@@ -63,9 +63,69 @@ namespace UserApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap đăng_ký {
+            get {
+                object obj = ResourceManager.GetObject("đăng ký", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap đăng_nhập {
+            get {
+                object obj = ResourceManager.GetObject("đăng nhập", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap khuyến_mãi {
+            get {
+                object obj = ResourceManager.GetObject("khuyến mãi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Logo_hamster {
             get {
                 object obj = ResourceManager.GetObject("Logo hamster", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap phim {
+            get {
+                object obj = ResourceManager.GetObject("phim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap shooting_schedule {
+            get {
+                object obj = ResourceManager.GetObject("shooting-schedule", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap tin_tức {
+            get {
+                object obj = ResourceManager.GetObject("tin tức", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
