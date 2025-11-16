@@ -218,14 +218,12 @@
             guna2Button4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button4.ForeColor = Color.White;
             guna2Button4.Image = Properties.Resources.tin_tức;
-            guna2Button4.ImageAlign = HorizontalAlignment.Right;
             guna2Button4.Location = new Point(697, 41);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2Button4.Size = new Size(122, 51);
             guna2Button4.TabIndex = 31;
             guna2Button4.Text = "TIN TỨC";
-            guna2Button4.TextAlign = HorizontalAlignment.Left;
             // 
             // label2
             // 
@@ -249,7 +247,6 @@
             guna2Button3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button3.ForeColor = Color.White;
             guna2Button3.Image = Properties.Resources.khuyến_mãi;
-            guna2Button3.ImageAlign = HorizontalAlignment.Right;
             guna2Button3.ImageSize = new Size(25, 25);
             guna2Button3.Location = new Point(505, 41);
             guna2Button3.Name = "guna2Button3";
@@ -257,7 +254,6 @@
             guna2Button3.Size = new Size(162, 51);
             guna2Button3.TabIndex = 30;
             guna2Button3.Text = "KHUYẾN MÃI";
-            guna2Button3.TextAlign = HorizontalAlignment.Left;
             // 
             // button7
             // 
@@ -283,14 +279,12 @@
             guna2Button2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button2.ForeColor = Color.White;
             guna2Button2.Image = Properties.Resources.phim;
-            guna2Button2.ImageAlign = HorizontalAlignment.Right;
             guna2Button2.Location = new Point(370, 41);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2Button2.Size = new Size(98, 51);
             guna2Button2.TabIndex = 29;
             guna2Button2.Text = "PHIM";
-            guna2Button2.TextAlign = HorizontalAlignment.Left;
             // 
             // button8
             // 
@@ -316,14 +310,12 @@
             guna2Button5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button5.ForeColor = Color.White;
             guna2Button5.Image = Properties.Resources.shooting_schedule;
-            guna2Button5.ImageAlign = HorizontalAlignment.Right;
             guna2Button5.Location = new Point(201, 41);
             guna2Button5.Name = "guna2Button5";
             guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2Button5.Size = new Size(143, 51);
             guna2Button5.TabIndex = 28;
             guna2Button5.Text = "LỊCH CHIẾU";
-            guna2Button5.TextAlign = HorizontalAlignment.Left;
             // 
             // pictureBox2
             // 
