@@ -101,8 +101,8 @@
             btnDangKy.FocusedColor = Color.FromArgb(245, 131, 35);
             btnDangKy.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangKy.ForeColor = SystemColors.Window;
-            btnDangKy.Image = Properties.Resources.đăng_ký;
-            btnDangKy.Location = new Point(443, 200);
+            btnDangKy.Image = Properties.Resources.DangKy;
+            btnDangKy.Location = new Point(436, 166);
             btnDangKy.Name = "btnDangKy";
             btnDangKy.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnDangKy.Size = new Size(151, 46);
@@ -121,8 +121,8 @@
             btnDangNhap.FocusedColor = Color.FromArgb(245, 131, 35);
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
-            btnDangNhap.Image = Properties.Resources.đăng_nhập;
-            btnDangNhap.Location = new Point(271, 200);
+            btnDangNhap.Image = Properties.Resources.DangNhap;
+            btnDangNhap.Location = new Point(264, 166);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnDangNhap.Size = new Size(151, 46);
