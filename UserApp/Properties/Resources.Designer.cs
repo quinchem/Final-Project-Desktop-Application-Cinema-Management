@@ -63,9 +63,9 @@ namespace UserApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap đăng_ký {
+        public static System.Drawing.Bitmap DangKy {
             get {
-                object obj = ResourceManager.GetObject("đăng ký", resourceCulture);
+                object obj = ResourceManager.GetObject("DangKy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace UserApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap đăng_nhập {
+        public static System.Drawing.Bitmap DangNhap {
             get {
-                object obj = ResourceManager.GetObject("đăng nhập", resourceCulture);
+                object obj = ResourceManager.GetObject("DangNhap", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace UserApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap khuyến_mãi {
+        public static System.Drawing.Bitmap KhuyenMai {
             get {
-                object obj = ResourceManager.GetObject("khuyến mãi", resourceCulture);
+                object obj = ResourceManager.GetObject("KhuyenMai", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -95,7 +95,7 @@ namespace UserApp.Properties {
         /// </summary>
         public static System.Drawing.Bitmap Logo_hamster {
             get {
-                object obj = ResourceManager.GetObject("Logo hamster", resourceCulture);
+                object obj = ResourceManager.GetObject("Logo_hamster", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace UserApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap tin_tức {
+        public static System.Drawing.Bitmap TinTuc {
             get {
-                object obj = ResourceManager.GetObject("tin tức", resourceCulture);
+                object obj = ResourceManager.GetObject("TinTuc", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
