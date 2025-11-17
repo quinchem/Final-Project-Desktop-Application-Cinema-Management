@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace AdminApp
 {
-    public partial class AdminThemPhim : Form
+    public partial class AdminThemSuatChieu : Form
     {
-        public AdminThemPhim()
+        public AdminThemSuatChieu()
         {
             InitializeComponent();
         }
+
     }
 }
