@@ -99,14 +99,14 @@
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             label2 = new Label();
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
-            button7 = new Button();
+            btnDangKy = new Button();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            button8 = new Button();
+            btnDangNhap = new Button();
             guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
-            pictureBox2 = new PictureBox();
+            logo = new PictureBox();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            panel1 = new Panel();
+            mainpanel = new Panel();
             flowLayoutPanel3 = new FlowLayoutPanel();
             guna2PictureBox18 = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2PictureBox19 = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -136,8 +136,8 @@
             guna2PictureBox8 = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2PictureBox9 = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2Panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
+            mainpanel.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox18).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox19).BeginInit();
@@ -190,11 +190,11 @@
             guna2Panel2.Controls.Add(guna2Button4);
             guna2Panel2.Controls.Add(label2);
             guna2Panel2.Controls.Add(guna2Button3);
-            guna2Panel2.Controls.Add(button7);
+            guna2Panel2.Controls.Add(btnDangKy);
             guna2Panel2.Controls.Add(guna2Button2);
-            guna2Panel2.Controls.Add(button8);
+            guna2Panel2.Controls.Add(btnDangNhap);
             guna2Panel2.Controls.Add(guna2Button5);
-            guna2Panel2.Controls.Add(pictureBox2);
+            guna2Panel2.Controls.Add(logo);
             guna2Panel2.CustomizableEdges = customizableEdges11;
             guna2Panel2.Dock = DockStyle.Top;
             guna2Panel2.Location = new Point(0, 0);
@@ -255,18 +255,19 @@
             guna2Button3.TabIndex = 30;
             guna2Button3.Text = "KHUYẾN MÃI";
             // 
-            // button7
+            // btnDangKy
             // 
-            button7.FlatAppearance.BorderSize = 0;
-            button7.FlatStyle = FlatStyle.Flat;
-            button7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button7.ForeColor = SystemColors.ActiveBorder;
-            button7.Location = new Point(1041, 51);
-            button7.Name = "button7";
-            button7.Size = new Size(91, 29);
-            button7.TabIndex = 23;
-            button7.Text = "ĐĂNG KÝ";
-            button7.UseVisualStyleBackColor = true;
+            btnDangKy.FlatAppearance.BorderSize = 0;
+            btnDangKy.FlatStyle = FlatStyle.Flat;
+            btnDangKy.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDangKy.ForeColor = SystemColors.ActiveBorder;
+            btnDangKy.Location = new Point(1041, 51);
+            btnDangKy.Name = "btnDangKy";
+            btnDangKy.Size = new Size(91, 29);
+            btnDangKy.TabIndex = 23;
+            btnDangKy.Text = "ĐĂNG KÝ";
+            btnDangKy.UseVisualStyleBackColor = true;
+            btnDangKy.Click += btnDangKy_Click;
             // 
             // guna2Button2
             // 
@@ -286,18 +287,19 @@
             guna2Button2.TabIndex = 29;
             guna2Button2.Text = "PHIM";
             // 
-            // button8
+            // btnDangNhap
             // 
-            button8.FlatAppearance.BorderSize = 0;
-            button8.FlatStyle = FlatStyle.Flat;
-            button8.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button8.ForeColor = SystemColors.ActiveBorder;
-            button8.Location = new Point(893, 51);
-            button8.Name = "button8";
-            button8.Size = new Size(119, 29);
-            button8.TabIndex = 22;
-            button8.Text = "ĐĂNG NHẬP";
-            button8.UseVisualStyleBackColor = true;
+            btnDangNhap.FlatAppearance.BorderSize = 0;
+            btnDangNhap.FlatStyle = FlatStyle.Flat;
+            btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDangNhap.ForeColor = SystemColors.ActiveBorder;
+            btnDangNhap.Location = new Point(893, 51);
+            btnDangNhap.Name = "btnDangNhap";
+            btnDangNhap.Size = new Size(119, 29);
+            btnDangNhap.TabIndex = 22;
+            btnDangNhap.Text = "ĐĂNG NHẬP";
+            btnDangNhap.UseVisualStyleBackColor = true;
+            btnDangNhap.Click += btnDangNhap_Click;
             // 
             // guna2Button5
             // 
@@ -317,15 +319,16 @@
             guna2Button5.TabIndex = 28;
             guna2Button5.Text = "LỊCH CHIẾU";
             // 
-            // pictureBox2
+            // logo
             // 
-            pictureBox2.Image = Properties.Resources.Logo_hamster;
-            pictureBox2.Location = new Point(30, 9);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(126, 106);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 17;
-            pictureBox2.TabStop = false;
+            logo.Image = Properties.Resources.Logo_hamster;
+            logo.Location = new Point(30, 9);
+            logo.Name = "logo";
+            logo.Size = new Size(126, 106);
+            logo.SizeMode = PictureBoxSizeMode.Zoom;
+            logo.TabIndex = 17;
+            logo.TabStop = false;
+            logo.Click += logo_Click;
             // 
             // guna2Button1
             // 
@@ -372,25 +375,25 @@
             guna2TextBox2.Size = new Size(584, 38);
             guna2TextBox2.TabIndex = 6;
             // 
-            // panel1
+            // mainpanel
             // 
-            panel1.AutoScroll = true;
-            panel1.AutoScrollMinSize = new Size(0, 2200);
-            panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel1.BackColor = Color.FromArgb(92, 124, 150);
-            panel1.Controls.Add(flowLayoutPanel3);
-            panel1.Controls.Add(flowLayoutPanel2);
-            panel1.Controls.Add(guna2PictureBox10);
-            panel1.Controls.Add(guna2TextBox2);
-            panel1.Controls.Add(flowLayoutPanel1);
-            panel1.Controls.Add(guna2Button1);
-            panel1.Controls.Add(guna2Panel2);
-            panel1.Controls.Add(guna2TextBox1);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1200, 750);
-            panel1.TabIndex = 0;
+            mainpanel.AutoScroll = true;
+            mainpanel.AutoScrollMinSize = new Size(0, 2200);
+            mainpanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            mainpanel.BackColor = Color.FromArgb(92, 124, 150);
+            mainpanel.Controls.Add(flowLayoutPanel3);
+            mainpanel.Controls.Add(flowLayoutPanel2);
+            mainpanel.Controls.Add(guna2PictureBox10);
+            mainpanel.Controls.Add(guna2TextBox2);
+            mainpanel.Controls.Add(flowLayoutPanel1);
+            mainpanel.Controls.Add(guna2Button1);
+            mainpanel.Controls.Add(guna2Panel2);
+            mainpanel.Controls.Add(guna2TextBox1);
+            mainpanel.Dock = DockStyle.Fill;
+            mainpanel.Location = new Point(0, 0);
+            mainpanel.Name = "mainpanel";
+            mainpanel.Size = new Size(1200, 750);
+            mainpanel.TabIndex = 0;
             // 
             // flowLayoutPanel3
             // 
@@ -726,14 +729,14 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1200, 750);
-            Controls.Add(panel1);
+            Controls.Add(mainpanel);
             IsMdiContainer = true;
             Name = "UserMainForm";
             Text = "Trang chủ";
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)logo).EndInit();
+            mainpanel.ResumeLayout(false);
             flowLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox18).EndInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox19).EndInit();
@@ -770,12 +773,12 @@
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Label label2;
-        private Button button7;
-        private Button button8;
-        private PictureBox pictureBox2;
+        private Button btnDangKy;
+        private Button btnDangNhap;
+        private PictureBox logo;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
-        private Panel panel1;
+        private Panel mainpanel;
         private FlowLayoutPanel flowLayoutPanel1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
