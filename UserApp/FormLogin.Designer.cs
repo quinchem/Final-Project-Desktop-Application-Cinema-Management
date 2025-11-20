@@ -282,7 +282,7 @@
             guna2Button4.FillColor = Color.FromArgb(44, 84, 115);
             guna2Button4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button4.ForeColor = Color.White;
-            guna2Button4.Image = Properties.Resources.tin_tức;
+            guna2Button4.Image = Properties.Resources.TinTuc;
             guna2Button4.Location = new Point(697, 41);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges14;
@@ -300,7 +300,7 @@
             guna2Button3.FillColor = Color.FromArgb(44, 84, 115);
             guna2Button3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button3.ForeColor = Color.White;
-            guna2Button3.Image = Properties.Resources.khuyến_mãi;
+            guna2Button3.Image = Properties.Resources.KhuyenMai;
             guna2Button3.ImageSize = new Size(25, 25);
             guna2Button3.Location = new Point(505, 41);
             guna2Button3.Name = "guna2Button3";
