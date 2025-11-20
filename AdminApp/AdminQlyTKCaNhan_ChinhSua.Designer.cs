@@ -254,7 +254,7 @@
             guna2TextBox8.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox8.Font = new Font("Segoe UI", 9F);
             guna2TextBox8.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox8.Location = new Point(1064, 144);
+            guna2TextBox8.Location = new Point(1073, 144);
             guna2TextBox8.Margin = new Padding(3, 4, 3, 4);
             guna2TextBox8.Name = "guna2TextBox8";
             guna2TextBox8.PlaceholderText = "";
@@ -274,7 +274,7 @@
             guna2TextBox7.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2TextBox7.Font = new Font("Segoe UI", 9F);
             guna2TextBox7.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox7.Location = new Point(1064, 66);
+            guna2TextBox7.Location = new Point(1073, 66);
             guna2TextBox7.Margin = new Padding(3, 4, 3, 4);
             guna2TextBox7.Name = "guna2TextBox7";
             guna2TextBox7.PlaceholderText = "";
