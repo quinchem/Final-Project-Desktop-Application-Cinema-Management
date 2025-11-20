@@ -160,7 +160,7 @@
             guna2TextBox11.PlaceholderText = "";
             guna2TextBox11.SelectedText = "";
             guna2TextBox11.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2TextBox11.Size = new Size(349, 30);
+            guna2TextBox11.Size = new Size(503, 30);
             guna2TextBox11.TabIndex = 20;
             // 
             // guna2HtmlLabel15
@@ -190,7 +190,7 @@
             guna2TextBox10.PlaceholderText = "";
             guna2TextBox10.SelectedText = "";
             guna2TextBox10.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2TextBox10.Size = new Size(349, 30);
+            guna2TextBox10.Size = new Size(503, 30);
             guna2TextBox10.TabIndex = 18;
             // 
             // guna2HtmlLabel14
@@ -220,7 +220,7 @@
             guna2TextBox9.PlaceholderText = "";
             guna2TextBox9.SelectedText = "";
             guna2TextBox9.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2TextBox9.Size = new Size(349, 30);
+            guna2TextBox9.Size = new Size(503, 30);
             guna2TextBox9.TabIndex = 16;
             // 
             // guna2HtmlLabel13
