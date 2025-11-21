@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AdminApp
 {
-    public partial class AdminQLPhim : Form
+    public partial class FormMovieManagement : Form
     {
-        public AdminQLPhim()
+        public FormMovieManagement()
         {
             InitializeComponent();
         }

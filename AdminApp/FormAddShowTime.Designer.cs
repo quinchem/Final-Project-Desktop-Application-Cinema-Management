@@ -1,6 +1,6 @@
 ﻿namespace AdminApp
 {
-    partial class AdminThemSuatChieu
+    partial class FormAddShowTime : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -61,7 +61,6 @@
             btnThemPhim = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2ShadowPanel1.SuspendLayout();
-            SuspendLayout();
             // 
             // guna2ShadowPanel1
             // 
