@@ -10,12 +10,16 @@ using System.Windows.Forms;
 
 namespace AdminApp
 {
-    public partial class AdminThemSuatChieu : Form
+    public partial class FormViewDetailMovie : Form
     {
-        public AdminThemSuatChieu()
+        public FormViewDetailMovie()
         {
             InitializeComponent();
         }
 
+        private void LbDoTuoi_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
