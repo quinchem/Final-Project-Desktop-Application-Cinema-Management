@@ -1,6 +1,6 @@
 ﻿namespace AdminApp
 {
-    partial class AdminQlyTaiKhoanCaNhan
+    partial class AdminAccountManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -112,7 +112,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1378, 716);
+            panel1.Size = new Size(1420, 750);
             panel1.TabIndex = 5;
             // 
             // guna2Button2
@@ -176,7 +176,7 @@
             guna2CustomGradientPanel1.Controls.Add(pictureBox1);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel4);
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges27;
-            guna2CustomGradientPanel1.Location = new Point(26, 121);
+            guna2CustomGradientPanel1.Location = new Point(49, 121);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.Color = Color.FromArgb(80, 80, 80);
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges28;
@@ -631,7 +631,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1378, 716);
+            ClientSize = new Size(1420, 750);
             Controls.Add(panel1);
             Name = "AdminQlyTaiKhoanCaNhan";
             Text = "Quản lý tài khoản cá nhân";

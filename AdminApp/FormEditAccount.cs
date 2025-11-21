@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AdminApp
 {
-    public partial class AdminQlyTKCaNhan_ChinhSua : Form
+    public partial class FormEditAccount : Form
     {
-        public AdminQlyTKCaNhan_ChinhSua()
+        public FormEditAccount()
         {
             InitializeComponent();
         }

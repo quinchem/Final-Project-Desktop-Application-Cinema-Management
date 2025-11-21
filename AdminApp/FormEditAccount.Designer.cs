@@ -1,6 +1,6 @@
 ﻿namespace AdminApp
 {
-    partial class AdminQlyTKCaNhan_ChinhSua
+    partial class FormEditAccount
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,8 @@
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -52,9 +54,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2TextBox11 = new Guna.UI2.WinForms.Guna2TextBox();
             guna2HtmlLabel15 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -79,7 +80,6 @@
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             pictureBox1 = new PictureBox();
             guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2CustomGradientPanel1.SuspendLayout();
             guna2CustomGradientPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -111,15 +111,35 @@
             guna2CustomGradientPanel1.Controls.Add(pictureBox1);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel4);
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges25;
-            guna2CustomGradientPanel1.Location = new Point(36, 33);
+            guna2CustomGradientPanel1.Location = new Point(26, 41);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.Color = Color.FromArgb(80, 80, 80);
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges26;
             guna2CustomGradientPanel1.ShadowDecoration.Depth = 10;
             guna2CustomGradientPanel1.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel1.ShadowDecoration.Shadow = new Padding(3, 3, 7, 7);
-            guna2CustomGradientPanel1.Size = new Size(1346, 584);
+            guna2CustomGradientPanel1.Size = new Size(1360, 621);
             guna2CustomGradientPanel1.TabIndex = 8;
+            // 
+            // guna2Button1
+            // 
+            guna2Button1.BackColor = Color.Transparent;
+            guna2Button1.BorderRadius = 8;
+            guna2Button1.CustomizableEdges = customizableEdges1;
+            guna2Button1.FillColor = Color.FromArgb(39, 75, 99);
+            guna2Button1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            guna2Button1.ForeColor = Color.White;
+            guna2Button1.ImageAlign = HorizontalAlignment.Left;
+            guna2Button1.Location = new Point(1110, 472);
+            guna2Button1.Name = "guna2Button1";
+            guna2Button1.ShadowDecoration.BorderRadius = 8;
+            guna2Button1.ShadowDecoration.Color = Color.FromArgb(100, 100, 100);
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Button1.ShadowDecoration.Depth = 3;
+            guna2Button1.ShadowDecoration.Enabled = true;
+            guna2Button1.Size = new Size(198, 41);
+            guna2Button1.TabIndex = 16;
+            guna2Button1.Text = "Lưu";
             // 
             // guna2CustomGradientPanel2
             // 
@@ -471,31 +491,12 @@
             guna2HtmlLabel4.TabIndex = 0;
             guna2HtmlLabel4.Text = "Thông tin cá nhân";
             // 
-            // guna2Button1
-            // 
-            guna2Button1.BackColor = Color.Transparent;
-            guna2Button1.BorderRadius = 8;
-            guna2Button1.CustomizableEdges = customizableEdges1;
-            guna2Button1.FillColor = Color.FromArgb(39, 75, 99);
-            guna2Button1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.ImageAlign = HorizontalAlignment.Left;
-            guna2Button1.Location = new Point(1110, 472);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.BorderRadius = 8;
-            guna2Button1.ShadowDecoration.Color = Color.FromArgb(100, 100, 100);
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button1.ShadowDecoration.Depth = 3;
-            guna2Button1.ShadowDecoration.Enabled = true;
-            guna2Button1.Size = new Size(198, 41);
-            guna2Button1.TabIndex = 16;
-            guna2Button1.Text = "Lưu";
-            // 
             // AdminQlyTKCaNhan_ChinhSua
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1418, 684);
+            AutoScroll = true;
+            ClientSize = new Size(1420, 750);
             Controls.Add(guna2CustomGradientPanel1);
             Name = "AdminQlyTKCaNhan_ChinhSua";
             Text = "AdminQlyTKCaNhan_ChinhSua";

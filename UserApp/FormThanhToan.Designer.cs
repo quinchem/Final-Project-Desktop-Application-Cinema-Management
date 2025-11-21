@@ -113,7 +113,7 @@
             guna2Panel2.ShadowDecoration.Depth = 60;
             guna2Panel2.ShadowDecoration.Enabled = true;
             guna2Panel2.ShadowDecoration.Shadow = new Padding(0, 0, 0, 6);
-            guna2Panel2.Size = new Size(1165, 126);
+            guna2Panel2.Size = new Size(1200, 126);
             guna2Panel2.TabIndex = 10;
             // 
             // guna2Button4
@@ -246,7 +246,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 126);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1165, 642);
+            panel1.Size = new Size(1200, 624);
             panel1.TabIndex = 11;
             // 
             // guna2CustomGradientPanel3
@@ -267,7 +267,7 @@
             guna2CustomGradientPanel3.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel3.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel3.ShadowDecoration.Shadow = new Padding(2, 2, 8, 8);
-            guna2CustomGradientPanel3.Size = new Size(507, 593);
+            guna2CustomGradientPanel3.Size = new Size(507, 560);
             guna2CustomGradientPanel3.TabIndex = 17;
             // 
             // guna2HtmlLabel18
@@ -313,7 +313,7 @@
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel2.Size = new Size(333, 202);
+            guna2CustomGradientPanel2.Size = new Size(333, 169);
             guna2CustomGradientPanel2.TabIndex = 16;
             // 
             // guna2CustomGradientPanel5
@@ -326,7 +326,7 @@
             guna2CustomGradientPanel5.Location = new Point(175, 59);
             guna2CustomGradientPanel5.Name = "guna2CustomGradientPanel5";
             guna2CustomGradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2CustomGradientPanel5.Size = new Size(101, 110);
+            guna2CustomGradientPanel5.Size = new Size(101, 85);
             guna2CustomGradientPanel5.TabIndex = 1;
             // 
             // guna2CustomGradientPanel4
@@ -340,7 +340,7 @@
             guna2CustomGradientPanel4.Location = new Point(44, 59);
             guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
             guna2CustomGradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2CustomGradientPanel4.Size = new Size(101, 110);
+            guna2CustomGradientPanel4.Size = new Size(101, 85);
             guna2CustomGradientPanel4.TabIndex = 0;
             // 
             // guna2HtmlLabel16
@@ -549,7 +549,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1165, 768);
+            ClientSize = new Size(1200, 750);
             Controls.Add(panel1);
             Controls.Add(guna2Panel2);
             Name = "FormThanhToan";
