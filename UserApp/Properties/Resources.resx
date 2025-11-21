@@ -118,25 +118,52 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Logo_hamster" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Logo hamster.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="right_arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chevron1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TinTuc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tin tức.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="avata user" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\avata user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DangKy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\đăng ký.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="shooting-schedule" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shooting-schedule1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="phim" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\phim.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="QuenMK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuenMK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DangNhap" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\đăng nhập.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BookingHistory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lịch sử đặt vé.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ThongtinChung" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\thông tin chung.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TinTuc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tin tức.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="KhuyenMai" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\khuyến mãi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DangKy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\đăng ký.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="left_arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Logo_hamster" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Logo hamster.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DangNhap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\đăng nhập.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="phim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\phim.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="right_arrow1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mũi tên phải.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DoiMK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\đổi mật khẩu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DatlaiMK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DatlaiMK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

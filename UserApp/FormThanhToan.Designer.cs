@@ -326,7 +326,7 @@
             guna2CustomGradientPanel5.Location = new Point(175, 59);
             guna2CustomGradientPanel5.Name = "guna2CustomGradientPanel5";
             guna2CustomGradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2CustomGradientPanel5.Size = new Size(101, 85);
+            guna2CustomGradientPanel5.Size = new Size(101, 110);
             guna2CustomGradientPanel5.TabIndex = 1;
             // 
             // guna2CustomGradientPanel4
@@ -340,7 +340,7 @@
             guna2CustomGradientPanel4.Location = new Point(44, 59);
             guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
             guna2CustomGradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2CustomGradientPanel4.Size = new Size(101, 85);
+            guna2CustomGradientPanel4.Size = new Size(101, 110);
             guna2CustomGradientPanel4.TabIndex = 0;
             // 
             // guna2HtmlLabel16

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AdminApp
+namespace UserApp
 {
-    public partial class AdminQLPhim : Form
+    public partial class FormShowtimeDetail : Form
     {
-        public AdminQLPhim()
+        public FormShowtimeDetail()
         {
             InitializeComponent();
         }

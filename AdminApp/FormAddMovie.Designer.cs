@@ -522,7 +522,7 @@
             btnUpPoster.FillColor = SystemColors.InactiveCaption;
             btnUpPoster.Font = new Font("Segoe UI", 9F);
             btnUpPoster.ForeColor = Color.White;
-            btnUpPoster.Image = Properties.Resources.images_removebg_preview;
+            btnUpPoster.Image = Properties.Resources.push_icon;
             btnUpPoster.Location = new Point(514, 558);
             btnUpPoster.Name = "btnUpPoster";
             btnUpPoster.ShadowDecoration.CustomizableEdges = customizableEdges22;

@@ -8,14 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AdminApp
+namespace UserApp
 {
-    public partial class AdminThemSuatChieu : Form
+    public partial class FormShowtimeList : Form
     {
-        public AdminThemSuatChieu()
+        public FormShowtimeList()
         {
             InitializeComponent();
         }
-
     }
 }
