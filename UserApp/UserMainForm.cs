@@ -8,7 +8,7 @@ namespace UserApp
         }
 
         private Form currentFormChild;
-        private void OpenChildForm(Form childForm)
+        public void OpenChildForm(Form childForm)
         {
             if (currentFormChild != null)
                 currentFormChild.Close();
@@ -31,7 +31,7 @@ namespace UserApp
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
-            loginForm = new FormLogin();
+            loginForm = new FormLogin(this);
             OpenChildForm(loginForm);
             loginForm.ShowLogin();
         }
@@ -39,7 +39,7 @@ namespace UserApp
         private void btnDangKy_Click(object sender, EventArgs e)
         {
 
-            loginForm = new FormLogin();
+            loginForm = new FormLogin(this);
             OpenChildForm(loginForm);
             loginForm.ShowRegister();
         }

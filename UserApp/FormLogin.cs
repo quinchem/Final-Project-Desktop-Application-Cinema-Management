@@ -20,7 +20,7 @@ namespace UserApp
         private void FormLogin_Load(object sender, EventArgs e)
         {
             System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
-            t.Interval = 10; 
+            t.Interval = 10;
             t.Tick += (s, a) =>
             {
                 if (this.Opacity < 1)
@@ -61,6 +61,18 @@ namespace UserApp
         public void SwitchToRegister()
         {
             ShowRegister();
+        }
+        private UserMainForm parentForm;
+
+        public FormLogin(UserMainForm parent)
+        {
+            InitializeComponent();
+            parentForm = parent;
+        }
+
+        private void btnQuenMk_Click(object sender, EventArgs e)
+        {
+            parentForm.OpenChildForm(new FormForgetPassword(parentForm));
         }
     }
 }
