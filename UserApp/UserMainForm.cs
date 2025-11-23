@@ -58,6 +58,11 @@ namespace UserApp
         {
             GoHome();
         }
+
+        private void txtTimKiem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new FormSearch());
+        }
     }
 }
 
