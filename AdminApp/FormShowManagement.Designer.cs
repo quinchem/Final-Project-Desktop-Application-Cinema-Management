@@ -53,6 +53,12 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
@@ -71,7 +77,13 @@
             guna2Button7 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button8 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button9 = new Guna.UI2.WinForms.Guna2Button();
+            guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
+            guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            txtTheLoaiPhim = new Guna.UI2.WinForms.Guna2TextBox();
+            label1 = new Label();
+            guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             SuspendLayout();
             // 
             // guna2Button3
@@ -412,12 +424,95 @@
             guna2Button9.TabIndex = 44;
             guna2Button9.Text = "Phòng 5";
             // 
+            // guna2Separator1
+            // 
+            guna2Separator1.Location = new Point(72, 154);
+            guna2Separator1.Name = "guna2Separator1";
+            guna2Separator1.Size = new Size(1267, 12);
+            guna2Separator1.TabIndex = 45;
+            // 
+            // guna2DateTimePicker1
+            // 
+            guna2DateTimePicker1.Checked = true;
+            guna2DateTimePicker1.CustomizableEdges = customizableEdges23;
+            guna2DateTimePicker1.FillColor = Color.LightSteelBlue;
+            guna2DateTimePicker1.Font = new Font("Segoe UI", 9F);
+            guna2DateTimePicker1.Format = DateTimePickerFormat.Long;
+            guna2DateTimePicker1.Location = new Point(1002, 90);
+            guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            guna2DateTimePicker1.Name = "guna2DateTimePicker1";
+            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            guna2DateTimePicker1.Size = new Size(339, 45);
+            guna2DateTimePicker1.TabIndex = 46;
+            guna2DateTimePicker1.Value = new DateTime(2025, 11, 23, 18, 16, 6, 909);
+            guna2DateTimePicker1.Visible = false;
+            // 
+            // txtTheLoaiPhim
+            // 
+            txtTheLoaiPhim.BorderColor = SystemColors.ControlLight;
+            txtTheLoaiPhim.CustomizableEdges = customizableEdges25;
+            txtTheLoaiPhim.DefaultText = "";
+            txtTheLoaiPhim.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtTheLoaiPhim.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtTheLoaiPhim.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtTheLoaiPhim.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtTheLoaiPhim.FillColor = Color.LightGray;
+            txtTheLoaiPhim.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
+            txtTheLoaiPhim.FocusedState.FillColor = Color.White;
+            txtTheLoaiPhim.FocusedState.ForeColor = Color.Black;
+            txtTheLoaiPhim.FocusedState.PlaceholderForeColor = Color.Transparent;
+            txtTheLoaiPhim.Font = new Font("Segoe UI", 9F);
+            txtTheLoaiPhim.ForeColor = Color.Black;
+            txtTheLoaiPhim.HoverState.BorderColor = SystemColors.AppWorkspace;
+            txtTheLoaiPhim.HoverState.ForeColor = Color.White;
+            txtTheLoaiPhim.HoverState.PlaceholderForeColor = Color.Transparent;
+            txtTheLoaiPhim.Location = new Point(1002, 53);
+            txtTheLoaiPhim.Margin = new Padding(3, 4, 3, 4);
+            txtTheLoaiPhim.Name = "txtTheLoaiPhim";
+            txtTheLoaiPhim.PlaceholderForeColor = SystemColors.ControlDarkDark;
+            txtTheLoaiPhim.PlaceholderText = "dd/MM/yyyy";
+            txtTheLoaiPhim.SelectedText = "";
+            txtTheLoaiPhim.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            txtTheLoaiPhim.Size = new Size(293, 33);
+            txtTheLoaiPhim.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            txtTheLoaiPhim.TabIndex = 47;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.ControlLight;
+            label1.Location = new Point(1002, 29);
+            label1.Name = "label1";
+            label1.Size = new Size(83, 20);
+            label1.TabIndex = 48;
+            label1.Text = "Chọn ngày";
+            label1.Click += label1_Click;
+            // 
+            // guna2PictureBox1
+            // 
+            guna2PictureBox1.CustomizableEdges = customizableEdges27;
+            guna2PictureBox1.Image = Properties.Resources.calendar;
+            guna2PictureBox1.ImageRotate = 0F;
+            guna2PictureBox1.Location = new Point(1301, 52);
+            guna2PictureBox1.Name = "guna2PictureBox1";
+            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            guna2PictureBox1.Size = new Size(38, 32);
+            guna2PictureBox1.TabIndex = 49;
+            guna2PictureBox1.TabStop = false;
+            // 
             // FormShowManagement
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
             ClientSize = new Size(1402, 703);
+            Controls.Add(guna2PictureBox1);
+            Controls.Add(label1);
+            Controls.Add(txtTheLoaiPhim);
+            Controls.Add(guna2DateTimePicker1);
+            Controls.Add(guna2Separator1);
             Controls.Add(guna2Button9);
             Controls.Add(guna2Button8);
             Controls.Add(guna2Button7);
@@ -433,7 +528,9 @@
             Name = "FormShowManagement";
             Text = "FormShowManagement";
             ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -456,5 +553,10 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button7;
         private Guna.UI2.WinForms.Guna2Button guna2Button8;
         private Guna.UI2.WinForms.Guna2Button guna2Button9;
+        private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
+        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
+        private Guna.UI2.WinForms.Guna2TextBox txtTheLoaiPhim;
+        private Label label1;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
     }
 }
