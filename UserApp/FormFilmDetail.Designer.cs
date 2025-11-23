@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            panel1 = new Panel();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            panelChiTiet = new Panel();
+            btnMoTa = new Guna.UI2.WinForms.Guna2Button();
             btnDatVe = new Guna.UI2.WinForms.Guna2Button();
             guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -48,42 +53,65 @@
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            panel1.SuspendLayout();
+            MoTa = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            Trailer = new Guna.UI2.WinForms.Guna2Button();
+            panelChiTiet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // panel1
+            // panelChiTiet
             // 
-            panel1.AutoScroll = true;
-            panel1.AutoScrollMargin = new Size(0, 700);
-            panel1.AutoScrollMinSize = new Size(0, 400);
-            panel1.BackColor = Color.FromArgb(92, 124, 150);
-            panel1.Controls.Add(btnDatVe);
-            panel1.Controls.Add(guna2HtmlLabel12);
-            panel1.Controls.Add(guna2HtmlLabel11);
-            panel1.Controls.Add(guna2HtmlLabel10);
-            panel1.Controls.Add(guna2HtmlLabel9);
-            panel1.Controls.Add(guna2HtmlLabel8);
-            panel1.Controls.Add(guna2HtmlLabel7);
-            panel1.Controls.Add(guna2HtmlLabel6);
-            panel1.Controls.Add(guna2HtmlLabel5);
-            panel1.Controls.Add(guna2HtmlLabel4);
-            panel1.Controls.Add(guna2HtmlLabel3);
-            panel1.Controls.Add(guna2HtmlLabel1);
-            panel1.Controls.Add(guna2HtmlLabel2);
-            panel1.Controls.Add(lblTenPhim);
-            panel1.Controls.Add(guna2PictureBox1);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1482, 853);
-            panel1.TabIndex = 0;
+            panelChiTiet.AutoScroll = true;
+            panelChiTiet.AutoScrollMargin = new Size(0, 700);
+            panelChiTiet.AutoScrollMinSize = new Size(0, 400);
+            panelChiTiet.BackColor = Color.FromArgb(92, 124, 150);
+            panelChiTiet.Controls.Add(Trailer);
+            panelChiTiet.Controls.Add(MoTa);
+            panelChiTiet.Controls.Add(btnMoTa);
+            panelChiTiet.Controls.Add(btnDatVe);
+            panelChiTiet.Controls.Add(guna2HtmlLabel12);
+            panelChiTiet.Controls.Add(guna2HtmlLabel11);
+            panelChiTiet.Controls.Add(guna2HtmlLabel10);
+            panelChiTiet.Controls.Add(guna2HtmlLabel9);
+            panelChiTiet.Controls.Add(guna2HtmlLabel8);
+            panelChiTiet.Controls.Add(guna2HtmlLabel7);
+            panelChiTiet.Controls.Add(guna2HtmlLabel6);
+            panelChiTiet.Controls.Add(guna2HtmlLabel5);
+            panelChiTiet.Controls.Add(guna2HtmlLabel4);
+            panelChiTiet.Controls.Add(guna2HtmlLabel3);
+            panelChiTiet.Controls.Add(guna2HtmlLabel1);
+            panelChiTiet.Controls.Add(guna2HtmlLabel2);
+            panelChiTiet.Controls.Add(lblTenPhim);
+            panelChiTiet.Controls.Add(guna2PictureBox1);
+            panelChiTiet.Dock = DockStyle.Fill;
+            panelChiTiet.Location = new Point(0, 0);
+            panelChiTiet.Name = "panelChiTiet";
+            panelChiTiet.Size = new Size(1482, 853);
+            panelChiTiet.TabIndex = 0;
+            // 
+            // btnMoTa
+            // 
+            btnMoTa.BorderRadius = 15;
+            btnMoTa.CustomizableEdges = customizableEdges3;
+            btnMoTa.DisabledState.BorderColor = Color.DarkGray;
+            btnMoTa.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnMoTa.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnMoTa.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnMoTa.FillColor = Color.Linen;
+            btnMoTa.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnMoTa.ForeColor = Color.FromArgb(245, 131, 35);
+            btnMoTa.Location = new Point(117, 504);
+            btnMoTa.Name = "btnMoTa";
+            btnMoTa.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnMoTa.Size = new Size(145, 49);
+            btnMoTa.TabIndex = 16;
+            btnMoTa.Text = "Mô tả";
             // 
             // btnDatVe
             // 
             btnDatVe.BackColor = Color.Transparent;
             btnDatVe.BorderRadius = 28;
-            btnDatVe.CustomizableEdges = customizableEdges1;
+            btnDatVe.CustomizableEdges = customizableEdges5;
             btnDatVe.DisabledState.BorderColor = Color.DarkGray;
             btnDatVe.DisabledState.CustomBorderColor = Color.DarkGray;
             btnDatVe.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -98,7 +126,7 @@
             btnDatVe.Name = "btnDatVe";
             btnDatVe.ShadowDecoration.BorderRadius = 28;
             btnDatVe.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            btnDatVe.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnDatVe.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnDatVe.ShadowDecoration.Depth = 40;
             btnDatVe.ShadowDecoration.Enabled = true;
             btnDatVe.ShadowDecoration.Shadow = new Padding(0, 0, 3, 5);
@@ -252,32 +280,62 @@
             // 
             // guna2PictureBox1
             // 
-            guna2PictureBox1.CustomizableEdges = customizableEdges3;
+            guna2PictureBox1.CustomizableEdges = customizableEdges7;
             guna2PictureBox1.ImageRotate = 0F;
             guna2PictureBox1.Location = new Point(117, 47);
             guna2PictureBox1.Name = "guna2PictureBox1";
-            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2PictureBox1.Size = new Size(268, 392);
             guna2PictureBox1.TabIndex = 0;
             guna2PictureBox1.TabStop = false;
+            // 
+            // MoTa
+            // 
+            MoTa.AutoSize = false;
+            MoTa.BackColor = Color.Transparent;
+            MoTa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            MoTa.ForeColor = Color.White;
+            MoTa.Location = new Point(117, 578);
+            MoTa.Name = "MoTa";
+            MoTa.Size = new Size(1206, 350);
+            MoTa.TabIndex = 17;
+            MoTa.Text = "Chi tiết mô tả";
+            // 
+            // Trailer
+            // 
+            Trailer.BorderRadius = 15;
+            Trailer.CustomizableEdges = customizableEdges1;
+            Trailer.DisabledState.BorderColor = Color.DarkGray;
+            Trailer.DisabledState.CustomBorderColor = Color.DarkGray;
+            Trailer.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            Trailer.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            Trailer.FillColor = Color.Linen;
+            Trailer.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Trailer.ForeColor = Color.FromArgb(245, 131, 35);
+            Trailer.Location = new Point(117, 966);
+            Trailer.Name = "Trailer";
+            Trailer.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            Trailer.Size = new Size(145, 49);
+            Trailer.TabIndex = 18;
+            Trailer.Text = "Trailer";
             // 
             // FormFilmDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1482, 853);
-            Controls.Add(panel1);
+            Controls.Add(panelChiTiet);
             Name = "FormFilmDetail";
             Text = "Chi tiết phim";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            panelChiTiet.ResumeLayout(false);
+            panelChiTiet.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
+        private Panel panelChiTiet;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTenPhim;
@@ -293,5 +351,8 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
+        private Guna.UI2.WinForms.Guna2Button btnMoTa;
+        private Guna.UI2.WinForms.Guna2HtmlLabel MoTa;
+        private Guna.UI2.WinForms.Guna2Button Trailer;
     }
 }
