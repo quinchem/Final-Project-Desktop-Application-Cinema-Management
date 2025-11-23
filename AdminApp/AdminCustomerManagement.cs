@@ -31,7 +31,7 @@ namespace AdminApp
                     conn.Open();
                     var test = new SqliteCommand("SELECT COUNT(*) FROM customer", conn);
                     int count = Convert.ToInt32(test.ExecuteScalar());
-                    MessageBox.Show("Số dòng trong bảng customer = " + count);
+                   //MessageBox.Show("Số dòng trong bảng customer = " + count);
 
                     string query = @"SELECT 
                     full_name,
@@ -57,17 +57,16 @@ namespace AdminApp
             {
                 MessageBox.Show("Lỗi tải dữ liệu khách hàng: " + ex.Message);
             }
-            MessageBox.Show("Đang mở file DB:\n" + DatabaseHelper.GetConnectionString());
+            //MessageBox.Show("Đang mở file DB:\n" + DatabaseHelper.GetConnectionString());
 
 
 
         }
 
-        private void AdminCustomerManagement_Load(object sender, EventArgs e)
+
+        private void AdminCustomerManagement_Load_1(object sender, EventArgs e)
         {
             LoadCustomerData();
-            
-
         }
     }
 }
