@@ -113,6 +113,16 @@ namespace UserApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap DatVe {
+            get {
+                object obj = ResourceManager.GetObject("DatVe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap DoiMK {
             get {
                 object obj = ResourceManager.GetObject("DoiMK", resourceCulture);
