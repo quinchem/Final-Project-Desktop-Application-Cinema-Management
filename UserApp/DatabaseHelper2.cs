@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-public static class DatabaseHelper
+public static class DatabaseHelper2
 {
     public static string GetConnectionString()
     {
