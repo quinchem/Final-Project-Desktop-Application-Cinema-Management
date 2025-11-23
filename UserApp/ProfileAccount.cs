@@ -10,13 +10,12 @@ using System.Windows.Forms;
 
 namespace UserApp
 {
-    public partial class FormProfile : Form
+    public partial class ProfileAccount : UserControl
     {
-        public FormProfile()
+        public ProfileAccount()
         {
             InitializeComponent();
         }
 
-        
     }
 }
