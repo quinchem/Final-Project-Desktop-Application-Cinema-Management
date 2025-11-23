@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace AdminApp
 {
-    public partial class FormShowManagement : Form
+    public partial class FormStatistics3 : Form
     {
-        public FormShowManagement()
+        public FormStatistics3()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
