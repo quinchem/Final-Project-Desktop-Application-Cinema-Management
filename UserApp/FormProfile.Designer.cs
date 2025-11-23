@@ -226,6 +226,7 @@
             btnInformation.Size = new Size(207, 66);
             btnInformation.TabIndex = 1;
             btnInformation.Text = "Thông tin chung";
+            btnInformation.Click += btnInformation_Click;
             // 
             // btnChangPassword
             // 
@@ -245,6 +246,7 @@
             btnChangPassword.Size = new Size(207, 66);
             btnChangPassword.TabIndex = 2;
             btnChangPassword.Text = "Đổi mật khẩu";
+            btnChangPassword.Click += btnChangePassword_Click;
             // 
             // btnHistory
             // 
@@ -264,6 +266,7 @@
             btnHistory.Size = new Size(207, 66);
             btnHistory.TabIndex = 3;
             btnHistory.Text = "Lịch sử đặt vé";
+            btnHistory.Click += btnHistory_Click;
             // 
             // panelContent
             // 
@@ -287,6 +290,7 @@
             Controls.Add(panelHeader);
             Name = "FormProfile";
             Text = "FormProfile";
+            Load += FormProfile_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
