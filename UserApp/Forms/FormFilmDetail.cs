@@ -16,5 +16,16 @@ namespace UserApp
         {
             InitializeComponent();
         }
+
+        private void btnDatVe_Click(object sender, EventArgs e)
+        {
+            // Tìm MainForm để gọi OpenChildForm()
+            UserMainForm parent = this.ParentForm as UserMainForm;
+
+            if (parent != null)
+            {
+                parent.OpenChildForm(new FormShowtimeDetail());
+            }
+        }
     }
 }
