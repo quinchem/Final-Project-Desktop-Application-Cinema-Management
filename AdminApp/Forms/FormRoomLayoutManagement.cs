@@ -37,6 +37,8 @@ namespace AdminApp
 
         }
 
+
+
         private void guna2Button92_Click(object sender, EventArgs e)
         {
 
