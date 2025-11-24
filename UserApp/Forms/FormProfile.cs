@@ -36,13 +36,13 @@ namespace UserApp
         }
         private void FormProfile_Load(object sender, EventArgs e)
         {
-            LoadUserControl(new ProfileAccount());   // Load mặc định khi mở form
+            LoadUserControl(new ProfileAccount(currentUser));   // Load mặc định khi mở form
         }
 
         // Nút Thông tin
         private void btnInformation_Click(object sender, EventArgs e)
         {
-            LoadUserControl(new ProfileAccount());
+            LoadUserControl(new ProfileAccount(currentUser));
         }
 
         // Nút Đổi mật khẩu

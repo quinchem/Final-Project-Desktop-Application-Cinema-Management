@@ -245,6 +245,7 @@
             btnUserName.Text = "USERNAME";
             btnUserName.TextAlign = ContentAlignment.MiddleRight;
             btnUserName.UseVisualStyleBackColor = true;
+            btnUserName.Click += btnUserName_Click;
             // 
             // guna2Button4
             // 
