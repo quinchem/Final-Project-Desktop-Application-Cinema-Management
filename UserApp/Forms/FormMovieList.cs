@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UserApp
 {
-    public partial class FormFilmDetail : Form
+    public partial class FormMovieList : Form
     {
-        public FormFilmDetail()
+        public FormMovieList()
         {
             InitializeComponent();
         }

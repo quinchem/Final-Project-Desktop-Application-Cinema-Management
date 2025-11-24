@@ -1,7 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.IO;
 using System.Linq;
-
 public static class DatabaseHelper
 {
     public static string GetConnectionString()
