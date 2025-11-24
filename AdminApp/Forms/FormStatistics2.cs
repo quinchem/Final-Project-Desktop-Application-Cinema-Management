@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UserApp
+namespace AdminApp
 {
-    public partial class FormProfile : Form
+    public partial class FormStatistics2 : Form
     {
-        public FormProfile()
+        public FormStatistics2()
         {
             InitializeComponent();
         }
-
-        
     }
 }

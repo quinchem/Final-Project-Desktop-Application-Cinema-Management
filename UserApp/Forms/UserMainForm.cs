@@ -1,3 +1,5 @@
+﻿using UserApp.Models;
+
 namespace UserApp
 {
     public partial class UserMainForm : Form
@@ -5,6 +7,7 @@ namespace UserApp
         public UserMainForm()
         {
             InitializeComponent();
+            UpdateHeaderUI();
         }
 
         private Form currentFormChild;
@@ -34,6 +37,39 @@ namespace UserApp
             loginForm = new FormLogin(this);
             OpenChildForm(loginForm);
             loginForm.ShowLogin();
+        }
+
+        // Biến lưu thông tin user đã login
+        public Customer CurrentUser { get; private set; }
+
+        // Method để set thông tin user khi login thành công
+        public void SetCurrentUser(Customer customer)
+        {
+            CurrentUser = customer;
+            UpdateHeaderUI();
+        }
+
+        private void UpdateHeaderUI()
+        {
+            if (CurrentUser != null)
+            {
+                // Đã login
+                btnUserName.Text = CurrentUser.full_name.ToUpper();
+                btnUserName.Visible = true;
+                btnLogout.Visible = true;
+
+                btnDangNhap.Visible = false;
+                btnDangKy.Visible = false;
+            }
+            else
+            {
+                // Chưa login
+                btnUserName.Visible = false;
+                btnLogout.Visible = false;
+
+                btnDangNhap.Visible = true;
+                btnDangKy.Visible = true;
+            }
         }
 
         private void btnDangKy_Click(object sender, EventArgs e)
@@ -67,6 +103,18 @@ namespace UserApp
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
             OpenChildForm(new FormMovieDetail());
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            // 1️⃣ Xóa thông tin user hiện tại
+            CurrentUser = null;
+
+            // 2️⃣ Reset header về trạng thái chưa login
+            UpdateHeaderUI();
+
+            // 3️⃣ Đóng child form hiện tại (nếu có) và trở về trang chủ
+            GoHome();
         }
     }
 }

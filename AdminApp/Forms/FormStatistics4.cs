@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UserApp
+namespace AdminApp
 {
-    public partial class FormThanhToan : Form
+    public partial class FormStatistics4 : Form
     {
-        public FormThanhToan()
+        public FormStatistics4()
         {
             InitializeComponent();
         }

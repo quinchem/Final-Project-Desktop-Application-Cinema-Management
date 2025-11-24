@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AdminApp
 {
-    public partial class FormShowManagement : Form
+    public partial class FormRoomLayoutManagement : Form
     {
-        public FormShowManagement()
+        public FormRoomLayoutManagement()
         {
             InitializeComponent();
         }
