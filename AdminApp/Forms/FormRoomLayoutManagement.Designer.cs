@@ -27,6 +27,8 @@
                 base.Dispose(disposing);
             }
 
+
+
         private void InitializeComponent()
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
