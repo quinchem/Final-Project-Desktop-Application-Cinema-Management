@@ -107,15 +107,32 @@ namespace UserApp
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            // 1️⃣ Xóa thông tin user hiện tại
-            CurrentUser = null;
+            var result = MessageBox.Show(
+                "Bạn có chắc chắn muốn đăng xuất?",
+                "Xác nhận đăng xuất",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
-            // 2️⃣ Reset header về trạng thái chưa login
-            UpdateHeaderUI();
+            if (result == DialogResult.Yes)
+            {
+                // 1️⃣ Xóa thông tin user hiện tại
+                CurrentUser = null;
 
-            // 3️⃣ Đóng child form hiện tại (nếu có) và trở về trang chủ
-            GoHome();
+                // 2️⃣ Reset header về trạng thái chưa login
+                UpdateHeaderUI();
+
+                // 3️⃣ Đóng child form hiện tại (nếu có) và trở về trang chủ
+                GoHome();
+            }
+        }
+        private void btnUserName_Click(object sender, EventArgs e)
+        {
+            if (CurrentUser == null) return;
+
+            FormProfile profileForm = new FormProfile(CurrentUser);
+            OpenChildForm(profileForm);
         }
     }
 }
+
 
