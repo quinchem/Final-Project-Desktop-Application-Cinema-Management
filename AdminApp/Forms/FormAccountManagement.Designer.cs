@@ -1,6 +1,6 @@
 ﻿namespace AdminApp
 {
-    partial class AdminAccountManagement
+    partial class FormAccountManagement
     {
         /// <summary>
         /// Required designer variable.
