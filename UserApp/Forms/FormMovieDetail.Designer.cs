@@ -1,6 +1,6 @@
 ﻿namespace UserApp
 {
-    partial class FormFilmDetail
+    partial class FormMovieDetail
     {
         /// <summary>
         /// Required designer variable.
