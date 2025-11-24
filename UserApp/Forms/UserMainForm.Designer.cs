@@ -106,7 +106,7 @@
             btnDangKy = new Button();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             btnDangNhap = new Button();
-            guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
+            btnLichChieu = new Guna.UI2.WinForms.Guna2Button();
             logo = new PictureBox();
             mainpanel = new Panel();
             guna2PictureBox27 = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -201,7 +201,7 @@
             guna2Panel2.Controls.Add(btnDangKy);
             guna2Panel2.Controls.Add(guna2Button2);
             guna2Panel2.Controls.Add(btnDangNhap);
-            guna2Panel2.Controls.Add(guna2Button5);
+            guna2Panel2.Controls.Add(btnLichChieu);
             guna2Panel2.Controls.Add(logo);
             guna2Panel2.CustomizableEdges = customizableEdges11;
             guna2Panel2.Dock = DockStyle.Top;
@@ -242,6 +242,7 @@
             btnUserName.Text = "USERNAME";
             btnUserName.TextAlign = ContentAlignment.MiddleRight;
             btnUserName.UseVisualStyleBackColor = true;
+            btnUserName.Click += btnUserName_Click;
             // 
             // guna2Button4
             // 
@@ -316,7 +317,8 @@
             guna2Button2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button2.ForeColor = Color.White;
             guna2Button2.Image = Properties.Resources.phim;
-            guna2Button2.Location = new Point(368, 41);
+            guna2Button2.Location = new Point(569, 62);
+            guna2Button2.Margin = new Padding(4);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2Button2.Size = new Size(98, 51);
@@ -337,24 +339,24 @@
             btnDangNhap.UseVisualStyleBackColor = true;
             btnDangNhap.Click += btnDangNhap_Click;
             // 
-            // guna2Button5
+            // btnLichChieu
             // 
-            guna2Button5.CustomizableEdges = customizableEdges9;
-            guna2Button5.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button5.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button5.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button5.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button5.FillColor = Color.FromArgb(44, 84, 115);
-            guna2Button5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button5.ForeColor = Color.White;
-            guna2Button5.Image = Properties.Resources.shooting_schedule;
-            guna2Button5.Location = new Point(203, 41);
-            guna2Button5.Margin = new Padding(2);
-            guna2Button5.Name = "guna2Button5";
-            guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button5.Size = new Size(143, 51);
-            guna2Button5.TabIndex = 28;
-            guna2Button5.Text = "LỊCH CHIẾU";
+            btnLichChieu.CustomizableEdges = customizableEdges9;
+            btnLichChieu.DisabledState.BorderColor = Color.DarkGray;
+            btnLichChieu.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnLichChieu.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnLichChieu.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnLichChieu.FillColor = Color.FromArgb(44, 84, 115);
+            btnLichChieu.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLichChieu.ForeColor = Color.White;
+            btnLichChieu.Image = Properties.Resources.shooting_schedule;
+            btnLichChieu.Location = new Point(334, 63);
+            btnLichChieu.Name = "btnLichChieu";
+            btnLichChieu.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnLichChieu.Size = new Size(214, 76);
+            btnLichChieu.TabIndex = 28;
+            btnLichChieu.Text = "LỊCH CHIẾU";
+            btnLichChieu.Click += btnLichChieu_Click;
             // 
             // logo
             // 
@@ -594,6 +596,7 @@
             guna2PictureBox11.Size = new Size(149, 83);
             guna2PictureBox11.TabIndex = 0;
             guna2PictureBox11.TabStop = false;
+            guna2PictureBox11.Click += Poster_Click;
             // 
             // guna2PictureBox12
             // 
@@ -605,6 +608,7 @@
             guna2PictureBox12.Size = new Size(149, 83);
             guna2PictureBox12.TabIndex = 1;
             guna2PictureBox12.TabStop = false;
+            guna2PictureBox12.Click += Poster_Click;
             // 
             // guna2PictureBox13
             // 
@@ -616,6 +620,7 @@
             guna2PictureBox13.Size = new Size(149, 83);
             guna2PictureBox13.TabIndex = 2;
             guna2PictureBox13.TabStop = false;
+            guna2PictureBox13.Click += Poster_Click;
             // 
             // guna2PictureBox14
             // 
@@ -627,6 +632,7 @@
             guna2PictureBox14.Size = new Size(149, 83);
             guna2PictureBox14.TabIndex = 3;
             guna2PictureBox14.TabStop = false;
+            guna2PictureBox14.Click += Poster_Click;
             // 
             // guna2PictureBox15
             // 
@@ -638,6 +644,7 @@
             guna2PictureBox15.Size = new Size(149, 83);
             guna2PictureBox15.TabIndex = 4;
             guna2PictureBox15.TabStop = false;
+            guna2PictureBox15.Click += Poster_Click;
             // 
             // guna2PictureBox16
             // 
@@ -649,6 +656,7 @@
             guna2PictureBox16.Size = new Size(149, 83);
             guna2PictureBox16.TabIndex = 5;
             guna2PictureBox16.TabStop = false;
+            guna2PictureBox16.Click += Poster_Click;
             // 
             // guna2PictureBox10
             // 
@@ -660,6 +668,7 @@
             guna2PictureBox10.Size = new Size(896, 350);
             guna2PictureBox10.TabIndex = 7;
             guna2PictureBox10.TabStop = false;
+            guna2PictureBox10.Click += Poster_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -866,7 +875,7 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button5;
+        private Guna.UI2.WinForms.Guna2Button btnLichChieu;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox27;
         private Guna.UI2.WinForms.Guna2TextBox txtTimKiem;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
