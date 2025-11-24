@@ -238,6 +238,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges204 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges205 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges206 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges207 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges208 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             lblTitle = new Label();
             lblScreen = new Label();
             guna2Button94 = new Guna.UI2.WinForms.Guna2Button();
@@ -354,6 +356,8 @@
             guna2Button99 = new Guna.UI2.WinForms.Guna2Button();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             btnThemPhim = new Guna.UI2.WinForms.Guna2Button();
+            panel1 = new Panel();
+            panelSoDoGhe = new Guna.UI2.WinForms.Guna2Panel();
             guna2CustomGradientPanel1.SuspendLayout();
             guna2CustomGradientPanel2.SuspendLayout();
             guna2CustomGradientPanel3.SuspendLayout();
@@ -2454,12 +2458,29 @@
             btnThemPhim.TabIndex = 157;
             btnThemPhim.Text = "Lưu";
             // 
+            // panel1
+            // 
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(250, 125);
+            panel1.TabIndex = 158;
+            // 
+            // panelSoDoGhe
+            // 
+            panelSoDoGhe.CustomizableEdges = customizableEdges207;
+            panelSoDoGhe.Location = new Point(97, 209);
+            panelSoDoGhe.Name = "panelSoDoGhe";
+            panelSoDoGhe.ShadowDecoration.CustomizableEdges = customizableEdges208;
+            panelSoDoGhe.Size = new Size(1024, 678);
+            panelSoDoGhe.TabIndex = 159;
+            // 
             // FormRoomLayoutManagement
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(88, 115, 140);
             ClientSize = new Size(1420, 938);
+            Controls.Add(panel1);
             Controls.Add(btnThemPhim);
             Controls.Add(guna2Separator1);
             Controls.Add(guna2Button95);
@@ -2562,6 +2583,7 @@
             Controls.Add(guna2Button15);
             Controls.Add(lblTitle);
             Controls.Add(lblScreen);
+            Controls.Add(panelSoDoGhe);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormRoomLayoutManagement";
             StartPosition = FormStartPosition.CenterScreen;
@@ -2749,6 +2771,8 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button99;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private Guna.UI2.WinForms.Guna2Button btnThemPhim;
+        private Panel panel1;
+        private Guna.UI2.WinForms.Guna2Panel panelSoDoGhe;
     }
     }
 
