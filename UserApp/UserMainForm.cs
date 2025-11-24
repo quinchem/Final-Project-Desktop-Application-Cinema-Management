@@ -66,7 +66,7 @@ namespace UserApp
 
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormFilmDetail());
+            OpenChildForm(new FormMovieDetail());
         }
     }
 }
