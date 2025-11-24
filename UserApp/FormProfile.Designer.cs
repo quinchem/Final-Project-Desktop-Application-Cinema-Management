@@ -54,7 +54,8 @@
             btnInformation.FocusedColor = Color.FromArgb(245, 131, 35);
             btnInformation.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnInformation.ForeColor = Color.White;
-            btnInformation.Location = new Point(50, 196);
+            btnInformation.Location = new Point(65, 87);
+            btnInformation.Margin = new Padding(4);
             btnInformation.Name = "btnInformation";
             btnInformation.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnInformation.Size = new Size(207, 66);
@@ -74,7 +75,8 @@
             btnChangPassword.FocusedColor = Color.FromArgb(245, 131, 35);
             btnChangPassword.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnChangPassword.ForeColor = Color.White;
-            btnChangPassword.Location = new Point(377, 196);
+            btnChangPassword.Location = new Point(405, 87);
+            btnChangPassword.Margin = new Padding(4);
             btnChangPassword.Name = "btnChangPassword";
             btnChangPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnChangPassword.Size = new Size(207, 66);
@@ -94,7 +96,8 @@
             btnHistory.FocusedColor = Color.FromArgb(245, 131, 35);
             btnHistory.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnHistory.ForeColor = Color.White;
-            btnHistory.Location = new Point(702, 196);
+            btnHistory.Location = new Point(754, 87);
+            btnHistory.Margin = new Padding(4);
             btnHistory.Name = "btnHistory";
             btnHistory.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnHistory.Size = new Size(207, 66);
@@ -113,10 +116,10 @@
             // 
             // FormProfile
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1500, 938);
+            ClientSize = new Size(1800, 1126);
             Controls.Add(panelContent);
             Controls.Add(btnHistory);
             Controls.Add(btnChangPassword);

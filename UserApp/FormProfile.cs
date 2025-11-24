@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserApp.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace UserApp
 {
@@ -24,6 +26,13 @@ namespace UserApp
             uc.Dock = DockStyle.Fill;
             panelContent.Controls.Add(uc);
             uc.BringToFront();
+        }
+        private Customer currentUser;
+
+        public FormProfile(Customer user)
+        {
+            InitializeComponent();
+            currentUser = user;
         }
         private void FormProfile_Load(object sender, EventArgs e)
         {
