@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panelChiTiet = new Panel();
+            Trailer = new Guna.UI2.WinForms.Guna2Button();
+            MoTa = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnMoTa = new Guna.UI2.WinForms.Guna2Button();
             btnDatVe = new Guna.UI2.WinForms.Guna2Button();
             guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -53,8 +55,6 @@
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            MoTa = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            Trailer = new Guna.UI2.WinForms.Guna2Button();
             panelChiTiet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             SuspendLayout();
@@ -86,8 +86,38 @@
             panelChiTiet.Dock = DockStyle.Fill;
             panelChiTiet.Location = new Point(0, 0);
             panelChiTiet.Name = "panelChiTiet";
-            panelChiTiet.Size = new Size(1482, 853);
+            panelChiTiet.Size = new Size(1182, 703);
             panelChiTiet.TabIndex = 0;
+            // 
+            // Trailer
+            // 
+            Trailer.BorderRadius = 15;
+            Trailer.CustomizableEdges = customizableEdges1;
+            Trailer.DisabledState.BorderColor = Color.DarkGray;
+            Trailer.DisabledState.CustomBorderColor = Color.DarkGray;
+            Trailer.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            Trailer.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            Trailer.FillColor = Color.Linen;
+            Trailer.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Trailer.ForeColor = Color.FromArgb(245, 131, 35);
+            Trailer.Location = new Point(117, 966);
+            Trailer.Name = "Trailer";
+            Trailer.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            Trailer.Size = new Size(145, 49);
+            Trailer.TabIndex = 18;
+            Trailer.Text = "Trailer";
+            // 
+            // MoTa
+            // 
+            MoTa.AutoSize = false;
+            MoTa.BackColor = Color.Transparent;
+            MoTa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            MoTa.ForeColor = Color.White;
+            MoTa.Location = new Point(117, 578);
+            MoTa.Name = "MoTa";
+            MoTa.Size = new Size(1206, 350);
+            MoTa.TabIndex = 17;
+            MoTa.Text = "Chi tiết mô tả";
             // 
             // btnMoTa
             // 
@@ -117,12 +147,12 @@
             btnDatVe.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnDatVe.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnDatVe.FillColor = Color.FromArgb(45, 76, 101);
-            btnDatVe.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDatVe.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDatVe.ForeColor = Color.White;
             btnDatVe.Image = Properties.Resources.DatVe;
             btnDatVe.ImageAlign = HorizontalAlignment.Left;
-            btnDatVe.ImageSize = new Size(40, 40);
-            btnDatVe.Location = new Point(1114, 47);
+            btnDatVe.ImageSize = new Size(30, 30);
+            btnDatVe.Location = new Point(944, 47);
             btnDatVe.Name = "btnDatVe";
             btnDatVe.ShadowDecoration.BorderRadius = 28;
             btnDatVe.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
@@ -130,7 +160,7 @@
             btnDatVe.ShadowDecoration.Depth = 40;
             btnDatVe.ShadowDecoration.Enabled = true;
             btnDatVe.ShadowDecoration.Shadow = new Padding(0, 0, 3, 5);
-            btnDatVe.Size = new Size(169, 56);
+            btnDatVe.Size = new Size(140, 56);
             btnDatVe.TabIndex = 14;
             btnDatVe.Text = "ĐẶT VÉ";
             btnDatVe.TextAlign = HorizontalAlignment.Right;
@@ -289,43 +319,13 @@
             guna2PictureBox1.TabIndex = 0;
             guna2PictureBox1.TabStop = false;
             // 
-            // MoTa
-            // 
-            MoTa.AutoSize = false;
-            MoTa.BackColor = Color.Transparent;
-            MoTa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            MoTa.ForeColor = Color.White;
-            MoTa.Location = new Point(117, 578);
-            MoTa.Name = "MoTa";
-            MoTa.Size = new Size(1206, 350);
-            MoTa.TabIndex = 17;
-            MoTa.Text = "Chi tiết mô tả";
-            // 
-            // Trailer
-            // 
-            Trailer.BorderRadius = 15;
-            Trailer.CustomizableEdges = customizableEdges1;
-            Trailer.DisabledState.BorderColor = Color.DarkGray;
-            Trailer.DisabledState.CustomBorderColor = Color.DarkGray;
-            Trailer.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            Trailer.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            Trailer.FillColor = Color.Linen;
-            Trailer.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Trailer.ForeColor = Color.FromArgb(245, 131, 35);
-            Trailer.Location = new Point(117, 966);
-            Trailer.Name = "Trailer";
-            Trailer.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            Trailer.Size = new Size(145, 49);
-            Trailer.TabIndex = 18;
-            Trailer.Text = "Trailer";
-            // 
-            // FormFilmDetail
+            // FormMovieDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1482, 853);
+            ClientSize = new Size(1182, 703);
             Controls.Add(panelChiTiet);
-            Name = "FormFilmDetail";
+            Name = "FormMovieDetail";
             Text = "Chi tiết phim";
             panelChiTiet.ResumeLayout(false);
             panelChiTiet.PerformLayout();
