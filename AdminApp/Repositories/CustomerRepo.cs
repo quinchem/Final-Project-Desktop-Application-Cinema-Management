@@ -45,5 +45,21 @@ namespace AdminApp.Repositories
 
             return list;
         }
+        public bool DeleteCustomer(string id)
+        {
+            using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
+            {
+                conn.Open();
+
+                string query = "DELETE FROM customer WHERE customer_id = @id";
+
+                using (var cmd = new SqliteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
     }
 }

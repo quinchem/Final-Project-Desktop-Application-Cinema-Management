@@ -66,7 +66,7 @@ namespace AdminApp
 
         private void AdminCustomerManagement_Load_1(object sender, EventArgs e)
         {
-            LoadCustomerData();
+            LoadCustomerData(); //t2//
         }
     }
 }

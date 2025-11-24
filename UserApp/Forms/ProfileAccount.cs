@@ -84,7 +84,7 @@ namespace UserApp
             string newEmail = txtEmail.Text.Trim();
             string newPhone = txtSDT.Text.Trim();
             string newAddress = txtDiachi.Text.Trim();
-            string newDob = dtpNgaysinh.Value.ToString("yyyy-MM-dd");
+            string newDob = dtpNgaysinh.Value.ToString("dd-MM-yyyy");
             string newGender = radNam.Checked ? "Nam" : radNu.Checked ? "Nữ" : "";
 
             // Validate cơ bản
