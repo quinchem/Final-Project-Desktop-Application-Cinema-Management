@@ -58,7 +58,7 @@
             btnInformation.Margin = new Padding(4);
             btnInformation.Name = "btnInformation";
             btnInformation.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnInformation.Size = new Size(248, 79);
+            btnInformation.Size = new Size(207, 66);
             btnInformation.TabIndex = 1;
             btnInformation.Text = "Thông tin chung";
             btnInformation.Click += btnInformation_Click;
@@ -79,7 +79,7 @@
             btnChangPassword.Margin = new Padding(4);
             btnChangPassword.Name = "btnChangPassword";
             btnChangPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnChangPassword.Size = new Size(248, 79);
+            btnChangPassword.Size = new Size(207, 66);
             btnChangPassword.TabIndex = 2;
             btnChangPassword.Text = "Đổi mật khẩu";
             btnChangPassword.Click += btnChangePassword_Click;
@@ -100,7 +100,7 @@
             btnHistory.Margin = new Padding(4);
             btnHistory.Name = "btnHistory";
             btnHistory.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnHistory.Size = new Size(248, 79);
+            btnHistory.Size = new Size(207, 66);
             btnHistory.TabIndex = 3;
             btnHistory.Text = "Lịch sử đặt vé";
             btnHistory.Click += btnHistory_Click;
@@ -108,11 +108,10 @@
             // panelContent
             // 
             panelContent.CustomizableEdges = customizableEdges7;
-            panelContent.Location = new Point(65, 231);
-            panelContent.Margin = new Padding(4);
+            panelContent.Location = new Point(50, 316);
             panelContent.Name = "panelContent";
             panelContent.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            panelContent.Size = new Size(1594, 662);
+            panelContent.Size = new Size(1328, 552);
             panelContent.TabIndex = 4;
             // 
             // FormProfile
@@ -125,7 +124,6 @@
             Controls.Add(btnHistory);
             Controls.Add(btnChangPassword);
             Controls.Add(btnInformation);
-            Margin = new Padding(4);
             Name = "FormProfile";
             Text = "FormProfile";
             Load += FormProfile_Load;
