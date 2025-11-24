@@ -132,6 +132,21 @@ namespace UserApp
             FormProfile profileForm = new FormProfile(CurrentUser);
             OpenChildForm(profileForm);
         }
+
+        private void Poster_Click(object sender, EventArgs e)
+        {
+            PictureBox poster = sender as PictureBox;
+
+            // (OPTIONAL) Lấy thông tin phim từ Tag nếu có
+            // var movieId = poster.Tag.ToString();
+
+            OpenChildForm(new FormMovieDetail());
+        }
+
+        private void btnLichChieu_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new FormShowtimeList());
+        }
     }
 }
 
