@@ -829,6 +829,7 @@
             IsMdiContainer = true;
             Margin = new Padding(4);
             Name = "UserMainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Trang chủ";
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();
