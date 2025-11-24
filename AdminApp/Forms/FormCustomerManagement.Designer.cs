@@ -59,25 +59,25 @@
             // 
             // txtTimKiem
             // 
-            txtTimKiem.BorderColor = Color.Transparent;
-            txtTimKiem.BorderThickness = 0;
-            txtTimKiem.CustomizableEdges = null;
-            txtTimKiem.DefaultText = "";
-            txtTimKiem.FillColor = Color.FromArgb(235, 235, 235);
-            txtTimKiem.FocusedState.BorderColor = Color.FromArgb(0, 120, 215);
-            txtTimKiem.Font = new Font("Segoe UI", 10.5F);
-            txtTimKiem.ForeColor = Color.Black;
-            txtTimKiem.HoverState.BorderColor = Color.FromArgb(0, 120, 215);
-            txtTimKiem.Location = new Point(73, 56);
-            txtTimKiem.Margin = new Padding(3, 4, 3, 4);
-            txtTimKiem.Name = "txtTimKiem";
-            txtTimKiem.PlaceholderForeColor = Color.Gray;
-            txtTimKiem.PlaceholderText = "Hãy nhập từ khóa";
-            txtTimKiem.SelectedText = "";
-            txtTimKiem.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            txtTimKiem.Size = new Size(270, 35);
-            txtTimKiem.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
-            txtTimKiem.TabIndex = 0;
+            txtTenPhim.BorderColor = Color.Transparent;
+            txtTenPhim.BorderThickness = 0;
+            txtTenPhim.CustomizableEdges = null;
+            txtTenPhim.DefaultText = "";
+            txtTenPhim.FillColor = Color.FromArgb(235, 235, 235);
+            txtTenPhim.FocusedState.BorderColor = Color.FromArgb(0, 120, 215);
+            txtTenPhim.Font = new Font("Segoe UI", 10.5F);
+            txtTenPhim.ForeColor = Color.Black;
+            txtTenPhim.HoverState.BorderColor = Color.FromArgb(0, 120, 215);
+            txtTenPhim.Location = new Point(68, 54);
+            txtTenPhim.Margin = new Padding(3, 4, 3, 4);
+            txtTenPhim.Name = "txtTenPhim";
+            txtTenPhim.PlaceholderForeColor = Color.Gray;
+            txtTenPhim.PlaceholderText = "Hãy nhập từ khóa";
+            txtTenPhim.SelectedText = "";
+            txtTenPhim.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            txtTenPhim.Size = new Size(270, 35);
+            txtTenPhim.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            txtTenPhim.TabIndex = 0;
             // 
             // btnTim
             // 
