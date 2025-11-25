@@ -54,13 +54,13 @@
             btnInformation.FocusedColor = Color.FromArgb(245, 131, 35);
             btnInformation.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnInformation.ForeColor = Color.White;
-            btnInformation.Location = new Point(65, 87);
-            btnInformation.Margin = new Padding(4);
+            btnInformation.Image = Properties.Resources.ThongtinChung;
+            btnInformation.Location = new Point(105, 75);
             btnInformation.Name = "btnInformation";
             btnInformation.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnInformation.Size = new Size(248, 79);
+            btnInformation.Size = new Size(254, 58);
             btnInformation.TabIndex = 1;
-            btnInformation.Text = "Thông tin chung";
+            btnInformation.Text = "THÔNG TIN CHUNG";
             btnInformation.Click += btnInformation_Click;
             // 
             // btnChangPassword
@@ -75,13 +75,13 @@
             btnChangPassword.FocusedColor = Color.FromArgb(245, 131, 35);
             btnChangPassword.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnChangPassword.ForeColor = Color.White;
-            btnChangPassword.Location = new Point(405, 87);
-            btnChangPassword.Margin = new Padding(4);
+            btnChangPassword.Image = Properties.Resources.DatlaiMK;
+            btnChangPassword.Location = new Point(446, 75);
             btnChangPassword.Name = "btnChangPassword";
             btnChangPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnChangPassword.Size = new Size(248, 79);
+            btnChangPassword.Size = new Size(207, 58);
             btnChangPassword.TabIndex = 2;
-            btnChangPassword.Text = "Đổi mật khẩu";
+            btnChangPassword.Text = "ĐỔI MẬT KHẨU";
             btnChangPassword.Click += btnChangePassword_Click;
             // 
             // btnHistory
@@ -96,36 +96,36 @@
             btnHistory.FocusedColor = Color.FromArgb(245, 131, 35);
             btnHistory.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnHistory.ForeColor = Color.White;
-            btnHistory.Location = new Point(754, 87);
-            btnHistory.Margin = new Padding(4);
+            btnHistory.Image = Properties.Resources.BookingHistory;
+            btnHistory.Location = new Point(731, 75);
             btnHistory.Name = "btnHistory";
             btnHistory.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnHistory.Size = new Size(248, 79);
+            btnHistory.Size = new Size(207, 58);
             btnHistory.TabIndex = 3;
-            btnHistory.Text = "Lịch sử đặt vé";
+            btnHistory.Text = "LỊCH SỬ ĐẶT VÉ";
             btnHistory.Click += btnHistory_Click;
             // 
             // panelContent
             // 
+            panelContent.BorderRadius = 20;
             panelContent.CustomizableEdges = customizableEdges7;
-            panelContent.Location = new Point(65, 231);
-            panelContent.Margin = new Padding(4);
+            panelContent.Location = new Point(34, 190);
             panelContent.Name = "panelContent";
             panelContent.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            panelContent.Size = new Size(1594, 662);
+            panelContent.Size = new Size(1417, 620);
             panelContent.TabIndex = 4;
             // 
             // FormProfile
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1800, 1126);
+            ClientSize = new Size(1500, 938);
             Controls.Add(panelContent);
             Controls.Add(btnHistory);
             Controls.Add(btnChangPassword);
             Controls.Add(btnInformation);
-            Margin = new Padding(4);
+            ForeColor = SystemColors.ActiveCaptionText;
             Name = "FormProfile";
             Text = "FormProfile";
             Load += FormProfile_Load;
