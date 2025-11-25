@@ -60,7 +60,9 @@
             guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             btnThemPhim = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            label1 = new Label();
             guna2ShadowPanel1.SuspendLayout();
+            SuspendLayout();
             // 
             // guna2ShadowPanel1
             // 
@@ -254,7 +256,7 @@
             guna2ComboBox3.HoverState.BorderColor = Color.Silver;
             guna2ComboBox3.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             guna2ComboBox3.ItemHeight = 30;
-            guna2ComboBox3.Location = new Point(685, 199);
+            guna2ComboBox3.Location = new Point(685, 208);
             guna2ComboBox3.Name = "guna2ComboBox3";
             guna2ComboBox3.ShadowDecoration.CustomizableEdges = customizableEdges26;
             guna2ComboBox3.Size = new Size(275, 36);
@@ -319,12 +321,22 @@
             guna2Button1.TabIndex = 30;
             guna2Button1.Text = "Đóng";
             // 
-            // AdminThemSuatChieu
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(381, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(50, 20);
+            label1.TabIndex = 31;
+            label1.Text = "label1";
+            // 
+            // FormAddShowTime
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1017, 372);
+            Controls.Add(label1);
             Controls.Add(guna2Button1);
             Controls.Add(btnThemPhim);
             Controls.Add(guna2DateTimePicker1);
@@ -340,7 +352,7 @@
             Controls.Add(guna2HtmlLabel1);
             Controls.Add(LbTenPhim);
             Controls.Add(guna2ShadowPanel1);
-            Name = "AdminThemSuatChieu";
+            Name = "FormAddShowTime";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminThemSuatChieu";
             guna2ShadowPanel1.ResumeLayout(false);
@@ -367,5 +379,6 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
         private Guna.UI2.WinForms.Guna2Button btnThemPhim;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Label label1;
     }
 }

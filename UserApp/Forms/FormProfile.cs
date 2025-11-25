@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace UserApp
         {
             InitializeComponent();
         }
+        
 
         // Hàm load UserControl vào panelContainer
         private void LoadUserControl(UserControl uc)
@@ -36,13 +38,13 @@ namespace UserApp
         }
         private void FormProfile_Load(object sender, EventArgs e)
         {
-            LoadUserControl(new ProfileAccount());   // Load mặc định khi mở form
+            LoadUserControl(new ProfileAccount(currentUser));   // Load mặc định khi mở form
         }
 
         // Nút Thông tin
         private void btnInformation_Click(object sender, EventArgs e)
         {
-            LoadUserControl(new ProfileAccount());
+            LoadUserControl(new ProfileAccount(currentUser));
         }
 
         // Nút Đổi mật khẩu
