@@ -7,9 +7,10 @@ namespace AdminApp
             InitializeComponent();
         }
 
-        private void guna2Button5_Click(object sender, EventArgs e)
+        private void btnSuatChieu_Click(object sender, EventArgs e)
         {
-
+            var f = new FormShowManagement();
+            f.Show();
         }
     }
 }

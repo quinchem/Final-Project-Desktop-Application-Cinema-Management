@@ -49,21 +49,21 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            label2 = new Label();
+            label1 = new Label();
+            pictureBox2 = new PictureBox();
             guna2Button7 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
+            btnSuatChieu = new Guna.UI2.WinForms.Guna2Button();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            label1 = new Label();
-            label2 = new Label();
             LbTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // LbTenPhim
@@ -71,7 +71,8 @@
             LbTenPhim.BackColor = Color.Transparent;
             LbTenPhim.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbTenPhim.ForeColor = Color.White;
-            LbTenPhim.Location = new Point(225, 50);
+            LbTenPhim.Location = new Point(338, 75);
+            LbTenPhim.Margin = new Padding(4, 4, 4, 4);
             LbTenPhim.Name = "LbTenPhim";
             LbTenPhim.Size = new Size(3, 2);
             LbTenPhim.TabIndex = 7;
@@ -86,7 +87,7 @@
             guna2Panel1.Controls.Add(guna2Button7);
             guna2Panel1.Controls.Add(guna2Button6);
             guna2Panel1.Controls.Add(guna2Button4);
-            guna2Panel1.Controls.Add(guna2Button3);
+            guna2Panel1.Controls.Add(btnSuatChieu);
             guna2Panel1.Controls.Add(guna2Button2);
             guna2Panel1.Controls.Add(guna2Button1);
             guna2Panel1.Controls.Add(guna2Button5);
@@ -95,10 +96,45 @@
             guna2Panel1.CustomizableEdges = customizableEdges15;
             guna2Panel1.Dock = DockStyle.Top;
             guna2Panel1.Location = new Point(0, 0);
+            guna2Panel1.Margin = new Padding(4, 4, 4, 4);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2Panel1.Size = new Size(1402, 131);
+            guna2Panel1.Size = new Size(2103, 196);
             guna2Panel1.TabIndex = 0;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(1941, 152);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(73, 25);
+            label2.TabIndex = 36;
+            label2.Text = "ADMIN";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(1898, 122);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(152, 30);
+            label1.TabIndex = 1;
+            label1.Text = "LÊ THỤC UYÊN";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.avatar;
+            pictureBox2.Location = new Point(1928, 38);
+            pictureBox2.Margin = new Padding(4, 4, 4, 4);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(93, 80);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 1;
+            pictureBox2.TabStop = false;
             // 
             // guna2Button7
             // 
@@ -113,10 +149,11 @@
             guna2Button7.HoverState.ForeColor = Color.FromArgb(255, 128, 0);
             guna2Button7.Image = Properties.Resources.discount;
             guna2Button7.ImageSize = new Size(25, 25);
-            guna2Button7.Location = new Point(915, 41);
+            guna2Button7.Location = new Point(1363, 62);
+            guna2Button7.Margin = new Padding(4, 4, 4, 4);
             guna2Button7.Name = "guna2Button7";
             guna2Button7.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button7.Size = new Size(143, 51);
+            guna2Button7.Size = new Size(214, 76);
             guna2Button7.TabIndex = 35;
             guna2Button7.Text = "KHUYẾN MÃI";
             // 
@@ -133,10 +170,11 @@
             guna2Button6.HoverState.ForeColor = Color.FromArgb(255, 128, 0);
             guna2Button6.Image = Properties.Resources.setting;
             guna2Button6.ImageSize = new Size(25, 25);
-            guna2Button6.Location = new Point(1097, 40);
+            guna2Button6.Location = new Point(1631, 60);
+            guna2Button6.Margin = new Padding(4, 4, 4, 4);
             guna2Button6.Name = "guna2Button6";
             guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button6.Size = new Size(143, 51);
+            guna2Button6.Size = new Size(214, 76);
             guna2Button6.TabIndex = 34;
             guna2Button6.Text = "KHÁCH HÀNG";
             // 
@@ -152,31 +190,34 @@
             guna2Button4.ForeColor = Color.White;
             guna2Button4.HoverState.ForeColor = Color.FromArgb(255, 128, 0);
             guna2Button4.Image = Properties.Resources.film;
-            guna2Button4.Location = new Point(303, 41);
+            guna2Button4.Location = new Point(454, 62);
+            guna2Button4.Margin = new Padding(4, 4, 4, 4);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button4.Size = new Size(86, 51);
+            guna2Button4.Size = new Size(129, 76);
             guna2Button4.TabIndex = 33;
             guna2Button4.Text = "PHIM";
             // 
-            // guna2Button3
+            // btnSuatChieu
             // 
-            guna2Button3.CustomizableEdges = customizableEdges7;
-            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button3.FillColor = Color.FromArgb(44, 84, 115);
-            guna2Button3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button3.ForeColor = Color.White;
-            guna2Button3.HoverState.ForeColor = Color.FromArgb(255, 128, 0);
-            guna2Button3.Image = Properties.Resources.showtime;
-            guna2Button3.Location = new Point(416, 41);
-            guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2Button3.Size = new Size(136, 51);
-            guna2Button3.TabIndex = 32;
-            guna2Button3.Text = "SUẤT CHIẾU";
+            btnSuatChieu.CustomizableEdges = customizableEdges7;
+            btnSuatChieu.DisabledState.BorderColor = Color.DarkGray;
+            btnSuatChieu.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSuatChieu.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSuatChieu.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSuatChieu.FillColor = Color.FromArgb(44, 84, 115);
+            btnSuatChieu.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSuatChieu.ForeColor = Color.White;
+            btnSuatChieu.HoverState.ForeColor = Color.FromArgb(255, 128, 0);
+            btnSuatChieu.Image = Properties.Resources.showtime;
+            btnSuatChieu.Location = new Point(621, 62);
+            btnSuatChieu.Margin = new Padding(4, 4, 4, 4);
+            btnSuatChieu.Name = "btnSuatChieu";
+            btnSuatChieu.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnSuatChieu.Size = new Size(204, 76);
+            btnSuatChieu.TabIndex = 32;
+            btnSuatChieu.Text = "SUẤT CHIẾU";
+            btnSuatChieu.Click += btnSuatChieu_Click;
             // 
             // guna2Button2
             // 
@@ -191,10 +232,11 @@
             guna2Button2.HoverState.ForeColor = Color.FromArgb(255, 128, 0);
             guna2Button2.Image = Properties.Resources.popcorn;
             guna2Button2.ImageSize = new Size(25, 25);
-            guna2Button2.Location = new Point(764, 41);
+            guna2Button2.Location = new Point(1131, 62);
+            guna2Button2.Margin = new Padding(4, 4, 4, 4);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button2.Size = new Size(118, 51);
+            guna2Button2.Size = new Size(177, 76);
             guna2Button2.TabIndex = 31;
             guna2Button2.Text = "DỊCH VỤ";
             // 
@@ -211,10 +253,11 @@
             guna2Button1.HoverState.ForeColor = Color.FromArgb(255, 128, 0);
             guna2Button1.Image = Properties.Resources.cinema_seats;
             guna2Button1.ImageSize = new Size(25, 25);
-            guna2Button1.Location = new Point(589, 41);
+            guna2Button1.Location = new Point(871, 62);
+            guna2Button1.Margin = new Padding(4, 4, 4, 4);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2Button1.Size = new Size(137, 51);
+            guna2Button1.Size = new Size(206, 76);
             guna2Button1.TabIndex = 30;
             guna2Button1.Text = "SƠ ĐỒ GHẾ";
             // 
@@ -232,69 +275,40 @@
             guna2Button5.HoverState.ForeColor = Color.FromArgb(255, 128, 0);
             guna2Button5.Image = Properties.Resources.dashboard_icon;
             guna2Button5.ImageSize = new Size(25, 25);
-            guna2Button5.Location = new Point(136, 40);
+            guna2Button5.Location = new Point(204, 60);
+            guna2Button5.Margin = new Padding(4, 4, 4, 4);
             guna2Button5.Name = "guna2Button5";
             guna2Button5.PressedColor = Color.FromArgb(44, 84, 115);
             guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2Button5.Size = new Size(143, 51);
+            guna2Button5.Size = new Size(214, 76);
             guna2Button5.TabIndex = 29;
             guna2Button5.Text = "TỔNG QUAN";
-            guna2Button5.Click += guna2Button5_Click;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.logoHamster;
-            pictureBox1.Location = new Point(0, 8);
+            pictureBox1.Location = new Point(0, 12);
+            pictureBox1.Margin = new Padding(4, 4, 4, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(135, 114);
+            pictureBox1.Size = new Size(202, 171);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.avatar;
-            pictureBox2.Location = new Point(1285, 25);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(62, 53);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 1;
-            pictureBox2.TabStop = false;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(1265, 81);
-            label1.Name = "label1";
-            label1.Size = new Size(107, 20);
-            label1.TabIndex = 1;
-            label1.Text = "LÊ THỤC UYÊN";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(1294, 101);
-            label2.Name = "label2";
-            label2.Size = new Size(50, 17);
-            label2.TabIndex = 36;
-            label2.Text = "ADMIN";
-            // 
             // AdminMainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1402, 703);
+            ClientSize = new Size(2103, 1054);
             Controls.Add(guna2Panel1);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "AdminMainForm";
             Text = "AdminMainForm";
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -306,7 +320,7 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button5;
         private Guna.UI2.WinForms.Guna2Button guna2Button6;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
+        private Guna.UI2.WinForms.Guna2Button btnSuatChieu;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button guna2Button7;
