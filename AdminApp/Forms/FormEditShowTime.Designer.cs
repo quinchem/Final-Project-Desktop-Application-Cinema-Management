@@ -1,6 +1,6 @@
 ﻿namespace AdminApp.Forms
 {
-    partial class EditShowTime
+    partial class FormEditShowTime
     {
         /// <summary>
         /// Required designer variable.
