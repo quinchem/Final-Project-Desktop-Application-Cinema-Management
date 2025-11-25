@@ -12,7 +12,7 @@ namespace AdminApp.Forms
 {
     public partial class FrmEditShowTime : Form
     {
-        public FrmEditShowTime()
+        public FrmEditShowTime(string showtimeId)
         {
             InitializeComponent();
         }
