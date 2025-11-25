@@ -69,7 +69,7 @@
             label1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label1.Location = new Point(339, 95);
             label1.Name = "label1";
-            label1.Size = new Size(111, 30);
+            label1.Size = new Size(127, 32);
             label1.TabIndex = 0;
             label1.Text = "Họ và tên:";
             // 
@@ -79,7 +79,7 @@
             label2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label2.Location = new Point(339, 233);
             label2.Name = "label2";
-            label2.Size = new Size(113, 30);
+            label2.Size = new Size(128, 32);
             label2.TabIndex = 1;
             label2.Text = "Ngày sinh:";
             // 
@@ -89,7 +89,7 @@
             label3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label3.Location = new Point(339, 380);
             label3.Name = "label3";
-            label3.Size = new Size(69, 30);
+            label3.Size = new Size(78, 32);
             label3.TabIndex = 2;
             label3.Text = "Email:";
             // 
@@ -99,7 +99,7 @@
             label4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label4.Location = new Point(853, 95);
             label4.Name = "label4";
-            label4.Size = new Size(99, 30);
+            label4.Size = new Size(114, 32);
             label4.TabIndex = 3;
             label4.Text = "Giới tính:";
             // 
@@ -109,7 +109,7 @@
             label5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label5.Location = new Point(853, 233);
             label5.Name = "label5";
-            label5.Size = new Size(82, 30);
+            label5.Size = new Size(94, 32);
             label5.TabIndex = 4;
             label5.Text = "Địa chỉ:";
             // 
@@ -119,7 +119,7 @@
             label6.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label6.Location = new Point(853, 380);
             label6.Name = "label6";
-            label6.Size = new Size(144, 30);
+            label6.Size = new Size(165, 32);
             label6.TabIndex = 5;
             label6.Text = "Số điện thoại:";
             // 
@@ -225,7 +225,7 @@
             label7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label7.Location = new Point(888, 134);
             label7.Name = "label7";
-            label7.Size = new Size(59, 30);
+            label7.Size = new Size(66, 32);
             label7.TabIndex = 14;
             label7.Text = "Nam";
             // 
@@ -235,7 +235,7 @@
             label8.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label8.Location = new Point(1047, 134);
             label8.Name = "label8";
-            label8.Size = new Size(42, 30);
+            label8.Size = new Size(47, 32);
             label8.TabIndex = 15;
             label8.Text = "Nữ";
             // 
@@ -317,7 +317,7 @@
             // 
             // ProfileAccount
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(236, 230, 224);
             Controls.Add(guna2TextBox4);
@@ -337,6 +337,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(4);
             Name = "ProfileAccount";
             Size = new Size(1417, 620);
             Load += MyUserControl_Load;
