@@ -60,6 +60,41 @@ namespace AdminApp.Repositories
                 }
             }
         }
+        public bool UpdateCustomer(string id, string fullName, string gender,
+                           string birth, string phone, string email,
+                           string address, string createDate)
+        {
+            using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
+            {
+                conn.Open();
+
+                string query = @"
+            UPDATE customer
+            SET full_name = @full_name,
+                gender = @gender,
+                date_of_birth = @dob,
+                phone_number = @phone,
+                email = @email,
+                address = @address,
+                create_date = @create_date
+            WHERE customer_id = @id
+        ";
+
+                using (var cmd = new SqliteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@full_name", fullName);
+                    cmd.Parameters.AddWithValue("@gender", gender);
+                    cmd.Parameters.AddWithValue("@dob", birth);
+                    cmd.Parameters.AddWithValue("@phone", phone);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@address", address);
+                    cmd.Parameters.AddWithValue("@create_date", createDate);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
 
     }
 }

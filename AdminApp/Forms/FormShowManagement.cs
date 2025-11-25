@@ -1,4 +1,6 @@
-﻿using AdminApp.Repositories;
+﻿using AdminApp.Forms;
+using AdminApp.Models;
+using AdminApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,192 +15,181 @@ namespace AdminApp
 {
     public partial class FormShowManagement : Form
     {
-        private readonly ShowtimeRepo _showtimeRepo;
-        private readonly FilmRepo _filmRepo;
-        private readonly AuditoriumRepo _auditoriumRepo;
+        private readonly FilmRepo _filmRepo = new FilmRepo();
+        private readonly AuditoriumRepo _audRepo = new AuditoriumRepo();
+        private readonly AuditoriumTypeRepo _audTypeRepo = new AuditoriumTypeRepo();
+
+        private string _filterFilmId = null;
+        private string _filterRoomId = null;
+        private DateTime? _filterDate = null;
         public FormShowManagement()
         {
             InitializeComponent();
-            _showtimeRepo = new ShowtimeRepo();
-            _filmRepo = new FilmRepo();
-            _auditoriumRepo = new AuditoriumRepo();
-
-        }
-
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-            var f = new FormAddShowTime();
-            f.Show();
+            dgvShowtime.AutoGenerateColumns = false;
         }
 
         private void FormShowManagement_Load(object sender, EventArgs e)
         {
-            InitializeComboBoxes();
             LoadShow();
         }
-
-        // Load dữ liệu lên DataGridView
-        private void LoadShow(string searchText = "")
+            // LOAD SHOWTIME
+            // =====================================================
+        private void LoadShow(string search = null)
         {
-            try
-            {
-                var showtimes = _showtimeRepo.GetAll();
+            List<Showtime> shows = null;
 
-                // Lọc theo tên phim nếu có tìm kiếm
-                if (!string.IsNullOrWhiteSpace(searchText))
+            if (_filterFilmId != null && _filterDate != null)
+                shows = ShowtimeRepo.GetShowByFilmAndDate(_filterFilmId, _filterDate.Value);
+            else if (_filterFilmId != null)
+                shows = ShowtimeRepo.GetShowByFilm(_filterFilmId);
+            else if (_filterDate != null)
+                shows = ShowtimeRepo.GetShowByDate(_filterDate.Value);
+            else
+                shows = ShowtimeRepo.GetAll();
+
+            if (_filterRoomId != null)
+                shows = shows.Where(s => s.auditorium_id == _filterRoomId).ToList();
+
+            // Build list of ShowtimeDisplay by joining repo results
+            var displayList = shows.Select(s =>
+            {
+                var film = _filmRepo.GetById(s.movie_id);
+                var auditorium_id = _audRepo.GetById(s.auditorium_id);
+                var audType = auditorium_id != null ? _audTypeRepo.GetById(auditorium_id.auditorium_type_id) : null;
+
+                // build gio chieu string
+                string gio = null;
+                try
                 {
-                    showtimes = showtimes.Where(s =>
-                        s.Film.TenPhim.ToLower().Contains(searchText.ToLower())
-                    ).ToList();
+                    // nếu start_time/end_time là "HH:mm" hoặc "HH:mm:ss"
+                    var st = s.start_time ?? "";
+                    var et = s.end_time ?? "";
+                    if (!string.IsNullOrWhiteSpace(st) && !string.IsNullOrWhiteSpace(et))
+                        gio = $"{st} - {et}";
+                    else if (!string.IsNullOrWhiteSpace(st))
+                        gio = st;
+                    else
+                        gio = et;
+                }
+                catch
+                {
+                    gio = $"{s.start_time} - {s.end_time}";
                 }
 
-                // Tạo dữ liệu hiển thị
-                var displayData = showtimes.Select(s => new
+                return new ShowtimeDisplay
                 {
-                    Id = s.Id,
-                    TenPhim = s.Film.TenPhim,
-                    NgayChieu = s.NgayChieu.ToString("dd/MM/yyyy"),
-                    TrangThai = s.TrangThai,
-                    ThoiLuong = s.Film.ThoiLuong + " phút",
-                    ChinhXoa = "Chỉnh sửa / Xóa"
-                }).ToList();
+                    ShowtimeId = s.showtime_id,
+                    TenPhim = film?.title ?? "(Không tìm thấy)",
+                    Phong = auditorium_id?.name ?? s.auditorium_id,
+                    LoaiPhong = audType?.auditorium_type ?? "",
+                    NgayChieu = s.show_date,
+                    GioChieu = gio
+                };
+            }).ToList();
 
-                dgvShowtime.DataSource = displayData;
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            // bind giữ cột Designer -> reset datasource trước
+            dgvShowtime.DataSource = null;
+            dgvShowtime.DataSource = displayList;
         }
 
-
-
-        // Khởi tạo ComboBox cho phòng chiếu
-        private void InitializeComboBoxes()
-        {
-            try
-            {
-                // Load danh sách phòng chiếu
-                var auditoriums = _auditoriumRepo.GetAll();
-                // Thêm logic để bind vào ComboBox các phòng (Phòng 1, 2, 3, 4, 5)
-
-                // Load danh sách phim vào ComboBox (nếu có)
-                var films = _filmRepo.GetAll();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải danh sách: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+       
         // Sự kiện nút Tìm
         private void btnTim_Click(object sender, EventArgs e)
         {
-            string searchText = txtTimKiem.Text.Trim();
-            LoadShow(searchText);
+            string search = txtTenPhim.Text.Trim();
+
+            if (string.IsNullOrEmpty(search))
+            {
+                _filterFilmId = null;
+            }
+            else
+            {
+                var films = _filmRepo.SearchFilmByName(search);
+                _filterFilmId = films.FirstOrDefault()?.movie_id;
+            }
+
+            LoadShow();
         }
 
-
-
-        // Sự kiện click vào cell trong DataGridView
-        private void dgvShowtimes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        // Sự kiện nút Thêm - Mở form thêm mới
+        private void btnThem_Click(object sender, EventArgs e)
         {
-            if (e.RowIndex < 0) return;
-
-            // Nếu click vào cột "Chỉnh, Xóa"
-            if (dgvShowtime.Columns[e.ColumnIndex].HeaderText == "Chỉnh, Xóa")
-            {
-                // Hiển thị context menu hoặc dialog để chọn chỉnh sửa/xóa
-                var contextMenu = new ContextMenuStrip();
-                contextMenu.Items.Add("Chỉnh sửa", null, (s, ev) => btnSua_Click(s, ev));
-                contextMenu.Items.Add("Xóa", null, (s, ev) => btnXoa_Click(s, ev));
-                contextMenu.Show(Cursor.Position);
-            }
+            var f = new FormAddShowTime();
+            if (f.ShowDialog() == DialogResult.OK)
+                LoadShow();
         }
 
-        // Lọc theo phòng chiếu
-        private void btnPhong_Click(object sender, EventArgs e)
+        // Sự kiện nút Chỉnh sửa - Mở form chỉnh sửa
+        private void btnChinhSua_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            string phongText = btn.Text; // "Phòng 1", "Phòng 2", etc.
-
-            try
+            if (dgvShowtime.SelectedRows.Count == 0)
             {
-                var showtimes = _showtimeRepo.GetAll();
-
-                if (phongText != "Tất cả")
-                {
-                    showtimes = showtimes.Where(s =>
-                        s.Auditorium.TenPhong == phongText
-                    ).ToList();
-                }
-
-                var displayData = showtimes.Select(s => new
-                {
-                    Id = s.Id,
-                    TenPhim = s.Film.TenPhim,
-                    NgayChieu = s.NgayChieu.ToString("dd/MM/yyyy"),
-                    TrangThai = s.TrangThai,
-                    ThoiLuong = s.Film.ThoiLuong + " phút",
-                    ChinhXoa = "Chỉnh sửa / Xóa"
-                }).ToList();
-
-                dgvShowtime.DataSource = displayData;
+                MessageBox.Show("Chọn suất chiếu cần sửa!");
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi lọc: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            string id = dgvShowtime.SelectedRows[0].Cells["ShowtimeId"].Value.ToString();
+
+            var f = new FrmEditShowTime(id);
+            if (f.ShowDialog() == DialogResult.OK)
+                LoadShow();
         }
 
-        // Lọc theo ngày
-        private void dtpNgayChieu_ValueChanged(object sender, EventArgs e)
+        // Sự kiện nút Xóa
+        private void btnXoa_Click(object sender, EventArgs e)
         {
-            try
+            if (dgvShowtime.SelectedRows.Count == 0)
             {
-                DateTime selectedDate = dtpNgayChieu.Value.Date;
-                var showtimes = _showtimeRepo.GetAll()
-                    .Where(s => s.NgayChieu.Date == selectedDate)
-                    .ToList();
-
-                var displayData = showtimes.Select(s => new
-                {
-                    Id = s.Id,
-                    TenPhim = s.Film.TenPhim,
-                    NgayChieu = s.NgayChieu.ToString("dd/MM/yyyy HH:mm"),
-                    TrangThai = s.TrangThai,
-                    ThoiLuong = s.Film.ThoiLuong + " phút",
-                    ChinhXoa = "Chỉnh sửa / Xóa"
-                }).ToList();
-
-                dgvShowtime.DataSource = displayData;
+                MessageBox.Show("Chọn suất chiếu để xóa!");
+                return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi lọc theo ngày: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            string id = dgvShowtime.SelectedRows[0].Cells["ShowtimeId"].Value.ToString();
+
+            if (MessageBox.Show("Xóa suất chiếu này?", "Xác nhận",
+                MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
+
+            ShowtimeRepo.Delete(id);
+            LoadShow();
         }
 
+        private void FilterRoom(string auditorium_id)
+        {
+            _filterRoomId = auditorium_id;
+            LoadShow();
+        }
+
+        private void btnTatCa_Click(object sender, EventArgs e)
+            => FilterRoom(null);
+
+        private void btnPhong1_Click(object sender, EventArgs e)
+            => FilterRoom("RO1");
+
+        private void btnPhong2_Click(object sender, EventArgs e)
+            => FilterRoom("RO2");
+
+        private void btnPhong3_Click(object sender, EventArgs e)
+            => FilterRoom("RO3");
+
+        private void btnPhong4_Click(object sender, EventArgs e)
+            => FilterRoom("RO4");
+
+        private void btnPhong5_Click(object sender, EventArgs e)
+            => FilterRoom("RO5");
+
+        // Lọc theo ngày chọn
+        private void dtpChonNgay_ValueChanged(object sender, EventArgs e)
+        {
+            _filterDate = dtpNgayChieu.Value.Date;
+            LoadShow();
+        }
+
+        
         // Refresh dữ liệu
         public void RefreshData()
         {
             LoadShow();
         }
-
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
-

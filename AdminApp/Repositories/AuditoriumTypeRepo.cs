@@ -44,12 +44,12 @@ namespace AdminApp.Repositories
                 conn.Open();
 
                 string sql = @"INSERT INTO auditorium_type (auditorium_type_id, auditorium_type)
-                           VALUES (@id, @name)";
+                           VALUES (@auditorium_type_id, @auditorium_type)";
 
                 using (var cmd = new SqliteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", t.auditorium_type_id);
-                    cmd.Parameters.AddWithValue("@name", t.auditorium_type);
+                    cmd.Parameters.AddWithValue("@auditorium_type_id", t.auditorium_type_id);
+                    cmd.Parameters.AddWithValue("@auditorium_type", t.auditorium_type);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -62,13 +62,13 @@ namespace AdminApp.Repositories
                 conn.Open();
 
                 string sql = @"UPDATE auditorium_type 
-                           SET auditorium_type = @name
-                           WHERE auditorium_type_id = @id";
+                           SET auditorium_type = @auditorium_type
+                           WHERE auditorium_type_id = @auditorium_type_id";
 
                 using (var cmd = new SqliteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", t.auditorium_type_id);
-                    cmd.Parameters.AddWithValue("@name", t.auditorium_type);
+                    cmd.Parameters.AddWithValue("@auditorium_type_id", t.auditorium_type_id);
+                    cmd.Parameters.AddWithValue("@auditorium_type", t.auditorium_type);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -81,14 +81,35 @@ namespace AdminApp.Repositories
                 conn.Open();
 
                 string sql = @"DELETE FROM auditorium_type 
-                           WHERE auditorium_type_id = @id";
+                           WHERE auditorium_type_id = @auditorium_type_id";
 
                 using (var cmd = new SqliteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", typeId);
+                    cmd.Parameters.AddWithValue("@auditorium_type_id", typeId);
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public AuditoriumType GetById(string id)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT auditorium_type_id, auditorium_type FROM auditorium_type WHERE auditorium_type_id = @auditorium_type_id";
+                cmd.Parameters.AddWithValue("@auditorium_type_id", id);
+                using (var r = cmd.ExecuteReader())
+                {
+                    if (r.Read())
+                        return new AuditoriumType
+                        {
+                            auditorium_type_id = r["auditorium_type_id"].ToString(),
+                            auditorium_type = r["auditorium_type"].ToString(),
+                        };
+                }
+            }
+            return null;
         }
     }
 }

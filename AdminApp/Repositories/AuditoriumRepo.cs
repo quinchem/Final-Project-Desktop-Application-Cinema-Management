@@ -25,7 +25,7 @@ namespace AdminApp.Repositories
                            a.name,
                            a.number_of_seats,
                            t.auditorium_type
-                    FROM auditorium a
+                    FROM Auditorium a
                     LEFT JOIN auditorium_type t 
                          ON a.auditorium_type_id = t.auditorium_type_id
                     ORDER BY a.auditorium_id;
@@ -62,15 +62,15 @@ namespace AdminApp.Repositories
                            a.name,
                            a.number_of_seats,
                            t.auditorium_type
-                    FROM auditorium a
-                    LEFT JOIN auditorium_type t 
+                    FROM Auditorium a
+                    LEFT JOIN auditorium_type t
                          ON a.auditorium_type_id = t.auditorium_type_id
-                    WHERE a.auditorium_id = @id;
+                    WHERE a.auditorium_id = @auditorium_id;
                     ";
 
                 using (var cmd = new SqliteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@auditorium_id", id);
 
                     using (var rd = cmd.ExecuteReader())
                     {
@@ -98,16 +98,16 @@ namespace AdminApp.Repositories
                 conn.Open();
 
                 string sql = @"
-                    INSERT INTO auditorium (auditorium_id, auditorium_type_id, name, number_of_seats)
-                    VALUES (@id, @type, @name, @seats);
+                    INSERT INTO Auditorium (auditorium_id, auditorium_type_id, name, number_of_seats)
+                    VALUES (@auditorium_id, @auditorium_type_id, @name, @number_of_seats);
                     ";
 
                 using (var cmd = new SqliteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", a.auditorium_id);
-                    cmd.Parameters.AddWithValue("@type", a.auditorium_type_id);
+                    cmd.Parameters.AddWithValue("@auditorium_id", a.auditorium_id);
+                    cmd.Parameters.AddWithValue("@auditorium_type_id", a.auditorium_type_id);
                     cmd.Parameters.AddWithValue("@name", a.name);
-                    cmd.Parameters.AddWithValue("@seats", a.number_of_seats);
+                    cmd.Parameters.AddWithValue("@number_of_seats", a.number_of_seats);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -120,19 +120,19 @@ namespace AdminApp.Repositories
                 conn.Open();
 
                 string sql = @"
-                    UPDATE auditorium
-                    SET auditorium_type_id = @type,
+                    UPDATE Auditorium
+                    SET auditorium_type_id = @auditorium_type_id,
                         name = @name,
-                        number_of_seats = @seats
-                    WHERE auditorium_id = @id;
+                        number_of_seats = @number_of_seats
+                    WHERE auditorium_id = @auditorium_id;
                     ";
 
                 using (var cmd = new SqliteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", a.auditorium_id);
-                    cmd.Parameters.AddWithValue("@type", a.auditorium_type_id);
+                    cmd.Parameters.AddWithValue("@auditorium_id", a.auditorium_id);
+                    cmd.Parameters.AddWithValue("@auditorium_type_id", a.auditorium_type_id);
                     cmd.Parameters.AddWithValue("@name", a.name);
-                    cmd.Parameters.AddWithValue("@seats", a.number_of_seats);
+                    cmd.Parameters.AddWithValue("@number_of_seats", a.number_of_seats);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -144,11 +144,11 @@ namespace AdminApp.Repositories
             {
                 conn.Open();
 
-                string sql = @"DELETE FROM auditorium WHERE auditorium_id = @id";
+                string sql = @"DELETE FROM Auditorium WHERE auditorium_id = @auditorium_id";
 
                 using (var cmd = new SqliteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@auditorium_id", id);
                     cmd.ExecuteNonQuery();
                 }
             }

@@ -1,10 +1,11 @@
 ﻿using AdminApp.Models;
+using Microsoft.Data.Sqlite;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
 
 namespace AdminApp.Repositories
 {
@@ -116,6 +117,23 @@ namespace AdminApp.Repositories
                 }
             }
             return shows;
+        }
+
+        public Film GetById(string id)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT movie_id, title FROM movie WHERE movie_id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                using (var r = cmd.ExecuteReader())
+                {
+                    if (r.Read())
+                        return new Film { movie_id = r["movie_id"].ToString(), title = r["title"].ToString() };
+                }
+            }
+            return null;
         }
 
         // ----------- HÀM MAP DỮ LIỆU -----------

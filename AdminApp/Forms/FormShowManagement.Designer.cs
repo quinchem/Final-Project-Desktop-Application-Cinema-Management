@@ -60,17 +60,17 @@
             btnXoa = new Guna.UI2.WinForms.Guna2Button();
             btnSua = new Guna.UI2.WinForms.Guna2Button();
             dgvShowtime = new Guna.UI2.WinForms.Guna2DataGridView();
-            TenPhim = new DataGridViewTextBoxColumn();
-            NgayChieu = new DataGridViewTextBoxColumn();
-            TrangThai = new DataGridViewTextBoxColumn();
-            ThoiLuong = new DataGridViewTextBoxColumn();
-            ChinhSua = new DataGridViewImageColumn();
-            Xoa = new DataGridViewImageColumn();
+            title = new DataGridViewTextBoxColumn();
+            name = new DataGridViewTextBoxColumn();
+            auditorium_type = new DataGridViewTextBoxColumn();
+            GiaVe = new DataGridViewTextBoxColumn();
+            show_date = new DataGridViewTextBoxColumn();
+            start_time = new DataGridViewTextBoxColumn();
             btnThem = new Guna.UI2.WinForms.Guna2Button();
             btnTimPhim = new Guna.UI2.WinForms.Guna2Button();
-            txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
+            txtTenPhim = new Guna.UI2.WinForms.Guna2TextBox();
+            btnTatCa = new Guna.UI2.WinForms.Guna2Button();
+            btnPhong1 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button7 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button8 = new Guna.UI2.WinForms.Guna2Button();
@@ -116,20 +116,20 @@
             btnSua.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSua.ForeColor = Color.White;
             btnSua.Image = Properties.Resources.pen;
-            btnSua.Location = new Point(1666, 158);
+            btnSua.Location = new Point(1664, 158);
             btnSua.Margin = new Padding(4);
             btnSua.Name = "btnSua";
             btnSua.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnSua.Size = new Size(183, 56);
             btnSua.TabIndex = 37;
             btnSua.Text = "Chỉnh sửa";
-            btnSua.Click += btnSua_Click;
+            btnSua.Click += btnChinhSua_Click;
             // 
             // dgvShowtime
             // 
-            dgvShowtime.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = Color.White;
             dgvShowtime.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgvShowtime.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dgvShowtime.BackgroundColor = SystemColors.Window;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.White;
@@ -141,7 +141,7 @@
             dgvShowtime.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvShowtime.ColumnHeadersHeight = 27;
             dgvShowtime.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgvShowtime.Columns.AddRange(new DataGridViewColumn[] { TenPhim, NgayChieu, TrangThai, ThoiLuong, ChinhSua, Xoa });
+            dgvShowtime.Columns.AddRange(new DataGridViewColumn[] { title, name, auditorium_type, GiaVe, show_date, start_time });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -158,7 +158,7 @@
             dgvShowtime.RowHeadersVisible = false;
             dgvShowtime.RowHeadersWidth = 51;
             dgvShowtime.RowTemplate.Height = 29;
-            dgvShowtime.Size = new Size(1904, 808);
+            dgvShowtime.Size = new Size(1840, 808);
             dgvShowtime.TabIndex = 36;
             dgvShowtime.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgvShowtime.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -182,73 +182,67 @@
             dgvShowtime.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgvShowtime.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
-            // TenPhim
+            // title
             // 
-            TenPhim.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            TenPhim.Frozen = true;
-            TenPhim.HeaderText = "Tên Phim";
-            TenPhim.MinimumWidth = 6;
-            TenPhim.Name = "TenPhim";
-            TenPhim.ReadOnly = true;
-            TenPhim.Width = 450;
+            title.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            title.DataPropertyName = "TenPhim";
+            title.Frozen = true;
+            title.HeaderText = "Tên Phim";
+            title.MinimumWidth = 6;
+            title.Name = "title";
+            title.ReadOnly = true;
+            title.Width = 450;
             // 
-            // NgayChieu
+            // name
             // 
-            NgayChieu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            NgayChieu.FillWeight = 65.33226F;
-            NgayChieu.Frozen = true;
-            NgayChieu.HeaderText = "Ngày Chiếu";
-            NgayChieu.MinimumWidth = 6;
-            NgayChieu.Name = "NgayChieu";
-            NgayChieu.ReadOnly = true;
-            NgayChieu.Width = 220;
+            name.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            name.DataPropertyName = "Phong ";
+            name.FillWeight = 65.33226F;
+            name.Frozen = true;
+            name.HeaderText = "Phòng";
+            name.MinimumWidth = 6;
+            name.Name = "name";
+            name.ReadOnly = true;
+            name.Width = 120;
             // 
-            // TrangThai
+            // auditorium_type
             // 
-            TrangThai.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            TrangThai.FillWeight = 65.33226F;
-            TrangThai.Frozen = true;
-            TrangThai.HeaderText = "Trạng Thái";
-            TrangThai.MinimumWidth = 6;
-            TrangThai.Name = "TrangThai";
-            TrangThai.ReadOnly = true;
-            TrangThai.Width = 220;
+            auditorium_type.DataPropertyName = "LoaiPhong";
+            auditorium_type.HeaderText = "Định Dạng";
+            auditorium_type.MinimumWidth = 6;
+            auditorium_type.Name = "auditorium_type";
+            auditorium_type.ReadOnly = true;
+            auditorium_type.Width = 120;
             // 
-            // ThoiLuong
+            // GiaVe
             // 
-            ThoiLuong.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            ThoiLuong.FillWeight = 65.33226F;
-            ThoiLuong.Frozen = true;
-            ThoiLuong.HeaderText = "Thời Lượng";
-            ThoiLuong.MinimumWidth = 6;
-            ThoiLuong.Name = "ThoiLuong";
-            ThoiLuong.ReadOnly = true;
-            ThoiLuong.Width = 220;
+            GiaVe.HeaderText = "Giá Vé";
+            GiaVe.MinimumWidth = 6;
+            GiaVe.Name = "GiaVe";
+            GiaVe.ReadOnly = true;
+            GiaVe.Width = 150;
             // 
-            // ChinhSua
+            // show_date
             // 
-            ChinhSua.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            ChinhSua.FillWeight = 223.358109F;
-            ChinhSua.Frozen = true;
-            ChinhSua.HeaderText = "Chỉnh";
-            ChinhSua.Image = Properties.Resources.pen;
-            ChinhSua.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            ChinhSua.MinimumWidth = 6;
-            ChinhSua.Name = "ChinhSua";
-            ChinhSua.ReadOnly = true;
-            ChinhSua.Width = 70;
+            show_date.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            show_date.DataPropertyName = "NgayChieu ";
+            show_date.FillWeight = 65.33226F;
+            show_date.HeaderText = "Ngày Chiếu";
+            show_date.MinimumWidth = 6;
+            show_date.Name = "show_date";
+            show_date.ReadOnly = true;
+            show_date.Width = 250;
             // 
-            // Xoa
+            // start_time
             // 
-            Xoa.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Xoa.FillWeight = 80.6451645F;
-            Xoa.HeaderText = "Xóa";
-            Xoa.Image = Properties.Resources.trash;
-            Xoa.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Xoa.MinimumWidth = 6;
-            Xoa.Name = "Xoa";
-            Xoa.ReadOnly = true;
-            Xoa.Width = 70;
+            start_time.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            start_time.DataPropertyName = "GioChieu ";
+            start_time.FillWeight = 65.33226F;
+            start_time.HeaderText = "Giờ Chiếu";
+            start_time.MinimumWidth = 6;
+            start_time.Name = "start_time";
+            start_time.ReadOnly = true;
+            start_time.Width = 250;
             // 
             // btnThem
             // 
@@ -269,6 +263,7 @@
             btnThem.Size = new Size(146, 56);
             btnThem.TabIndex = 35;
             btnThem.Text = "Thêm";
+            btnThem.Click += btnThem_Click;
             // 
             // btnTimPhim
             // 
@@ -289,75 +284,78 @@
             btnTimPhim.Size = new Size(112, 56);
             btnTimPhim.TabIndex = 34;
             btnTimPhim.Text = "Tìm";
+            btnTimPhim.Click += btnTim_Click;
             // 
-            // txtTimKiem
+            // txtTenPhim
             // 
-            txtTimKiem.BorderColor = Color.Black;
-            txtTimKiem.BorderRadius = 20;
-            txtTimKiem.CustomizableEdges = customizableEdges9;
-            txtTimKiem.DefaultText = "";
-            txtTimKiem.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtTimKiem.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtTimKiem.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtTimKiem.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtTimKiem.FillColor = Color.LightSteelBlue;
-            txtTimKiem.FocusedState.BorderColor = Color.Black;
-            txtTimKiem.FocusedState.FillColor = Color.LightSteelBlue;
-            txtTimKiem.FocusedState.ForeColor = Color.FromArgb(92, 124, 150);
-            txtTimKiem.FocusedState.PlaceholderForeColor = Color.Transparent;
-            txtTimKiem.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtTimKiem.ForeColor = Color.FromArgb(92, 124, 150);
-            txtTimKiem.HoverState.BorderColor = SystemColors.ActiveBorder;
-            txtTimKiem.HoverState.ForeColor = Color.FromArgb(92, 124, 150);
-            txtTimKiem.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtTimKiem.Location = new Point(108, 64);
-            txtTimKiem.Margin = new Padding(4, 8, 4, 8);
-            txtTimKiem.Name = "txtTimKiem";
-            txtTimKiem.PlaceholderForeColor = Color.FromArgb(92, 124, 150);
-            txtTimKiem.PlaceholderText = "Nhập tên phim";
-            txtTimKiem.SelectedText = "";
-            txtTimKiem.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            txtTimKiem.Size = new Size(746, 68);
-            txtTimKiem.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
-            txtTimKiem.TabIndex = 33;
+            txtTenPhim.BorderColor = Color.Black;
+            txtTenPhim.BorderRadius = 10;
+            txtTenPhim.CustomizableEdges = customizableEdges9;
+            txtTenPhim.DefaultText = "";
+            txtTenPhim.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtTenPhim.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtTenPhim.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtTenPhim.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtTenPhim.FillColor = Color.LightSteelBlue;
+            txtTenPhim.FocusedState.BorderColor = Color.Black;
+            txtTenPhim.FocusedState.FillColor = Color.LightSteelBlue;
+            txtTenPhim.FocusedState.ForeColor = Color.FromArgb(92, 124, 150);
+            txtTenPhim.FocusedState.PlaceholderForeColor = Color.Transparent;
+            txtTenPhim.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTenPhim.ForeColor = Color.FromArgb(92, 124, 150);
+            txtTenPhim.HoverState.BorderColor = SystemColors.ActiveBorder;
+            txtTenPhim.HoverState.ForeColor = Color.FromArgb(92, 124, 150);
+            txtTenPhim.HoverState.PlaceholderForeColor = Color.Transparent;
+            txtTenPhim.Location = new Point(108, 64);
+            txtTenPhim.Margin = new Padding(4, 8, 4, 8);
+            txtTenPhim.Name = "txtTenPhim";
+            txtTenPhim.PlaceholderForeColor = Color.FromArgb(92, 124, 150);
+            txtTenPhim.PlaceholderText = "Nhập tên phim";
+            txtTenPhim.SelectedText = "";
+            txtTenPhim.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtTenPhim.Size = new Size(746, 68);
+            txtTenPhim.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            txtTenPhim.TabIndex = 33;
             // 
-            // guna2Button4
+            // btnTatCa
             // 
-            guna2Button4.BorderRadius = 5;
-            guna2Button4.CustomizableEdges = customizableEdges11;
-            guna2Button4.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button4.FillColor = Color.Silver;
-            guna2Button4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button4.ForeColor = Color.White;
-            guna2Button4.Location = new Point(108, 158);
-            guna2Button4.Margin = new Padding(4);
-            guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2Button4.Size = new Size(146, 56);
-            guna2Button4.TabIndex = 39;
-            guna2Button4.Text = "Tất cả";
+            btnTatCa.BorderRadius = 5;
+            btnTatCa.CustomizableEdges = customizableEdges11;
+            btnTatCa.DisabledState.BorderColor = Color.DarkGray;
+            btnTatCa.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnTatCa.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnTatCa.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnTatCa.FillColor = Color.Silver;
+            btnTatCa.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnTatCa.ForeColor = Color.White;
+            btnTatCa.Location = new Point(108, 158);
+            btnTatCa.Margin = new Padding(4);
+            btnTatCa.Name = "btnTatCa";
+            btnTatCa.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            btnTatCa.Size = new Size(146, 56);
+            btnTatCa.TabIndex = 39;
+            btnTatCa.Text = "Tất cả";
+            btnTatCa.Click += btnTatCa_Click;
             // 
-            // guna2Button5
+            // btnPhong1
             // 
-            guna2Button5.BorderRadius = 5;
-            guna2Button5.CustomizableEdges = customizableEdges13;
-            guna2Button5.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button5.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button5.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button5.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button5.FillColor = Color.Silver;
-            guna2Button5.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button5.ForeColor = Color.White;
-            guna2Button5.Location = new Point(270, 158);
-            guna2Button5.Margin = new Padding(4);
-            guna2Button5.Name = "guna2Button5";
-            guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2Button5.Size = new Size(160, 56);
-            guna2Button5.TabIndex = 40;
-            guna2Button5.Text = "Phòng 1";
+            btnPhong1.BorderRadius = 5;
+            btnPhong1.CustomizableEdges = customizableEdges13;
+            btnPhong1.DisabledState.BorderColor = Color.DarkGray;
+            btnPhong1.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnPhong1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnPhong1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnPhong1.FillColor = Color.Silver;
+            btnPhong1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPhong1.ForeColor = Color.White;
+            btnPhong1.Location = new Point(270, 158);
+            btnPhong1.Margin = new Padding(4);
+            btnPhong1.Name = "btnPhong1";
+            btnPhong1.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            btnPhong1.Size = new Size(160, 56);
+            btnPhong1.TabIndex = 40;
+            btnPhong1.Text = "Phòng 1";
+            btnPhong1.Click += btnPhong1_Click;
             // 
             // guna2Button6
             // 
@@ -377,6 +375,7 @@
             guna2Button6.Size = new Size(164, 56);
             guna2Button6.TabIndex = 41;
             guna2Button6.Text = "Phòng 2";
+            guna2Button6.Click += btnPhong2_Click;
             // 
             // guna2Button7
             // 
@@ -396,6 +395,7 @@
             guna2Button7.Size = new Size(162, 56);
             guna2Button7.TabIndex = 42;
             guna2Button7.Text = "Phòng 3";
+            guna2Button7.Click += btnPhong3_Click;
             // 
             // guna2Button8
             // 
@@ -415,6 +415,7 @@
             guna2Button8.Size = new Size(162, 56);
             guna2Button8.TabIndex = 43;
             guna2Button8.Text = "Phòng 4";
+            guna2Button8.Click += btnPhong4_Click;
             // 
             // guna2Button9
             // 
@@ -434,6 +435,7 @@
             guna2Button9.Size = new Size(156, 56);
             guna2Button9.TabIndex = 44;
             guna2Button9.Text = "Phòng 5";
+            guna2Button9.Click += btnPhong5_Click;
             // 
             // guna2Separator1
             // 
@@ -451,13 +453,13 @@
             dtpNgayChieu.FillColor = Color.LightSteelBlue;
             dtpNgayChieu.Font = new Font("Segoe UI", 9F);
             dtpNgayChieu.Format = DateTimePickerFormat.Long;
-            dtpNgayChieu.Location = new Point(1503, 82);
+            dtpNgayChieu.Location = new Point(1500, 78);
             dtpNgayChieu.Margin = new Padding(4);
             dtpNgayChieu.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dtpNgayChieu.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtpNgayChieu.Name = "dtpNgayChieu";
             dtpNgayChieu.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            dtpNgayChieu.Size = new Size(441, 68);
+            dtpNgayChieu.Size = new Size(361, 68);
             dtpNgayChieu.TabIndex = 46;
             dtpNgayChieu.Value = new DateTime(2025, 11, 23, 18, 16, 6, 909);
             // 
@@ -466,7 +468,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ControlLight;
-            label1.Location = new Point(1503, 41);
+            label1.Location = new Point(1510, 41);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(116, 30);
@@ -478,11 +480,11 @@
             guna2PictureBox1.CustomizableEdges = customizableEdges25;
             guna2PictureBox1.Image = Properties.Resources.calendar;
             guna2PictureBox1.ImageRotate = 0F;
-            guna2PictureBox1.Location = new Point(1466, 41);
+            guna2PictureBox1.Location = new Point(1475, 36);
             guna2PictureBox1.Margin = new Padding(4);
             guna2PictureBox1.Name = "guna2PictureBox1";
             guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2PictureBox1.Size = new Size(41, 45);
+            guna2PictureBox1.Size = new Size(36, 35);
             guna2PictureBox1.TabIndex = 49;
             guna2PictureBox1.TabStop = false;
             // 
@@ -500,14 +502,14 @@
             Controls.Add(guna2Button8);
             Controls.Add(guna2Button7);
             Controls.Add(guna2Button6);
-            Controls.Add(guna2Button5);
-            Controls.Add(guna2Button4);
+            Controls.Add(btnPhong1);
+            Controls.Add(btnTatCa);
             Controls.Add(btnXoa);
             Controls.Add(btnSua);
             Controls.Add(dgvShowtime);
             Controls.Add(btnThem);
             Controls.Add(btnTimPhim);
-            Controls.Add(txtTimKiem);
+            Controls.Add(txtTenPhim);
             Margin = new Padding(4);
             Name = "FormShowManagement";
             Text = "FormShowManagement";
@@ -523,17 +525,11 @@
         private Guna.UI2.WinForms.Guna2Button btnXoa;
         private Guna.UI2.WinForms.Guna2Button btnSua;
         private Guna.UI2.WinForms.Guna2DataGridView dgvShowtime;
-        private DataGridViewTextBoxColumn TenPhim;
-        private DataGridViewTextBoxColumn NgayChieu;
-        private DataGridViewTextBoxColumn TrangThai;
-        private DataGridViewTextBoxColumn ThoiLuong;
-        private DataGridViewImageColumn ChinhSua;
-        private DataGridViewImageColumn Xoa;
         private Guna.UI2.WinForms.Guna2Button btnThem;
         private Guna.UI2.WinForms.Guna2Button btnTimPhim;
-        private Guna.UI2.WinForms.Guna2TextBox txtTimKiem;
-        private Guna.UI2.WinForms.Guna2Button guna2Button4;
-        private Guna.UI2.WinForms.Guna2Button guna2Button5;
+        private Guna.UI2.WinForms.Guna2TextBox txtTenPhim;
+        private Guna.UI2.WinForms.Guna2Button btnTatCa;
+        private Guna.UI2.WinForms.Guna2Button btnPhong1;
         private Guna.UI2.WinForms.Guna2Button guna2Button6;
         private Guna.UI2.WinForms.Guna2Button guna2Button7;
         private Guna.UI2.WinForms.Guna2Button guna2Button8;
@@ -542,5 +538,11 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayChieu;
         private Label label1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private DataGridViewTextBoxColumn title;
+        private DataGridViewTextBoxColumn name;
+        private DataGridViewTextBoxColumn auditorium_type;
+        private DataGridViewTextBoxColumn GiaVe;
+        private DataGridViewTextBoxColumn show_date;
+        private DataGridViewTextBoxColumn start_time;
     }
 }
