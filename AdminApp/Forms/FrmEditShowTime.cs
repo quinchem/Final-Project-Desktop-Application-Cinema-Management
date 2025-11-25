@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AdminApp.Forms
 {
-    public partial class EditShowTime : Form
+    public partial class FrmEditShowTime : Form
     {
-        public EditShowTime()
+        public FrmEditShowTime()
         {
             InitializeComponent();
         }
