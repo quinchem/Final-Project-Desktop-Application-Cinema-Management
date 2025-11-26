@@ -38,5 +38,37 @@ namespace AdminApp.Repositories
                 }
             }
         }
+        public double GetTicketPriceByAuditoriumType(string auditoriumTypeId)
+        {
+            double price = 0;
+            using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
+            {
+                conn.Open();
+
+                // SQL: Lấy giá của ghế, bằng cách nối bảng Seat với Auditorium
+                // Điều kiện: Tìm các ghế thuộc các phòng có loại (type) tương ứng
+                string query = @"
+                    SELECT s.per_seat_ticket_price
+                    FROM seat s
+                    JOIN auditorium a ON s.auditorium_id = a.auditorium_id
+                    WHERE a.auditorium_type_id = @typeId
+                    AND s.per_seat_ticket_price > 0
+                    LIMIT 1";
+                // Thêm điều kiện price > 0 để tránh lấy trúng ghế chưa set giá
+
+                using (var cmd = new SqliteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@typeId", auditoriumTypeId);
+
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        price = Convert.ToDouble(result);
+                    }
+                }
+            }
+            return price;
+        }
     }
 }

@@ -120,33 +120,54 @@ namespace AdminApp
         {
             if (dgvShowtime.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Chọn suất chiếu cần sửa!");
+                MessageBox.Show("Vui lòng chọn suất chiếu cần chỉnh sửa!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string id = dgvShowtime.SelectedRows[0].Cells["ShowtimeId"].Value.ToString();
+            try
+            {
+                // Lấy từ cột showtime_id (chữ thường)
+                string id = dgvShowtime.SelectedRows[0].Cells["showtime_id"].Value.ToString();
 
-            var f = new FrmEditShowTime(id);
-            if (f.ShowDialog() == DialogResult.OK)
-                LoadShow();
+                var f = new FrmEditShowTime(id);
+                if (f.ShowDialog() == DialogResult.OK)
+                    LoadShow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi");
+            }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (dgvShowtime.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Chọn suất chiếu để xóa!");
+                MessageBox.Show("Vui lòng chọn suất chiếu cần xóa!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string id = dgvShowtime.SelectedRows[0].Cells["ShowtimeId"].Value.ToString();
+            try
+            {
+                // Lấy từ cột showtime_id (chữ thường)
+                string id = dgvShowtime.SelectedRows[0].Cells["showtime_id"].Value.ToString();
 
-            if (MessageBox.Show("Xóa suất chiếu này?", "Xác nhận",
-                MessageBoxButtons.YesNo) == DialogResult.No)
-                return;
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa suất chiếu này?", "Xác nhận",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    return;
 
-            ShowtimeRepo.Delete(id);
-            LoadShow();
+                ShowtimeRepo.Delete(id);
+                MessageBox.Show("Xóa suất chiếu thành công!", "Thành công",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadShow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi xóa: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void FilterRoom(string auditorium_id)
@@ -161,11 +182,26 @@ namespace AdminApp
             LoadShow();
         }
 
-        private void btnPhong1_Click(object sender, EventArgs e) => FilterRoom("RO1");
-        private void btnPhong2_Click(object sender, EventArgs e) => FilterRoom("RO2");
-        private void btnPhong3_Click(object sender, EventArgs e) => FilterRoom("RO3");
-        private void btnPhong4_Click(object sender, EventArgs e) => FilterRoom("RO4");
-        private void btnPhong5_Click(object sender, EventArgs e) => FilterRoom("RO5");
+        private void btnPhong1_Click(object sender, EventArgs e) => FilterRoomByName("Phòng 1");
+        private void btnPhong2_Click(object sender, EventArgs e) => FilterRoomByName("Phòng 2");
+        private void btnPhong3_Click(object sender, EventArgs e) => FilterRoomByName("Phòng 3");
+        private void btnPhong4_Click(object sender, EventArgs e) => FilterRoomByName("Phòng 4");
+        private void btnPhong5_Click(object sender, EventArgs e) => FilterRoomByName("Phòng 5");
+
+        private void FilterRoomByName(string roomName)
+        {
+            var rooms = _audRepo.GetAll();
+            var room = rooms.FirstOrDefault(r => r.name == roomName);
+
+            if (room != null)
+            {
+                FilterRoom(room.auditorium_id);
+            }
+            else
+            {
+                MessageBox.Show($"Không tìm thấy {roomName} trong database!", "Lỗi");
+            }
+        }
 
         // ================== LỌC THEO NGÀY ==================
 
