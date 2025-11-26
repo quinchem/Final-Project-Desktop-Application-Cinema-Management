@@ -87,23 +87,38 @@ namespace UserApp.Repositories
                             }
 
                             // 3️⃣ Chèn Customer
-                            customer.customer_id = Guid.NewGuid().ToString();
+                            using (var getIdCmd = conn.CreateCommand())
+                            {
+                                getIdCmd.Transaction = tx;
+                                getIdCmd.CommandText = @"
+        SELECT 'C' || printf('%03d',
+            IFNULL(MAX(CAST(SUBSTR(customer_id, 2) AS INTEGER)), 0) + 1
+        )
+        FROM customer;
+    ";
+
+                                customer.customer_id = getIdCmd.ExecuteScalar().ToString();
+                            }
+
                             customer.create_date = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
+
                             using (var insertCustomerCmd = conn.CreateCommand())
                             {
                                 insertCustomerCmd.Transaction = tx;
                                 insertCustomerCmd.CommandText = @"
-                                INSERT INTO customer
-                                (customer_id, full_name, email, phone_number, gender, date_of_birth, address, create_date)
-                                VALUES
-                                (@customerId, @fullName, @email, @phone, @gender, @dob, @address, @createDate);";
+        INSERT INTO customer
+        (customer_id, full_name, email, phone_number, gender, date_of_birth, address, create_date)
+        VALUES
+        (@customerId, @fullName, @email, @phone, @gender, @dob, @address, @createDate);
+    ";
 
                                 insertCustomerCmd.Parameters.AddWithValue("@customerId", customer.customer_id);
                                 insertCustomerCmd.Parameters.AddWithValue("@fullName", customer.full_name ?? "");
                                 insertCustomerCmd.Parameters.AddWithValue("@email", customer.email ?? "");
                                 insertCustomerCmd.Parameters.AddWithValue("@phone", customer.phone_number ?? "");
                                 insertCustomerCmd.Parameters.AddWithValue("@gender", customer.gender ?? "");
-                                insertCustomerCmd.Parameters.AddWithValue("@dob", string.IsNullOrWhiteSpace(customer.date_of_birth) ? "" : customer.date_of_birth);
+                                insertCustomerCmd.Parameters.AddWithValue("@dob",
+                                    string.IsNullOrWhiteSpace(customer.date_of_birth) ? DBNull.Value : customer.date_of_birth);
                                 insertCustomerCmd.Parameters.AddWithValue("@address", customer.address ?? "");
                                 insertCustomerCmd.Parameters.AddWithValue("@createDate", customer.create_date);
 
