@@ -1,208 +1,201 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AdminApp.Models;
+﻿using AdminApp.Models;
 using Microsoft.Data.Sqlite;
+using System;
+using System.Collections.Generic;
 
 namespace AdminApp.Repositories
 {
-    public class ShowtimeRepo
+    public static class ShowtimeRepo
     {
+        private static string connStr = DatabaseHelper.GetConnectionString();
+
+        // Convert DateTime -> string dd/MM/yyyy
+        private static string ConvertDate(DateTime dt)
+        {
+            return dt.ToString("dd/MM/yyyy");
+        }
+
+        // ===================== GET ALL =====================
         public static List<Showtime> GetAll()
         {
             List<Showtime> list = new List<Showtime>();
-            using (var conn = DatabaseHelper.GetConnection())
+
+            using (var conn = new SqliteConnection(connStr))
             {
                 conn.Open();
+                string query = "SELECT * FROM showtime";
 
-                var command = conn.CreateCommand();
-                command.CommandText = "SELECT * FROM Showtime"; 
-
-                using (var reader = command.ExecuteReader())
+                using (var cmd = new SqliteCommand(query, conn))
+                using (var rd = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    while (rd.Read())
                     {
-                        // Gọi lại hàm ReadShowtime bạn đã viết sẵn bên dưới
-                        list.Add(ReadShowtime(reader));
+                        list.Add(ReadShowtime(rd));
                     }
                 }
             }
             return list;
         }
-        // ------------------------------
-        // Đọc 1 dòng Showtime từ Reader
-        // ------------------------------
-        private static Showtime ReadShowtime(SqliteDataReader reader)
-        {
-            return new Showtime
-            {
-                showtime_id = reader["showtime_id"]?.ToString(),
-                movie_id = reader["movie_id"]?.ToString(),
-                auditorium_id = reader["auditorium_id"]?.ToString(),
-                show_date = reader["show_date"]?.ToString(),
-                start_time = reader["start_time"]?.ToString(),
-                end_time = reader["end_time"]?.ToString()
-            };
-        }
 
-        // ---------------------------------------------------------
-        // 1) Lấy tất cả suất chiếu theo phim (movie_id)
-        // ---------------------------------------------------------
-        public static List<Showtime> GetShowByFilm(string id)
+        // ===================== GET BY FILM =====================
+        public static List<Showtime> GetByFilm(string movieId)
         {
             List<Showtime> list = new List<Showtime>();
 
-            using (var conn = DatabaseHelper.GetConnection())
+            using (var conn = new SqliteConnection(connStr))
             {
                 conn.Open();
+                string query = "SELECT * FROM showtime WHERE movie_id = @m";
 
-                string query = @"
-                    SELECT showtime_id, movie_id, auditorium_id, show_date, start_time, end_time
-                    FROM Showtime
-                    WHERE movie_id = @movie_id
-                    ORDER BY show_date ASC, start_time ASC";
-
-                using (var cmd = conn.CreateCommand())
+                using (var cmd = new SqliteCommand(query, conn))
                 {
-                    cmd.CommandText = query;
-                    cmd.Parameters.AddWithValue("@movie_id", id);
+                    cmd.Parameters.AddWithValue("@m", movieId);
 
-                    using (var reader = cmd.ExecuteReader())
+                    using (var rd = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (rd.Read())
                         {
-                            list.Add(ReadShowtime(reader));
+                            list.Add(ReadShowtime(rd));
                         }
                     }
                 }
             }
-
             return list;
         }
 
-        // ---------------------------------------------------------
-        // 2) Lấy suất chiếu theo ngày (mọi phim)
-        // ---------------------------------------------------------
-        public static List<Showtime> GetShowByDate(DateTime date)
+        // ===================== GET BY DATE =====================
+        public static List<Showtime> GetByDate(DateTime date)
         {
             List<Showtime> list = new List<Showtime>();
-            string dateStr = date.ToString("dd-MM-yyyy");
+            string dateStr = ConvertDate(date); // dd/MM/yyyy
 
-            using (var conn = DatabaseHelper.GetConnection())
+            using (var conn = new SqliteConnection(connStr))
             {
                 conn.Open();
+                string query = "SELECT * FROM showtime WHERE show_date = @d";
 
-                string query = @"
-                    SELECT showtime_id, movie_id, auditorium_id, show_date, start_time, end_time
-                    FROM Showtime
-                    WHERE show_date = @show_date
-                    ORDER BY start_time ASC";
-
-                using (var cmd = conn.CreateCommand())
+                using (var cmd = new SqliteCommand(query, conn))
                 {
-                    cmd.CommandText = query;
-                    cmd.Parameters.AddWithValue("@show_date", date.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("@d", dateStr);
 
-                    using (var reader = cmd.ExecuteReader())
+                    using (var rd = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (rd.Read())
                         {
-                            list.Add(ReadShowtime(reader));
+                            list.Add(ReadShowtime(rd));
                         }
                     }
                 }
             }
-
             return list;
         }
 
-        // ---------------------------------------------------------
-        // 3) Lấy suất chiếu theo phim + ngày
-        // ---------------------------------------------------------
-        public static List<Showtime> GetShowByFilmAndDate(string id, DateTime date)
+        // ===================== GET BY FILM + DATE =====================
+        public static List<Showtime> GetByFilmAndDate(string movieId, DateTime date)
         {
             List<Showtime> list = new List<Showtime>();
-            string dateStr = date.ToString("dd-MM-yyyy");
+            string dateStr = ConvertDate(date);
 
-            using (var conn = DatabaseHelper.GetConnection())
+            using (var conn = new SqliteConnection(connStr))
             {
                 conn.Open();
+                string query = @"SELECT * FROM showtime
+                                 WHERE movie_id = @m AND show_date = @d";
 
-                string query = @"
-                    SELECT showtime_id, movie_id, auditorium_id, show_date, start_time, end_time
-                    FROM Showtime
-                    WHERE movie_id = @movieId AND show_date = @date
-                    ORDER BY start_time ASC";
-
-                using (var cmd = conn.CreateCommand())
+                using (var cmd = new SqliteCommand(query, conn))
                 {
-                    cmd.CommandText = query;
-                    cmd.Parameters.AddWithValue("@movieId", id);
-                    cmd.Parameters.AddWithValue("@show_date", date.ToString("dd-MM-yyyy"));
+                    cmd.Parameters.AddWithValue("@m", movieId);
+                    cmd.Parameters.AddWithValue("@d", dateStr);
 
-                    using (var reader = cmd.ExecuteReader())
+                    using (var rd = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (rd.Read())
                         {
-                            list.Add(ReadShowtime(reader));
+                            list.Add(ReadShowtime(rd));
                         }
                     }
                 }
             }
-
             return list;
         }
-        // ---------------------------------------------------------
-        // 4) Lấy 1 suất chiếu theo ID
-        // ---------------------------------------------------------
-        public static Showtime GetById(string id)
-        {
-            using (var conn = DatabaseHelper.GetConnection())
-            {
-                conn.Open();
 
-                string sql = @"
-            SELECT showtime_id, movie_id, auditorium_id, show_date, start_time, end_time
-            FROM Showtime
-            WHERE showtime_id = @showtime_id";
-
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = sql;
-                    cmd.Parameters.AddWithValue("@showtime_id", id);
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                            return ReadShowtime(reader);
-                    }
-                }
-            }
-            return null;
-        }
-
-        // ---------------------------------------------------------
-        // 5) Xóa suất chiếu
-        // ---------------------------------------------------------
+        // ===================== DELETE =====================
         public static void Delete(string id)
         {
-            using (var conn = DatabaseHelper.GetConnection())
+            using (var conn = new SqliteConnection(connStr))
             {
                 conn.Open();
+                string query = "DELETE FROM showtime WHERE showtime_id = @id";
 
-                string sql = @"DELETE FROM Showtime WHERE showtime_id = @showtime_id";
-
-                using (var cmd = conn.CreateCommand())
+                using (var cmd = new SqliteCommand(query, conn))
                 {
-                    cmd.CommandText = sql;
-                    cmd.Parameters.AddWithValue("@showtime_id", id);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        // Thêm vào ShowtimeRepo.cs
+
+        // INSERT
+        public static void Insert(Showtime showtime)
+        {
+            using (var conn = new SqliteConnection(connStr))
+            {
+                conn.Open();
+                string query = @"INSERT INTO showtime (showtime_id, movie_id, auditorium_id, show_date, start_time, end_time)
+                        VALUES (@id, @mid, @aid, @date, @start, @end)";
+
+                using (var cmd = new SqliteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", showtime.showtime_id);
+                    cmd.Parameters.AddWithValue("@mid", showtime.movie_id);
+                    cmd.Parameters.AddWithValue("@aid", showtime.auditorium_id);
+                    cmd.Parameters.AddWithValue("@date", showtime.show_date);
+                    cmd.Parameters.AddWithValue("@start", showtime.start_time);
+                    cmd.Parameters.AddWithValue("@end", showtime.end_time);
+
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-    }
+        // UPDATE
+        public static void Update(Showtime showtime)
+        {
+            using (var conn = new SqliteConnection(connStr))
+            {
+                conn.Open();
+                string query = @"UPDATE showtime 
+                        SET movie_id = @mid, auditorium_id = @aid, show_date = @date, 
+                            start_time = @start, end_time = @end
+                        WHERE showtime_id = @id";
 
+                using (var cmd = new SqliteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", showtime.showtime_id);
+                    cmd.Parameters.AddWithValue("@mid", showtime.movie_id);
+                    cmd.Parameters.AddWithValue("@aid", showtime.auditorium_id);
+                    cmd.Parameters.AddWithValue("@date", showtime.show_date);
+                    cmd.Parameters.AddWithValue("@start", showtime.start_time);
+                    cmd.Parameters.AddWithValue("@end", showtime.end_time);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // ===================== MAPPING =====================
+        private static Showtime ReadShowtime(SqliteDataReader rd)
+        {
+            return new Showtime
+            {
+                showtime_id = rd["showtime_id"].ToString(),
+                movie_id = rd["movie_id"].ToString(),
+                auditorium_id = rd["auditorium_id"].ToString(),
+                show_date = rd["show_date"].ToString(),
+                start_time = rd["start_time"].ToString(),
+                end_time = rd["end_time"].ToString()
+            };
+        }
+    }
 }
