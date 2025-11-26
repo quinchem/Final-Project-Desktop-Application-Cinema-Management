@@ -299,7 +299,6 @@
             Controls.Add(txtTimKiem);
             Name = "AdminCustomerManagement";
             Text = "Quản lý khách hàng";
-            Load += AdminCustomerManagement_Load_1;
             ((System.ComponentModel.ISupportInitialize)DataGridViewCustomerManagement).EndInit();
             ResumeLayout(false);
         }
