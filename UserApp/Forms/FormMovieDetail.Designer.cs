@@ -87,7 +87,7 @@
             panelChiTiet.Location = new Point(0, 0);
             panelChiTiet.Margin = new Padding(4, 4, 4, 4);
             panelChiTiet.Name = "panelChiTiet";
-            panelChiTiet.Size = new Size(2223, 1280);
+            panelChiTiet.Size = new Size(1182, 703);
             panelChiTiet.TabIndex = 0;
             // 
             // Trailer
@@ -151,13 +151,12 @@
             btnDatVe.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnDatVe.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnDatVe.FillColor = Color.FromArgb(45, 76, 101);
-            btnDatVe.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDatVe.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDatVe.ForeColor = Color.White;
             btnDatVe.Image = Properties.Resources.DatVe;
             btnDatVe.ImageAlign = HorizontalAlignment.Left;
-            btnDatVe.ImageSize = new Size(40, 40);
-            btnDatVe.Location = new Point(1575, 70);
-            btnDatVe.Margin = new Padding(4, 4, 4, 4);
+            btnDatVe.ImageSize = new Size(30, 30);
+            btnDatVe.Location = new Point(944, 47);
             btnDatVe.Name = "btnDatVe";
             btnDatVe.ShadowDecoration.BorderRadius = 28;
             btnDatVe.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
@@ -165,7 +164,7 @@
             btnDatVe.ShadowDecoration.Depth = 40;
             btnDatVe.ShadowDecoration.Enabled = true;
             btnDatVe.ShadowDecoration.Shadow = new Padding(0, 0, 3, 5);
-            btnDatVe.Size = new Size(254, 84);
+            btnDatVe.Size = new Size(140, 56);
             btnDatVe.TabIndex = 14;
             btnDatVe.Text = "ĐẶT VÉ";
             btnDatVe.TextAlign = HorizontalAlignment.Right;
@@ -339,14 +338,13 @@
             guna2PictureBox1.TabIndex = 0;
             guna2PictureBox1.TabStop = false;
             // 
-            // FormFilmDetail
+            // FormMovieDetail
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2223, 1280);
+            ClientSize = new Size(1182, 703);
             Controls.Add(panelChiTiet);
-            Margin = new Padding(4, 4, 4, 4);
-            Name = "FormFilmDetail";
+            Name = "FormMovieDetail";
             Text = "Chi tiết phim";
             panelChiTiet.ResumeLayout(false);
             panelChiTiet.PerformLayout();
