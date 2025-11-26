@@ -44,16 +44,16 @@
             txtTenPhim = new Guna.UI2.WinForms.Guna2TextBox();
             btnTimPhim = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
-            TenPhim = new DataGridViewTextBoxColumn();
-            NgayChieu = new DataGridViewTextBoxColumn();
-            TrangThai = new DataGridViewTextBoxColumn();
-            ThoiLuong = new DataGridViewTextBoxColumn();
-            ChinhSua = new DataGridViewImageColumn();
-            Xoa = new DataGridViewImageColumn();
+            dgvMovies = new Guna.UI2.WinForms.Guna2DataGridView();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
+            title = new DataGridViewTextBoxColumn();
+            release_date = new DataGridViewTextBoxColumn();
+            status = new DataGridViewTextBoxColumn();
+            duration = new DataGridViewTextBoxColumn();
+            ChinhSua = new DataGridViewImageColumn();
+            Xoa = new DataGridViewImageColumn();
+            ((System.ComponentModel.ISupportInitialize)dgvMovies).BeginInit();
             SuspendLayout();
             // 
             // txtTenPhim
@@ -125,12 +125,12 @@
             guna2Button1.TabIndex = 29;
             guna2Button1.Text = "Thêm";
             // 
-            // guna2DataGridView1
+            // dgvMovies
             // 
-            guna2DataGridView1.AllowUserToAddRows = false;
+            dgvMovies.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = Color.White;
-            guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            guna2DataGridView1.BackgroundColor = SystemColors.Window;
+            dgvMovies.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgvMovies.BackgroundColor = SystemColors.Window;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 163);
@@ -138,10 +138,10 @@
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.GradientActiveCaption;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            guna2DataGridView1.ColumnHeadersHeight = 27;
-            guna2DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView1.Columns.AddRange(new DataGridViewColumn[] { TenPhim, NgayChieu, TrangThai, ThoiLuong, ChinhSua, Xoa });
+            dgvMovies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgvMovies.ColumnHeadersHeight = 27;
+            dgvMovies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgvMovies.Columns.AddRange(new DataGridViewColumn[] { title, release_date, status, duration, ChinhSua, Xoa });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -149,104 +149,36 @@
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 192, 128);
             dataGridViewCellStyle3.SelectionForeColor = Color.Black;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            guna2DataGridView1.GridColor = Color.WhiteSmoke;
-            guna2DataGridView1.Location = new Point(76, 164);
-            guna2DataGridView1.Name = "guna2DataGridView1";
-            guna2DataGridView1.ReadOnly = true;
-            guna2DataGridView1.RowHeadersVisible = false;
-            guna2DataGridView1.RowHeadersWidth = 51;
-            guna2DataGridView1.Size = new Size(1269, 539);
-            guna2DataGridView1.TabIndex = 30;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.BackColor = SystemColors.Window;
-            guna2DataGridView1.ThemeStyle.GridColor = Color.WhiteSmoke;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.Height = 27;
-            guna2DataGridView1.ThemeStyle.ReadOnly = true;
-            guna2DataGridView1.ThemeStyle.RowsStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            guna2DataGridView1.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView1.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
-            guna2DataGridView1.ThemeStyle.RowsStyle.Height = 29;
-            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // TenPhim
-            // 
-            TenPhim.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            TenPhim.Frozen = true;
-            TenPhim.HeaderText = "Tên Phim";
-            TenPhim.MinimumWidth = 6;
-            TenPhim.Name = "TenPhim";
-            TenPhim.ReadOnly = true;
-            TenPhim.Width = 450;
-            // 
-            // NgayChieu
-            // 
-            NgayChieu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            NgayChieu.FillWeight = 65.33226F;
-            NgayChieu.Frozen = true;
-            NgayChieu.HeaderText = "Ngày Chiếu";
-            NgayChieu.MinimumWidth = 6;
-            NgayChieu.Name = "NgayChieu";
-            NgayChieu.ReadOnly = true;
-            NgayChieu.Width = 220;
-            // 
-            // TrangThai
-            // 
-            TrangThai.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            TrangThai.FillWeight = 65.33226F;
-            TrangThai.Frozen = true;
-            TrangThai.HeaderText = "Trạng Thái";
-            TrangThai.MinimumWidth = 6;
-            TrangThai.Name = "TrangThai";
-            TrangThai.ReadOnly = true;
-            TrangThai.Width = 220;
-            // 
-            // ThoiLuong
-            // 
-            ThoiLuong.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            ThoiLuong.FillWeight = 65.33226F;
-            ThoiLuong.Frozen = true;
-            ThoiLuong.HeaderText = "Thời Lượng";
-            ThoiLuong.MinimumWidth = 6;
-            ThoiLuong.Name = "ThoiLuong";
-            ThoiLuong.ReadOnly = true;
-            ThoiLuong.Width = 220;
-            // 
-            // ChinhSua
-            // 
-            ChinhSua.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            ChinhSua.FillWeight = 223.358109F;
-            ChinhSua.Frozen = true;
-            ChinhSua.HeaderText = "Chỉnh";
-            ChinhSua.Image = Properties.Resources.pen;
-            ChinhSua.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            ChinhSua.MinimumWidth = 6;
-            ChinhSua.Name = "ChinhSua";
-            ChinhSua.ReadOnly = true;
-            ChinhSua.Width = 70;
-            // 
-            // Xoa
-            // 
-            Xoa.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Xoa.FillWeight = 80.6451645F;
-            Xoa.HeaderText = "Xóa";
-            Xoa.Image = Properties.Resources.trash;
-            Xoa.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Xoa.MinimumWidth = 6;
-            Xoa.Name = "Xoa";
-            Xoa.ReadOnly = true;
-            Xoa.Width = 70;
+            dgvMovies.DefaultCellStyle = dataGridViewCellStyle3;
+            dgvMovies.GridColor = Color.WhiteSmoke;
+            dgvMovies.Location = new Point(76, 164);
+            dgvMovies.Name = "dgvMovies";
+            dgvMovies.ReadOnly = true;
+            dgvMovies.RowHeadersVisible = false;
+            dgvMovies.RowHeadersWidth = 51;
+            dgvMovies.Size = new Size(1269, 539);
+            dgvMovies.TabIndex = 30;
+            dgvMovies.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dgvMovies.ThemeStyle.AlternatingRowsStyle.Font = null;
+            dgvMovies.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dgvMovies.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            dgvMovies.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            dgvMovies.ThemeStyle.BackColor = SystemColors.Window;
+            dgvMovies.ThemeStyle.GridColor = Color.WhiteSmoke;
+            dgvMovies.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            dgvMovies.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvMovies.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            dgvMovies.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dgvMovies.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgvMovies.ThemeStyle.HeaderStyle.Height = 27;
+            dgvMovies.ThemeStyle.ReadOnly = true;
+            dgvMovies.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dgvMovies.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvMovies.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            dgvMovies.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
+            dgvMovies.ThemeStyle.RowsStyle.Height = 29;
+            dgvMovies.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dgvMovies.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
             // guna2Button2
             // 
@@ -286,6 +218,73 @@
             guna2Button3.TabIndex = 32;
             guna2Button3.Text = "Xóa";
             // 
+            // title
+            // 
+            title.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            title.DataPropertyName = "title";
+            title.HeaderText = "Tên Phim";
+            title.MinimumWidth = 6;
+            title.Name = "title";
+            title.ReadOnly = true;
+            title.Width = 450;
+            // 
+            // release_date
+            // 
+            release_date.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            release_date.DataPropertyName = "ReleaseDate";
+            release_date.FillWeight = 65.33226F;
+            release_date.HeaderText = "Ngày Chiếu";
+            release_date.MinimumWidth = 6;
+            release_date.Name = "release_date";
+            release_date.ReadOnly = true;
+            release_date.Width = 220;
+            // 
+            // status
+            // 
+            status.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            status.DataPropertyName = "status";
+            status.FillWeight = 65.33226F;
+            status.HeaderText = "Trạng Thái";
+            status.MinimumWidth = 6;
+            status.Name = "status";
+            status.ReadOnly = true;
+            status.Width = 220;
+            // 
+            // duration
+            // 
+            duration.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            duration.DataPropertyName = "duration";
+            duration.FillWeight = 65.33226F;
+            duration.HeaderText = "Thời Lượng";
+            duration.MinimumWidth = 6;
+            duration.Name = "duration";
+            duration.ReadOnly = true;
+            duration.Width = 220;
+            // 
+            // ChinhSua
+            // 
+            ChinhSua.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            ChinhSua.FillWeight = 223.358109F;
+            ChinhSua.HeaderText = "Chỉnh";
+            ChinhSua.Image = Properties.Resources.pen;
+            ChinhSua.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            ChinhSua.MinimumWidth = 6;
+            ChinhSua.Name = "ChinhSua";
+            ChinhSua.ReadOnly = true;
+            ChinhSua.Width = 70;
+            // 
+            // Xoa
+            // 
+            Xoa.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Xoa.FillWeight = 80.6451645F;
+            Xoa.HeaderText = "Xóa";
+            Xoa.Image = Properties.Resources.trash;
+            Xoa.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Xoa.MinimumWidth = 6;
+            Xoa.Name = "Xoa";
+            Xoa.ReadOnly = true;
+            Xoa.Width = 70;
+            // 
             // FormMovieManagement
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -294,13 +293,13 @@
             ClientSize = new Size(1402, 703);
             Controls.Add(guna2Button3);
             Controls.Add(guna2Button2);
-            Controls.Add(guna2DataGridView1);
+            Controls.Add(dgvMovies);
             Controls.Add(guna2Button1);
             Controls.Add(btnTimPhim);
             Controls.Add(txtTenPhim);
             Name = "FormMovieManagement";
             Text = "AdminQLPhim";
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMovies).EndInit();
             ResumeLayout(false);
         }
 
@@ -309,14 +308,14 @@
         private Guna.UI2.WinForms.Guna2TextBox txtTenPhim;
         private Guna.UI2.WinForms.Guna2Button btnTimPhim;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
-        private DataGridViewTextBoxColumn TenPhim;
-        private DataGridViewTextBoxColumn NgayChieu;
-        private DataGridViewTextBoxColumn TrangThai;
-        private DataGridViewTextBoxColumn ThoiLuong;
-        private DataGridViewImageColumn ChinhSua;
-        private DataGridViewImageColumn Xoa;
+        private Guna.UI2.WinForms.Guna2DataGridView dgvMovies;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
+        private DataGridViewTextBoxColumn title;
+        private DataGridViewTextBoxColumn release_date;
+        private DataGridViewTextBoxColumn status;
+        private DataGridViewTextBoxColumn duration;
+        private DataGridViewImageColumn ChinhSua;
+        private DataGridViewImageColumn Xoa;
     }
 }
