@@ -41,51 +41,50 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            txtTenPhim = new Guna.UI2.WinForms.Guna2TextBox();
+            txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             btnTimPhim = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             dgvMovies = new Guna.UI2.WinForms.Guna2DataGridView();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             title = new DataGridViewTextBoxColumn();
             release_date = new DataGridViewTextBoxColumn();
             status = new DataGridViewTextBoxColumn();
             duration = new DataGridViewTextBoxColumn();
             ChinhSua = new DataGridViewImageColumn();
             Xoa = new DataGridViewImageColumn();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)dgvMovies).BeginInit();
             SuspendLayout();
             // 
-            // txtTenPhim
+            // txtSearch
             // 
-            txtTenPhim.BorderColor = Color.Black;
-            txtTenPhim.BorderRadius = 10;
-            txtTenPhim.CustomizableEdges = customizableEdges1;
-            txtTenPhim.DefaultText = "";
-            txtTenPhim.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtTenPhim.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtTenPhim.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtTenPhim.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtTenPhim.FillColor = Color.LightSteelBlue;
-            txtTenPhim.FocusedState.BorderColor = Color.Black;
-            txtTenPhim.FocusedState.FillColor = Color.LightSteelBlue;
-            txtTenPhim.FocusedState.ForeColor = Color.FromArgb(92, 124, 150);
-            txtTenPhim.FocusedState.PlaceholderForeColor = Color.Transparent;
-            txtTenPhim.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtTenPhim.ForeColor = Color.FromArgb(92, 124, 150);
-            txtTenPhim.HoverState.BorderColor = SystemColors.ActiveBorder;
-            txtTenPhim.HoverState.ForeColor = Color.FromArgb(92, 124, 150);
-            txtTenPhim.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtTenPhim.Location = new Point(81, 86);
-            txtTenPhim.Margin = new Padding(3, 5, 3, 5);
-            txtTenPhim.Name = "txtTenPhim";
-            txtTenPhim.PlaceholderForeColor = Color.FromArgb(92, 124, 150);
-            txtTenPhim.PlaceholderText = "Nhập tên phim";
-            txtTenPhim.SelectedText = "";
-            txtTenPhim.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            txtTenPhim.Size = new Size(497, 45);
-            txtTenPhim.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
-            txtTenPhim.TabIndex = 1;
+            txtSearch.BorderColor = Color.Black;
+            txtSearch.BorderRadius = 10;
+            txtSearch.CustomizableEdges = customizableEdges1;
+            txtSearch.DefaultText = "";
+            txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtSearch.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtSearch.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtSearch.FillColor = Color.LightSteelBlue;
+            txtSearch.FocusedState.BorderColor = Color.Black;
+            txtSearch.FocusedState.FillColor = Color.LightSteelBlue;
+            txtSearch.FocusedState.ForeColor = Color.Black;
+            txtSearch.FocusedState.PlaceholderForeColor = Color.Transparent;
+            txtSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSearch.ForeColor = Color.FromArgb(92, 124, 150);
+            txtSearch.HoverState.BorderColor = SystemColors.ActiveBorder;
+            txtSearch.HoverState.ForeColor = Color.FromArgb(92, 124, 150);
+            txtSearch.HoverState.PlaceholderForeColor = Color.Transparent;
+            txtSearch.Location = new Point(81, 86);
+            txtSearch.Margin = new Padding(3, 5, 3, 5);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderForeColor = Color.FromArgb(92, 124, 150);
+            txtSearch.PlaceholderText = "Nhập tên phim";
+            txtSearch.SelectedText = "";
+            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtSearch.Size = new Size(508, 45);
+            txtSearch.TabIndex = 1;
             // 
             // btnTimPhim
             // 
@@ -105,6 +104,7 @@
             btnTimPhim.Size = new Size(75, 37);
             btnTimPhim.TabIndex = 28;
             btnTimPhim.Text = "Tìm";
+            btnTimPhim.Click += BtnSearch_Click;
             // 
             // guna2Button1
             // 
@@ -180,44 +180,6 @@
             dgvMovies.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgvMovies.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
-            // guna2Button2
-            // 
-            guna2Button2.BorderRadius = 5;
-            guna2Button2.CustomizableEdges = customizableEdges7;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.FromArgb(254, 188, 47);
-            guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Image = Properties.Resources.pen;
-            guna2Button2.Location = new Point(832, 88);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2Button2.Size = new Size(122, 37);
-            guna2Button2.TabIndex = 31;
-            guna2Button2.Text = "Chỉnh sửa";
-            // 
-            // guna2Button3
-            // 
-            guna2Button3.BorderRadius = 5;
-            guna2Button3.CustomizableEdges = customizableEdges9;
-            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button3.FillColor = Color.Silver;
-            guna2Button3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button3.ForeColor = Color.White;
-            guna2Button3.Image = Properties.Resources.trash;
-            guna2Button3.Location = new Point(967, 88);
-            guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button3.Size = new Size(97, 37);
-            guna2Button3.TabIndex = 32;
-            guna2Button3.Text = "Xóa";
-            // 
             // title
             // 
             title.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -231,7 +193,7 @@
             // release_date
             // 
             release_date.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            release_date.DataPropertyName = "ReleaseDate";
+            release_date.DataPropertyName = "release_date";
             release_date.FillWeight = 65.33226F;
             release_date.HeaderText = "Ngày Chiếu";
             release_date.MinimumWidth = 6;
@@ -285,6 +247,44 @@
             Xoa.ReadOnly = true;
             Xoa.Width = 70;
             // 
+            // guna2Button2
+            // 
+            guna2Button2.BorderRadius = 5;
+            guna2Button2.CustomizableEdges = customizableEdges7;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = Color.FromArgb(254, 188, 47);
+            guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button2.ForeColor = Color.White;
+            guna2Button2.Image = Properties.Resources.pen;
+            guna2Button2.Location = new Point(832, 88);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2Button2.Size = new Size(122, 37);
+            guna2Button2.TabIndex = 31;
+            guna2Button2.Text = "Chỉnh sửa";
+            // 
+            // guna2Button3
+            // 
+            guna2Button3.BorderRadius = 5;
+            guna2Button3.CustomizableEdges = customizableEdges9;
+            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button3.FillColor = Color.Silver;
+            guna2Button3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button3.ForeColor = Color.White;
+            guna2Button3.Image = Properties.Resources.trash;
+            guna2Button3.Location = new Point(967, 88);
+            guna2Button3.Name = "guna2Button3";
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2Button3.Size = new Size(97, 37);
+            guna2Button3.TabIndex = 32;
+            guna2Button3.Text = "Xóa";
+            // 
             // FormMovieManagement
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -296,16 +296,17 @@
             Controls.Add(dgvMovies);
             Controls.Add(guna2Button1);
             Controls.Add(btnTimPhim);
-            Controls.Add(txtTenPhim);
+            Controls.Add(txtSearch);
             Name = "FormMovieManagement";
             Text = "AdminQLPhim";
+            Load += FormMovieManagement_Load;
             ((System.ComponentModel.ISupportInitialize)dgvMovies).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2TextBox txtTenPhim;
+        private Guna.UI2.WinForms.Guna2TextBox txtSearch;
         private Guna.UI2.WinForms.Guna2Button btnTimPhim;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2DataGridView dgvMovies;

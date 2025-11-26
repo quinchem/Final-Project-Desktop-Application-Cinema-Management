@@ -1,5 +1,6 @@
-﻿using AdminApp.Repositories;
+﻿using AdminApp.Models;
 using AdminApp.Properties;
+using AdminApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace AdminApp
 {
     public partial class FormMovieManagement : Form
     {
-        MovieRepository _movieRepo = new MovieRepository();
+        private FilmRepo _filmRepo = new FilmRepo();
 
         public FormMovieManagement()
         {
@@ -25,51 +26,51 @@ namespace AdminApp
 
         private void FormMovieManagement_Load(object sender, EventArgs e)
         {
-            LoadMovieData();
+            LoadFilmData();
         }
 
-        private void LoadMovieData()
+        private void LoadFilmData()
         {
             try
             {
-                var movies = _movieRepo.GetAllMovies();
-
-                // Gán dữ liệu theo đúng DataPropertyName của từng cột
-                dgvMovies.DataSource = movies;
-
-                // Đảm bảo thứ tự cột đúng Designer
-                dgvMovies.Columns["title"].DisplayIndex = 0;
-                dgvMovies.Columns["release_date"].DisplayIndex = 1;
-                dgvMovies.Columns["status"].DisplayIndex = 2;
-                dgvMovies.Columns["duration"].DisplayIndex = 3;
-                dgvMovies.Columns["ChinhSua"].DisplayIndex = 4;
-                dgvMovies.Columns["Xoa"].DisplayIndex = 5;
+                var films = _filmRepo.GetAllFilms();
+                BindDataToGrid(films);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading movies: " + ex.Message);
-
+                MessageBox.Show("Error loading films: " + ex.Message);
             }
+        }
+        private void BindDataToGrid(List<Film> films)
+        {
+            dgvMovies.DataSource = films;
+
+            // Đảm bảo thứ tự cột đúng Designer
+            dgvMovies.Columns["title"].DisplayIndex = 0;
+            dgvMovies.Columns["release_date"].DisplayIndex = 1;
+            dgvMovies.Columns["status"].DisplayIndex = 2;
+            dgvMovies.Columns["duration"].DisplayIndex = 3;
+            dgvMovies.Columns["ChinhSua"].DisplayIndex = 4;
+            dgvMovies.Columns["Xoa"].DisplayIndex = 5;
+        }
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            string keyword = txtSearch.Text.Trim();
+            List<Film> results;
+
+            if (string.IsNullOrEmpty(keyword))
+            {
+                // Nếu textbox rỗng -> load tất cả phim
+                results = _filmRepo.GetAllFilms();
+            }
+            else
+            {
+                results = _filmRepo.SearchFilmByName1(keyword);
+            }
+
+            BindDataToGrid(results);
         }
     }
 }
-        namespace AdminApp.Models
-    {
-        public class Movie
-        {
-            public string MovieId { get; set; }
-            public string Title { get; set; }
-            public string Description { get; set; }
-            public string Genre { get; set; }
-            public string Director { get; set; }
-            public string Actor { get; set; }
-            public string ReleaseDate { get; set; }
-            public string Language { get; set; }
-            public string AgeRestriction { get; set; }
-            public int Duration { get; set; }
-            public int FilmPurchasePrice { get; set; }
-            public string Status { get; set; }
-        }
-    }
 
 

@@ -59,6 +59,24 @@ namespace AdminApp.Repositories
             return films;
         }
 
+        // ---- Tìm kiếm phim theo tên (C# LINQ) ----
+        public List<Film> SearchFilmByName1(string keyword)
+        {
+            // Lấy toàn bộ phim
+            var allFilms = GetAllFilms();
+
+            if (string.IsNullOrEmpty(keyword))
+                return allFilms;
+
+            // Lọc trong C#, không phân biệt chữ hoa/chữ thường
+            var results = allFilms
+                .Where(f => f.title.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
+                .ToList();
+
+            return results;
+        }
+
+
         // ---- Tìm kiếm phim theo tên ----
         public List<Film> SearchFilmByName(string keyword)
         {
