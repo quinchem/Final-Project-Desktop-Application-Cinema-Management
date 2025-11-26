@@ -62,12 +62,6 @@
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
-            TenPhim = new DataGridViewTextBoxColumn();
-            NgayChieu = new DataGridViewTextBoxColumn();
-            TrangThai = new DataGridViewTextBoxColumn();
-            ThoiLuong = new DataGridViewTextBoxColumn();
-            ChinhSua = new DataGridViewImageColumn();
-            Xoa = new DataGridViewImageColumn();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             btnTimPhim = new Guna.UI2.WinForms.Guna2Button();
             txtTenPhim = new Guna.UI2.WinForms.Guna2TextBox();
@@ -82,6 +76,12 @@
             txtTheLoaiPhim = new Guna.UI2.WinForms.Guna2TextBox();
             label1 = new Label();
             guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            TenPhim = new DataGridViewTextBoxColumn();
+            Phong = new DataGridViewTextBoxColumn();
+            DinhDang = new DataGridViewTextBoxColumn();
+            GiaVe = new DataGridViewTextBoxColumn();
+            NgayChieu = new DataGridViewTextBoxColumn();
+            GioChieu = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             SuspendLayout();
@@ -126,9 +126,9 @@
             // 
             // guna2DataGridView1
             // 
-            guna2DataGridView1.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = Color.White;
             guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            guna2DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             guna2DataGridView1.BackgroundColor = SystemColors.Window;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.White;
@@ -140,7 +140,7 @@
             guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             guna2DataGridView1.ColumnHeadersHeight = 27;
             guna2DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView1.Columns.AddRange(new DataGridViewColumn[] { TenPhim, NgayChieu, TrangThai, ThoiLuong, ChinhSua, Xoa });
+            guna2DataGridView1.Columns.AddRange(new DataGridViewColumn[] { TenPhim, Phong, DinhDang, GiaVe, NgayChieu, GioChieu });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -178,74 +178,6 @@
             guna2DataGridView1.ThemeStyle.RowsStyle.Height = 29;
             guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // TenPhim
-            // 
-            TenPhim.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            TenPhim.Frozen = true;
-            TenPhim.HeaderText = "Tên Phim";
-            TenPhim.MinimumWidth = 6;
-            TenPhim.Name = "TenPhim";
-            TenPhim.ReadOnly = true;
-            TenPhim.Width = 450;
-            // 
-            // NgayChieu
-            // 
-            NgayChieu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            NgayChieu.FillWeight = 65.33226F;
-            NgayChieu.Frozen = true;
-            NgayChieu.HeaderText = "Ngày Chiếu";
-            NgayChieu.MinimumWidth = 6;
-            NgayChieu.Name = "NgayChieu";
-            NgayChieu.ReadOnly = true;
-            NgayChieu.Width = 220;
-            // 
-            // TrangThai
-            // 
-            TrangThai.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            TrangThai.FillWeight = 65.33226F;
-            TrangThai.Frozen = true;
-            TrangThai.HeaderText = "Trạng Thái";
-            TrangThai.MinimumWidth = 6;
-            TrangThai.Name = "TrangThai";
-            TrangThai.ReadOnly = true;
-            TrangThai.Width = 220;
-            // 
-            // ThoiLuong
-            // 
-            ThoiLuong.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            ThoiLuong.FillWeight = 65.33226F;
-            ThoiLuong.Frozen = true;
-            ThoiLuong.HeaderText = "Thời Lượng";
-            ThoiLuong.MinimumWidth = 6;
-            ThoiLuong.Name = "ThoiLuong";
-            ThoiLuong.ReadOnly = true;
-            ThoiLuong.Width = 220;
-            // 
-            // ChinhSua
-            // 
-            ChinhSua.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            ChinhSua.FillWeight = 223.358109F;
-            ChinhSua.Frozen = true;
-            ChinhSua.HeaderText = "Chỉnh";
-            ChinhSua.Image = Properties.Resources.pen;
-            ChinhSua.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            ChinhSua.MinimumWidth = 6;
-            ChinhSua.Name = "ChinhSua";
-            ChinhSua.ReadOnly = true;
-            ChinhSua.Width = 70;
-            // 
-            // Xoa
-            // 
-            Xoa.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Xoa.FillWeight = 80.6451645F;
-            Xoa.HeaderText = "Xóa";
-            Xoa.Image = Properties.Resources.trash;
-            Xoa.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Xoa.MinimumWidth = 6;
-            Xoa.Name = "Xoa";
-            Xoa.ReadOnly = true;
-            Xoa.Width = 70;
             // 
             // guna2Button1
             // 
@@ -502,6 +434,63 @@
             guna2PictureBox1.TabIndex = 49;
             guna2PictureBox1.TabStop = false;
             // 
+            // TenPhim
+            // 
+            TenPhim.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            TenPhim.Frozen = true;
+            TenPhim.HeaderText = "Tên Phim";
+            TenPhim.MinimumWidth = 6;
+            TenPhim.Name = "TenPhim";
+            TenPhim.ReadOnly = true;
+            TenPhim.Width = 450;
+            // 
+            // Phong
+            // 
+            Phong.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Phong.FillWeight = 65.33226F;
+            Phong.Frozen = true;
+            Phong.HeaderText = "Phòng";
+            Phong.MinimumWidth = 6;
+            Phong.Name = "Phong";
+            Phong.ReadOnly = true;
+            Phong.Width = 120;
+            // 
+            // DinhDang
+            // 
+            DinhDang.HeaderText = "Định Dạng";
+            DinhDang.MinimumWidth = 6;
+            DinhDang.Name = "DinhDang";
+            DinhDang.ReadOnly = true;
+            DinhDang.Width = 120;
+            // 
+            // GiaVe
+            // 
+            GiaVe.HeaderText = "Giá Vé";
+            GiaVe.MinimumWidth = 6;
+            GiaVe.Name = "GiaVe";
+            GiaVe.ReadOnly = true;
+            GiaVe.Width = 150;
+            // 
+            // NgayChieu
+            // 
+            NgayChieu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            NgayChieu.FillWeight = 65.33226F;
+            NgayChieu.HeaderText = "Ngày Chiếu";
+            NgayChieu.MinimumWidth = 6;
+            NgayChieu.Name = "NgayChieu";
+            NgayChieu.ReadOnly = true;
+            NgayChieu.Width = 250;
+            // 
+            // GioChieu
+            // 
+            GioChieu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            GioChieu.FillWeight = 65.33226F;
+            GioChieu.HeaderText = "Giờ Chiếu";
+            GioChieu.MinimumWidth = 6;
+            GioChieu.Name = "GioChieu";
+            GioChieu.ReadOnly = true;
+            GioChieu.Width = 250;
+            // 
             // FormShowManagement
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -538,12 +527,6 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
-        private DataGridViewTextBoxColumn TenPhim;
-        private DataGridViewTextBoxColumn NgayChieu;
-        private DataGridViewTextBoxColumn TrangThai;
-        private DataGridViewTextBoxColumn ThoiLuong;
-        private DataGridViewImageColumn ChinhSua;
-        private DataGridViewImageColumn Xoa;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button btnTimPhim;
         private Guna.UI2.WinForms.Guna2TextBox txtTenPhim;
@@ -558,5 +541,11 @@
         private Guna.UI2.WinForms.Guna2TextBox txtTheLoaiPhim;
         private Label label1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private DataGridViewTextBoxColumn TenPhim;
+        private DataGridViewTextBoxColumn Phong;
+        private DataGridViewTextBoxColumn DinhDang;
+        private DataGridViewTextBoxColumn GiaVe;
+        private DataGridViewTextBoxColumn NgayChieu;
+        private DataGridViewTextBoxColumn GioChieu;
     }
 }

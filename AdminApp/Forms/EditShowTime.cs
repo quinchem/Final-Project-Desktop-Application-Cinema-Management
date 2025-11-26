@@ -8,14 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UserApp
+namespace AdminApp.Forms
 {
-    public partial class ProfileAccount : UserControl
+    public partial class EditShowTime : Form
     {
-        public ProfileAccount()
+        public EditShowTime()
         {
             InitializeComponent();
         }
-
     }
 }

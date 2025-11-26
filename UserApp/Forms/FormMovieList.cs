@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace UserApp
 {
-    public partial class ProfileChangePassword : UserControl
+    public partial class FormMovieList : Form
     {
-        public ProfileChangePassword()
+        public FormMovieList()
         {
             InitializeComponent();
         }
+
     }
 }
