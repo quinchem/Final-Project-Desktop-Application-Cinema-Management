@@ -125,12 +125,12 @@ namespace AdminApp.Repositories
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT movie_id, title FROM movie WHERE movie_id = @id";
+                cmd.CommandText = "SELECT movie_id, title, duration FROM movie WHERE movie_id = @id";
                 cmd.Parameters.AddWithValue("@id", id);
                 using (var r = cmd.ExecuteReader())
                 {
                     if (r.Read())
-                        return new Film { movie_id = r["movie_id"].ToString(), title = r["title"].ToString() };
+                        return new Film { movie_id = r["movie_id"].ToString(), title = r["title"].ToString(), duration = Convert.ToInt32(r["duration"]) };
                 }
             }
             return null;
@@ -151,7 +151,7 @@ namespace AdminApp.Repositories
                 release_date = r["release_date"].ToString(),
                 language = r["language"].ToString(),
                 age_restriction = r["age_restriction"].ToString(),
-                duration = Convert.ToInt32(r["duration"]),
+                duration = r["duration"] != DBNull.Value ? Convert.ToInt32(r["duration"]) : 0,
                 film_purchase_price = r["film_purchase_price"] == DBNull.Value ? null : (int?)Convert.ToInt32(r["film_purchase_price"]),
                 status = r["status"].ToString()
             };

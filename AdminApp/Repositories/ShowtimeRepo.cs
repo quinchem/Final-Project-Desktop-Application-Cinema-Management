@@ -134,6 +134,55 @@ namespace AdminApp.Repositories
                 }
             }
         }
+        // Thêm vào ShowtimeRepo.cs
+
+        // INSERT
+        public static void Insert(Showtime showtime)
+        {
+            using (var conn = new SqliteConnection(connStr))
+            {
+                conn.Open();
+                string query = @"INSERT INTO showtime (showtime_id, movie_id, auditorium_id, show_date, start_time, end_time)
+                        VALUES (@id, @mid, @aid, @date, @start, @end)";
+
+                using (var cmd = new SqliteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", showtime.showtime_id);
+                    cmd.Parameters.AddWithValue("@mid", showtime.movie_id);
+                    cmd.Parameters.AddWithValue("@aid", showtime.auditorium_id);
+                    cmd.Parameters.AddWithValue("@date", showtime.show_date);
+                    cmd.Parameters.AddWithValue("@start", showtime.start_time);
+                    cmd.Parameters.AddWithValue("@end", showtime.end_time);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // UPDATE
+        public static void Update(Showtime showtime)
+        {
+            using (var conn = new SqliteConnection(connStr))
+            {
+                conn.Open();
+                string query = @"UPDATE showtime 
+                        SET movie_id = @mid, auditorium_id = @aid, show_date = @date, 
+                            start_time = @start, end_time = @end
+                        WHERE showtime_id = @id";
+
+                using (var cmd = new SqliteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", showtime.showtime_id);
+                    cmd.Parameters.AddWithValue("@mid", showtime.movie_id);
+                    cmd.Parameters.AddWithValue("@aid", showtime.auditorium_id);
+                    cmd.Parameters.AddWithValue("@date", showtime.show_date);
+                    cmd.Parameters.AddWithValue("@start", showtime.start_time);
+                    cmd.Parameters.AddWithValue("@end", showtime.end_time);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
         // ===================== MAPPING =====================
         private static Showtime ReadShowtime(SqliteDataReader rd)
