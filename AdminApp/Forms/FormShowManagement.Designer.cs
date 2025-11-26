@@ -63,7 +63,7 @@
             title = new DataGridViewTextBoxColumn();
             name = new DataGridViewTextBoxColumn();
             auditorium_type = new DataGridViewTextBoxColumn();
-            GiaVe = new DataGridViewTextBoxColumn();
+            per_seat_ticket_price = new DataGridViewTextBoxColumn();
             show_date = new DataGridViewTextBoxColumn();
             start_time = new DataGridViewTextBoxColumn();
             btnThem = new Guna.UI2.WinForms.Guna2Button();
@@ -139,9 +139,9 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dgvShowtime.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgvShowtime.ColumnHeadersHeight = 27;
+            dgvShowtime.ColumnHeadersHeight = 40;
             dgvShowtime.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgvShowtime.Columns.AddRange(new DataGridViewColumn[] { title, name, auditorium_type, GiaVe, show_date, start_time });
+            dgvShowtime.Columns.AddRange(new DataGridViewColumn[] { title, name, auditorium_type, per_seat_ticket_price, show_date, start_time });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -172,7 +172,7 @@
             dgvShowtime.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
             dgvShowtime.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             dgvShowtime.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgvShowtime.ThemeStyle.HeaderStyle.Height = 27;
+            dgvShowtime.ThemeStyle.HeaderStyle.Height = 40;
             dgvShowtime.ThemeStyle.ReadOnly = true;
             dgvShowtime.ThemeStyle.RowsStyle.BackColor = Color.White;
             dgvShowtime.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -185,7 +185,7 @@
             // title
             // 
             title.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            title.DataPropertyName = "TenPhim";
+            title.DataPropertyName = "title";
             title.Frozen = true;
             title.HeaderText = "Tên Phim";
             title.MinimumWidth = 6;
@@ -196,36 +196,37 @@
             // name
             // 
             name.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            name.DataPropertyName = "Phong ";
+            name.DataPropertyName = "name";
             name.FillWeight = 65.33226F;
             name.Frozen = true;
             name.HeaderText = "Phòng";
             name.MinimumWidth = 6;
             name.Name = "name";
             name.ReadOnly = true;
-            name.Width = 120;
+            name.Width = 200;
             // 
             // auditorium_type
             // 
-            auditorium_type.DataPropertyName = "LoaiPhong";
+            auditorium_type.DataPropertyName = "auditorium_type";
             auditorium_type.HeaderText = "Định Dạng";
             auditorium_type.MinimumWidth = 6;
             auditorium_type.Name = "auditorium_type";
             auditorium_type.ReadOnly = true;
-            auditorium_type.Width = 120;
+            auditorium_type.Width = 200;
             // 
-            // GiaVe
+            // per_seat_ticket_price
             // 
-            GiaVe.HeaderText = "Giá Vé";
-            GiaVe.MinimumWidth = 6;
-            GiaVe.Name = "GiaVe";
-            GiaVe.ReadOnly = true;
-            GiaVe.Width = 150;
+            per_seat_ticket_price.DataPropertyName = "per_seat_ticket_price";
+            per_seat_ticket_price.HeaderText = "Giá Vé";
+            per_seat_ticket_price.MinimumWidth = 6;
+            per_seat_ticket_price.Name = "per_seat_ticket_price";
+            per_seat_ticket_price.ReadOnly = true;
+            per_seat_ticket_price.Width = 200;
             // 
             // show_date
             // 
             show_date.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            show_date.DataPropertyName = "NgayChieu ";
+            show_date.DataPropertyName = "show_date";
             show_date.FillWeight = 65.33226F;
             show_date.HeaderText = "Ngày Chiếu";
             show_date.MinimumWidth = 6;
@@ -236,7 +237,7 @@
             // start_time
             // 
             start_time.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            start_time.DataPropertyName = "GioChieu ";
+            start_time.DataPropertyName = "start_time";
             start_time.FillWeight = 65.33226F;
             start_time.HeaderText = "Giờ Chiếu";
             start_time.MinimumWidth = 6;
@@ -541,7 +542,7 @@
         private DataGridViewTextBoxColumn title;
         private DataGridViewTextBoxColumn name;
         private DataGridViewTextBoxColumn auditorium_type;
-        private DataGridViewTextBoxColumn GiaVe;
+        private DataGridViewTextBoxColumn per_seat_ticket_price;
         private DataGridViewTextBoxColumn show_date;
         private DataGridViewTextBoxColumn start_time;
     }
