@@ -76,7 +76,7 @@
             txtSearch.HoverState.BorderColor = SystemColors.ActiveBorder;
             txtSearch.HoverState.ForeColor = Color.FromArgb(92, 124, 150);
             txtSearch.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtSearch.Location = new Point(81, 86);
+            txtSearch.Location = new Point(78, 81);
             txtSearch.Margin = new Padding(3, 5, 3, 5);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderForeColor = Color.FromArgb(92, 124, 150);
@@ -151,12 +151,12 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvMovies.DefaultCellStyle = dataGridViewCellStyle3;
             dgvMovies.GridColor = Color.WhiteSmoke;
-            dgvMovies.Location = new Point(76, 164);
+            dgvMovies.Location = new Point(45, 166);
             dgvMovies.Name = "dgvMovies";
             dgvMovies.ReadOnly = true;
             dgvMovies.RowHeadersVisible = false;
             dgvMovies.RowHeadersWidth = 51;
-            dgvMovies.Size = new Size(1269, 539);
+            dgvMovies.Size = new Size(1293, 539);
             dgvMovies.TabIndex = 30;
             dgvMovies.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgvMovies.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -289,6 +289,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            AutoScrollMinSize = new Size(800, 800);
             BackColor = Color.FromArgb(92, 124, 150);
             ClientSize = new Size(1402, 703);
             Controls.Add(guna2Button3);

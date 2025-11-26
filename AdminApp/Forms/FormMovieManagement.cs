@@ -70,6 +70,13 @@ namespace AdminApp
 
             BindDataToGrid(results);
         }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            var f = new FormAddShowTime();
+            f.Show();
+        }
+
     }
 }
 
