@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using ClosedXML.Excel;
 using System.IO;
+using System.Globalization;
+
 
 namespace AdminApp
 {
@@ -16,11 +18,33 @@ namespace AdminApp
         public FormCustomerManagement()
         {
             InitializeComponent();
-            DataGridViewCustomerManagement.Columns.Add("customer_id", "ID");
-            DataGridViewCustomerManagement.Columns["customer_id"].Visible = false;
-            DataGridViewCustomerManagement.AutoGenerateColumns = false;
-            LoadCustomers();
 
+            DataGridViewCustomerManagement.AutoGenerateColumns = false;
+            DataGridViewCustomerManagement.ReadOnly = true;
+            DataGridViewCustomerManagement.EditMode = DataGridViewEditMode.EditOnEnter;
+            DataGridViewCustomerManagement.AllowUserToAddRows = false;
+
+            // =============================
+            //  TẠO CỘT CUSTOMER_ID ẨN
+            // =============================
+            if (DataGridViewCustomerManagement.Columns["customer_id"] == null)
+            {
+                DataGridViewCustomerManagement.Columns.Add(new DataGridViewTextBoxColumn()
+                {
+                    DataPropertyName = "customer_id",
+                    Name = "customer_id",
+                    HeaderText = "ID",
+                    Visible = false
+                });
+            }
+
+            LoadCustomers();
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            LoadCustomers();
         }
 
         private void LoadCustomers()
@@ -34,9 +58,9 @@ namespace AdminApp
                 DataGridViewCustomerManagement.Columns["create_date"].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
 
-        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        private void btnTim_Click(object sender, EventArgs e)
         {
-
+            SearchCustomers();
         }
         private void SearchCustomers()
         {
@@ -57,10 +81,20 @@ namespace AdminApp
 
             DataGridViewCustomerManagement.DataSource = filtered;
         }
-
-        private void btnTim_Click(object sender, EventArgs e)
+        private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
         {
-            SearchCustomers();
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchCustomers();
+                e.SuppressKeyPress = true;
+            }
+        }
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTimKiem.Text))
+            {
+                DataGridViewCustomerManagement.DataSource = customerList;
+            }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
@@ -147,42 +181,84 @@ namespace AdminApp
 
         private void btnChinhSua_Click(object sender, EventArgs e)
         {
-            DataGridViewCustomerManagement.ReadOnly = false;
+            if (DataGridViewCustomerManagement.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn 1 khách hàng!");
+                return;
+            }
 
-            MessageBox.Show(
-                "Bạn đã bật chế độ chỉnh sửa.\n" +
-                "Giờ bạn có thể sửa nhiều dòng cùng lúc.\n" +
-                "Dữ liệu sẽ tự động lưu khi bạn rời ô hoặc nhấn Enter."
-            );
+            var row = DataGridViewCustomerManagement.SelectedRows[0];
+
+            Customer c = new Customer
+            {
+                customer_id = Convert.ToString(row.Cells["customer_id"].Value),
+                full_name = Convert.ToString(row.Cells["full_name"].Value),
+                gender = Convert.ToString(row.Cells["gender"].Value),
+                date_of_birth = Convert.ToString(row.Cells["date_of_birth"].Value),
+                phone_number = Convert.ToString(row.Cells["phone_number"].Value),
+                email = Convert.ToString(row.Cells["email"].Value),
+                address = Convert.ToString(row.Cells["address"].Value),
+                create_date = Convert.ToString(row.Cells["create_date"].Value)
+            };
+
+            using (FormEditCustomer f = new FormEditCustomer(c))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    LoadCustomers(); // reload sau khi sửa
+                }
+            }
         }
+
 
         private void DataGridViewCustomerManagement_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (DataGridViewCustomerManagement.Columns[e.ColumnIndex].Name == "customer_id")
+                return;
             try
             {
                 var row = DataGridViewCustomerManagement.Rows[e.RowIndex];
 
-                // Nếu ID null => không update được
                 if (row.Cells["customer_id"].Value == null)
                     return;
-                if (e.ColumnIndex == DataGridViewCustomerManagement.Columns["date_of_birth"].Index)
-                {
-                    if (DateTime.TryParse(row.Cells["date_of_birth"].Value?.ToString(), out DateTime d))
-                        row.Cells["date_of_birth"].Value = d.ToString("dd/MM/yyyy");
-                }
 
-                // ✔ Dòng bạn hỏi nằm ở đây
-                string id = row.Cells["customer_id"].Value.ToString();
-
+                string id = Convert.ToString(row.Cells["customer_id"].Value);
+                if (string.IsNullOrWhiteSpace(id))
+                    return;
                 string fullName = row.Cells["full_name"].Value?.ToString() ?? "";
                 string gender = row.Cells["gender"].Value?.ToString() ?? "";
-                string birth = row.Cells["date_of_birth"].Value?.ToString() ?? "";
                 string phone = row.Cells["phone_number"].Value?.ToString() ?? "";
                 string email = row.Cells["email"].Value?.ToString() ?? "";
                 string address = row.Cells["address"].Value?.ToString() ?? "";
-                string createDate = row.Cells["create_date"].Value?.ToString() ?? "";
 
-                bool ok = repo.UpdateCustomer(id, fullName, gender, birth, phone, email, address, createDate);
+                // ✅ XỬ LÝ DATE_OF_BIRTH
+                string birth = row.Cells["date_of_birth"].Value?.ToString() ?? "";
+                if (!TryNormalizeDate(birth, out string birthFormatted))
+                {
+                    MessageBox.Show("Ngày sinh không đúng định dạng dd/MM/yyyy");
+                    LoadCustomers();
+                    return;
+                }
+
+                // ✅ XỬ LÝ CREATE_DATE
+                string createDate = row.Cells["create_date"].Value?.ToString() ?? "";
+                if (!TryNormalizeDate(createDate, out string createDateFormatted))
+                {
+                    MessageBox.Show("Ngày tạo không đúng định dạng dd/MM/yyyy");
+                    LoadCustomers();
+                    return;
+                }
+
+                bool ok = repo.UpdateCustomer(
+                    id,
+                    fullName,
+                    gender,
+                    birthFormatted,
+                    phone,
+                    email,
+                    address,
+                    createDateFormatted
+                );
 
                 if (!ok)
                     MessageBox.Show("Cập nhật thất bại!");
@@ -192,6 +268,37 @@ namespace AdminApp
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
+        private bool TryNormalizeDate(string input, out string output)
+        {
+            output = "";
+
+            if (string.IsNullOrWhiteSpace(input))
+                return true;
+
+            string[] formats = new[] { "dd/MM/yyyy", "dd-MM-yyyy", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd" };
+
+            if (DateTime.TryParseExact(
+                input,
+                formats,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out DateTime d))
+            {
+                output = d.ToString("dd/MM/yyyy");
+                return true;
+            }
+
+            // fallback: try general parse
+            if (DateTime.TryParse(input, out d))
+            {
+                output = d.ToString("dd/MM/yyyy");
+                return true;
+            }
+
+            return false;
+        }
+
+
 
     }
 }

@@ -155,12 +155,12 @@ namespace UserApp
                 {
                     // CustomerId will be generated in repository
                     full_name = txtHoTen.Text.Trim(),
-                    date_of_birth = dtpNgaySinh.Value.ToString("dd-MM-yyyy"), // string format
+                    date_of_birth = dtpNgaySinh.Value.ToString("dd/MM/yyyy"),
                     gender = radNam.Checked ? "Nam" : "Nữ",
                     address = txtDiachi.Text.Trim(),
                     email = txtEmailDK.Text.Trim(),
                     phone_number = txtSDT.Text.Trim(),
-                    create_date = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") // string
+                    create_date = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")
                 };
 
                 // Build Account (use email as username if you don't have a username field)
