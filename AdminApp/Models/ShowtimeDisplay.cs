@@ -8,11 +8,12 @@ namespace AdminApp.Models
 {
     public class ShowtimeDisplay
     {
-        public string ShowtimeId { get; set; }
-        public string TenPhim { get; set; }
-        public string Phong { get; set; }
-        public string LoaiPhong { get; set; }
-        public string NgayChieu { get; set; }
-        public string GioChieu { get; set; } // format "HH:mm - HH:mm"
+        public string showtime_id { get; set; }
+        public string title { get; set; }
+        public string name { get; set; }
+        public string auditorium_type { get; set; }
+        public string per_seat_ticket_price { get; set; }
+        public string show_date { get; set; }
+        public string start_time { get; set; }
     }
 }
