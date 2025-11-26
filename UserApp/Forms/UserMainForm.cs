@@ -145,7 +145,7 @@ namespace UserApp
 
         private void btnLichChieu_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormShowtimeList());
+           // OpenChildForm(new FormShowtimeList());
         }
     }
 }
