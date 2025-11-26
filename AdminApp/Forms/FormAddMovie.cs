@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AdminApp
 {
-    public partial class AdminThemPhim : Form
+    public partial class FormAddMovie : Form
     {
-        public AdminThemPhim()
+        public FormAddMovie()
         {
             InitializeComponent();
         }

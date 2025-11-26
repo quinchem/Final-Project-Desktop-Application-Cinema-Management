@@ -73,7 +73,7 @@ namespace AdminApp
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            var f = new FormAddShowTime();
+            var f = new FormAddMovie();
             f.Show();
         }
 

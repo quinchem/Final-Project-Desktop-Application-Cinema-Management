@@ -124,6 +124,7 @@
             guna2Button1.Size = new Size(97, 37);
             guna2Button1.TabIndex = 29;
             guna2Button1.Text = "Thêm";
+            guna2Button1.Click += btnThem_Click;
             // 
             // dgvMovies
             // 
