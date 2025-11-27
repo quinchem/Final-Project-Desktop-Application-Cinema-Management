@@ -1,6 +1,7 @@
-﻿using AdminApp.Properties;
-using SharedData.Models;
-using SharedData.Repositories;
+﻿using AdminApp.Models;
+using AdminApp.Properties;
+using AdminApp.Repositories;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -74,6 +75,66 @@ namespace AdminApp
         private void btnThem_Click(object sender, EventArgs e)
         {
             var f = new FormAddMovie();
+            f.Show();
+        }
+
+
+        private void dgvMovies_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Bỏ qua header
+            if (e.RowIndex < 0) return;
+
+            // Lấy ID của dòng được click
+            string movie_id = dgvMovies.Rows[e.RowIndex].Cells["movie_id"].Value.ToString();
+
+            // 1) Click icon chỉnh sửa
+            if (dgvMovies.Columns[e.ColumnIndex].Name == "colEdit")
+            {
+                FormEditMovie f = new FormEditMovie(movie_id);
+                f.ShowDialog();
+                LoadFilmData();   // Reload lại bảng sau khi sửa
+                return;
+            }
+
+            // 2) Click icon xóa
+            if (dgvMovies.Columns[e.ColumnIndex].Name == "colDelete")
+            {
+                DialogResult result = MessageBox.Show(
+                    "Bạn có chắc muốn xóa phim này?",
+                    "Xác nhận",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (result == DialogResult.Yes)
+                {
+                    DeleteMovie(movie_id);
+                    LoadFilmData();
+                }
+                return;
+            }
+        }
+        private void DeleteMovie(string id)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                string sql = "DELETE FROM movie WHERE movie_id = @id";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        private void dgvMovie_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            string movieId = dgvMovies.Rows[e.RowIndex].Cells["movie_id"].Value.ToString();
+
+            var f = new FormViewDetailMovie(movieId);
             f.Show();
         }
 
