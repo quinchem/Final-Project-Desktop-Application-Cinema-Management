@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,26 +17,26 @@ namespace AdminApp
 {
     public partial class FormAddMovie : Form
     {
-    
 
-    public FormAddMovie()
+        private FilmRepo _filmRepo = new FilmRepo();
+        public FormAddMovie()
         {
             InitializeComponent(); // Khởi tạo các control trên form
             LoadComboBoxData(); // Load dữ liệu vào các ComboBox
         }
 
-    private void LoadComboBoxData()
+        private void LoadComboBoxData()
         {
             try
             {
                 // 3.2: Load độ tuổi (dữ liệu cố định, không cần lấy từ DB)
                 // ------------------------------------
                 // P: Phổ thông, K: Trẻ em, T13: Trên 13 tuổi, T16: Trên 16, T18: Trên 18
-                cboDoTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18"});
+                cboDoTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18" });
 
                 // 3.3: Load trạng thái (dữ liệu cố định)
                 // ------------------------------------
-                cboTrangThai.Items.AddRange(new object[] { "Đang chiếu", "Sắp chiếu"});
+                cboTrangThai.Items.AddRange(new object[] { "Đang chiếu", "Sắp chiếu" });
                 cboTrangThai.SelectedIndex = 0; // Mặc định chọn item đầu tiên
             }
             catch (Exception ex)
@@ -46,9 +47,26 @@ namespace AdminApp
             }
         }
 
-   
 
 
+        public string GenerateNextMovieId()
+        {
+            var movies = _filmRepo.GetAllFilms();
+            int nextNumber = 1;
+
+            if (movies.Count > 0)
+            {
+                // Lấy movie_id lớn nhất hiện tại
+                var lastId = movies.OrderByDescending(m => m.movie_id).First().movie_id; // M001, M002…
+                int lastNum = int.Parse(lastId.Substring(1)); // cắt chữ M ra
+                nextNumber = lastNum + 1;
+            }
+
+            return "M" + nextNumber.ToString("D3"); // M001, M002, …
+        }
+        public event EventHandler FilmAdded;
+
+    
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
@@ -59,7 +77,8 @@ namespace AdminApp
 
 
                 // 3. Lấy dữ liệu từ form
-                string movieId = Guid.NewGuid().ToString();
+                string movieId = GenerateNextMovieId();
+
                 string title = txtTenPhim.Text;
                 string genre = txtTheLoai.Text;
                 string language = txtNgonNgu.Text;
@@ -70,7 +89,8 @@ namespace AdminApp
                 int film_purchase_price = int.Parse(txtGiaNhap.Text);
                 int duration = int.Parse(txtThoiLuong.Text);
                 string age = cboDoTuoi.Text;
-                string releaseDate = dtNgayChieu.Value.ToString("dd/MM/yyyy"); 
+                string releaseDate = dtNgayChieu.Value.ToString("dd/MM/yyyy");
+
 
                 // 4. Lưu vào SQLite
                 using (var conn = DatabaseHelper.GetConnection())
@@ -105,7 +125,7 @@ VALUES
 
                 MessageBox.Show("Thêm phim thành công!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                FilmAdded?.Invoke(this, EventArgs.Empty); // Báo cho FormMovieManagement
                 ClearForm();
             }
             catch (Exception ex)
@@ -231,7 +251,7 @@ VALUES
                 MessageBox.Show("Vui lòng nhập thời lượng!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtThoiLuong.Focus();
-                    return false;
+                return false;
             }
             return true;
         }
@@ -258,6 +278,8 @@ VALUES
             dtNgayChieu.Value = DateTime.Now;
 
         }
+
+
 
         // PHẦN 9: VALIDATE INPUT TRONG TEXTBOX
         // =====================================================
@@ -287,6 +309,11 @@ VALUES
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 
-    }
+}
