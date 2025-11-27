@@ -1,6 +1,6 @@
 ﻿using AdminApp.Forms;
-using AdminApp.Models;
-using AdminApp.Repositories;
+using SharedData.Models;
+using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,8 +57,6 @@ namespace AdminApp
                 var room = _audRepo.GetById(s.auditorium_id);
                 var type = room != null ? _audTypeRepo.GetById(room.auditorium_type_id) : null;
                 double price = 0;
-                // ⭐ Lấy giá vé theo phòng chiếu
-                //double price = _seatRepo.GetTicketPriceByAuditorium(s.auditorium_id);
 
                 price = _seatRepo.GetTicketPriceByAuditoriumType(room.auditorium_type_id);
 

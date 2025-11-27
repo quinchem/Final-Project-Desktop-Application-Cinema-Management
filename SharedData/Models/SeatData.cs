@@ -1,4 +1,4 @@
-﻿namespace SharedData
+﻿namespace SharedData.Models
 {
         public class SeatData
         {

@@ -1,5 +1,4 @@
-﻿using AdminApp.Models;
-using AdminApp.Properties;
+﻿using AdminApp.Properties;
 using AdminApp.Repositories;
 using Microsoft.Data.Sqlite;
 using System;
