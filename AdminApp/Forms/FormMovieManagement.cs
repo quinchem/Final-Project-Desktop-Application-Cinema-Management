@@ -1,5 +1,6 @@
-﻿using AdminApp.Properties;
-using AdminApp.Repositories;
+﻿using SharedData.Models;
+using AdminApp.Properties;
+using SharedData.Repositories;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
