@@ -255,10 +255,10 @@
             guna2Button4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button4.ForeColor = Color.White;
             guna2Button4.Image = Properties.Resources.TinTuc;
-            guna2Button4.Location = new Point(687, 41);
+            guna2Button4.Location = new Point(689, 40);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button4.Size = new Size(122, 51);
+            guna2Button4.Size = new Size(120, 45);
             guna2Button4.TabIndex = 31;
             guna2Button4.Text = "TIN TỨC";
             // 
@@ -285,10 +285,10 @@
             guna2Button3.ForeColor = Color.White;
             guna2Button3.Image = Properties.Resources.KhuyenMai;
             guna2Button3.ImageSize = new Size(25, 25);
-            guna2Button3.Location = new Point(500, 41);
+            guna2Button3.Location = new Point(487, 40);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button3.Size = new Size(162, 51);
+            guna2Button3.Size = new Size(160, 45);
             guna2Button3.TabIndex = 30;
             guna2Button3.Text = "KHUYẾN MÃI";
             // 
@@ -317,11 +317,11 @@
             guna2Button2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button2.ForeColor = Color.White;
             guna2Button2.Image = Properties.Resources.phim;
-            guna2Button2.Location = new Point(569, 62);
+            guna2Button2.Location = new Point(353, 40);
             guna2Button2.Margin = new Padding(4);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2Button2.Size = new Size(98, 51);
+            guna2Button2.Size = new Size(100, 45);
             guna2Button2.TabIndex = 29;
             guna2Button2.Text = "PHIM";
             // 
@@ -350,10 +350,10 @@
             btnLichChieu.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLichChieu.ForeColor = Color.White;
             btnLichChieu.Image = Properties.Resources.shooting_schedule;
-            btnLichChieu.Location = new Point(334, 63);
+            btnLichChieu.Location = new Point(175, 40);
             btnLichChieu.Name = "btnLichChieu";
             btnLichChieu.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            btnLichChieu.Size = new Size(214, 76);
+            btnLichChieu.Size = new Size(144, 45);
             btnLichChieu.TabIndex = 28;
             btnLichChieu.Text = "LỊCH CHIẾU";
             btnLichChieu.Click += btnLichChieu_Click;

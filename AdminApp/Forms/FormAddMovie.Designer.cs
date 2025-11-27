@@ -1,6 +1,6 @@
 ﻿namespace AdminApp
 {
-    partial class AdminThemPhim
+    partial class FormAddMovie
     {
         /// <summary>
         /// Required designer variable.
@@ -70,19 +70,19 @@
             LbMoTa = new Guna.UI2.WinForms.Guna2HtmlLabel();
             LbPoster = new Guna.UI2.WinForms.Guna2HtmlLabel();
             LbTrangThai = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            txtTheLoaiPhim = new Guna.UI2.WinForms.Guna2TextBox();
+            txtTheLoai = new Guna.UI2.WinForms.Guna2TextBox();
             txtDienVien = new Guna.UI2.WinForms.Guna2TextBox();
             txtThoiLuong = new Guna.UI2.WinForms.Guna2TextBox();
-            txtGiaNhapPhim = new Guna.UI2.WinForms.Guna2TextBox();
+            txtGiaNhap = new Guna.UI2.WinForms.Guna2TextBox();
             txtNgonNgu = new Guna.UI2.WinForms.Guna2TextBox();
-            dtpNgayChieu = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            CbDoTuoi = new Guna.UI2.WinForms.Guna2ComboBox();
-            CbTrangThai = new Guna.UI2.WinForms.Guna2ComboBox();
-            pBPoster = new PictureBox();
+            dtNgayChieu = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            cboDoTuoi = new Guna.UI2.WinForms.Guna2ComboBox();
+            cboTrangThai = new Guna.UI2.WinForms.Guna2ComboBox();
+            picPoster = new PictureBox();
             btnUpPoster = new Guna.UI2.WinForms.Guna2Button();
             btnThemPhim = new Guna.UI2.WinForms.Guna2Button();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            ((System.ComponentModel.ISupportInitialize)pBPoster).BeginInit();
+            txtMoTa = new Guna.UI2.WinForms.Guna2TextBox();
+            ((System.ComponentModel.ISupportInitialize)picPoster).BeginInit();
             SuspendLayout();
             // 
             // txtTenPhim
@@ -298,34 +298,34 @@
             LbTrangThai.TabIndex = 16;
             LbTrangThai.Text = "Trạng thái";
             // 
-            // txtTheLoaiPhim
+            // txtTheLoai
             // 
-            txtTheLoaiPhim.BorderColor = SystemColors.ControlLight;
-            txtTheLoaiPhim.CustomizableEdges = customizableEdges5;
-            txtTheLoaiPhim.DefaultText = "";
-            txtTheLoaiPhim.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtTheLoaiPhim.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtTheLoaiPhim.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtTheLoaiPhim.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtTheLoaiPhim.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
-            txtTheLoaiPhim.FocusedState.FillColor = Color.White;
-            txtTheLoaiPhim.FocusedState.ForeColor = Color.Black;
-            txtTheLoaiPhim.FocusedState.PlaceholderForeColor = Color.Transparent;
-            txtTheLoaiPhim.Font = new Font("Segoe UI", 9F);
-            txtTheLoaiPhim.ForeColor = Color.Black;
-            txtTheLoaiPhim.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtTheLoaiPhim.HoverState.ForeColor = Color.White;
-            txtTheLoaiPhim.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtTheLoaiPhim.Location = new Point(353, 100);
-            txtTheLoaiPhim.Margin = new Padding(3, 4, 3, 4);
-            txtTheLoaiPhim.Name = "txtTheLoaiPhim";
-            txtTheLoaiPhim.PlaceholderForeColor = SystemColors.AppWorkspace;
-            txtTheLoaiPhim.PlaceholderText = "Nhập thể loại phim";
-            txtTheLoaiPhim.SelectedText = "";
-            txtTheLoaiPhim.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            txtTheLoaiPhim.Size = new Size(286, 33);
-            txtTheLoaiPhim.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
-            txtTheLoaiPhim.TabIndex = 17;
+            txtTheLoai.BorderColor = SystemColors.ControlLight;
+            txtTheLoai.CustomizableEdges = customizableEdges5;
+            txtTheLoai.DefaultText = "";
+            txtTheLoai.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtTheLoai.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtTheLoai.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtTheLoai.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtTheLoai.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
+            txtTheLoai.FocusedState.FillColor = Color.White;
+            txtTheLoai.FocusedState.ForeColor = Color.Black;
+            txtTheLoai.FocusedState.PlaceholderForeColor = Color.Transparent;
+            txtTheLoai.Font = new Font("Segoe UI", 9F);
+            txtTheLoai.ForeColor = Color.Black;
+            txtTheLoai.HoverState.BorderColor = SystemColors.AppWorkspace;
+            txtTheLoai.HoverState.ForeColor = Color.White;
+            txtTheLoai.HoverState.PlaceholderForeColor = Color.Transparent;
+            txtTheLoai.Location = new Point(353, 100);
+            txtTheLoai.Margin = new Padding(3, 4, 3, 4);
+            txtTheLoai.Name = "txtTheLoai";
+            txtTheLoai.PlaceholderForeColor = SystemColors.AppWorkspace;
+            txtTheLoai.PlaceholderText = "Nhập thể loại phim";
+            txtTheLoai.SelectedText = "";
+            txtTheLoai.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtTheLoai.Size = new Size(286, 33);
+            txtTheLoai.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            txtTheLoai.TabIndex = 17;
             // 
             // txtDienVien
             // 
@@ -385,34 +385,34 @@
             txtThoiLuong.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtThoiLuong.TabIndex = 19;
             // 
-            // txtGiaNhapPhim
+            // txtGiaNhap
             // 
-            txtGiaNhapPhim.BorderColor = SystemColors.ControlLight;
-            txtGiaNhapPhim.CustomizableEdges = customizableEdges11;
-            txtGiaNhapPhim.DefaultText = "";
-            txtGiaNhapPhim.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtGiaNhapPhim.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtGiaNhapPhim.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtGiaNhapPhim.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtGiaNhapPhim.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
-            txtGiaNhapPhim.FocusedState.FillColor = Color.White;
-            txtGiaNhapPhim.FocusedState.ForeColor = Color.Black;
-            txtGiaNhapPhim.FocusedState.PlaceholderForeColor = Color.Transparent;
-            txtGiaNhapPhim.Font = new Font("Segoe UI", 9F);
-            txtGiaNhapPhim.ForeColor = Color.Black;
-            txtGiaNhapPhim.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtGiaNhapPhim.HoverState.ForeColor = Color.White;
-            txtGiaNhapPhim.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtGiaNhapPhim.Location = new Point(676, 100);
-            txtGiaNhapPhim.Margin = new Padding(3, 4, 3, 4);
-            txtGiaNhapPhim.Name = "txtGiaNhapPhim";
-            txtGiaNhapPhim.PlaceholderForeColor = SystemColors.AppWorkspace;
-            txtGiaNhapPhim.PlaceholderText = "Nhập giá nhập phim";
-            txtGiaNhapPhim.SelectedText = "";
-            txtGiaNhapPhim.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            txtGiaNhapPhim.Size = new Size(286, 33);
-            txtGiaNhapPhim.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
-            txtGiaNhapPhim.TabIndex = 20;
+            txtGiaNhap.BorderColor = SystemColors.ControlLight;
+            txtGiaNhap.CustomizableEdges = customizableEdges11;
+            txtGiaNhap.DefaultText = "";
+            txtGiaNhap.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtGiaNhap.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtGiaNhap.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtGiaNhap.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtGiaNhap.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
+            txtGiaNhap.FocusedState.FillColor = Color.White;
+            txtGiaNhap.FocusedState.ForeColor = Color.Black;
+            txtGiaNhap.FocusedState.PlaceholderForeColor = Color.Transparent;
+            txtGiaNhap.Font = new Font("Segoe UI", 9F);
+            txtGiaNhap.ForeColor = Color.Black;
+            txtGiaNhap.HoverState.BorderColor = SystemColors.AppWorkspace;
+            txtGiaNhap.HoverState.ForeColor = Color.White;
+            txtGiaNhap.HoverState.PlaceholderForeColor = Color.Transparent;
+            txtGiaNhap.Location = new Point(676, 100);
+            txtGiaNhap.Margin = new Padding(3, 4, 3, 4);
+            txtGiaNhap.Name = "txtGiaNhap";
+            txtGiaNhap.PlaceholderForeColor = SystemColors.AppWorkspace;
+            txtGiaNhap.PlaceholderText = "Nhập giá nhập phim";
+            txtGiaNhap.SelectedText = "";
+            txtGiaNhap.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            txtGiaNhap.Size = new Size(286, 33);
+            txtGiaNhap.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            txtGiaNhap.TabIndex = 20;
             // 
             // txtNgonNgu
             // 
@@ -443,73 +443,73 @@
             txtNgonNgu.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtNgonNgu.TabIndex = 21;
             // 
-            // dtpNgayChieu
+            // dtNgayChieu
             // 
-            dtpNgayChieu.BackColor = Color.Transparent;
-            dtpNgayChieu.BorderColor = Color.White;
-            dtpNgayChieu.BorderRadius = 5;
-            dtpNgayChieu.Checked = true;
-            dtpNgayChieu.CheckedState.ForeColor = Color.Black;
-            dtpNgayChieu.CustomizableEdges = customizableEdges15;
-            dtpNgayChieu.FillColor = SystemColors.GradientInactiveCaption;
-            dtpNgayChieu.Font = new Font("Segoe UI", 9F);
-            dtpNgayChieu.ForeColor = Color.LightGray;
-            dtpNgayChieu.Format = DateTimePickerFormat.Long;
-            dtpNgayChieu.HoverState.BorderColor = Color.Gray;
-            dtpNgayChieu.Location = new Point(12, 190);
-            dtpNgayChieu.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            dtpNgayChieu.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            dtpNgayChieu.Name = "dtpNgayChieu";
-            dtpNgayChieu.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            dtpNgayChieu.Size = new Size(290, 45);
-            dtpNgayChieu.TabIndex = 22;
-            dtpNgayChieu.Value = new DateTime(2025, 11, 17, 2, 53, 35, 363);
+            dtNgayChieu.BackColor = Color.Transparent;
+            dtNgayChieu.BorderColor = Color.White;
+            dtNgayChieu.BorderRadius = 5;
+            dtNgayChieu.Checked = true;
+            dtNgayChieu.CheckedState.ForeColor = Color.Black;
+            dtNgayChieu.CustomizableEdges = customizableEdges15;
+            dtNgayChieu.FillColor = SystemColors.GradientInactiveCaption;
+            dtNgayChieu.Font = new Font("Segoe UI", 9F);
+            dtNgayChieu.ForeColor = Color.LightGray;
+            dtNgayChieu.Format = DateTimePickerFormat.Long;
+            dtNgayChieu.HoverState.BorderColor = Color.Gray;
+            dtNgayChieu.Location = new Point(12, 190);
+            dtNgayChieu.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            dtNgayChieu.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            dtNgayChieu.Name = "dtNgayChieu";
+            dtNgayChieu.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            dtNgayChieu.Size = new Size(290, 45);
+            dtNgayChieu.TabIndex = 22;
+            dtNgayChieu.Value = new DateTime(2025, 11, 17, 2, 53, 35, 363);
             // 
-            // CbDoTuoi
+            // cboDoTuoi
             // 
-            CbDoTuoi.BackColor = Color.Transparent;
-            CbDoTuoi.CustomizableEdges = customizableEdges17;
-            CbDoTuoi.DrawMode = DrawMode.OwnerDrawFixed;
-            CbDoTuoi.DropDownStyle = ComboBoxStyle.DropDownList;
-            CbDoTuoi.FocusedColor = Color.FromArgb(255, 192, 128);
-            CbDoTuoi.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
-            CbDoTuoi.Font = new Font("Segoe UI", 10F);
-            CbDoTuoi.ForeColor = Color.Gray;
-            CbDoTuoi.HoverState.BorderColor = Color.Silver;
-            CbDoTuoi.HoverState.FillColor = Color.FromArgb(224, 224, 224);
-            CbDoTuoi.ItemHeight = 30;
-            CbDoTuoi.Location = new Point(676, 188);
-            CbDoTuoi.Name = "CbDoTuoi";
-            CbDoTuoi.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            CbDoTuoi.Size = new Size(145, 36);
-            CbDoTuoi.TabIndex = 23;
+            cboDoTuoi.BackColor = Color.Transparent;
+            cboDoTuoi.CustomizableEdges = customizableEdges17;
+            cboDoTuoi.DrawMode = DrawMode.OwnerDrawFixed;
+            cboDoTuoi.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboDoTuoi.FocusedColor = Color.FromArgb(255, 192, 128);
+            cboDoTuoi.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
+            cboDoTuoi.Font = new Font("Segoe UI", 10F);
+            cboDoTuoi.ForeColor = Color.Gray;
+            cboDoTuoi.HoverState.BorderColor = Color.Silver;
+            cboDoTuoi.HoverState.FillColor = Color.FromArgb(224, 224, 224);
+            cboDoTuoi.ItemHeight = 30;
+            cboDoTuoi.Location = new Point(676, 188);
+            cboDoTuoi.Name = "cboDoTuoi";
+            cboDoTuoi.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            cboDoTuoi.Size = new Size(145, 36);
+            cboDoTuoi.TabIndex = 23;
             // 
-            // CbTrangThai
+            // cboTrangThai
             // 
-            CbTrangThai.BackColor = Color.Transparent;
-            CbTrangThai.CustomizableEdges = customizableEdges19;
-            CbTrangThai.DrawMode = DrawMode.OwnerDrawFixed;
-            CbTrangThai.DropDownStyle = ComboBoxStyle.DropDownList;
-            CbTrangThai.FocusedColor = Color.FromArgb(255, 192, 128);
-            CbTrangThai.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
-            CbTrangThai.Font = new Font("Segoe UI", 10F);
-            CbTrangThai.ForeColor = Color.Gray;
-            CbTrangThai.HoverState.BorderColor = Color.Silver;
-            CbTrangThai.HoverState.FillColor = Color.FromArgb(224, 224, 224);
-            CbTrangThai.ItemHeight = 30;
-            CbTrangThai.Location = new Point(676, 379);
-            CbTrangThai.Name = "CbTrangThai";
-            CbTrangThai.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            CbTrangThai.Size = new Size(286, 36);
-            CbTrangThai.TabIndex = 24;
+            cboTrangThai.BackColor = Color.Transparent;
+            cboTrangThai.CustomizableEdges = customizableEdges19;
+            cboTrangThai.DrawMode = DrawMode.OwnerDrawFixed;
+            cboTrangThai.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTrangThai.FocusedColor = Color.FromArgb(255, 192, 128);
+            cboTrangThai.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
+            cboTrangThai.Font = new Font("Segoe UI", 10F);
+            cboTrangThai.ForeColor = Color.Gray;
+            cboTrangThai.HoverState.BorderColor = Color.Silver;
+            cboTrangThai.HoverState.FillColor = Color.FromArgb(224, 224, 224);
+            cboTrangThai.ItemHeight = 30;
+            cboTrangThai.Location = new Point(676, 379);
+            cboTrangThai.Name = "cboTrangThai";
+            cboTrangThai.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            cboTrangThai.Size = new Size(286, 36);
+            cboTrangThai.TabIndex = 24;
             // 
-            // pBPoster
+            // picPoster
             // 
-            pBPoster.Location = new Point(354, 384);
-            pBPoster.Name = "pBPoster";
-            pBPoster.Size = new Size(135, 200);
-            pBPoster.TabIndex = 25;
-            pBPoster.TabStop = false;
+            picPoster.Location = new Point(354, 384);
+            picPoster.Name = "picPoster";
+            picPoster.Size = new Size(135, 200);
+            picPoster.TabIndex = 25;
+            picPoster.TabStop = false;
             // 
             // btnUpPoster
             // 
@@ -546,53 +546,54 @@
             btnThemPhim.Size = new Size(88, 37);
             btnThemPhim.TabIndex = 27;
             btnThemPhim.Text = "Thêm";
+            btnThemPhim.Click += btnThem_Click;
             // 
-            // guna2TextBox1
+            // txtMoTa
             // 
-            guna2TextBox1.BorderThickness = 2;
-            guna2TextBox1.CustomizableEdges = customizableEdges25;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
-            guna2TextBox1.FocusedState.FillColor = Color.White;
-            guna2TextBox1.FocusedState.ForeColor = Color.Black;
-            guna2TextBox1.FocusedState.PlaceholderForeColor = Color.Transparent;
-            guna2TextBox1.Font = new Font("Segoe UI", 9F);
-            guna2TextBox1.HoverState.BorderColor = SystemColors.AppWorkspace;
-            guna2TextBox1.HoverState.FillColor = Color.Transparent;
-            guna2TextBox1.HoverState.ForeColor = Color.White;
-            guna2TextBox1.Location = new Point(16, 384);
-            guna2TextBox1.Margin = new Padding(3, 4, 3, 4);
-            guna2TextBox1.Multiline = true;
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderForeColor = SystemColors.AppWorkspace;
-            guna2TextBox1.PlaceholderText = "Giới thiệu phim";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2TextBox1.Size = new Size(286, 200);
-            guna2TextBox1.TabIndex = 28;
+            txtMoTa.BorderThickness = 2;
+            txtMoTa.CustomizableEdges = customizableEdges25;
+            txtMoTa.DefaultText = "";
+            txtMoTa.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtMoTa.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtMoTa.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtMoTa.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtMoTa.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
+            txtMoTa.FocusedState.FillColor = Color.White;
+            txtMoTa.FocusedState.ForeColor = Color.Black;
+            txtMoTa.FocusedState.PlaceholderForeColor = Color.Transparent;
+            txtMoTa.Font = new Font("Segoe UI", 9F);
+            txtMoTa.HoverState.BorderColor = SystemColors.AppWorkspace;
+            txtMoTa.HoverState.FillColor = Color.Transparent;
+            txtMoTa.HoverState.ForeColor = Color.White;
+            txtMoTa.Location = new Point(16, 384);
+            txtMoTa.Margin = new Padding(3, 4, 3, 4);
+            txtMoTa.Multiline = true;
+            txtMoTa.Name = "txtMoTa";
+            txtMoTa.PlaceholderForeColor = SystemColors.AppWorkspace;
+            txtMoTa.PlaceholderText = "Giới thiệu phim";
+            txtMoTa.SelectedText = "";
+            txtMoTa.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            txtMoTa.Size = new Size(286, 200);
+            txtMoTa.TabIndex = 28;
             // 
-            // AdminThemPhim
+            // FormAddMovie
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1028, 601);
-            Controls.Add(guna2TextBox1);
+            Controls.Add(txtMoTa);
             Controls.Add(btnThemPhim);
             Controls.Add(btnUpPoster);
-            Controls.Add(pBPoster);
-            Controls.Add(CbTrangThai);
-            Controls.Add(CbDoTuoi);
-            Controls.Add(dtpNgayChieu);
+            Controls.Add(picPoster);
+            Controls.Add(cboTrangThai);
+            Controls.Add(cboDoTuoi);
+            Controls.Add(dtNgayChieu);
             Controls.Add(txtNgonNgu);
-            Controls.Add(txtGiaNhapPhim);
+            Controls.Add(txtGiaNhap);
             Controls.Add(txtThoiLuong);
             Controls.Add(txtDienVien);
-            Controls.Add(txtTheLoaiPhim);
+            Controls.Add(txtTheLoai);
             Controls.Add(LbTrangThai);
             Controls.Add(LbPoster);
             Controls.Add(LbMoTa);
@@ -609,10 +610,10 @@
             Controls.Add(LbTenPhim);
             Controls.Add(txtTenPhim);
             Controls.Add(guna2ShadowPanel1);
-            Name = "AdminThemPhim";
+            Name = "FormAddMovie";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminThemPhim";
-            ((System.ComponentModel.ISupportInitialize)pBPoster).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picPoster).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -635,17 +636,17 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel LbMoTa;
         private Guna.UI2.WinForms.Guna2HtmlLabel LbPoster;
         private Guna.UI2.WinForms.Guna2HtmlLabel LbTrangThai;
-        private Guna.UI2.WinForms.Guna2TextBox txtTheLoaiPhim;
+        private Guna.UI2.WinForms.Guna2TextBox txtTheLoai;
         private Guna.UI2.WinForms.Guna2TextBox txtDienVien;
         private Guna.UI2.WinForms.Guna2TextBox txtThoiLuong;
-        private Guna.UI2.WinForms.Guna2TextBox txtGiaNhapPhim;
+        private Guna.UI2.WinForms.Guna2TextBox txtGiaNhap;
         private Guna.UI2.WinForms.Guna2TextBox txtNgonNgu;
-        private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayChieu;
-        private Guna.UI2.WinForms.Guna2ComboBox CbDoTuoi;
-        private Guna.UI2.WinForms.Guna2ComboBox CbTrangThai;
-        private PictureBox pBPoster;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtNgayChieu;
+        private Guna.UI2.WinForms.Guna2ComboBox cboDoTuoi;
+        private Guna.UI2.WinForms.Guna2ComboBox cboTrangThai;
+        private PictureBox picPoster;
         private Guna.UI2.WinForms.Guna2Button btnUpPoster;
         private Guna.UI2.WinForms.Guna2Button btnThemPhim;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2TextBox txtMoTa;
     }
 }
