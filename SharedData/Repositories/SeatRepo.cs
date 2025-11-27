@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 
-namespace AdminApp.Repositories
+namespace SharedData.Repositories
 {
     public class SeatRepo
     {

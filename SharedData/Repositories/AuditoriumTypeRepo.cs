@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
-using AdminApp.Models;
+using SharedData.Models;
 
-namespace AdminApp.Repositories
+namespace SharedData.Repositories
 {
     public class AuditoriumTypeRepo
     {

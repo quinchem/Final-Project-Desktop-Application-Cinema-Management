@@ -11,9 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using Newtonsoft.Json;                 
+using Newtonsoft.Json;
 using Guna.UI2.WinForms;
-using SharedData;
+using SharedData.Models;
 
 namespace AdminApp
 {

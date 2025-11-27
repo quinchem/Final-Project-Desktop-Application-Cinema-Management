@@ -1,8 +1,8 @@
-﻿using AdminApp.Models;
-using AdminApp.Repositories;
+﻿using SharedData.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using SharedData.Repositories;
 
 namespace AdminApp
 {

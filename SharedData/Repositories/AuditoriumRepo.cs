@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
-using AdminApp.Models;
+using SharedData.Models;
 
-namespace AdminApp.Repositories
+namespace SharedData.Repositories
 {
     public class AuditoriumRepo
     {
