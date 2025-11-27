@@ -1,7 +1,10 @@
 ﻿using AdminApp.Models;
 using AdminApp.Repositories;
+using SharedData.Repositories;
 using System;
 using System.Windows.Forms;
+using System.IO;
+using System.Drawing;
 
 namespace AdminApp
 {
@@ -10,6 +13,7 @@ namespace AdminApp
         private readonly string _staff_id;
         private readonly StaffRepo _staffRepo = new StaffRepo();
         private bool _isEditing = false;
+        private readonly ImageRepo _imageRepo = new ImageRepo();
 
         public FormAccountManagement(string staff_id)
         {
@@ -37,7 +41,22 @@ namespace AdminApp
             txtEmail.Text = staff.email;
             txtSDT.Text = staff.phone_number;
             txtChucVu.Text = staff.role;
+
+            // ✅ LOAD AVATAR
+            byte[] img = _imageRepo.GetStaffImage(_staff_id);
+            if (img != null)
+            {
+                using (MemoryStream ms = new MemoryStream(img))
+                {
+                    picAvatar.Image = Image.FromStream(ms);
+                }
+            }
+            else
+            {
+                picAvatar.Image = null; // hoặc ảnh mặc định
+            }
         }
+
 
         private void SetReadOnly(bool value)
         {
@@ -90,3 +109,5 @@ namespace AdminApp
         }
     }
 }
+
+

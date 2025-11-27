@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using SharedData.Repositories;
 
 namespace AdminApp
 {
@@ -16,6 +18,8 @@ namespace AdminApp
     {
         private readonly string _staff_id;
         private readonly StaffRepo _staffRepo = new StaffRepo();
+        private byte[] _selectedImageBytes;
+        private ImageRepo _imageRepo = new ImageRepo();
 
         public FormEditAccount(string staff_id)
         {
@@ -42,6 +46,14 @@ namespace AdminApp
             txtChucVu.Text = staff.role;
 
             txtChucVu.ReadOnly = true; // không cho sửa chức vụ
+            byte[] img = _imageRepo.GetStaffImage(_staff_id);
+            if (img != null)
+            {
+                using (MemoryStream ms = new MemoryStream(img))
+                {
+                    picAvatar.Image = Image.FromStream(ms);
+                }
+            }
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
@@ -52,7 +64,6 @@ namespace AdminApp
                 return;
             }
 
-            // ✅ kiểm tra mật khẩu nếu có nhập
             if (!string.IsNullOrWhiteSpace(txtMKmoi.Text) ||
                 !string.IsNullOrWhiteSpace(txtNhapLaiMK.Text))
             {
@@ -61,8 +72,6 @@ namespace AdminApp
                     MessageBox.Show("Mật khẩu nhập lại không khớp");
                     return;
                 }
-
-                // TODO: verify mật khẩu cũ nếu có bảng Account
             }
 
             Staff staff = new Staff
@@ -78,8 +87,14 @@ namespace AdminApp
 
             if (_staffRepo.UpdateStaff(staff))
             {
+                // ✅ Lưu ảnh nếu có chọn
+                if (_selectedImageBytes != null)
+                {
+                    _imageRepo.SaveStaffImage(_staff_id, _selectedImageBytes);
+                }
+
                 MessageBox.Show("Cập nhật thành công");
-                DialogResult = DialogResult.OK; // ✅ báo cho form cha
+                DialogResult = DialogResult.OK;
                 Close();
             }
             else
@@ -87,5 +102,26 @@ namespace AdminApp
                 MessageBox.Show("Cập nhật thất bại");
             }
         }
+
+
+        private void btnTaiAnh_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Chọn ảnh";
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    _selectedImageBytes = File.ReadAllBytes(ofd.FileName);
+
+                    using (MemoryStream ms = new MemoryStream(_selectedImageBytes))
+                    {
+                        picAvatar.Image = Image.FromStream(ms);
+                    }
+                }
+            }
+        }
     }
 }
+
