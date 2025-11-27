@@ -36,8 +36,9 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             lblThanhToan = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -62,11 +63,11 @@
             lblPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblNDThanhtoan = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            lblBackDV = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            lblTime = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             guna2CustomGradientPanel2.SuspendLayout();
@@ -364,12 +365,12 @@
             guna2CustomGradientPanel2.BackColor = Color.Transparent;
             guna2CustomGradientPanel2.BorderColor = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel2.BorderRadius = 15;
-            guna2CustomGradientPanel2.Controls.Add(lblBackDV);
-            guna2CustomGradientPanel2.Controls.Add(guna2CircleButton2);
+            guna2CustomGradientPanel2.Controls.Add(lblTime);
+            guna2CustomGradientPanel2.Controls.Add(guna2Button2);
             guna2CustomGradientPanel2.Controls.Add(guna2HtmlLabel2);
             guna2CustomGradientPanel2.Controls.Add(guna2HtmlLabel1);
             guna2CustomGradientPanel2.Controls.Add(guna2CircleButton1);
-            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges11;
+            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges12;
             guna2CustomGradientPanel2.FillColor = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(217, 217, 217);
@@ -378,42 +379,12 @@
             guna2CustomGradientPanel2.Margin = new Padding(4);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges13;
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
             guna2CustomGradientPanel2.Size = new Size(2352, 105);
             guna2CustomGradientPanel2.TabIndex = 68;
-            // 
-            // lblBackDV
-            // 
-            lblBackDV.BackColor = Color.Transparent;
-            lblBackDV.Font = new Font("Segoe UI", 9.857143F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblBackDV.ForeColor = Color.FromArgb(245, 131, 35);
-            lblBackDV.Location = new Point(445, 39);
-            lblBackDV.Margin = new Padding(4);
-            lblBackDV.Name = "lblBackDV";
-            lblBackDV.Size = new Size(216, 33);
-            lblBackDV.TabIndex = 29;
-            lblBackDV.Text = "Quay lại đặt dịch vụ";
-            // 
-            // guna2CircleButton2
-            // 
-            guna2CircleButton2.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton2.FillColor = Color.FromArgb(217, 217, 217);
-            guna2CircleButton2.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton2.ForeColor = Color.Black;
-            guna2CircleButton2.Image = Properties.Resources.back_arrow;
-            guna2CircleButton2.ImageSize = new Size(40, 40);
-            guna2CircleButton2.Location = new Point(394, 39);
-            guna2CircleButton2.Name = "guna2CircleButton2";
-            guna2CircleButton2.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton2.Size = new Size(44, 37);
-            guna2CircleButton2.TabIndex = 30;
             // 
             // guna2HtmlLabel2
             // 
@@ -451,10 +422,44 @@
             guna2CircleButton1.ImageSize = new Size(40, 40);
             guna2CircleButton1.Location = new Point(54, 40);
             guna2CircleButton1.Name = "guna2CircleButton1";
-            guna2CircleButton1.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2CircleButton1.ShadowDecoration.CustomizableEdges = customizableEdges11;
             guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CircleButton1.Size = new Size(44, 37);
             guna2CircleButton1.TabIndex = 24;
+            // 
+            // guna2Button2
+            // 
+            guna2Button2.CustomizableEdges = customizableEdges9;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = Color.Transparent;
+            guna2Button2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button2.ForeColor = Color.FromArgb(245, 131, 35);
+            guna2Button2.Image = Properties.Resources.right_arrow1;
+            guna2Button2.ImageAlign = HorizontalAlignment.Right;
+            guna2Button2.Location = new Point(408, 30);
+            guna2Button2.Margin = new Padding(4);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2Button2.Size = new Size(288, 52);
+            guna2Button2.TabIndex = 29;
+            guna2Button2.Text = "Quay lại đặt dịch vụ";
+            // 
+            // lblTime
+            // 
+            lblTime.AutoSize = false;
+            lblTime.BackColor = Color.FromArgb(245, 131, 35);
+            lblTime.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTime.ForeColor = SystemColors.ButtonHighlight;
+            lblTime.Location = new Point(1306, 16);
+            lblTime.Margin = new Padding(4);
+            lblTime.Name = "lblTime";
+            lblTime.Size = new Size(170, 66);
+            lblTime.TabIndex = 30;
+            lblTime.Text = "meo";
+            lblTime.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // FormPayment1
             // 
@@ -503,7 +508,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblBackDV;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton2;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTime;
     }
 }

@@ -39,9 +39,9 @@
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            guna2TextBox3 = new Guna.UI2.WinForms.Guna2TextBox();
+            txtOldPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            txtConfirmPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            txtNewPassword = new Guna.UI2.WinForms.Guna2TextBox();
             btnSavePassword = new Guna.UI2.WinForms.Guna2Button();
             SuspendLayout();
             // 
@@ -49,7 +49,7 @@
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            guna2HtmlLabel1.Location = new Point(204, 120);
+            guna2HtmlLabel1.Location = new Point(220, 119);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(168, 30);
             guna2HtmlLabel1.TabIndex = 0;
@@ -59,7 +59,7 @@
             // 
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            guna2HtmlLabel2.Location = new Point(204, 219);
+            guna2HtmlLabel2.Location = new Point(220, 252);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(135, 30);
             guna2HtmlLabel2.TabIndex = 1;
@@ -69,74 +69,74 @@
             // 
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            guna2HtmlLabel3.Location = new Point(204, 319);
+            guna2HtmlLabel3.Location = new Point(220, 379);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(216, 30);
             guna2HtmlLabel3.TabIndex = 2;
             guna2HtmlLabel3.Text = "Nhập lại mật khẩu mới:";
             // 
-            // guna2TextBox1
+            // txtOldPassword
             // 
-            guna2TextBox1.BorderRadius = 10;
-            guna2TextBox1.CustomizableEdges = customizableEdges1;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Segoe UI", 9F);
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(461, 120);
-            guna2TextBox1.Margin = new Padding(4, 5, 4, 5);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2TextBox1.Size = new Size(429, 33);
-            guna2TextBox1.TabIndex = 3;
+            txtOldPassword.BorderRadius = 10;
+            txtOldPassword.CustomizableEdges = customizableEdges1;
+            txtOldPassword.DefaultText = "";
+            txtOldPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtOldPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtOldPassword.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtOldPassword.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtOldPassword.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtOldPassword.Font = new Font("Segoe UI", 10.2F);
+            txtOldPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtOldPassword.Location = new Point(485, 116);
+            txtOldPassword.Margin = new Padding(4, 6, 4, 6);
+            txtOldPassword.Name = "txtOldPassword";
+            txtOldPassword.PlaceholderText = "";
+            txtOldPassword.SelectedText = "";
+            txtOldPassword.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            txtOldPassword.Size = new Size(639, 37);
+            txtOldPassword.TabIndex = 3;
             // 
-            // guna2TextBox2
+            // txtConfirmPassword
             // 
-            guna2TextBox2.BorderRadius = 10;
-            guna2TextBox2.CustomizableEdges = customizableEdges3;
-            guna2TextBox2.DefaultText = "";
-            guna2TextBox2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Font = new Font("Segoe UI", 9F);
-            guna2TextBox2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox2.Location = new Point(461, 316);
-            guna2TextBox2.Margin = new Padding(4, 5, 4, 5);
-            guna2TextBox2.Name = "guna2TextBox2";
-            guna2TextBox2.PlaceholderText = "";
-            guna2TextBox2.SelectedText = "";
-            guna2TextBox2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2TextBox2.Size = new Size(429, 33);
-            guna2TextBox2.TabIndex = 4;
+            txtConfirmPassword.BorderRadius = 10;
+            txtConfirmPassword.CustomizableEdges = customizableEdges3;
+            txtConfirmPassword.DefaultText = "";
+            txtConfirmPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtConfirmPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtConfirmPassword.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtConfirmPassword.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtConfirmPassword.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtConfirmPassword.Font = new Font("Segoe UI", 10.2F);
+            txtConfirmPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtConfirmPassword.Location = new Point(485, 379);
+            txtConfirmPassword.Margin = new Padding(4, 6, 4, 6);
+            txtConfirmPassword.Name = "txtConfirmPassword";
+            txtConfirmPassword.PlaceholderText = "";
+            txtConfirmPassword.SelectedText = "";
+            txtConfirmPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtConfirmPassword.Size = new Size(639, 37);
+            txtConfirmPassword.TabIndex = 4;
             // 
-            // guna2TextBox3
+            // txtNewPassword
             // 
-            guna2TextBox3.BorderRadius = 10;
-            guna2TextBox3.CustomizableEdges = customizableEdges5;
-            guna2TextBox3.DefaultText = "";
-            guna2TextBox3.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox3.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox3.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox3.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Font = new Font("Segoe UI", 9F);
-            guna2TextBox3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox3.Location = new Point(461, 219);
-            guna2TextBox3.Margin = new Padding(4, 5, 4, 5);
-            guna2TextBox3.Name = "guna2TextBox3";
-            guna2TextBox3.PlaceholderText = "";
-            guna2TextBox3.SelectedText = "";
-            guna2TextBox3.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2TextBox3.Size = new Size(429, 33);
-            guna2TextBox3.TabIndex = 5;
+            txtNewPassword.BorderRadius = 10;
+            txtNewPassword.CustomizableEdges = customizableEdges5;
+            txtNewPassword.DefaultText = "";
+            txtNewPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtNewPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtNewPassword.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtNewPassword.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtNewPassword.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtNewPassword.Font = new Font("Segoe UI", 10.2F);
+            txtNewPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtNewPassword.Location = new Point(485, 249);
+            txtNewPassword.Margin = new Padding(4, 6, 4, 6);
+            txtNewPassword.Name = "txtNewPassword";
+            txtNewPassword.PlaceholderText = "Mật khẩu tối thiểu 8 ký tự, bao gồm cả ký tự đặc biệt vào in hoa";
+            txtNewPassword.SelectedText = "";
+            txtNewPassword.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtNewPassword.Size = new Size(639, 37);
+            txtNewPassword.TabIndex = 5;
             // 
             // btnSavePassword
             // 
@@ -149,27 +149,28 @@
             btnSavePassword.FillColor = Color.FromArgb(44, 84, 115);
             btnSavePassword.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnSavePassword.ForeColor = Color.White;
-            btnSavePassword.Location = new Point(836, 416);
+            btnSavePassword.Location = new Point(1039, 522);
             btnSavePassword.Name = "btnSavePassword";
             btnSavePassword.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnSavePassword.Size = new Size(193, 48);
+            btnSavePassword.Size = new Size(231, 54);
             btnSavePassword.TabIndex = 6;
-            btnSavePassword.Text = "Lưu mật khẩu";
+            btnSavePassword.Text = "LƯU MẬT KHẨU";
             // 
             // ProfileChangePassword
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(12F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(236, 230, 224);
             Controls.Add(btnSavePassword);
-            Controls.Add(guna2TextBox3);
-            Controls.Add(guna2TextBox2);
-            Controls.Add(guna2TextBox1);
+            Controls.Add(txtNewPassword);
+            Controls.Add(txtConfirmPassword);
+            Controls.Add(txtOldPassword);
             Controls.Add(guna2HtmlLabel3);
             Controls.Add(guna2HtmlLabel2);
             Controls.Add(guna2HtmlLabel1);
+            Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             Name = "ProfileChangePassword";
-            Size = new Size(1328, 552);
+            Size = new Size(1701, 694);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -179,9 +180,9 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox2;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox3;
+        private Guna.UI2.WinForms.Guna2TextBox txtOldPassword;
+        private Guna.UI2.WinForms.Guna2TextBox txtConfirmPassword;
+        private Guna.UI2.WinForms.Guna2TextBox txtNewPassword;
         private Guna.UI2.WinForms.Guna2Button btnSavePassword;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace UserApp
         {
             InitializeComponent();
         }
+        
 
         // Hàm load UserControl vào panelContainer
         private void LoadUserControl(UserControl uc)
@@ -54,7 +56,25 @@ namespace UserApp
         // Nút Lịch sử
         private void btnHistory_Click(object sender, EventArgs e)
         {
-            LoadUserControl(new HistoryTicket());
+            if (currentUser == null)
+            {
+                MessageBox.Show("Vui lòng đăng nhập trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Tạo instance HistoryTicket với customerId
+            HistoryTicket HistoryTicket = new HistoryTicket(currentUser.customer_id);
+            //HistoryTicket HistoryTicket = new HistoryTicket("C001");
+
+            HistoryTicket.OnViewBillDetail += (billId) =>
+            {
+                // Khi click "Xem", load HistoryDetail vào panel
+                HistoryTicketDetail detailUC = new HistoryTicketDetail (billId);
+                LoadUserControl(detailUC);
+            };
+
+            // Load vào panelContent
+            LoadUserControl(HistoryTicket);
         }
 
     }
