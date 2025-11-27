@@ -45,14 +45,14 @@
             btnTimPhim = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             dgvMovies = new Guna.UI2.WinForms.Guna2DataGridView();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             title = new DataGridViewTextBoxColumn();
             release_date = new DataGridViewTextBoxColumn();
             status = new DataGridViewTextBoxColumn();
             duration = new DataGridViewTextBoxColumn();
-            ChinhSua = new DataGridViewImageColumn();
-            Xoa = new DataGridViewImageColumn();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
+            colEdit = new DataGridViewImageColumn();
+            colDelete = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dgvMovies).BeginInit();
             SuspendLayout();
             // 
@@ -142,7 +142,7 @@
             dgvMovies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvMovies.ColumnHeadersHeight = 27;
             dgvMovies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgvMovies.Columns.AddRange(new DataGridViewColumn[] { title, release_date, status, duration, ChinhSua, Xoa });
+            dgvMovies.Columns.AddRange(new DataGridViewColumn[] { title, release_date, status, duration, colEdit, colDelete });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -180,6 +180,44 @@
             dgvMovies.ThemeStyle.RowsStyle.Height = 29;
             dgvMovies.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgvMovies.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
+            // guna2Button2
+            // 
+            guna2Button2.BorderRadius = 5;
+            guna2Button2.CustomizableEdges = customizableEdges7;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = Color.FromArgb(254, 188, 47);
+            guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button2.ForeColor = Color.White;
+            guna2Button2.Image = Properties.Resources.pen;
+            guna2Button2.Location = new Point(832, 88);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2Button2.Size = new Size(122, 37);
+            guna2Button2.TabIndex = 31;
+            guna2Button2.Text = "Chỉnh sửa";
+            // 
+            // guna2Button3
+            // 
+            guna2Button3.BorderRadius = 5;
+            guna2Button3.CustomizableEdges = customizableEdges9;
+            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button3.FillColor = Color.Silver;
+            guna2Button3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button3.ForeColor = Color.White;
+            guna2Button3.Image = Properties.Resources.trash;
+            guna2Button3.Location = new Point(967, 88);
+            guna2Button3.Name = "guna2Button3";
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2Button3.Size = new Size(97, 37);
+            guna2Button3.TabIndex = 32;
+            guna2Button3.Text = "Xóa";
             // 
             // title
             // 
@@ -224,67 +262,29 @@
             duration.ReadOnly = true;
             duration.Width = 220;
             // 
-            // ChinhSua
+            // colEdit
             // 
-            ChinhSua.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            ChinhSua.FillWeight = 223.358109F;
-            ChinhSua.HeaderText = "Chỉnh";
-            ChinhSua.Image = Properties.Resources.pen;
-            ChinhSua.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            ChinhSua.MinimumWidth = 6;
-            ChinhSua.Name = "ChinhSua";
-            ChinhSua.ReadOnly = true;
-            ChinhSua.Width = 70;
+            colEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colEdit.FillWeight = 223.358109F;
+            colEdit.HeaderText = "Chỉnh";
+            colEdit.Image = Properties.Resources.pen;
+            colEdit.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            colEdit.MinimumWidth = 6;
+            colEdit.Name = "colEdit";
+            colEdit.ReadOnly = true;
+            colEdit.Width = 70;
             // 
-            // Xoa
+            // colDelete
             // 
-            Xoa.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Xoa.FillWeight = 80.6451645F;
-            Xoa.HeaderText = "Xóa";
-            Xoa.Image = Properties.Resources.trash;
-            Xoa.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Xoa.MinimumWidth = 6;
-            Xoa.Name = "Xoa";
-            Xoa.ReadOnly = true;
-            Xoa.Width = 70;
-            // 
-            // guna2Button2
-            // 
-            guna2Button2.BorderRadius = 5;
-            guna2Button2.CustomizableEdges = customizableEdges7;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.FromArgb(254, 188, 47);
-            guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Image = Properties.Resources.pen;
-            guna2Button2.Location = new Point(832, 88);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2Button2.Size = new Size(122, 37);
-            guna2Button2.TabIndex = 31;
-            guna2Button2.Text = "Chỉnh sửa";
-            // 
-            // guna2Button3
-            // 
-            guna2Button3.BorderRadius = 5;
-            guna2Button3.CustomizableEdges = customizableEdges9;
-            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button3.FillColor = Color.Silver;
-            guna2Button3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button3.ForeColor = Color.White;
-            guna2Button3.Image = Properties.Resources.trash;
-            guna2Button3.Location = new Point(967, 88);
-            guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button3.Size = new Size(97, 37);
-            guna2Button3.TabIndex = 32;
-            guna2Button3.Text = "Xóa";
+            colDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colDelete.FillWeight = 80.6451645F;
+            colDelete.HeaderText = "Xóa";
+            colDelete.Image = Properties.Resources.trash;
+            colDelete.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            colDelete.MinimumWidth = 6;
+            colDelete.Name = "colDelete";
+            colDelete.ReadOnly = true;
+            colDelete.Width = 70;
             // 
             // FormMovieManagement
             // 
@@ -319,7 +319,7 @@
         private DataGridViewTextBoxColumn release_date;
         private DataGridViewTextBoxColumn status;
         private DataGridViewTextBoxColumn duration;
-        private DataGridViewImageColumn ChinhSua;
-        private DataGridViewImageColumn Xoa;
+        private DataGridViewImageColumn colEdit;
+        private DataGridViewImageColumn colDelete;
     }
 }
