@@ -154,6 +154,36 @@ namespace AdminApp.Repositories
             return null;
         }
 
+        public void UpdateFilm(Film film)
+        {
+            using var conn = DatabaseHelper.GetConnection();
+            conn.Open();
+
+            string sql = @"UPDATE movie
+                   SET title = @title, genre = @genre, language = @language, 
+                       director = @director, actor = @actor, description = @description, 
+                       status = @status, film_purchase_price = @price, duration = @duration, 
+                       age_restrictione = @age, release_date = @releaseDate
+                   WHERE movie_id = @id";
+
+            using var cmd = new SqliteCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@title", film.title);
+            cmd.Parameters.AddWithValue("@genre", film.genre);
+            cmd.Parameters.AddWithValue("@language", film.language);
+            cmd.Parameters.AddWithValue("@director", film.director);
+            cmd.Parameters.AddWithValue("@actor", film.actor);
+            cmd.Parameters.AddWithValue("@description", film.description);
+            cmd.Parameters.AddWithValue("@status", film.status);
+            cmd.Parameters.AddWithValue("@price", film.film_purchase_price);
+            cmd.Parameters.AddWithValue("@duration", film.duration);
+            cmd.Parameters.AddWithValue("@age", film.age_restriction);
+            cmd.Parameters.AddWithValue("@releaseDate", film.release_date);
+            cmd.Parameters.AddWithValue("@id", film.movie_id);
+
+            cmd.ExecuteNonQuery();
+        }
+
+
         // ----------- HÀM MAP DỮ LIỆU -----------
 
         private Film MapFilm(SqliteDataReader r)
