@@ -15,7 +15,7 @@ namespace UserApp
     public partial class HistoryTicket : UserControl
     {
         private string _customerId;
-        //public HistoryTicket() : this("C001") { }
+        public HistoryTicket() : this("C001") { }
         public HistoryTicket(string customerId)
         {
             InitializeComponent();
@@ -142,6 +142,7 @@ namespace UserApp
                 // Trigger event
                 OnViewBillDetail?.Invoke(billId);
             }
+
         }
     }
 }

@@ -19,7 +19,6 @@ namespace SharedData.Repositories
             {
                 conn.Open();
                 string sql = "SELECT * FROM movie";
-
                 using (var cmd = new SqliteCommand(sql, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
