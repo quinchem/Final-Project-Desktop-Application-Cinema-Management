@@ -21,20 +21,20 @@ namespace SharedData.Models
 
 
         // Computed Properties
-        public string Month => show_date.ToString("MM");
-        public string MonthName => $"THÁNG {show_date.Month}";
-        public DayOfWeek DayOfWeek => show_date.DayOfWeek;
-        public int Day => show_date.Day;
-
+        //public string Month => show_date.ToString("MM");
+        //public string MonthName => $"THÁNG {show_date.Month}";
+        //public DayOfWeek DayOfWeek => show_date.DayOfWeek;
+        //public int Day => show_date.Day;
+       
         // Format thời gian chiếu: "15:15 - 17:14"
         public string TimeRange => $"{start_time:hh\\:mm} - {end_time:hh\\:mm}";
 
         // Tên thứ tiếng Việt
-        public string DayName
-        {
-            get
-            {
-                switch (DayOfWeek)
+        //public string DayName
+        //{
+            //get
+            //{
+                /*switch (DayOfWeek)
                 {
                     case DayOfWeek.Monday: return "Thứ 2";
                     case DayOfWeek.Tuesday: return "Thứ 3";
@@ -44,9 +44,9 @@ namespace SharedData.Models
                     case DayOfWeek.Saturday: return "Thứ 7";
                     case DayOfWeek.Sunday: return "Chủ nhật";
                     default: return "";
-                }
+                }*/
             }
         }
-    }
-}
-}
+    //}
+//}
+//}
