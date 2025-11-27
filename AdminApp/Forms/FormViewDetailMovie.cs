@@ -15,13 +15,14 @@ namespace AdminApp
     public partial class FormViewDetailMovie : Form
     {
         private string movieId;
+        private ImageRepo _imageRepo = new ImageRepo();
 
         public FormViewDetailMovie(string id)
         {
             InitializeComponent();
             movieId = id;
-
             LoadMovieDetails();
+            LoadMoviePoster();
         }
 
         private void LoadMovieDetails()
@@ -29,7 +30,7 @@ namespace AdminApp
             try
             {
                 var repo = new FilmRepo();
-                var film = repo.GetById(movieId);
+                var film = repo.GetById2(movieId);
 
                 if (film != null)
                 {
@@ -54,6 +55,26 @@ namespace AdminApp
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi load thông tin phim: " + ex.Message);
+            }
+        }
+
+        private void LoadMoviePoster()
+        {
+            try
+            {
+                byte[] imgData = _imageRepo.GetMoviePoster(movieId);
+                if (imgData != null)
+                {
+                    using (MemoryStream ms = new MemoryStream(imgData))
+                    {
+                        picPoster.Image = Image.FromStream(ms);
+                        picPoster.SizeMode = PictureBoxSizeMode.Zoom; // hiển thị vừa khung
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi load poster: " + ex.Message);
             }
         }
     }

@@ -49,6 +49,9 @@ namespace AdminApp
             { "F", 15 }
         };
 
+        // Folder lưu trữ file phòng
+        private string localRoomFolder = @"D:\Desktop app\Do an cuoi ky\Cinema\CinemaData\Room";
+
         public FormRoomLayoutManagement()
         {
             InitializeComponent();
@@ -57,7 +60,55 @@ namespace AdminApp
 
         private void FormRoomLayoutManagement_Load(object sender, EventArgs e)
         {
-            GenerateSeatLayout();
+            LoadRoom(1);
+            btnPhong1.Checked = true;
+            txtDinhDang.Text = "2D";
+        }
+        private void LoadRoom(int roomId)
+        {
+            currentRoom = roomId;
+
+            string file = $"Room_{roomId}.json";
+
+            // Clear panel trước khi load
+            panelRoomLayout.Controls.Clear();
+
+            // Tạo lại thanh MÀN HÌNH
+            CreateScreenBar();
+
+            if (File.Exists(file))
+            {
+                // Load JSON
+                var json = File.ReadAllText(file);
+                var list = JsonConvert.DeserializeObject<List<SeatData>>(json);
+
+                foreach (var seat in list)
+                {
+                    // Những dữ liệu thiếu trong file (trường hợp file cũ)
+                    if (seat.Status == null) seat.Status = "Active";
+                    if (seat.Type == null) seat.Type = "Normal";
+
+                    var btn = CreateSeat(seat);
+
+                    // KÍCH THƯỚC GHẾ CHUẨN
+                    btn.Width = 50;
+                    btn.Height = 50;
+                }
+            }
+            else
+            {
+                // Không có file -> tạo layout mặc định
+                GenerateSeatLayout();
+            }
+
+            // Reset dữ liệu chọn ghế
+            selectedSeat = null;
+            txtMaGhe.Text = "";
+            rdoThuong.Checked = true;
+            rdoBinhThuong.Checked = true;
+
+            // Tắt edit mode
+            SetEditMode(false);
         }
 
         // ================= TẠO THANH MÀN HÌNH ================= //
@@ -70,6 +121,7 @@ namespace AdminApp
             screen.FillColor = Color.WhiteSmoke;
             screen.BorderRadius = 0;
             screen.Height = 50;
+
 
             int width = panelRoomLayout.Width - 150;
             screen.Width = width;
@@ -93,7 +145,6 @@ namespace AdminApp
             screen.MouseDown += Screen_MouseDown;
             screen.MouseMove += Screen_MouseMove;
             screen.MouseUp += Screen_MouseUp;
-
             panelRoomLayout.Controls.Add(screen);
             screen.BringToFront();
         }
@@ -108,6 +159,7 @@ namespace AdminApp
 
             var screen = (Guna2Panel)sender;
             screenDragStartPoint = screen.Location;
+            screen.FillColor = Color.LightGray;
         }
 
         private void Screen_MouseMove(object sender, MouseEventArgs e)
@@ -123,6 +175,8 @@ namespace AdminApp
         private void Screen_MouseUp(object sender, MouseEventArgs e)
         {
             draggingScreen = false;
+            var screen = (Guna2Panel)sender;
+            screen.FillColor = Color.WhiteSmoke; // màu bình thường sau khi thả
         }
 
         // ================= GHẾ: TẠO MỚI ================= //
@@ -150,7 +204,7 @@ namespace AdminApp
             return btn;
         }
 
-        //Khi chọn ghế
+        //CHỌN GHẾ
         private void Seat_Select(object sender, EventArgs e)
         {
             // reset ghế cũ
@@ -165,7 +219,7 @@ namespace AdminApp
             var seat = (SeatData)selectedSeat.Tag;
 
             // highlight XANH LÁ
-            selectedSeat.FillColor = Color.FromArgb(35, 150, 62);   // xanh lá đẹp
+            selectedSeat.FillColor = Color.FromArgb(35, 150, 62);
             selectedSeat.ForeColor = Color.White;
 
             if (seat.Type == "VIP")
@@ -184,8 +238,8 @@ namespace AdminApp
             txtMaGhe.Text = seat.SeatId;
             rdoVip.Checked = seat.Type == "VIP";
             rdoThuong.Checked = seat.Type == "Normal";
-            rdoBaoTri.Checked = seat.Type == "Disabled";
-            rdoBinhThuong.Checked = seat.Type != "Disabled";
+            rdoBaoTri.Checked = seat.Status == "Disabled";
+            rdoBinhThuong.Checked = seat.Status == "Active";
 
             // TẮT chỉnh sửa
             SetEditMode(false);
@@ -209,17 +263,21 @@ namespace AdminApp
             btn.BorderRadius = 0;
             btn.ForeColor = Color.Black;
 
+            // ======= STATUS ======= //
+            if (seat.Status == "Disabled")  // GHẾ BẢO TRÌ
+            {
+                btn.FillColor = Color.DimGray;
+                btn.ForeColor = Color.White;
+                btn.BorderThickness = 0;
+                return;
+            }
+
+            // ======= TYPE ======= //
             if (seat.Type == "VIP")
             {
                 btn.FillColor = Color.White;
                 btn.BorderColor = Color.FromArgb(255, 193, 7);
                 btn.BorderThickness = 4;
-            }
-            else if (seat.Type == "Disabled")
-            {
-                btn.FillColor = Color.DimGray;
-                btn.ForeColor = Color.White;
-                btn.BorderThickness = 0;
             }
             else
             {
@@ -397,6 +455,7 @@ namespace AdminApp
                         Row = rowName,
                         Col = col,
                         Type = (rowName == "A" || rowName == "B" || rowName == "C") ? "Normal" : "VIP",
+                        Status = "Active",
                         X = startX,
                         Y = startY
                     };
@@ -412,8 +471,6 @@ namespace AdminApp
             }
         }
 
-        // ================= THÊM HÀNG ALPHABET ================= //
-
         private void btnThemHang_Click(object sender, EventArgs e)
         {
             char last = seatMap.Keys.Last()[0];
@@ -427,7 +484,7 @@ namespace AdminApp
         {
             if (selectedSeat == null)
             {
-                MessageBox.Show("Hãy chọn 1 ghế trong hàng trước khi thêm!");
+                MessageBox.Show("Hãy chọn 1 ghế trong hàng trước khi thêm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -494,19 +551,38 @@ namespace AdminApp
 
             foreach (Control c in panelRoomLayout.Controls)
             {
-                if (c is Guna2Button btn)
+                if (c is Guna2Button btn && btn.Tag is SeatData seat)
                 {
-                    var seat = (SeatData)btn.Tag;
-                    seat.X = btn.Location.X;
-                    seat.Y = btn.Location.Y;
+                    // GHẾ: cập nhật toạ độ mới sau khi kéo
+                    seat.X = btn.Left;
+                    seat.Y = btn.Top;
+
+                    // Nếu seat.Status null → gán Active
+                    if (string.IsNullOrEmpty(seat.Status))
+                        seat.Status = "Active";
+
+                    // Nếu seat.Type null → gán Normal
+                    if (string.IsNullOrEmpty(seat.Type))
+                        seat.Type = "Normal";
+
                     list.Add(seat);
                 }
             }
 
-            File.WriteAllText("Room_1.json",
-                JsonConvert.SerializeObject(list, Formatting.Indented));
+            // ====== LƯU ĐÚNG FILE THEO PHÒNG ======
+            // Tạo file path theo phòng
+            string filePath = Path.Combine(localRoomFolder, $"Room_{currentRoom}.json");
 
-            MessageBox.Show("Đã lưu layout");
+            // Tự tạo folder nếu chưa có
+            Directory.CreateDirectory(localRoomFolder);
+
+            File.WriteAllText(filePath, JsonConvert.SerializeObject(list, Formatting.Indented));
+
+            MessageBox.Show(
+                $"Đã lưu sơ đồ phòng {currentRoom}!",
+                "Thông báo",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -549,7 +625,7 @@ namespace AdminApp
         {
             if (!editMode || selectedSeat == null || !rdoBinhThuong.Checked) return;
             var seat = (SeatData)selectedSeat.Tag;
-            seat.Type = "Normal";
+            seat.Status = "Active";
             ApplySeatStyle(selectedSeat, seat);
         }
 
@@ -557,7 +633,7 @@ namespace AdminApp
         {
             if (!editMode || selectedSeat == null || !rdoBaoTri.Checked) return;
             var seat = (SeatData)selectedSeat.Tag;
-            seat.Type = "Disabled";
+            seat.Status = "Disabled";
             ApplySeatStyle(selectedSeat, seat);
         }
 
@@ -580,6 +656,73 @@ namespace AdminApp
             // Tạo lại layout ban đầu
             GenerateSeatLayout();
         }
+
+        private void btnXoaHang_Click(object sender, EventArgs e)
+        {
+
+            if (selectedSeat == null)
+            {
+                MessageBox.Show("Hãy chọn 1 ghế trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var seat = (SeatData)selectedSeat.Tag;
+            string rowName = seat.Row;
+
+            // XÁC NHẬN
+            if (MessageBox.Show($"Xóa toàn bộ hàng {rowName}?",
+                                "Xác nhận",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning) == DialogResult.No)
+                return;
+
+            // XÓA GHẾ TRÊN GIAO DIỆN
+            var seatsToRemove = panelRoomLayout.Controls
+                .OfType<Guna2Button>()
+                .Where(btn => ((SeatData)btn.Tag).Row == rowName)
+                .ToList();
+
+            foreach (var btn in seatsToRemove)
+            {
+                panelRoomLayout.Controls.Remove(btn);
+                btn.Dispose();
+            }
+
+            // XÓA KHỎI seatMap
+            if (seatMap.ContainsKey(rowName))
+                seatMap.Remove(rowName);
+
+            // TẮT chọn ghế
+            selectedSeat = null;
+        }
+
+
+        private void btnPhong1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (btnPhong1.Checked)
+            { LoadRoom(1); txtDinhDang.Text = "2D"; }
+        }
+        private void btnPhong2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (btnPhong2.Checked)
+            { LoadRoom(2); txtDinhDang.Text = "2D"; }
+        }
+        private void btnPhong3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (btnPhong3.Checked)
+            { LoadRoom(3); txtDinhDang.Text = "2D"; }
+        }
+        private void btnPhong4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (btnPhong4.Checked)
+            { LoadRoom(4); txtDinhDang.Text = "2D"; }
+        }
+        private void btnPhong5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (btnPhong5.Checked)
+            { LoadRoom(5); txtDinhDang.Text = "3D"; }
+        }
+
     }
 
 }
