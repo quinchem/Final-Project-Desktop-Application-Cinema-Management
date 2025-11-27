@@ -45,10 +45,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             lblLichChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
             dayPanels = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             btnPrevWeek = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -69,24 +65,12 @@
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             cboMonth = new Guna.UI2.WinForms.Guna2ComboBox();
             lblNgayChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            rad2D = new Guna.UI2.WinForms.Guna2RadioButton();
-            rad3D = new Guna.UI2.WinForms.Guna2RadioButton();
-            lblLoaiphong = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblSuatchieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            lblTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            picPoster = new Guna.UI2.WinForms.Guna2PictureBox();
-            flpShowtimes = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            lblPhongChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblDinhDang = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblGioChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            showtimePanel = new Panel();
-            flpShowtime = new FlowLayoutPanel();
+            btnChonCho = new Guna.UI2.WinForms.Guna2Button();
+            flpShowtimes = new FlowLayoutPanel();
             dayPanels.SuspendLayout();
             guna2CustomGradientPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)picPoster).BeginInit();
-            flpShowtimes.SuspendLayout();
             SuspendLayout();
             // 
             // lblLichChieu
@@ -405,66 +389,12 @@
             lblNgayChieu.TabIndex = 6;
             lblNgayChieu.Text = "Chọn ngày chiếu";
             // 
-            // rad2D
-            // 
-            rad2D.AutoSize = true;
-            rad2D.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
-            rad2D.CheckedState.BorderThickness = 0;
-            rad2D.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            rad2D.CheckedState.InnerColor = Color.White;
-            rad2D.CheckedState.InnerOffset = -4;
-            rad2D.ForeColor = SystemColors.ButtonHighlight;
-            rad2D.Location = new Point(1415, 529);
-            rad2D.Margin = new Padding(4);
-            rad2D.Name = "rad2D";
-            rad2D.Size = new Size(64, 34);
-            rad2D.TabIndex = 8;
-            rad2D.Text = "2D";
-            rad2D.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
-            rad2D.UncheckedState.BorderThickness = 2;
-            rad2D.UncheckedState.FillColor = Color.Transparent;
-            rad2D.UncheckedState.InnerColor = Color.Transparent;
-            rad2D.CheckedChanged += FilterChanged_Event;
-            // 
-            // rad3D
-            // 
-            rad3D.AutoSize = true;
-            rad3D.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
-            rad3D.CheckedState.BorderThickness = 0;
-            rad3D.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            rad3D.CheckedState.InnerColor = Color.White;
-            rad3D.CheckedState.InnerOffset = -4;
-            rad3D.ForeColor = SystemColors.ButtonHighlight;
-            rad3D.Location = new Point(1415, 589);
-            rad3D.Margin = new Padding(4);
-            rad3D.Name = "rad3D";
-            rad3D.Size = new Size(64, 34);
-            rad3D.TabIndex = 7;
-            rad3D.Text = "3D";
-            rad3D.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
-            rad3D.UncheckedState.BorderThickness = 2;
-            rad3D.UncheckedState.FillColor = Color.Transparent;
-            rad3D.UncheckedState.InnerColor = Color.Transparent;
-            rad3D.CheckedChanged += FilterChanged_Event;
-            // 
-            // lblLoaiphong
-            // 
-            lblLoaiphong.BackColor = Color.Transparent;
-            lblLoaiphong.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
-            lblLoaiphong.ForeColor = SystemColors.ButtonHighlight;
-            lblLoaiphong.Location = new Point(1187, 525);
-            lblLoaiphong.Margin = new Padding(4);
-            lblLoaiphong.Name = "lblLoaiphong";
-            lblLoaiphong.Size = new Size(205, 38);
-            lblLoaiphong.TabIndex = 7;
-            lblLoaiphong.Text = "Chọn loại phòng";
-            // 
             // lblSuatchieu
             // 
             lblSuatchieu.BackColor = Color.Transparent;
             lblSuatchieu.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
             lblSuatchieu.ForeColor = SystemColors.ButtonHighlight;
-            lblSuatchieu.Location = new Point(209, 525);
+            lblSuatchieu.Location = new Point(208, 502);
             lblSuatchieu.Margin = new Padding(4);
             lblSuatchieu.Name = "lblSuatchieu";
             lblSuatchieu.Size = new Size(197, 38);
@@ -476,7 +406,7 @@
             guna2CustomGradientPanel2.BackColor = Color.Transparent;
             guna2CustomGradientPanel2.BorderColor = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.BorderRadius = 15;
-            guna2CustomGradientPanel2.Controls.Add(guna2Button2);
+            guna2CustomGradientPanel2.Controls.Add(btnChonCho);
             guna2CustomGradientPanel2.CustomizableEdges = customizableEdges16;
             guna2CustomGradientPanel2.FillColor = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(217, 217, 217);
@@ -493,107 +423,37 @@
             guna2CustomGradientPanel2.Size = new Size(1796, 92);
             guna2CustomGradientPanel2.TabIndex = 24;
             // 
-            // guna2Button2
+            // btnChonCho
             // 
-            guna2Button2.CustomizableEdges = customizableEdges14;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.Transparent;
-            guna2Button2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button2.ForeColor = Color.FromArgb(245, 131, 35);
-            guna2Button2.Image = Properties.Resources.right_arrow1;
-            guna2Button2.ImageAlign = HorizontalAlignment.Right;
-            guna2Button2.Location = new Point(1475, 27);
-            guna2Button2.Margin = new Padding(4);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            guna2Button2.Size = new Size(221, 52);
-            guna2Button2.TabIndex = 10;
-            guna2Button2.Text = "Chọn chỗ ngồi";
-            // 
-            // lblTenPhim
-            // 
-            lblTenPhim.BackColor = Color.Transparent;
-            lblTenPhim.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
-            lblTenPhim.ForeColor = SystemColors.ButtonHighlight;
-            lblTenPhim.Location = new Point(247, 608);
-            lblTenPhim.Margin = new Padding(4);
-            lblTenPhim.Name = "lblTenPhim";
-            lblTenPhim.Size = new Size(118, 38);
-            lblTenPhim.TabIndex = 26;
-            lblTenPhim.Text = "Tên phim";
-            // 
-            // picPoster
-            // 
-            picPoster.CustomizableEdges = customizableEdges18;
-            picPoster.ImageRotate = 0F;
-            picPoster.Location = new Point(217, 668);
-            picPoster.Name = "picPoster";
-            picPoster.ShadowDecoration.CustomizableEdges = customizableEdges19;
-            picPoster.Size = new Size(217, 253);
-            picPoster.TabIndex = 27;
-            picPoster.TabStop = false;
+            btnChonCho.CustomizableEdges = customizableEdges14;
+            btnChonCho.DisabledState.BorderColor = Color.DarkGray;
+            btnChonCho.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnChonCho.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnChonCho.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnChonCho.FillColor = Color.Transparent;
+            btnChonCho.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChonCho.ForeColor = Color.FromArgb(245, 131, 35);
+            btnChonCho.Image = Properties.Resources.right_arrow1;
+            btnChonCho.ImageAlign = HorizontalAlignment.Right;
+            btnChonCho.Location = new Point(1475, 27);
+            btnChonCho.Margin = new Padding(4);
+            btnChonCho.Name = "btnChonCho";
+            btnChonCho.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            btnChonCho.Size = new Size(221, 52);
+            btnChonCho.TabIndex = 10;
+            btnChonCho.Text = "Chọn chỗ ngồi";
+            btnChonCho.Click += btnChonCho_Click;
             // 
             // flpShowtimes
             // 
-            flpShowtimes.Controls.Add(lblPhongChieu);
-            flpShowtimes.Controls.Add(lblDinhDang);
-            flpShowtimes.Controls.Add(lblGioChieu);
-            flpShowtimes.CustomizableEdges = customizableEdges20;
-            flpShowtimes.Location = new Point(536, 680);
+            flpShowtimes.AutoScroll = true;
+            flpShowtimes.BackColor = Color.Transparent;
+            flpShowtimes.FlowDirection = FlowDirection.TopDown;
+            flpShowtimes.Location = new Point(235, 581);
             flpShowtimes.Name = "flpShowtimes";
-            flpShowtimes.ShadowDecoration.CustomizableEdges = customizableEdges21;
-            flpShowtimes.Size = new Size(215, 206);
-            flpShowtimes.TabIndex = 31;
-            // 
-            // lblPhongChieu
-            // 
-            lblPhongChieu.BackColor = Color.Transparent;
-            lblPhongChieu.Location = new Point(50, 155);
-            lblPhongChieu.Name = "lblPhongChieu";
-            lblPhongChieu.Size = new Size(119, 32);
-            lblPhongChieu.TabIndex = 2;
-            lblPhongChieu.Text = "Phòng chiếu";
-            // 
-            // lblDinhDang
-            // 
-            lblDinhDang.BackColor = Color.Transparent;
-            lblDinhDang.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblDinhDang.ForeColor = Color.SteelBlue;
-            lblDinhDang.Location = new Point(57, 97);
-            lblDinhDang.Name = "lblDinhDang";
-            lblDinhDang.Size = new Size(102, 32);
-            lblDinhDang.TabIndex = 1;
-            lblDinhDang.Text = "Định dạng";
-            // 
-            // lblGioChieu
-            // 
-            lblGioChieu.BackColor = Color.Transparent;
-            lblGioChieu.Font = new Font("Segoe UI Black", 9.857143F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblGioChieu.Location = new Point(50, 27);
-            lblGioChieu.Name = "lblGioChieu";
-            lblGioChieu.Size = new Size(107, 33);
-            lblGioChieu.TabIndex = 0;
-            lblGioChieu.Text = "Giờ chiếu";
-            // 
-            // showtimePanel
-            // 
-            showtimePanel.Location = new Point(1143, 691);
-            showtimePanel.Name = "showtimePanel";
-            showtimePanel.Size = new Size(503, 529);
-            showtimePanel.TabIndex = 32;
-            // 
-            // flpShowtime
-            // 
-            flpShowtime.AutoScroll = true;
-            flpShowtime.FlowDirection = FlowDirection.TopDown;
-            flpShowtime.Location = new Point(156, 589);
-            flpShowtime.Name = "flpShowtime";
-            flpShowtime.Size = new Size(705, 590);
-            flpShowtime.TabIndex = 33;
-            flpShowtime.WrapContents = false;
+            flpShowtimes.Size = new Size(1286, 824);
+            flpShowtimes.TabIndex = 33;
+            flpShowtimes.WrapContents = false;
             // 
             // FormShowtimeList
             // 
@@ -603,26 +463,17 @@
             AutoScrollMinSize = new Size(0, 5);
             BackColor = Color.FromArgb(92, 124, 150);
             ClientSize = new Size(1759, 1564);
-            Controls.Add(flpShowtime);
             Controls.Add(flpShowtimes);
-            Controls.Add(picPoster);
-            Controls.Add(lblTenPhim);
             Controls.Add(guna2CustomGradientPanel2);
             Controls.Add(lblSuatchieu);
-            Controls.Add(lblLoaiphong);
-            Controls.Add(rad2D);
-            Controls.Add(rad3D);
             Controls.Add(dayPanels);
             Controls.Add(lblLichChieu);
-            Controls.Add(showtimePanel);
             Name = "FormShowtimeList";
             Text = "FormShowtimeList";
+            Load += FormShowtimeList_Load;
             dayPanels.ResumeLayout(false);
             dayPanels.PerformLayout();
             guna2CustomGradientPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)picPoster).EndInit();
-            flpShowtimes.ResumeLayout(false);
-            flpShowtimes.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -631,9 +482,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblLichChieu;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel dayPanels;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNgayChieu;
-        private Guna.UI2.WinForms.Guna2RadioButton rad2D;
-        private Guna.UI2.WinForms.Guna2RadioButton rad3D;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblLoaiphong;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblSuatchieu;
         private Guna.UI2.WinForms.Guna2ComboBox cboMonth;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
@@ -653,14 +501,7 @@
         private Guna.UI2.WinForms.Guna2CircleButton btnPrevWeek;
         private Guna.UI2.WinForms.Guna2CircleButton btnNextWeek;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTenPhim;
-        private Guna.UI2.WinForms.Guna2PictureBox picPoster;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel flpShowtimes;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblPhongChieu;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblDinhDang;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblGioChieu;
-        private Panel showtimePanel;
-        private FlowLayoutPanel flpShowtime;
+        private Guna.UI2.WinForms.Guna2Button btnChonCho;
+        private FlowLayoutPanel flpShowtimes;
     }
 }

@@ -48,7 +48,23 @@ namespace AdminApp
 
             if (_filterRoomId != null)
                 shows = shows.Where(s => s.auditorium_id == _filterRoomId).ToList();
+            shows = shows.OrderBy(s =>
+            {
+                // Cố gắng ép kiểu chuỗi ngày về DateTime để sắp xếp chuẩn
+                // Nếu DB lưu dd/MM/yyyy thì phải ParseExact, nếu yyyy-MM-dd thì Parse thường
+                DateTime dt;
+                string[] formats = { "dd/MM/yyyy", "yyyy-MM-dd", "MM/dd/yyyy" };
 
+                if (DateTime.TryParseExact(s.show_date, formats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None, out dt))
+                {
+                    return dt;
+                }
+                return DateTime.MaxValue; // Nếu lỗi ngày thì đẩy xuống cuối
+            })
+    .ThenBy(s => s.start_time) // Sắp xếp tiếp theo giờ chiếu (Sáng -> Tối)
+    .ToList();
             var display = new List<ShowtimeDisplay>();
 
             foreach (var s in shows)
