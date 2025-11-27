@@ -2,10 +2,11 @@
 using SharedData.Models;
 using System;
 using System.Collections.Generic;
+using UserApp.Models;
 
 namespace SharedData.Repositories
 {
-    public static class ShowtimeRepo
+    public class ShowtimeRepo
     {
         private static string connStr = DatabaseHelper.GetConnectionString();
 
@@ -118,6 +119,73 @@ namespace SharedData.Repositories
             }
             return list;
         }
+
+        // Lấy suất chiếu theo khoảng ngày (JOIN với Auditorium và AuditoriumType)
+        public List<ShowtimeInfo> GetShowtimesByDateRange(DateTime startDate, int days = 7)
+        {
+            List<ShowtimeInfo> showtimes = new List<ShowtimeInfo>();
+
+            // 1. Tạo danh sách 7 chuỗi ngày cần lấy (Ví dụ: "27-11-2025", "28-11-2025"...)
+            // Format "dd-MM-yyyy" phải GIỐNG HỆT format bạn lưu trong Database
+            List<string> targetDates = new List<string>();
+            for (int i = 0; i < days; i++)
+            {
+                targetDates.Add($"'{startDate.AddDays(i).ToString("dd-MM-yyyy")}'");
+            }
+
+            // Nối lại thành chuỗi để đưa vào câu SQL: '27-11-2025','28-11-2025',...
+            string inClause = string.Join(",", targetDates);
+
+            using (SqliteConnection conn = DatabaseHelper.GetConnection())
+            {
+                // 2. Dùng câu lệnh WHERE IN (...)
+                // Nghĩa là: Lấy suất chiếu mà ngày chiếu NẰM TRONG danh sách 7 ngày kia
+                string query = $@"
+                        SELECT 
+                            s.showtime_id,
+                            m.title,
+                            
+                            s.show_date,
+                            s.start_time,
+                            s.end_time,
+                            a.auditorium_id,
+                            a.name,
+                            at.auditorium_type
+                        FROM showtime s
+                        INNER JOIN auditorium a ON s.auditorium_id = a.auditorium_id
+                        INNER JOIN auditorium_type at ON a.auditorium_type_id = at.auditorium_type_id
+                        INNER JOIN movie m ON s.movie_id = m.movie_id
+                        WHERE s.show_date IN ({inClause}) 
+                        ORDER BY s.show_date, s.start_time";
+
+                SqliteCommand cmd = new SqliteCommand(query, conn);
+
+                conn.Open();
+                using (SqliteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        showtimes.Add(new ShowtimeInfo
+                        {
+                            showtime_id = Convert.ToInt32(reader["showtime_id"]),
+                            title = reader["title"].ToString(),
+                            // Nếu cột poster null thì để chuỗi rỗng
+                            //poster_path = reader["poster_path"] != DBNull.Value ? reader["poster_path"].ToString() : "",
+
+                            // Lấy thẳng string lên, không cần Parse DateTime gì cả
+                            show_date = reader["show_date"].ToString(),
+                            start_time = reader["start_time"].ToString(),
+                            end_time = reader["end_time"].ToString(),
+                            auditorium_id = Convert.ToInt32(reader["auditorium_id"]),
+                            name = reader["name"].ToString(),
+                            auditorium_type = reader["auditorium_type"].ToString(),
+                        });
+                    }
+                }
+            }
+            return showtimes;
+        }
+
 
         // ===================== DELETE =====================
         public static void Delete(string id)
