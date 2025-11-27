@@ -29,7 +29,7 @@ namespace AdminApp
             try
             {
                 var repo = new FilmRepo();
-                var film = repo.GetById(movieId);
+                var film = repo.GetById2(movieId);
 
                 if (film != null)
                 {

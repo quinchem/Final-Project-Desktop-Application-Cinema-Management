@@ -203,7 +203,7 @@ namespace SharedData.Repositories
                    SET title = @title, genre = @genre, language = @language, 
                        director = @director, actor = @actor, description = @description, 
                        status = @status, film_purchase_price = @price, duration = @duration, 
-                       age_restrictione = @age, release_date = @releaseDate
+                       age_restriction = @age, release_date = @releaseDate
                    WHERE movie_id = @id";
 
             using var cmd = new SqliteCommand(sql, conn);

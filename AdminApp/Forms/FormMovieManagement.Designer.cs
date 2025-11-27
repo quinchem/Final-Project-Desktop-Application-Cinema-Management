@@ -38,9 +38,8 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMovieManagement));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             btnTimPhim = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
@@ -51,8 +50,7 @@
             duration = new DataGridViewTextBoxColumn();
             colEdit = new DataGridViewImageColumn();
             colDelete = new DataGridViewImageColumn();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
+            btnXuatFile = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)dgvMovies).BeginInit();
             SuspendLayout();
             // 
@@ -250,43 +248,25 @@
             colDelete.ReadOnly = true;
             colDelete.Width = 70;
             // 
-            // guna2Button2
+            // btnXuatFile
             // 
-            guna2Button2.BorderRadius = 5;
-            guna2Button2.CustomizableEdges = customizableEdges7;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.FromArgb(254, 188, 47);
-            guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Image = Properties.Resources.pen;
-            guna2Button2.Location = new Point(832, 88);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2Button2.Size = new Size(122, 37);
-            guna2Button2.TabIndex = 31;
-            guna2Button2.Text = "Chỉnh sửa";
-            // 
-            // guna2Button3
-            // 
-            guna2Button3.BorderRadius = 5;
-            guna2Button3.CustomizableEdges = customizableEdges9;
-            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button3.FillColor = Color.Silver;
-            guna2Button3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button3.ForeColor = Color.White;
-            guna2Button3.Image = Properties.Resources.trash;
-            guna2Button3.Location = new Point(967, 88);
-            guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button3.Size = new Size(97, 37);
-            guna2Button3.TabIndex = 32;
-            guna2Button3.Text = "Xóa";
+            btnXuatFile.BorderRadius = 8;
+            btnXuatFile.CustomizableEdges = customizableEdges7;
+            btnXuatFile.DisabledState.BorderColor = Color.DarkGray;
+            btnXuatFile.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnXuatFile.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnXuatFile.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnXuatFile.FillColor = Color.FromArgb(254, 188, 47);
+            btnXuatFile.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnXuatFile.ForeColor = Color.White;
+            btnXuatFile.Image = (Image)resources.GetObject("btnXuatFile.Image");
+            btnXuatFile.Location = new Point(1149, 88);
+            btnXuatFile.Name = "btnXuatFile";
+            btnXuatFile.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnXuatFile.Size = new Size(189, 38);
+            btnXuatFile.TabIndex = 32;
+            btnXuatFile.Text = "Xuất file excel";
+            btnXuatFile.Click += btnExportExcel_Click;
             // 
             // FormMovieManagement
             // 
@@ -296,8 +276,7 @@
             AutoScrollMinSize = new Size(800, 800);
             BackColor = Color.FromArgb(92, 124, 150);
             ClientSize = new Size(1402, 703);
-            Controls.Add(guna2Button3);
-            Controls.Add(guna2Button2);
+            Controls.Add(btnXuatFile);
             Controls.Add(dgvMovies);
             Controls.Add(guna2Button1);
             Controls.Add(btnTimPhim);
@@ -315,13 +294,12 @@
         private Guna.UI2.WinForms.Guna2Button btnTimPhim;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2DataGridView dgvMovies;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private DataGridViewTextBoxColumn title;
         private DataGridViewTextBoxColumn release_date;
         private DataGridViewTextBoxColumn status;
         private DataGridViewTextBoxColumn duration;
         private DataGridViewImageColumn colEdit;
         private DataGridViewImageColumn colDelete;
+        private Guna.UI2.WinForms.Guna2Button btnXuatFile;
     }
 }
