@@ -46,13 +46,12 @@ namespace AdminApp
         {
             dgvMovies.DataSource = films;
 
-            // Đảm bảo thứ tự cột đúng Designer
             dgvMovies.Columns["title"].DisplayIndex = 0;
             dgvMovies.Columns["release_date"].DisplayIndex = 1;
             dgvMovies.Columns["status"].DisplayIndex = 2;
             dgvMovies.Columns["duration"].DisplayIndex = 3;
-            dgvMovies.Columns["ChinhSua"].DisplayIndex = 4;
-            dgvMovies.Columns["Xoa"].DisplayIndex = 5;
+            dgvMovies.Columns["colEdit"].DisplayIndex = 4;
+            dgvMovies.Columns["colDelete"].DisplayIndex = 5;
         }
         private void BtnSearch_Click(object sender, EventArgs e)
         {
@@ -85,7 +84,8 @@ namespace AdminApp
             if (e.RowIndex < 0) return;
 
             // Lấy ID của dòng được click
-            string movie_id = dgvMovies.Rows[e.RowIndex].Cells["movie_id"].Value.ToString();
+           Film film = (Film)dgvMovies.Rows[e.RowIndex].DataBoundItem;
+            string movie_id = film.movie_id;
 
             // 1) Click icon chỉnh sửa
             if (dgvMovies.Columns[e.ColumnIndex].Name == "colEdit")
@@ -132,7 +132,8 @@ namespace AdminApp
         {
             if (e.RowIndex < 0) return;
 
-            string movieId = dgvMovies.Rows[e.RowIndex].Cells["movie_id"].Value.ToString();
+            Film film = (Film)dgvMovies.Rows[e.RowIndex].DataBoundItem;
+            string movieId = film.movie_id;
 
             var f = new FormViewDetailMovie(movieId);
             f.Show();

@@ -154,6 +154,47 @@ namespace AdminApp.Repositories
             return null;
         }
 
+        public Film GetById2(string id)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                string sql = @"SELECT movie_id, title, description, genre, director, actor, 
+                              release_date, language, age_restriction, duration, 
+                              film_purchase_price, status
+                       FROM movie
+                       WHERE movie_id = @id";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Film
+                            {
+                                movie_id = reader["movie_id"].ToString(),
+                                title = reader["title"].ToString(),
+                                description = reader["description"].ToString(),
+                                genre = reader["genre"].ToString(),
+                                director = reader["director"].ToString(),
+                                actor = reader["actor"].ToString(),
+                                release_date = reader["release_date"].ToString(),
+                                language = reader["language"].ToString(),
+                                age_restriction = reader["age_restriction"].ToString(),
+                                duration = int.Parse(reader["duration"].ToString()),
+                                film_purchase_price = reader["film_purchase_price"] == DBNull.Value ? (int?)null : int.Parse(reader["film_purchase_price"].ToString()),
+                                status = reader["status"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+
         public void UpdateFilm(Film film)
         {
             using var conn = DatabaseHelper.GetConnection();
