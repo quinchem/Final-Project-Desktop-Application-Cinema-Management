@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedDatabase", "SharedDat
 		SharedDatabase\Cinema.db = SharedDatabase\Cinema.db
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedData", "SharedData\SharedData.csproj", "{1519EB68-EF9E-4507-9E14-A936A94A16DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{33AF3AE2-3C92-491B-A074-A30DEEBB34D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33AF3AE2-3C92-491B-A074-A30DEEBB34D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33AF3AE2-3C92-491B-A074-A30DEEBB34D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1519EB68-EF9E-4507-9E14-A936A94A16DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1519EB68-EF9E-4507-9E14-A936A94A16DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1519EB68-EF9E-4507-9E14-A936A94A16DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1519EB68-EF9E-4507-9E14-A936A94A16DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

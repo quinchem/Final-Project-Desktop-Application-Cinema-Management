@@ -8,7 +8,9 @@ namespace UserApp
         {
             InitializeComponent();
             UpdateHeaderUI();
+            
         }
+        private Guna.UI2.WinForms.Guna2Button currentButton;
 
         private Form currentFormChild;
         public void OpenChildForm(Form childForm)
@@ -30,6 +32,31 @@ namespace UserApp
                 mainpanel.AutoScroll = true;
             };
         }
+        private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
+        {
+            if (btn == null) return;
+
+            // Reset nút cũ về trạng thái Design
+            if (currentButton != null)
+            {
+                // Reset về trạng thái mặc định trong Designer
+                currentButton.FillColor = currentButton.Tag != null
+                    ? (Color)currentButton.Tag
+                    : Color.FromArgb(44, 84, 115); // fallback
+                currentButton.ForeColor = Color.White;
+                currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
+            }
+
+            // Lưu màu gốc của nút mới (nếu chưa lưu)
+            if (btn.Tag == null)
+                btn.Tag = btn.FillColor; // lưu FillColor gốc vào Tag
+
+            // Set nút hiện tại active
+            currentButton = btn;
+            currentButton.FillColor = Color.FromArgb(44, 84, 115);
+            currentButton.ForeColor = Color.FromArgb(255, 128, 0);
+            currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
+        }
         private FormLogin loginForm;
 
         private void btnDangNhap_Click(object sender, EventArgs e)
@@ -37,6 +64,7 @@ namespace UserApp
             loginForm = new FormLogin(this);
             OpenChildForm(loginForm);
             loginForm.ShowLogin();
+            
         }
 
         // Biến lưu thông tin user đã login
@@ -74,7 +102,6 @@ namespace UserApp
 
         private void btnDangKy_Click(object sender, EventArgs e)
         {
-
             loginForm = new FormLogin(this);
             OpenChildForm(loginForm);
             loginForm.ShowRegister();
@@ -145,7 +172,22 @@ namespace UserApp
 
         private void btnLichChieu_Click(object sender, EventArgs e)
         {
+            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
+            if (btn == null) return;
+
+            ActivateButton(btn);
+            
             OpenChildForm(new FormShowtimeList());
+        }
+
+        private void btnPhim_Click(object sender, EventArgs e)
+        {
+            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
+            if (btn == null) return;
+
+            ActivateButton(btn);
+           
+            OpenChildForm(new FormMovieList());
         }
     }
 }
