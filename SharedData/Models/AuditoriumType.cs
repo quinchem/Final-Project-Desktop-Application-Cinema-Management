@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminApp.Models
+namespace SharedData.Models
 {
     public class AuditoriumType
     {

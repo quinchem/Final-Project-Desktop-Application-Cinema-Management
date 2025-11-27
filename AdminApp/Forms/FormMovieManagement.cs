@@ -1,6 +1,6 @@
-﻿using AdminApp.Models;
-using AdminApp.Properties;
-using AdminApp.Repositories;
+﻿using AdminApp.Properties;
+using SharedData.Models;
+using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

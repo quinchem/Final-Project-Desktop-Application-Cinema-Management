@@ -1,13 +1,12 @@
-﻿using AdminApp.Models;
-using Microsoft.Data.Sqlite;
-using Microsoft.VisualBasic.Devices;
+﻿using Microsoft.Data.Sqlite;
+using SharedData.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminApp.Repositories
+namespace SharedData.Repositories
 {
     public class FilmRepo
     {

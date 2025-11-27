@@ -20,6 +20,7 @@ namespace UserApp
             InitializeComponent();
             this.Opacity = 0;
         }
+        private Guna.UI2.WinForms.Guna2Button currentButton;
         private void FormLogin_Load(object sender, EventArgs e)
         {
             System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
@@ -33,11 +34,39 @@ namespace UserApp
             };
             t.Start();
         }
+        private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
+        {
+            if (btn == null) return;
+
+            // Reset nút cũ về trạng thái Design
+            if (currentButton != null)
+            {
+                // Reset về trạng thái mặc định trong Designer
+                currentButton.FillColor = currentButton.Tag != null
+                    ? (Color)currentButton.Tag
+                    : Color.FromArgb(44, 84, 115); // fallback
+                currentButton.ForeColor = Color.White;
+                currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
+            }
+
+            // Lưu màu gốc của nút mới (nếu chưa lưu)
+            if (btn.Tag == null)
+                btn.Tag = btn.FillColor; // lưu FillColor gốc vào Tag
+
+            // Set nút hiện tại active
+            currentButton = btn;
+            currentButton.FillColor = Color.FromArgb(255, 128, 0);
+            //currentButton.ForeColor = Color.FromArgb(255, 128, 0);
+            currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
+        }
         public void ShowLogin()
         {
             panelDangNhap.Visible = true;
             panelDangKy.Visible = false;
             panelDangNhap.BringToFront();
+            
+            if (btnDangNhap == null) return;
+            ActivateButton(btnDangNhap);
         }
 
         public void ShowRegister()
@@ -45,16 +74,25 @@ namespace UserApp
             panelDangNhap.Visible = false;
             panelDangKy.Visible = true;
             panelDangKy.BringToFront();
+
+            if (btnDangKy == null) return;
+            ActivateButton(btnDangKy);
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             ShowLogin();
+            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
+            if (btn == null) return;
+            ActivateButton(btn);
         }
 
         private void btnDangKy_Click(object sender, EventArgs e)
         {
             ShowRegister();
+            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
+            if (btn == null) return;
+            ActivateButton(btn);
         }
         public void SwitchToLogin()
         {
