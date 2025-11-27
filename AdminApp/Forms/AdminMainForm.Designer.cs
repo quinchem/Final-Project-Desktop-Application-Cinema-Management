@@ -239,7 +239,7 @@
             guna2Button5.Size = new Size(143, 51);
             guna2Button5.TabIndex = 29;
             guna2Button5.Text = "TỔNG QUAN";
-            guna2Button5.Click += guna2Button5_Click;
+            //guna2Button5.Click += guna2Button5_Click;
             // 
             // pictureBox1
             // 
