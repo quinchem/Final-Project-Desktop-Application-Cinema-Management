@@ -15,6 +15,7 @@ namespace UserApp
     {
         private ShowtimeRepo repo = new ShowtimeRepo();
         private List<ShowtimeInfo> currentShowtimes;
+        private ImageRepo _imageRepo = new ImageRepo();
         private DateTime currentStartDate;
         private DateTime selectedDate;
         private ShowtimeInfo _selectedShowtime = null;
@@ -68,22 +69,28 @@ namespace UserApp
 
         private void OnMonthChanged(object sender, EventArgs e)
         {
-            // Chặn sự kiện chạy khi chưa load xong form
             if (cboMonth.SelectedIndex < 0) return;
 
             int selectedMonth = cboMonth.SelectedIndex + 1;
             int currentYear = DateTime.Today.Year;
 
-            // Lấy ngày đầu tiên của tháng được chọn
-            DateTime firstDayOfMonth = new DateTime(currentYear, selectedMonth, 1);
+            DateTime targetDate;
 
-            // Cập nhật lại ngày bắt đầu tuần (Thứ 2)
-            currentStartDate = GetMondayOfWeek(firstDayOfMonth);
+            // Nếu tháng được chọn trùng với tháng thực tế hiện tại
+            if (selectedMonth == DateTime.Today.Month && currentYear == DateTime.Today.Year)
+            {
+                targetDate = DateTime.Today; // -> Chọn luôn ngày hôm nay
+            }
+            else
+            {
+                targetDate = new DateTime(currentYear, selectedMonth, 1); // -> Các tháng khác thì chọn ngày mùng 1
+            }
 
-            // 🔥 QUAN TRỌNG: Reset ngày đang chọn về đầu tuần đó luôn để tránh lỗi lệch ngày
-            selectedDate = firstDayOfMonth; ;
+            // Tính toán lại thứ 2 đầu tuần để vẽ lịch cho đúng dải ngày
+            currentStartDate = GetMondayOfWeek(targetDate);
 
-            LoadShowtimes();
+            // Gán ngày được chọn (để hiện nút màu cam)
+            SelectDate(targetDate);
         }
 
         private DateTime GetMondayOfWeek(DateTime date)
@@ -297,16 +304,44 @@ namespace UserApp
             mainPanel.ShadowDecoration.Color = Color.Black;
             mainPanel.ShadowDecoration.BorderRadius = 15;
 
-            // 2. Poster (Bên trái)
+            // 2 Lấy Ảnh Poster từ Repo
+            Image moviePoster = null;
+            try
+            {
+                // Kiểm tra biến _imageRepo đã được khởi tạo chưa
+                if (_imageRepo == null) _imageRepo = new ImageRepo();
+
+                string movieId = showtimes[0].movie_id;
+                byte[] imgBytes = _imageRepo.GetMoviePoster(movieId);
+
+                if (imgBytes != null && imgBytes.Length > 0)
+                {
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        // Clone ảnh ra để tránh lỗi MemoryStream bị đóng
+                        moviePoster = new Bitmap(Image.FromStream(ms));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi load ảnh: " + ex.Message);
+                moviePoster = null; // Nếu lỗi thì để null
+            }
+
+            // 2. Poster
             Guna2PictureBox picPoster = new Guna2PictureBox
             {
                 Size = new Size(175, 250),
                 Location = new Point(20, 15),
-                BackColor = Color.Silver,
+                BackColor = Color.Silver, // Màu xám nếu không có ảnh
                 SizeMode = PictureBoxSizeMode.StretchImage,
-                BorderRadius = 12
+                BorderRadius = 12,
+                UseTransparentBackground = true,
+                Image = moviePoster // 👈 Gán ảnh vào đây
             };
             mainPanel.Controls.Add(picPoster);
+
 
             Panel rightPanel = new Panel
             {
