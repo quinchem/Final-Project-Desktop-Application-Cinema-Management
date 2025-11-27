@@ -56,9 +56,11 @@ namespace AdminApp
                 var film = _filmRepo.GetById(s.movie_id);
                 var room = _audRepo.GetById(s.auditorium_id);
                 var type = room != null ? _audTypeRepo.GetById(room.auditorium_type_id) : null;
-
+                double price = 0;
                 // ⭐ Lấy giá vé theo phòng chiếu
-                double price = _seatRepo.GetTicketPriceByAuditorium(s.auditorium_id);
+                //double price = _seatRepo.GetTicketPriceByAuditorium(s.auditorium_id);
+
+                price = _seatRepo.GetTicketPriceByAuditoriumType(room.auditorium_type_id);
 
                 display.Add(new ShowtimeDisplay
                 {

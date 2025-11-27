@@ -28,15 +28,15 @@ namespace AdminApp.Repositories
 
                 using (var cmd = new SqliteCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", auditoriumId);
+                    cmd.Parameters.AddWithValue("@aid", auditoriumId);
 
                     var result = cmd.ExecuteScalar();
                     if (result != null && result != DBNull.Value)
                         return Convert.ToDouble(result);
-
-                    return 0;
+                    
                 }
             }
+            return 0;
         }
         public double GetTicketPriceByAuditoriumType(string auditoriumTypeId)
         {

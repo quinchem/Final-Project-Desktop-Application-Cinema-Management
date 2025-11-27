@@ -70,8 +70,8 @@ namespace AdminApp
         // Hàm cập nhật giá vé
         private void UpdateTicketPrice()
         {
-            // 1. Kiểm tra nếu chưa chọn định dạng thì giá = 0
-            if (cboDinhDang.SelectedValue == null)
+            // đảm bảo DataSource đã load và có item
+            if (cboDinhDang.DataSource == null || cboDinhDang.SelectedIndex == -1 || cboDinhDang.SelectedValue == null)
             {
                 lblGiaVe.Text = "0";
                 return;
@@ -79,20 +79,22 @@ namespace AdminApp
 
             try
             {
-                // 2. Lấy ID định dạng (VD: 'type01', '2D'...)
-                string typeId = cboDinhDang.SelectedValue.ToString();
+                string auditoriumTypeId = cboDinhDang.SelectedValue.ToString().Trim();
+                if (string.IsNullOrEmpty(auditoriumTypeId))
+                {
+                    lblGiaVe.Text = "0";
+                    return;
+                }
 
-                // --- SỬA Ở ĐÂY ---
-                // Lúc nãy gọi nhầm hàm GetTicketPriceByAuditorium -> Sửa thành GetTicketPriceByAuditoriumType
-                double price = _seatRepo.GetTicketPriceByAuditoriumType(typeId);
+                double price = _seatRepo.GetTicketPriceByAuditoriumType(auditoriumTypeId);
 
-                // 3. Hiển thị lên Label
-                lblGiaVe.Text = price.ToString("N0");
+                // Nếu repo trả 0 (không tìm thấy), hiển thị 0 — hoặc bạn có thể show lỗi debug
+                lblGiaVe.Text = price > 0 ? price.ToString("N0") : "0";
             }
             catch (Exception ex)
             {
-                // Debug lỗi nếu cần
-                // MessageBox.Show(ex.Message);
+                // Nếu cần debug, hiện message
+                // MessageBox.Show("UpdateTicketPrice error: " + ex.Message);
                 lblGiaVe.Text = "0";
             }
         }
@@ -123,7 +125,10 @@ namespace AdminApp
                 MessageBox.Show("Giá vé chưa hợp lệ!", "Thông báo");
                 return;
             }
+            double currentPrice = 0;
+            double.TryParse(lblGiaVe.Text.Replace(",", ""), out currentPrice);
 
+            
             try
             {
                 var showtime = new Showtime
@@ -134,7 +139,6 @@ namespace AdminApp
                     show_date = dtpNgayChieu.Value.ToString("dd/MM/yyyy"),
                     start_time = dtpGioBD.Value.ToString("HH:mm:ss"),
                     end_time = CalculateEndTime(dtpGioBD.Value).ToString("HH:mm:ss")
-                    // Giá vé (price) thường sẽ được lấy từ bảng seat/type chứ không lưu cứng vào showtime (tùy DB của bạn)
                 };
 
                 ShowtimeRepo.Insert(showtime);
