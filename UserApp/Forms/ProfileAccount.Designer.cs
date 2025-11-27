@@ -140,7 +140,6 @@
             pctAvatar.SizeMode = PictureBoxSizeMode.Zoom;
             pctAvatar.TabIndex = 6;
             pctAvatar.TabStop = false;
-            pctAvatar.Click += pctAvatar_Click;
             // 
             // txtHoTen
             // 
@@ -288,48 +287,6 @@
             CbGioiTinh.Size = new Size(220, 36);
             CbGioiTinh.TabIndex = 58;
             // 
-            // guna2TextBox5
-            // 
-            guna2TextBox5.BorderRadius = 10;
-            guna2TextBox5.CustomizableEdges = customizableEdges12;
-            guna2TextBox5.DefaultText = "";
-            guna2TextBox5.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox5.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox5.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox5.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox5.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox5.Font = new Font("Segoe UI", 9F);
-            guna2TextBox5.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox5.Location = new Point(853, 279);
-            guna2TextBox5.Margin = new Padding(4, 5, 4, 5);
-            guna2TextBox5.Name = "guna2TextBox5";
-            guna2TextBox5.PlaceholderText = "";
-            guna2TextBox5.SelectedText = "";
-            guna2TextBox5.ShadowDecoration.CustomizableEdges = customizableEdges13;
-            guna2TextBox5.Size = new Size(330, 35);
-            guna2TextBox5.TabIndex = 18;
-            // 
-            // guna2TextBox4
-            // 
-            guna2TextBox4.BorderRadius = 10;
-            guna2TextBox4.CustomizableEdges = customizableEdges14;
-            guna2TextBox4.DefaultText = "";
-            guna2TextBox4.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox4.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox4.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox4.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Font = new Font("Segoe UI", 9F);
-            guna2TextBox4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox4.Location = new Point(853, 426);
-            guna2TextBox4.Margin = new Padding(4, 5, 4, 5);
-            guna2TextBox4.Name = "guna2TextBox4";
-            guna2TextBox4.PlaceholderText = "";
-            guna2TextBox4.SelectedText = "";
-            guna2TextBox4.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            guna2TextBox4.Size = new Size(330, 35);
-            guna2TextBox4.TabIndex = 19;
-            // 
             // ProfileAccount
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -349,7 +306,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(4);
             Name = "ProfileAccount";
             Size = new Size(945, 413);
             Click += ProfileAccount_Load;

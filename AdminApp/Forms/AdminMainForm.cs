@@ -1,10 +1,14 @@
-﻿namespace AdminApp
+using AdminApp.Models;
+
+namespace AdminApp
 {
     public partial class AdminMainForm : Form
     {
-        public AdminMainForm()
+        private readonly string _staffId;
+        public AdminMainForm(string staffId)
         {
             InitializeComponent();
+            _staffId = staffId;
         }
 
         private void AdminMainForm_Load(object sender, EventArgs e)
@@ -124,11 +128,9 @@
 
         private void picUserIcon_Click(object sender, EventArgs e)
         {
-            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
-            if (btn == null) return;
+            
+            OpenChildForm(new FormAccountManagement(_staffId));
 
-            ActivateButton(btn);
-            OpenChildForm(new FormAccountManagement());
         }
         public void GoHome()
         {
@@ -154,3 +156,5 @@
         }
     }
 }
+
+

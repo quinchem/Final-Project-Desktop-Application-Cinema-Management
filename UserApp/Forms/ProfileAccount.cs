@@ -1,15 +1,9 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserApp.Models;
 
@@ -34,8 +28,6 @@ namespace UserApp
             CbGioiTinh.Items.Clear();
             CbGioiTinh.Items.AddRange(new[] { "Nam", "Nữ", "Khác" });
             CbGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-            }
         }
 
         // ===================== LOAD DATA =====================
@@ -92,7 +84,6 @@ namespace UserApp
                 return;
             }
 
-            // Lấy dữ liệu mới từ UI
             string newName = txtHoTen.Text.Trim();
             string newEmail = txtEmail.Text.Trim();
             string newPhone = txtSDT.Text.Trim();
@@ -131,7 +122,6 @@ namespace UserApp
                     }
 
                     using (var tx = conn.BeginTransaction())
-                    {
                     using (var cmd = conn.CreateCommand())
                     {
                         cmd.Transaction = tx;
@@ -204,23 +194,12 @@ namespace UserApp
             path.CloseFigure();
             Region = new Region(path);
 
-            // Vẽ viền
             using (Pen pen = new Pen(Color.Gray, 1))
             {
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 e.Graphics.DrawPath(pen, path);
             }
         }
-        private void MyUserControl_Load(object sender, EventArgs e)
-        {
-            this.Invalidate(); // vẽ lại => tự chạy OnPaint
-        }
-        private void pctAvatar_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.Title = "Chọn ảnh đại diện";
-                dlg.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
 
         private void ProfileAccount_Load(object sender, EventArgs e)
         {
