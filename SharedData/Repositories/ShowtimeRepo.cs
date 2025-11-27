@@ -2,7 +2,8 @@
 using SharedData.Models;
 using System;
 using System.Collections.Generic;
-using UserApp.Models;
+using System.Data;
+using System.Globalization;
 
 namespace SharedData.Repositories
 {
@@ -121,70 +122,77 @@ namespace SharedData.Repositories
         }
 
         // Lấy suất chiếu theo khoảng ngày (JOIN với Auditorium và AuditoriumType)
-        public List<ShowtimeInfo> GetShowtimesByDateRange(DateTime startDate, int days = 7)
+        // ✅ SỬA: Lấy suất chiếu theo khoảng ngày
+        public List<ShowtimeInfo> GetShowtimesByDateRange(DateTime startDate, int days)
         {
-            List<ShowtimeInfo> showtimes = new List<ShowtimeInfo>();
+            List<ShowtimeInfo> list = new List<ShowtimeInfo>();
 
-            // 1. Tạo danh sách 7 chuỗi ngày cần lấy (Ví dụ: "27-11-2025", "28-11-2025"...)
-            // Format "dd-MM-yyyy" phải GIỐNG HỆT format bạn lưu trong Database
-            List<string> targetDates = new List<string>();
-            for (int i = 0; i < days; i++)
+            try
             {
-                targetDates.Add($"'{startDate.AddDays(i).ToString("dd-MM-yyyy")}'");
-            }
+                // 1️⃣ Format ngày chuẩn ISO yyyy-MM-dd
+                string strStart = startDate.ToString("yyyy-MM-dd");
+                string strEnd = startDate.AddDays(days - 1).ToString("yyyy-MM-dd");
 
-            // Nối lại thành chuỗi để đưa vào câu SQL: '27-11-2025','28-11-2025',...
-            string inClause = string.Join(",", targetDates);
-
-            using (SqliteConnection conn = DatabaseHelper.GetConnection())
-            {
-                // 2. Dùng câu lệnh WHERE IN (...)
-                // Nghĩa là: Lấy suất chiếu mà ngày chiếu NẰM TRONG danh sách 7 ngày kia
+                // 1. Sửa lại câu Query dùng JOIN
                 string query = $@"
                         SELECT 
-                            s.showtime_id,
-                            m.title,
-                            
-                            s.show_date,
-                            s.start_time,
-                            s.end_time,
-                            a.auditorium_id,
-                            a.name,
-                            at.auditorium_type
+                            s.showtime_id, 
+                            s.show_date, 
+                            s.start_time, 
+                            s.end_time, 
+                            s.movie_id,
+                            m.title,    
+                            m.duration,
+                            a.name,     
+                            at.auditorium_type    
                         FROM showtime s
-                        INNER JOIN auditorium a ON s.auditorium_id = a.auditorium_id
-                        INNER JOIN auditorium_type at ON a.auditorium_type_id = at.auditorium_type_id
-                        INNER JOIN movie m ON s.movie_id = m.movie_id
-                        WHERE s.show_date IN ({inClause}) 
-                        ORDER BY s.show_date, s.start_time";
+                        LEFT JOIN movie m ON s.movie_id = m.movie_id          -- Nối với bảng Phim
+                        LEFT JOIN auditorium a ON s.auditorium_id = a.auditorium_id  -- Nối với bảng Phòng
+                        LEFT JOIN auditorium_type at ON a.auditorium_type_id = at.auditorium_type_id -- Nối với bảng Loại Phòng  
+                       
+                        ORDER BY s.show_date, s.start_time
+                    ";
 
-                SqliteCommand cmd = new SqliteCommand(query, conn);
-
-                conn.Open();
-                using (SqliteDataReader reader = cmd.ExecuteReader())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    while (reader.Read())
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
                     {
-                        showtimes.Add(new ShowtimeInfo
-                        {
-                            showtime_id = Convert.ToInt32(reader["showtime_id"]),
-                            title = reader["title"].ToString(),
-                            // Nếu cột poster null thì để chuỗi rỗng
-                            //poster_path = reader["poster_path"] != DBNull.Value ? reader["poster_path"].ToString() : "",
+                        cmd.CommandText = query;
 
-                            // Lấy thẳng string lên, không cần Parse DateTime gì cả
-                            show_date = reader["show_date"].ToString(),
-                            start_time = reader["start_time"].ToString(),
-                            end_time = reader["end_time"].ToString(),
-                            auditorium_id = Convert.ToInt32(reader["auditorium_id"]),
-                            name = reader["name"].ToString(),
-                            auditorium_type = reader["auditorium_type"].ToString(),
-                        });
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var info = new ShowtimeInfo
+                                {
+                                    // Đảm bảo tên cột trong chuỗi khớp với Database của bạn
+                                    showtime_id = reader["showtime_id"]?.ToString(),
+                                    movie_id = reader["movie_id"]?.ToString(),
+                                    title = reader["title"]?.ToString(),
+                                    show_date = reader["show_date"]?.ToString(),
+                                    start_time = reader["start_time"]?.ToString(),
+                                    duration = reader["duration"] != DBNull.Value ? Convert.ToInt32(reader["duration"]) : 0,
+                                    auditorium_type = reader["auditorium_type"]?.ToString(),
+                                    name = reader["name"]?.ToString(),
+                                    // Nếu cột nào null thì bỏ qua hoặc handle, đừng để crash
+                                };
+                                list.Add(info);
+                            }
+                        }
                     }
                 }
             }
-            return showtimes;
+            catch (Exception ex)
+            {
+                // 🔥 QUAN TRỌNG: Hiện lỗi lên để biết đường sửa
+                throw new Exception("Lỗi tại GetShowtimesByDateRange: " + ex.Message);
+            }
+
+            return list;
         }
+
+
 
 
         // ===================== DELETE =====================
