@@ -48,65 +48,65 @@ namespace AdminApp
         }
 
         private void LoadMovieInfo()
-{
-    try
-    {
-        var filmRepo = new FilmRepo();
-        var film = filmRepo.GetById2(movieId); // Lấy film theo ID
-        if (film != null)
         {
-            // TextBox
-            txtTenPhim.Text = film.title;
-            txtTheLoai.Text = film.genre;
-            txtNgonNgu.Text = film.language;
-            txtDaoDien.Text = film.director;
-            txtDienVien.Text = film.actor;
-            txtMoTa.Text = film.description;
-            txtGiaNhap.Text = film.film_purchase_price?.ToString() ?? "";
-            txtThoiLuong.Text = film.duration.ToString();
-
-            // ComboBox: trạng thái
-            if (!string.IsNullOrEmpty(film.status))
+            try
             {
-                if (cboTrangThai.Items.Contains(film.status))
-                    cboTrangThai.SelectedItem = film.status;
+                var filmRepo = new FilmRepo();
+                var film = filmRepo.GetById2(movieId); // Lấy film theo ID
+                if (film != null)
+                {
+                    // TextBox
+                    txtTenPhim.Text = film.title;
+                    txtTheLoai.Text = film.genre;
+                    txtNgonNgu.Text = film.language;
+                    txtDaoDien.Text = film.director;
+                    txtDienVien.Text = film.actor;
+                    txtMoTa.Text = film.description;
+                    txtGiaNhap.Text = film.film_purchase_price?.ToString() ?? "";
+                    txtThoiLuong.Text = film.duration.ToString();
+
+                    // ComboBox: trạng thái
+                    if (!string.IsNullOrEmpty(film.status))
+                    {
+                        if (cboTrangThai.Items.Contains(film.status))
+                            cboTrangThai.SelectedItem = film.status;
+                        else
+                            cboTrangThai.Text = film.status; // fallback
+                    }
+
+                    // ComboBox: độ tuổi
+                    if (!string.IsNullOrEmpty(film.age_restriction))
+                    {
+                        if (cboDoTuoi.Items.Contains(film.age_restriction))
+                            cboDoTuoi.SelectedItem = film.age_restriction;
+                        else
+                            cboDoTuoi.Text = film.age_restriction;
+                    }
+
+                    // DateTimePicker: release_date
+                    DateTime parsedDate;
+                    if (!string.IsNullOrEmpty(film.release_date) &&
+                        DateTime.TryParseExact(film.release_date, "dd/MM/yyyy", null,
+                                               System.Globalization.DateTimeStyles.None, out parsedDate))
+                    {
+                        dtNgayChieu.Value = parsedDate;
+                    }
+                    else
+                    {
+                        dtNgayChieu.Value = DateTime.Today;
+                    }
+                }
                 else
-                    cboTrangThai.Text = film.status; // fallback
+                {
+                    MessageBox.Show("Không tìm thấy thông tin phim!");
+                    this.Close();
+                }
             }
-
-            // ComboBox: độ tuổi
-            if (!string.IsNullOrEmpty(film.age_restriction))
+            catch (Exception ex)
             {
-                if (cboDoTuoi.Items.Contains(film.age_restriction))
-                    cboDoTuoi.SelectedItem = film.age_restriction;
-                else
-                    cboDoTuoi.Text = film.age_restriction;
-            }
-
-            // DateTimePicker: release_date
-            DateTime parsedDate;
-            if (!string.IsNullOrEmpty(film.release_date) &&
-                DateTime.TryParseExact(film.release_date, "dd/MM/yyyy", null,
-                                       System.Globalization.DateTimeStyles.None, out parsedDate))
-            {
-                dtNgayChieu.Value = parsedDate;
-            }
-            else
-            {
-                dtNgayChieu.Value = DateTime.Today;
+                MessageBox.Show("Error loading movie: " + ex.Message);
             }
         }
-        else
-        {
-            MessageBox.Show("Không tìm thấy thông tin phim!");
-            this.Close();
-        }
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show("Error loading movie: " + ex.Message);
-    }
-}
 
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -141,5 +141,9 @@ namespace AdminApp
             }
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

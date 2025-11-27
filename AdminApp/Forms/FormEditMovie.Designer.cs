@@ -54,6 +54,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             LbThemPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtMoTa = new Guna.UI2.WinForms.Guna2TextBox();
@@ -82,6 +84,7 @@
             txtDaoDien = new Guna.UI2.WinForms.Guna2TextBox();
             LbTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtTenPhim = new Guna.UI2.WinForms.Guna2TextBox();
+            btnClose = new Guna.UI2.WinForms.Guna2Button();
             guna2ShadowPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pBPoster).BeginInit();
             SuspendLayout();
@@ -578,12 +581,32 @@
             txtTenPhim.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtTenPhim.TabIndex = 29;
             // 
+            // btnClose
+            // 
+            btnClose.BorderRadius = 5;
+            btnClose.CustomizableEdges = customizableEdges27;
+            btnClose.DisabledState.BorderColor = Color.DarkGray;
+            btnClose.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnClose.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnClose.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnClose.FillColor = Color.Gray;
+            btnClose.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClose.ForeColor = Color.White;
+            btnClose.Location = new Point(788, 552);
+            btnClose.Name = "btnClose";
+            btnClose.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            btnClose.Size = new Size(80, 37);
+            btnClose.TabIndex = 72;
+            btnClose.Text = "Đóng";
+            btnClose.Click += btnClose_Click;
+            // 
             // FormEditMovie
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1028, 601);
+            Controls.Add(btnClose);
             Controls.Add(txtMoTa);
             Controls.Add(btnThemPhim);
             Controls.Add(btnUpPoster);
@@ -650,5 +673,6 @@
         private Guna.UI2.WinForms.Guna2TextBox txtDaoDien;
         private Guna.UI2.WinForms.Guna2HtmlLabel LbTenPhim;
         private Guna.UI2.WinForms.Guna2TextBox txtTenPhim;
+        private Guna.UI2.WinForms.Guna2Button btnClose;
     }
 }
