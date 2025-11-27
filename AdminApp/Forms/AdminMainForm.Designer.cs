@@ -1,4 +1,4 @@
-﻿namespace AdminApp
+namespace AdminApp
 {
     partial class AdminMainForm
     {
