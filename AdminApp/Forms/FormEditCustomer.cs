@@ -1,5 +1,5 @@
-﻿using AdminApp.Repositories;
-using AdminApp.Models;
+﻿using SharedData.Repositories;
+using SharedData.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

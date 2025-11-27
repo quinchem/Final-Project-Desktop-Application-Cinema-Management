@@ -1,9 +1,9 @@
-﻿using AdminApp.Models;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
+using SharedData.Models;
 using System;
 using System.Collections.Generic;
 
-namespace AdminApp.Repositories
+namespace SharedData.Repositories
 {
     public static class ShowtimeRepo
     {

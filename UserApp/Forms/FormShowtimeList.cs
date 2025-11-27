@@ -12,7 +12,7 @@ namespace UserApp
 {
     public partial class FormShowtimeList : Form
     {
-        public FormShowtimeList(string movie_id)
+        public FormShowtimeList()
         {
             InitializeComponent();
         }
