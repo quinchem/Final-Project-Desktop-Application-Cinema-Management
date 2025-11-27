@@ -1,215 +1,507 @@
-﻿using Guna.UI2.WinForms;
-using Newtonsoft.Json;
-using SharedData.Models;
-using System.IO;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
+using Guna.UI2.WinForms;
+using Microsoft.Data.Sqlite;
+using Newtonsoft.Json;
+using SharedData.Models;
 
 namespace UserApp
 {
     public partial class FormSeatSelection : Form
     {
-        public FormSeatSelection()
+        // ================== CONFIG ==================
+        private readonly string roomDesignFolder;
+
+        private readonly string _showtimeId;
+        private readonly string _customerId;
+        private string _auditoriumId;          // R01 / R02...
+
+        // Danh sách toàn bộ ghế của suất chiếu hiện tại
+        private readonly List<SeatUser> _allSeats = new List<SeatUser>();
+
+        // Ghế đang chọn (user)
+        private readonly List<SeatUser> _selectedSeats = new List<SeatUser>();
+
+        // Map button -> SeatUser
+        private readonly Dictionary<Guna2Button, SeatUser> _btnToSeat
+            = new Dictionary<Guna2Button, SeatUser>();
+
+        // Giá từng ghế (key: seat_id thực trong DB: A01R01)
+        private readonly Dictionary<string, decimal> _seatPrices
+            = new Dictionary<string, decimal>();
+
+        private decimal _totalPrice = 0m;
+
+        // ================== CTOR ==================
+        public FormSeatSelection(string showtimeId, string customerId)
         {
             InitializeComponent();
+
+            _showtimeId = showtimeId;
+            _customerId = customerId;
+
+            roomDesignFolder = GetRoomDesignFolder();
         }
-        int timeLeft = 600;
-        private void timer1_Tick(object sender, EventArgs e)
+
+        private string GetRoomDesignFolder()
         {
-            timeLeft--;
+            // Giống bên Admin: suy ra <SolutionRoot>\SharedData\RoomDesign
+            var csb = new SqliteConnectionStringBuilder(DatabaseHelper.GetConnectionString());
+            string dbPath = csb.DataSource;                           // ...\SharedDatabase\Cinema.db
+            string dbDir = Path.GetDirectoryName(dbPath);             // ...\SharedDatabase
+            string solutionRoot = Directory.GetParent(dbDir)?.FullName ?? dbDir;
 
-            // Hiển thị dạng mm:ss
-            lblTime.Text = TimeSpan.FromSeconds(timeLeft).ToString(@"mm\:ss");
-            lblTime.Refresh();
+            string folder = Path.Combine(solutionRoot, "SharedData", "RoomDesign");
+            Directory.CreateDirectory(folder);
+            return folder;
+        }
 
-            if (timeLeft <= 0)
+        // ================== FORM LOAD ==================
+        private void FormSeatSelection_Load(object sender, EventArgs e)
+        {
+            LoadShowtimeAndAuditorium();
+            LoadSeatLayout();
+            UpdateTotalPrice();
+        }
+
+        // 1) Lấy auditorium_id từ showtime
+        private void LoadShowtimeAndAuditorium()
+        {
+            using (var conn = DatabaseHelper.GetConnection())
             {
-                timer1.Stop();
-                lblTime.Text = "00:00";
-                MessageBox.Show("Hết giờ rồi!");
+                conn.Open();
+
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = @"
+SELECT auditorium_id
+FROM showtime
+WHERE showtime_id = $id;
+";
+                cmd.Parameters.AddWithValue("$id", _showtimeId);
+
+                object res = cmd.ExecuteScalar();
+                if (res == null || res == DBNull.Value)
+                {
+                    MessageBox.Show("Không tìm thấy suất chiếu!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Close();
+                    return;
+                }
+
+                _auditoriumId = Convert.ToString(res);   // R01 / R02...
             }
         }
 
-        private void guna2HtmlLabel3_Click(object sender, EventArgs e)
+        // 2) Load layout ghế: JSON + DB seat + seat_for_showtime
+        private void LoadSeatLayout()
         {
-            timeLeft = 600;       // reset 10 phút
-            lblTime.Text = "10:00";
+            panelRoomLayout.Controls.Clear();
+            _allSeats.Clear();
+            _selectedSeats.Clear();
+            _btnToSeat.Clear();
+            _seatPrices.Clear();
+
+            CreateScreenBar();
+
+            // ====== 2.1 Đọc JSON layout (SeatData) ======
+            // auditorium_id = R0X → X = roomIndex
+            int roomIndex = 1;
+            if (!string.IsNullOrEmpty(_auditoriumId) &&
+                _auditoriumId.Length == 3 &&
+                _auditoriumId[0] == 'R')
+            {
+                // "R01" → 1
+                roomIndex = int.Parse(_auditoriumId.Substring(2, 1));
+            }
+
+            string jsonFile = Path.Combine(roomDesignFolder, $"Room_{roomIndex}.json");
+            var jsonSeats = new List<SeatData>();
+
+            if (File.Exists(jsonFile))
+            {
+                jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(
+                               File.ReadAllText(jsonFile)
+                           ) ?? new List<SeatData>();
+            }
+
+            // Map JSON theo location: A01 → SeatData
+            var jsonMap = jsonSeats.ToDictionary(
+                s => s.SeatId,   // A01, A02...
+                s => s,
+                StringComparer.OrdinalIgnoreCase
+            );
+
+            // ====== 2.2 Đọc ghế từ bảng seat ======
+            var seatRows = new List<(string SeatIdDb, string Location, string Status, string SeatTypeId, decimal Price)>();
+
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = @"
+SELECT seat_id, location, status, seat_type_id, per_seat_ticket_price
+FROM seat
+WHERE auditorium_id = $aud;
+";
+                cmd.Parameters.AddWithValue("$aud", _auditoriumId);
+
+                using (var r = cmd.ExecuteReader())
+                {
+                    while (r.Read())
+                    {
+                        string seatIdDb = r.GetString(0);      // A01R01
+                        string loc = r.GetString(1);           // A01
+                        string status = r.GetString(2);        // Bình thường / Bảo trì
+                        string seatTypeId = r.GetString(3);    // ST01 / ST02
+                        decimal price = r.GetDecimal(4);       // 70000 / 90000
+
+                        seatRows.Add((seatIdDb, loc, status, seatTypeId, price));
+                        _seatPrices[seatIdDb] = price;
+                    }
+                }
+
+                // ====== 2.3 Đọc trạng thái từ seat_for_showtime ======
+                var showStatusMap = new Dictionary<string, string>();   // seat_id -> status
+
+                var cmd2 = conn.CreateCommand();
+                cmd2.CommandText = @"
+SELECT seat_id, status
+FROM seat_for_showtime
+WHERE showtime_id = $stid;
+";
+                cmd2.Parameters.AddWithValue("$stid", _showtimeId);
+
+                using (var r2 = cmd2.ExecuteReader())
+                {
+                    while (r2.Read())
+                    {
+                        string sid = r2.GetString(0);   // A01R01
+                        string st = r2.GetString(1);    // Trống / Full / Bảo trì
+                        showStatusMap[sid] = st;
+                    }
+                }
+
+                // ====== 2.4 Kết hợp tạo SeatUser + Button ======
+                foreach (var row in seatRows)
+                {
+                    string seatIdDb = row.SeatIdDb;   // A01R01
+                    string loc = row.Location;        // A01
+
+                    if (string.IsNullOrWhiteSpace(loc) || loc.Length < 2)
+                        continue;
+
+                    string rowChar = loc.Substring(0, 1);     // A
+                    int col = int.Parse(loc.Substring(1));    // 1
+
+                    // Tìm vị trí (X, Y) từ JSON theo SeatId A01
+                    jsonMap.TryGetValue(loc, out var jsonSeat);
+
+                    int posX = jsonSeat?.X ?? 0;
+                    int posY = jsonSeat?.Y ?? 0;
+
+                    string baseStatus = row.Status;               // Bình thường / Bảo trì
+                    string seatTypeId = row.SeatTypeId;           // ST01 / ST02
+                    string showStatus = showStatusMap.ContainsKey(seatIdDb)
+                        ? showStatusMap[seatIdDb]
+                        : "";                                     // null → chưa phát sinh đặt
+
+                    string seatType = seatTypeId == "ST02" ? "VIP" : "thường";
+
+                    // Nếu seat bảng seat là Bảo trì thì showtimeStatus luôn coi như Bảo trì
+                    string finalShowtimeStatus;
+                    if (string.Equals(baseStatus, "Bảo trì", StringComparison.OrdinalIgnoreCase))
+                    {
+                        finalShowtimeStatus = "Bảo trì";
+                    }
+                    else
+                    {
+                        // Trống / Full / Bảo trì / "" (chưa phát sinh)
+                        if (string.IsNullOrWhiteSpace(showStatus))
+                            finalShowtimeStatus = "Trống";
+                        else
+                            finalShowtimeStatus = showStatus;
+                    }
+
+                    var su = new SeatUser
+                    {
+                        SeatId = seatIdDb,          // A01R01
+                        Row = rowChar,              // A
+                        Col = col,                  // 1
+                        SeatType = seatType,        // VIP / thường
+                        BaseStatus = baseStatus,    // Bình thường / Bảo trì
+                        ShowtimeStatus = finalShowtimeStatus, // Trống / Full / Bảo trì
+                        X = posX,
+                        Y = posY
+                    };
+
+                    _allSeats.Add(su);
+
+                    // Tạo nút ghế
+                    var btn = CreateSeatButton(su);
+                    _btnToSeat[btn] = su;
+                }
+            }
         }
+
+        // ================== TẠO MÀN HÌNH ==================
         private void CreateScreenBar()
         {
+            var screen = new Guna2Panel
+            {
+                Name = "screenBar",
+                FillColor = Color.WhiteSmoke,
+                BorderRadius = 0,
+                Height = 50
+            };
 
-            // Tạo panel màn hình
-            Guna2Panel screen = new Guna2Panel();
-            screen.Name = "screenBar";
-            screen.FillColor = Color.WhiteSmoke;
-            screen.BorderRadius = 0;
-            screen.Height = 45;
-
-            int width = panelSeat.Width - 150;
+            int width = panelRoomLayout.Width - 150;
             screen.Width = width;
-            screen.Left = (panelSeat.Width - width) / 2;
+            screen.Left = (panelRoomLayout.Width - width) / 2;
             screen.Top = 20;
 
-            // Label MÀN HÌNH
-            System.Windows.Forms.Label lbl = new System.Windows.Forms.Label();
-            lbl.Text = "MÀN HÌNH";
-            lbl.Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold);
-            lbl.ForeColor = Color.FromArgb(50, 50, 50);
-            lbl.BackColor = Color.Transparent;
-            lbl.AutoSize = true;
+            var lbl = new Label
+            {
+                Text = "MÀN HÌNH",
+                Font = new Font("Segoe UI Semibold", 16, FontStyle.Bold),
+                ForeColor = Color.FromArgb(50, 50, 50),
+                BackColor = Color.Transparent,
+                AutoSize = true
+            };
 
             screen.Controls.Add(lbl);
-
             lbl.Left = (screen.Width - lbl.Width) / 2;
             lbl.Top = (screen.Height - lbl.Height) / 2;
 
-            panelSeat.Controls.Add(screen);
+            panelRoomLayout.Controls.Add(screen);
             screen.BringToFront();
         }
-        private string sharedRoomFolder = @"\\LAPTOP-HQN1B4JJ\CinemaData\Room";
-        private List<Guna2Button> selectedSeats = new List<Guna2Button>();
-        private void LoadRoomLayout(int roomId)
+
+        // ================== TẠO BUTTON GHẾ ==================
+        private Guna2Button CreateSeatButton(SeatUser seat)
         {
-            string filePath = Path.Combine(sharedRoomFolder, $"Room_1.json");
-
-            panelSeat.Controls.Clear();
-            CreateScreenBar();
-
-            if (!File.Exists(filePath))
+            var btn = new Guna2Button
             {
-                MessageBox.Show("Không tìm thấy sơ đồ ghế!", "Thông báo", MessageBoxButtons.OK,
-    MessageBoxIcon.Information);
-                return;
-            }
+                Size = new Size(50, 50),
+                Location = new Point(seat.X, seat.Y),
+                Text = $"{seat.Row}{seat.Col:00}",           // A01, A02...
+                Font = new Font("Segoe UI", 7, FontStyle.Bold),
+                Tag = seat
+            };
 
-            var list = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(filePath));
+            ApplySeatStyle(btn, seat);
 
-            foreach (var seat in list)
-            {
-                Guna2Button btn = new Guna2Button();
-                btn.Text = seat.SeatId;
-                btn.Tag = seat;
-
-                btn.Width = 50;
-                btn.Height = 50;
-                btn.Location = new Point(seat.X, seat.Y);
-
-                btn.Font = new Font("Segoe UI", 7, FontStyle.Bold);
-
-                // STYLE GHẾ
-                ApplyUserSeatStyle(btn, seat);
-
-                if (seat.Status == "Active")
-                    btn.Click += UserSelectSeat;  // chỉ Active mới click
-
-                panelSeat.Controls.Add(btn);
-            }
-        }
-
-        private void ApplyUserSeatStyle(Guna2Button btn, SeatData seat)
-        {
-            btn.AutoRoundedCorners = false;
-            btn.BorderRadius = 0;
+            btn.Click += SeatButton_Click;
             btn.MouseEnter += Seat_Hover;
             btn.MouseLeave += Seat_Unhover;
 
-            if (seat.Status == "Disabled")
+            panelRoomLayout.Controls.Add(btn);
+            return btn;
+        }
+
+        private void ApplySeatStyle(Guna2Button btn, SeatUser seat, bool isSelected = false)
+        {
+            btn.AutoRoundedCorners = false;
+            btn.BorderRadius = 0;
+
+            // GHẾ KHÔNG CHỌN
+            if (!isSelected)
             {
-                btn.FillColor = Color.LightGray;
+                // Bảo trì
+                if (seat.BaseStatus == "Bảo trì" || seat.ShowtimeStatus == "Bảo trì")
+                {
+                    btn.FillColor = Color.DimGray;
+                    btn.ForeColor = Color.White;
+                    btn.BorderThickness = 0;
+                    return;
+                }
+
+                // Full
+                if (seat.ShowtimeStatus == "Full")
+                {
+                    btn.FillColor = Color.LightCoral;
+                    btn.ForeColor = Color.White;
+                    btn.BorderThickness = 0;
+                    return;
+                }
+
+                // Trống
+                btn.FillColor = Color.White;
                 btn.ForeColor = Color.Black;
-                btn.Image = Properties.Resources.close;
-                btn.Text = "";
-                btn.BorderThickness = 0;
-                btn.Enabled = false;  // khóa click
-                return;
-            }
-            // GHẾ ĐÃ ĐẶT → BOOKED
-            if (seat.Status == "Booked")
-            {
-                btn.FillColor = Color.LightCoral;
-                btn.ForeColor = Color.Black;
-                btn.Enabled = false;         // KHÓA CLICK
+                btn.BorderThickness = 3;
+                btn.BorderColor = seat.SeatType == "VIP"
+                    ? Color.FromArgb(255, 193, 7)
+                    : Color.DimGray;
+
                 return;
             }
 
-            if (seat.Type == "VIP")
-            {
-                btn.FillColor = Color.White;
-                btn.BorderColor = Color.FromArgb(255, 193, 7);
-                btn.ForeColor = Color.Black;
-                btn.BorderThickness = 3;
-            }
-            else
-            {
-                btn.FillColor = Color.White;
-                btn.BorderColor = Color.DimGray;
-                btn.ForeColor = Color.Black;
-                btn.BorderThickness = 3;
-            }
+            // GHẾ ĐANG ĐƯỢC CHỌN
+            btn.FillColor = Color.FromArgb(35, 150, 62);
+            btn.ForeColor = Color.White;
+            btn.BorderThickness = 3;
+            btn.BorderColor = seat.SeatType == "VIP"
+                ? Color.FromArgb(255, 193, 7)
+                : Color.White;
         }
+
+        // ================== HOVER ==================
         private void Seat_Hover(object sender, EventArgs e)
         {
-            Guna2Button btn = (Guna2Button)sender;
+            var btn = (Guna2Button)sender;
+            var seat = (SeatUser)btn.Tag;
 
-            if (selectedSeats.Contains(btn))
+            if (_selectedSeats.Contains(seat)) return;
+
+            if (seat.BaseStatus == "Bảo trì" || seat.ShowtimeStatus == "Bảo trì" || seat.ShowtimeStatus == "Full")
                 return;
 
-            btn.FillColor = Color.FromArgb(138, 177, 222); // xanh dương nhạt
+            btn.FillColor = Color.FromArgb(167, 238, 250);
         }
 
         private void Seat_Unhover(object sender, EventArgs e)
         {
-            Guna2Button btn = (Guna2Button)sender;
+            var btn = (Guna2Button)sender;
+            var seat = (SeatUser)btn.Tag;
 
-            if (selectedSeats.Contains(btn))
-                return;
-
-            var seat = (SeatData)btn.Tag;
-            ApplyUserSeatStyle(btn, seat); // trở lại style gốc
+            bool isSelected = _selectedSeats.Contains(seat);
+            ApplySeatStyle(btn, seat, isSelected);
         }
-        private void UserSelectSeat(object sender, EventArgs e)
+
+        // ================== CLICK GHẾ ==================
+        private void SeatButton_Click(object sender, EventArgs e)
         {
-            Guna2Button btn = (Guna2Button)sender;
-            SeatData seat = (SeatData)btn.Tag;
-            timer1.Start();  // BẮT ĐẦU ĐẾM NGƯỢC
+            var btn = (Guna2Button)sender;
+            var seat = (SeatUser)btn.Tag;
 
-            // Nếu ghế Disabled -> không chọn
-            if (seat.Status == "Disabled")
-                return;
-
-            // GHẾ ĐÃ ĐƯỢC CHỌN → BỎ CHỌN
-            if (selectedSeats.Contains(btn))
+            // GHẾ KHÔNG ĐƯỢC CHỌN
+            if (seat.BaseStatus == "Bảo trì" || seat.ShowtimeStatus == "Bảo trì")
             {
-                selectedSeats.Remove(btn);
-                ApplyUserSeatStyle(btn, seat);  // trả về màu gốc
+                MessageBox.Show("Ghế này đang bảo trì, không thể chọn!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
-
             }
-            // GHẾ CHƯA ĐƯỢC CHỌN → CHỌN THÊM
-            selectedSeats.Add(btn);
-            HighlightUserSeat(btn);  // highlight xanh lá
-        }
-        private void HighlightUserSeat(Guna2Button btn)
-        {
-            btn.FillColor = Color.FromArgb(35, 150, 62);  // xanh lá
-            btn.ForeColor = Color.White;
+
+            if (seat.ShowtimeStatus == "Full")
+            {
+                MessageBox.Show("Ghế này đã được đặt trước!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Toggle chọn
+            if (_selectedSeats.Contains(seat))
+            {
+                _selectedSeats.Remove(seat);
+            }
+            else
+            {
+                _selectedSeats.Add(seat);
+            }
+
+            bool isSelected = _selectedSeats.Contains(seat);
+            ApplySeatStyle(btn, seat, isSelected);
+            UpdateTotalPrice();
         }
 
-        private void FormSeatSelection_Load(object sender, EventArgs e)
+        // ================== TÍNH TIỀN ==================
+        private void UpdateTotalPrice()
         {
-            LoadRoomLayout(1);
+            _totalPrice = 0m;
+
+            foreach (var seat in _selectedSeats)
+            {
+                if (_seatPrices.TryGetValue(seat.SeatId, out var price))
+                {
+                    _totalPrice += price;
+                }
+            }
+
+            // Hiển thị: 120.000 → "120,000"
+            lblSoTien.Text = _totalPrice.ToString("#,##0 VNĐ");
         }
 
+        // ================== ĐẶT VÉ & LƯU BILL ==================
+        private void btnDatVe_Click(object sender, EventArgs e)
+        {
+            if (_selectedSeats.Count == 0)
+            {
+                MessageBox.Show("Hãy chọn ít nhất 1 ghế!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                using (var tran = conn.BeginTransaction())
+                {
+                    // 1) Tạo bill
+                    string billId = Guid.NewGuid().ToString("N").Substring(0, 12);
+                    int quantity = _selectedSeats.Count;
+
+                    var cmdBill = conn.CreateCommand();
+                    cmdBill.Transaction = tran;
+                    cmdBill.CommandText = @"
+INSERT INTO bill(bill_id, customer_id, showtime_id, bill_date,
+                 quantity_ticket, per_seat_ticket_price, note, total)
+VALUES ($id, $cus, $show, $date, $qty, $price, $note, $total);
+";
+                    cmdBill.Parameters.AddWithValue("$id", billId);
+                    cmdBill.Parameters.AddWithValue("$cus", _customerId);
+                    cmdBill.Parameters.AddWithValue("$show", _showtimeId);
+                    cmdBill.Parameters.AddWithValue("$date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmdBill.Parameters.AddWithValue("$qty", quantity);
+                    cmdBill.Parameters.AddWithValue("$price", 0);  // không dùng, total mới là chuẩn
+                    cmdBill.Parameters.AddWithValue("$note", "");
+                    cmdBill.Parameters.AddWithValue("$total", _totalPrice);
+
+                    cmdBill.ExecuteNonQuery();
+
+                    // 2) Cập nhật seat_for_showtime (Full)
+                    foreach (var seat in _selectedSeats)
+                    {
+                        var cmdUpdate = conn.CreateCommand();
+                        cmdUpdate.Transaction = tran;
+                        cmdUpdate.CommandText = @"
+UPDATE seat_for_showtime
+SET status = 'Full'
+WHERE seat_id = $sid AND showtime_id = $stid;
+";
+                        cmdUpdate.Parameters.AddWithValue("$sid", seat.SeatId);   // A01R01
+                        cmdUpdate.Parameters.AddWithValue("$stid", _showtimeId);
+
+                        int rows = cmdUpdate.ExecuteNonQuery();
+
+                        if (rows == 0)
+                        {
+                            var cmdInsert = conn.CreateCommand();
+                            cmdInsert.Transaction = tran;
+                            cmdInsert.CommandText = @"
+INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
+VALUES ($sid, $stid, 'Full');
+";
+                            cmdInsert.Parameters.AddWithValue("$sid", seat.SeatId);
+                            cmdInsert.Parameters.AddWithValue("$stid", _showtimeId);
+                            cmdInsert.ExecuteNonQuery();
+                        }
+                    }
+
+                    tran.Commit();
+                }
+            }
+
+            MessageBox.Show("Đặt vé thành công!", "Thông báo",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Refresh lại trạng thái ghế
+            LoadSeatLayout();
+            UpdateTotalPrice();
+        }
     }
-
-
 }

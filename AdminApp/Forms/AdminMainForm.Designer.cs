@@ -100,7 +100,7 @@
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2Panel1.Size = new Size(1382, 131);
+            guna2Panel1.Size = new Size(1412, 131);
             guna2Panel1.TabIndex = 0;
             // 
             // label2
@@ -294,20 +294,22 @@
             // panelMain
             // 
             panelMain.AutoScroll = true;
-            panelMain.AutoScrollMinSize = new Size(800, 800);
             panelMain.CustomizableEdges = customizableEdges17;
-            panelMain.Location = new Point(0, 128);
+            panelMain.Dock = DockStyle.Fill;
+            panelMain.Location = new Point(0, 131);
             panelMain.Name = "panelMain";
             panelMain.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            panelMain.Size = new Size(1382, 793);
+            panelMain.Size = new Size(1412, 869);
             panelMain.TabIndex = 1;
             // 
             // AdminMainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            AutoScrollMinSize = new Size(0, 1000);
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1382, 918);
+            ClientSize = new Size(1433, 953);
             Controls.Add(panelMain);
             Controls.Add(guna2Panel1);
             Name = "AdminMainForm";
