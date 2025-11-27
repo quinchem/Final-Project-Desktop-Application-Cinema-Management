@@ -583,8 +583,6 @@
             // 
             // btnClose
             // 
-
-
             btnClose.BorderRadius = 5;
             btnClose.CustomizableEdges = customizableEdges27;
             btnClose.DisabledState.BorderColor = Color.DarkGray;
