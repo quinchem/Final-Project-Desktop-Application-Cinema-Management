@@ -37,6 +37,7 @@ namespace AdminApp
             try
             {
                 var films = _filmRepo.GetAllFilms();
+                var sortedFilms = films.OrderByDescending(x => x.release_date).ToList();
                 BindDataToGrid(films);
             }
             catch (Exception ex)

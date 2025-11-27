@@ -60,6 +60,13 @@
             btnXoa = new Guna.UI2.WinForms.Guna2Button();
             btnSua = new Guna.UI2.WinForms.Guna2Button();
             dgvShowtime = new Guna.UI2.WinForms.Guna2DataGridView();
+            Showtime_id = new DataGridViewTextBoxColumn();
+            title = new DataGridViewTextBoxColumn();
+            name = new DataGridViewTextBoxColumn();
+            auditorium_type = new DataGridViewTextBoxColumn();
+            per_seat_ticket_price = new DataGridViewTextBoxColumn();
+            show_date = new DataGridViewTextBoxColumn();
+            start_time = new DataGridViewTextBoxColumn();
             btnThem = new Guna.UI2.WinForms.Guna2Button();
             btnTimPhim = new Guna.UI2.WinForms.Guna2Button();
             txtTenPhim = new Guna.UI2.WinForms.Guna2TextBox();
@@ -73,13 +80,6 @@
             dtpNgayChieu = new Guna.UI2.WinForms.Guna2DateTimePicker();
             label1 = new Label();
             guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            Showtime_id = new DataGridViewTextBoxColumn();
-            title = new DataGridViewTextBoxColumn();
-            name = new DataGridViewTextBoxColumn();
-            auditorium_type = new DataGridViewTextBoxColumn();
-            per_seat_ticket_price = new DataGridViewTextBoxColumn();
-            show_date = new DataGridViewTextBoxColumn();
-            start_time = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvShowtime).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             SuspendLayout();
@@ -152,14 +152,14 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvShowtime.DefaultCellStyle = dataGridViewCellStyle3;
             dgvShowtime.GridColor = Color.WhiteSmoke;
-            dgvShowtime.Location = new Point(108, 279);
+            dgvShowtime.Location = new Point(148, 279);
             dgvShowtime.Margin = new Padding(4);
             dgvShowtime.Name = "dgvShowtime";
             dgvShowtime.ReadOnly = true;
             dgvShowtime.RowHeadersVisible = false;
             dgvShowtime.RowHeadersWidth = 51;
             dgvShowtime.RowTemplate.Height = 29;
-            dgvShowtime.Size = new Size(1840, 808);
+            dgvShowtime.Size = new Size(1713, 808);
             dgvShowtime.TabIndex = 36;
             dgvShowtime.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgvShowtime.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -182,6 +182,80 @@
             dgvShowtime.ThemeStyle.RowsStyle.Height = 29;
             dgvShowtime.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgvShowtime.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
+            // Showtime_id
+            // 
+            Showtime_id.DataPropertyName = "showtime_id";
+            Showtime_id.Frozen = true;
+            Showtime_id.HeaderText = "Column1";
+            Showtime_id.MinimumWidth = 9;
+            Showtime_id.Name = "Showtime_id";
+            Showtime_id.ReadOnly = true;
+            Showtime_id.Visible = false;
+            Showtime_id.Width = 175;
+            // 
+            // title
+            // 
+            title.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            title.DataPropertyName = "title";
+            title.Frozen = true;
+            title.HeaderText = "Tên Phim";
+            title.MinimumWidth = 6;
+            title.Name = "title";
+            title.ReadOnly = true;
+            title.Width = 450;
+            // 
+            // name
+            // 
+            name.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            name.DataPropertyName = "name";
+            name.FillWeight = 65.33226F;
+            name.Frozen = true;
+            name.HeaderText = "Phòng";
+            name.MinimumWidth = 6;
+            name.Name = "name";
+            name.ReadOnly = true;
+            name.Width = 200;
+            // 
+            // auditorium_type
+            // 
+            auditorium_type.DataPropertyName = "auditorium_type";
+            auditorium_type.HeaderText = "Định Dạng";
+            auditorium_type.MinimumWidth = 6;
+            auditorium_type.Name = "auditorium_type";
+            auditorium_type.ReadOnly = true;
+            auditorium_type.Width = 200;
+            // 
+            // per_seat_ticket_price
+            // 
+            per_seat_ticket_price.DataPropertyName = "per_seat_ticket_price";
+            per_seat_ticket_price.HeaderText = "Giá Vé";
+            per_seat_ticket_price.MinimumWidth = 6;
+            per_seat_ticket_price.Name = "per_seat_ticket_price";
+            per_seat_ticket_price.ReadOnly = true;
+            per_seat_ticket_price.Width = 200;
+            // 
+            // show_date
+            // 
+            show_date.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            show_date.DataPropertyName = "show_date";
+            show_date.FillWeight = 65.33226F;
+            show_date.HeaderText = "Ngày Chiếu";
+            show_date.MinimumWidth = 6;
+            show_date.Name = "show_date";
+            show_date.ReadOnly = true;
+            show_date.Width = 250;
+            // 
+            // start_time
+            // 
+            start_time.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            start_time.DataPropertyName = "start_time";
+            start_time.FillWeight = 65.33226F;
+            start_time.HeaderText = "Giờ Chiếu";
+            start_time.MinimumWidth = 6;
+            start_time.Name = "start_time";
+            start_time.ReadOnly = true;
+            start_time.Width = 250;
             // 
             // btnThem
             // 
@@ -427,80 +501,6 @@
             guna2PictureBox1.Size = new Size(36, 35);
             guna2PictureBox1.TabIndex = 49;
             guna2PictureBox1.TabStop = false;
-            // 
-            // showtime_id
-            // 
-            Showtime_id.DataPropertyName = "showtime_id";
-            Showtime_id.Frozen = true;
-            Showtime_id.HeaderText = "Column1";
-            Showtime_id.MinimumWidth = 9;
-            Showtime_id.Name = "showtime_id";
-            Showtime_id.ReadOnly = true;
-            Showtime_id.Visible = false;
-            Showtime_id.Width = 175;
-            // 
-            // title
-            // 
-            title.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            title.DataPropertyName = "title";
-            title.Frozen = true;
-            title.HeaderText = "Tên Phim";
-            title.MinimumWidth = 6;
-            title.Name = "title";
-            title.ReadOnly = true;
-            title.Width = 450;
-            // 
-            // name
-            // 
-            name.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            name.DataPropertyName = "name";
-            name.FillWeight = 65.33226F;
-            name.Frozen = true;
-            name.HeaderText = "Phòng";
-            name.MinimumWidth = 6;
-            name.Name = "name";
-            name.ReadOnly = true;
-            name.Width = 200;
-            // 
-            // auditorium_type
-            // 
-            auditorium_type.DataPropertyName = "auditorium_type";
-            auditorium_type.HeaderText = "Định Dạng";
-            auditorium_type.MinimumWidth = 6;
-            auditorium_type.Name = "auditorium_type";
-            auditorium_type.ReadOnly = true;
-            auditorium_type.Width = 200;
-            // 
-            // per_seat_ticket_price
-            // 
-            per_seat_ticket_price.DataPropertyName = "per_seat_ticket_price";
-            per_seat_ticket_price.HeaderText = "Giá Vé";
-            per_seat_ticket_price.MinimumWidth = 6;
-            per_seat_ticket_price.Name = "per_seat_ticket_price";
-            per_seat_ticket_price.ReadOnly = true;
-            per_seat_ticket_price.Width = 200;
-            // 
-            // show_date
-            // 
-            show_date.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            show_date.DataPropertyName = "show_date";
-            show_date.FillWeight = 65.33226F;
-            show_date.HeaderText = "Ngày Chiếu";
-            show_date.MinimumWidth = 6;
-            show_date.Name = "show_date";
-            show_date.ReadOnly = true;
-            show_date.Width = 250;
-            // 
-            // start_time
-            // 
-            start_time.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            start_time.DataPropertyName = "start_time";
-            start_time.FillWeight = 65.33226F;
-            start_time.HeaderText = "Giờ Chiếu";
-            start_time.MinimumWidth = 6;
-            start_time.Name = "start_time";
-            start_time.ReadOnly = true;
-            start_time.Width = 250;
             // 
             // FormShowManagement
             // 
