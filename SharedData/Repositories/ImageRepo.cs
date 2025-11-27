@@ -1,0 +1,103 @@
+﻿using Microsoft.Data.Sqlite;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SharedData.Repositories
+{
+    public class ImageRepo
+    {
+        /// <summary>
+        /// Lưu ảnh cho staff (ghi đè nếu đã tồn tại)
+        /// </summary>
+        public bool SaveStaffImage(string staffId, byte[] imageBytes)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+
+                // 1️⃣ Xóa ảnh cũ
+                string deleteSql = @"
+                    DELETE FROM ImageStore
+                    WHERE related_id = @id AND image_type = 'staff';
+                ";
+
+                using (var deleteCmd = new SqliteCommand(deleteSql, conn))
+                {
+                    deleteCmd.Parameters.AddWithValue("@id", staffId);
+                    deleteCmd.ExecuteNonQuery();
+                }
+
+                // 2️⃣ Insert ảnh mới
+                string insertSql = @"
+                    INSERT INTO ImageStore (related_id, image_type, image_data)
+                    VALUES (@id, 'staff', @img);
+                ";
+
+                using (var insertCmd = new SqliteCommand(insertSql, conn))
+                {
+                    insertCmd.Parameters.Add("@id", SqliteType.Text).Value = staffId;
+                    insertCmd.Parameters.Add("@img", SqliteType.Blob).Value = imageBytes;
+
+                    return insertCmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Lấy ảnh staff
+        /// </summary>
+        public byte[] GetStaffImage(string staffId)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+
+                string sql = @"
+                    SELECT image_data
+                    FROM ImageStore
+                    WHERE related_id = @id AND image_type = 'staff'
+                    LIMIT 1;
+                ";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", staffId);
+
+                    object result = cmd.ExecuteScalar();
+
+                    if (result == null || result == DBNull.Value)
+                        return null;
+
+                    return (byte[])result;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Xóa ảnh staff
+        /// </summary>
+        public bool DeleteStaffImage(string staffId)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+
+                string sql = @"
+                    DELETE FROM ImageStore
+                    WHERE related_id = @id AND image_type = 'staff';
+                ";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", staffId);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+    }
+}
+
+

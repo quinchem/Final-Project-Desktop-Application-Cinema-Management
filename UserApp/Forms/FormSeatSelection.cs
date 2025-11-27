@@ -1,6 +1,6 @@
 ﻿using Guna.UI2.WinForms;
 using Newtonsoft.Json;
-using SharedData;
+using SharedData.Models;
 using System.IO;
 using System;
 using System.Collections.Generic;
