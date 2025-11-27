@@ -17,8 +17,9 @@ namespace AdminApp
 {
     public partial class FormAddMovie : Form
     {
-
+       
         private FilmRepo _filmRepo = new FilmRepo();
+        private byte[] _posterImageData = null;
         public FormAddMovie()
         {
             InitializeComponent(); // Khởi tạo các control trên form
@@ -66,7 +67,38 @@ namespace AdminApp
         }
         public event EventHandler FilmAdded;
 
-    
+        private void btnUploadImage_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // Dispose the old image first
+                    if (picPoster.Image != null)
+                    {
+                        picPoster.Image.Dispose();
+                        picPoster.Image = null;
+                    }
+
+                    // Load the new image
+                    picPoster.Image = Image.FromFile(ofd.FileName);
+
+                    // Read image into byte array
+                    _posterImageData = File.ReadAllBytes(ofd.FileName);
+                }
+                catch (OutOfMemoryException)
+                {
+                    MessageBox.Show("Ảnh quá lớn hoặc hệ thống không đủ bộ nhớ. Vui lòng chọn ảnh nhỏ hơn.",
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    picPoster.Image = null;
+                    _posterImageData = null;
+                }
+            }
+        }
+
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
@@ -120,7 +152,21 @@ VALUES
 
                         cmd.ExecuteNonQuery();
                     }
+                    if (_posterImageData != null)
+                    {
+                        string sqlImg = @"
+                            INSERT INTO ImageStore (related_id, image_type, image_data)
+                            VALUES (@related_id, @image_type, @image_data)
+                        ";
 
+                        using (var cmdImg = new SqliteCommand(sqlImg, conn))
+                        {
+                            cmdImg.Parameters.AddWithValue("@related_id", movieId);
+                            cmdImg.Parameters.AddWithValue("@image_type", "poster");
+                            cmdImg.Parameters.Add("@image_data", SqliteType.Blob).Value = _posterImageData;
+                            cmdImg.ExecuteNonQuery();
+                        }
+                    }
                 }
 
                 MessageBox.Show("Thêm phim thành công!", "Thông báo",
@@ -273,10 +319,16 @@ VALUES
             txtThoiLuong.Clear();
             txtMoTa.Clear();
             txtTheLoai.Clear();
-
-            // Reset DateTimePicker về ngày hiện tại
+            
+            // Properly dispose image
+            if (picPoster.Image != null)
+            {
+                picPoster.Image.Dispose();
+                picPoster.Image = null;
+            }
+            
+            _posterImageData = null;
             dtNgayChieu.Value = DateTime.Now;
-
         }
 
 
