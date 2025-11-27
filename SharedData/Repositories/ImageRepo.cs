@@ -97,6 +97,84 @@ namespace SharedData.Repositories
                 }
             }
         }
+
+        /// <summary>
+        /// Lưu poster phim (ghi đè nếu đã tồn tại)
+        /// </summary>
+        public bool SaveMoviePoster(string movieId, byte[] imageBytes)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+
+                string deleteSql = @"
+                    DELETE FROM ImageStore
+                    WHERE related_id = @id AND image_type = 'poster';
+                ";
+
+                using (var deleteCmd = new SqliteCommand(deleteSql, conn))
+                {
+                    deleteCmd.Parameters.AddWithValue("@id", movieId);
+                    deleteCmd.ExecuteNonQuery();
+                }
+
+                string insertSql = @"
+                    INSERT INTO ImageStore (related_id, image_type, image_data)
+                    VALUES (@id, 'poster', @img);
+                ";
+
+                using (var insertCmd = new SqliteCommand(insertSql, conn))
+                {
+                    insertCmd.Parameters.AddWithValue("@id", movieId);
+                    insertCmd.Parameters.AddWithValue("@img", imageBytes);
+                    return insertCmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Lấy poster phim
+        /// </summary>
+        public byte[] GetMoviePoster(string movieId)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+
+                string sql = @"
+                    SELECT image_data
+                    FROM ImageStore
+                    WHERE related_id = @id AND image_type = 'poster'
+                    LIMIT 1;
+                ";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", movieId);
+                    object result = cmd.ExecuteScalar();
+                    return (result == null || result == DBNull.Value) ? null : (byte[])result;
+                }
+            }
+        }
+
+        public bool DeleteMoviePoster(string movieId)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+
+                string sql = @"
+                    DELETE FROM ImageStore
+                    WHERE related_id = @id AND image_type = 'poster';
+                ";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", movieId);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
     }
 }
 

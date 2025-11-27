@@ -32,7 +32,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             LbThemPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            pBPoster = new PictureBox();
+            picPoster = new PictureBox();
             LbThoiLuong = new Guna.UI2.WinForms.Guna2HtmlLabel();
             LbDoTuoi = new Guna.UI2.WinForms.Guna2HtmlLabel();
             LbGiaNhap = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -57,7 +57,7 @@
             lblStatus = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2ShadowPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pBPoster).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picPoster).BeginInit();
             SuspendLayout();
             // 
             // guna2ShadowPanel1
@@ -84,13 +84,13 @@
             LbThemPhim.TabIndex = 3;
             LbThemPhim.Text = "Chi Tiết Phim";
             // 
-            // pBPoster
+            // picPoster
             // 
-            pBPoster.Location = new Point(33, 99);
-            pBPoster.Name = "pBPoster";
-            pBPoster.Size = new Size(243, 360);
-            pBPoster.TabIndex = 52;
-            pBPoster.TabStop = false;
+            picPoster.Location = new Point(33, 99);
+            picPoster.Name = "picPoster";
+            picPoster.Size = new Size(243, 360);
+            picPoster.TabIndex = 52;
+            picPoster.TabStop = false;
             // 
             // LbThoiLuong
             // 
@@ -359,13 +359,13 @@
             Controls.Add(LbDaoDien);
             Controls.Add(LbNgayChieu);
             Controls.Add(LbTenPhim);
-            Controls.Add(pBPoster);
+            Controls.Add(picPoster);
             Controls.Add(guna2ShadowPanel1);
             Name = "FormViewDetailMovie";
             Text = "FormViewDetailMovie";
             guna2ShadowPanel1.ResumeLayout(false);
             guna2ShadowPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pBPoster).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picPoster).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -374,7 +374,7 @@
 
         private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel LbThemPhim;
-        private PictureBox pBPoster;
+        private PictureBox picPoster;
         private Guna.UI2.WinForms.Guna2HtmlLabel LbThoiLuong;
         private Guna.UI2.WinForms.Guna2HtmlLabel LbDoTuoi;
         private Guna.UI2.WinForms.Guna2HtmlLabel LbGiaNhap;

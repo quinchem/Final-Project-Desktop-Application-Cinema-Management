@@ -1,6 +1,7 @@
-﻿using SharedData.Models;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.Data.Sqlite;
+using SharedData.Models;
 using SharedData.Repositories;
-using DocumentFormat.OpenXml.Office2010.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,8 @@ namespace AdminApp
     public partial class FormEditMovie : Form
     {
         private string movieId;
+        private byte[] _posterImageBytes; // lưu ảnh được chọn
+        private ImageRepo _imageRepo = new ImageRepo();
 
         public FormEditMovie(string id)
         {
@@ -23,6 +26,7 @@ namespace AdminApp
             movieId = id;
             LoadComboBoxData();
             LoadMovieInfo();
+            LoadMoviePoster();
         }
 
         private void LoadComboBoxData()
@@ -108,8 +112,53 @@ namespace AdminApp
             }
         }
 
+        private void LoadMoviePoster()
+        {
+            try
+            {
+                byte[] imgData = _imageRepo.GetMoviePoster(movieId);
+                if (imgData != null)
+                {
+                    _posterImageBytes = imgData;
+                    using (MemoryStream ms = new MemoryStream(imgData))
+                    {
+                        // Đảm bảo PictureBox hiển thị hình gốc
+                        picPoster.Image = Image.FromStream(ms);
+                        picPoster.SizeMode = PictureBoxSizeMode.Zoom; // hiển thị vừa khung
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load poster: " + ex.Message);
+            }
+        }
 
 
+        private void btnUploadPoster_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Chọn poster";
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        _posterImageBytes = File.ReadAllBytes(ofd.FileName);
+                        using (MemoryStream ms = new MemoryStream(_posterImageBytes))
+                        {
+                            picPoster.Image = Image.FromStream(ms);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Không thể tải ảnh: " + ex.Message);
+                    }
+                }
+            }
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -117,7 +166,7 @@ namespace AdminApp
             {
                 var updatedFilm = new Film
                 {
-                    movie_id = movieId, // giữ nguyên ID cũ
+                    movie_id = movieId,
                     title = txtTenPhim.Text,
                     genre = txtTheLoai.Text,
                     language = txtNgonNgu.Text,
@@ -134,12 +183,18 @@ namespace AdminApp
                 var filmRepo = new FilmRepo();
                 filmRepo.UpdateFilm(updatedFilm);
 
+                // ✅ Lưu poster nếu đã chọn
+                if (_posterImageBytes != null)
+                {
+                    _imageRepo.SaveMoviePoster(movieId, _posterImageBytes);
+                }
+
                 MessageBox.Show("Cập nhật phim thành công!");
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error updating movie: " + ex.Message);
+                MessageBox.Show("Lỗi cập nhật phim: " + ex.Message);
             }
         }
 
@@ -148,4 +203,5 @@ namespace AdminApp
             this.Close();
         }
     }
+    
 }
