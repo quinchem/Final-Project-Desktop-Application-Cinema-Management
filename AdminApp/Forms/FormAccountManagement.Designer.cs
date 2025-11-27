@@ -82,7 +82,7 @@
             lbHoTen = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnChinhSua = new Guna.UI2.WinForms.Guna2Button();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            pictureBox1 = new PictureBox();
+            picAvatar = new PictureBox();
             guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnminiDK = new Guna.UI2.WinForms.Guna2Button();
@@ -93,7 +93,7 @@
             panel1.SuspendLayout();
             PanelChinhSua.SuspendLayout();
             guna2CustomGradientPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picAvatar).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -129,7 +129,7 @@
             PanelChinhSua.Controls.Add(lbHoTen);
             PanelChinhSua.Controls.Add(btnChinhSua);
             PanelChinhSua.Controls.Add(guna2HtmlLabel5);
-            PanelChinhSua.Controls.Add(pictureBox1);
+            PanelChinhSua.Controls.Add(picAvatar);
             PanelChinhSua.Controls.Add(guna2HtmlLabel4);
             PanelChinhSua.CustomizableEdges = customizableEdges23;
             PanelChinhSua.Location = new Point(49, 92);
@@ -427,13 +427,12 @@
             txtHoTen.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtHoTen.Location = new Point(360, 66);
             txtHoTen.Margin = new Padding(3, 4, 3, 4);
-            txtHoTen.Name = "full_name";
+            txtHoTen.Name = "txtHoTen";
             txtHoTen.PlaceholderText = "";
             txtHoTen.SelectedText = "";
             txtHoTen.ShadowDecoration.CustomizableEdges = customizableEdges20;
             txtHoTen.Size = new Size(215, 30);
             txtHoTen.TabIndex = 4;
-            
             // 
             // lbHoTen
             // 
@@ -476,13 +475,14 @@
             guna2HtmlLabel5.TabIndex = 2;
             guna2HtmlLabel5.Text = "Admin";
             // 
-            // pictureBox1
+            // picAvatar
             // 
-            pictureBox1.Location = new Point(71, 76);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(125, 117);
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
+            picAvatar.Location = new Point(71, 76);
+            picAvatar.Name = "picAvatar";
+            picAvatar.Size = new Size(125, 117);
+            picAvatar.SizeMode = PictureBoxSizeMode.Zoom;
+            picAvatar.TabIndex = 1;
+            picAvatar.TabStop = false;
             // 
             // guna2HtmlLabel4
             // 
@@ -598,7 +598,7 @@
             PanelChinhSua.PerformLayout();
             guna2CustomGradientPanel2.ResumeLayout(false);
             guna2CustomGradientPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picAvatar).EndInit();
             ResumeLayout(false);
         }
 
@@ -614,7 +614,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2Button btnChinhSua;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
-        private PictureBox pictureBox1;
+        private PictureBox picAvatar;
         private Guna.UI2.WinForms.Guna2HtmlLabel lbNgaySinh;
         private Guna.UI2.WinForms.Guna2TextBox txtHoTen;
         private Guna.UI2.WinForms.Guna2HtmlLabel lbHoTen;
