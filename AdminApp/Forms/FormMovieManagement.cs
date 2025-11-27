@@ -143,6 +143,9 @@ namespace AdminApp
             var f = new FormViewDetailMovie(movieId);
             f.Show();
         }
+           
+
+
 
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
