@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SharedData.Models;
+using SharedData.Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,81 @@ namespace UserApp
 {
     public partial class FormMovieDetail : Form
     {
-        public FormMovieDetail()
+     
+       
+
+        private string movieId;
+        private ImageRepo _imageRepo = new ImageRepo();
+
+        public FormMovieDetail(string id)
         {
             InitializeComponent();
+            movieId = id;
+            LoadMovieDetails();
+            LoadMoviePoster();
+        }
+
+        private void LoadMovieDetails()
+        {
+            try
+            {
+                var repo = new FilmRepo();
+                var film = repo.GetById2(movieId);
+
+                if (film != null)
+                {
+                    lblTitle.Text = film.title;
+                    lblGenre.Text = film.genre;
+                    lblLanguage.Text = film.language;
+                    lblDirector.Text = film.director;
+                    lblActor.Text = film.actor;
+                    lblDescription.Text = film.description;
+                    //lblStatus.Text = film.status;
+                    lblDuration.Text = film.duration.ToString() + " phút";
+                    //lblPrice.Text = film.film_purchase_price.HasValue ? film.film_purchase_price.Value.ToString() : "N/A";
+                    lblAge.Text = film.age_restriction;
+                    lblReleaseDate.Text = film.release_date;
+
+                    // --- Giới hạn xuống dòng cho diễn viên ---
+                    lblActor.AutoSize = true;
+                    lblActor.MaximumSize = new Size(350, 0); // 400 là bề rộng label, có thể chỉnh
+                    lblActor.Text = film.actor;
+
+                    // --- Giới hạn xuống dòng cho mô tả ---
+                    lblDescription.AutoSize = true;
+                    lblDescription.MaximumSize = new Size(800, 0); // 400 là bề rộng label, có thể chỉnh
+                    lblDescription.Text = film.description;
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy thông tin phim!");
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi load thông tin phim: " + ex.Message);
+            }
+        }
+
+        private void LoadMoviePoster()
+        {
+            try
+            {
+                byte[] imgData = _imageRepo.GetMoviePoster(movieId);
+                if (imgData != null)
+                {
+                    using (MemoryStream ms = new MemoryStream(imgData))
+                    {
+                        picPoster.Image = Image.FromStream(ms);
+                        picPoster.SizeMode = PictureBoxSizeMode.Zoom; // hiển thị vừa khung
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi load poster: " + ex.Message);
+            }
         }
 
         private void btnDatVe_Click(object sender, EventArgs e)

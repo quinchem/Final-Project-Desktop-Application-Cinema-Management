@@ -25,7 +25,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            panel1 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panelTemplate = new Guna.UI2.WinForms.Guna2Panel();
             icon1st = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -38,32 +37,20 @@
             guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             panelTemplate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)icon1st).BeginInit();
             ((System.ComponentModel.ISupportInitialize)poster1).BeginInit();
             SuspendLayout();
             // 
-            // panel1
-            // 
-            panel1.AutoScroll = true;
-            panel1.BackColor = Color.FromArgb(92, 124, 150);
-            panel1.Controls.Add(flowLayoutPanel1);
-            panel1.Controls.Add(guna2HtmlLabel1);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1182, 703);
-            panel1.TabIndex = 0;
-            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.Controls.Add(panelTemplate);
-            flowLayoutPanel1.Location = new Point(54, 82);
+            flowLayoutPanel1.Dock = DockStyle.Bottom;
+            flowLayoutPanel1.Location = new Point(0, 218);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1080, 580);
+            flowLayoutPanel1.Size = new Size(1182, 485);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // panelTemplate
@@ -81,7 +68,7 @@
             panelTemplate.Location = new Point(3, 3);
             panelTemplate.Name = "panelTemplate";
             panelTemplate.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            panelTemplate.Size = new Size(292, 423);
+            panelTemplate.Size = new Size(290, 423);
             panelTemplate.TabIndex = 2;
             panelTemplate.Visible = false;
             // 
@@ -196,7 +183,7 @@
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold);
             guna2HtmlLabel1.ForeColor = Color.FromArgb(245, 131, 35);
-            guna2HtmlLabel1.Location = new Point(89, 37);
+            guna2HtmlLabel1.Location = new Point(49, 46);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(260, 39);
             guna2HtmlLabel1.TabIndex = 1;
@@ -206,23 +193,22 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(92, 124, 150);
             ClientSize = new Size(1182, 703);
-            Controls.Add(panel1);
+            Controls.Add(guna2HtmlLabel1);
+            Controls.Add(flowLayoutPanel1);
             Name = "FormMovieList";
             Text = "FormMovieList";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
             panelTemplate.ResumeLayout(false);
             panelTemplate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)icon1st).EndInit();
             ((System.ComponentModel.ISupportInitialize)poster1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
-        private Panel panel1;
         private FlowLayoutPanel flowLayoutPanel1;
         private Guna.UI2.WinForms.Guna2Panel panelTemplate;
         private Guna.UI2.WinForms.Guna2PictureBox poster1;

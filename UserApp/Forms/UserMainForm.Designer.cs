@@ -622,7 +622,6 @@
             guna2PictureBox11.Size = new Size(224, 124);
             guna2PictureBox11.TabIndex = 0;
             guna2PictureBox11.TabStop = false;
-            guna2PictureBox11.Click += Poster_Click;
             // 
             // guna2PictureBox12
             // 
@@ -635,7 +634,6 @@
             guna2PictureBox12.Size = new Size(224, 124);
             guna2PictureBox12.TabIndex = 1;
             guna2PictureBox12.TabStop = false;
-            guna2PictureBox12.Click += Poster_Click;
             // 
             // guna2PictureBox13
             // 
@@ -648,7 +646,6 @@
             guna2PictureBox13.Size = new Size(224, 124);
             guna2PictureBox13.TabIndex = 2;
             guna2PictureBox13.TabStop = false;
-            guna2PictureBox13.Click += Poster_Click;
             // 
             // guna2PictureBox14
             // 
@@ -661,7 +658,6 @@
             guna2PictureBox14.Size = new Size(224, 124);
             guna2PictureBox14.TabIndex = 3;
             guna2PictureBox14.TabStop = false;
-            guna2PictureBox14.Click += Poster_Click;
             // 
             // guna2PictureBox15
             // 
@@ -674,7 +670,6 @@
             guna2PictureBox15.Size = new Size(224, 124);
             guna2PictureBox15.TabIndex = 4;
             guna2PictureBox15.TabStop = false;
-            guna2PictureBox15.Click += Poster_Click;
             // 
             // guna2PictureBox16
             // 
@@ -687,7 +682,6 @@
             guna2PictureBox16.Size = new Size(224, 124);
             guna2PictureBox16.TabIndex = 5;
             guna2PictureBox16.TabStop = false;
-            guna2PictureBox16.Click += Poster_Click;
             // 
             // guna2PictureBox10
             // 
@@ -700,7 +694,6 @@
             guna2PictureBox10.Size = new Size(1344, 525);
             guna2PictureBox10.TabIndex = 7;
             guna2PictureBox10.TabStop = false;
-            guna2PictureBox10.Click += Poster_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -733,7 +726,6 @@
             guna2PictureBox1.Size = new Size(242, 300);
             guna2PictureBox1.TabIndex = 0;
             guna2PictureBox1.TabStop = false;
-            guna2PictureBox1.Click += guna2PictureBox1_Click;
             // 
             // guna2PictureBox2
             // 

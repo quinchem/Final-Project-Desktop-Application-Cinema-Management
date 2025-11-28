@@ -18,108 +18,165 @@ namespace UserApp
     {
         private FilmRepo _filmRepo = new FilmRepo();
         private ImageRepo _imageRepo = new ImageRepo();
+        private UserMainForm _parentForm;
 
-        public FormMovieList()
+
+        public FormMovieList(UserMainForm parentForm)
         {
             InitializeComponent();
+            _parentForm = parentForm;
             LoadMovies();
         }
 
         private void LoadMovies()
         {
-            flowLayoutPanel1.Controls.Clear(); // xóa cũ
-            var films = _filmRepo.GetAllFilms();
+            FilmRepo repo = new FilmRepo();
+            ImageRepo imgRepo = new ImageRepo();
 
+            var films = _filmRepo.GetCurrentlyShowingFilms1();
+            flowLayoutPanel1.Controls.Clear();
             foreach (var film in films)
             {
-                // clone panel template
-                Guna.UI2.WinForms.Guna2Panel panel = new Guna.UI2.WinForms.Guna2Panel();
-                panel.Size = panelTemplate.Size;
-                panel.BackColor = Color.FromArgb(92, 124, 150); // set nền đúng màu
-                panel.ShadowDecoration.CustomizableEdges = panelTemplate.ShadowDecoration.CustomizableEdges;
-
-                // Clone poster
-                Guna.UI2.WinForms.Guna2PictureBox poster = new Guna.UI2.WinForms.Guna2PictureBox();
-                poster.Size = poster1.Size;
-                poster.Location = poster1.Location;
-                poster.SizeMode = poster1.SizeMode;
-                poster.BackColor = Color.Transparent;
-
-                // load ảnh từ db
-                byte[] posterBytes = _imageRepo.GetMoviePoster(film.movie_id);
-                if (posterBytes != null)
-                {
-                    using (MemoryStream ms = new MemoryStream(posterBytes))
-                    {
-                        poster.Image = Image.FromStream(ms);
-                    }
-                }
-
-                panel.Controls.Add(poster);
-
-                // Tên phim
-                Guna.UI2.WinForms.Guna2HtmlLabel lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
-                lblTitle.Size = guna2HtmlLabel2.Size;
-                lblTitle.Location = guna2HtmlLabel2.Location;
-                lblTitle.Font = guna2HtmlLabel2.Font;
-                lblTitle.ForeColor = Color.White;
-                lblTitle.BackColor = Color.Transparent;
-                lblTitle.Text = film.title;
-                panel.Controls.Add(lblTitle);
-
-                // Thời lượng
-                Guna.UI2.WinForms.Guna2HtmlLabel lblDuration = new Guna.UI2.WinForms.Guna2HtmlLabel();
-                lblDuration.Location = guna2HtmlLabel10.Location;
-                lblDuration.Size = guna2HtmlLabel10.Size;
-                lblDuration.ForeColor = Color.White;
-                lblDuration.BackColor = Color.Transparent;
-                lblDuration.Text = $"{film.duration} phút";
-                panel.Controls.Add(lblDuration);
-
-                // Độ tuổi
-                Label lblAge = new Label();
-                lblAge.Location = label2.Location;
-                lblAge.Size = label2.Size;
-                lblAge.ForeColor = Color.White;
-                lblAge.BackColor = Color.Transparent;
-                lblAge.Text = film.age_restriction;
-                panel.Controls.Add(lblAge);
-
-                // Ngày khởi chiếu
-                Guna.UI2.WinForms.Guna2HtmlLabel lblRelease = new Guna.UI2.WinForms.Guna2HtmlLabel();
-                lblRelease.Location = guna2HtmlLabel12.Location;
-                lblRelease.Size = guna2HtmlLabel12.Size;
-                lblRelease.ForeColor = Color.White;
-                lblRelease.BackColor = Color.Transparent;
-                lblRelease.Text = film.release_date;
-                panel.Controls.Add(lblRelease);
-
-                // Nút Đặt vé
-                Guna.UI2.WinForms.Guna2Button btnBook = new Guna.UI2.WinForms.Guna2Button();
-                btnBook.Size = guna2Button1.Size;
-                btnBook.Location = guna2Button1.Location;
-                btnBook.FillColor = guna2Button1.FillColor;
-                btnBook.ForeColor = guna2Button1.ForeColor;
-                btnBook.Font = guna2Button1.Font;
-                btnBook.Text = "ĐẶT VÉ";
-                btnBook.BorderRadius = guna2Button1.BorderRadius;
-                btnBook.Click += (s, e) =>
-                {
-                    MessageBox.Show($"Bạn chọn đặt vé cho phim: {film.title}");
-                    // ở đây gọi form đặt vé
-                };
-                panel.Controls.Add(btnBook);
-
-                // Icon 1st prize (nếu muốn hiển thị)
-                Guna.UI2.WinForms.Guna2PictureBox icon = new Guna.UI2.WinForms.Guna2PictureBox();
-                icon.Size = icon1st.Size;
-                icon.Location = icon1st.Location;
-                icon.Image = icon1st.Image;
-                icon.BackColor = Color.Transparent;
-                panel.Controls.Add(icon);
-
-                flowLayoutPanel1.Controls.Add(panel);
+                var posterBytes = _imageRepo.GetMoviePoster(film.movie_id);
+                var card = CreateFilmCard(film, posterBytes);
+                flowLayoutPanel1.Controls.Add(card);
             }
         }
-    }
+
+        private Panel CreateFilmCard(Film film, byte[] posterBytes)
+        {
+            Panel panel = new Panel();
+            panel.Size = new Size(250, 420);
+            panel.BackColor = Color.FromArgb(92, 124, 150);
+            panel.Margin = new Padding(20);
+
+            // ---------------- POSTER ----------------
+            PictureBox poster = new PictureBox();
+            poster.Size = new Size(180, 230);
+            poster.SizeMode = PictureBoxSizeMode.Zoom;
+            poster.Location = new Point((panel.Width - poster.Width) / 2, 10);
+            poster.Cursor = Cursors.Hand; // đổi con trỏ chuột khi hover
+
+            if (posterBytes != null)
+            {
+                using (MemoryStream ms = new MemoryStream(posterBytes))
+                    poster.Image = Image.FromStream(ms);
+            }
+            else poster.BackColor = Color.Gray;
+
+            // Thêm sự kiện click mở FormMovieDetail theo movie_id
+            poster.Click += (s, e) =>
+            {
+                if (_parentForm != null)
+                {
+                    _parentForm.OpenChildForm(new FormMovieDetail(film.movie_id));
+                }
+            };
+
+            panel.Controls.Add(poster);
+
+            // ---------------- TÊN PHIM ----------------
+            Label lblTitle = new Label();
+            lblTitle.AutoSize = false;
+            lblTitle.Width = panel.Width - 20;
+            lblTitle.Height = 32;
+            lblTitle.Location = new Point(10, poster.Bottom + 10);
+            lblTitle.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.White;
+            lblTitle.BackColor = Color.Transparent;
+            lblTitle.TextAlign = ContentAlignment.MiddleCenter;
+
+            // Hiển thị tên phim 1 dòng, có dấu "..." nếu quá dài
+            lblTitle.Text = film.title;
+            lblTitle.AutoEllipsis = true;
+
+            // Tooltip hiển thị full title khi hover
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(lblTitle, film.title);
+
+            panel.Controls.Add(lblTitle);
+
+            panel.Controls.Add(lblTitle);
+
+            // ---------------- THỜI LƯỢNG | TUỔI ----------------
+            FlowLayoutPanel infoPanel = new FlowLayoutPanel();
+            infoPanel.AutoSize = true;
+            infoPanel.FlowDirection = FlowDirection.LeftToRight;
+            infoPanel.WrapContents = false;
+            infoPanel.Location = new Point(10, lblTitle.Bottom + 6);
+            infoPanel.BackColor = Color.Transparent;
+
+            // Label thời lượng
+            Label lblDuration = new Label();
+            lblDuration.AutoSize = true;
+            lblDuration.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
+            lblDuration.ForeColor = Color.White;
+            lblDuration.BackColor = Color.Transparent;
+            lblDuration.Text = $"{film.duration} PHÚT";
+
+            // Label dấu |
+            Label lblSeparator = new Label();
+            lblSeparator.AutoSize = true;
+            lblSeparator.Font = new Font("Segoe UI ", 10F, FontStyle.Regular);
+            lblSeparator.ForeColor = Color.White;
+            lblSeparator.BackColor = Color.Transparent;
+            lblSeparator.Text = " | ";
+
+            // Label tuổi với màu
+            Label lblAge = new Label();
+            lblAge.AutoSize = true;
+            lblAge.Font = new Font("Segoe UI Black", 10F, FontStyle.Bold);
+            lblAge.TextAlign = ContentAlignment.MiddleCenter;
+            lblAge.BackColor = Color.Transparent;
+            lblAge.Text = film.age_restriction;
+            lblAge.ForeColor = film.age_restriction switch
+            {
+                "P" => Color.LimeGreen,
+                "K" => Color.HotPink,
+                "T13" => Color.Yellow,
+                "T16" => Color.Orange,
+                "T18" => Color.FromArgb(232, 81, 81),
+                _ => Color.White
+            };
+
+            infoPanel.Controls.Add(lblDuration);
+            infoPanel.Controls.Add(lblSeparator);
+            infoPanel.Controls.Add(lblAge);
+
+            // Canh giữa infoPanel
+            infoPanel.Left = (panel.Width - infoPanel.PreferredSize.Width) / 2;
+            infoPanel.Height = infoPanel.PreferredSize.Height;
+
+            panel.Controls.Add(infoPanel);
+
+            // ---------------- KHỞI CHIẾU ----------------
+            Label lblDate = new Label();
+            lblDate.AutoSize = false;
+            lblDate.Width = panel.Width - 20;
+            lblDate.Height = 20;
+            lblDate.Location = new Point(10, infoPanel.Bottom + 6);
+            lblDate.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
+            lblDate.ForeColor = Color.White;
+            lblDate.BackColor = Color.Transparent;
+            lblDate.TextAlign = ContentAlignment.MiddleCenter;
+            lblDate.Text = $"KHỞI CHIẾU: {film.release_date}";
+            panel.Controls.Add(lblDate);
+
+            // ---------------- BUTTON ĐẶT VÉ ----------------
+            Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button();
+            btn.Text = "ĐẶT VÉ";
+            btn.FillColor = Color.FromArgb(245, 131, 35);
+            btn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn.ForeColor = Color.White;
+            btn.BorderRadius = 10;
+            btn.Size = new Size(120, 38);
+            btn.Location = new Point((panel.Width - btn.Width) / 2, panel.Height - 55);
+            panel.Controls.Add(btn);
+
+            return panel;
+        }
+
+
+
+}
 }

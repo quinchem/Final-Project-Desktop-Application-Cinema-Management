@@ -128,10 +128,10 @@ namespace UserApp
             OpenChildForm(new FormSearch());
         }
 
-        private void guna2PictureBox1_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormMovieDetail());
-        }
+        //private void guna2PictureBox1_Click(object sender, EventArgs e)
+        //{
+        //    OpenChildForm(new FormMovieDetail());
+        //}
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -161,15 +161,15 @@ namespace UserApp
             OpenChildForm(profileForm);
         }
 
-        private void Poster_Click(object sender, EventArgs e)
-        {
-            PictureBox poster = sender as PictureBox;
+        //private void Poster_Click(object sender, EventArgs e)
+        //{
+        //    PictureBox poster = sender as PictureBox;
 
-            // (OPTIONAL) Lấy thông tin phim từ Tag nếu có
-            // var movieId = poster.Tag.ToString();
+        //    // (OPTIONAL) Lấy thông tin phim từ Tag nếu có
+        //    // var movieId = poster.Tag.ToString();
 
-            OpenChildForm(new FormMovieDetail());
-        }
+        //    OpenChildForm(new FormMovieDetail());
+        //}
 
         private void btnLichChieu_Click(object sender, EventArgs e)
         {
@@ -188,8 +188,10 @@ namespace UserApp
 
             ActivateButton(btn);
            
-            OpenChildForm(new FormMovieList());
+            OpenChildForm(new FormMovieList(this));
         }
+
+
     }
 }
 
