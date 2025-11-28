@@ -45,6 +45,16 @@ namespace AdminApp
                     lblPrice.Text = film.film_purchase_price.HasValue ? film.film_purchase_price.Value.ToString() : "N/A";
                     lblAge.Text = film.age_restriction;
                     lblReleaseDate.Text = film.release_date;
+
+                    // --- Giới hạn xuống dòng cho diễn viên ---
+                    lblActor.AutoSize = true;
+                    lblActor.MaximumSize = new Size(350, 0); // 400 là bề rộng label, có thể chỉnh
+                    lblActor.Text = film.actor;
+
+                    // --- Giới hạn xuống dòng cho mô tả ---
+                    lblDescription.AutoSize = true;
+                    lblDescription.MaximumSize = new Size(400, 0); // 400 là bề rộng label, có thể chỉnh
+                    lblDescription.Text = film.description;
                 }
                 else
                 {
@@ -76,6 +86,11 @@ namespace AdminApp
             {
                 MessageBox.Show("Lỗi khi load poster: " + ex.Message);
             }
+        }
+
+        private void btnThemPhim_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
