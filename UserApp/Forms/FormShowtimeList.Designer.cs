@@ -1,4 +1,4 @@
-﻿namespace UserApp
+namespace UserApp
 {
     public partial class FormShowtimeList
     {

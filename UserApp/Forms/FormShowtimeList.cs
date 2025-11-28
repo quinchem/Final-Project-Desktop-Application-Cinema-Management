@@ -1,4 +1,4 @@
-﻿using Guna.UI2.WinForms;
+using Guna.UI2.WinForms;
 using SharedData.Models;
 using SharedData.Repositories;
 using System;
