@@ -184,6 +184,7 @@
             picPoster.Location = new Point(354, 389);
             picPoster.Name = "picPoster";
             picPoster.Size = new Size(135, 200);
+            picPoster.SizeMode = PictureBoxSizeMode.Zoom;
             picPoster.TabIndex = 51;
             picPoster.TabStop = false;
             // 
