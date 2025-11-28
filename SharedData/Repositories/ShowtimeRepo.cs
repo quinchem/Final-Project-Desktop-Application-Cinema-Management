@@ -2,10 +2,12 @@
 using SharedData.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 
 namespace SharedData.Repositories
 {
-    public static class ShowtimeRepo
+    public class ShowtimeRepo
     {
         private static string connStr = DatabaseHelper.GetConnectionString();
 
@@ -118,6 +120,80 @@ namespace SharedData.Repositories
             }
             return list;
         }
+
+        // Lấy suất chiếu theo khoảng ngày (JOIN với Auditorium và AuditoriumType)
+        // ✅ SỬA: Lấy suất chiếu theo khoảng ngày
+        public List<ShowtimeInfo> GetShowtimesByDateRange(DateTime startDate, int days)
+        {
+            List<ShowtimeInfo> list = new List<ShowtimeInfo>();
+
+            try
+            {
+                // 1️⃣ Format ngày chuẩn ISO yyyy-MM-dd
+                string strStart = startDate.ToString("yyyy-MM-dd");
+                string strEnd = startDate.AddDays(days - 1).ToString("yyyy-MM-dd");
+
+                // 1. Sửa lại câu Query dùng JOIN
+                string query = $@"
+                        SELECT 
+                            s.showtime_id, 
+                            s.show_date, 
+                            s.start_time, 
+                            s.end_time, 
+                            s.movie_id,
+                            m.title,    
+                            m.duration,
+                            a.name,     
+                            at.auditorium_type    
+                        FROM showtime s
+                        LEFT JOIN movie m ON s.movie_id = m.movie_id          -- Nối với bảng Phim
+                        LEFT JOIN auditorium a ON s.auditorium_id = a.auditorium_id  -- Nối với bảng Phòng
+                        LEFT JOIN auditorium_type at ON a.auditorium_type_id = at.auditorium_type_id -- Nối với bảng Loại Phòng  
+                       
+                        ORDER BY s.show_date, s.start_time
+                    ";
+
+                using (var conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = query;
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var info = new ShowtimeInfo
+                                {
+                                    // Đảm bảo tên cột trong chuỗi khớp với Database của bạn
+                                    showtime_id = reader["showtime_id"]?.ToString(),
+                                    movie_id = reader["movie_id"]?.ToString(),
+                                    title = reader["title"]?.ToString(),
+                                    show_date = reader["show_date"]?.ToString(),
+                                    start_time = reader["start_time"]?.ToString(),
+                                    duration = reader["duration"] != DBNull.Value ? Convert.ToInt32(reader["duration"]) : 0,
+                                    auditorium_type = reader["auditorium_type"]?.ToString(),
+                                    name = reader["name"]?.ToString(),
+                                    // Nếu cột nào null thì bỏ qua hoặc handle, đừng để crash
+                                };
+                                list.Add(info);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // 🔥 QUAN TRỌNG: Hiện lỗi lên để biết đường sửa
+                throw new Exception("Lỗi tại GetShowtimesByDateRange: " + ex.Message);
+            }
+
+            return list;
+        }
+
+
+
 
         // ===================== DELETE =====================
         public static void Delete(string id)
