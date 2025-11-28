@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SharedData;
 
 namespace UserApp
 {
@@ -31,7 +32,7 @@ namespace UserApp
             try
             {
                 // Kết nối DB và load thông tin bill chi tiết
-                using (var conn = new SqliteConnection(DatabaseHelper2.GetConnectionString()))
+                using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
                 {
                     conn.Open();
                     string query = @"
@@ -122,7 +123,7 @@ namespace UserApp
             string products = "";
             try
             {
-                using (var conn = new SqliteConnection(DatabaseHelper2.GetConnectionString()))
+                using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
                 {
                     conn.Open();
                     string query = @"
