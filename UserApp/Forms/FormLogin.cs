@@ -16,6 +16,9 @@ namespace UserApp
             InitializeComponent();
             this.Opacity = 0;   // fade-in
             this.KeyPreview = true;
+
+            // 1. GỌI SHOWLOGIN NGAY TRONG CONSTRUCTOR ĐỂ THIẾT LẬP TRẠNG THÁI MẶC ĐỊNH
+            ShowLogin();
         }
         private Form currentChildForm;
 
@@ -29,8 +32,10 @@ namespace UserApp
             child.FormBorderStyle = FormBorderStyle.None;
             child.Dock = DockStyle.Fill;
 
-            panelLogin.Controls.Add(child);
+            panelLogin.Controls.Clear();     // Xóa form cũ
+            panelLogin.Controls.Add(child);  // Chỉ chứa form con
             panelLogin.Tag = child;
+
             child.BringToFront();
             child.Show();
         }
@@ -52,7 +57,7 @@ namespace UserApp
             };
 
             t.Start();
-            ShowLogin();
+            // Đã xóa ShowLogin() ở đây vì nó đã được gọi trong Constructor
         }
 
         // ================================
@@ -62,34 +67,61 @@ namespace UserApp
         {
             panelDangNhap.Visible = true;
             panelDangKy.Visible = false;
-            btnMiniDN.Enabled = false;
+            // Đã xóa: btnMiniDN.Enabled = false; (để ValidateLoginForm quyết định)
 
             panelDangNhap.BringToFront();
             if (btnDangNhap == null) return;
             ActivateButton(btnDangNhap);
+
+            // Cập nhật trạng thái nút Đăng nhập dựa trên nội dung hiện tại
+            ValidateLoginForm();
         }
 
         public void ShowRegister()
         {
             panelDangNhap.Visible = false;
             panelDangKy.Visible = true;
-            btnminiDK.Enabled = false;
+            // Đã xóa: btnminiDK.Enabled = false; (để ValidateRegisterForm quyết định)
 
             panelDangKy.BringToFront();
             if (btnDangKy == null) return;
             ActivateButton(btnDangKy);
+
+            // Cập nhật trạng thái nút Đăng ký dựa trên nội dung hiện tại
+            ValidateRegisterForm();
         }
 
-     
+
         private void ValidateRegisterForm()
         {
             bool valid =
-                !string.IsNullOrWhiteSpace(txtHoTen.Text) &&
-                !string.IsNullOrWhiteSpace(txtEmailDK.Text) &&
-                !string.IsNullOrWhiteSpace(txtPassDK.Text) &&
-                !string.IsNullOrWhiteSpace(txtPassCF.Text) &&
-                dtpNgaySinh.Value <= DateTime.Today &&
-                chkDieuKhoan.Checked;
+           // Họ tên
+           !string.IsNullOrWhiteSpace(txtHoTen.Text) &&
+
+           // Email
+           !string.IsNullOrWhiteSpace(txtEmailDK.Text) &&
+           txtEmailDK.Text.Contains("@") &&
+
+           // SĐT
+           !string.IsNullOrWhiteSpace(txtSDT.Text) &&
+           System.Text.RegularExpressions.Regex.IsMatch(txtSDT.Text, @"^\d{10}$") &&
+
+           // Giới tính (radio)
+           (radNam.Checked || radNu.Checked) &&
+
+           // Mật khẩu
+           !string.IsNullOrWhiteSpace(txtPassDK.Text) &&
+           System.Text.RegularExpressions.Regex.IsMatch(txtPassDK.Text, @"^(?=.*[A-Z])(?=.*\W).{8,}$") &&
+
+           // Xác nhận mật khẩu
+           !string.IsNullOrWhiteSpace(txtPassCF.Text) &&
+           txtPassCF.Text == txtPassDK.Text &&
+
+           // Ngày sinh
+           dtpNgaySinh.Value <= DateTime.Today &&
+
+           // Đồng ý điều khoản
+           chkDieuKhoan.Checked;
 
             btnminiDK.Enabled = valid;
         }
@@ -97,6 +129,10 @@ namespace UserApp
         private void btnDangKy_Click(object sender, EventArgs e)
         {
             ShowRegister();
+        }
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+            ShowLogin();
         }
 
         // ================================
@@ -229,7 +265,7 @@ namespace UserApp
             if (InsertNewAccount(out string msg))
             {
                 MessageBox.Show("Đăng ký thành công!", "Thành công",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 ShowLogin();
                 ClearRegisterFields();
@@ -237,7 +273,7 @@ namespace UserApp
             else
             {
                 MessageBox.Show("Đăng ký thất bại: " + msg, "Lỗi",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -266,16 +302,17 @@ namespace UserApp
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Vui lòng nhập email và mật khẩu.",
-                                "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                 "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (AccountRepo.Login(email, password, out Customer customer, out string msg))
             {
                 MessageBox.Show($"Đăng nhập thành công! Xin chào {customer.full_name}",
-                                "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                 "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // MỞ MAIN FORM
+                // Lưu ý: Cần đảm bảo class UserMainForm có tồn tại và constructor nhận đối tượng Customer
                 UserMainForm main = new UserMainForm(customer);
                 main.Show();
 
@@ -288,12 +325,13 @@ namespace UserApp
             else
             {
                 MessageBox.Show("Đăng nhập thất bại: " + msg,
-                                "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                 "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnQuenMk_Click(object sender, EventArgs e)
         {
+            // Lưu ý: Cần đảm bảo class FormForgetPassword có tồn tại và constructor nhận Form cha (this)
             OpenChildForm(new FormForgetPassword(this));
         }
 
@@ -315,10 +353,11 @@ namespace UserApp
         private void ValidateLoginForm()
         {
             bool valid = !string.IsNullOrWhiteSpace(txtEmailDN.Text)
-                      && !string.IsNullOrWhiteSpace(txtPassDN.Text);
+                         && !string.IsNullOrWhiteSpace(txtPassDN.Text);
 
             btnMiniDN.Enabled = valid;
         }
+
         private void txtEmailDN_TextChanged(object sender, EventArgs e)
         {
             ValidateLoginForm();
@@ -328,10 +367,7 @@ namespace UserApp
         {
             ValidateLoginForm();
         }
-        private void btnDangNhap_Click(object sender, EventArgs e)
-        {
-            ShowLogin();
-        }
+
         private void txtHoTen_TextChanged(object sender, EventArgs e)
         { ValidateRegisterForm(); }
 
@@ -349,5 +385,19 @@ namespace UserApp
 
         private void chkDieuKhoan_CheckedChanged(object sender, EventArgs e)
         { ValidateRegisterForm(); }
+        private void txtSDT_TextChanged(object sender, EventArgs e)
+        {
+            ValidateRegisterForm();
+        }
+
+        private void radNam_CheckedChanged(object sender, EventArgs e)
+        {
+            ValidateRegisterForm();
+        }
+
+        private void radNu_CheckedChanged(object sender, EventArgs e)
+        {
+            ValidateRegisterForm();
+        }
     }
 }

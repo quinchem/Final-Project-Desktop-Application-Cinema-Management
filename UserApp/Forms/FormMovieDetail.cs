@@ -14,16 +14,17 @@ namespace UserApp
 {
     public partial class FormMovieDetail : Form
     {
-     
-       
+
+
 
         private string movieId;
         private ImageRepo _imageRepo = new ImageRepo();
-
-        public FormMovieDetail(string id)
+        private UserMainForm _parentForm;
+        public FormMovieDetail(string id, UserMainForm parentForm)
         {
             InitializeComponent();
             movieId = id;
+            _parentForm = parentForm;
             LoadMovieDetails();
             LoadMoviePoster();
         }
@@ -98,8 +99,18 @@ namespace UserApp
 
             if (parent != null)
             {
-                parent.OpenChildForm(new FormShowtimeDetail());
+                parent.OpenChildForm(new FormShowtimeList());
+            }
+        }
+
+        private void btnQuayLai_Click(object sender, EventArgs e)
+        {
+            if (_parentForm != null)
+            {
+                _parentForm.OpenChildForm(new FormMovieList(_parentForm));
             }
         }
     }
 }
+
+
