@@ -3,8 +3,8 @@
     "SeatId": "A1",
     "Row": "A",
     "Col": 1,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 75,
     "Y": 90
   },
@@ -12,8 +12,8 @@
     "SeatId": "A2",
     "Row": "A",
     "Col": 2,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 133,
     "Y": 90
   },
@@ -21,8 +21,8 @@
     "SeatId": "A3",
     "Row": "A",
     "Col": 3,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 191,
     "Y": 90
   },
@@ -30,8 +30,8 @@
     "SeatId": "A4",
     "Row": "A",
     "Col": 4,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 249,
     "Y": 90
   },
@@ -39,8 +39,8 @@
     "SeatId": "A5",
     "Row": "A",
     "Col": 5,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 307,
     "Y": 90
   },
@@ -48,8 +48,8 @@
     "SeatId": "A6",
     "Row": "A",
     "Col": 6,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 365,
     "Y": 90
   },
@@ -57,8 +57,8 @@
     "SeatId": "A7",
     "Row": "A",
     "Col": 7,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 423,
     "Y": 90
   },
@@ -66,8 +66,8 @@
     "SeatId": "A8",
     "Row": "A",
     "Col": 8,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 481,
     "Y": 90
   },
@@ -75,8 +75,8 @@
     "SeatId": "A9",
     "Row": "A",
     "Col": 9,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 539,
     "Y": 90
   },
@@ -84,8 +84,8 @@
     "SeatId": "A10",
     "Row": "A",
     "Col": 10,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bảo trì",
     "X": 597,
     "Y": 90
   },
@@ -93,8 +93,8 @@
     "SeatId": "A11",
     "Row": "A",
     "Col": 11,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 655,
     "Y": 90
   },
@@ -102,8 +102,8 @@
     "SeatId": "A12",
     "Row": "A",
     "Col": 12,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 713,
     "Y": 90
   },
@@ -111,8 +111,8 @@
     "SeatId": "A13",
     "Row": "A",
     "Col": 13,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 771,
     "Y": 90
   },
@@ -120,8 +120,8 @@
     "SeatId": "A14",
     "Row": "A",
     "Col": 14,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 829,
     "Y": 90
   },
@@ -129,8 +129,8 @@
     "SeatId": "A15",
     "Row": "A",
     "Col": 15,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 887,
     "Y": 90
   },
@@ -138,8 +138,8 @@
     "SeatId": "B1",
     "Row": "B",
     "Col": 1,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 75,
     "Y": 150
   },
@@ -147,8 +147,8 @@
     "SeatId": "B2",
     "Row": "B",
     "Col": 2,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 133,
     "Y": 150
   },
@@ -156,8 +156,8 @@
     "SeatId": "B3",
     "Row": "B",
     "Col": 3,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 191,
     "Y": 150
   },
@@ -165,8 +165,8 @@
     "SeatId": "B4",
     "Row": "B",
     "Col": 4,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 249,
     "Y": 150
   },
@@ -174,8 +174,8 @@
     "SeatId": "B5",
     "Row": "B",
     "Col": 5,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 307,
     "Y": 150
   },
@@ -183,8 +183,8 @@
     "SeatId": "B6",
     "Row": "B",
     "Col": 6,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 365,
     "Y": 150
   },
@@ -192,8 +192,8 @@
     "SeatId": "B7",
     "Row": "B",
     "Col": 7,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 423,
     "Y": 150
   },
@@ -201,8 +201,8 @@
     "SeatId": "B8",
     "Row": "B",
     "Col": 8,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 481,
     "Y": 150
   },
@@ -210,8 +210,8 @@
     "SeatId": "B9",
     "Row": "B",
     "Col": 9,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 539,
     "Y": 150
   },
@@ -219,8 +219,8 @@
     "SeatId": "B10",
     "Row": "B",
     "Col": 10,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 597,
     "Y": 150
   },
@@ -228,8 +228,8 @@
     "SeatId": "B11",
     "Row": "B",
     "Col": 11,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 655,
     "Y": 150
   },
@@ -237,8 +237,8 @@
     "SeatId": "B12",
     "Row": "B",
     "Col": 12,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 713,
     "Y": 150
   },
@@ -246,8 +246,8 @@
     "SeatId": "B13",
     "Row": "B",
     "Col": 13,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 771,
     "Y": 150
   },
@@ -255,8 +255,8 @@
     "SeatId": "B14",
     "Row": "B",
     "Col": 14,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 829,
     "Y": 150
   },
@@ -264,8 +264,8 @@
     "SeatId": "B15",
     "Row": "B",
     "Col": 15,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 887,
     "Y": 150
   },
@@ -273,8 +273,8 @@
     "SeatId": "C1",
     "Row": "C",
     "Col": 1,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 75,
     "Y": 210
   },
@@ -282,8 +282,8 @@
     "SeatId": "C2",
     "Row": "C",
     "Col": 2,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 133,
     "Y": 210
   },
@@ -291,8 +291,8 @@
     "SeatId": "C3",
     "Row": "C",
     "Col": 3,
-    "Type": "Normal",
-    "Status": "Disabled",
+    "Type": "Thường",
+    "Status": "Bảo trì",
     "X": 191,
     "Y": 210
   },
@@ -300,8 +300,8 @@
     "SeatId": "C4",
     "Row": "C",
     "Col": 4,
-    "Type": "Normal",
-    "Status": "Disabled",
+    "Type": "Thường",
+    "Status": "Bảo trì",
     "X": 249,
     "Y": 210
   },
@@ -309,8 +309,8 @@
     "SeatId": "C5",
     "Row": "C",
     "Col": 5,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 307,
     "Y": 210
   },
@@ -318,8 +318,8 @@
     "SeatId": "C6",
     "Row": "C",
     "Col": 6,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 365,
     "Y": 210
   },
@@ -327,8 +327,8 @@
     "SeatId": "C7",
     "Row": "C",
     "Col": 7,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 423,
     "Y": 210
   },
@@ -336,8 +336,8 @@
     "SeatId": "C8",
     "Row": "C",
     "Col": 8,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bảo trì",
     "X": 481,
     "Y": 210
   },
@@ -345,8 +345,8 @@
     "SeatId": "C9",
     "Row": "C",
     "Col": 9,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 539,
     "Y": 210
   },
@@ -354,8 +354,8 @@
     "SeatId": "C10",
     "Row": "C",
     "Col": 10,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 597,
     "Y": 210
   },
@@ -363,8 +363,8 @@
     "SeatId": "C11",
     "Row": "C",
     "Col": 11,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 655,
     "Y": 210
   },
@@ -372,8 +372,8 @@
     "SeatId": "C12",
     "Row": "C",
     "Col": 12,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 713,
     "Y": 210
   },
@@ -381,8 +381,8 @@
     "SeatId": "C13",
     "Row": "C",
     "Col": 13,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 771,
     "Y": 210
   },
@@ -390,8 +390,8 @@
     "SeatId": "C14",
     "Row": "C",
     "Col": 14,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 829,
     "Y": 210
   },
@@ -399,8 +399,8 @@
     "SeatId": "C15",
     "Row": "C",
     "Col": 15,
-    "Type": "Normal",
-    "Status": "Active",
+    "Type": "Thường",
+    "Status": "Bình thường",
     "X": 887,
     "Y": 210
   },
@@ -409,7 +409,7 @@
     "Row": "D",
     "Col": 1,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 75,
     "Y": 270
   },
@@ -418,7 +418,7 @@
     "Row": "D",
     "Col": 2,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 133,
     "Y": 270
   },
@@ -427,7 +427,7 @@
     "Row": "D",
     "Col": 3,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 191,
     "Y": 270
   },
@@ -436,7 +436,7 @@
     "Row": "D",
     "Col": 4,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 249,
     "Y": 270
   },
@@ -445,7 +445,7 @@
     "Row": "D",
     "Col": 5,
     "Type": "VIP",
-    "Status": "Disabled",
+    "Status": "Bảo trì",
     "X": 307,
     "Y": 270
   },
@@ -454,7 +454,7 @@
     "Row": "D",
     "Col": 6,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bảo trì",
     "X": 365,
     "Y": 270
   },
@@ -463,7 +463,7 @@
     "Row": "D",
     "Col": 7,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 423,
     "Y": 270
   },
@@ -472,7 +472,7 @@
     "Row": "D",
     "Col": 8,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 481,
     "Y": 270
   },
@@ -481,7 +481,7 @@
     "Row": "D",
     "Col": 9,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 539,
     "Y": 270
   },
@@ -490,7 +490,7 @@
     "Row": "D",
     "Col": 10,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 597,
     "Y": 270
   },
@@ -499,7 +499,7 @@
     "Row": "D",
     "Col": 11,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 655,
     "Y": 270
   },
@@ -508,7 +508,7 @@
     "Row": "D",
     "Col": 12,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 713,
     "Y": 270
   },
@@ -517,7 +517,7 @@
     "Row": "D",
     "Col": 13,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 771,
     "Y": 270
   },
@@ -526,7 +526,7 @@
     "Row": "D",
     "Col": 14,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 829,
     "Y": 270
   },
@@ -535,7 +535,7 @@
     "Row": "D",
     "Col": 15,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 887,
     "Y": 270
   },
@@ -544,7 +544,7 @@
     "Row": "E",
     "Col": 1,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 75,
     "Y": 330
   },
@@ -553,7 +553,7 @@
     "Row": "E",
     "Col": 2,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 133,
     "Y": 330
   },
@@ -562,7 +562,7 @@
     "Row": "E",
     "Col": 3,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 191,
     "Y": 330
   },
@@ -571,7 +571,7 @@
     "Row": "E",
     "Col": 4,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 249,
     "Y": 330
   },
@@ -580,7 +580,7 @@
     "Row": "E",
     "Col": 5,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 307,
     "Y": 330
   },
@@ -589,7 +589,7 @@
     "Row": "E",
     "Col": 6,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 365,
     "Y": 330
   },
@@ -598,7 +598,7 @@
     "Row": "E",
     "Col": 7,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 423,
     "Y": 330
   },
@@ -607,7 +607,7 @@
     "Row": "E",
     "Col": 8,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 481,
     "Y": 330
   },
@@ -616,7 +616,7 @@
     "Row": "E",
     "Col": 9,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 539,
     "Y": 330
   },
@@ -625,7 +625,7 @@
     "Row": "E",
     "Col": 10,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 597,
     "Y": 330
   },
@@ -634,7 +634,7 @@
     "Row": "E",
     "Col": 11,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 655,
     "Y": 330
   },
@@ -643,7 +643,7 @@
     "Row": "E",
     "Col": 12,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 713,
     "Y": 330
   },
@@ -652,7 +652,7 @@
     "Row": "E",
     "Col": 13,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 771,
     "Y": 330
   },
@@ -661,7 +661,7 @@
     "Row": "E",
     "Col": 14,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 829,
     "Y": 330
   },
@@ -670,7 +670,7 @@
     "Row": "E",
     "Col": 15,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 887,
     "Y": 330
   },
@@ -679,7 +679,7 @@
     "Row": "F",
     "Col": 1,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 75,
     "Y": 390
   },
@@ -688,7 +688,7 @@
     "Row": "F",
     "Col": 2,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 133,
     "Y": 390
   },
@@ -697,7 +697,7 @@
     "Row": "F",
     "Col": 3,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 191,
     "Y": 390
   },
@@ -706,7 +706,7 @@
     "Row": "F",
     "Col": 4,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 249,
     "Y": 390
   },
@@ -715,7 +715,7 @@
     "Row": "F",
     "Col": 5,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 307,
     "Y": 390
   },
@@ -724,7 +724,7 @@
     "Row": "F",
     "Col": 6,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 365,
     "Y": 390
   },
@@ -733,7 +733,7 @@
     "Row": "F",
     "Col": 7,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 423,
     "Y": 390
   },
@@ -742,7 +742,7 @@
     "Row": "F",
     "Col": 8,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 481,
     "Y": 390
   },
@@ -751,7 +751,7 @@
     "Row": "F",
     "Col": 9,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 539,
     "Y": 390
   },
@@ -760,7 +760,7 @@
     "Row": "F",
     "Col": 10,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 597,
     "Y": 390
   },
@@ -769,7 +769,7 @@
     "Row": "F",
     "Col": 11,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 655,
     "Y": 390
   },
@@ -778,7 +778,7 @@
     "Row": "F",
     "Col": 12,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 713,
     "Y": 390
   },
@@ -787,7 +787,7 @@
     "Row": "F",
     "Col": 13,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 771,
     "Y": 390
   },
@@ -796,7 +796,7 @@
     "Row": "F",
     "Col": 14,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 829,
     "Y": 390
   },
@@ -805,7 +805,7 @@
     "Row": "F",
     "Col": 15,
     "Type": "VIP",
-    "Status": "Active",
+    "Status": "Bình thường",
     "X": 887,
     "Y": 390
   }
