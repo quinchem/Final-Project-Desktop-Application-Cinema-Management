@@ -274,6 +274,7 @@
             txtSDT.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtSDT.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSDT.Font = new Font("Segoe UI", 9F);
+            txtSDT.ForeColor = Color.Black;
             txtSDT.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSDT.Location = new Point(1064, 144);
             txtSDT.Margin = new Padding(3, 4, 3, 4);
@@ -294,6 +295,7 @@
             txtGioiTinh.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtGioiTinh.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtGioiTinh.Font = new Font("Segoe UI", 9F);
+            txtGioiTinh.ForeColor = Color.Black;
             txtGioiTinh.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtGioiTinh.Location = new Point(1064, 66);
             txtGioiTinh.Margin = new Padding(3, 4, 3, 4);
@@ -334,6 +336,7 @@
             txtChucVu.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtChucVu.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtChucVu.Font = new Font("Segoe UI", 9F);
+            txtChucVu.ForeColor = Color.Black;
             txtChucVu.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtChucVu.Location = new Point(690, 144);
             txtChucVu.Margin = new Padding(3, 4, 3, 4);
@@ -354,6 +357,7 @@
             txtEmail.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtEmail.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtEmail.Font = new Font("Segoe UI", 9F);
+            txtEmail.ForeColor = Color.Black;
             txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtEmail.Location = new Point(690, 66);
             txtEmail.Margin = new Padding(3, 4, 3, 4);
@@ -394,6 +398,7 @@
             txtNgaySinh.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtNgaySinh.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtNgaySinh.Font = new Font("Segoe UI", 9F);
+            txtNgaySinh.ForeColor = Color.Black;
             txtNgaySinh.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtNgaySinh.Location = new Point(360, 144);
             txtNgaySinh.Margin = new Padding(3, 4, 3, 4);
@@ -424,6 +429,7 @@
             txtHoTen.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtHoTen.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtHoTen.Font = new Font("Segoe UI", 9F);
+            txtHoTen.ForeColor = Color.Black;
             txtHoTen.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtHoTen.Location = new Point(360, 66);
             txtHoTen.Margin = new Padding(3, 4, 3, 4);

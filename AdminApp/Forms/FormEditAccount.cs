@@ -20,6 +20,7 @@ namespace AdminApp
         private readonly StaffRepo _staffRepo = new StaffRepo();
         private byte[] _selectedImageBytes;
         private ImageRepo _imageRepo = new ImageRepo();
+        private readonly AccountRepository _accountRepo = new AccountRepository();
 
         public FormEditAccount(string staff_id)
         {
@@ -30,6 +31,10 @@ namespace AdminApp
 
         private void LoadStaffInfo()
         {
+            txtMKcu.UseSystemPasswordChar = true;
+            txtMKmoi.UseSystemPasswordChar = true;
+            txtNhapLaiMK.UseSystemPasswordChar = true;
+
             Staff staff = _staffRepo.GetStaffById(_staff_id);
             if (staff == null)
             {
@@ -40,7 +45,7 @@ namespace AdminApp
 
             txtHoTen.Text = staff.full_name;
             txtNgaySinh.Text = staff.date_of_birth;
-            txtGioiTinh.Text = staff.gender;
+            cbGioiTinh.Text = staff.gender;
             txtEmail.Text = staff.email;
             txtSDT.Text = staff.phone_number;
             txtChucVu.Text = staff.role;
@@ -64,22 +69,55 @@ namespace AdminApp
                 return;
             }
 
-            if (!string.IsNullOrWhiteSpace(txtMKmoi.Text) ||
-                !string.IsNullOrWhiteSpace(txtNhapLaiMK.Text))
+            bool wantChangePassword =
+                !string.IsNullOrWhiteSpace(txtMKcu.Text) ||
+                !string.IsNullOrWhiteSpace(txtMKmoi.Text) ||
+                !string.IsNullOrWhiteSpace(txtNhapLaiMK.Text);
+
+            // 🔐 XỬ LÝ ĐỔI MẬT KHẨU
+            if (wantChangePassword)
             {
-                if (txtMKmoi.Text != txtNhapLaiMK.Text)
+                if (string.IsNullOrWhiteSpace(txtMKcu.Text))
                 {
-                    MessageBox.Show("Mật khẩu nhập lại không khớp");
+                    MessageBox.Show("Vui lòng nhập mật khẩu cũ");
                     return;
                 }
+
+                if (string.IsNullOrWhiteSpace(txtMKmoi.Text) ||
+                    string.IsNullOrWhiteSpace(txtNhapLaiMK.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ mật khẩu mới");
+                    return;
+                }
+
+                // ✅ kiểm tra mật khẩu cũ
+                bool correctOldPass =
+                    _accountRepo.CheckOldPassword(_staff_id, txtMKcu.Text);
+
+                if (!correctOldPass)
+                {
+                    MessageBox.Show("Mật khẩu cũ không đúng");
+                    return;
+                }
+
+                // ✅ kiểm tra nhập lại
+                if (txtMKmoi.Text != txtNhapLaiMK.Text)
+                {
+                    MessageBox.Show("Mật khẩu mới nhập lại không khớp");
+                    return;
+                }
+
+                // ✅ update mật khẩu
+                _accountRepo.UpdatePassword(_staff_id, txtMKmoi.Text);
             }
 
+            // ✅ UPDATE THÔNG TIN NHÂN VIÊN
             Staff staff = new Staff
             {
                 staff_id = _staff_id,
                 full_name = txtHoTen.Text.Trim(),
                 date_of_birth = txtNgaySinh.Text.Trim(),
-                gender = txtGioiTinh.Text.Trim(),
+                gender = cbGioiTinh.Text.Trim(),
                 email = txtEmail.Text.Trim(),
                 phone_number = txtSDT.Text.Trim(),
                 role = txtChucVu.Text.Trim()
@@ -87,7 +125,6 @@ namespace AdminApp
 
             if (_staffRepo.UpdateStaff(staff))
             {
-                // ✅ Lưu ảnh nếu có chọn
                 if (_selectedImageBytes != null)
                 {
                     _imageRepo.SaveStaffImage(_staff_id, _selectedImageBytes);
