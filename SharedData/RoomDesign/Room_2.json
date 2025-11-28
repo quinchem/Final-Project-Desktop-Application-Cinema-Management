@@ -319,7 +319,7 @@
     "Row": "C",
     "Col": 6,
     "Type": "Normal",
-    "Status": "Active",
+    "Status": "Disabled",
     "X": 365,
     "Y": 210
   },
@@ -328,7 +328,7 @@
     "Row": "C",
     "Col": 7,
     "Type": "Normal",
-    "Status": "Active",
+    "Status": "Disabled",
     "X": 423,
     "Y": 210
   },

@@ -729,6 +729,8 @@ namespace AdminApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            AutoScrollMinSize = new Size(0, 1000);
             BackColor = Color.FromArgb(92, 124, 150);
             ClientSize = new Size(1376, 918);
             Controls.Add(panelDangNhap);
