@@ -32,7 +32,6 @@ namespace AdminApp
         private void InitializeComponent()
         {
             Guna.UI2.WinForms.Guna2HtmlLabel LbTenPhim;
-            Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -77,6 +76,7 @@ namespace AdminApp
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             btnDangXuat = new Button();
@@ -111,7 +111,6 @@ namespace AdminApp
             txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
             lblEmail = new Guna.UI2.WinForms.Guna2HtmlLabel();
             LbTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel1.SuspendLayout();
             guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picAvatar).BeginInit();
@@ -164,7 +163,7 @@ namespace AdminApp
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges32;
-            guna2Panel1.Size = new Size(1376, 131);
+            guna2Panel1.Size = new Size(1508, 131);
             guna2Panel1.TabIndex = 0;
             // 
             // guna2Panel2
@@ -187,7 +186,7 @@ namespace AdminApp
             guna2Panel2.Location = new Point(0, 0);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2Panel2.Size = new Size(1376, 131);
+            guna2Panel2.Size = new Size(1508, 131);
             guna2Panel2.TabIndex = 37;
             // 
             // btnDangXuat
@@ -198,7 +197,7 @@ namespace AdminApp
             btnDangXuat.FlatStyle = FlatStyle.Flat;
             btnDangXuat.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangXuat.ForeColor = SystemColors.ActiveBorder;
-            btnDangXuat.Location = new Point(1239, 95);
+            btnDangXuat.Location = new Point(1372, 50);
             btnDangXuat.Name = "btnDangXuat";
             btnDangXuat.Size = new Size(133, 33);
             btnDangXuat.TabIndex = 34;
@@ -211,7 +210,7 @@ namespace AdminApp
             lblChucVu.AutoSize = true;
             lblChucVu.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblChucVu.ForeColor = Color.White;
-            lblChucVu.Location = new Point(1237, 77);
+            lblChucVu.Location = new Point(1277, 84);
             lblChucVu.Name = "lblChucVu";
             lblChucVu.Size = new Size(50, 17);
             lblChucVu.TabIndex = 36;
@@ -576,12 +575,12 @@ namespace AdminApp
             // panelMain
             // 
             panelMain.AutoScroll = true;
-            panelMain.AutoScrollMinSize = new Size(800, 800);
+            panelMain.AutoScrollMinSize = new Size(800, 1000);
             panelMain.CustomizableEdges = customizableEdges33;
             panelMain.Location = new Point(0, 128);
             panelMain.Name = "panelMain";
             panelMain.ShadowDecoration.CustomizableEdges = customizableEdges34;
-            panelMain.Size = new Size(1382, 793);
+            panelMain.Size = new Size(1508, 793);
             panelMain.TabIndex = 1;
             // 
             // panelDangNhap
@@ -732,7 +731,7 @@ namespace AdminApp
             AutoScroll = true;
             AutoScrollMinSize = new Size(0, 1000);
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1376, 918);
+            ClientSize = new Size(1508, 918);
             Controls.Add(panelDangNhap);
             Controls.Add(panelMain);
             Controls.Add(guna2Panel1);
@@ -788,6 +787,7 @@ namespace AdminApp
         private Guna.UI2.WinForms.Guna2TextBox txtUsername;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblEmail;
         private Label lblError;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }
 

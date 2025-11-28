@@ -38,7 +38,7 @@ namespace AdminApp
             this.Close();
 
             // Hiện lại panel đăng nhập
-            parentForm.ShowLoginPanel();
+            //parentForm.ShowLoginPanel();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace AdminApp.Forms
             dtpGioBD.Format = DateTimePickerFormat.Time;
             dtpGioBD.ShowUpDown = true;
 
-            
+
             LoadShowtimeData();
         }
 
@@ -130,7 +130,7 @@ namespace AdminApp.Forms
             }
         }
 
-       //Chọn định dạng thì đổi giá vé
+        //Chọn định dạng thì đổi giá vé
         private void cboDinhDang_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTicketPrice();
@@ -231,6 +231,11 @@ namespace AdminApp.Forms
                 }
             }
             return startTime.AddMinutes(120);
+        }
+
+        private void cboChonPhong_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
