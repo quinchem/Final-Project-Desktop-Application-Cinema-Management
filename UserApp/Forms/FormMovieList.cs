@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UserApp.Models;
 
 namespace UserApp
 {
@@ -69,7 +68,8 @@ namespace UserApp
             {
                 if (_parentForm != null)
                 {
-                    _parentForm.OpenChildForm(new FormMovieDetail(film.movie_id));
+                    _parentForm.OpenChildForm(new FormMovieDetail(film.movie_id, _parentForm));
+
                 }
             };
 
@@ -171,6 +171,14 @@ namespace UserApp
             btn.BorderRadius = 10;
             btn.Size = new Size(120, 38);
             btn.Location = new Point((panel.Width - btn.Width) / 2, panel.Height - 55);
+            btn.Click += (s, e) =>
+            {
+                if (_parentForm != null)
+                {
+                    _parentForm.OpenChildForm(new FormShowtimeList());
+                }
+            };
+
             panel.Controls.Add(btn);
 
             return panel;
@@ -178,5 +186,7 @@ namespace UserApp
 
 
 
+    }
 }
-}
+
+

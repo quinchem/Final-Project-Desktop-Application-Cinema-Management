@@ -16,8 +16,8 @@ namespace UserApp
         {
             InitializeComponent();
         }
-        private UserMainForm parentForm;
-        public FormResetPassword(UserMainForm parent)
+        private FormLogin parentForm;
+        public FormResetPassword(FormLogin parent)
         {
             InitializeComponent();
             parentForm = parent;

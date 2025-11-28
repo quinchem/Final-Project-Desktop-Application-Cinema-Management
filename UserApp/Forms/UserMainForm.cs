@@ -1,112 +1,103 @@
-﻿using SharedData.Models;         
-using SharedData.Repositories;
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+using SharedData.Models;
 
 namespace UserApp
 {
     public partial class UserMainForm : Form
     {
+        // Lưu thông tin user hiện tại
+        public Customer CurrentUser { get; private set; }
+
+        private Form currentFormChild;
+        private Guna.UI2.WinForms.Guna2Button currentButton;
+
+        // Nhận user từ FormLogin
+        public UserMainForm(Customer customer)
+        {
+            InitializeComponent();
+            CurrentUser = customer;
+            UpdateHeaderUI();
+        }
+
+        // Giữ lại cho các form khác cần khởi tạo mặc định (nếu có)
         public UserMainForm()
         {
             InitializeComponent();
-            UpdateHeaderUI();
-            
         }
-        private Guna.UI2.WinForms.Guna2Button currentButton;
 
-        private Form currentFormChild;
+        // Cập nhật giao diện header
+        private void UpdateHeaderUI()
+        {
+            if (CurrentUser != null)
+            {
+                btnUserName.Text = CurrentUser.full_name.ToUpper();
+                btnUserName.Visible = true;
+
+                btnLogout.Visible = true;
+            }
+        }
+
+        // Load form con
         public void OpenChildForm(Form childForm)
         {
             if (currentFormChild != null)
                 currentFormChild.Close();
+
             mainpanel.AutoScroll = false;
 
             currentFormChild = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
+
             mainpanel.Controls.Add(childForm);
             mainpanel.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
+
             childForm.FormClosed += (s, e) =>
             {
                 mainpanel.AutoScroll = true;
             };
         }
-        private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
+
+        // Nút xem trang cá nhân
+        private void btnUserName_Click(object sender, EventArgs e)
         {
-            if (btn == null) return;
+            if (CurrentUser == null) return;
 
-            // Reset nút cũ về trạng thái Design
-            if (currentButton != null)
-            {
-                // Reset về trạng thái mặc định trong Designer
-                currentButton.FillColor = currentButton.Tag != null
-                    ? (Color)currentButton.Tag
-                    : Color.FromArgb(44, 84, 115); // fallback
-                currentButton.ForeColor = Color.White;
-                currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
-            }
-
-            // Lưu màu gốc của nút mới (nếu chưa lưu)
-            if (btn.Tag == null)
-                btn.Tag = btn.FillColor; // lưu FillColor gốc vào Tag
-
-            // Set nút hiện tại active
-            currentButton = btn;
-            currentButton.FillColor = Color.FromArgb(44, 84, 115);
-            currentButton.ForeColor = Color.FromArgb(255, 128, 0);
-            currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
-        }
-        private FormLogin loginForm;
-
-        private void btnDangNhap_Click(object sender, EventArgs e)
-        {
-            loginForm = new FormLogin(this);
-            OpenChildForm(loginForm);
-            loginForm.ShowLogin();
-            
+            OpenChildForm(new FormProfile(CurrentUser));
         }
 
-        // Biến lưu thông tin user đã login
-        public Customer CurrentUser { get; private set; }
-
-        // Method để set thông tin user khi login thành công
-        public void SetCurrentUser(Customer customer)
+        // Nút đăng xuất
+        private void btnLogout_Click(object sender, EventArgs e)
         {
-            CurrentUser = customer;
-            UpdateHeaderUI();
-        }
+            var result = MessageBox.Show(
+                "Bạn có chắc chắn muốn đăng xuất?",
+                "Xác nhận",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
-        private void UpdateHeaderUI()
-        {
-            if (CurrentUser != null)
+            if (result == DialogResult.Yes)
             {
-                // Đã login
-                btnUserName.Text = CurrentUser.full_name.ToUpper();
-                btnUserName.Visible = true;
-                btnLogout.Visible = true;
+                CurrentUser = null;
 
-                btnDangNhap.Visible = false;
-                btnDangKy.Visible = false;
-            }
-            else
-            {
-                // Chưa login
-                btnUserName.Visible = false;
-                btnLogout.Visible = false;
+                // Quay về FormLogin
+                // Mở lại FormLogin
+                FormLogin login = new FormLogin();
+                login.Show();
 
-                btnDangNhap.Visible = true;
-                btnDangKy.Visible = true;
+                // Ẩn UserMainForm (không đóng ngay để tránh tắt app)
+                this.Hide();
+
+                // Khi FormLogin đóng → đóng luôn UserMainForm
+                login.FormClosed += (s2, e2) => this.Close();
             }
         }
 
-        private void btnDangKy_Click(object sender, EventArgs e)
-        {
-            loginForm = new FormLogin(this);
-            OpenChildForm(loginForm);
-            loginForm.ShowRegister();
-        }
+        // Quay về home
         public void GoHome()
         {
             if (currentFormChild != null)
@@ -123,51 +114,20 @@ namespace UserApp
             GoHome();
         }
 
+        // Mở form tìm kiếm
         private void txtTimKiem_Click(object sender, EventArgs e)
         {
             OpenChildForm(new FormSearch());
         }
 
+        // Mở chi tiết phim
         //private void guna2PictureBox1_Click(object sender, EventArgs e)
         //{
         //    OpenChildForm(new FormMovieDetail());
         //}
 
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show(
-                "Bạn có chắc chắn muốn đăng xuất?",
-                "Xác nhận đăng xuất",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                // 1️⃣ Xóa thông tin user hiện tại
-                CurrentUser = null;
-
-                // 2️⃣ Reset header về trạng thái chưa login
-                UpdateHeaderUI();
-
-                // 3️⃣ Đóng child form hiện tại (nếu có) và trở về trang chủ
-                GoHome();
-            }
-        }
-        private void btnUserName_Click(object sender, EventArgs e)
-        {
-            if (CurrentUser == null) return;
-
-            FormProfile profileForm = new FormProfile(CurrentUser);
-            OpenChildForm(profileForm);
-        }
-
         //private void Poster_Click(object sender, EventArgs e)
         //{
-        //    PictureBox poster = sender as PictureBox;
-
-        //    // (OPTIONAL) Lấy thông tin phim từ Tag nếu có
-        //    // var movieId = poster.Tag.ToString();
-
         //    OpenChildForm(new FormMovieDetail());
         //}
 
@@ -177,8 +137,9 @@ namespace UserApp
             if (btn == null) return;
 
             ActivateButton(btn);
-            
+
             OpenChildForm(new FormShowtimeList());
+
         }
 
         private void btnPhim_Click(object sender, EventArgs e)
@@ -187,12 +148,32 @@ namespace UserApp
             if (btn == null) return;
 
             ActivateButton(btn);
-           
+
             OpenChildForm(new FormMovieList(this));
+
         }
 
+        private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
+        {
+            if (btn == null) return;
 
+            if (currentButton != null)
+            {
+                currentButton.FillColor = currentButton.Tag != null
+                    ? (Color)currentButton.Tag
+                    : Color.FromArgb(44, 84, 115);
+
+                currentButton.ForeColor = Color.White;
+                currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
+            }
+
+            if (btn.Tag == null)
+                btn.Tag = btn.FillColor;
+
+            currentButton = btn;
+            currentButton.FillColor = Color.FromArgb(44, 84, 115);
+            currentButton.ForeColor = Color.FromArgb(255, 128, 0);
+            currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
+        }
     }
 }
-
-
