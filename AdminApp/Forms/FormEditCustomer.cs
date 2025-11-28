@@ -15,7 +15,7 @@ namespace AdminApp
 {
     public partial class FormEditCustomer : Form
     {
-        private readonly CustomerRepository repo = new CustomerRepository();
+        private readonly CustomerRepo repo = new CustomerRepo();
         private readonly Customer customer;
 
         // ✅ Constructor nhận khách hàng từ form cha
@@ -80,30 +80,26 @@ namespace AdminApp
                 return;
             }
 
-            // ✅ Lấy dữ liệu
-            string fullName = txtTenKH.Text.Trim();
-            string gender = CbGioiTinh.SelectedItem.ToString();
-            string ngaySinh = dtpNgaySinh.Value.ToString("dd/MM/yyyy");
-            string phone = txtSDT.Text.Trim();
-            string email = txtEmail.Text.Trim();
-            string address = txtDiaChi.Text.Trim();
+            // ✅ Build Customer object (CHUẨN CustomerRepo)
+            Customer updatedCustomer = new Customer
+            {
+                customer_id = customer.customer_id,           // KHÔNG ĐỔI
+                full_name = txtTenKH.Text.Trim(),
+                gender = CbGioiTinh.SelectedItem.ToString(),
+                date_of_birth = dtpNgaySinh.Value.ToString("dd/MM/yyyy"),
+                phone_number = txtSDT.Text.Trim(),
+                email = txtEmail.Text.Trim(),
+                address = txtDiaChi.Text.Trim(),
+                create_date = customer.create_date            // GIỮ NGUYÊN
+            };
 
             // ✅ Update DB
-            bool ok = repo.UpdateCustomer(
-                customer.customer_id,
-                fullName,
-                gender,
-                ngaySinh,
-                phone,
-                email,
-                address,
-                customer.create_date // giữ nguyên ngày tạo
-            );
+            bool ok = repo.Update(updatedCustomer);           // ✅ ĐÚNG CHỮ KÝ
 
             if (ok)
             {
                 MessageBox.Show("✅ Cập nhật thông tin khách hàng thành công!");
-                DialogResult = DialogResult.OK; // báo cho form cha reload
+                DialogResult = DialogResult.OK; // báo form cha reload
                 Close();
             }
             else
@@ -111,6 +107,7 @@ namespace AdminApp
                 MessageBox.Show("❌ Không thể cập nhật khách hàng!");
             }
         }
+
 
     }
 }

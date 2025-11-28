@@ -213,6 +213,7 @@ namespace AdminApp
             DataGridViewCustomerManagement.ThemeStyle.RowsStyle.Height = 29;
             DataGridViewCustomerManagement.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             DataGridViewCustomerManagement.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            DataGridViewCustomerManagement.CellEndEdit += DataGridViewCustomerManagement_CellEndEdit;
             // 
             // HoTen
             // 
@@ -224,7 +225,6 @@ namespace AdminApp
             HoTen.Name = "full_name";
             HoTen.ReadOnly = true;
             HoTen.Width = 220;
-            HoTen.DataPropertyName = "full_name";
             // 
             // GioiTinh
             // 
