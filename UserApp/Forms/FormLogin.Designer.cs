@@ -63,7 +63,7 @@ namespace UserApp
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            panel1 = new Panel();
+            panelLogin = new Panel();
             btnDangKy = new Guna2Button();
             btnDangNhap = new Guna2Button();
             panelDangNhap = new Guna2CustomGradientPanel();
@@ -93,24 +93,24 @@ namespace UserApp
             guna2HtmlLabel2 = new Guna2HtmlLabel();
             txtHoTen = new Guna2TextBox();
             guna2HtmlLabel3 = new Guna2HtmlLabel();
-            panel1.SuspendLayout();
+            panelLogin.SuspendLayout();
             panelDangNhap.SuspendLayout();
             panelDangKy.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // panelLogin
             // 
-            panel1.AutoScroll = true;
-            panel1.BackColor = Color.FromArgb(92, 124, 150);
-            panel1.Controls.Add(btnDangKy);
-            panel1.Controls.Add(btnDangNhap);
-            panel1.Controls.Add(panelDangNhap);
-            panel1.Controls.Add(panelDangKy);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1200, 703);
-            panel1.TabIndex = 0;
+            panelLogin.AutoScroll = true;
+            panelLogin.BackColor = Color.FromArgb(92, 124, 150);
+            panelLogin.Controls.Add(btnDangKy);
+            panelLogin.Controls.Add(btnDangNhap);
+            panelLogin.Controls.Add(panelDangNhap);
+            panelLogin.Controls.Add(panelDangKy);
+            panelLogin.Dock = DockStyle.Fill;
+            panelLogin.Location = new Point(0, 0);
+            panelLogin.Name = "panelLogin";
+            panelLogin.Size = new Size(1482, 753);
+            panelLogin.TabIndex = 0;
             // 
             // btnDangKy
             // 
@@ -125,7 +125,7 @@ namespace UserApp
             btnDangKy.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangKy.ForeColor = SystemColors.Window;
             btnDangKy.Image = Properties.Resources.DangKy;
-            btnDangKy.Location = new Point(462, 35);
+            btnDangKy.Location = new Point(553, 72);
             btnDangKy.Name = "btnDangKy";
             btnDangKy.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnDangKy.Size = new Size(151, 46);
@@ -146,7 +146,7 @@ namespace UserApp
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.DangNhap;
-            btnDangNhap.Location = new Point(290, 35);
+            btnDangNhap.Location = new Point(381, 72);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnDangNhap.Size = new Size(151, 46);
@@ -170,7 +170,7 @@ namespace UserApp
             panelDangNhap.FillColor2 = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor3 = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelDangNhap.Location = new Point(271, 102);
+            panelDangNhap.Location = new Point(362, 139);
             panelDangNhap.Name = "panelDangNhap";
             panelDangNhap.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges14;
@@ -214,7 +214,7 @@ namespace UserApp
             btnMiniDN.Location = new Point(515, 261);
             btnMiniDN.Name = "btnMiniDN";
             btnMiniDN.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnMiniDN.Size = new Size(136, 35);
+            btnMiniDN.Size = new Size(136, 47);
             btnMiniDN.TabIndex = 5;
             btnMiniDN.Text = "ĐĂNG NHẬP";
             btnMiniDN.Click += btnMiniDN_Click;
@@ -240,6 +240,7 @@ namespace UserApp
             txtPassDN.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtPassDN.Size = new Size(591, 45);
             txtPassDN.TabIndex = 3;
+            txtPassDN.TextChanged += txtPassDN_TextChanged;
             // 
             // lblPass
             // 
@@ -273,6 +274,7 @@ namespace UserApp
             txtEmailDN.ShadowDecoration.CustomizableEdges = customizableEdges12;
             txtEmailDN.Size = new Size(591, 45);
             txtEmailDN.TabIndex = 1;
+            txtEmailDN.TextChanged += txtEmailDN_TextChanged;
             // 
             // lblEmail
             // 
@@ -314,7 +316,7 @@ namespace UserApp
             panelDangKy.FillColor2 = Color.FromArgb(236, 230, 224);
             panelDangKy.FillColor3 = Color.FromArgb(236, 230, 224);
             panelDangKy.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelDangKy.Location = new Point(185, 102);
+            panelDangKy.Location = new Point(276, 139);
             panelDangKy.Name = "panelDangKy";
             panelDangKy.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelDangKy.ShadowDecoration.CustomizableEdges = customizableEdges32;
@@ -335,7 +337,7 @@ namespace UserApp
             chkDieuKhoan.CheckMarkColor = Color.Black;
             chkDieuKhoan.Location = new Point(55, 418);
             chkDieuKhoan.Name = "chkDieuKhoan";
-            chkDieuKhoan.Size = new Size(331, 24);
+            chkDieuKhoan.Size = new Size(335, 24);
             chkDieuKhoan.TabIndex = 20;
             chkDieuKhoan.Text = "Tôi đã đọc, hiểu, và đồng ý với các điều khoản";
             chkDieuKhoan.UncheckedState.BorderColor = Color.White;
@@ -579,10 +581,10 @@ namespace UserApp
             btnminiDK.FocusedColor = Color.FromArgb(245, 131, 35);
             btnminiDK.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnminiDK.ForeColor = Color.White;
-            btnminiDK.Location = new Point(684, 418);
+            btnminiDK.Location = new Point(684, 409);
             btnminiDK.Name = "btnminiDK";
             btnminiDK.ShadowDecoration.CustomizableEdges = customizableEdges28;
-            btnminiDK.Size = new Size(136, 35);
+            btnminiDK.Size = new Size(136, 44);
             btnminiDK.TabIndex = 5;
             btnminiDK.Text = "ĐĂNG KÝ";
             btnminiDK.Click += btnminiDK_Click;
@@ -633,11 +635,14 @@ namespace UserApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1200, 703);
-            Controls.Add(panel1);
+            ClientSize = new Size(1482, 753);
+            Controls.Add(panelLogin);
+            IsMdiContainer = true;
             Name = "FormLogin";
             Text = "Đăng nhập";
-            panel1.ResumeLayout(false);
+            Load += FormLogin_Load;
+            KeyDown += FormLogin_KeyDown;
+            panelLogin.ResumeLayout(false);
             panelDangNhap.ResumeLayout(false);
             panelDangKy.ResumeLayout(false);
             panelDangKy.PerformLayout();
@@ -646,7 +651,7 @@ namespace UserApp
 
         #endregion
 
-        private Panel panel1;
+        private Panel panelLogin;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel panelDangNhap;
         private Guna.UI2.WinForms.Guna2Button btnDangKy;
         private Guna.UI2.WinForms.Guna2Button btnDangNhap;

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SharedData;
 
 
 namespace UserApp
@@ -29,7 +30,7 @@ namespace UserApp
         {
             dgvHistoryTicket.Rows.Clear();
 
-            using (var conn = new SqliteConnection(DatabaseHelper2.GetConnectionString()))
+            using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
             {
                 conn.Open();
 

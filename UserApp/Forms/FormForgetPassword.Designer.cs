@@ -77,7 +77,7 @@ namespace UserApp
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.QuenMK;
-            btnDangNhap.Location = new Point(290, 35);
+            btnDangNhap.Location = new Point(307, 80);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnDangNhap.Size = new Size(197, 46);
@@ -100,7 +100,7 @@ namespace UserApp
             panelQMK.FillColor2 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor3 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelQMK.Location = new Point(271, 102);
+            panelQMK.Location = new Point(288, 147);
             panelQMK.Name = "panelQMK";
             panelQMK.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelQMK.ShadowDecoration.CustomizableEdges = customizableEdges10;

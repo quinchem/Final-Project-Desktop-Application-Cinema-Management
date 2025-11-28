@@ -20,7 +20,7 @@ namespace AdminApp
         private readonly StaffRepo _staffRepo = new StaffRepo();
         private byte[] _selectedImageBytes;
         private ImageRepo _imageRepo = new ImageRepo();
-        private readonly AccountRepository _accountRepo = new AccountRepository();
+        private readonly AccountRepo _accountRepo = new AccountRepo();
 
         public FormEditAccount(string staff_id)
         {
