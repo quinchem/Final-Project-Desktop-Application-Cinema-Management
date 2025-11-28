@@ -1,5 +1,4 @@
-﻿using AdminApp.Models;
-using AdminApp.Repositories;
+﻿using SharedData.Models;
 using SharedData.Repositories;
 using System;
 using System.Windows.Forms;

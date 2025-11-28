@@ -17,7 +17,6 @@ namespace UserApp
             this.Opacity = 0;   // fade-in
             this.KeyPreview = true;
 
-            // 1. GỌI SHOWLOGIN NGAY TRONG CONSTRUCTOR ĐỂ THIẾT LẬP TRẠNG THÁI MẶC ĐỊNH
             ShowLogin();
         }
         private Form currentChildForm;
@@ -32,7 +31,8 @@ namespace UserApp
             child.FormBorderStyle = FormBorderStyle.None;
             child.Dock = DockStyle.Fill;
 
-            panelLogin.Controls.Clear();     // Xóa form cũ
+            panelDangNhap.Visible = false;
+            panelDangKy.Visible = false;  // Xóa form cũ
             panelLogin.Controls.Add(child);  // Chỉ chứa form con
             panelLogin.Tag = child;
 
@@ -65,7 +65,15 @@ namespace UserApp
         // ================================
         public void ShowLogin()
         {
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+                panelLogin.Controls.Remove(currentChildForm);
+                currentChildForm = null;
+            }
+
             panelDangNhap.Visible = true;
+            panelDangNhap.Enabled = true;
             panelDangKy.Visible = false;
             // Đã xóa: btnMiniDN.Enabled = false; (để ValidateLoginForm quyết định)
 
@@ -123,7 +131,7 @@ namespace UserApp
            // Đồng ý điều khoản
            chkDieuKhoan.Checked;
 
-            btnminiDK.Enabled = valid;
+            btnminiDK.Enabled = true;
         }
 
         private void btnDangKy_Click(object sender, EventArgs e)
@@ -331,6 +339,9 @@ namespace UserApp
 
         private void btnQuenMk_Click(object sender, EventArgs e)
         {
+            panelDangNhap.Visible = false;
+            panelDangNhap.Enabled = false;
+
             // Lưu ý: Cần đảm bảo class FormForgetPassword có tồn tại và constructor nhận Form cha (this)
             OpenChildForm(new FormForgetPassword(this));
         }
@@ -355,7 +366,7 @@ namespace UserApp
             bool valid = !string.IsNullOrWhiteSpace(txtEmailDN.Text)
                          && !string.IsNullOrWhiteSpace(txtPassDN.Text);
 
-            btnMiniDN.Enabled = valid;
+            btnMiniDN.Enabled = true;
         }
 
         private void txtEmailDN_TextChanged(object sender, EventArgs e)
@@ -398,6 +409,25 @@ namespace UserApp
         private void radNu_CheckedChanged(object sender, EventArgs e)
         {
             ValidateRegisterForm();
+        }
+
+        private void guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+            if (txtPassDN.UseSystemPasswordChar == true)
+            {
+                // Hiện lên + Đổi ảnh mở
+                txtPassDN.UseSystemPasswordChar = false;
+                txtPassDN.PasswordChar = '\0';
+                guna2PictureBox1.Image = Properties.Resources.view;
+            }
+            else
+            {
+                // Ẩn đi + Đổi ảnh đóng
+                txtPassDN.UseSystemPasswordChar = true;
+
+                // Đổi ảnh đóng ở đây
+                guna2PictureBox1.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+            }
         }
     }
 }

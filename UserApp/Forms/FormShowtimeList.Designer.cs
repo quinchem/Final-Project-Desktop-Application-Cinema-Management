@@ -30,6 +30,12 @@ namespace UserApp
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -39,14 +45,14 @@ namespace UserApp
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             lblLichChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
             dayPanels = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            btnSun = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnSat = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnFri = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnThu = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnWed = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnTue = new Guna.UI2.WinForms.Guna2CircleButton();
             btnPrevWeek = new Guna.UI2.WinForms.Guna2CircleButton();
             btnNextWeek = new Guna.UI2.WinForms.Guna2CircleButton();
             btnMon = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -63,12 +69,6 @@ namespace UserApp
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             btnChonCho = new Guna.UI2.WinForms.Guna2Button();
             flpShowtimes = new FlowLayoutPanel();
-            btnTue = new Guna.UI2.WinForms.Guna2CircleButton();
-            btnWed = new Guna.UI2.WinForms.Guna2CircleButton();
-            btnThu = new Guna.UI2.WinForms.Guna2CircleButton();
-            btnFri = new Guna.UI2.WinForms.Guna2CircleButton();
-            btnSat = new Guna.UI2.WinForms.Guna2CircleButton();
-            btnSun = new Guna.UI2.WinForms.Guna2CircleButton();
             dayPanels.SuspendLayout();
             guna2CustomGradientPanel2.SuspendLayout();
             SuspendLayout();
@@ -122,6 +122,114 @@ namespace UserApp
             dayPanels.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
             dayPanels.Size = new Size(967, 186);
             dayPanels.TabIndex = 13;
+            // 
+            // btnSun
+            // 
+            btnSun.DisabledState.BorderColor = Color.DarkGray;
+            btnSun.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSun.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSun.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSun.FillColor = Color.FromArgb(236, 230, 224);
+            btnSun.Font = new Font("Segoe UI", 9F);
+            btnSun.ForeColor = Color.Black;
+            btnSun.Location = new Point(797, 114);
+            btnSun.Margin = new Padding(2);
+            btnSun.Name = "btnSun";
+            btnSun.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            btnSun.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnSun.Size = new Size(51, 49);
+            btnSun.TabIndex = 29;
+            btnSun.Text = "dd";
+            // 
+            // btnSat
+            // 
+            btnSat.DisabledState.BorderColor = Color.DarkGray;
+            btnSat.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSat.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSat.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSat.FillColor = Color.FromArgb(236, 230, 224);
+            btnSat.Font = new Font("Segoe UI", 9F);
+            btnSat.ForeColor = Color.Black;
+            btnSat.Location = new Point(677, 114);
+            btnSat.Margin = new Padding(2);
+            btnSat.Name = "btnSat";
+            btnSat.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnSat.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnSat.Size = new Size(51, 49);
+            btnSat.TabIndex = 28;
+            btnSat.Text = "dd";
+            // 
+            // btnFri
+            // 
+            btnFri.DisabledState.BorderColor = Color.DarkGray;
+            btnFri.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnFri.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnFri.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnFri.FillColor = Color.FromArgb(236, 230, 224);
+            btnFri.Font = new Font("Segoe UI", 9F);
+            btnFri.ForeColor = Color.Black;
+            btnFri.Location = new Point(575, 114);
+            btnFri.Margin = new Padding(2);
+            btnFri.Name = "btnFri";
+            btnFri.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            btnFri.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnFri.Size = new Size(51, 49);
+            btnFri.TabIndex = 27;
+            btnFri.Text = "dd";
+            // 
+            // btnThu
+            // 
+            btnThu.DisabledState.BorderColor = Color.DarkGray;
+            btnThu.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnThu.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnThu.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnThu.FillColor = Color.FromArgb(236, 230, 224);
+            btnThu.Font = new Font("Segoe UI", 9F);
+            btnThu.ForeColor = Color.Black;
+            btnThu.Location = new Point(467, 114);
+            btnThu.Margin = new Padding(2);
+            btnThu.Name = "btnThu";
+            btnThu.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnThu.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnThu.Size = new Size(51, 49);
+            btnThu.TabIndex = 26;
+            btnThu.Text = "dd";
+            // 
+            // btnWed
+            // 
+            btnWed.DisabledState.BorderColor = Color.DarkGray;
+            btnWed.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnWed.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnWed.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnWed.FillColor = Color.FromArgb(236, 230, 224);
+            btnWed.Font = new Font("Segoe UI", 9F);
+            btnWed.ForeColor = Color.Black;
+            btnWed.Location = new Point(370, 114);
+            btnWed.Margin = new Padding(2);
+            btnWed.Name = "btnWed";
+            btnWed.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            btnWed.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnWed.Size = new Size(51, 49);
+            btnWed.TabIndex = 25;
+            btnWed.Text = "dd";
+            // 
+            // btnTue
+            // 
+            btnTue.DisabledState.BorderColor = Color.DarkGray;
+            btnTue.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnTue.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnTue.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnTue.FillColor = Color.FromArgb(236, 230, 224);
+            btnTue.Font = new Font("Segoe UI", 9F);
+            btnTue.ForeColor = Color.Black;
+            btnTue.Location = new Point(262, 114);
+            btnTue.Margin = new Padding(2);
+            btnTue.Name = "btnTue";
+            btnTue.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnTue.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnTue.Size = new Size(51, 49);
+            btnTue.TabIndex = 24;
+            btnTue.Text = "dd";
             // 
             // btnPrevWeek
             // 
@@ -312,7 +420,7 @@ namespace UserApp
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel2.Size = new Size(1197, 61);
+            guna2CustomGradientPanel2.Size = new Size(1256, 61);
             guna2CustomGradientPanel2.TabIndex = 24;
             // 
             // btnChonCho
@@ -327,10 +435,10 @@ namespace UserApp
             btnChonCho.ForeColor = Color.FromArgb(245, 131, 35);
             btnChonCho.Image = Properties.Resources.right_arrow1;
             btnChonCho.ImageAlign = HorizontalAlignment.Right;
-            btnChonCho.Location = new Point(983, 18);
+            btnChonCho.Location = new Point(1037, 17);
             btnChonCho.Name = "btnChonCho";
             btnChonCho.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            btnChonCho.Size = new Size(147, 35);
+            btnChonCho.Size = new Size(180, 35);
             btnChonCho.TabIndex = 10;
             btnChonCho.Text = "Chọn chỗ ngồi";
             btnChonCho.Click += btnChonCho_Click;
@@ -346,114 +454,6 @@ namespace UserApp
             flpShowtimes.Size = new Size(935, 549);
             flpShowtimes.TabIndex = 33;
             flpShowtimes.WrapContents = false;
-            // 
-            // btnTue
-            // 
-            btnTue.DisabledState.BorderColor = Color.DarkGray;
-            btnTue.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnTue.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnTue.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnTue.FillColor = Color.FromArgb(236, 230, 224);
-            btnTue.Font = new Font("Segoe UI", 9F);
-            btnTue.ForeColor = Color.Black;
-            btnTue.Location = new Point(262, 114);
-            btnTue.Margin = new Padding(2);
-            btnTue.Name = "btnTue";
-            btnTue.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnTue.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            btnTue.Size = new Size(51, 49);
-            btnTue.TabIndex = 24;
-            btnTue.Text = "dd";
-            // 
-            // btnWed
-            // 
-            btnWed.DisabledState.BorderColor = Color.DarkGray;
-            btnWed.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnWed.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnWed.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnWed.FillColor = Color.FromArgb(236, 230, 224);
-            btnWed.Font = new Font("Segoe UI", 9F);
-            btnWed.ForeColor = Color.Black;
-            btnWed.Location = new Point(370, 114);
-            btnWed.Margin = new Padding(2);
-            btnWed.Name = "btnWed";
-            btnWed.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            btnWed.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            btnWed.Size = new Size(51, 49);
-            btnWed.TabIndex = 25;
-            btnWed.Text = "dd";
-            // 
-            // btnThu
-            // 
-            btnThu.DisabledState.BorderColor = Color.DarkGray;
-            btnThu.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnThu.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnThu.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnThu.FillColor = Color.FromArgb(236, 230, 224);
-            btnThu.Font = new Font("Segoe UI", 9F);
-            btnThu.ForeColor = Color.Black;
-            btnThu.Location = new Point(467, 114);
-            btnThu.Margin = new Padding(2);
-            btnThu.Name = "btnThu";
-            btnThu.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnThu.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            btnThu.Size = new Size(51, 49);
-            btnThu.TabIndex = 26;
-            btnThu.Text = "dd";
-            // 
-            // btnFri
-            // 
-            btnFri.DisabledState.BorderColor = Color.DarkGray;
-            btnFri.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnFri.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnFri.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnFri.FillColor = Color.FromArgb(236, 230, 224);
-            btnFri.Font = new Font("Segoe UI", 9F);
-            btnFri.ForeColor = Color.Black;
-            btnFri.Location = new Point(575, 114);
-            btnFri.Margin = new Padding(2);
-            btnFri.Name = "btnFri";
-            btnFri.ShadowDecoration.CustomizableEdges = customizableEdges3;
-            btnFri.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            btnFri.Size = new Size(51, 49);
-            btnFri.TabIndex = 27;
-            btnFri.Text = "dd";
-            // 
-            // btnSat
-            // 
-            btnSat.DisabledState.BorderColor = Color.DarkGray;
-            btnSat.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnSat.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnSat.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnSat.FillColor = Color.FromArgb(236, 230, 224);
-            btnSat.Font = new Font("Segoe UI", 9F);
-            btnSat.ForeColor = Color.Black;
-            btnSat.Location = new Point(677, 114);
-            btnSat.Margin = new Padding(2);
-            btnSat.Name = "btnSat";
-            btnSat.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnSat.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            btnSat.Size = new Size(51, 49);
-            btnSat.TabIndex = 28;
-            btnSat.Text = "dd";
-            // 
-            // btnSun
-            // 
-            btnSun.DisabledState.BorderColor = Color.DarkGray;
-            btnSun.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnSun.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnSun.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnSun.FillColor = Color.FromArgb(236, 230, 224);
-            btnSun.Font = new Font("Segoe UI", 9F);
-            btnSun.ForeColor = Color.Black;
-            btnSun.Location = new Point(797, 114);
-            btnSun.Margin = new Padding(2);
-            btnSun.Name = "btnSun";
-            btnSun.ShadowDecoration.CustomizableEdges = customizableEdges1;
-            btnSun.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            btnSun.Size = new Size(51, 49);
-            btnSun.TabIndex = 29;
-            btnSun.Text = "dd";
             // 
             // FormShowtimeList
             // 
