@@ -8,17 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SharedData.Models;
+using SharedData.Repositories;
 
 namespace AdminApp.Forms
 {
     public partial class FormResetPassword : Form
     {
         private AdminMainForm parentForm;
-
-        public FormResetPassword(AdminMainForm parent)
+        private string _userEmail; // Biến lưu email để dùng lúc đổi pass
+        public FormResetPassword(AdminMainForm parent, string email)
         {
             InitializeComponent();
             parentForm = parent;
+            this._userEmail = email; // Lưu lại email
 
             txtMKmoi.UseSystemPasswordChar = true;
             txtXacNhanMK.UseSystemPasswordChar = true;
@@ -68,6 +71,44 @@ namespace AdminApp.Forms
                         MessageBox.Show("Không tìm thấy tài khoản");
                     }
                 }
+            }
+        }
+
+        private void picEye1_Click(object sender, EventArgs e)
+        {
+            if (txtMKmoi.UseSystemPasswordChar == true)
+            {
+                // Hiện lên + Đổi ảnh mở
+                txtMKmoi.UseSystemPasswordChar = false;
+                txtMKmoi.PasswordChar = '\0';
+                picEye1.Image = Properties.Resources.view;
+            }
+            else
+            {
+                // Ẩn đi + Đổi ảnh đóng
+                txtMKmoi.UseSystemPasswordChar = true;
+
+                // Đổi ảnh đóng ở đây
+                picEye1.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+            }
+        }
+
+        private void picEye2_Click(object sender, EventArgs e)
+        {
+            if (txtXacNhanMK.UseSystemPasswordChar == true)
+            {
+                // Hiện lên + Đổi ảnh mở
+                txtXacNhanMK.UseSystemPasswordChar = false;
+                txtXacNhanMK.PasswordChar = '\0';
+                picEye2.Image = Properties.Resources.view;
+            }
+            else
+            {
+                // Ẩn đi + Đổi ảnh đóng
+                txtXacNhanMK.UseSystemPasswordChar = true;
+
+                // Đổi ảnh đóng ở đây
+                picEye2.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
             }
         }
     }

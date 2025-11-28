@@ -189,15 +189,6 @@ namespace UserApp
                 currentShowtimes = repo.GetShowtimesByDateRange(currentStartDate, 7);
                 if (currentShowtimes == null) currentShowtimes = new List<ShowtimeInfo>();
 
-                // 🔥 LOGIC THÔNG MINH: Nếu ngày chọn (01/xx) ko có phim, tự nhảy sang ngày có phim
-                bool hasMovie = currentShowtimes.Any(s => s.ParsedDate.Date == selectedDate.Date);
-                if (!hasMovie && currentShowtimes.Count > 0)
-                {
-                    // Chọn ngày đầu tiên có phim trong list
-                    selectedDate = currentShowtimes.OrderBy(s => s.ParsedDate).First().ParsedDate.Date;
-                    UpdateDateButtons(); // Cập nhật lại màu nút
-                }
-
                 DisplayShowtimes();
             }
             catch (Exception ex)

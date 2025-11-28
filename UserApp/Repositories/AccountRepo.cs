@@ -91,11 +91,11 @@ namespace UserApp.Repositories
                             {
                                 getIdCmd.Transaction = tx;
                                 getIdCmd.CommandText = @"
-        SELECT 'C' || printf('%03d',
-            IFNULL(MAX(CAST(SUBSTR(customer_id, 2) AS INTEGER)), 0) + 1
-        )
-        FROM customer;
-    ";
+                                    SELECT 'C' || printf('%03d',
+                                        IFNULL(MAX(CAST(SUBSTR(customer_id, 2) AS INTEGER)), 0) + 1
+                                    )
+                                    FROM customer;
+                                    ";
 
                                 customer.customer_id = getIdCmd.ExecuteScalar().ToString();
                             }
@@ -106,11 +106,11 @@ namespace UserApp.Repositories
                             {
                                 insertCustomerCmd.Transaction = tx;
                                 insertCustomerCmd.CommandText = @"
-        INSERT INTO customer
-        (customer_id, full_name, email, phone_number, gender, date_of_birth, address, create_date)
-        VALUES
-        (@customerId, @fullName, @email, @phone, @gender, @dob, @address, @createDate);
-    ";
+                                    INSERT INTO customer
+                                    (customer_id, full_name, email, phone_number, gender, date_of_birth, address, create_date)
+                                    VALUES
+                                    (@customerId, @fullName, @email, @phone, @gender, @dob, @address, @createDate);
+                                ";
 
                                 insertCustomerCmd.Parameters.AddWithValue("@customerId", customer.customer_id);
                                 insertCustomerCmd.Parameters.AddWithValue("@fullName", customer.full_name ?? "");
