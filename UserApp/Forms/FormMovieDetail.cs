@@ -14,10 +14,8 @@ namespace UserApp
 {
     public partial class FormMovieDetail : Form
     {
-
-
-
         private string movieId;
+        private FilmRepo _filmRepo = new FilmRepo();
         private ImageRepo _imageRepo = new ImageRepo();
         private UserMainForm _parentForm;
         public FormMovieDetail(string id, UserMainForm parentForm)
@@ -35,7 +33,6 @@ namespace UserApp
             {
                 var repo = new FilmRepo();
                 var film = repo.GetById2(movieId);
-
                 if (film != null)
                 {
                     lblTitle.Text = film.title;
@@ -91,7 +88,8 @@ namespace UserApp
                 MessageBox.Show("Lỗi khi load poster: " + ex.Message);
             }
         }
-
+        
+        
         private void btnDatVe_Click(object sender, EventArgs e)
         {
             // Tìm MainForm để gọi OpenChildForm()
@@ -99,7 +97,7 @@ namespace UserApp
 
             if (parent != null)
             {
-                parent.OpenChildForm(new FormShowtimeList());
+                parent.OpenChildForm(new FormShowtimeDetail(movieId));
             }
         }
 
