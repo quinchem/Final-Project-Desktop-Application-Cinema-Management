@@ -35,20 +35,20 @@ namespace UserApp
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -66,6 +66,9 @@ namespace UserApp
             panelLogin = new Panel();
             btnDangKy = new Guna2Button();
             btnDangNhap = new Guna2Button();
+            panelDangKy = new Guna2CustomGradientPanel();
+            chkDieuKhoan = new Guna2CheckBox();
+            txtPassCF = new Guna2TextBox();
             panelDangNhap = new Guna2CustomGradientPanel();
             btnQuenMk = new Guna2Button();
             btnMiniDN = new Guna2Button();
@@ -73,9 +76,6 @@ namespace UserApp
             lblPass = new Guna2HtmlLabel();
             txtEmailDN = new Guna2TextBox();
             lblEmail = new Guna2HtmlLabel();
-            panelDangKy = new Guna2CustomGradientPanel();
-            chkDieuKhoan = new Guna2CheckBox();
-            txtPassCF = new Guna2TextBox();
             guna2HtmlLabel8 = new Guna2HtmlLabel();
             txtSDT = new Guna2TextBox();
             guna2HtmlLabel6 = new Guna2HtmlLabel();
@@ -94,8 +94,8 @@ namespace UserApp
             txtHoTen = new Guna2TextBox();
             guna2HtmlLabel3 = new Guna2HtmlLabel();
             panelLogin.SuspendLayout();
-            panelDangNhap.SuspendLayout();
             panelDangKy.SuspendLayout();
+            panelDangNhap.SuspendLayout();
             SuspendLayout();
             // 
             // panelLogin
@@ -104,7 +104,6 @@ namespace UserApp
             panelLogin.BackColor = Color.FromArgb(92, 124, 150);
             panelLogin.Controls.Add(btnDangKy);
             panelLogin.Controls.Add(btnDangNhap);
-            panelLogin.Controls.Add(panelDangNhap);
             panelLogin.Controls.Add(panelDangKy);
             panelLogin.Dock = DockStyle.Fill;
             panelLogin.Location = new Point(0, 0);
@@ -154,139 +153,6 @@ namespace UserApp
             btnDangNhap.Text = "ĐĂNG NHẬP";
             btnDangNhap.Click += btnDangNhap_Click;
             // 
-            // panelDangNhap
-            // 
-            panelDangNhap.BackColor = Color.Transparent;
-            panelDangNhap.BorderColor = Color.FromArgb(236, 230, 224);
-            panelDangNhap.BorderRadius = 15;
-            panelDangNhap.Controls.Add(btnQuenMk);
-            panelDangNhap.Controls.Add(btnMiniDN);
-            panelDangNhap.Controls.Add(txtPassDN);
-            panelDangNhap.Controls.Add(lblPass);
-            panelDangNhap.Controls.Add(txtEmailDN);
-            panelDangNhap.Controls.Add(lblEmail);
-            panelDangNhap.CustomizableEdges = customizableEdges13;
-            panelDangNhap.FillColor = Color.FromArgb(236, 230, 224);
-            panelDangNhap.FillColor2 = Color.FromArgb(236, 230, 224);
-            panelDangNhap.FillColor3 = Color.FromArgb(236, 230, 224);
-            panelDangNhap.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelDangNhap.Location = new Point(362, 139);
-            panelDangNhap.Name = "panelDangNhap";
-            panelDangNhap.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            panelDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            panelDangNhap.ShadowDecoration.Depth = 20;
-            panelDangNhap.ShadowDecoration.Enabled = true;
-            panelDangNhap.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            panelDangNhap.Size = new Size(713, 332);
-            panelDangNhap.TabIndex = 6;
-            // 
-            // btnQuenMk
-            // 
-            btnQuenMk.CustomizableEdges = customizableEdges5;
-            btnQuenMk.DisabledState.BorderColor = Color.DarkGray;
-            btnQuenMk.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnQuenMk.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnQuenMk.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnQuenMk.FillColor = Color.FromArgb(236, 230, 224);
-            btnQuenMk.Font = new Font("Segoe UI", 10.2F, FontStyle.Italic);
-            btnQuenMk.ForeColor = SystemColors.GrayText;
-            btnQuenMk.Location = new Point(54, 234);
-            btnQuenMk.Name = "btnQuenMk";
-            btnQuenMk.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnQuenMk.Size = new Size(152, 27);
-            btnQuenMk.TabIndex = 6;
-            btnQuenMk.Text = "Quên mật khẩu?";
-            btnQuenMk.TextAlign = HorizontalAlignment.Left;
-            btnQuenMk.Click += btnQuenMk_Click;
-            // 
-            // btnMiniDN
-            // 
-            btnMiniDN.BorderRadius = 8;
-            btnMiniDN.CustomizableEdges = customizableEdges7;
-            btnMiniDN.DisabledState.BorderColor = Color.DarkGray;
-            btnMiniDN.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnMiniDN.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnMiniDN.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnMiniDN.FillColor = Color.FromArgb(44, 84, 115);
-            btnMiniDN.FocusedColor = Color.FromArgb(245, 131, 35);
-            btnMiniDN.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnMiniDN.ForeColor = Color.White;
-            btnMiniDN.Location = new Point(515, 261);
-            btnMiniDN.Name = "btnMiniDN";
-            btnMiniDN.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnMiniDN.Size = new Size(136, 47);
-            btnMiniDN.TabIndex = 5;
-            btnMiniDN.Text = "ĐĂNG NHẬP";
-            btnMiniDN.Click += btnMiniDN_Click;
-            // 
-            // txtPassDN
-            // 
-            txtPassDN.BorderRadius = 8;
-            txtPassDN.CustomizableEdges = customizableEdges9;
-            txtPassDN.DefaultText = "";
-            txtPassDN.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtPassDN.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtPassDN.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtPassDN.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtPassDN.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPassDN.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPassDN.ForeColor = Color.FromArgb(64, 64, 64);
-            txtPassDN.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPassDN.Location = new Point(60, 181);
-            txtPassDN.Margin = new Padding(3, 5, 3, 5);
-            txtPassDN.Name = "txtPassDN";
-            txtPassDN.PlaceholderText = "";
-            txtPassDN.SelectedText = "";
-            txtPassDN.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            txtPassDN.Size = new Size(591, 45);
-            txtPassDN.TabIndex = 3;
-            txtPassDN.TextChanged += txtPassDN_TextChanged;
-            // 
-            // lblPass
-            // 
-            lblPass.AutoSize = false;
-            lblPass.BackColor = Color.Transparent;
-            lblPass.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPass.Location = new Point(60, 145);
-            lblPass.Name = "lblPass";
-            lblPass.Size = new Size(261, 33);
-            lblPass.TabIndex = 2;
-            lblPass.Text = "Mật khẩu (Password):";
-            // 
-            // txtEmailDN
-            // 
-            txtEmailDN.BorderRadius = 8;
-            txtEmailDN.CustomizableEdges = customizableEdges11;
-            txtEmailDN.DefaultText = "";
-            txtEmailDN.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtEmailDN.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtEmailDN.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtEmailDN.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtEmailDN.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmailDN.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmailDN.ForeColor = Color.FromArgb(64, 64, 64);
-            txtEmailDN.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmailDN.Location = new Point(60, 79);
-            txtEmailDN.Margin = new Padding(3, 5, 3, 5);
-            txtEmailDN.Name = "txtEmailDN";
-            txtEmailDN.PlaceholderText = "";
-            txtEmailDN.SelectedText = "";
-            txtEmailDN.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            txtEmailDN.Size = new Size(591, 45);
-            txtEmailDN.TabIndex = 1;
-            txtEmailDN.TextChanged += txtEmailDN_TextChanged;
-            // 
-            // lblEmail
-            // 
-            lblEmail.AutoSize = false;
-            lblEmail.BackColor = Color.Transparent;
-            lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(60, 33);
-            lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(166, 38);
-            lblEmail.TabIndex = 0;
-            lblEmail.Text = "Email:";
-            // 
             // panelDangKy
             // 
             panelDangKy.BackColor = Color.Transparent;
@@ -294,6 +160,7 @@ namespace UserApp
             panelDangKy.BorderRadius = 15;
             panelDangKy.Controls.Add(chkDieuKhoan);
             panelDangKy.Controls.Add(txtPassCF);
+            panelDangKy.Controls.Add(panelDangNhap);
             panelDangKy.Controls.Add(guna2HtmlLabel8);
             panelDangKy.Controls.Add(txtSDT);
             panelDangKy.Controls.Add(guna2HtmlLabel6);
@@ -349,7 +216,7 @@ namespace UserApp
             // txtPassCF
             // 
             txtPassCF.BorderRadius = 8;
-            txtPassCF.CustomizableEdges = customizableEdges15;
+            txtPassCF.CustomizableEdges = customizableEdges5;
             txtPassCF.DefaultText = "";
             txtPassCF.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPassCF.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -364,9 +231,142 @@ namespace UserApp
             txtPassCF.Name = "txtPassCF";
             txtPassCF.PlaceholderText = "";
             txtPassCF.SelectedText = "";
-            txtPassCF.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            txtPassCF.ShadowDecoration.CustomizableEdges = customizableEdges6;
             txtPassCF.Size = new Size(352, 39);
             txtPassCF.TabIndex = 19;
+            // 
+            // panelDangNhap
+            // 
+            panelDangNhap.BackColor = Color.Transparent;
+            panelDangNhap.BorderColor = Color.FromArgb(236, 230, 224);
+            panelDangNhap.BorderRadius = 15;
+            panelDangNhap.Controls.Add(btnQuenMk);
+            panelDangNhap.Controls.Add(btnMiniDN);
+            panelDangNhap.Controls.Add(txtPassDN);
+            panelDangNhap.Controls.Add(lblPass);
+            panelDangNhap.Controls.Add(txtEmailDN);
+            panelDangNhap.Controls.Add(lblEmail);
+            panelDangNhap.CustomizableEdges = customizableEdges15;
+            panelDangNhap.FillColor = Color.FromArgb(236, 230, 224);
+            panelDangNhap.FillColor2 = Color.FromArgb(236, 230, 224);
+            panelDangNhap.FillColor3 = Color.FromArgb(236, 230, 224);
+            panelDangNhap.FillColor4 = Color.FromArgb(236, 230, 224);
+            panelDangNhap.Location = new Point(87, 0);
+            panelDangNhap.Name = "panelDangNhap";
+            panelDangNhap.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
+            panelDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            panelDangNhap.ShadowDecoration.Depth = 20;
+            panelDangNhap.ShadowDecoration.Enabled = true;
+            panelDangNhap.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
+            panelDangNhap.Size = new Size(713, 332);
+            panelDangNhap.TabIndex = 6;
+            // 
+            // btnQuenMk
+            // 
+            btnQuenMk.CustomizableEdges = customizableEdges7;
+            btnQuenMk.DisabledState.BorderColor = Color.DarkGray;
+            btnQuenMk.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnQuenMk.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnQuenMk.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnQuenMk.FillColor = Color.FromArgb(236, 230, 224);
+            btnQuenMk.Font = new Font("Segoe UI", 10.2F, FontStyle.Italic);
+            btnQuenMk.ForeColor = SystemColors.GrayText;
+            btnQuenMk.Location = new Point(54, 234);
+            btnQuenMk.Name = "btnQuenMk";
+            btnQuenMk.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnQuenMk.Size = new Size(152, 27);
+            btnQuenMk.TabIndex = 6;
+            btnQuenMk.Text = "Quên mật khẩu?";
+            btnQuenMk.TextAlign = HorizontalAlignment.Left;
+            btnQuenMk.Click += btnQuenMk_Click;
+            // 
+            // btnMiniDN
+            // 
+            btnMiniDN.BorderRadius = 8;
+            btnMiniDN.CustomizableEdges = customizableEdges9;
+            btnMiniDN.DisabledState.BorderColor = Color.DarkGray;
+            btnMiniDN.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnMiniDN.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnMiniDN.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnMiniDN.FillColor = Color.FromArgb(44, 84, 115);
+            btnMiniDN.FocusedColor = Color.FromArgb(245, 131, 35);
+            btnMiniDN.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnMiniDN.ForeColor = Color.White;
+            btnMiniDN.Location = new Point(515, 261);
+            btnMiniDN.Name = "btnMiniDN";
+            btnMiniDN.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnMiniDN.Size = new Size(136, 47);
+            btnMiniDN.TabIndex = 5;
+            btnMiniDN.Text = "ĐĂNG NHẬP";
+            btnMiniDN.Click += btnMiniDN_Click;
+            // 
+            // txtPassDN
+            // 
+            txtPassDN.BorderRadius = 8;
+            txtPassDN.CustomizableEdges = customizableEdges11;
+            txtPassDN.DefaultText = "";
+            txtPassDN.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtPassDN.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtPassDN.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtPassDN.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtPassDN.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtPassDN.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPassDN.ForeColor = Color.FromArgb(64, 64, 64);
+            txtPassDN.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtPassDN.Location = new Point(60, 181);
+            txtPassDN.Margin = new Padding(3, 5, 3, 5);
+            txtPassDN.Name = "txtPassDN";
+            txtPassDN.PlaceholderText = "";
+            txtPassDN.SelectedText = "";
+            txtPassDN.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            txtPassDN.Size = new Size(591, 45);
+            txtPassDN.TabIndex = 3;
+            txtPassDN.TextChanged += txtPassDN_TextChanged;
+            // 
+            // lblPass
+            // 
+            lblPass.AutoSize = false;
+            lblPass.BackColor = Color.Transparent;
+            lblPass.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPass.Location = new Point(60, 145);
+            lblPass.Name = "lblPass";
+            lblPass.Size = new Size(261, 33);
+            lblPass.TabIndex = 2;
+            lblPass.Text = "Mật khẩu (Password):";
+            // 
+            // txtEmailDN
+            // 
+            txtEmailDN.BorderRadius = 8;
+            txtEmailDN.CustomizableEdges = customizableEdges13;
+            txtEmailDN.DefaultText = "";
+            txtEmailDN.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtEmailDN.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtEmailDN.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtEmailDN.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtEmailDN.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtEmailDN.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtEmailDN.ForeColor = Color.FromArgb(64, 64, 64);
+            txtEmailDN.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtEmailDN.Location = new Point(60, 79);
+            txtEmailDN.Margin = new Padding(3, 5, 3, 5);
+            txtEmailDN.Name = "txtEmailDN";
+            txtEmailDN.PlaceholderText = "";
+            txtEmailDN.SelectedText = "";
+            txtEmailDN.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            txtEmailDN.Size = new Size(591, 45);
+            txtEmailDN.TabIndex = 1;
+            txtEmailDN.TextChanged += txtEmailDN_TextChanged;
+            // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = false;
+            lblEmail.BackColor = Color.Transparent;
+            lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEmail.Location = new Point(60, 33);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(166, 38);
+            lblEmail.TabIndex = 0;
+            lblEmail.Text = "Email:";
             // 
             // guna2HtmlLabel8
             // 
@@ -399,6 +399,7 @@ namespace UserApp
             txtSDT.ShadowDecoration.CustomizableEdges = customizableEdges18;
             txtSDT.Size = new Size(352, 39);
             txtSDT.TabIndex = 17;
+            txtSDT.TextChanged += txtSDT_TextChanged;
             // 
             // guna2HtmlLabel6
             // 
@@ -540,6 +541,7 @@ namespace UserApp
             radNu.UncheckedState.BorderThickness = 2;
             radNu.UncheckedState.FillColor = Color.Transparent;
             radNu.UncheckedState.InnerColor = Color.Transparent;
+            radNu.CheckedChanged += radNu_CheckedChanged;
             // 
             // radNam
             // 
@@ -558,6 +560,7 @@ namespace UserApp
             radNam.UncheckedState.BorderThickness = 2;
             radNam.UncheckedState.FillColor = Color.Transparent;
             radNam.UncheckedState.InnerColor = Color.Transparent;
+            radNam.CheckedChanged += radNam_CheckedChanged;
             // 
             // guna2HtmlLabel1
             // 
@@ -643,9 +646,9 @@ namespace UserApp
             Load += FormLogin_Load;
             KeyDown += FormLogin_KeyDown;
             panelLogin.ResumeLayout(false);
-            panelDangNhap.ResumeLayout(false);
             panelDangKy.ResumeLayout(false);
             panelDangKy.PerformLayout();
+            panelDangNhap.ResumeLayout(false);
             ResumeLayout(false);
         }
 
