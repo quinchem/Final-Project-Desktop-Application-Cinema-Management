@@ -499,11 +499,11 @@ namespace UserApp
     // 2. Mở form chọn ghế
     // (Đảm bảo bên FormSeatSelection đã có hàm khởi tạo nhận tham số nhé)
     //var frm = new FormSeatSelection(_selectedShowtime);
-    var frm = new FormSeatSelection();
+    //var frm = new FormSeatSelection(showtimeId);
     
-    this.Hide();      // Ẩn form hiện tại
-    frm.ShowDialog(); // Hiện form chọn ghế
-    this.Show();      // Hiện lại form này khi form kia đóng
-        }
+    //this.Hide();      // Ẩn form hiện tại
+    //frm.ShowDialog(); // Hiện form chọn ghế
+    //this.Show();      // Hiện lại form này khi form kia đóng
+     }
     }
 }

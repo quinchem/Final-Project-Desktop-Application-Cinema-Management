@@ -58,7 +58,7 @@ namespace UserApp
             lblLegendMaintenance = new Label();
             guna2Button93 = new Guna.UI2.WinForms.Guna2Button();
             panelHoaDon = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            lblSoTien = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblSotien = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -69,7 +69,7 @@ namespace UserApp
             lblTime = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            panelRoomLayout = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            panelRoom = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
@@ -86,7 +86,7 @@ namespace UserApp
             panel1.Controls.Add(panelHoaDon);
             panel1.Controls.Add(guna2HtmlLabel2);
             panel1.Controls.Add(panel2);
-            panel1.Controls.Add(panelRoomLayout);
+            panel1.Controls.Add(panelRoom);
             panel1.Controls.Add(guna2HtmlLabel1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
@@ -231,7 +231,7 @@ namespace UserApp
             // panelHoaDon
             // 
             panelHoaDon.BackColor = Color.FromArgb(236, 230, 224);
-            panelHoaDon.Controls.Add(lblSoTien);
+            panelHoaDon.Controls.Add(lblSotien);
             panelHoaDon.Controls.Add(guna2HtmlLabel6);
             panelHoaDon.Controls.Add(guna2HtmlLabel5);
             panelHoaDon.Controls.Add(guna2HtmlLabel4);
@@ -249,16 +249,16 @@ namespace UserApp
             panelHoaDon.Size = new Size(305, 681);
             panelHoaDon.TabIndex = 6;
             // 
-            // lblSoTien
+            // lblSotien
             // 
-            lblSoTien.BackColor = Color.Transparent;
-            lblSoTien.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSoTien.ForeColor = Color.Black;
-            lblSoTien.Location = new Point(161, 571);
-            lblSoTien.Name = "lblSoTien";
-            lblSoTien.Size = new Size(69, 30);
-            lblSoTien.TabIndex = 11;
-            lblSoTien.Text = "Số tiền";
+            lblSotien.BackColor = Color.Transparent;
+            lblSotien.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSotien.ForeColor = Color.Black;
+            lblSotien.Location = new Point(161, 571);
+            lblSotien.Name = "lblSotien";
+            lblSotien.Size = new Size(69, 30);
+            lblSotien.TabIndex = 11;
+            lblSotien.Text = "Số tiền";
             // 
             // guna2HtmlLabel6
             // 
@@ -380,18 +380,18 @@ namespace UserApp
             guna2Button1.TabIndex = 0;
             guna2Button1.Text = "Quay lại đổi suất chiếu";
             // 
-            // panelRoomLayout
+            // panelRoom
             // 
-            panelRoomLayout.CustomizableEdges = customizableEdges35;
-            panelRoomLayout.FillColor = Color.Transparent;
-            panelRoomLayout.FillColor2 = Color.Transparent;
-            panelRoomLayout.FillColor3 = Color.Transparent;
-            panelRoomLayout.FillColor4 = Color.Transparent;
-            panelRoomLayout.Location = new Point(46, 93);
-            panelRoomLayout.Name = "panelRoomLayout";
-            panelRoomLayout.ShadowDecoration.CustomizableEdges = customizableEdges36;
-            panelRoomLayout.Size = new Size(1012, 482);
-            panelRoomLayout.TabIndex = 3;
+            panelRoom.CustomizableEdges = customizableEdges35;
+            panelRoom.FillColor = Color.Transparent;
+            panelRoom.FillColor2 = Color.Transparent;
+            panelRoom.FillColor3 = Color.Transparent;
+            panelRoom.FillColor4 = Color.Transparent;
+            panelRoom.Location = new Point(46, 93);
+            panelRoom.Name = "panelRoom";
+            panelRoom.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            panelRoom.Size = new Size(1012, 482);
+            panelRoom.TabIndex = 3;
             // 
             // guna2HtmlLabel1
             // 
@@ -431,7 +431,7 @@ namespace UserApp
         #endregion
 
         private Panel panel1;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel panelRoomLayout;
+        private Guna.UI2.WinForms.Guna2CustomGradientPanel panelRoom;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Panel panel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
@@ -445,7 +445,7 @@ namespace UserApp
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblSoTien;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblSotien;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel3;
         private Label lblLegendNormal;
         private Guna.UI2.WinForms.Guna2Button guna2Button94;
