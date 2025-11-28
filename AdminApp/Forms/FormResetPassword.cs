@@ -22,9 +22,6 @@ namespace AdminApp.Forms
             InitializeComponent();
             parentForm = parent;
             this._userEmail = email; // Lưu lại email
-
-            txtMKmoi.UseSystemPasswordChar = true;
-            txtXacNhanMK.UseSystemPasswordChar = true;
         }
 
         private void btnDatLaiMK_Click(object sender, EventArgs e)

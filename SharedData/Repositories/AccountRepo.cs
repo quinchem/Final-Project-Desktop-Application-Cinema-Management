@@ -222,6 +222,46 @@ namespace SharedData.Repositories
             return cmd.ExecuteNonQuery() > 0;
         }
 
+        // Thêm hàm này vào AccountRepo.cs
+        public bool ResetPassword(string email, string newPassword, out string msg)
+        {
+            msg = "";
+            try
+            {
+                // 1. Tận dụng hàm HashPassword "xịn" có sẵn của class này
+                // Nó sẽ tự sinh Salt và tạo chuỗi đúng định dạng: iter.salt.hash
+                string secureHash = HashPassword(newPassword);
+
+                using var conn = new SqliteConnection(ConnStr);
+                conn.Open();
+
+                using var cmd = conn.CreateCommand();
+
+                // Cập nhật mật khẩu dựa trên Username (vì hệ thống bạn dùng Email làm Username)
+                cmd.CommandText = @"UPDATE account SET password = @p WHERE username = @u";
+
+                cmd.Parameters.AddWithValue("@p", secureHash);
+                cmd.Parameters.AddWithValue("@u", email);
+
+                int result = cmd.ExecuteNonQuery();
+
+                if (result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    msg = "Không tìm thấy tài khoản với email này.";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+                return false;
+            }
+        }
+
         // =========================
         // HASH & VERIFY
         // =========================
