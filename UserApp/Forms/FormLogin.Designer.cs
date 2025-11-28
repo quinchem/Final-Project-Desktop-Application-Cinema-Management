@@ -109,7 +109,7 @@ namespace UserApp
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1200, 750);
+            panel1.Size = new Size(1200, 703);
             panel1.TabIndex = 0;
             // 
             // btnDangKy
@@ -243,11 +243,12 @@ namespace UserApp
             // 
             // lblPass
             // 
+            lblPass.AutoSize = false;
             lblPass.BackColor = Color.Transparent;
             lblPass.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPass.Location = new Point(60, 143);
+            lblPass.Location = new Point(60, 145);
             lblPass.Name = "lblPass";
-            lblPass.Size = new Size(207, 30);
+            lblPass.Size = new Size(261, 33);
             lblPass.TabIndex = 2;
             lblPass.Text = "Mật khẩu (Password):";
             // 
@@ -275,11 +276,12 @@ namespace UserApp
             // 
             // lblEmail
             // 
+            lblEmail.AutoSize = false;
             lblEmail.BackColor = Color.Transparent;
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblEmail.Location = new Point(60, 33);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(60, 30);
+            lblEmail.Size = new Size(166, 38);
             lblEmail.TabIndex = 0;
             lblEmail.Text = "Email:";
             // 
@@ -333,7 +335,7 @@ namespace UserApp
             chkDieuKhoan.CheckMarkColor = Color.Black;
             chkDieuKhoan.Location = new Point(55, 418);
             chkDieuKhoan.Name = "chkDieuKhoan";
-            chkDieuKhoan.Size = new Size(335, 24);
+            chkDieuKhoan.Size = new Size(331, 24);
             chkDieuKhoan.TabIndex = 20;
             chkDieuKhoan.Text = "Tôi đã đọc, hiểu, và đồng ý với các điều khoản";
             chkDieuKhoan.UncheckedState.BorderColor = Color.White;
@@ -631,13 +633,12 @@ namespace UserApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1200, 750);
+            ClientSize = new Size(1200, 703);
             Controls.Add(panel1);
             Name = "FormLogin";
             Text = "Đăng nhập";
             panel1.ResumeLayout(false);
             panelDangNhap.ResumeLayout(false);
-            panelDangNhap.PerformLayout();
             panelDangKy.ResumeLayout(false);
             panelDangKy.PerformLayout();
             ResumeLayout(false);
