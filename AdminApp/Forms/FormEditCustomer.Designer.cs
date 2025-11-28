@@ -283,7 +283,6 @@
             // 
             // txtThoiGian
             // 
-            txtThoiGian.ReadOnly = true;
             txtThoiGian.BorderColor = SystemColors.ControlLight;
             txtThoiGian.CustomizableEdges = customizableEdges9;
             txtThoiGian.DefaultText = "";
@@ -305,6 +304,7 @@
             txtThoiGian.Name = "txtThoiGian";
             txtThoiGian.PlaceholderForeColor = SystemColors.AppWorkspace;
             txtThoiGian.PlaceholderText = "Nhập thời gian tạo tài khoản";
+            txtThoiGian.ReadOnly = true;
             txtThoiGian.SelectedText = "";
             txtThoiGian.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtThoiGian.Size = new Size(290, 33);
@@ -365,11 +365,11 @@
             CbGioiTinh.HoverState.BorderColor = Color.Silver;
             CbGioiTinh.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             CbGioiTinh.ItemHeight = 30;
-            CbGioiTinh.Items.AddRange(new object[] { "Nam ", "Nữ ", "Khác" });
+            CbGioiTinh.Items.AddRange(new object[] { "Nam ", "Nữ " });
             CbGioiTinh.Location = new Point(162, 277);
             CbGioiTinh.Name = "CbGioiTinh";
             CbGioiTinh.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            CbGioiTinh.Size = new Size(145, 36);
+            CbGioiTinh.Size = new Size(290, 36);
             CbGioiTinh.TabIndex = 57;
             // 
             // FormEditCustomer

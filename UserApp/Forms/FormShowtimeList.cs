@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.IO;
+using System.IO; // Để xử lý ảnh
 using System.Linq;
 using System.Windows.Forms;
 
@@ -13,59 +13,61 @@ namespace UserApp
 {
     public partial class FormShowtimeList : Form
     {
+        // --- KHAI BÁO BIẾN ---
         private ShowtimeRepo repo = new ShowtimeRepo();
-        private List<ShowtimeInfo> currentShowtimes;
         private ImageRepo _imageRepo = new ImageRepo();
+        private List<ShowtimeInfo> currentShowtimes;
+
         private DateTime currentStartDate;
         private DateTime selectedDate;
+
         private ShowtimeInfo _selectedShowtime = null;
-        // Biến lưu cái panel đang chọn (để đổi màu)
         private Guna2Panel _selectedPanel = null;
 
+        // --- KHỞI TẠO ---
         public FormShowtimeList()
         {
             InitializeComponent();
 
-            // ✅ Khởi tạo FlowLayoutPanel
+            // 1. Cấu hình Panel chứa phim
             InitializeFlowLayoutPanel();
 
+            // 2. Khởi tạo ngày mặc định
             currentStartDate = GetMondayOfWeek(DateTime.Today);
             selectedDate = DateTime.Today;
 
+            // 3. Load ComboBox tháng
             LoadMonthsComboBox();
-
         }
 
-        // ✅ MỚI: Đảm bảo FlowLayoutPanel có thuộc tính đúng
+        // ✅ FIX LỖI GIAO DIỆN BỊ CHE (QUAN TRỌNG)
         private void InitializeFlowLayoutPanel()
         {
-            if (flpShowtimes == null)
-            {
-                MessageBox.Show("FlowLayoutPanel 'flpShowtimes' chưa được tạo trong Designer!",
-                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            if (flpShowtimes == null) return;
 
-            // Đảm bảo visible, kích thước hợp lý và dễ debug
             flpShowtimes.Visible = true;
             flpShowtimes.AutoScroll = true;
             flpShowtimes.FlowDirection = FlowDirection.LeftToRight;
             flpShowtimes.WrapContents = true;
+            flpShowtimes.BorderStyle = BorderStyle.None;
 
-            flpShowtimes.BorderStyle = BorderStyle.FixedSingle;
-            flpShowtimes.BringToFront();
+            // Màu nền trong suốt để thấy màu form
+            flpShowtimes.BackColor = Color.Transparent;
 
+            // 🔥 QUAN TRỌNG: Đẩy xuống dưới cùng để không che cái Lịch
+            flpShowtimes.SendToBack();
         }
 
         private void LoadMonthsComboBox()
         {
             cboMonth.Items.Clear();
-            for (int i = 1; i <= 12; i++)
-            {
-                cboMonth.Items.Add($"THÁNG {i}");
-            }
+            for (int i = 1; i <= 12; i++) cboMonth.Items.Add($"THÁNG {i}");
+
+            // Chọn tháng hiện tại -> Sự kiện OnMonthChanged sẽ tự chạy
             cboMonth.SelectedIndex = DateTime.Today.Month - 1;
         }
+
+        // --- LOGIC XỬ LÝ NGÀY THÁNG ---
 
         private void OnMonthChanged(object sender, EventArgs e)
         {
@@ -73,24 +75,20 @@ namespace UserApp
 
             int selectedMonth = cboMonth.SelectedIndex + 1;
             int currentYear = DateTime.Today.Year;
-
             DateTime targetDate;
 
-            // Nếu tháng được chọn trùng với tháng thực tế hiện tại
+            // Nếu chọn tháng hiện tại -> Chọn Hôm Nay. Tháng khác -> Chọn mùng 1
             if (selectedMonth == DateTime.Today.Month && currentYear == DateTime.Today.Year)
-            {
-                targetDate = DateTime.Today; // -> Chọn luôn ngày hôm nay
-            }
+                targetDate = DateTime.Today;
             else
-            {
-                targetDate = new DateTime(currentYear, selectedMonth, 1); // -> Các tháng khác thì chọn ngày mùng 1
-            }
+                targetDate = new DateTime(currentYear, selectedMonth, 1);
 
-            // Tính toán lại thứ 2 đầu tuần để vẽ lịch cho đúng dải ngày
+            // Cập nhật lại lịch
             currentStartDate = GetMondayOfWeek(targetDate);
+            selectedDate = targetDate;
 
-            // Gán ngày được chọn (để hiện nút màu cam)
-            SelectDate(targetDate);
+            // 🔥 Tải lại dữ liệu ngay lập tức
+            LoadShowtimes();
         }
 
         private DateTime GetMondayOfWeek(DateTime date)
@@ -105,28 +103,47 @@ namespace UserApp
             LoadShowtimes();
         }
 
-        private void btnPrevWeek_Click(object sender, EventArgs e)
-        {
-            ChangeWeek(-7);
-        }
-
-        private void btnNextWeek_Click(object sender, EventArgs e)
-        {
-            ChangeWeek(7);
-        }
+        private void btnPrevWeek_Click(object sender, EventArgs e) => ChangeWeek(-7);
+        private void btnNextWeek_Click(object sender, EventArgs e) => ChangeWeek(7);
 
         private void SelectDate(DateTime date)
         {
             selectedDate = date;
             ResetDateButtonStyles();
+
             Guna2CircleButton clickedButton = GetDateButton(date);
             if (clickedButton != null)
             {
-                clickedButton.FillColor = Color.FromArgb(255, 140, 50);
+                clickedButton.FillColor = Color.FromArgb(255, 140, 50); // Cam
                 clickedButton.ForeColor = Color.White;
             }
 
             DisplayShowtimes();
+        }
+
+        private void UpdateDateButtons()
+        {
+            Guna2CircleButton[] dateButtons = { btnMon, btnTue, btnWed, btnThu, btnFri, btnSat, btnSun };
+            for (int i = 0; i < 7; i++)
+            {
+                DateTime date = currentStartDate.AddDays(i);
+                var btn = dateButtons[i];
+                if (btn == null) continue;
+
+                btn.Text = date.Day.ToString("00");
+                btn.Tag = date;
+                btn.Click -= DateButton_Click; // Xóa cũ
+                btn.Click += DateButton_Click; // Thêm mới
+            }
+
+            // Highlight lại nút đang chọn nếu nó nằm trong tuần này
+            ResetDateButtonStyles();
+            Guna2CircleButton selectedBtn = GetDateButton(selectedDate);
+            if (selectedBtn != null)
+            {
+                selectedBtn.FillColor = Color.FromArgb(255, 140, 50);
+                selectedBtn.ForeColor = Color.White;
+            }
         }
 
         private void ResetDateButtonStyles()
@@ -142,120 +159,14 @@ namespace UserApp
 
         private Guna2CircleButton GetDateButton(DateTime date)
         {
-            int dayIndex = (int)date.DayOfWeek;
-            dayIndex = (dayIndex == 0) ? 6 : dayIndex - 1;
-            Guna2CircleButton[] dateButtons = { btnMon, btnTue, btnWed, btnThu, btnFri, btnSat, btnSun };
-            return dayIndex >= 0 && dayIndex < 7 ? dateButtons[dayIndex] : null;
-        }
-        private void LoadShowtimes()
-        {
-            // Cập nhật nhãn ngày trên các nút (Thứ 2, Thứ 3...)
-            UpdateDateButtons();
-
-            try
+            TimeSpan diff = date.Date - currentStartDate.Date;
+            int daysDiff = diff.Days;
+            if (daysDiff >= 0 && daysDiff < 7)
             {
-                // 1️⃣ Lấy dữ liệu từ repo
-                currentShowtimes = repo.GetShowtimesByDateRange(currentStartDate, 7);
-
-                // Debug log
-                Console.WriteLine($"📊 Loaded {currentShowtimes?.Count ?? 0} showtimes from repo");
-
-                // Đảm bảo list không bao giờ null để tránh lỗi crash sau này
-                if (currentShowtimes == null)
-                    currentShowtimes = new List<ShowtimeInfo>();
-
-                /* * ❌ ĐÃ XÓA: Phần code tự động set lại cboMonth ở đây.
-                 * Lý do: Việc chọn tháng là do người dùng quyết định ở sự kiện OnMonthChanged.
-                 * Nếu để lại, nó sẽ gây xung đột (User chọn tháng 2, code tự nhảy về tháng 11).
-                 */
-
-                // 2️⃣ Hiển thị dữ liệu lên giao diện
-                // Phải gọi hàm này thì Panel phim mới hiện ra
-                SelectDate(selectedDate);
+                Guna2CircleButton[] dateButtons = { btnMon, btnTue, btnWed, btnThu, btnFri, btnSat, btnSun };
+                return dateButtons[daysDiff];
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải lịch chiếu: " + ex.Message, "Lỗi Nghiêm Trọng", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                // Reset list và xóa giao diện để tránh hiển thị sai
-                currentShowtimes = new List<ShowtimeInfo>();
-                if (flpShowtimes != null) flpShowtimes.Controls.Clear();
-            }
-        }
-
-        private void DisplayShowtimes()
-        {
-            flpShowtimes.SuspendLayout();
-            flpShowtimes.Controls.Clear();
-
-            try
-            {
-                // 1. Kiểm tra dữ liệu đầu vào
-                if (currentShowtimes == null || currentShowtimes.Count == 0)
-                {
-                    ShowEmptyMessage("Chưa có dữ liệu nào trong Database.");
-                    return;
-                }
-
-                var listByDate = currentShowtimes
-                    .Where(s => s.ParsedDate.Date == selectedDate.Date)
-                    .ToList();
-
-                var filteredList = listByDate;
-
-                // 4. Group phim và vẽ Panel
-                var grouped = filteredList.GroupBy(s => s.title);
-
-                foreach (var group in grouped)
-                {
-                    var panel = CreateMoviePanel(group.Key, group.ToList());
-                    if (panel != null)
-                    {
-                        panel.BackColor = Color.White;
-                        flpShowtimes.Controls.Add(panel);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi hiển thị: " + ex.Message);
-            }
-            finally
-            {
-                flpShowtimes.ResumeLayout();
-            }
-        }
-        private void ShowEmptyMessage(string message)
-        {
-            Label lbl = new Label
-            {
-                Text = message,
-                Font = new Font("Segoe UI", 12, FontStyle.Italic),
-                ForeColor = Color.DimGray,
-                AutoSize = false, // Để mình tự chỉnh kích thước
-                TextAlign = ContentAlignment.MiddleCenter, // Căn giữa chữ
-                Width = flpShowtimes.ClientSize.Width - 10, // Rộng bằng panel
-                Height = 50,
-                Margin = new Padding(0, 20, 0, 0) // Cách lề trên một chút
-            };
-            flpShowtimes.Controls.Add(lbl);
-        }
-
-
-        private void UpdateDateButtons()
-        {
-            Guna2CircleButton[] dateButtons = { btnMon, btnTue, btnWed, btnThu, btnFri, btnSat, btnSun };
-            for (int i = 0; i < 7; i++)
-            {
-                DateTime date = currentStartDate.AddDays(i);
-                var btn = dateButtons[i];
-                if (btn == null) continue;
-
-                btn.Text = date.Day.ToString("00");
-                btn.Tag = date;
-                btn.Click -= DateButton_Click;
-                btn.Click += DateButton_Click;
-            }
+            return null;
         }
 
         private void DateButton_Click(object sender, EventArgs e)
@@ -266,96 +177,162 @@ namespace UserApp
             }
         }
 
-        private void FilterChanged_Event(object sender, EventArgs e)
+        // --- TẢI VÀ HIỂN THỊ DỮ LIỆU ---
+
+        private void LoadShowtimes()
         {
-            DisplayShowtimes();
+            UpdateDateButtons(); // Vẽ lại số ngày trên lịch
+
+            try
+            {
+                // Lấy dữ liệu 7 ngày
+                currentShowtimes = repo.GetShowtimesByDateRange(currentStartDate, 7);
+                if (currentShowtimes == null) currentShowtimes = new List<ShowtimeInfo>();
+
+                // 🔥 LOGIC THÔNG MINH: Nếu ngày chọn (01/xx) ko có phim, tự nhảy sang ngày có phim
+                bool hasMovie = currentShowtimes.Any(s => s.ParsedDate.Date == selectedDate.Date);
+                if (!hasMovie && currentShowtimes.Count > 0)
+                {
+                    // Chọn ngày đầu tiên có phim trong list
+                    selectedDate = currentShowtimes.OrderBy(s => s.ParsedDate).First().ParsedDate.Date;
+                    UpdateDateButtons(); // Cập nhật lại màu nút
+                }
+
+                DisplayShowtimes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
         }
 
-        // ✅ HÀM TẠO GIAO DIỆN TỪNG PHIM
+        private void DisplayShowtimes()
+        {
+            flpShowtimes.SuspendLayout();
+            flpShowtimes.Controls.Clear();
+
+            try
+            {
+                if (currentShowtimes == null || currentShowtimes.Count == 0)
+                {
+                    ShowEmptyMessage("Chưa có lịch chiếu nào trong tuần này.");
+                    return;
+                }
+
+                // Lọc theo ngày
+                var filteredList = currentShowtimes
+                    .Where(s => s.ParsedDate.Date == selectedDate.Date)
+                    .ToList();
+
+                if (filteredList.Count == 0)
+                {
+                    ShowEmptyMessage($"Ngày {selectedDate:dd/MM} không có suất chiếu nào.");
+                    return;
+                }
+
+                // Vẽ giao diện từng phim
+                var grouped = filteredList.GroupBy(s => s.title);
+                foreach (var group in grouped)
+                {
+                    var panel = CreateMoviePanel(group.Key, group.ToList());
+                    if (panel != null) flpShowtimes.Controls.Add(panel);
+                }
+            }
+            finally
+            {
+                flpShowtimes.ResumeLayout();
+            }
+        }
+
+        private void ShowEmptyMessage(string message)
+        {
+            Label lbl = new Label
+            {
+                Text = message,
+                Font = new Font("Segoe UI", 14, FontStyle.Italic),
+                ForeColor = Color.WhiteSmoke,
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Width = flpShowtimes.ClientSize.Width - 10,
+                Height = 60,
+                Margin = new Padding(0, 50, 0, 0)
+            };
+            flpShowtimes.Controls.Add(lbl);
+        }
+
+        // --- TẠO GIAO DIỆN PHIM ĐẸP (Xanh Hamster) ---
         private Guna2Panel CreateMoviePanel(string movieTitle, List<ShowtimeInfo> showtimes)
         {
             if (showtimes == null || showtimes.Count == 0) return null;
 
             string displayTitle = string.IsNullOrEmpty(movieTitle) ? "Tên phim đang cập nhật" : movieTitle.ToUpper();
 
-            // --- MÀU SẮC ---
-            Color mainBgColor = Color.FromArgb(92, 124, 150); // Xanh Hamster
+            // Màu sắc
+            Color mainBgColor = Color.FromArgb(92, 124, 150); // Nền Xanh
             Color titleColor = Color.White;
-            Color timeBgColor = Color.FromArgb(236, 230, 224); // Kem
-            Color accentColor = Color.FromArgb(45, 87, 154);   // Xanh đậm cho chữ phụ
+            Color timeBgColor = Color.FromArgb(236, 230, 224); // Nút Kem
+            Color accentColor = Color.FromArgb(45, 87, 154);   // Chữ Xanh đậm
 
             int panelHeight = 280;
 
-            // 1. Panel Chính
+            // Panel Chính
             Guna2Panel mainPanel = new Guna2Panel
             {
                 Width = flpShowtimes.ClientSize.Width - 25,
                 Height = panelHeight,
                 FillColor = mainBgColor,
                 BackColor = Color.Transparent,
+                UseTransparentBackground = true, // Fix góc trắng
                 BorderRadius = 15,
-                UseTransparentBackground = true,
                 Margin = new Padding(5, 5, 5, 25)
             };
-
-            //Shadow
             mainPanel.ShadowDecoration.Enabled = true;
             mainPanel.ShadowDecoration.Depth = 10;
             mainPanel.ShadowDecoration.Color = Color.Black;
             mainPanel.ShadowDecoration.BorderRadius = 15;
 
-            // 2 Lấy Ảnh Poster từ Repo
+            // Poster
             Image moviePoster = null;
             try
             {
-                // Kiểm tra biến _imageRepo đã được khởi tạo chưa
-                if (_imageRepo == null) _imageRepo = new ImageRepo();
-
                 string movieId = showtimes[0].movie_id;
                 byte[] imgBytes = _imageRepo.GetMoviePoster(movieId);
-
                 if (imgBytes != null && imgBytes.Length > 0)
                 {
                     using (MemoryStream ms = new MemoryStream(imgBytes))
                     {
-                        // Clone ảnh ra để tránh lỗi MemoryStream bị đóng
                         moviePoster = new Bitmap(Image.FromStream(ms));
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi load ảnh: " + ex.Message);
-                moviePoster = null; // Nếu lỗi thì để null
-            }
+            catch { }
 
-            // 2. Poster
             Guna2PictureBox picPoster = new Guna2PictureBox
             {
                 Size = new Size(175, 250),
                 Location = new Point(20, 15),
-                BackColor = Color.Silver, // Màu xám nếu không có ảnh
+                BackColor = Color.Silver,
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 BorderRadius = 12,
                 UseTransparentBackground = true,
-                Image = moviePoster // 👈 Gán ảnh vào đây
+                Image = moviePoster
             };
             mainPanel.Controls.Add(picPoster);
 
-
+            // Panel Phải (Chứa thông tin)
             Panel rightPanel = new Panel
             {
-                Location = new Point(280, 15),
-                Size = new Size(mainPanel.Width - 290, panelHeight - 30),
+                Location = new Point(240, 15),
+                Size = new Size(mainPanel.Width - 250, panelHeight - 30),
                 BackColor = Color.Transparent
             };
             mainPanel.Controls.Add(rightPanel);
 
-            // 3.1 Tên Phim
+            // Tên Phim
             Label lblTitle = new Label
             {
                 Text = displayTitle,
-                Font = new Font("Segoe UI", 16, FontStyle.Bold),
+                Font = new Font("Segoe UI", 18, FontStyle.Bold),
                 ForeColor = titleColor,
                 Width = rightPanel.Width,
                 Height = 70,
@@ -371,61 +348,62 @@ namespace UserApp
                 Dock = DockStyle.Fill,
                 FlowDirection = FlowDirection.LeftToRight,
                 WrapContents = true,
-                Padding = new Padding(0, 20, 0, 0),
+                Padding = new Padding(0, 15, 0, 0),
                 AutoScroll = true
             };
             rightPanel.Controls.Add(flpTimes);
             lblTitle.SendToBack();
 
-            // 4. Tạo Nút Giờ
+            // Tạo Nút Giờ
             var sortedShowtimes = showtimes.OrderBy(s => s.StartTime).ToList();
 
             foreach (var s in sortedShowtimes)
             {
                 Guna2Panel timePanel = new Guna2Panel
                 {
-                    Size = new Size(300, 150),
+                    Size = new Size(170, 100),
                     FillColor = timeBgColor,
                     BorderThickness = 0,
                     BorderRadius = 15,
-                    Margin = new Padding(0, 0, 25, 25),
+                    Margin = new Padding(0, 0, 20, 20),
                     Cursor = Cursors.Hand,
-                    Tag = s
+                    Tag = s,
+                    UseTransparentBackground = true,
+                    BackColor = Color.Transparent
                 };
 
-                // Shadow cho nút giờ
                 timePanel.ShadowDecoration.Enabled = true;
-                timePanel.ShadowDecoration.Depth = 4;
+                timePanel.ShadowDecoration.Depth = 3;
                 timePanel.ShadowDecoration.Color = Color.Gray;
 
-                // Giờ chiếu
+                // Giờ
                 Label lblTime = new Label
                 {
                     Text = $"{s.StartTime:hh\\:mm} - {s.EndTime:hh\\:mm}",
-                    Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                    Font = new Font("Segoe UI", 12, FontStyle.Bold),
                     ForeColor = Color.Black,
                     AutoSize = false,
                     TextAlign = ContentAlignment.BottomCenter,
                     Dock = DockStyle.Top,
-                    Height = 45,
+                    Height = 40,
                     BackColor = Color.Transparent
                 };
 
-                // Loại (2D/3D)
+                // Loại
                 Label lblType = new Label
                 {
                     Text = s.auditorium_type ?? "2D",
-                    Font = new Font("Segoe UI", 12, FontStyle.Bold | FontStyle.Italic),
+                    Font = new Font("Segoe UI", 11, FontStyle.Bold | FontStyle.Italic),
                     ForeColor = accentColor,
                     AutoSize = false,
                     TextAlign = ContentAlignment.MiddleCenter,
                     Dock = DockStyle.Top,
-                    Height = 50,
+                    Height = 30,
                     Padding = new Padding(0, 5, 0, 0),
                     BackColor = Color.Transparent
                 };
 
-                // Tên phòng
+                // Phòng
                 Label lblRoom = new Label
                 {
                     Text = s.name ?? "P.?",
@@ -438,7 +416,6 @@ namespace UserApp
                     BackColor = Color.Transparent
                 };
 
-                // Sự kiện Click
                 timePanel.Click += Showtime_Click_Handler;
                 lblTime.Click += (sender, e) => Showtime_Click_Handler(timePanel, e);
                 lblType.Click += (sender, e) => Showtime_Click_Handler(timePanel, e);
@@ -456,25 +433,21 @@ namespace UserApp
 
         private void Showtime_Click_Handler(object sender, EventArgs e)
         {
-            // Lấy cái Panel vừa bị click
             Guna2Panel clickedPanel = null;
             if (sender is Guna2Panel p) clickedPanel = p;
             else if (sender is Control c && c.Parent is Guna2Panel p2) clickedPanel = p2;
 
             if (clickedPanel != null && clickedPanel.Tag is ShowtimeInfo info)
             {
-                // 1. Trả lại màu cũ cho panel trước đó (nếu có)
                 if (_selectedPanel != null)
                 {
-                    _selectedPanel.FillColor = Color.FromArgb(236, 230, 224); // Màu kem bình thường
+                    _selectedPanel.FillColor = Color.FromArgb(236, 230, 224); // Trả màu cũ
                     _selectedPanel.BorderThickness = 0;
                 }
 
-                // 2. Tô màu mới cho panel vừa chọn (Highlight)
-                clickedPanel.FillColor = Color.FromArgb(245, 131, 35); 
+                clickedPanel.FillColor = Color.FromArgb(245, 131, 35); // Tô màu cam chọn
                 clickedPanel.BorderThickness = 2;
 
-                // 3. Lưu lại vào biến để tí nữa nút Button dùng
                 _selectedPanel = clickedPanel;
                 _selectedShowtime = info;
             }
@@ -482,28 +455,25 @@ namespace UserApp
 
         private void FormShowtimeList_Load(object sender, EventArgs e)
         {
-            LoadShowtimes();
-
+            // Tự động load lần đầu
+            // OnMonthChanged(null, null); // Không cần gọi lại vì đã gọi trong Constructor
         }
 
         private void btnChonCho_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra xem đã chọn suất nào chưa
-    if (_selectedShowtime == null)
-    {
-        MessageBox.Show("Vui lòng chọn suất chiếu trước khi tiếp tục!", "Chưa chọn", 
-            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        return;
-    }
+            if (_selectedShowtime == null)
+            {
+                MessageBox.Show("Vui lòng chọn suất chiếu trước khi tiếp tục!", "Chưa chọn",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-    // 2. Mở form chọn ghế
-    // (Đảm bảo bên FormSeatSelection đã có hàm khởi tạo nhận tham số nhé)
-    //var frm = new FormSeatSelection(_selectedShowtime);
-    var frm = new FormSeatSelection();
-    
-    this.Hide();      // Ẩn form hiện tại
-    frm.ShowDialog(); // Hiện form chọn ghế
-    this.Show();      // Hiện lại form này khi form kia đóng
+            // Mở form chọn ghế
+            //var frm = new FormSeatSelection(_selectedShowtime); // Đảm bảo FormSeatSelection nhận tham số
+            var frm = new FormSeatSelection();
+            this.Hide();
+            frm.ShowDialog();
+            this.Show();
         }
     }
 }

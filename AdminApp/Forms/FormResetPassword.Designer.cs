@@ -41,11 +41,11 @@
             btnDangNhap = new Guna.UI2.WinForms.Guna2Button();
             panelResetPW = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            txtXacNhanMK = new Guna.UI2.WinForms.Guna2TextBox();
             btnDatLaiMK = new Guna.UI2.WinForms.Guna2Button();
             lblyc = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblEmail = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
+            txtMKmoi = new Guna.UI2.WinForms.Guna2TextBox();
             panelResetPW.SuspendLayout();
             SuspendLayout();
             // 
@@ -74,11 +74,11 @@
             panelResetPW.BorderColor = Color.FromArgb(236, 230, 224);
             panelResetPW.BorderRadius = 15;
             panelResetPW.Controls.Add(guna2HtmlLabel1);
-            panelResetPW.Controls.Add(guna2TextBox1);
+            panelResetPW.Controls.Add(txtXacNhanMK);
             panelResetPW.Controls.Add(btnDatLaiMK);
             panelResetPW.Controls.Add(lblyc);
             panelResetPW.Controls.Add(lblEmail);
-            panelResetPW.Controls.Add(txtEmail);
+            panelResetPW.Controls.Add(txtMKmoi);
             panelResetPW.CustomizableEdges = customizableEdges9;
             panelResetPW.FillColor = Color.FromArgb(236, 230, 224);
             panelResetPW.FillColor2 = Color.FromArgb(236, 230, 224);
@@ -104,27 +104,27 @@
             guna2HtmlLabel1.TabIndex = 7;
             guna2HtmlLabel1.Text = "Xác nhận lại mật khẩu mới:";
             // 
-            // guna2TextBox1
+            // txtXacNhanMK
             // 
-            guna2TextBox1.BorderRadius = 8;
-            guna2TextBox1.CustomizableEdges = customizableEdges3;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2TextBox1.ForeColor = Color.FromArgb(64, 64, 64);
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(58, 220);
-            guna2TextBox1.Margin = new Padding(3, 5, 3, 5);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderText = "";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2TextBox1.Size = new Size(591, 45);
-            guna2TextBox1.TabIndex = 6;
+            txtXacNhanMK.BorderRadius = 8;
+            txtXacNhanMK.CustomizableEdges = customizableEdges3;
+            txtXacNhanMK.DefaultText = "";
+            txtXacNhanMK.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtXacNhanMK.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtXacNhanMK.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtXacNhanMK.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtXacNhanMK.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtXacNhanMK.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtXacNhanMK.ForeColor = Color.FromArgb(64, 64, 64);
+            txtXacNhanMK.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtXacNhanMK.Location = new Point(58, 220);
+            txtXacNhanMK.Margin = new Padding(3, 5, 3, 5);
+            txtXacNhanMK.Name = "txtXacNhanMK";
+            txtXacNhanMK.PlaceholderText = "";
+            txtXacNhanMK.SelectedText = "";
+            txtXacNhanMK.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtXacNhanMK.Size = new Size(591, 45);
+            txtXacNhanMK.TabIndex = 6;
             // 
             // btnDatLaiMK
             // 
@@ -144,6 +144,7 @@
             btnDatLaiMK.Size = new Size(91, 35);
             btnDatLaiMK.TabIndex = 5;
             btnDatLaiMK.Text = "ĐẶT LẠI";
+            btnDatLaiMK.Click += btnDatLaiMK_Click;
             // 
             // lblyc
             // 
@@ -166,27 +167,27 @@
             lblEmail.TabIndex = 2;
             lblEmail.Text = "Mật khẩu mới:";
             // 
-            // txtEmail
+            // txtMKmoi
             // 
-            txtEmail.BorderRadius = 8;
-            txtEmail.CustomizableEdges = customizableEdges7;
-            txtEmail.DefaultText = "";
-            txtEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtEmail.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtEmail.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtEmail.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtEmail.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmail.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.ForeColor = Color.FromArgb(64, 64, 64);
-            txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmail.Location = new Point(58, 123);
-            txtEmail.Margin = new Padding(3, 5, 3, 5);
-            txtEmail.Name = "txtEmail";
-            txtEmail.PlaceholderText = "";
-            txtEmail.SelectedText = "";
-            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            txtEmail.Size = new Size(591, 45);
-            txtEmail.TabIndex = 1;
+            txtMKmoi.BorderRadius = 8;
+            txtMKmoi.CustomizableEdges = customizableEdges7;
+            txtMKmoi.DefaultText = "";
+            txtMKmoi.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtMKmoi.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtMKmoi.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtMKmoi.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtMKmoi.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtMKmoi.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtMKmoi.ForeColor = Color.FromArgb(64, 64, 64);
+            txtMKmoi.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtMKmoi.Location = new Point(58, 123);
+            txtMKmoi.Margin = new Padding(3, 5, 3, 5);
+            txtMKmoi.Name = "txtMKmoi";
+            txtMKmoi.PlaceholderText = "";
+            txtMKmoi.SelectedText = "";
+            txtMKmoi.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtMKmoi.Size = new Size(591, 45);
+            txtMKmoi.TabIndex = 1;
             // 
             // FormResetPassword
             // 
@@ -208,10 +209,10 @@
         private Guna.UI2.WinForms.Guna2Button btnDangNhap;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel panelResetPW;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2TextBox txtXacNhanMK;
         private Guna.UI2.WinForms.Guna2Button btnDatLaiMK;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblyc;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblEmail;
-        private Guna.UI2.WinForms.Guna2TextBox txtEmail;
+        private Guna.UI2.WinForms.Guna2TextBox txtMKmoi;
     }
 }
