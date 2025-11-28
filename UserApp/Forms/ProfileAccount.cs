@@ -110,7 +110,7 @@ namespace UserApp
 
             try
             {
-                using (var conn = DatabaseHelper2.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
 

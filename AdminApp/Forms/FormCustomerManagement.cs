@@ -12,7 +12,7 @@ namespace AdminApp
 {
     public partial class FormCustomerManagement : Form
     {
-        private CustomerRepository repo = new CustomerRepository();
+        private CustomerRepo repo = new CustomerRepo();
         private List<Customer> customerList = new List<Customer>();
 
         public FormCustomerManagement()
@@ -49,7 +49,7 @@ namespace AdminApp
 
         private void LoadCustomers()
         {
-            customerList = repo.GetAllCustomers();
+            customerList = repo.GetAll();
             DataGridViewCustomerManagement.DataSource = customerList;
             if (DataGridViewCustomerManagement.Columns["date_of_birth"] != null)
                 DataGridViewCustomerManagement.Columns["date_of_birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
@@ -97,37 +97,37 @@ namespace AdminApp
             }
         }
 
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            if (DataGridViewCustomerManagement.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Vui lòng chọn khách hàng cần xóa!");
-                return;
-            }
+        //private void btnXoa_Click(object sender, EventArgs e)
+        //{
+        //    if (DataGridViewCustomerManagement.SelectedRows.Count == 0)
+        //    {
+        //        MessageBox.Show("Vui lòng chọn khách hàng cần xóa!");
+        //        return;
+        //    }
 
-            string id = DataGridViewCustomerManagement.SelectedRows[0].Cells["customer_id"].Value.ToString();
+        //    string id = DataGridViewCustomerManagement.SelectedRows[0].Cells["customer_id"].Value.ToString();
 
-            DialogResult result = MessageBox.Show(
-                "Bạn có chắc muốn xóa khách hàng này?",
-                "Xác nhận",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning
-            );
+        //    DialogResult result = MessageBox.Show(
+        //        "Bạn có chắc muốn xóa khách hàng này?",
+        //        "Xác nhận",
+        //        MessageBoxButtons.YesNo,
+        //        MessageBoxIcon.Warning
+        //    );
 
-            if (result == DialogResult.Yes)
-            {
-                bool success = repo.DeleteCustomer(id);
-                if (success)
-                {
-                    MessageBox.Show("Xóa thành công!");
-                    LoadCustomers();     // load lại danh sách
-                }
-                else
-                {
-                    MessageBox.Show("Xóa thất bại!");
-                }
-            }
-        }
+        //    if (result == DialogResult.Yes)
+        //    {
+        //        bool success = repo.DeleteCustomer(id);
+        //        if (success)
+        //        {
+        //            MessageBox.Show("Xóa thành công!");
+        //            LoadCustomers();     // load lại danh sách
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Xóa thất bại!");
+        //        }
+        //    }
+        //}
 
         private void btnXuatFile_Click(object sender, EventArgs e)
         {
@@ -211,27 +211,28 @@ namespace AdminApp
         }
 
 
-        private void DataGridViewCustomerManagement_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewCustomerManagement_CellEndEdit(
+     object sender, DataGridViewCellEventArgs e)
         {
             if (DataGridViewCustomerManagement.Columns[e.ColumnIndex].Name == "customer_id")
                 return;
+
             try
             {
                 var row = DataGridViewCustomerManagement.Rows[e.RowIndex];
-
-                if (row.Cells["customer_id"].Value == null)
-                    return;
+                if (row.Cells["customer_id"].Value == null) return;
 
                 string id = Convert.ToString(row.Cells["customer_id"].Value);
-                if (string.IsNullOrWhiteSpace(id))
-                    return;
+                if (string.IsNullOrWhiteSpace(id)) return;
+
+                // ✅ lấy dữ liệu
                 string fullName = row.Cells["full_name"].Value?.ToString() ?? "";
                 string gender = row.Cells["gender"].Value?.ToString() ?? "";
                 string phone = row.Cells["phone_number"].Value?.ToString() ?? "";
                 string email = row.Cells["email"].Value?.ToString() ?? "";
                 string address = row.Cells["address"].Value?.ToString() ?? "";
 
-                // ✅ XỬ LÝ DATE_OF_BIRTH
+                // ✅ date_of_birth
                 string birth = row.Cells["date_of_birth"].Value?.ToString() ?? "";
                 if (!TryNormalizeDate(birth, out string birthFormatted))
                 {
@@ -240,25 +241,29 @@ namespace AdminApp
                     return;
                 }
 
-                // ✅ XỬ LÝ CREATE_DATE
+                // ✅ create_date
                 string createDate = row.Cells["create_date"].Value?.ToString() ?? "";
-                if (!TryNormalizeDate(createDate, out string createDateFormatted))
+                if (!TryNormalizeDate(createDate, out string createFormatted))
                 {
                     MessageBox.Show("Ngày tạo không đúng định dạng dd/MM/yyyy");
                     LoadCustomers();
                     return;
                 }
 
-                bool ok = repo.UpdateCustomer(
-                    id,
-                    fullName,
-                    gender,
-                    birthFormatted,
-                    phone,
-                    email,
-                    address,
-                    createDateFormatted
-                );
+                // ✅ BUILD MODEL – ĐÚNG CHUẨN REPO
+                Customer c = new Customer
+                {
+                    customer_id = id,
+                    full_name = fullName,
+                    gender = gender,
+                    phone_number = phone,
+                    email = email,
+                    address = address,
+                    date_of_birth = birthFormatted,
+                    create_date = createFormatted
+                };
+
+                bool ok = repo.Update(c); // ✅ ĐÚNG CHỮ KÝ
 
                 if (!ok)
                     MessageBox.Show("Cập nhật thất bại!");
@@ -268,6 +273,7 @@ namespace AdminApp
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
+
         private bool TryNormalizeDate(string input, out string output)
         {
             output = "";
@@ -302,3 +308,4 @@ namespace AdminApp
 
     }
 }
+

@@ -1,39 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UserApp
 {
     public partial class FormForgetPassword : Form
     {
-        public FormForgetPassword()
-        {
-            InitializeComponent();
-        }
-        private UserMainForm parentForm;
+        private FormLogin parentForm;
 
-        public FormForgetPassword(UserMainForm parent)
+        // Constructor cha-truy-con
+        public FormForgetPassword(FormLogin parent)
         {
             InitializeComponent();
             parentForm = parent;
         }
 
+        // Nút Gửi → mở FormResetPassword trong FormLogin (cha)
         private void btnGui_Click(object sender, EventArgs e)
         {
-            parentForm.OpenChildForm(new FormResetPassword(parentForm));
+            parentForm.OpenChildForm(new FormResetPassword());
         }
 
+        // Nút Quay Lại → quay về panel Đăng nhập trong FormLogin (cha)
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
-            var loginForm = new FormLogin(parentForm);
-            parentForm.OpenChildForm(loginForm);
-            loginForm.ShowLogin();
+            parentForm.ShowLogin();   
+            this.Close();        
         }
     }
 }

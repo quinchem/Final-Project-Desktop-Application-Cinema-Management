@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using SharedData.Models;
 using SharedData.Repositories;
@@ -10,19 +9,40 @@ namespace UserApp
     public partial class FormLogin : Form
     {
         private readonly AccountRepo AccountRepo = new AccountRepo();
+        private Guna.UI2.WinForms.Guna2Button currentButton;
 
         public FormLogin()
         {
             InitializeComponent();
-            this.Opacity = 0;
+            this.Opacity = 0;   // fade-in
+            this.KeyPreview = true;
+        }
+        private Form currentChildForm;
+
+        public void OpenChildForm(Form child)
+        {
+            if (currentChildForm != null)
+                currentChildForm.Close();
+
+            currentChildForm = child;
+            child.TopLevel = false;
+            child.FormBorderStyle = FormBorderStyle.None;
+            child.Dock = DockStyle.Fill;
+
+            panelLogin.Controls.Add(child);
+            panelLogin.Tag = child;
+            child.BringToFront();
+            child.Show();
         }
 
-        private Guna.UI2.WinForms.Guna2Button currentButton;
-
+        // ================================
+        // Fade-in animation
+        // ================================
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            var t = new System.Windows.Forms.Timer();
             t.Interval = 10;
+
             t.Tick += (s, a) =>
             {
                 if (this.Opacity < 1)
@@ -30,75 +50,88 @@ namespace UserApp
                 else
                     t.Stop();
             };
+
             t.Start();
+            ShowLogin();
         }
 
-        private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
-        {
-            if (btn == null) return;
-
-            if (currentButton != null)
-            {
-                currentButton.FillColor = currentButton.Tag != null
-                    ? (Color)currentButton.Tag
-                    : Color.FromArgb(44, 84, 115);
-                currentButton.ForeColor = Color.White;
-                currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
-            }
-
-            if (btn.Tag == null)
-                btn.Tag = btn.FillColor;
-
-            currentButton = btn;
-            currentButton.FillColor = Color.FromArgb(255, 128, 0);
-            currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
-        }
-
+        // ================================
+        // UI switching giữa Login/Register
+        // ================================
         public void ShowLogin()
         {
             panelDangNhap.Visible = true;
             panelDangKy.Visible = false;
-            panelDangNhap.BringToFront();
+            btnMiniDN.Enabled = false;
 
-            if (btnDangNhap != null)
-                ActivateButton(btnDangNhap);
+            panelDangNhap.BringToFront();
+            if (btnDangNhap == null) return;
+            ActivateButton(btnDangNhap);
         }
 
         public void ShowRegister()
         {
             panelDangNhap.Visible = false;
             panelDangKy.Visible = true;
-            panelDangKy.BringToFront();
+            btnminiDK.Enabled = false;
 
-            if (btnDangKy != null)
-                ActivateButton(btnDangKy);
+            panelDangKy.BringToFront();
+            if (btnDangKy == null) return;
+            ActivateButton(btnDangKy);
         }
 
-        private void btnDangNhap_Click(object sender, EventArgs e)
+     
+        private void ValidateRegisterForm()
         {
-            ShowLogin();
-            ActivateButton((Guna.UI2.WinForms.Guna2Button)sender);
+            bool valid =
+                !string.IsNullOrWhiteSpace(txtHoTen.Text) &&
+                !string.IsNullOrWhiteSpace(txtEmailDK.Text) &&
+                !string.IsNullOrWhiteSpace(txtPassDK.Text) &&
+                !string.IsNullOrWhiteSpace(txtPassCF.Text) &&
+                dtpNgaySinh.Value <= DateTime.Today &&
+                chkDieuKhoan.Checked;
+
+            btnminiDK.Enabled = valid;
         }
 
         private void btnDangKy_Click(object sender, EventArgs e)
         {
             ShowRegister();
-            ActivateButton((Guna.UI2.WinForms.Guna2Button)sender);
         }
 
-        private UserMainForm parentForm;
-
-        public FormLogin(UserMainForm parent)
+        // ================================
+        // Button highlight
+        // ================================
+        private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
-            InitializeComponent();
-            parentForm = parent;
+            if (btn == null) return;
+
+            // Reset nút cũ về trạng thái Design
+            if (currentButton != null)
+            {
+                // Reset về trạng thái mặc định trong Designer
+                currentButton.FillColor = currentButton.Tag != null
+                    ? (Color)currentButton.Tag
+                    : Color.FromArgb(44, 84, 115); // fallback
+                currentButton.ForeColor = Color.White;
+                currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
+            }
+
+            // Lưu màu gốc của nút mới (nếu chưa lưu)
+            if (btn.Tag == null)
+                btn.Tag = btn.FillColor; // lưu FillColor gốc vào Tag
+
+            // Set nút hiện tại active
+            currentButton = btn;
+            currentButton.FillColor = Color.FromArgb(255, 128, 0);
+            //currentButton.ForeColor = Color.FromArgb(255, 128, 0);
+            currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
+
         }
 
-        private void btnQuenMk_Click(object sender, EventArgs e)
-        {
-            parentForm.OpenChildForm(new FormForgetPassword(parentForm));
-        }
-
+        // ================================
+        // REGISTER VALIDATION
+        // ================================
         private bool ValidateRegistrationForm(out string msg)
         {
             msg = "";
@@ -109,37 +142,27 @@ namespace UserApp
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtEmailDK.Text) || !txtEmailDK.Text.Contains("@"))
+            if (!txtEmailDK.Text.Contains("@"))
             {
                 msg = "Email không hợp lệ.";
                 return false;
             }
 
-            string phone = txtSDT.Text?.Trim() ?? "";
-            if (string.IsNullOrWhiteSpace(phone) || !System.Text.RegularExpressions.Regex.IsMatch(phone, @"^\d{10}$"))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtSDT.Text ?? "", @"^\d{10}$"))
             {
-                msg = "Số điện thoại phải gồm đúng 10 chữ số.";
+                msg = "Số điện thoại phải gồm 10 chữ số.";
                 return false;
             }
 
-            string password = txtPassDK.Text ?? "";
-            string confirm = txtPassCF.Text ?? "";
-            if (string.IsNullOrWhiteSpace(password))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtPassDK.Text, @"^(?=.*[A-Z])(?=.*\W).{8,}$"))
             {
-                msg = "Vui lòng nhập mật khẩu.";
+                msg = "Mật khẩu phải có chữ hoa + ký tự đặc biệt và >= 8 ký tự.";
                 return false;
             }
 
-            var pwdPattern = new System.Text.RegularExpressions.Regex(@"^(?=.*[A-Z])(?=.*\W).{8,}$");
-            if (!pwdPattern.IsMatch(password))
+            if (txtPassDK.Text != txtPassCF.Text)
             {
-                msg = "Mật khẩu cần 8 ký tự gồm chữ hoa + ký tự đặc biệt.";
-                return false;
-            }
-
-            if (password != confirm)
-            {
-                msg = "Xác nhận mật khẩu không khớp.";
+                msg = "Mật khẩu xác nhận không khớp.";
                 return false;
             }
 
@@ -151,7 +174,7 @@ namespace UserApp
 
             if (!chkDieuKhoan.Checked)
             {
-                msg = "Bạn phải chấp nhận điều khoản.";
+                msg = "Bạn phải đồng ý điều khoản.";
                 return false;
             }
 
@@ -159,7 +182,7 @@ namespace UserApp
         }
 
         // ================================
-        // BUILD Customer + Account và REGISTER
+        // REGISTER new account
         // ================================
         private bool InsertNewAccount(out string message)
         {
@@ -173,14 +196,14 @@ namespace UserApp
                     date_of_birth = dtpNgaySinh.Value.ToString("dd/MM/yyyy"),
                     gender = radNam.Checked ? "Nam" : "Nữ",
                     address = txtDiachi.Text.Trim(),
-                    email = txtEmailDK.Text.Trim(),   // EMAIL -> lưu vào customer.email
+                    email = txtEmailDK.Text.Trim(),
                     phone_number = txtSDT.Text.Trim(),
                     create_date = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")
                 };
 
                 var account = new Account
                 {
-                    username = txtEmailDK.Text.Trim(),  // USERNAME = EMAIL
+                    username = customer.email, // Email = Username
                     password = txtPassDK.Text,
                     role_account = "customer",
                     staff_id = null
@@ -203,35 +226,37 @@ namespace UserApp
                 return;
             }
 
-            bool ok = InsertNewAccount(out string msg);
-            if (ok)
+            if (InsertNewAccount(out string msg))
             {
-                MessageBox.Show("Đăng ký thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Đăng ký thành công!", "Thành công",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 ShowLogin();
                 ClearRegisterFields();
             }
             else
             {
-                MessageBox.Show("Đăng ký thất bại: " + msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Đăng ký thất bại: " + msg, "Lỗi",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void ClearRegisterFields()
         {
             txtHoTen.Text = "";
-            dtpNgaySinh.Value = DateTime.Now;
-            radNam.Checked = false;
-            radNu.Checked = false;
-            txtDiachi.Text = "";
             txtEmailDK.Text = "";
             txtSDT.Text = "";
             txtPassDK.Text = "";
             txtPassCF.Text = "";
+            txtDiachi.Text = "";
+            radNam.Checked = false;
+            radNu.Checked = false;
             chkDieuKhoan.Checked = false;
+            dtpNgaySinh.Value = DateTime.Now;
         }
 
         // ================================
-        // LOGIN (email + password)
+        // LOGIN
         // ================================
         private void btnMiniDN_Click(object sender, EventArgs e)
         {
@@ -240,7 +265,8 @@ namespace UserApp
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Vui lòng nhập email và password.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập email và mật khẩu.",
+                                "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -249,14 +275,79 @@ namespace UserApp
                 MessageBox.Show($"Đăng nhập thành công! Xin chào {customer.full_name}",
                                 "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                parentForm?.SetCurrentUser(customer);
-                this.Close();
+                // MỞ MAIN FORM
+                UserMainForm main = new UserMainForm(customer);
+                main.Show();
+
+                // ẨN LOGIN FORM 
+                this.Hide();
+
+                // Khi MAIN FORM đóng → đóng luôn LOGIN FORM → app tắt đúng cách
+                main.FormClosed += (s, args) => this.Close();
             }
             else
             {
-                MessageBox.Show("Đăng nhập thất bại: " + msg, "Lỗi",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Đăng nhập thất bại: " + msg,
+                                "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnQuenMk_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new FormForgetPassword(this));
+        }
+
+        private void FormLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (panelDangNhap.Visible)
+                {
+                    btnMiniDN.PerformClick(); // ENTER -> Đăng nhập
+                }
+                else if (panelDangKy.Visible)
+                {
+                    btnminiDK.PerformClick(); // ENTER -> Đăng ký
+                }
+            }
+        }
+
+        private void ValidateLoginForm()
+        {
+            bool valid = !string.IsNullOrWhiteSpace(txtEmailDN.Text)
+                      && !string.IsNullOrWhiteSpace(txtPassDN.Text);
+
+            btnMiniDN.Enabled = valid;
+        }
+        private void txtEmailDN_TextChanged(object sender, EventArgs e)
+        {
+            ValidateLoginForm();
+        }
+
+        private void txtPassDN_TextChanged(object sender, EventArgs e)
+        {
+            ValidateLoginForm();
+        }
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+            ShowLogin();
+        }
+        private void txtHoTen_TextChanged(object sender, EventArgs e)
+        { ValidateRegisterForm(); }
+
+        private void txtEmailDK_TextChanged(object sender, EventArgs e)
+        { ValidateRegisterForm(); }
+
+        private void txtPassDK_TextChanged(object sender, EventArgs e)
+        { ValidateRegisterForm(); }
+
+        private void txtPassCF_TextChanged(object sender, EventArgs e)
+        { ValidateRegisterForm(); }
+
+        private void dtpNgaySinh_ValueChanged(object sender, EventArgs e)
+        { ValidateRegisterForm(); }
+
+        private void chkDieuKhoan_CheckedChanged(object sender, EventArgs e)
+        { ValidateRegisterForm(); }
     }
 }
