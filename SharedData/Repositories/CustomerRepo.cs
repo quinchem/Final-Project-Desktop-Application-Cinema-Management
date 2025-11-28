@@ -2,99 +2,106 @@
 using SharedData.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharedData.Repositories
 {
-    public class CustomerRepository
+    public class CustomerRepo
     {
-        public List<Customer> GetAllCustomers()
+        private string ConnStr => DatabaseHelper.GetConnectionString();
+
+        public List<Customer> GetAll()
         {
-            List<Customer> list = new List<Customer>();
+            List<Customer> list = new();
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
 
-            using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
+            string sql = "SELECT * FROM customer";
+            using var cmd = new SqliteCommand(sql, conn);
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
             {
-                conn.Open();
-
-                string query = @"
-                    SELECT customer_id, full_name, email, phone_number,
-                           gender, date_of_birth, address, create_date
-                    FROM customer";
-
-                using (var cmd = new SqliteCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
+                list.Add(new Customer
                 {
-                    while (reader.Read())
-                    {
-                        list.Add(new Customer
-                        {
-                            customer_id = reader["customer_id"].ToString(),
-                            full_name = reader["full_name"].ToString(),
-                            email = reader["email"].ToString(),
-                            phone_number = reader["phone_number"].ToString(),
-                            gender = reader["gender"].ToString(),
-                            date_of_birth = reader["date_of_birth"].ToString(),
-                            address = reader["address"].ToString(),
-                            create_date = reader["create_date"].ToString()
-                        });
-                    }
-                }
+                    customer_id = reader["customer_id"].ToString(),
+                    full_name = reader["full_name"].ToString(),
+                    email = reader["email"].ToString(),
+                    phone_number = reader["phone_number"].ToString(),
+                    gender = reader["gender"].ToString(),
+                    date_of_birth = reader["date_of_birth"].ToString(),
+                    address = reader["address"].ToString(),
+                    create_date = reader["create_date"].ToString()
+                });
             }
 
             return list;
         }
-        public bool DeleteCustomer(string id)
+
+        public Customer GetById(string id)
         {
-            using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            string sql = "SELECT * FROM customer WHERE customer_id = @id";
+            using var cmd = new SqliteCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            using var reader = cmd.ExecuteReader();
+            if (!reader.Read()) return null;
+
+            return new Customer
             {
-                conn.Open();
-
-                string query = "DELETE FROM customer WHERE customer_id = @id";
-
-                using (var cmd = new SqliteCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    return cmd.ExecuteNonQuery() > 0;
-                }
-            }
-        }
-        public bool UpdateCustomer(string id, string fullName, string gender,
-                           string birth, string phone, string email,
-                           string address, string createDate)
-        {
-            using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
-            {
-                conn.Open();
-
-                string query = @"
-            UPDATE customer
-            SET full_name = @full_name,
-                gender = @gender,
-                date_of_birth = @dob,
-                phone_number = @phone,
-                email = @email,
-                address = @address,
-                create_date = @create_date
-            WHERE customer_id = @id
-        ";
-
-                using (var cmd = new SqliteCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@full_name", fullName);
-                    cmd.Parameters.AddWithValue("@gender", gender);
-                    cmd.Parameters.AddWithValue("@dob", birth);
-                    cmd.Parameters.AddWithValue("@phone", phone);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@address", address);
-                    cmd.Parameters.AddWithValue("@create_date", createDate);
-                    cmd.Parameters.AddWithValue("@id", id);
-
-                    return cmd.ExecuteNonQuery() > 0;
-                }
-            }
+                customer_id = reader["customer_id"].ToString(),
+                full_name = reader["full_name"].ToString(),
+                email = reader["email"].ToString(),
+                phone_number = reader["phone_number"].ToString(),
+                gender = reader["gender"].ToString(),
+                date_of_birth = reader["date_of_birth"].ToString(),
+                address = reader["address"].ToString(),
+                create_date = reader["create_date"].ToString()
+            };
         }
 
+        public bool Update(Customer c)
+        {
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            string sql = @"
+                UPDATE customer SET
+                    full_name = @name,
+                    email = @mail,
+                    phone_number = @phone,
+                    gender = @gender,
+                    date_of_birth = @dob,
+                    address = @address,
+                    create_date = @created
+                WHERE customer_id = @id
+            ";
+
+            using var cmd = new SqliteCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", c.customer_id);
+            cmd.Parameters.AddWithValue("@name", c.full_name);
+            cmd.Parameters.AddWithValue("@mail", c.email);
+            cmd.Parameters.AddWithValue("@phone", c.phone_number);
+            cmd.Parameters.AddWithValue("@gender", c.gender);
+            cmd.Parameters.AddWithValue("@dob", c.date_of_birth);
+            cmd.Parameters.AddWithValue("@address", c.address);
+            cmd.Parameters.AddWithValue("@created", c.create_date);
+
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+        public bool Delete(string id)
+        {
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            string sql = "DELETE FROM customer WHERE customer_id = @id";
+            using var cmd = new SqliteCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            return cmd.ExecuteNonQuery() > 0;
+        }
     }
 }
