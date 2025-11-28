@@ -471,7 +471,7 @@ namespace UserApp
                 }
 
                 // 2. Tô màu mới cho panel vừa chọn (Highlight)
-                clickedPanel.FillColor = Color.FromArgb(245, 131, 35); 
+                clickedPanel.FillColor = Color.FromArgb(245, 131, 35);
                 clickedPanel.BorderThickness = 2;
 
                 // 3. Lưu lại vào biến để tí nữa nút Button dùng
@@ -489,21 +489,26 @@ namespace UserApp
         private void btnChonCho_Click(object sender, EventArgs e)
         {
             // 1. Kiểm tra xem đã chọn suất nào chưa
-    if (_selectedShowtime == null)
-    {
-        MessageBox.Show("Vui lòng chọn suất chiếu trước khi tiếp tục!", "Chưa chọn", 
-            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        return;
-    }
+            if (_selectedShowtime == null)
+            {
+                MessageBox.Show("Vui lòng chọn suất chiếu trước khi tiếp tục!", "Chưa chọn",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-    // 2. Mở form chọn ghế
-    // (Đảm bảo bên FormSeatSelection đã có hàm khởi tạo nhận tham số nhé)
-    //var frm = new FormSeatSelection(_selectedShowtime);
-    var frm = new FormSeatSelection();
-    
-    this.Hide();      // Ẩn form hiện tại
-    frm.ShowDialog(); // Hiện form chọn ghế
-    this.Show();      // Hiện lại form này khi form kia đóng
+            // 2. Mở form chọn ghế
+            // (Đảm bảo bên FormSeatSelection đã có hàm khởi tạo nhận tham số nhé)
+            //var frm = new FormSeatSelection(_selectedShowtime);
+            var frm = new FormSeatSelection();
+
+            this.Hide();      // Ẩn form hiện tại
+            frm.ShowDialog(); // Hiện form chọn ghế
+            this.Show();      // Hiện lại form này khi form kia đóng
+        }
+
+        private void InitializeComponent()
+        {
+
         }
     }
 }
