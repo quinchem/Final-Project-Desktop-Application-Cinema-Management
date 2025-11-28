@@ -48,11 +48,11 @@ namespace SharedData.Repositories
         // REGISTER (Customer + Account)
         // ===========================
         public bool Register(Customer c, Account a, out string message)
-        {
+            {
             message = "";
 
             using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
+                conn.Open();
             using var tran = conn.BeginTransaction();
 
             try
@@ -115,7 +115,7 @@ namespace SharedData.Repositories
 
                 tran.Commit();
                 return true;
-            }
+                }
             catch (Exception ex)
             {
                 tran.Rollback();
@@ -128,12 +128,12 @@ namespace SharedData.Repositories
         // LOGIN
         // ===========================
         public bool Login(string email, string password, out Customer customer, out string msg)
-        {
+            {
             msg = "";
             customer = null;
 
             using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
+                conn.Open();
 
             string sql = @"
                 SELECT a.password,
@@ -150,7 +150,7 @@ namespace SharedData.Repositories
             using var reader = cmd.ExecuteReader();
 
             if (!reader.Read())
-            {
+                {
                 msg = "Email không tồn tại.";
                 return false;
             }

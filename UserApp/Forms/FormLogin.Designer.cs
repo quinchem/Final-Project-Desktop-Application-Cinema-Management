@@ -337,7 +337,7 @@ namespace UserApp
             chkDieuKhoan.Name = "chkDieuKhoan";
             chkDieuKhoan.Size = new Size(331, 24);
             chkDieuKhoan.TabIndex = 20;
-            chkDieuKhoan.Text = "Tôi đã đọc, hiểu,và đồng ý với các điều khoản";
+            chkDieuKhoan.Text = "Tôi đã đọc, hiểu, và đồng ý với các điều khoản";
             chkDieuKhoan.UncheckedState.BorderColor = Color.White;
             chkDieuKhoan.UncheckedState.BorderRadius = 0;
             chkDieuKhoan.UncheckedState.BorderThickness = 0;
