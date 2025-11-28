@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             LbThemPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
             picPoster = new PictureBox();
@@ -56,6 +56,7 @@
             lblDescription = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblStatus = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2vSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
             guna2ShadowPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picPoster).BeginInit();
             SuspendLayout();
@@ -89,6 +90,7 @@
             picPoster.Location = new Point(33, 99);
             picPoster.Name = "picPoster";
             picPoster.Size = new Size(243, 360);
+            picPoster.SizeMode = PictureBoxSizeMode.Zoom;
             picPoster.TabIndex = 52;
             picPoster.TabStop = false;
             // 
@@ -97,7 +99,7 @@
             LbThoiLuong.BackColor = Color.Transparent;
             LbThoiLuong.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbThoiLuong.ForeColor = Color.Coral;
-            LbThoiLuong.Location = new Point(657, 274);
+            LbThoiLuong.Location = new Point(657, 240);
             LbThoiLuong.Name = "LbThoiLuong";
             LbThoiLuong.Size = new Size(96, 27);
             LbThoiLuong.TabIndex = 63;
@@ -108,7 +110,7 @@
             LbDoTuoi.BackColor = Color.Transparent;
             LbDoTuoi.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbDoTuoi.ForeColor = Color.Coral;
-            LbDoTuoi.Location = new Point(657, 184);
+            LbDoTuoi.Location = new Point(657, 165);
             LbDoTuoi.Name = "LbDoTuoi";
             LbDoTuoi.Size = new Size(66, 27);
             LbDoTuoi.TabIndex = 62;
@@ -130,7 +132,7 @@
             LbDienVien.BackColor = Color.Transparent;
             LbDienVien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbDienVien.ForeColor = Color.Coral;
-            LbDienVien.Location = new Point(657, 364);
+            LbDienVien.Location = new Point(657, 393);
             LbDienVien.Name = "LbDienVien";
             LbDienVien.Size = new Size(83, 27);
             LbDienVien.TabIndex = 60;
@@ -141,7 +143,7 @@
             LbNgonNgu.BackColor = Color.Transparent;
             LbNgonNgu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbNgonNgu.ForeColor = Color.Coral;
-            LbNgonNgu.Location = new Point(310, 274);
+            LbNgonNgu.Location = new Point(310, 240);
             LbNgonNgu.Name = "LbNgonNgu";
             LbNgonNgu.Size = new Size(89, 27);
             LbNgonNgu.TabIndex = 59;
@@ -152,7 +154,7 @@
             LbTheLoaiPhim.BackColor = Color.Transparent;
             LbTheLoaiPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbTheLoaiPhim.ForeColor = Color.Coral;
-            LbTheLoaiPhim.Location = new Point(310, 184);
+            LbTheLoaiPhim.Location = new Point(310, 165);
             LbTheLoaiPhim.Name = "LbTheLoaiPhim";
             LbTheLoaiPhim.Size = new Size(71, 27);
             LbTheLoaiPhim.TabIndex = 58;
@@ -163,7 +165,7 @@
             LbDaoDien.BackColor = Color.Transparent;
             LbDaoDien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbDaoDien.ForeColor = Color.Coral;
-            LbDaoDien.Location = new Point(310, 364);
+            LbDaoDien.Location = new Point(310, 393);
             LbDaoDien.Name = "LbDaoDien";
             LbDaoDien.Size = new Size(79, 27);
             LbDaoDien.TabIndex = 57;
@@ -174,7 +176,7 @@
             LbNgayChieu.BackColor = Color.Transparent;
             LbNgayChieu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbNgayChieu.ForeColor = Color.Coral;
-            LbNgayChieu.Location = new Point(310, 451);
+            LbNgayChieu.Location = new Point(310, 315);
             LbNgayChieu.Name = "LbNgayChieu";
             LbNgayChieu.Size = new Size(99, 27);
             LbNgayChieu.TabIndex = 56;
@@ -194,7 +196,7 @@
             // btnThemPhim
             // 
             btnThemPhim.BorderRadius = 5;
-            btnThemPhim.CustomizableEdges = customizableEdges3;
+            btnThemPhim.CustomizableEdges = customizableEdges1;
             btnThemPhim.DisabledState.BorderColor = Color.DarkGray;
             btnThemPhim.DisabledState.CustomBorderColor = Color.DarkGray;
             btnThemPhim.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -204,15 +206,16 @@
             btnThemPhim.ForeColor = Color.White;
             btnThemPhim.Location = new Point(863, 606);
             btnThemPhim.Name = "btnThemPhim";
-            btnThemPhim.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnThemPhim.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnThemPhim.Size = new Size(80, 37);
             btnThemPhim.TabIndex = 71;
             btnThemPhim.Text = "Đóng";
+            btnThemPhim.Click += btnThemPhim_Click;
             // 
             // lblTitle
             // 
             lblTitle.BackColor = Color.Transparent;
-            lblTitle.Location = new Point(310, 144);
+            lblTitle.Location = new Point(310, 129);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(37, 22);
             lblTitle.TabIndex = 72;
@@ -221,7 +224,7 @@
             // lblLanguage
             // 
             lblLanguage.BackColor = Color.Transparent;
-            lblLanguage.Location = new Point(310, 319);
+            lblLanguage.Location = new Point(310, 276);
             lblLanguage.Name = "lblLanguage";
             lblLanguage.Size = new Size(67, 22);
             lblLanguage.TabIndex = 73;
@@ -230,7 +233,7 @@
             // lblGenre
             // 
             lblGenre.BackColor = Color.Transparent;
-            lblGenre.Location = new Point(310, 229);
+            lblGenre.Location = new Point(310, 197);
             lblGenre.Name = "lblGenre";
             lblGenre.Size = new Size(53, 22);
             lblGenre.TabIndex = 74;
@@ -239,7 +242,7 @@
             // lblAge
             // 
             lblAge.BackColor = Color.Transparent;
-            lblAge.Location = new Point(657, 235);
+            lblAge.Location = new Point(657, 203);
             lblAge.Name = "lblAge";
             lblAge.Size = new Size(51, 22);
             lblAge.TabIndex = 75;
@@ -248,7 +251,7 @@
             // lblPrice
             // 
             lblPrice.BackColor = Color.Transparent;
-            lblPrice.Location = new Point(657, 144);
+            lblPrice.Location = new Point(657, 129);
             lblPrice.Name = "lblPrice";
             lblPrice.Size = new Size(61, 22);
             lblPrice.TabIndex = 76;
@@ -257,7 +260,7 @@
             // lblReleaseDate
             // 
             lblReleaseDate.BackColor = Color.Transparent;
-            lblReleaseDate.Location = new Point(310, 484);
+            lblReleaseDate.Location = new Point(310, 348);
             lblReleaseDate.Name = "lblReleaseDate";
             lblReleaseDate.Size = new Size(74, 22);
             lblReleaseDate.TabIndex = 77;
@@ -266,7 +269,7 @@
             // lblDirector
             // 
             lblDirector.BackColor = Color.Transparent;
-            lblDirector.Location = new Point(310, 407);
+            lblDirector.Location = new Point(310, 426);
             lblDirector.Name = "lblDirector";
             lblDirector.Size = new Size(62, 22);
             lblDirector.TabIndex = 78;
@@ -275,7 +278,7 @@
             // lblDuration
             // 
             lblDuration.BackColor = Color.Transparent;
-            lblDuration.Location = new Point(657, 319);
+            lblDuration.Location = new Point(657, 276);
             lblDuration.Name = "lblDuration";
             lblDuration.Size = new Size(72, 22);
             lblDuration.TabIndex = 79;
@@ -284,7 +287,7 @@
             // lblActor
             // 
             lblActor.BackColor = Color.Transparent;
-            lblActor.Location = new Point(657, 407);
+            lblActor.Location = new Point(658, 426);
             lblActor.Name = "lblActor";
             lblActor.Size = new Size(63, 22);
             lblActor.TabIndex = 80;
@@ -295,7 +298,7 @@
             guna2HtmlLabel10.BackColor = Color.Transparent;
             guna2HtmlLabel10.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2HtmlLabel10.ForeColor = Color.Coral;
-            guna2HtmlLabel10.Location = new Point(33, 487);
+            guna2HtmlLabel10.Location = new Point(33, 483);
             guna2HtmlLabel10.Name = "guna2HtmlLabel10";
             guna2HtmlLabel10.Size = new Size(53, 27);
             guna2HtmlLabel10.TabIndex = 81;
@@ -304,7 +307,7 @@
             // lblDescription
             // 
             lblDescription.BackColor = Color.Transparent;
-            lblDescription.Location = new Point(33, 520);
+            lblDescription.Location = new Point(33, 516);
             lblDescription.Name = "lblDescription";
             lblDescription.Size = new Size(42, 22);
             lblDescription.TabIndex = 82;
@@ -313,7 +316,7 @@
             // lblStatus
             // 
             lblStatus.BackColor = Color.Transparent;
-            lblStatus.Location = new Point(654, 484);
+            lblStatus.Location = new Point(659, 348);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(67, 22);
             lblStatus.TabIndex = 84;
@@ -324,11 +327,18 @@
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2HtmlLabel2.ForeColor = Color.Coral;
-            guna2HtmlLabel2.Location = new Point(654, 451);
+            guna2HtmlLabel2.Location = new Point(658, 315);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(92, 27);
             guna2HtmlLabel2.TabIndex = 83;
             guna2HtmlLabel2.Text = "Tình trạng";
+            // 
+            // guna2vSeparator1
+            // 
+            guna2vSeparator1.Location = new Point(612, 99);
+            guna2vSeparator1.Name = "guna2vSeparator1";
+            guna2vSeparator1.Size = new Size(12, 360);
+            guna2vSeparator1.TabIndex = 86;
             // 
             // FormViewDetailMovie
             // 
@@ -336,6 +346,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1028, 667);
+            Controls.Add(guna2vSeparator1);
             Controls.Add(lblStatus);
             Controls.Add(guna2HtmlLabel2);
             Controls.Add(lblDescription);
@@ -398,5 +409,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblDescription;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblStatus;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2VSeparator guna2vSeparator1;
     }
 }
