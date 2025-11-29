@@ -8,7 +8,32 @@ namespace SharedData.Repositories
     public class CustomerRepo
     {
         private string ConnStr => DatabaseHelper.GetConnectionString();
+        public Customer GetById(string id)
+        {
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
 
+            string sql = @"SELECT * FROM customer WHERE customer_id = @id";
+
+            using var cmd = new SqliteCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            using var reader = cmd.ExecuteReader();
+
+            if (!reader.Read()) return null;
+
+            return new Customer
+            {
+                customer_id = reader["customer_id"].ToString(),
+                full_name = reader["full_name"].ToString(),
+                email = reader["email"].ToString(),
+                phone_number = reader["phone_number"].ToString(),
+                gender = reader["gender"].ToString(),
+                date_of_birth = reader["date_of_birth"].ToString(),
+                address = reader["address"].ToString(),
+                create_date = reader["create_date"].ToString()
+            };
+        }
         public List<Customer> GetAll()
         {
             List<Customer> list = new();
@@ -37,30 +62,7 @@ namespace SharedData.Repositories
             return list;
         }
 
-        public Customer GetById(string id)
-        {
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
-
-            string sql = "SELECT * FROM customer WHERE customer_id = @id";
-            using var cmd = new SqliteCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@id", id);
-
-            using var reader = cmd.ExecuteReader();
-            if (!reader.Read()) return null;
-
-            return new Customer
-            {
-                customer_id = reader["customer_id"].ToString(),
-                full_name = reader["full_name"].ToString(),
-                email = reader["email"].ToString(),
-                phone_number = reader["phone_number"].ToString(),
-                gender = reader["gender"].ToString(),
-                date_of_birth = reader["date_of_birth"].ToString(),
-                address = reader["address"].ToString(),
-                create_date = reader["create_date"].ToString()
-            };
-        }
+       
         public bool CheckEmailExist(string email)
         {
             // Dùng lại DatabaseHelper 
@@ -84,7 +86,7 @@ namespace SharedData.Repositories
                 }
             }
         }
-
+        
         public bool Update(Customer c)
         {
             using var conn = new SqliteConnection(ConnStr);

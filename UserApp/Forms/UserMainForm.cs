@@ -138,7 +138,7 @@ namespace UserApp
 
             ActivateButton(btn);
 
-            OpenChildForm(new FormShowtimeList());
+            OpenChildForm(new FormShowtimeList(this));
 
         }
 

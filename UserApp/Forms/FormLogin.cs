@@ -57,7 +57,7 @@ namespace UserApp
             };
 
             t.Start();
-            // Đã xóa ShowLogin() ở đây vì nó đã được gọi trong Constructor
+            
         }
 
         // ================================
@@ -75,65 +75,25 @@ namespace UserApp
             panelDangNhap.Visible = true;
             panelDangNhap.Enabled = true;
             panelDangKy.Visible = false;
-            // Đã xóa: btnMiniDN.Enabled = false; (để ValidateLoginForm quyết định)
 
             panelDangNhap.BringToFront();
             if (btnDangNhap == null) return;
             ActivateButton(btnDangNhap);
 
-            // Cập nhật trạng thái nút Đăng nhập dựa trên nội dung hiện tại
-            ValidateLoginForm();
         }
 
         public void ShowRegister()
         {
             panelDangNhap.Visible = false;
             panelDangKy.Visible = true;
-            // Đã xóa: btnminiDK.Enabled = false; (để ValidateRegisterForm quyết định)
 
             panelDangKy.BringToFront();
             if (btnDangKy == null) return;
             ActivateButton(btnDangKy);
-
-            // Cập nhật trạng thái nút Đăng ký dựa trên nội dung hiện tại
-            ValidateRegisterForm();
         }
 
 
-        private void ValidateRegisterForm()
-        {
-            bool valid =
-           // Họ tên
-           !string.IsNullOrWhiteSpace(txtHoTen.Text) &&
-
-           // Email
-           !string.IsNullOrWhiteSpace(txtEmailDK.Text) &&
-           txtEmailDK.Text.Contains("@") &&
-
-           // SĐT
-           !string.IsNullOrWhiteSpace(txtSDT.Text) &&
-           System.Text.RegularExpressions.Regex.IsMatch(txtSDT.Text, @"^\d{10}$") &&
-
-           // Giới tính (radio)
-           (radNam.Checked || radNu.Checked) &&
-
-           // Mật khẩu
-           !string.IsNullOrWhiteSpace(txtPassDK.Text) &&
-           System.Text.RegularExpressions.Regex.IsMatch(txtPassDK.Text, @"^(?=.*[A-Z])(?=.*\W).{8,}$") &&
-
-           // Xác nhận mật khẩu
-           !string.IsNullOrWhiteSpace(txtPassCF.Text) &&
-           txtPassCF.Text == txtPassDK.Text &&
-
-           // Ngày sinh
-           dtpNgaySinh.Value <= DateTime.Today &&
-
-           // Đồng ý điều khoản
-           chkDieuKhoan.Checked;
-
-            btnminiDK.Enabled = true;
-        }
-
+       
         private void btnDangKy_Click(object sender, EventArgs e)
         {
             ShowRegister();
@@ -240,16 +200,16 @@ namespace UserApp
                     date_of_birth = dtpNgaySinh.Value.ToString("dd/MM/yyyy"),
                     gender = radNam.Checked ? "Nam" : "Nữ",
                     address = txtDiachi.Text.Trim(),
-                    email = txtEmailDK.Text.Trim(),
+                    email = txtEmailDK.Text.Trim(),   // EMAIL -> lưu vào customer.email
                     phone_number = txtSDT.Text.Trim(),
-                    create_date = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")
+                    create_date = DateTime.UtcNow.ToString("HH:mm:ss dd-MM-yyyy")
                 };
 
                 var account = new Account
                 {
-                    username = customer.email, // Email = Username
+                    username = txtEmailDK.Text.Trim(),  // USERNAME = EMAIL
                     password = txtPassDK.Text,
-                    role_account = "customer",
+                    role_account = "Khách hàng",
                     staff_id = null
                 };
 
@@ -261,6 +221,7 @@ namespace UserApp
                 return false;
             }
         }
+   
 
         private void btnminiDK_Click(object sender, EventArgs e)
         {
@@ -342,7 +303,6 @@ namespace UserApp
             panelDangNhap.Visible = false;
             panelDangNhap.Enabled = false;
 
-            // Lưu ý: Cần đảm bảo class FormForgetPassword có tồn tại và constructor nhận Form cha (this)
             OpenChildForm(new FormForgetPassword(this));
         }
 
@@ -361,56 +321,7 @@ namespace UserApp
             }
         }
 
-        private void ValidateLoginForm()
-        {
-            bool valid = !string.IsNullOrWhiteSpace(txtEmailDN.Text)
-                         && !string.IsNullOrWhiteSpace(txtPassDN.Text);
-
-            btnMiniDN.Enabled = true;
-        }
-
-        private void txtEmailDN_TextChanged(object sender, EventArgs e)
-        {
-            ValidateLoginForm();
-        }
-
-        private void txtPassDN_TextChanged(object sender, EventArgs e)
-        {
-            ValidateLoginForm();
-        }
-
-        private void txtHoTen_TextChanged(object sender, EventArgs e)
-        { ValidateRegisterForm(); }
-
-        private void txtEmailDK_TextChanged(object sender, EventArgs e)
-        { ValidateRegisterForm(); }
-
-        private void txtPassDK_TextChanged(object sender, EventArgs e)
-        { ValidateRegisterForm(); }
-
-        private void txtPassCF_TextChanged(object sender, EventArgs e)
-        { ValidateRegisterForm(); }
-
-        private void dtpNgaySinh_ValueChanged(object sender, EventArgs e)
-        { ValidateRegisterForm(); }
-
-        private void chkDieuKhoan_CheckedChanged(object sender, EventArgs e)
-        { ValidateRegisterForm(); }
-        private void txtSDT_TextChanged(object sender, EventArgs e)
-        {
-            ValidateRegisterForm();
-        }
-
-        private void radNam_CheckedChanged(object sender, EventArgs e)
-        {
-            ValidateRegisterForm();
-        }
-
-        private void radNu_CheckedChanged(object sender, EventArgs e)
-        {
-            ValidateRegisterForm();
-        }
-
+      
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
             if (txtPassDN.UseSystemPasswordChar == true)
