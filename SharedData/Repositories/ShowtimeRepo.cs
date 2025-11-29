@@ -273,7 +273,7 @@ namespace SharedData.Repositories
         }
         // Thêm vào ShowtimeRepo.cs
 
-        // INSERT
+        // INSERT 
         public static void Insert(Showtime showtime)
         {
             using (var conn = new SqliteConnection(connStr))
