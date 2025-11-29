@@ -307,51 +307,78 @@ namespace SharedData.Repositories
         }
         // INSERT 
         public static void Insert(Showtime showtime)
+{
+    if (!string.IsNullOrWhiteSpace(showtime.showtime_id))
+    {
+        showtime.showtime_id = showtime.showtime_id.Trim().ToUpper();
+
+        // Nếu format không hợp lệ (không giống T + số), thì bỏ và tự sinh
+        if (!Regex.IsMatch(showtime.showtime_id, @"^[T]\d+$"))
         {
-            if (!string.IsNullOrWhiteSpace(showtime.showtime_id))
-            {
-                showtime.showtime_id = showtime.showtime_id.Trim().ToUpper();
-
-                // Nếu format không hợp lệ (không giống T + số), thì bỏ và tự sinh
-                if (!Regex.IsMatch(showtime.showtime_id, @"^[T]\d+$"))
-                {
-                    showtime.showtime_id = null;
-                }
-            }
-
-            // Nếu vẫn rỗng => tự sinh
-            if (string.IsNullOrWhiteSpace(showtime.showtime_id))
-            {
-                showtime.showtime_id = GenerateNextShowtimeId();
-            }
-            using (var conn = new SqliteConnection(connStr))
-            {
-                conn.Open();
-                string query = @"INSERT INTO showtime (showtime_id, movie_id, auditorium_id, show_date, start_time, end_time)
-                        VALUES (@id, @mid, @aid, @date, @start, @end)";
-
-                using (var cmd = new SqliteCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", showtime.showtime_id);
-                    cmd.Parameters.AddWithValue("@mid", showtime.movie_id);
-                    cmd.Parameters.AddWithValue("@aid", showtime.auditorium_id);
-                    cmd.Parameters.AddWithValue("@date", showtime.show_date);
-                    cmd.Parameters.AddWithValue("@start", showtime.start_time);
-                    cmd.Parameters.AddWithValue("@end", showtime.end_time);
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (SqliteException ex) when (ex.SqliteErrorCode == 19) // UNIQUE constraint failed
-                    {
-                        // Nếu bị trùng do race condition, thử lại với id mới (simple retry)
-                        showtime.showtime_id = GenerateNextShowtimeId();
-                        cmd.Parameters["@id"].Value = showtime.showtime_id;
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
+            showtime.showtime_id = null;
         }
+    }
+
+    // Nếu vẫn rỗng => tự sinh
+    if (string.IsNullOrWhiteSpace(showtime.showtime_id))
+    {
+        showtime.showtime_id = GenerateNextShowtimeId();
+    }
+    using (var conn = new SqliteConnection(connStr))
+    {
+        conn.Open();
+        using (var tran = conn.BeginTransaction())
+        {
+            // ==========================
+            // 2) INSERT SHOWTIME
+            // ==========================
+            var cmd = conn.CreateCommand();
+            cmd.Transaction = tran;
+            cmd.CommandText = @"
+        INSERT INTO showtime (showtime_id, movie_id, auditorium_id, show_date, start_time, end_time)
+        VALUES (@id, @mid, @aid, @date, @start, @end)";
+
+            cmd.Parameters.AddWithValue("@id", showtime.showtime_id);
+            cmd.Parameters.AddWithValue("@mid", showtime.movie_id);
+            cmd.Parameters.AddWithValue("@aid", showtime.auditorium_id);
+            cmd.Parameters.AddWithValue("@date", showtime.show_date);
+            cmd.Parameters.AddWithValue("@start", showtime.start_time);
+            cmd.Parameters.AddWithValue("@end", showtime.end_time);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqliteException ex) when (ex.SqliteErrorCode == 19) // UNIQUE error
+            {
+                // Nếu trùng ID (race condition) → sinh ID mới
+                showtime.showtime_id = GenerateNextShowtimeId();
+                cmd.Parameters["@id"].Value = showtime.showtime_id;
+                cmd.ExecuteNonQuery();
+            }
+
+            // ==========================
+            // 3) AUTO SYNC SEAT_FOR_SHOWTIME
+            // ==========================
+            // Chỉ insert ghế đang Bảo trì
+            var cmdMaint = conn.CreateCommand();
+            cmdMaint.Transaction = tran;
+            cmdMaint.CommandText = @"
+        INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
+        SELECT seat_id, @stid, 'Bảo trì'
+        FROM seat
+        WHERE auditorium_id = @aid
+          AND status = 'Bảo trì';
+    ";
+
+            cmdMaint.Parameters.AddWithValue("@stid", showtime.showtime_id);
+            cmdMaint.Parameters.AddWithValue("@aid", showtime.auditorium_id);
+            cmdMaint.ExecuteNonQuery();
+
+            tran.Commit();
+        }
+    }
+}
 
         // UPDATE
         public static void Update(Showtime showtime)
