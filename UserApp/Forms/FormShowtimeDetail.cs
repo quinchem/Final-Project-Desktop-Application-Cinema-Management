@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace UserApp
 {
@@ -17,28 +18,23 @@ namespace UserApp
         private ShowtimeRepo repo = new ShowtimeRepo();
         private ImageRepo _imageRepo = new ImageRepo();
         private List<ShowtimeInfo> currentShowtimes;
+        private UserMainForm parentForm;
 
         private DateTime currentStartDate;
         private DateTime selectedDate;
+        private int selectedMonth = DateTime.Today.Month;
 
         private ShowtimeInfo _selectedShowtime = null;
         private Guna2Panel _selectedPanel = null;
 
         private string _targetMovieId = null;
-        
-        //CONSTRUCTOR 1: Mặc định (Hiện tất cả)
-        public FormShowtimeDetail()
-        {
-            InitializeComponent();
-            
-        }
 
-        //CONSTRUCTOR MỚI: Nhận ID Phim để lọc
-        public FormShowtimeDetail(string movieId)
+        //CONSTRUCTOR 1: Mặc định (Hiện tất cả)
+        public FormShowtimeDetail(UserMainForm parent, string movieId)
         {
             InitializeComponent();
-            _targetMovieId = movieId; // Lưu lại ID phim
-            
+            parentForm = parent;
+            _targetMovieId = movieId;
             SetupForm();
         }
         private void SetupForm()
@@ -46,11 +42,13 @@ namespace UserApp
             InitializeFlowLayoutPanel();
 
             // Khởi tạo ngày
+            selectedMonth = DateTime.Today.Month;
             currentStartDate = GetMondayOfWeek(DateTime.Today);
             selectedDate = DateTime.Today;
 
             // Load ComboBox -> Cái này sẽ kích hoạt OnMonthChanged -> LoadShowtimes
-            LoadMonthsComboBox();
+            LoadMonthsLabel();
+            this.Shown += (s, e) => InitCalendar();
         }
         private void InitializeFlowLayoutPanel()
         {
@@ -65,38 +63,30 @@ namespace UserApp
             flpShowtimes.SendToBack();
         }
 
-        private void LoadMonthsComboBox()
+        private void LoadMonthsLabel()
         {
-            cboMonth.Items.Clear();
-            for (int i = 1; i <= 12; i++) cboMonth.Items.Add($"THÁNG {i}");
-
-            // Chọn tháng hiện tại -> Sự kiện OnMonthChanged sẽ tự chạy
-            cboMonth.SelectedIndex = DateTime.Today.Month - 1;
+            lblMonth.Text = $"THÁNG {selectedMonth}";
         }
 
-        // --- LOGIC XỬ LÝ NGÀY THÁNG ---
-
-        private void OnMonthChanged(object sender, EventArgs e)
+        private void InitCalendar()
         {
-            if (cboMonth.SelectedIndex < 0) return;
-
-            int selectedMonth = cboMonth.SelectedIndex + 1;
-            int currentYear = DateTime.Today.Year;
-            DateTime targetDate;
-
-            // Nếu chọn tháng hiện tại -> Chọn Hôm Nay. Tháng khác -> Chọn mùng 1
-            if (selectedMonth == DateTime.Today.Month && currentYear == DateTime.Today.Year)
-                targetDate = DateTime.Today;
+            if (currentStartDate == default || currentStartDate == DateTime.MinValue)
+                currentStartDate = GetMondayOfWeek(DateTime.Today);
             else
-                targetDate = new DateTime(currentYear, selectedMonth, 1);
+                currentStartDate = GetMondayOfWeek(currentStartDate);
 
-            // Cập nhật lại lịch
-            currentStartDate = GetMondayOfWeek(targetDate);
-            selectedDate = targetDate;
+            // đảm bảo selectedDate có giá trị và là ngày (no time)
+            if (selectedDate == default || selectedDate == DateTime.MinValue)
+                selectedDate = DateTime.Today;
+            selectedDate = selectedDate.Date;
 
-            // 🔥 Tải lại dữ liệu ngay lập tức
-            LoadShowtimes();
+            // Update label tháng, nút ngày, load dữ liệu tuần, và chọn ngày hiện tại
+            UpdateMonthLabelByWeek();
+            UpdateDateButtons();  // set text, Tag và click handler cho 7 nút
+            LoadShowtimes();      // load currentShowtimes cho tuần hiện tại
+            SelectDate(selectedDate);
         }
+        // --- LOGIC XỬ LÝ NGÀY THÁNG ---
 
         private DateTime GetMondayOfWeek(DateTime date)
         {
@@ -104,14 +94,42 @@ namespace UserApp
             return date.AddDays(-1 * diff).Date;
         }
 
-        private void ChangeWeek(int days)
+        private void UpdateMonthLabelByWeek()
         {
-            currentStartDate = currentStartDate.AddDays(days);
-            LoadShowtimes();
+            // lấy ngày giữa tuần (Wednesday-ish) để biết tuần thuộc tháng nào nhiều hơn
+            DateTime midWeek = currentStartDate.AddDays(3);
+
+            int month = midWeek.Month;
+            int year = midWeek.Year;
+
+            lblMonth.Text = $"THÁNG {month} - {year}";
         }
 
-        private void btnPrevWeek_Click(object sender, EventArgs e) => ChangeWeek(-7);
-        private void btnNextWeek_Click(object sender, EventArgs e) => ChangeWeek(7);
+        private void btnPrevWeek_Click(object sender, EventArgs e)
+        {
+            // Lùi 1 tuần (trừ 7 ngày)
+            currentStartDate = currentStartDate.AddDays(-7);
+
+            // đảm bảo Monday
+            currentStartDate = GetMondayOfWeek(currentStartDate);
+
+            selectedDate = currentStartDate;
+
+            UpdateMonthLabelByWeek();
+            LoadShowtimes();
+        }
+        private void btnNextWeek_Click(object sender, EventArgs e)
+        {
+            currentStartDate = currentStartDate.AddDays(7);
+
+            // đảm bảo là Monday (nếu tiền lệ ko phải Monday)
+            currentStartDate = GetMondayOfWeek(currentStartDate);
+
+            selectedDate = currentStartDate;
+
+            UpdateMonthLabelByWeek();
+            LoadShowtimes();
+        }
 
         private void SelectDate(DateTime date)
         {
@@ -202,22 +220,6 @@ namespace UserApp
 
                 
                 if (currentShowtimes == null) currentShowtimes = new List<ShowtimeInfo>();
-
-                // Kiểm tra: Nếu ngày đang chọn (selectedDate) KHÔNG có suất chiếu nào
-                // NHƯNG trong danh sách tải về lại CÓ suất chiếu của ngày khác
-                bool hasShowOnSelectedDate = currentShowtimes.Any(s => s.ParsedDate.Date == selectedDate.Date);
-
-                if (!hasShowOnSelectedDate && currentShowtimes.Count > 0)
-                {
-                    var firstAvailableDate = currentShowtimes
-                                                .OrderBy(s => s.ParsedDate)
-                                                .First().ParsedDate.Date;
-
-                    selectedDate = firstAvailableDate;
-                    currentStartDate = GetMondayOfWeek(selectedDate);
-                    UpdateDateButtons();
-                }
-
                 // 3. Hiển thị
                 DisplayShowtimes();
             }
@@ -485,12 +487,7 @@ namespace UserApp
                 return;
             }
 
-            // Mở form chọn ghế
-            //var frm = new FormSeatSelection(_selectedShowtime); // Đảm bảo FormSeatSelection nhận tham số
-            var frm = new FormSeatSelection();
-            this.Hide();
-            frm.ShowDialog();
-            this.Show();
+            parentForm.OpenChildForm(new FormSeatSelection(_selectedShowtime));
         }
     }
 }

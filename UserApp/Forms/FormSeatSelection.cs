@@ -25,20 +25,16 @@ namespace UserApp
         // ====== DANH SÁCH GHẾ ======
         private List<SeatUser> _allSeats = new();
         private List<SeatUser> _selectedSeats = new();
-        private readonly SeatForShowtimeRepo _seatForShowtimeRepo = new SeatForShowtimeRepo();
-
 
         // ============================
         // CONSTRUCTOR
         // ============================
-        // Dùng cho Designer
         public FormSeatSelection()
         {
             InitializeComponent();
             _roomJsonFolder = GetRoomFolder();
         }
 
-        // Dùng thực tế: nhận ShowtimeInfo từ FormShowtimeList
         public FormSeatSelection(ShowtimeInfo showtime) : this()
         {
             _showtime = showtime;
@@ -59,32 +55,33 @@ namespace UserApp
 
         private void FormSeatSelection_Load(object sender, EventArgs e)
         {
-            // Tránh crash khi mở bằng Designer
-            if (string.IsNullOrEmpty(_auditoriumId) || string.IsNullOrEmpty(_showtimeId))
+            if (_showtime == null ||
+                string.IsNullOrEmpty(_auditoriumId) ||
+                string.IsNullOrEmpty(_showtimeId))
                 return;
+
+            // Thông tin suất chiếu
+            lblTenPhim.Text = _showtime.title;
+            lblPhong.Text = _showtime.name;
+            lblSuatChieu.Text = $"{_showtime.show_date} - {_showtime.start_time}";
 
             LoadRoom(_auditoriumId, _showtimeId);
 
-            timer1.Start();
+           
         }
-        //private void LoadShowtimeInfo()
-        //{
-        //    lblSuatChieu.Text = _showtime.title;
-        //    lblTime.Text = $"{_showtime.StartTime:hh\\:mm}";
-        //}
 
         // ===================================================
         // LOAD PHÒNG: JSON + DB
         // ===================================================
         private void LoadRoom(string auditoriumId, string showtimeId)
         {
-
             _allSeats.Clear();
             _selectedSeats.Clear();
             panelRoom.Controls.Clear();
             CreateScreenBar();
             UpdateTotal();
-            //UpdateSelectedSeatLabel();
+            UpdateSelectedSeatLabel();
+
 
             // ====== 1) JSON sơ đồ phòng: Room_5.json, Room_1.json, ...
             string digits = new string(auditoriumId.Where(char.IsDigit).ToArray()); // R05 -> "05"
@@ -100,33 +97,36 @@ namespace UserApp
 
             var jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonPath))
                             ?? new List<SeatData>();
+        
 
             // ====== 2) Load GHẾ từ database + loại ghế + giá
             var dbSeats = new Dictionary<string, (string type, string status, double price)>();
+         
 
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = @"
-            SELECT s.seat_id, st.seat_type, s.status, s.per_seat_ticket_price
-            FROM seat s
-            LEFT JOIN seat_type st ON s.seat_type_id = st.seat_type_id
-            WHERE s.auditorium_id = $aud";
-                cmd.Parameters.AddWithValue("$aud", auditoriumId);
+                SELECT s.seat_id, st.seat_type, s.status, s.per_seat_ticket_price
+                FROM seat s
+                LEFT JOIN seat_type st ON s.seat_type_id = st.seat_type_id
+                WHERE s.auditorium_id = @aud";
+                cmd.Parameters.AddWithValue("@aud", auditoriumId);
 
                 using (var r = cmd.ExecuteReader())
                 {
                     while (r.Read())
                     {
                         string id = r.GetString(0);
-                        string type = r.GetString(1);   // VIP / thường
+                        string type = r.GetString(1);   // VIP / Thường
                         string status = r.GetString(2); // Bình thường / Bảo trì
                         double price = r.GetDouble(3);  // giá ghế
 
                         dbSeats[id] = (type, status, price);
                     }
                 }
+
             }
 
             // ====== 3) Load trạng thái ghế theo suất chiếu
@@ -137,16 +137,16 @@ namespace UserApp
                 conn.Open();
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = @"
-            SELECT seat_id, status 
-            FROM seat_for_showtime 
-            WHERE showtime_id = $id";
+                    SELECT seat_id, status 
+                    FROM seat_for_showtime 
+                    WHERE showtime_id = $id";
                 cmd.Parameters.AddWithValue("$id", showtimeId);
 
                 using (var r = cmd.ExecuteReader())
                 {
                     while (r.Read())
                     {
-                        stStatus[r.GetString(0)] = r.GetString(1); // Trống / Full / Bảo trì
+                        stStatus[r.GetString(0)] = r.GetString(1); // Full / Bảo trì
                     }
                 }
             }
@@ -161,21 +161,20 @@ namespace UserApp
                 if (!dbSeats.TryGetValue(fullId, out var db))
                     continue; // ghế chưa có trong DB thì bỏ qua
 
-                string showStatus = stStatus.ContainsKey(fullId)
+                // Nếu có record trong seat_for_showtime → Full / Bảo trì
+                // Nếu không có → dùng status gốc của seat (Bình thường / Bảo trì)
+                string mergedStatus = stStatus.ContainsKey(fullId)
                     ? stStatus[fullId]
-                    : "Trống";
+                    : db.status;
 
                 var seatUser = new SeatUser
                 {
                     SeatId = fullId,
                     Row = s.Row,
                     Col = s.Col,
-
-                    SeatType = db.type,
-                    BaseStatus = db.status,
-                    ShowtimeStatus = showStatus,
-                    Price = db.price,
-
+                    Type = db.type,
+                    Status = mergedStatus,
+                    Price = (int)db.price,  
                     X = s.X,
                     Y = s.Y
                 };
@@ -198,7 +197,6 @@ namespace UserApp
             btn.Font = new Font("Segoe UI", 8, FontStyle.Bold);
 
             ApplySeatStyle(btn, seat);
-
             btn.Click += Seat_Click;
 
             return btn;
@@ -206,7 +204,8 @@ namespace UserApp
 
         private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
         {
-            if (seat.BaseStatus == "Bảo trì" || seat.ShowtimeStatus == "Bảo trì")
+            // Bảo trì
+            if (seat.Status == "Bảo trì")
             {
                 btn.FillColor = Color.Gray;
                 btn.ForeColor = Color.White;
@@ -214,7 +213,8 @@ namespace UserApp
                 return;
             }
 
-            if (seat.ShowtimeStatus == "Full")
+            // Đã đặt (Full)
+            if (seat.Status == "Full")
             {
                 btn.FillColor = Color.DarkRed;
                 btn.ForeColor = Color.White;
@@ -224,7 +224,8 @@ namespace UserApp
 
             // Trống
             btn.FillColor = Color.White;
-            btn.BorderColor = seat.SeatType == "VIP" ? Color.Gold : Color.DimGray;
+            btn.ForeColor = Color.Black;
+            btn.BorderColor = seat.Type == "VIP" ? Color.Gold : Color.DimGray;
             btn.BorderThickness = 3;
         }
 
@@ -251,6 +252,8 @@ namespace UserApp
             }
 
             UpdateTotal();
+            UpdateSelectedSeatLabel();
+            timer1.Start();
         }
 
         private void UpdateSelectedSeatLabel()
@@ -294,12 +297,13 @@ namespace UserApp
             l.Text = "MÀN HÌNH";
             l.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             l.AutoSize = true;
-            l.Left = (p.Width - l.Width) / 2;
+            l.Left = (p.Width - l.Width) / 2;   // sửa lại Left (chữ hoa)
             l.Top = (p.Height - l.Height) / 2;
 
             p.Controls.Add(l);
             panelRoom.Controls.Add(p);
         }
+
         // ===================================================
         // THANH TOÁN → CẬP NHẬT seat_for_showtime
         // ===================================================
