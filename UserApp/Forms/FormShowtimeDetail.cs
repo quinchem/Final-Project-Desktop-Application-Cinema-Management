@@ -27,22 +27,13 @@ namespace UserApp
         private Guna2Panel _selectedPanel = null;
 
         private string _targetMovieId = null;
-        
+
         //CONSTRUCTOR 1: Mặc định (Hiện tất cả)
-        public FormShowtimeDetail(UserMainForm parent)
+        public FormShowtimeDetail(UserMainForm parent, string movieId)
         {
             InitializeComponent();
             parentForm = parent;
-
-        }
-
-        //CONSTRUCTOR MỚI: Nhận ID Phim để lọc
-        public FormShowtimeDetail(string movieId)
-        {
-            InitializeComponent();
-        
-            _targetMovieId = movieId; // Lưu lại ID phim
-            
+            _targetMovieId = movieId;
             SetupForm();
         }
         private void SetupForm()
