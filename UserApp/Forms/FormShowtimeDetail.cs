@@ -225,22 +225,6 @@ namespace UserApp
 
                 
                 if (currentShowtimes == null) currentShowtimes = new List<ShowtimeInfo>();
-
-                // Kiểm tra: Nếu ngày đang chọn (selectedDate) KHÔNG có suất chiếu nào
-                // NHƯNG trong danh sách tải về lại CÓ suất chiếu của ngày khác
-                bool hasShowOnSelectedDate = currentShowtimes.Any(s => s.ParsedDate.Date == selectedDate.Date);
-
-                if (!hasShowOnSelectedDate && currentShowtimes.Count > 0)
-                {
-                    var firstAvailableDate = currentShowtimes
-                                                .OrderBy(s => s.ParsedDate)
-                                                .First().ParsedDate.Date;
-
-                    selectedDate = firstAvailableDate;
-                    currentStartDate = GetMondayOfWeek(selectedDate);
-                    UpdateDateButtons();
-                }
-
                 // 3. Hiển thị
                 DisplayShowtimes();
             }
