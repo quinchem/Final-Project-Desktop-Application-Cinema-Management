@@ -11,6 +11,7 @@ namespace SharedData.Repositories
 {
     public class FilmRepo
     {
+        
         // ---- Lấy toàn bộ phim ----
         public List<Film> GetAllFilms()
         {
