@@ -319,7 +319,7 @@
     "Row": "C",
     "Col": 6,
     "Type": "Normal",
-    "Status": "Active",
+    "Status": "Disabled",
     "X": 365,
     "Y": 210
   },
@@ -328,7 +328,7 @@
     "Row": "C",
     "Col": 7,
     "Type": "Normal",
-    "Status": "Active",
+    "Status": "Disabled",
     "X": 423,
     "Y": 210
   },
@@ -410,7 +410,7 @@
     "Col": 1,
     "Type": "VIP",
     "Status": "Active",
-    "X": 46,
+    "X": 75,
     "Y": 270
   },
   {
@@ -419,7 +419,7 @@
     "Col": 2,
     "Type": "VIP",
     "Status": "Active",
-    "X": 104,
+    "X": 133,
     "Y": 270
   },
   {
@@ -428,7 +428,7 @@
     "Col": 3,
     "Type": "VIP",
     "Status": "Active",
-    "X": 162,
+    "X": 191,
     "Y": 270
   },
   {
@@ -437,7 +437,7 @@
     "Col": 4,
     "Type": "VIP",
     "Status": "Active",
-    "X": 220,
+    "X": 249,
     "Y": 270
   },
   {
@@ -446,7 +446,7 @@
     "Col": 5,
     "Type": "VIP",
     "Status": "Active",
-    "X": 278,
+    "X": 307,
     "Y": 270
   },
   {
@@ -455,7 +455,7 @@
     "Col": 6,
     "Type": "VIP",
     "Status": "Active",
-    "X": 336,
+    "X": 365,
     "Y": 270
   },
   {
@@ -464,7 +464,7 @@
     "Col": 7,
     "Type": "VIP",
     "Status": "Active",
-    "X": 394,
+    "X": 423,
     "Y": 270
   },
   {
@@ -473,7 +473,7 @@
     "Col": 8,
     "Type": "VIP",
     "Status": "Active",
-    "X": 452,
+    "X": 481,
     "Y": 270
   },
   {
@@ -482,7 +482,7 @@
     "Col": 9,
     "Type": "VIP",
     "Status": "Active",
-    "X": 510,
+    "X": 539,
     "Y": 270
   },
   {
@@ -491,7 +491,7 @@
     "Col": 10,
     "Type": "VIP",
     "Status": "Active",
-    "X": 568,
+    "X": 597,
     "Y": 270
   },
   {
@@ -500,7 +500,7 @@
     "Col": 11,
     "Type": "VIP",
     "Status": "Active",
-    "X": 626,
+    "X": 655,
     "Y": 270
   },
   {
@@ -509,7 +509,7 @@
     "Col": 12,
     "Type": "VIP",
     "Status": "Active",
-    "X": 684,
+    "X": 713,
     "Y": 270
   },
   {
@@ -518,7 +518,7 @@
     "Col": 13,
     "Type": "VIP",
     "Status": "Active",
-    "X": 742,
+    "X": 771,
     "Y": 270
   },
   {
@@ -527,7 +527,7 @@
     "Col": 14,
     "Type": "VIP",
     "Status": "Active",
-    "X": 800,
+    "X": 829,
     "Y": 270
   },
   {
@@ -536,7 +536,7 @@
     "Col": 15,
     "Type": "VIP",
     "Status": "Active",
-    "X": 858,
+    "X": 887,
     "Y": 270
   },
   {
@@ -545,7 +545,7 @@
     "Col": 1,
     "Type": "VIP",
     "Status": "Active",
-    "X": 46,
+    "X": 75,
     "Y": 330
   },
   {
@@ -554,7 +554,7 @@
     "Col": 2,
     "Type": "VIP",
     "Status": "Active",
-    "X": 104,
+    "X": 133,
     "Y": 330
   },
   {
@@ -563,7 +563,7 @@
     "Col": 3,
     "Type": "VIP",
     "Status": "Active",
-    "X": 162,
+    "X": 191,
     "Y": 330
   },
   {
@@ -572,7 +572,7 @@
     "Col": 4,
     "Type": "VIP",
     "Status": "Active",
-    "X": 220,
+    "X": 249,
     "Y": 330
   },
   {
@@ -581,7 +581,7 @@
     "Col": 5,
     "Type": "VIP",
     "Status": "Active",
-    "X": 278,
+    "X": 307,
     "Y": 330
   },
   {
@@ -590,7 +590,7 @@
     "Col": 6,
     "Type": "VIP",
     "Status": "Active",
-    "X": 336,
+    "X": 365,
     "Y": 330
   },
   {
@@ -599,7 +599,7 @@
     "Col": 7,
     "Type": "VIP",
     "Status": "Active",
-    "X": 394,
+    "X": 423,
     "Y": 330
   },
   {
@@ -608,7 +608,7 @@
     "Col": 8,
     "Type": "VIP",
     "Status": "Active",
-    "X": 452,
+    "X": 481,
     "Y": 330
   },
   {
@@ -617,7 +617,7 @@
     "Col": 9,
     "Type": "VIP",
     "Status": "Active",
-    "X": 510,
+    "X": 539,
     "Y": 330
   },
   {
@@ -626,7 +626,7 @@
     "Col": 10,
     "Type": "VIP",
     "Status": "Active",
-    "X": 568,
+    "X": 597,
     "Y": 330
   },
   {
@@ -635,7 +635,7 @@
     "Col": 11,
     "Type": "VIP",
     "Status": "Active",
-    "X": 626,
+    "X": 655,
     "Y": 330
   },
   {
@@ -644,7 +644,7 @@
     "Col": 12,
     "Type": "VIP",
     "Status": "Active",
-    "X": 684,
+    "X": 713,
     "Y": 330
   },
   {
@@ -653,7 +653,7 @@
     "Col": 13,
     "Type": "VIP",
     "Status": "Active",
-    "X": 742,
+    "X": 771,
     "Y": 330
   },
   {
@@ -662,7 +662,7 @@
     "Col": 14,
     "Type": "VIP",
     "Status": "Active",
-    "X": 800,
+    "X": 829,
     "Y": 330
   },
   {
@@ -671,7 +671,7 @@
     "Col": 15,
     "Type": "VIP",
     "Status": "Active",
-    "X": 858,
+    "X": 887,
     "Y": 330
   },
   {
@@ -817,23 +817,5 @@
     "Status": "Active",
     "X": 916,
     "Y": 390
-  },
-  {
-    "SeatId": "E16",
-    "Row": "E",
-    "Col": 16,
-    "Type": "VIP",
-    "Status": "Active",
-    "X": 916,
-    "Y": 330
-  },
-  {
-    "SeatId": "D16",
-    "Row": "D",
-    "Col": 16,
-    "Type": "VIP",
-    "Status": "Active",
-    "X": 916,
-    "Y": 270
   }
 ]

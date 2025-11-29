@@ -77,7 +77,7 @@ namespace UserApp
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.QuenMK;
-            btnDangNhap.Location = new Point(290, 35);
+            btnDangNhap.Location = new Point(307, 80);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnDangNhap.Size = new Size(197, 46);
@@ -100,7 +100,7 @@ namespace UserApp
             panelQMK.FillColor2 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor3 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelQMK.Location = new Point(271, 102);
+            panelQMK.Location = new Point(288, 147);
             panelQMK.Name = "panelQMK";
             panelQMK.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelQMK.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -122,10 +122,12 @@ namespace UserApp
             btnQuayLai.FocusedColor = Color.FromArgb(245, 131, 35);
             btnQuayLai.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnQuayLai.ForeColor = Color.FromArgb(245, 131, 35);
-            btnQuayLai.Location = new Point(46, 261);
+            btnQuayLai.Image = Properties.Resources.back_arrow;
+            btnQuayLai.ImageAlign = HorizontalAlignment.Left;
+            btnQuayLai.Location = new Point(44, 269);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnQuayLai.Size = new Size(270, 35);
+            btnQuayLai.Size = new Size(293, 35);
             btnQuayLai.TabIndex = 7;
             btnQuayLai.Text = "QUAY VỀ TRANG ĐĂNG NHẬP";
             btnQuayLai.TextAlign = HorizontalAlignment.Left;
@@ -151,7 +153,7 @@ namespace UserApp
             btnGui.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnGui.FillColor = Color.FromArgb(44, 84, 115);
             btnGui.FocusedColor = Color.FromArgb(245, 131, 35);
-            btnGui.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGui.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGui.ForeColor = Color.White;
             btnGui.Location = new Point(558, 261);
             btnGui.Name = "btnGui";
@@ -170,13 +172,13 @@ namespace UserApp
             lblyc.Name = "lblyc";
             lblyc.Size = new Size(652, 59);
             lblyc.TabIndex = 0;
-            lblyc.Text = "Vui lòng nhập địa chỉ email của bạn vào ô bên dưới.<br>Bạn sẽ nhận được một liên kết để thiết lập lại mật khẩu.";
+            lblyc.Text = "Vui lòng nhập địa chỉ email của bạn vào ô bên dưới.";
             // 
             // lblEmail
             // 
             lblEmail.BackColor = Color.Transparent;
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(58, 131);
+            lblEmail.Location = new Point(58, 109);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(60, 30);
             lblEmail.TabIndex = 2;
@@ -195,7 +197,7 @@ namespace UserApp
             txtEmail.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtEmail.ForeColor = Color.FromArgb(64, 64, 64);
             txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmail.Location = new Point(58, 169);
+            txtEmail.Location = new Point(58, 159);
             txtEmail.Margin = new Padding(3, 5, 3, 5);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "";

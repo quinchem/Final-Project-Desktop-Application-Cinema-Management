@@ -1,4 +1,4 @@
-﻿using AdminApp.Models;
+﻿using SharedData.Models;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminApp.Repositories
+namespace SharedData.Repositories
 {
     public class StaffRepo
     {
@@ -79,6 +79,30 @@ namespace AdminApp.Repositories
                     cmd.Parameters.AddWithValue("@staff_id", staff.staff_id);
 
                     return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool CheckEmailExist(string email)
+        {
+            // Dùng lại DatabaseHelper giống hệt hàm GetStaffById của bạn
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+
+                // Câu lệnh SQL đếm xem có bao nhiêu dòng có email trùng khớp
+                string sql = "SELECT COUNT(*) FROM Staff WHERE email = @email";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    // Truyền tham số để tránh lỗi SQL Injection
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    // ExecuteScalar trả về giá trị đầu tiên (số lượng đếm được)
+                    long count = (long)cmd.ExecuteScalar();
+
+                    // Nếu đếm được > 0 tức là email đã tồn tại
+                    return count > 0;
                 }
             }
         }

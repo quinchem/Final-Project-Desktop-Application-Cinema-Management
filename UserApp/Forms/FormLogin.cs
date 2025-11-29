@@ -1,30 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using UserApp.Models;
-using static UserApp.Repositories.CustomerRepo;
+using SharedData.Models;
+using SharedData.Repositories;
 
 namespace UserApp
 {
     public partial class FormLogin : Form
     {
+        private readonly AccountRepo AccountRepo = new AccountRepo();
+        private Guna.UI2.WinForms.Guna2Button currentButton;
+
         public FormLogin()
         {
             InitializeComponent();
-            this.Opacity = 0;
+            this.Opacity = 0;   // fade-in
+            this.KeyPreview = true;
+
+            ShowLogin();
         }
-        private Guna.UI2.WinForms.Guna2Button currentButton;
+        private Form currentChildForm;
+
+        public void OpenChildForm(Form child)
+        {
+            if (currentChildForm != null)
+                currentChildForm.Close();
+
+            currentChildForm = child;
+            child.TopLevel = false;
+            child.FormBorderStyle = FormBorderStyle.None;
+            child.Dock = DockStyle.Fill;
+
+            panelDangNhap.Visible = false;
+            panelDangKy.Visible = false;  // Xóa form cũ
+            panelLogin.Controls.Add(child);  // Chỉ chứa form con
+            panelLogin.Tag = child;
+
+            child.BringToFront();
+            child.Show();
+        }
+
+        // ================================
+        // Fade-in animation
+        // ================================
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            var t = new System.Windows.Forms.Timer();
             t.Interval = 10;
+
             t.Tick += (s, a) =>
             {
                 if (this.Opacity < 1)
@@ -32,8 +55,57 @@ namespace UserApp
                 else
                     t.Stop();
             };
+
             t.Start();
+            
         }
+
+        // ================================
+        // UI switching giữa Login/Register
+        // ================================
+        public void ShowLogin()
+        {
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+                panelLogin.Controls.Remove(currentChildForm);
+                currentChildForm = null;
+            }
+
+            panelDangNhap.Visible = true;
+            panelDangNhap.Enabled = true;
+            panelDangKy.Visible = false;
+
+            panelDangNhap.BringToFront();
+            if (btnDangNhap == null) return;
+            ActivateButton(btnDangNhap);
+
+        }
+
+        public void ShowRegister()
+        {
+            panelDangNhap.Visible = false;
+            panelDangKy.Visible = true;
+
+            panelDangKy.BringToFront();
+            if (btnDangKy == null) return;
+            ActivateButton(btnDangKy);
+        }
+
+
+       
+        private void btnDangKy_Click(object sender, EventArgs e)
+        {
+            ShowRegister();
+        }
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+            ShowLogin();
+        }
+
+        // ================================
+        // Button highlight
+        // ================================
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
             if (btn == null) return;
@@ -58,65 +130,12 @@ namespace UserApp
             currentButton.FillColor = Color.FromArgb(255, 128, 0);
             //currentButton.ForeColor = Color.FromArgb(255, 128, 0);
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
-        }
-        public void ShowLogin()
-        {
-            panelDangNhap.Visible = true;
-            panelDangKy.Visible = false;
-            panelDangNhap.BringToFront();
-            
-            if (btnDangNhap == null) return;
-            ActivateButton(btnDangNhap);
+
         }
 
-        public void ShowRegister()
-        {
-            panelDangNhap.Visible = false;
-            panelDangKy.Visible = true;
-            panelDangKy.BringToFront();
-
-            if (btnDangKy == null) return;
-            ActivateButton(btnDangKy);
-        }
-
-        private void btnDangNhap_Click(object sender, EventArgs e)
-        {
-            ShowLogin();
-            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
-            if (btn == null) return;
-            ActivateButton(btn);
-        }
-
-        private void btnDangKy_Click(object sender, EventArgs e)
-        {
-            ShowRegister();
-            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
-            if (btn == null) return;
-            ActivateButton(btn);
-        }
-        public void SwitchToLogin()
-        {
-            ShowLogin();
-        }
-
-        public void SwitchToRegister()
-        {
-            ShowRegister();
-        }
-        private UserMainForm parentForm;
-
-        public FormLogin(UserMainForm parent)
-        {
-            InitializeComponent();
-            parentForm = parent;
-        }
-
-        private void btnQuenMk_Click(object sender, EventArgs e)
-        {
-            parentForm.OpenChildForm(new FormForgetPassword(parentForm));
-        }
-
-
+        // ================================
+        // REGISTER VALIDATION
+        // ================================
         private bool ValidateRegistrationForm(out string msg)
         {
             msg = "";
@@ -127,52 +146,39 @@ namespace UserApp
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtEmailDK.Text) || !txtEmailDK.Text.Contains("@"))
+            if (!txtEmailDK.Text.Contains("@"))
             {
                 msg = "Email không hợp lệ.";
                 return false;
             }
 
-            string phone = txtSDT.Text?.Trim() ?? "";
-            if (string.IsNullOrWhiteSpace(phone) || !System.Text.RegularExpressions.Regex.IsMatch(phone, @"^\d{10}$"))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtSDT.Text ?? "", @"^\d{10}$"))
             {
-                msg = "Số điện thoại phải gồm đúng 10 chữ số (ví dụ: 0123456789).";
+                msg = "Số điện thoại phải gồm 10 chữ số.";
                 return false;
             }
 
-            string password = txtPassDK.Text ?? "";
-            string confirm = txtPassCF.Text ?? "";
-            if (string.IsNullOrWhiteSpace(password))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtPassDK.Text, @"^(?=.*[A-Z])(?=.*\W).{8,}$"))
             {
-                msg = "Vui lòng nhập mật khẩu.";
+                msg = "Mật khẩu phải có chữ hoa + ký tự đặc biệt và >= 8 ký tự.";
                 return false;
             }
 
-            // mật khẩu tối thiểu 8 ký tự, ít nhất 1 ký tự hoa và 1 ký tự đặc biệt
-            var pwdPattern = new System.Text.RegularExpressions.Regex(@"^(?=.*[A-Z])(?=.*\W).{8,}$");
-            if (!pwdPattern.IsMatch(password))
+            if (txtPassDK.Text != txtPassCF.Text)
             {
-                msg = "Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất 1 chữ hoa và 1 ký tự đặc biệt.";
+                msg = "Mật khẩu xác nhận không khớp.";
                 return false;
             }
 
-            if (password != confirm)
-            {
-                msg = "Xác nhận mật khẩu không khớp.";
-                return false;
-            }
-
-            // ngày sinh không được ở tương lai
             if (dtpNgaySinh.Value.Date > DateTime.Today)
             {
                 msg = "Ngày sinh không hợp lệ.";
                 return false;
             }
 
-            // optional: check terms checkbox
             if (!chkDieuKhoan.Checked)
             {
-                msg = "Bạn phải chấp nhận điều khoản để đăng ký.";
+                msg = "Bạn phải đồng ý điều khoản.";
                 return false;
             }
 
@@ -180,7 +186,7 @@ namespace UserApp
         }
 
         // ================================
-        // INSERT NEW ACCOUNT (calls AccountRepo.Register which handles hashing & transaction)
+        // REGISTER new account
         // ================================
         private bool InsertNewAccount(out string message)
         {
@@ -188,32 +194,26 @@ namespace UserApp
 
             try
             {
-                // Build Customer (dates as strings)
                 var customer = new Customer
                 {
-                    // CustomerId will be generated in repository
                     full_name = txtHoTen.Text.Trim(),
                     date_of_birth = dtpNgaySinh.Value.ToString("dd/MM/yyyy"),
                     gender = radNam.Checked ? "Nam" : "Nữ",
                     address = txtDiachi.Text.Trim(),
-                    email = txtEmailDK.Text.Trim(),
+                    email = txtEmailDK.Text.Trim(),   // EMAIL -> lưu vào customer.email
                     phone_number = txtSDT.Text.Trim(),
-                    create_date = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")
+                    create_date = DateTime.UtcNow.ToString("HH:mm:ss dd-MM-yyyy")
                 };
 
-                // Build Account (use email as username if you don't have a username field)
                 var account = new Account
                 {
-                    // AccountId will be generated in repository
-                    username = txtEmailDK.Text.Trim(),
-                    password = txtPassDK.Text, // pass plaintext — AccountRepo.Register will hash
-                    role_account = "customer", // default role
-                    staff_id = null // no staff
+                    username = txtEmailDK.Text.Trim(),  // USERNAME = EMAIL
+                    password = txtPassDK.Text,
+                    role_account = "Khách hàng",
+                    staff_id = null
                 };
 
-                // Call repository register (which does transaction, duplication checks, hashing)
-                bool ok = AccountRepo.Register(customer, account, out message);
-                return ok;
+                return AccountRepo.Register(customer, account, out message);
             }
             catch (Exception ex)
             {
@@ -221,10 +221,8 @@ namespace UserApp
                 return false;
             }
         }
+   
 
-        // ================================
-        // REGISTER BUTTON CLICK
-        // ================================
         private void btnminiDK_Click(object sender, EventArgs e)
         {
             if (!ValidateRegistrationForm(out string validateMsg))
@@ -233,62 +231,113 @@ namespace UserApp
                 return;
             }
 
-            bool ok = InsertNewAccount(out string msg);
-            if (ok)
+            if (InsertNewAccount(out string msg))
             {
-                MessageBox.Show("Đăng ký thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ShowLogin();  // về lại login
+                MessageBox.Show("Đăng ký thành công!", "Thành công",
+                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                ShowLogin();
                 ClearRegisterFields();
             }
             else
             {
-                MessageBox.Show("Đăng ký thất bại: " + msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Đăng ký thất bại: " + msg, "Lỗi",
+                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void ClearRegisterFields()
         {
-            try
-            {
-                txtHoTen.Text = "";
-                dtpNgaySinh.Value = DateTime.Now;
-                radNam.Checked = false;
-                radNu.Checked = false;
-                txtDiachi.Text = "";
-                txtEmailDK.Text = "";
-                txtSDT.Text = "";
-                txtPassDK.Text = "";
-                txtPassCF.Text = "";
-                chkDieuKhoan.Checked = false;
-            }
-            catch
-            {
-                // ignore if some control not found
-            }
+            txtHoTen.Text = "";
+            txtEmailDK.Text = "";
+            txtSDT.Text = "";
+            txtPassDK.Text = "";
+            txtPassCF.Text = "";
+            txtDiachi.Text = "";
+            radNam.Checked = false;
+            radNu.Checked = false;
+            chkDieuKhoan.Checked = false;
+            dtpNgaySinh.Value = DateTime.Now;
         }
 
+        // ================================
+        // LOGIN
+        // ================================
         private void btnMiniDN_Click(object sender, EventArgs e)
         {
-            string username = txtEmailDN.Text.Trim();
+            string email = txtEmailDN.Text.Trim();
             string password = txtPassDN.Text;
 
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Vui lòng nhập username và password.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập email và mật khẩu.",
+                                 "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (AccountRepo.Login(username, password, out Customer customer, out string msg))
+            if (AccountRepo.Login(email, password, out Customer customer, out string msg))
             {
-                MessageBox.Show($"Đăng nhập thành công! Xin chào {customer.full_name}", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Đăng nhập thành công! Xin chào {customer.full_name}",
+                                 "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // TODO: mở form chính hoặc lưu thông tin user đã đăng nhập
-                parentForm?.SetCurrentUser(customer);
-                this.Close(); // đóng form login
+                // MỞ MAIN FORM
+                // Lưu ý: Cần đảm bảo class UserMainForm có tồn tại và constructor nhận đối tượng Customer
+                UserMainForm main = new UserMainForm(customer);
+                main.Show();
+
+                // ẨN LOGIN FORM 
+                this.Hide();
+
+                // Khi MAIN FORM đóng → đóng luôn LOGIN FORM → app tắt đúng cách
+                main.FormClosed += (s, args) => this.Close();
             }
             else
             {
-                MessageBox.Show("Đăng nhập thất bại: " + msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Đăng nhập thất bại: " + msg,
+                                 "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnQuenMk_Click(object sender, EventArgs e)
+        {
+            panelDangNhap.Visible = false;
+            panelDangNhap.Enabled = false;
+
+            OpenChildForm(new FormForgetPassword(this));
+        }
+
+        private void FormLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (panelDangNhap.Visible)
+                {
+                    btnMiniDN.PerformClick(); // ENTER -> Đăng nhập
+                }
+                else if (panelDangKy.Visible)
+                {
+                    btnminiDK.PerformClick(); // ENTER -> Đăng ký
+                }
+            }
+        }
+
+      
+        private void guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+            if (txtPassDN.UseSystemPasswordChar == true)
+            {
+                // Hiện lên + Đổi ảnh mở
+                txtPassDN.UseSystemPasswordChar = false;
+                txtPassDN.PasswordChar = '\0';
+                guna2PictureBox1.Image = Properties.Resources.view;
+            }
+            else
+            {
+                // Ẩn đi + Đổi ảnh đóng
+                txtPassDN.UseSystemPasswordChar = true;
+
+                // Đổi ảnh đóng ở đây
+                guna2PictureBox1.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
             }
         }
     }

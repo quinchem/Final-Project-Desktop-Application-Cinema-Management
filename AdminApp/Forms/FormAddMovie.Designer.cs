@@ -511,6 +511,7 @@
             picPoster.Location = new Point(354, 384);
             picPoster.Name = "picPoster";
             picPoster.Size = new Size(135, 200);
+            picPoster.SizeMode = PictureBoxSizeMode.Zoom;
             picPoster.TabIndex = 25;
             picPoster.TabStop = false;
             // 
@@ -531,6 +532,7 @@
             btnUpPoster.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btnUpPoster.Size = new Size(43, 26);
             btnUpPoster.TabIndex = 26;
+            btnUpPoster.Click += btnUploadImage_Click;
             // 
             // btnThemPhim
             // 
@@ -600,8 +602,6 @@
             // 
             // FormAddMovie
             // 
-
-
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;

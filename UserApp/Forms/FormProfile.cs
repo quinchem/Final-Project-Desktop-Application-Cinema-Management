@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UserApp.Models;
+using SharedData.Models;
+using SharedData.Repositories;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace UserApp
@@ -19,7 +21,7 @@ namespace UserApp
         {
             InitializeComponent();
         }
-        
+
 
         // Hàm load UserControl vào panelContainer
         private void LoadUserControl(UserControl uc)
@@ -63,19 +65,27 @@ namespace UserApp
             }
 
             // Tạo instance HistoryTicket với customerId
-            HistoryTicket HistoryTicket = new HistoryTicket(currentUser.customer_id);
-            //HistoryTicket HistoryTicket = new HistoryTicket("C001");
+            //HistoryTicket HistoryTicket = new HistoryTicket(currentUser.customer_id);
+            HistoryTicket HistoryTicket = new HistoryTicket("C001");
 
             HistoryTicket.OnViewBillDetail += (billId) =>
             {
-                // Khi click "Xem", load HistoryDetail vào panel
-                HistoryTicketDetail detailUC = new HistoryTicketDetail (billId);
+                // Khi bấm "Xem" → Hiển thị UserControl Chi Tiết
+                HistoryTicketDetail detailUC = new HistoryTicketDetail(billId);
+
+                // Đăng ký event "Quay lại"
+                detailUC.BackToHistory += (s, e) =>
+                {
+                    // Khi bấm "Quay lại" → Quay về UserControl Lịch Sử Vé
+                    LoadUserControl(HistoryTicket);
+                };
+
+                // Load UserControl Chi Tiết
                 LoadUserControl(detailUC);
             };
 
-            // Load vào panelContent
+            // Load UserControl Lịch Sử Vé lần đầu
             LoadUserControl(HistoryTicket);
         }
-
     }
 }

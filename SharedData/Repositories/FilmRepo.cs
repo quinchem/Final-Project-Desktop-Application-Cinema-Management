@@ -2,6 +2,7 @@
 using SharedData.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,6 @@ namespace SharedData.Repositories
             {
                 conn.Open();
                 string sql = "SELECT * FROM movie";
-
                 using (var cmd = new SqliteCommand(sql, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -103,37 +103,34 @@ namespace SharedData.Repositories
         }
 
         // ---- Lấy suất chiếu theo phim ----
-        public List<Showtime> GetShowByFilm(string filmId)
+        public List<Film> GetCurrentlyShowingFilms()
         {
-            List<Showtime> shows = new List<Showtime>();
+            var allFilms = GetAllFilms();
+            DateTime today = DateTime.Today;
 
-            using (var conn = DatabaseHelper.GetConnection())
-            {
-                conn.Open();
-                string sql = "SELECT * FROM showtime WHERE movie_id = @id";
-
-                using (var cmd = new SqliteCommand(sql, conn))
+            var showingFilms = allFilms
+                .Where(film =>
                 {
-                    cmd.Parameters.AddWithValue("@id", filmId);
+                    // Chỉ lấy phim active (nếu muốn)
+                    if (!string.Equals(film.status, "active", StringComparison.OrdinalIgnoreCase))
+                        return false;
 
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            shows.Add(new Showtime
-                            {
-                                showtime_id = reader["showtime_id"].ToString(),
-                                movie_id = reader["movie_id"].ToString(),
-                                auditorium_id = reader["auditorium_id"].ToString(),
-                                show_date = reader["show_date"].ToString(),
-                                start_time = reader["start_time"].ToString(),
-                                end_time = reader["end_time"].ToString()
-                            });
-                        }
-                    }
-                }
-            }
-            return shows;
+                    // Parse release_date
+                    DateTime release;
+                    string[] formats = { "yyyy-MM-dd", "dd/MM/yyyy" }; // hỗ trợ 2 format phổ biến
+                    bool parsed = DateTime.TryParseExact(
+                        film.release_date,
+                        formats,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out release
+                    );
+
+                    return parsed && release <= today; // chỉ lấy phim đã chiếu
+                })
+                .ToList();
+
+            return showingFilms;
         }
 
         public Film GetById(string id)
@@ -194,6 +191,44 @@ namespace SharedData.Repositories
         }
 
 
+
+        // Hàm lấy tất cả phim đã chiếu
+        public List<Film> GetCurrentlyShowingFilms1()
+        {
+            var allFilms = GetAllFilms();
+            DateTime today = DateTime.Today;
+            List<Film> showingFilms = new List<Film>();
+
+            foreach (var film in allFilms)
+            {
+                DateTime release;
+
+                // thử parse với nhiều format phổ biến
+                bool parsed = DateTime.TryParseExact(
+                    film.release_date,
+                    new string[] { "yyyy-MM-dd", "dd/MM/yyyy", "MM/dd/yyyy" },
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out release
+                );
+
+                if (!parsed)
+                {
+                    // Nếu parse fail, thử DateTime.TryParse bình thường
+                    parsed = DateTime.TryParse(film.release_date, out release);
+                }
+
+                if (!parsed)
+                    continue; // bỏ phim không parse được
+
+                if (release <= today)
+                    showingFilms.Add(film); // chỉ lấy phim đã chiếu
+            }
+
+            return showingFilms;
+        }
+
+
         public void UpdateFilm(Film film)
         {
             using var conn = DatabaseHelper.GetConnection();
@@ -222,6 +257,7 @@ namespace SharedData.Repositories
 
             cmd.ExecuteNonQuery();
         }
+
 
 
         // ----------- HÀM MAP DỮ LIỆU -----------

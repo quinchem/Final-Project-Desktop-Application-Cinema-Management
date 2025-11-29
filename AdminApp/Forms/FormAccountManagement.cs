@@ -1,5 +1,4 @@
-﻿using AdminApp.Models;
-using AdminApp.Repositories;
+﻿using SharedData.Models;
 using SharedData.Repositories;
 using System;
 using System.Windows.Forms;
@@ -19,8 +18,7 @@ namespace AdminApp
         {
             InitializeComponent();
             _staff_id = staff_id;
-
-            SetReadOnly(true);
+            SetLockControls(true);
             LoadStaffInfo();
         }
 
@@ -58,14 +56,22 @@ namespace AdminApp
         }
 
 
-        private void SetReadOnly(bool value)
+        private void SetLockControls(bool isLocked)
         {
-            txtHoTen.ReadOnly = value;
-            txtNgaySinh.ReadOnly = value;
-            txtGioiTinh.ReadOnly = value;
-            txtEmail.ReadOnly = value;
-            txtSDT.ReadOnly = value;
-            txtChucVu.ReadOnly = true;
+            // Thông tin cá nhân
+            txtHoTen.Enabled = !isLocked;
+            txtNgaySinh.Enabled = !isLocked;
+            txtGioiTinh.Enabled = !isLocked;
+            txtEmail.Enabled = !isLocked;
+            txtSDT.Enabled = !isLocked;
+
+            // Chức vụ luôn khóa
+            txtChucVu.Enabled = false;
+
+            // 🔐 MẬT KHẨU – KHÓA HOÀN TOÀN
+            txtMKcu.Enabled = !isLocked;
+            txtMKmoi.Enabled = !isLocked;
+            txtNhapLaiMK.Enabled = !isLocked;
         }
         private void btnChinhSua_Click(object sender, EventArgs e)
         {

@@ -61,7 +61,7 @@
             txtMoTa = new Guna.UI2.WinForms.Guna2TextBox();
             btnThemPhim = new Guna.UI2.WinForms.Guna2Button();
             btnUpPoster = new Guna.UI2.WinForms.Guna2Button();
-            pBPoster = new PictureBox();
+            picPoster = new PictureBox();
             cboTrangThai = new Guna.UI2.WinForms.Guna2ComboBox();
             cboDoTuoi = new Guna.UI2.WinForms.Guna2ComboBox();
             dtNgayChieu = new Guna.UI2.WinForms.Guna2DateTimePicker();
@@ -86,7 +86,7 @@
             txtTenPhim = new Guna.UI2.WinForms.Guna2TextBox();
             btnClose = new Guna.UI2.WinForms.Guna2Button();
             guna2ShadowPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pBPoster).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picPoster).BeginInit();
             SuspendLayout();
             // 
             // guna2ShadowPanel1
@@ -177,14 +177,16 @@
             btnUpPoster.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnUpPoster.Size = new Size(43, 26);
             btnUpPoster.TabIndex = 52;
+            btnUpPoster.Click += btnUploadPoster_Click;
             // 
-            // pBPoster
+            // picPoster
             // 
-            pBPoster.Location = new Point(354, 389);
-            pBPoster.Name = "pBPoster";
-            pBPoster.Size = new Size(135, 200);
-            pBPoster.TabIndex = 51;
-            pBPoster.TabStop = false;
+            picPoster.Location = new Point(354, 389);
+            picPoster.Name = "picPoster";
+            picPoster.Size = new Size(135, 200);
+            picPoster.SizeMode = PictureBoxSizeMode.Zoom;
+            picPoster.TabIndex = 51;
+            picPoster.TabStop = false;
             // 
             // cboTrangThai
             // 
@@ -610,7 +612,7 @@
             Controls.Add(txtMoTa);
             Controls.Add(btnThemPhim);
             Controls.Add(btnUpPoster);
-            Controls.Add(pBPoster);
+            Controls.Add(picPoster);
             Controls.Add(cboTrangThai);
             Controls.Add(cboDoTuoi);
             Controls.Add(dtNgayChieu);
@@ -638,7 +640,7 @@
             Text = "FormEditMovie";
             guna2ShadowPanel1.ResumeLayout(false);
             guna2ShadowPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pBPoster).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picPoster).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -650,7 +652,7 @@
         private Guna.UI2.WinForms.Guna2TextBox txtMoTa;
         private Guna.UI2.WinForms.Guna2Button btnThemPhim;
         private Guna.UI2.WinForms.Guna2Button btnUpPoster;
-        private PictureBox pBPoster;
+        private PictureBox picPoster;
         private Guna.UI2.WinForms.Guna2ComboBox cboTrangThai;
         private Guna.UI2.WinForms.Guna2ComboBox cboDoTuoi;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtNgayChieu;

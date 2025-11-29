@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using UserApp.Models;
+using SharedData.Models;
 
 namespace UserApp
 {
@@ -110,7 +110,7 @@ namespace UserApp
 
             try
             {
-                using (var conn = DatabaseHelper2.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
 
