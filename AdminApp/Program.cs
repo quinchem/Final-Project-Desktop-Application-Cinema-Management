@@ -10,7 +10,7 @@
             // demo – sau này bạn lấy từ form login
             string staff_id = "S01";
 
-            Application.Run(new FormStatistics1());
+            Application.Run(new FormStatistics3());
         }
     }
 }
