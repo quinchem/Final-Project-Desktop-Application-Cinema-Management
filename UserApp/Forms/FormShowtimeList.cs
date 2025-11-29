@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace UserApp
 {
@@ -17,6 +18,7 @@ namespace UserApp
         private ShowtimeRepo repo = new ShowtimeRepo();
         private ImageRepo _imageRepo = new ImageRepo();
         private List<ShowtimeInfo> currentShowtimes;
+        private UserMainForm parentForm;
 
         private DateTime currentStartDate;
         private DateTime selectedDate;
@@ -25,9 +27,10 @@ namespace UserApp
         private Guna2Panel _selectedPanel = null;
 
         // --- KHỞI TẠO ---
-        public FormShowtimeList()
+        public FormShowtimeList(UserMainForm parent)
         {
             InitializeComponent();
+            parentForm = parent;
 
             // 1. Cấu hình Panel chứa phim
             InitializeFlowLayoutPanel();
@@ -442,23 +445,22 @@ namespace UserApp
                 _selectedPanel = clickedPanel;
                 _selectedShowtime = info;
             }
+            string showtimeId = _selectedShowtime.showtime_id;
+            string auditoriumId = _selectedShowtime.auditorium_id;
+
         }
 
         private void btnChonCho_Click(object sender, EventArgs e)
         {
             if (_selectedShowtime == null)
             {
-                MessageBox.Show("Vui lòng chọn suất chiếu trước khi tiếp tục!", "Chưa chọn",
+                MessageBox.Show("Vui lòng chọn suất chiếu trước!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Mở form chọn ghế
-            //var frm = new FormSeatSelection(_selectedShowtime); // Đảm bảo FormSeatSelection nhận tham số
-            var frm = new FormSeatSelection();
-            this.Hide();
-            frm.ShowDialog();
-            this.Show();
+            parentForm.OpenChildForm(new FormSeatSelection(_selectedShowtime));
+
         }
     }
 }

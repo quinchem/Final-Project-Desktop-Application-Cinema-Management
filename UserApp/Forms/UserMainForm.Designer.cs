@@ -1632,6 +1632,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1200, 703);
             Controls.Add(mainpanel);
+            IsMdiContainer = true;
             Name = "UserMainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Trang chủ";
