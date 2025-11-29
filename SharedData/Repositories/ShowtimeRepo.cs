@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace SharedData.Repositories
 {
@@ -272,10 +273,57 @@ namespace SharedData.Repositories
             }
         }
         // Thêm vào ShowtimeRepo.cs
+        private static string GenerateNextShowtimeId()
+        {
+            int maxNum = 0;
 
-        // INSERT
+            using (var conn = new SqliteConnection(connStr))
+            {
+                conn.Open();
+                string query = "SELECT showtime_id FROM showtime";
+
+                using (var cmd = new SqliteCommand(query, conn))
+                using (var rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        var idRaw = rd["showtime_id"]?.ToString();
+                        if (string.IsNullOrWhiteSpace(idRaw)) continue;
+
+                        var id = idRaw.Trim();
+
+                        // Chỉ xét các id có prefix T hoặc t, theo mẫu T123
+                        var m = Regex.Match(id, @"^[Tt](\d+)$");
+                        if (m.Success && int.TryParse(m.Groups[1].Value, out int num))
+                        {
+                            if (num > maxNum) maxNum = num;
+                        }
+                    }
+                }
+            }
+
+            int next = maxNum + 1;
+            return "T" + next.ToString("D3"); // T001, T002...
+        }
+        // INSERT 
         public static void Insert(Showtime showtime)
         {
+            if (!string.IsNullOrWhiteSpace(showtime.showtime_id))
+            {
+                showtime.showtime_id = showtime.showtime_id.Trim().ToUpper();
+
+                // Nếu format không hợp lệ (không giống T + số), thì bỏ và tự sinh
+                if (!Regex.IsMatch(showtime.showtime_id, @"^[T]\d+$"))
+                {
+                    showtime.showtime_id = null;
+                }
+            }
+
+            // Nếu vẫn rỗng => tự sinh
+            if (string.IsNullOrWhiteSpace(showtime.showtime_id))
+            {
+                showtime.showtime_id = GenerateNextShowtimeId();
+            }
             using (var conn = new SqliteConnection(connStr))
             {
                 conn.Open();
@@ -290,8 +338,17 @@ namespace SharedData.Repositories
                     cmd.Parameters.AddWithValue("@date", showtime.show_date);
                     cmd.Parameters.AddWithValue("@start", showtime.start_time);
                     cmd.Parameters.AddWithValue("@end", showtime.end_time);
-
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (SqliteException ex) when (ex.SqliteErrorCode == 19) // UNIQUE constraint failed
+                    {
+                        // Nếu bị trùng do race condition, thử lại với id mới (simple retry)
+                        showtime.showtime_id = GenerateNextShowtimeId();
+                        cmd.Parameters["@id"].Value = showtime.showtime_id;
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
         }
