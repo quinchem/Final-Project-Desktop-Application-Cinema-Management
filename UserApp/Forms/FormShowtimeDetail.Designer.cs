@@ -41,22 +41,20 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            btnSun = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnSat = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnFri = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnThu = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnWed = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnTue = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnMon = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CircleButton9 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CircleButton8 = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2CircleButton7 = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2CircleButton6 = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2CircleButton5 = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2CircleButton4 = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2CircleButton3 = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -64,20 +62,14 @@
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
+            cboMonth = new Guna.UI2.WinForms.Guna2ComboBox();
             lblNgayChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblLichChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblSuatchieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblLoaiphong = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            rad2D = new Guna.UI2.WinForms.Guna2RadioButton();
-            rad3D = new Guna.UI2.WinForms.Guna2RadioButton();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            flpShowtimes = new FlowLayoutPanel();
+            lblSuatchieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CustomGradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             guna2CustomGradientPanel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -86,15 +78,15 @@
             guna2CustomGradientPanel1.BackColor = Color.Transparent;
             guna2CustomGradientPanel1.BorderColor = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel1.BorderRadius = 15;
+            guna2CustomGradientPanel1.Controls.Add(btnSun);
+            guna2CustomGradientPanel1.Controls.Add(btnSat);
+            guna2CustomGradientPanel1.Controls.Add(btnFri);
+            guna2CustomGradientPanel1.Controls.Add(btnThu);
+            guna2CustomGradientPanel1.Controls.Add(btnWed);
+            guna2CustomGradientPanel1.Controls.Add(btnTue);
+            guna2CustomGradientPanel1.Controls.Add(btnMon);
             guna2CustomGradientPanel1.Controls.Add(guna2CircleButton9);
             guna2CustomGradientPanel1.Controls.Add(guna2CircleButton8);
-            guna2CustomGradientPanel1.Controls.Add(guna2CircleButton7);
-            guna2CustomGradientPanel1.Controls.Add(guna2CircleButton6);
-            guna2CustomGradientPanel1.Controls.Add(guna2CircleButton5);
-            guna2CustomGradientPanel1.Controls.Add(guna2CircleButton4);
-            guna2CustomGradientPanel1.Controls.Add(guna2CircleButton3);
-            guna2CustomGradientPanel1.Controls.Add(guna2CircleButton2);
-            guna2CustomGradientPanel1.Controls.Add(guna2CircleButton1);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel7);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel6);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel5);
@@ -102,7 +94,7 @@
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel3);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel2);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel1);
-            guna2CustomGradientPanel1.Controls.Add(guna2ComboBox1);
+            guna2CustomGradientPanel1.Controls.Add(cboMonth);
             guna2CustomGradientPanel1.Controls.Add(lblNgayChieu);
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges12;
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(236, 230, 224);
@@ -116,8 +108,134 @@
             guna2CustomGradientPanel1.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel1.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel1.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel1.Size = new Size(943, 186);
+            guna2CustomGradientPanel1.Size = new Size(954, 193);
             guna2CustomGradientPanel1.TabIndex = 15;
+            // 
+            // btnSun
+            // 
+            btnSun.DisabledState.BorderColor = Color.DarkGray;
+            btnSun.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSun.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSun.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSun.FillColor = Color.FromArgb(236, 230, 224);
+            btnSun.Font = new Font("Segoe UI", 9F);
+            btnSun.ForeColor = Color.Black;
+            btnSun.Location = new Point(773, 109);
+            btnSun.Margin = new Padding(2);
+            btnSun.Name = "btnSun";
+            btnSun.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            btnSun.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnSun.Size = new Size(51, 49);
+            btnSun.TabIndex = 36;
+            btnSun.Text = "dd";
+            // 
+            // btnSat
+            // 
+            btnSat.DisabledState.BorderColor = Color.DarkGray;
+            btnSat.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSat.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSat.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSat.FillColor = Color.FromArgb(236, 230, 224);
+            btnSat.Font = new Font("Segoe UI", 9F);
+            btnSat.ForeColor = Color.Black;
+            btnSat.Location = new Point(658, 109);
+            btnSat.Margin = new Padding(2);
+            btnSat.Name = "btnSat";
+            btnSat.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnSat.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnSat.Size = new Size(51, 49);
+            btnSat.TabIndex = 35;
+            btnSat.Text = "dd";
+            // 
+            // btnFri
+            // 
+            btnFri.DisabledState.BorderColor = Color.DarkGray;
+            btnFri.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnFri.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnFri.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnFri.FillColor = Color.FromArgb(236, 230, 224);
+            btnFri.Font = new Font("Segoe UI", 9F);
+            btnFri.ForeColor = Color.Black;
+            btnFri.Location = new Point(556, 109);
+            btnFri.Margin = new Padding(2);
+            btnFri.Name = "btnFri";
+            btnFri.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            btnFri.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnFri.Size = new Size(51, 49);
+            btnFri.TabIndex = 34;
+            btnFri.Text = "dd";
+            // 
+            // btnThu
+            // 
+            btnThu.DisabledState.BorderColor = Color.DarkGray;
+            btnThu.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnThu.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnThu.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnThu.FillColor = Color.FromArgb(236, 230, 224);
+            btnThu.Font = new Font("Segoe UI", 9F);
+            btnThu.ForeColor = Color.Black;
+            btnThu.Location = new Point(448, 109);
+            btnThu.Margin = new Padding(2);
+            btnThu.Name = "btnThu";
+            btnThu.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnThu.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnThu.Size = new Size(51, 49);
+            btnThu.TabIndex = 33;
+            btnThu.Text = "dd";
+            // 
+            // btnWed
+            // 
+            btnWed.DisabledState.BorderColor = Color.DarkGray;
+            btnWed.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnWed.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnWed.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnWed.FillColor = Color.FromArgb(236, 230, 224);
+            btnWed.Font = new Font("Segoe UI", 9F);
+            btnWed.ForeColor = Color.Black;
+            btnWed.Location = new Point(351, 109);
+            btnWed.Margin = new Padding(2);
+            btnWed.Name = "btnWed";
+            btnWed.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            btnWed.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnWed.Size = new Size(51, 49);
+            btnWed.TabIndex = 32;
+            btnWed.Text = "dd";
+            // 
+            // btnTue
+            // 
+            btnTue.DisabledState.BorderColor = Color.DarkGray;
+            btnTue.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnTue.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnTue.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnTue.FillColor = Color.FromArgb(236, 230, 224);
+            btnTue.Font = new Font("Segoe UI", 9F);
+            btnTue.ForeColor = Color.Black;
+            btnTue.Location = new Point(250, 109);
+            btnTue.Margin = new Padding(2);
+            btnTue.Name = "btnTue";
+            btnTue.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnTue.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnTue.Size = new Size(51, 49);
+            btnTue.TabIndex = 31;
+            btnTue.Text = "dd";
+            // 
+            // btnMon
+            // 
+            btnMon.DisabledState.BorderColor = Color.DarkGray;
+            btnMon.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnMon.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnMon.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnMon.FillColor = Color.FromArgb(236, 230, 224);
+            btnMon.Font = new Font("Segoe UI", 9F);
+            btnMon.ForeColor = Color.Black;
+            btnMon.Location = new Point(144, 109);
+            btnMon.Margin = new Padding(2);
+            btnMon.Name = "btnMon";
+            btnMon.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            btnMon.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            btnMon.Size = new Size(51, 49);
+            btnMon.TabIndex = 30;
+            btnMon.Text = "dd";
             // 
             // guna2CircleButton9
             // 
@@ -130,13 +248,14 @@
             guna2CircleButton9.ForeColor = Color.Black;
             guna2CircleButton9.Image = Properties.Resources.left_arrow;
             guna2CircleButton9.ImageSize = new Size(40, 40);
-            guna2CircleButton9.Location = new Point(71, 102);
-            guna2CircleButton9.Margin = new Padding(2, 2, 2, 2);
+            guna2CircleButton9.Location = new Point(75, 117);
+            guna2CircleButton9.Margin = new Padding(2);
             guna2CircleButton9.Name = "guna2CircleButton9";
-            guna2CircleButton9.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            guna2CircleButton9.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2CircleButton9.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CircleButton9.Size = new Size(39, 38);
             guna2CircleButton9.TabIndex = 23;
+            guna2CircleButton9.Click += btnPrevWeek_Click;
             // 
             // guna2CircleButton8
             // 
@@ -149,145 +268,20 @@
             guna2CircleButton8.ForeColor = Color.Black;
             guna2CircleButton8.Image = Properties.Resources.right_arrow;
             guna2CircleButton8.ImageSize = new Size(40, 40);
-            guna2CircleButton8.Location = new Point(860, 102);
-            guna2CircleButton8.Margin = new Padding(2, 2, 2, 2);
+            guna2CircleButton8.Location = new Point(862, 117);
+            guna2CircleButton8.Margin = new Padding(2);
             guna2CircleButton8.Name = "guna2CircleButton8";
-            guna2CircleButton8.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2CircleButton8.ShadowDecoration.CustomizableEdges = customizableEdges9;
             guna2CircleButton8.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CircleButton8.Size = new Size(39, 38);
             guna2CircleButton8.TabIndex = 22;
-            // 
-            // guna2CircleButton7
-            // 
-            guna2CircleButton7.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton7.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton7.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton7.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton7.FillColor = Color.FromArgb(236, 230, 224);
-            guna2CircleButton7.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton7.ForeColor = Color.Black;
-            guna2CircleButton7.Location = new Point(769, 115);
-            guna2CircleButton7.Margin = new Padding(2, 2, 2, 2);
-            guna2CircleButton7.Name = "guna2CircleButton7";
-            guna2CircleButton7.ShadowDecoration.CustomizableEdges = customizableEdges3;
-            guna2CircleButton7.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton7.Size = new Size(39, 38);
-            guna2CircleButton7.TabIndex = 21;
-            guna2CircleButton7.Text = "dd";
-            // 
-            // guna2CircleButton6
-            // 
-            guna2CircleButton6.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton6.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton6.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton6.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton6.FillColor = Color.FromArgb(236, 230, 224);
-            guna2CircleButton6.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton6.ForeColor = Color.Black;
-            guna2CircleButton6.Location = new Point(658, 115);
-            guna2CircleButton6.Margin = new Padding(2, 2, 2, 2);
-            guna2CircleButton6.Name = "guna2CircleButton6";
-            guna2CircleButton6.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2CircleButton6.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton6.Size = new Size(40, 38);
-            guna2CircleButton6.TabIndex = 20;
-            guna2CircleButton6.Text = "dd";
-            // 
-            // guna2CircleButton5
-            // 
-            guna2CircleButton5.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton5.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton5.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton5.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton5.FillColor = Color.FromArgb(236, 230, 224);
-            guna2CircleButton5.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton5.ForeColor = Color.Black;
-            guna2CircleButton5.Location = new Point(546, 115);
-            guna2CircleButton5.Margin = new Padding(2, 2, 2, 2);
-            guna2CircleButton5.Name = "guna2CircleButton5";
-            guna2CircleButton5.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            guna2CircleButton5.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton5.Size = new Size(40, 38);
-            guna2CircleButton5.TabIndex = 19;
-            guna2CircleButton5.Text = "dd";
-            // 
-            // guna2CircleButton4
-            // 
-            guna2CircleButton4.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton4.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton4.FillColor = Color.FromArgb(236, 230, 224);
-            guna2CircleButton4.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton4.ForeColor = Color.Black;
-            guna2CircleButton4.Location = new Point(449, 115);
-            guna2CircleButton4.Margin = new Padding(2, 2, 2, 2);
-            guna2CircleButton4.Name = "guna2CircleButton4";
-            guna2CircleButton4.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2CircleButton4.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton4.Size = new Size(40, 38);
-            guna2CircleButton4.TabIndex = 18;
-            guna2CircleButton4.Text = "dd";
-            // 
-            // guna2CircleButton3
-            // 
-            guna2CircleButton3.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton3.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton3.FillColor = Color.FromArgb(236, 230, 224);
-            guna2CircleButton3.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton3.ForeColor = Color.Black;
-            guna2CircleButton3.Location = new Point(351, 115);
-            guna2CircleButton3.Margin = new Padding(2, 2, 2, 2);
-            guna2CircleButton3.Name = "guna2CircleButton3";
-            guna2CircleButton3.ShadowDecoration.CustomizableEdges = customizableEdges7;
-            guna2CircleButton3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton3.Size = new Size(40, 38);
-            guna2CircleButton3.TabIndex = 17;
-            guna2CircleButton3.Text = "dd";
-            // 
-            // guna2CircleButton2
-            // 
-            guna2CircleButton2.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton2.FillColor = Color.FromArgb(236, 230, 224);
-            guna2CircleButton2.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton2.ForeColor = Color.Black;
-            guna2CircleButton2.Location = new Point(247, 115);
-            guna2CircleButton2.Margin = new Padding(2, 2, 2, 2);
-            guna2CircleButton2.Name = "guna2CircleButton2";
-            guna2CircleButton2.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton2.Size = new Size(40, 38);
-            guna2CircleButton2.TabIndex = 16;
-            guna2CircleButton2.Text = "dd";
-            // 
-            // guna2CircleButton1
-            // 
-            guna2CircleButton1.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton1.FillColor = Color.FromArgb(236, 230, 224);
-            guna2CircleButton1.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton1.ForeColor = Color.Black;
-            guna2CircleButton1.Location = new Point(153, 115);
-            guna2CircleButton1.Margin = new Padding(2, 2, 2, 2);
-            guna2CircleButton1.Name = "guna2CircleButton1";
-            guna2CircleButton1.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton1.Size = new Size(40, 38);
-            guna2CircleButton1.TabIndex = 15;
-            guna2CircleButton1.Text = "dd";
+            guna2CircleButton8.Click += btnNextWeek_Click;
             // 
             // guna2HtmlLabel7
             // 
             guna2HtmlLabel7.BackColor = Color.Transparent;
             guna2HtmlLabel7.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel7.Location = new Point(759, 82);
+            guna2HtmlLabel7.Location = new Point(766, 82);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             guna2HtmlLabel7.Size = new Size(66, 23);
             guna2HtmlLabel7.TabIndex = 14;
@@ -297,7 +291,7 @@
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel6.Location = new Point(658, 82);
+            guna2HtmlLabel6.Location = new Point(665, 82);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(42, 23);
             guna2HtmlLabel6.TabIndex = 13;
@@ -307,7 +301,7 @@
             // 
             guna2HtmlLabel5.BackColor = Color.Transparent;
             guna2HtmlLabel5.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel5.Location = new Point(553, 82);
+            guna2HtmlLabel5.Location = new Point(560, 82);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             guna2HtmlLabel5.Size = new Size(42, 23);
             guna2HtmlLabel5.TabIndex = 12;
@@ -317,7 +311,7 @@
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.Location = new Point(449, 82);
+            guna2HtmlLabel4.Location = new Point(456, 82);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(42, 23);
             guna2HtmlLabel4.TabIndex = 11;
@@ -327,7 +321,7 @@
             // 
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel3.Location = new Point(351, 82);
+            guna2HtmlLabel3.Location = new Point(358, 82);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(42, 23);
             guna2HtmlLabel3.TabIndex = 10;
@@ -337,7 +331,7 @@
             // 
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel2.Location = new Point(247, 82);
+            guna2HtmlLabel2.Location = new Point(254, 82);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(42, 23);
             guna2HtmlLabel2.TabIndex = 9;
@@ -353,26 +347,27 @@
             guna2HtmlLabel1.TabIndex = 8;
             guna2HtmlLabel1.Text = "Thứ 2";
             // 
-            // guna2ComboBox1
+            // cboMonth
             // 
-            guna2ComboBox1.BackColor = Color.FromArgb(236, 230, 224);
-            guna2ComboBox1.BorderColor = Color.FromArgb(236, 230, 224);
-            guna2ComboBox1.CustomizableEdges = customizableEdges10;
-            guna2ComboBox1.DrawMode = DrawMode.OwnerDrawFixed;
-            guna2ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            guna2ComboBox1.FillColor = Color.FromArgb(236, 230, 224);
-            guna2ComboBox1.FocusedColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox1.Font = new Font("Segoe UI", 10F);
-            guna2ComboBox1.ForeColor = Color.FromArgb(68, 88, 112);
-            guna2ComboBox1.ItemHeight = 30;
-            guna2ComboBox1.Items.AddRange(new object[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" });
-            guna2ComboBox1.Location = new Point(377, 25);
-            guna2ComboBox1.Margin = new Padding(2, 2, 2, 2);
-            guna2ComboBox1.Name = "guna2ComboBox1";
-            guna2ComboBox1.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            guna2ComboBox1.Size = new Size(165, 36);
-            guna2ComboBox1.TabIndex = 7;
+            cboMonth.BackColor = Color.FromArgb(236, 230, 224);
+            cboMonth.BorderColor = Color.FromArgb(236, 230, 224);
+            cboMonth.CustomizableEdges = customizableEdges10;
+            cboMonth.DrawMode = DrawMode.OwnerDrawFixed;
+            cboMonth.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboMonth.FillColor = Color.FromArgb(236, 230, 224);
+            cboMonth.FocusedColor = Color.FromArgb(94, 148, 255);
+            cboMonth.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cboMonth.Font = new Font("Segoe UI", 10F);
+            cboMonth.ForeColor = Color.FromArgb(68, 88, 112);
+            cboMonth.ItemHeight = 30;
+            cboMonth.Items.AddRange(new object[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" });
+            cboMonth.Location = new Point(377, 25);
+            cboMonth.Margin = new Padding(2);
+            cboMonth.Name = "cboMonth";
+            cboMonth.ShadowDecoration.CustomizableEdges = customizableEdges11;
+            cboMonth.Size = new Size(165, 36);
+            cboMonth.TabIndex = 7;
+            cboMonth.SelectedIndexChanged += OnMonthChanged;
             // 
             // lblNgayChieu
             // 
@@ -390,94 +385,11 @@
             lblLichChieu.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblLichChieu.ForeColor = Color.FromArgb(245, 131, 35);
             lblLichChieu.Location = new Point(81, 52);
-            lblLichChieu.Margin = new Padding(2, 2, 2, 2);
+            lblLichChieu.Margin = new Padding(2);
             lblLichChieu.Name = "lblLichChieu";
             lblLichChieu.Size = new Size(142, 43);
             lblLichChieu.TabIndex = 14;
             lblLichChieu.Text = "Lịch chiếu";
-            // 
-            // guna2PictureBox1
-            // 
-            guna2PictureBox1.CustomizableEdges = customizableEdges14;
-            guna2PictureBox1.ImageRotate = 0F;
-            guna2PictureBox1.Location = new Point(149, 391);
-            guna2PictureBox1.Margin = new Padding(2, 2, 2, 2);
-            guna2PictureBox1.Name = "guna2PictureBox1";
-            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            guna2PictureBox1.Size = new Size(156, 183);
-            guna2PictureBox1.TabIndex = 34;
-            guna2PictureBox1.TabStop = false;
-            // 
-            // guna2HtmlLabel9
-            // 
-            guna2HtmlLabel9.BackColor = Color.Transparent;
-            guna2HtmlLabel9.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
-            guna2HtmlLabel9.ForeColor = SystemColors.ButtonHighlight;
-            guna2HtmlLabel9.Location = new Point(185, 591);
-            guna2HtmlLabel9.Name = "guna2HtmlLabel9";
-            guna2HtmlLabel9.Size = new Size(86, 27);
-            guna2HtmlLabel9.TabIndex = 33;
-            guna2HtmlLabel9.Text = "Tên phim";
-            // 
-            // lblSuatchieu
-            // 
-            lblSuatchieu.BackColor = Color.Transparent;
-            lblSuatchieu.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
-            lblSuatchieu.ForeColor = SystemColors.ButtonHighlight;
-            lblSuatchieu.Location = new Point(163, 349);
-            lblSuatchieu.Name = "lblSuatchieu";
-            lblSuatchieu.Size = new Size(144, 27);
-            lblSuatchieu.TabIndex = 31;
-            lblSuatchieu.Text = "Chọn suất chiếu";
-            // 
-            // lblLoaiphong
-            // 
-            lblLoaiphong.BackColor = Color.Transparent;
-            lblLoaiphong.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
-            lblLoaiphong.ForeColor = SystemColors.ButtonHighlight;
-            lblLoaiphong.Location = new Point(815, 349);
-            lblLoaiphong.Name = "lblLoaiphong";
-            lblLoaiphong.Size = new Size(151, 27);
-            lblLoaiphong.TabIndex = 28;
-            lblLoaiphong.Text = "Chọn loại phòng";
-            // 
-            // rad2D
-            // 
-            rad2D.AutoSize = true;
-            rad2D.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
-            rad2D.CheckedState.BorderThickness = 0;
-            rad2D.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            rad2D.CheckedState.InnerColor = Color.White;
-            rad2D.CheckedState.InnerOffset = -4;
-            rad2D.ForeColor = SystemColors.ButtonHighlight;
-            rad2D.Location = new Point(967, 351);
-            rad2D.Name = "rad2D";
-            rad2D.Size = new Size(49, 24);
-            rad2D.TabIndex = 30;
-            rad2D.Text = "2D";
-            rad2D.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
-            rad2D.UncheckedState.BorderThickness = 2;
-            rad2D.UncheckedState.FillColor = Color.Transparent;
-            rad2D.UncheckedState.InnerColor = Color.Transparent;
-            // 
-            // rad3D
-            // 
-            rad3D.AutoSize = true;
-            rad3D.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
-            rad3D.CheckedState.BorderThickness = 0;
-            rad3D.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            rad3D.CheckedState.InnerColor = Color.White;
-            rad3D.CheckedState.InnerOffset = -4;
-            rad3D.ForeColor = SystemColors.ButtonHighlight;
-            rad3D.Location = new Point(967, 391);
-            rad3D.Name = "rad3D";
-            rad3D.Size = new Size(49, 24);
-            rad3D.TabIndex = 29;
-            rad3D.Text = "3D";
-            rad3D.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
-            rad3D.UncheckedState.BorderThickness = 2;
-            rad3D.UncheckedState.FillColor = Color.Transparent;
-            rad3D.UncheckedState.InnerColor = Color.Transparent;
             // 
             // guna2CustomGradientPanel2
             // 
@@ -485,15 +397,15 @@
             guna2CustomGradientPanel2.BorderColor = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel2.BorderRadius = 15;
             guna2CustomGradientPanel2.Controls.Add(guna2Button2);
-            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges18;
+            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges16;
             guna2CustomGradientPanel2.FillColor = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor4 = Color.FromArgb(217, 217, 217);
-            guna2CustomGradientPanel2.Location = new Point(-15, 712);
+            guna2CustomGradientPanel2.Location = new Point(-12, 861);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
@@ -502,7 +414,7 @@
             // 
             // guna2Button2
             // 
-            guna2Button2.CustomizableEdges = customizableEdges16;
+            guna2Button2.CustomizableEdges = customizableEdges14;
             guna2Button2.DisabledState.BorderColor = Color.DarkGray;
             guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -512,49 +424,49 @@
             guna2Button2.ForeColor = Color.FromArgb(245, 131, 35);
             guna2Button2.Image = Properties.Resources.right_arrow1;
             guna2Button2.ImageAlign = HorizontalAlignment.Right;
-            guna2Button2.Location = new Point(982, 17);
+            guna2Button2.Location = new Point(958, 20);
             guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges15;
             guna2Button2.Size = new Size(172, 35);
             guna2Button2.TabIndex = 11;
             guna2Button2.Text = "Chọn chỗ ngồi";
+            guna2Button2.Click += btnChonCho_Click;
             // 
-            // tableLayoutPanel1
+            // flpShowtimes
             // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Location = new Point(363, 423);
-            tableLayoutPanel1.Margin = new Padding(2, 2, 2, 2);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(233, 117);
-            tableLayoutPanel1.TabIndex = 36;
+            flpShowtimes.Location = new Point(91, 405);
+            flpShowtimes.Name = "flpShowtimes";
+            flpShowtimes.Size = new Size(954, 425);
+            flpShowtimes.TabIndex = 36;
+            // 
+            // lblSuatchieu
+            // 
+            lblSuatchieu.BackColor = Color.Transparent;
+            lblSuatchieu.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
+            lblSuatchieu.ForeColor = SystemColors.ButtonHighlight;
+            lblSuatchieu.Location = new Point(91, 349);
+            lblSuatchieu.Name = "lblSuatchieu";
+            lblSuatchieu.Size = new Size(208, 27);
+            lblSuatchieu.TabIndex = 37;
+            lblSuatchieu.Text = "Chọn suất chiếu chi tiết";
             // 
             // FormShowtimeDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1173, 772);
-            Controls.Add(tableLayoutPanel1);
-            Controls.Add(guna2CustomGradientPanel2);
-            Controls.Add(guna2PictureBox1);
-            Controls.Add(guna2HtmlLabel9);
+            ClientSize = new Size(1164, 932);
             Controls.Add(lblSuatchieu);
-            Controls.Add(lblLoaiphong);
-            Controls.Add(rad2D);
-            Controls.Add(rad3D);
+            Controls.Add(flpShowtimes);
+            Controls.Add(guna2CustomGradientPanel2);
             Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(lblLichChieu);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "FormShowtimeDetail";
             Text = "FormShowtimeDetail";
             guna2CustomGradientPanel1.ResumeLayout(false);
             guna2CustomGradientPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
             guna2CustomGradientPanel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -564,13 +476,6 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton9;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton8;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton7;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton6;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton5;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton4;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton3;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton2;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
@@ -578,17 +483,19 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
+        private Guna.UI2.WinForms.Guna2ComboBox cboMonth;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNgayChieu;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblLichChieu;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblSuatchieu;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblLoaiphong;
-        private Guna.UI2.WinForms.Guna2RadioButton rad2D;
-        private Guna.UI2.WinForms.Guna2RadioButton rad3D;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private TableLayoutPanel tableLayoutPanel1;
+        private FlowLayoutPanel flpShowtimes;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblSuatchieu;
+        private Guna.UI2.WinForms.Guna2CircleButton btnSun;
+        private Guna.UI2.WinForms.Guna2CircleButton btnSat;
+        private Guna.UI2.WinForms.Guna2CircleButton btnFri;
+        private Guna.UI2.WinForms.Guna2CircleButton btnThu;
+        private Guna.UI2.WinForms.Guna2CircleButton btnWed;
+        private Guna.UI2.WinForms.Guna2CircleButton btnTue;
+        private Guna.UI2.WinForms.Guna2CircleButton btnMon;
     }
 }

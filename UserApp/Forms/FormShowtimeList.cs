@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.IO; // Để xử lý ảnh
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
@@ -448,12 +448,6 @@ namespace UserApp
             string showtimeId = _selectedShowtime.showtime_id;
             string auditoriumId = _selectedShowtime.auditorium_id;
 
-        }
-
-        private void FormShowtimeList_Load(object sender, EventArgs e)
-        {
-            // Tự động load lần đầu
-            // OnMonthChanged(null, null); // Không cần gọi lại vì đã gọi trong Constructor
         }
 
         private void btnChonCho_Click(object sender, EventArgs e)

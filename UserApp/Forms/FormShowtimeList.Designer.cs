@@ -471,7 +471,6 @@ namespace UserApp
             Margin = new Padding(2);
             Name = "FormShowtimeList";
             Text = "FormShowtimeList";
-            Load += FormShowtimeList_Load;
             dayPanels.ResumeLayout(false);
             dayPanels.PerformLayout();
             guna2CustomGradientPanel2.ResumeLayout(false);
