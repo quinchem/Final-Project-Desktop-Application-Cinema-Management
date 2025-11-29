@@ -66,8 +66,8 @@ namespace AdminApp
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -76,6 +76,8 @@ namespace AdminApp
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
@@ -103,6 +105,7 @@ namespace AdminApp
             pictureBox1 = new PictureBox();
             panelMain = new Guna.UI2.WinForms.Guna2Panel();
             panelDangNhap = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            picEye = new Guna.UI2.WinForms.Guna2PictureBox();
             lblError = new Label();
             btnQuenMk = new Guna.UI2.WinForms.Guna2Button();
             btnDN = new Guna.UI2.WinForms.Guna2Button();
@@ -118,6 +121,7 @@ namespace AdminApp
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelDangNhap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picEye).BeginInit();
             SuspendLayout();
             // 
             // LbTenPhim
@@ -588,6 +592,7 @@ namespace AdminApp
             panelDangNhap.BackColor = Color.Transparent;
             panelDangNhap.BorderColor = Color.FromArgb(236, 230, 224);
             panelDangNhap.BorderRadius = 15;
+            panelDangNhap.Controls.Add(picEye);
             panelDangNhap.Controls.Add(lblError);
             panelDangNhap.Controls.Add(btnQuenMk);
             panelDangNhap.Controls.Add(btnDN);
@@ -595,7 +600,7 @@ namespace AdminApp
             panelDangNhap.Controls.Add(lblPass);
             panelDangNhap.Controls.Add(txtUsername);
             panelDangNhap.Controls.Add(lblEmail);
-            panelDangNhap.CustomizableEdges = customizableEdges43;
+            panelDangNhap.CustomizableEdges = customizableEdges45;
             panelDangNhap.FillColor = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor2 = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor3 = Color.FromArgb(236, 230, 224);
@@ -603,12 +608,27 @@ namespace AdminApp
             panelDangNhap.Location = new Point(335, 293);
             panelDangNhap.Name = "panelDangNhap";
             panelDangNhap.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            panelDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges44;
+            panelDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges46;
             panelDangNhap.ShadowDecoration.Depth = 20;
             panelDangNhap.ShadowDecoration.Enabled = true;
             panelDangNhap.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            panelDangNhap.Size = new Size(713, 332);
+            panelDangNhap.Size = new Size(713, 357);
             panelDangNhap.TabIndex = 11;
+            // 
+            // picEye
+            // 
+            picEye.BackColor = Color.White;
+            picEye.CustomizableEdges = customizableEdges35;
+            picEye.Image = Properties.Resources.hide;
+            picEye.ImageRotate = 0F;
+            picEye.Location = new Point(596, 189);
+            picEye.Name = "picEye";
+            picEye.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            picEye.Size = new Size(34, 31);
+            picEye.SizeMode = PictureBoxSizeMode.Zoom;
+            picEye.TabIndex = 8;
+            picEye.TabStop = false;
+            picEye.Click += guna2PictureBox1_Click;
             // 
             // lblError
             // 
@@ -622,7 +642,7 @@ namespace AdminApp
             // 
             // btnQuenMk
             // 
-            btnQuenMk.CustomizableEdges = customizableEdges35;
+            btnQuenMk.CustomizableEdges = customizableEdges37;
             btnQuenMk.DisabledState.BorderColor = Color.DarkGray;
             btnQuenMk.DisabledState.CustomBorderColor = Color.DarkGray;
             btnQuenMk.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -630,9 +650,9 @@ namespace AdminApp
             btnQuenMk.FillColor = Color.FromArgb(236, 230, 224);
             btnQuenMk.Font = new Font("Segoe UI", 10.2F, FontStyle.Italic);
             btnQuenMk.ForeColor = SystemColors.GrayText;
-            btnQuenMk.Location = new Point(54, 234);
+            btnQuenMk.Location = new Point(54, 241);
             btnQuenMk.Name = "btnQuenMk";
-            btnQuenMk.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            btnQuenMk.ShadowDecoration.CustomizableEdges = customizableEdges38;
             btnQuenMk.Size = new Size(152, 27);
             btnQuenMk.TabIndex = 6;
             btnQuenMk.Text = "Quên mật khẩu?";
@@ -642,19 +662,19 @@ namespace AdminApp
             // btnDN
             // 
             btnDN.BorderRadius = 8;
-            btnDN.CustomizableEdges = customizableEdges37;
+            btnDN.CustomizableEdges = customizableEdges39;
             btnDN.DisabledState.BorderColor = Color.DarkGray;
             btnDN.DisabledState.CustomBorderColor = Color.DarkGray;
             btnDN.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnDN.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnDN.FillColor = Color.FromArgb(44, 84, 115);
             btnDN.FocusedColor = Color.FromArgb(245, 131, 35);
-            btnDN.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDN.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDN.ForeColor = Color.White;
-            btnDN.Location = new Point(515, 261);
+            btnDN.Location = new Point(503, 286);
             btnDN.Name = "btnDN";
-            btnDN.ShadowDecoration.CustomizableEdges = customizableEdges38;
-            btnDN.Size = new Size(136, 35);
+            btnDN.ShadowDecoration.CustomizableEdges = customizableEdges40;
+            btnDN.Size = new Size(171, 43);
             btnDN.TabIndex = 5;
             btnDN.Text = "ĐĂNG NHẬP";
             btnDN.Click += btnDangNhap_Click;
@@ -663,7 +683,7 @@ namespace AdminApp
             // txtPassword
             // 
             txtPassword.BorderRadius = 8;
-            txtPassword.CustomizableEdges = customizableEdges39;
+            txtPassword.CustomizableEdges = customizableEdges41;
             txtPassword.DefaultText = "";
             txtPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -678,9 +698,10 @@ namespace AdminApp
             txtPassword.Name = "txtPassword";
             txtPassword.PlaceholderText = "";
             txtPassword.SelectedText = "";
-            txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges40;
+            txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges42;
             txtPassword.Size = new Size(591, 45);
             txtPassword.TabIndex = 3;
+            txtPassword.UseSystemPasswordChar = true;
             // 
             // lblPass
             // 
@@ -695,7 +716,7 @@ namespace AdminApp
             // txtUsername
             // 
             txtUsername.BorderRadius = 8;
-            txtUsername.CustomizableEdges = customizableEdges41;
+            txtUsername.CustomizableEdges = customizableEdges43;
             txtUsername.DefaultText = "";
             txtUsername.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtUsername.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -710,7 +731,7 @@ namespace AdminApp
             txtUsername.Name = "txtUsername";
             txtUsername.PlaceholderText = "";
             txtUsername.SelectedText = "";
-            txtUsername.ShadowDecoration.CustomizableEdges = customizableEdges42;
+            txtUsername.ShadowDecoration.CustomizableEdges = customizableEdges44;
             txtUsername.Size = new Size(591, 45);
             txtUsername.TabIndex = 1;
             // 
@@ -748,6 +769,7 @@ namespace AdminApp
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelDangNhap.ResumeLayout(false);
             panelDangNhap.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picEye).EndInit();
             ResumeLayout(false);
         }
 
@@ -788,6 +810,7 @@ namespace AdminApp
         private Guna.UI2.WinForms.Guna2HtmlLabel lblEmail;
         private Label lblError;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2PictureBox picEye;
     }
 }
 

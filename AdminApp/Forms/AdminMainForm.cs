@@ -1,4 +1,4 @@
-using AdminApp.Models;
+using SharedData.Models;
 using ClosedXML.Excel;
 using Microsoft.Data.Sqlite;
 using System;
@@ -337,6 +337,24 @@ namespace AdminApp
             panelDangNhap.BringToFront();
         }
 
+        private void guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+            if (txtPassword.UseSystemPasswordChar == true)
+            {
+                // Hiện lên + Đổi ảnh mở
+                txtPassword.UseSystemPasswordChar = false;
+                txtPassword.PasswordChar = '\0';
+                picEye.Image = Properties.Resources.view;
+            }
+            else
+            {
+                // Ẩn đi + Đổi ảnh đóng
+                txtPassword.UseSystemPasswordChar = true;
+
+                // Đổi ảnh đóng ở đây
+                picEye.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+            }
+        }
     }
 }
 

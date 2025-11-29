@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SharedData.Models;
 
 namespace UserApp
 {
@@ -19,7 +18,7 @@ namespace UserApp
         private FilmRepo _filmRepo = new FilmRepo();
         private ImageRepo _imageRepo = new ImageRepo();
         private UserMainForm _parentForm;
-
+        string movieId;
 
         public FormMovieList(UserMainForm parentForm)
         {
@@ -69,7 +68,8 @@ namespace UserApp
             {
                 if (_parentForm != null)
                 {
-                    _parentForm.OpenChildForm(new FormMovieDetail(film.movie_id));
+                    _parentForm.OpenChildForm(new FormMovieDetail(film.movie_id, _parentForm));
+
                 }
             };
 
@@ -171,6 +171,15 @@ namespace UserApp
             btn.BorderRadius = 10;
             btn.Size = new Size(120, 38);
             btn.Location = new Point((panel.Width - btn.Width) / 2, panel.Height - 55);
+            btn.Tag = film.movie_id;
+            btn.Click += (s, e) =>
+            {
+                if (_parentForm != null)
+                {
+                    _parentForm.OpenChildForm(new FormShowtimeDetail(film.movie_id));
+                }
+            };
+
             panel.Controls.Add(btn);
 
             return panel;
@@ -178,5 +187,7 @@ namespace UserApp
 
 
 
+    }
 }
-}
+
+

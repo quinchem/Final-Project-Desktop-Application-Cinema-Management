@@ -65,14 +65,14 @@
             panelQMK.FillColor2 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor3 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelQMK.Location = new Point(366, 115);
+            panelQMK.Location = new Point(280, 196);
             panelQMK.Name = "panelQMK";
             panelQMK.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelQMK.ShadowDecoration.CustomizableEdges = customizableEdges8;
             panelQMK.ShadowDecoration.Depth = 20;
             panelQMK.ShadowDecoration.Enabled = true;
             panelQMK.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            panelQMK.Size = new Size(713, 332);
+            panelQMK.Size = new Size(829, 367);
             panelQMK.TabIndex = 8;
             // 
             // btnQuayLai
@@ -87,10 +87,12 @@
             btnQuayLai.FocusedColor = Color.FromArgb(245, 131, 35);
             btnQuayLai.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnQuayLai.ForeColor = Color.FromArgb(245, 131, 35);
-            btnQuayLai.Location = new Point(46, 261);
+            btnQuayLai.Image = Properties.Resources.back;
+            btnQuayLai.ImageAlign = HorizontalAlignment.Left;
+            btnQuayLai.Location = new Point(46, 301);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnQuayLai.Size = new Size(270, 35);
+            btnQuayLai.Size = new Size(287, 35);
             btnQuayLai.TabIndex = 7;
             btnQuayLai.Text = "QUAY VỀ TRANG ĐĂNG NHẬP";
             btnQuayLai.TextAlign = HorizontalAlignment.Left;
@@ -116,12 +118,12 @@
             btnGui.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnGui.FillColor = Color.FromArgb(44, 84, 115);
             btnGui.FocusedColor = Color.FromArgb(245, 131, 35);
-            btnGui.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGui.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGui.ForeColor = Color.White;
-            btnGui.Location = new Point(558, 261);
+            btnGui.Location = new Point(673, 273);
             btnGui.Name = "btnGui";
             btnGui.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnGui.Size = new Size(91, 35);
+            btnGui.Size = new Size(91, 43);
             btnGui.TabIndex = 5;
             btnGui.Text = "GỬI";
             btnGui.Click += btnGui_Click;
@@ -131,17 +133,17 @@
             lblyc.AutoSize = false;
             lblyc.BackColor = Color.Transparent;
             lblyc.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblyc.Location = new Point(58, 41);
+            lblyc.Location = new Point(46, 27);
             lblyc.Name = "lblyc";
             lblyc.Size = new Size(652, 59);
             lblyc.TabIndex = 0;
-            lblyc.Text = "Vui lòng nhập địa chỉ email của bạn vào ô bên dưới.<br>Bạn sẽ nhận được một liên kết để thiết lập lại mật khẩu.";
+            lblyc.Text = "Vui lòng nhập địa chỉ email của bạn vào ô bên dưới";
             // 
             // lblEmail
             // 
             lblEmail.BackColor = Color.Transparent;
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(58, 131);
+            lblEmail.Location = new Point(58, 92);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(60, 30);
             lblEmail.TabIndex = 2;
@@ -160,13 +162,13 @@
             txtEmail.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtEmail.ForeColor = Color.FromArgb(64, 64, 64);
             txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmail.Location = new Point(58, 169);
+            txtEmail.Location = new Point(58, 151);
             txtEmail.Margin = new Padding(3, 5, 3, 5);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            txtEmail.Size = new Size(591, 45);
+            txtEmail.Size = new Size(660, 45);
             txtEmail.TabIndex = 1;
             // 
             // btnDangNhap
@@ -181,7 +183,8 @@
             btnDangNhap.FocusedColor = Color.FromArgb(245, 131, 35);
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
-            btnDangNhap.Location = new Point(366, 49);
+            btnDangNhap.Image = Properties.Resources.doi_mk;
+            btnDangNhap.Location = new Point(289, 102);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btnDangNhap.Size = new Size(197, 46);

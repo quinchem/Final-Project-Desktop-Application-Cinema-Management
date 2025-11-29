@@ -121,28 +121,36 @@ namespace UserApp
         }
 
         // Mở chi tiết phim
-        private void guna2PictureBox1_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormMovieDetail());
-        }
+        //private void guna2PictureBox1_Click(object sender, EventArgs e)
+        //{
+        //    OpenChildForm(new FormMovieDetail());
+        //}
 
-        private void Poster_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormMovieDetail());
-        }
+        //private void Poster_Click(object sender, EventArgs e)
+        //{
+        //    OpenChildForm(new FormMovieDetail());
+        //}
 
         private void btnLichChieu_Click(object sender, EventArgs e)
         {
-            var btn = sender as Guna.UI2.WinForms.Guna2Button;
+            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
+            if (btn == null) return;
+
             ActivateButton(btn);
+
             OpenChildForm(new FormShowtimeList());
+
         }
 
         private void btnPhim_Click(object sender, EventArgs e)
         {
-            var btn = sender as Guna.UI2.WinForms.Guna2Button;
+            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
+            if (btn == null) return;
+
             ActivateButton(btn);
-            OpenChildForm(new FormMovieList());
+
+            OpenChildForm(new FormMovieList(this));
+
         }
 
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
