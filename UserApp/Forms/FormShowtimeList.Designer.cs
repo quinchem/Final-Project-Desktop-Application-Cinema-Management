@@ -406,21 +406,21 @@ namespace UserApp
             // 
             guna2CustomGradientPanel2.BackColor = Color.Transparent;
             guna2CustomGradientPanel2.BorderColor = Color.FromArgb(217, 217, 217);
-            guna2CustomGradientPanel2.BorderRadius = 15;
             guna2CustomGradientPanel2.Controls.Add(btnChonCho);
             guna2CustomGradientPanel2.CustomizableEdges = customizableEdges16;
+            guna2CustomGradientPanel2.Dock = DockStyle.Bottom;
             guna2CustomGradientPanel2.FillColor = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor4 = Color.FromArgb(217, 217, 217);
-            guna2CustomGradientPanel2.Location = new Point(-4, 1012);
+            guna2CustomGradientPanel2.Location = new Point(0, 936);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel2.Size = new Size(1256, 61);
+            guna2CustomGradientPanel2.Size = new Size(1240, 61);
             guna2CustomGradientPanel2.TabIndex = 24;
             // 
             // btnChonCho
@@ -460,7 +460,7 @@ namespace UserApp
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            AutoScrollMinSize = new Size(0, 5);
+            AutoScrollMinSize = new Size(0, 100);
             BackColor = Color.FromArgb(92, 124, 150);
             ClientSize = new Size(1261, 943);
             Controls.Add(flpShowtimes);

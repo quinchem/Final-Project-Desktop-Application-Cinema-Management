@@ -37,10 +37,10 @@ namespace UserApp
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -69,8 +69,8 @@ namespace UserApp
             btnDangKy = new Guna2Button();
             btnDangNhap = new Guna2Button();
             panelDangNhap = new Guna2CustomGradientPanel();
-            guna2PictureBox1 = new Guna2PictureBox();
             btnQuenMk = new Guna2Button();
+            guna2PictureBox1 = new Guna2PictureBox();
             txtPassDN = new Guna2TextBox();
             btnMiniDN = new Guna2Button();
             lblPass = new Guna2HtmlLabel();
@@ -175,7 +175,7 @@ namespace UserApp
             panelDangNhap.FillColor2 = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor3 = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelDangNhap.Location = new Point(385, 210);
+            panelDangNhap.Location = new Point(354, 165);
             panelDangNhap.Name = "panelDangNhap";
             panelDangNhap.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges16;
@@ -184,21 +184,6 @@ namespace UserApp
             panelDangNhap.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
             panelDangNhap.Size = new Size(713, 332);
             panelDangNhap.TabIndex = 10;
-            // 
-            // guna2PictureBox1
-            // 
-            guna2PictureBox1.BackColor = Color.White;
-            guna2PictureBox1.CustomizableEdges = customizableEdges7;
-            guna2PictureBox1.Image = Properties.Resources.hide;
-            guna2PictureBox1.ImageRotate = 0F;
-            guna2PictureBox1.Location = new Point(596, 185);
-            guna2PictureBox1.Name = "guna2PictureBox1";
-            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2PictureBox1.Size = new Size(34, 37);
-            guna2PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            guna2PictureBox1.TabIndex = 11;
-            guna2PictureBox1.TabStop = false;
-            guna2PictureBox1.Click += guna2PictureBox1_Click;
             // 
             // btnQuenMk
             // 
@@ -218,6 +203,21 @@ namespace UserApp
             btnQuenMk.Text = "Quên mật khẩu?";
             btnQuenMk.TextAlign = HorizontalAlignment.Left;
             btnQuenMk.Click += btnQuenMk_Click;
+            // 
+            // guna2PictureBox1
+            // 
+            guna2PictureBox1.BackColor = Color.White;
+            guna2PictureBox1.CustomizableEdges = customizableEdges7;
+            guna2PictureBox1.Image = Properties.Resources.hide;
+            guna2PictureBox1.ImageRotate = 0F;
+            guna2PictureBox1.Location = new Point(596, 185);
+            guna2PictureBox1.Name = "guna2PictureBox1";
+            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2PictureBox1.Size = new Size(34, 37);
+            guna2PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            guna2PictureBox1.TabIndex = 11;
+            guna2PictureBox1.TabStop = false;
+            guna2PictureBox1.Click += guna2PictureBox1_Click;
             // 
             // txtPassDN
             // 
@@ -254,7 +254,7 @@ namespace UserApp
             btnMiniDN.FocusedColor = Color.FromArgb(245, 131, 35);
             btnMiniDN.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnMiniDN.ForeColor = Color.White;
-            btnMiniDN.Location = new Point(558, 268);
+            btnMiniDN.Location = new Point(507, 264);
             btnMiniDN.Name = "btnMiniDN";
             btnMiniDN.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnMiniDN.Size = new Size(136, 47);
@@ -418,7 +418,6 @@ namespace UserApp
             txtSDT.ShadowDecoration.CustomizableEdges = customizableEdges20;
             txtSDT.Size = new Size(352, 39);
             txtSDT.TabIndex = 17;
-            txtSDT.TextChanged += txtSDT_TextChanged;
             // 
             // guna2HtmlLabel6
             // 
@@ -560,7 +559,6 @@ namespace UserApp
             radNu.UncheckedState.BorderThickness = 2;
             radNu.UncheckedState.FillColor = Color.Transparent;
             radNu.UncheckedState.InnerColor = Color.Transparent;
-            radNu.CheckedChanged += radNu_CheckedChanged;
             // 
             // radNam
             // 
@@ -579,7 +577,6 @@ namespace UserApp
             radNam.UncheckedState.BorderThickness = 2;
             radNam.UncheckedState.FillColor = Color.Transparent;
             radNam.UncheckedState.InnerColor = Color.Transparent;
-            radNam.CheckedChanged += radNam_CheckedChanged;
             // 
             // guna2HtmlLabel1
             // 

@@ -175,7 +175,7 @@ namespace UserApp
             {
                 if (_parentForm != null)
                 {
-                    _parentForm.OpenChildForm(new FormShowtimeList());
+                    _parentForm.OpenChildForm(new FormShowtimeList(_parentForm));
                 }
             };
 

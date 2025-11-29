@@ -99,7 +99,7 @@ namespace UserApp
 
             if (parent != null)
             {
-                parent.OpenChildForm(new FormShowtimeList());
+                parent.OpenChildForm(new FormShowtimeList(parent));
             }
         }
 
