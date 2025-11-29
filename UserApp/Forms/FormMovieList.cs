@@ -176,7 +176,7 @@ namespace UserApp
             {
                 if (_parentForm != null)
                 {
-                    _parentForm.OpenChildForm(new FormShowtimeDetail(film.movie_id));
+                    _parentForm.OpenChildForm(new FormShowtimeDetail(_parentForm, film.movie_id));
                 }
             };
 

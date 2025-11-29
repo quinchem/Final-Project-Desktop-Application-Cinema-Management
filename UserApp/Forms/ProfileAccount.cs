@@ -1,22 +1,32 @@
 ﻿using Microsoft.Data.Sqlite;
+using SharedData.Models;
+using SharedData.Repositories;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using SharedData.Models;
+using System.IO;
 
 namespace UserApp
 {
     public partial class ProfileAccount : UserControl
     {
         private Customer currentUser;
+        private readonly CustomerRepo _customerRepo;
+        private readonly ImageRepo _imageRepo;
+        private readonly string _customerId; // gán khi tạo Form
+        private readonly int _avatarSize = 200;
 
         public ProfileAccount(Customer user)
         {
             InitializeComponent();
             currentUser = user;
+            _customerRepo = new CustomerRepo();
+            _imageRepo = new ImageRepo();
+            _customerId = user.customer_id;  // tự lấy từ object user
 
             InitGenderComboBox();
             LoadUserInfo();
@@ -67,6 +77,18 @@ namespace UserApp
             {
                 CbGioiTinh.SelectedItem = currentUser.gender;
             }
+            try
+            {
+                byte[] imgBytes = _imageRepo.GetCustomerAvatar(_customerId);
+                if (imgBytes != null && imgBytes.Length > 0)
+                {
+                    using (var ms = new MemoryStream(imgBytes))
+                    {
+                        pctAvatar.Image = Image.FromStream(ms);
+                    }
+                }
+            }
+            catch { /* Bỏ qua lỗi load ảnh nếu muốn */ }
         }
 
         // ===================== SAVE =====================
@@ -206,6 +228,69 @@ namespace UserApp
             Invalidate(); // vẽ lại UI
         }
 
-        
+        private void pctAvatar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var ofd = new OpenFileDialog())
+                {
+                    ofd.Title = "Chọn ảnh avatar";
+                    ofd.Filter = "Ảnh (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
+
+                    if (ofd.ShowDialog() != DialogResult.OK) return;
+
+                    // Resize ảnh
+                    using (var src = Image.FromFile(ofd.FileName))
+                    using (var resized = ResizeImageToSquare(src, _avatarSize))
+                    {
+                        // Hiển thị lên UI ngay lập tức
+                        // (Clone ra bitmap mới để tránh lỗi stream đóng)
+                        pctAvatar.Image = new Bitmap(resized);
+
+                        // --- 4. LƯU VÀO DB (BLOB) ---
+                        byte[] imageBytes;
+                        using (var ms = new MemoryStream())
+                        {
+                            resized.Save(ms, ImageFormat.Png);
+                            imageBytes = ms.ToArray();
+                        }
+
+                        bool success = _imageRepo.SaveCustomerAvatar(_customerId, imageBytes);
+
+                        if (success)
+                        {
+                            //MessageBox.Show("Cập nhật avatar thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Lưu vào CSDL thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+        // Resize giữ tỉ lệ và crop trung tâm để thành hình vuông
+        private Image ResizeImageToSquare(Image src, int size)
+        {
+            // tính crop trung tâm vuông
+            int srcW = src.Width;
+            int srcH = src.Height;
+            int side = Math.Min(srcW, srcH);
+            int x = (srcW - side) / 2;
+            int y = (srcH - side) / 2;
+
+            var bmp = new Bitmap(size, size);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(src, new Rectangle(0, 0, size, size), new Rectangle(x, y, side, side), GraphicsUnit.Pixel);
+            }
+            return bmp;
+        }
     }
 }
