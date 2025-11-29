@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -39,12 +39,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             btnSun = new Guna.UI2.WinForms.Guna2CircleButton();
             btnSat = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -62,13 +60,13 @@
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            cboMonth = new Guna.UI2.WinForms.Guna2ComboBox();
             lblNgayChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblLichChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             flpShowtimes = new FlowLayoutPanel();
             lblSuatchieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblMonth = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CustomGradientPanel1.SuspendLayout();
             guna2CustomGradientPanel2.SuspendLayout();
             SuspendLayout();
@@ -78,6 +76,7 @@
             guna2CustomGradientPanel1.BackColor = Color.Transparent;
             guna2CustomGradientPanel1.BorderColor = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel1.BorderRadius = 15;
+            guna2CustomGradientPanel1.Controls.Add(lblMonth);
             guna2CustomGradientPanel1.Controls.Add(btnSun);
             guna2CustomGradientPanel1.Controls.Add(btnSat);
             guna2CustomGradientPanel1.Controls.Add(btnFri);
@@ -94,9 +93,8 @@
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel3);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel2);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel1);
-            guna2CustomGradientPanel1.Controls.Add(cboMonth);
             guna2CustomGradientPanel1.Controls.Add(lblNgayChieu);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges12;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges10;
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(236, 230, 224);
@@ -104,7 +102,7 @@
             guna2CustomGradientPanel1.Location = new Point(91, 115);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges13;
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges11;
             guna2CustomGradientPanel1.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel1.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel1.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
@@ -347,28 +345,6 @@
             guna2HtmlLabel1.TabIndex = 8;
             guna2HtmlLabel1.Text = "Thứ 2";
             // 
-            // cboMonth
-            // 
-            cboMonth.BackColor = Color.FromArgb(236, 230, 224);
-            cboMonth.BorderColor = Color.FromArgb(236, 230, 224);
-            cboMonth.CustomizableEdges = customizableEdges10;
-            cboMonth.DrawMode = DrawMode.OwnerDrawFixed;
-            cboMonth.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboMonth.FillColor = Color.FromArgb(236, 230, 224);
-            cboMonth.FocusedColor = Color.FromArgb(94, 148, 255);
-            cboMonth.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            cboMonth.Font = new Font("Segoe UI", 10F);
-            cboMonth.ForeColor = Color.FromArgb(68, 88, 112);
-            cboMonth.ItemHeight = 30;
-            cboMonth.Items.AddRange(new object[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" });
-            cboMonth.Location = new Point(377, 25);
-            cboMonth.Margin = new Padding(2);
-            cboMonth.Name = "cboMonth";
-            cboMonth.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            cboMonth.Size = new Size(165, 36);
-            cboMonth.TabIndex = 7;
-            cboMonth.SelectedIndexChanged += OnMonthChanged;
-            // 
             // lblNgayChieu
             // 
             lblNgayChieu.BackColor = Color.Transparent;
@@ -397,7 +373,7 @@
             guna2CustomGradientPanel2.BorderColor = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel2.BorderRadius = 15;
             guna2CustomGradientPanel2.Controls.Add(guna2Button2);
-            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges16;
+            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges14;
             guna2CustomGradientPanel2.FillColor = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(217, 217, 217);
@@ -405,7 +381,7 @@
             guna2CustomGradientPanel2.Location = new Point(-12, 861);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges15;
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
@@ -414,7 +390,7 @@
             // 
             // guna2Button2
             // 
-            guna2Button2.CustomizableEdges = customizableEdges14;
+            guna2Button2.CustomizableEdges = customizableEdges12;
             guna2Button2.DisabledState.BorderColor = Color.DarkGray;
             guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -426,7 +402,7 @@
             guna2Button2.ImageAlign = HorizontalAlignment.Right;
             guna2Button2.Location = new Point(958, 20);
             guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges13;
             guna2Button2.Size = new Size(172, 35);
             guna2Button2.TabIndex = 11;
             guna2Button2.Text = "Chọn chỗ ngồi";
@@ -449,6 +425,17 @@
             lblSuatchieu.Size = new Size(208, 27);
             lblSuatchieu.TabIndex = 37;
             lblSuatchieu.Text = "Chọn suất chiếu chi tiết";
+            // 
+            // lblMonth
+            // 
+            lblMonth.BackColor = Color.Transparent;
+            lblMonth.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMonth.ForeColor = Color.FromArgb(92, 124, 150);
+            lblMonth.Location = new Point(425, 23);
+            lblMonth.Name = "lblMonth";
+            lblMonth.Size = new Size(74, 30);
+            lblMonth.TabIndex = 37;
+            lblMonth.Text = "THÁNG ";
             // 
             // FormShowtimeDetail
             // 
@@ -483,7 +470,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2ComboBox cboMonth;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNgayChieu;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblLichChieu;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
@@ -497,5 +483,6 @@
         private Guna.UI2.WinForms.Guna2CircleButton btnWed;
         private Guna.UI2.WinForms.Guna2CircleButton btnTue;
         private Guna.UI2.WinForms.Guna2CircleButton btnMon;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblMonth;
     }
 }
