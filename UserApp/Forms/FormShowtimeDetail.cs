@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace UserApp
 {
@@ -17,6 +18,7 @@ namespace UserApp
         private ShowtimeRepo repo = new ShowtimeRepo();
         private ImageRepo _imageRepo = new ImageRepo();
         private List<ShowtimeInfo> currentShowtimes;
+        private UserMainForm parentForm;
 
         private DateTime currentStartDate;
         private DateTime selectedDate;
@@ -27,16 +29,18 @@ namespace UserApp
         private string _targetMovieId = null;
         
         //CONSTRUCTOR 1: Mặc định (Hiện tất cả)
-        public FormShowtimeDetail()
+        public FormShowtimeDetail(UserMainForm parent)
         {
             InitializeComponent();
-            
+            parentForm = parent;
+
         }
 
         //CONSTRUCTOR MỚI: Nhận ID Phim để lọc
         public FormShowtimeDetail(string movieId)
         {
             InitializeComponent();
+        
             _targetMovieId = movieId; // Lưu lại ID phim
             
             SetupForm();
@@ -485,12 +489,7 @@ namespace UserApp
                 return;
             }
 
-            // Mở form chọn ghế
-            //var frm = new FormSeatSelection(_selectedShowtime); // Đảm bảo FormSeatSelection nhận tham số
-            var frm = new FormSeatSelection();
-            this.Hide();
-            frm.ShowDialog();
-            this.Show();
+            parentForm.OpenChildForm(new FormSeatSelection(_selectedShowtime));
         }
     }
 }

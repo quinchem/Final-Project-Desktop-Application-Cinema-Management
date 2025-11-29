@@ -16,7 +16,22 @@ namespace SharedData.Repositories
         {
             return dt.ToString("dd/MM/yyyy");
         }
+        // =============================
+        // Generate Showtime ID: T001
+        // =============================
+        private static string GenerateShowtimeId(SqliteConnection conn)
+        {
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = @"SELECT showtime_id FROM showtime ORDER BY showtime_id DESC LIMIT 1";
 
+            var result = cmd.ExecuteScalar();
+
+            if (result == null)
+                return "T001";
+
+            int num = int.Parse(result.ToString().Substring(1));
+            return "T" + (num + 1).ToString("D3");
+        }
         // ===================== GET ALL =====================
         public static List<Showtime> GetAll()
         {
