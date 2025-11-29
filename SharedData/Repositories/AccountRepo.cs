@@ -11,6 +11,36 @@ namespace SharedData.Repositories
     {
         private string ConnStr => DatabaseHelper.GetConnectionString();
 
+        // Generate Customer ID
+        private string GenerateCustomerId(SqliteConnection conn, SqliteTransaction tran)
+        {
+            string sql = @"SELECT customer_id FROM customer ORDER BY customer_id DESC LIMIT 1";
+
+            using var cmd = new SqliteCommand(sql, conn, tran);
+            var result = cmd.ExecuteScalar();
+
+            if (result == null) return "C001";
+
+            int num = int.Parse(result.ToString().Substring(1));
+            return "C" + (num + 1).ToString("D3");
+        }
+
+        // Generate Account ID
+        private string GenerateAccountId(SqliteConnection conn, SqliteTransaction tran)
+        {
+            string sql = @"SELECT account_id FROM account ORDER BY account_id DESC LIMIT 1";
+
+            using var cmd = new SqliteCommand(sql, conn, tran);
+            var result = cmd.ExecuteScalar();
+
+            if (result == null) return "A001";
+
+            int num = int.Parse(result.ToString().Substring(1));
+            return "A" + (num + 1).ToString("D3");
+        }
+
+
+
         // =========================
         // REGISTER
         // =========================
@@ -24,39 +54,45 @@ namespace SharedData.Repositories
                 return false;
             }
 
-            // ✅ Validate phone
+            // Validate phone
             if (!Regex.IsMatch(customer.phone_number ?? "", @"^\d{10}$"))
             {
-                message = "SĐT phải đúng 10 chữ số.";
+                message = "Số điện thoại phải đúng 10 chữ số.";
                 return false;
             }
 
-            // ✅ Validate password
+            // Validate password
             if (!Regex.IsMatch(account.password ?? "", @"^(?=.{8,})(?=.*\W).*$"))
             {
-                message = "Mật khẩu phải ≥8 ký tự và có ký tự đặc biệt.";
+                message = "Mật khẩu phải lớn hơn hoặc bằng 8 ký tự và có ký tự đặc biệt.";
                 return false;
             }
 
             using var conn = new SqliteConnection(ConnStr);
             conn.Open();
 
-            using var pragma = conn.CreateCommand();
-            pragma.CommandText = "PRAGMA foreign_keys = ON;";
-            pragma.ExecuteNonQuery();
+            // Bật FK
+            using (var pragma = conn.CreateCommand())
+            {
+                pragma.CommandText = "PRAGMA foreign_keys = ON;";
+                pragma.ExecuteNonQuery();
+            }
 
+            // Bắt đầu transaction
             using var tran = conn.BeginTransaction();
 
             try
             {
-                // ✅ Check trùng email / phone
-                using (var cmd = conn.CreateCommand())
+                // ================================
+                // 1) CHECK EMAIL / PHONE TRÙNG
+                // ================================
+                using (var cmd = new SqliteCommand(
+                    @"SELECT COUNT(*) FROM customer 
+              WHERE email=@e OR phone_number=@p",
+                    conn, tran))
                 {
-                    cmd.Transaction = tran;
-                    cmd.CommandText = @"SELECT COUNT(*) FROM customer 
-                                       WHERE email=@e OR phone_number=@p";
-                    cmd.Parameters.AddWithValue("@e", customer.email ?? "");
-                    cmd.Parameters.AddWithValue("@p", customer.phone_number ?? "");
+                    cmd.Parameters.AddWithValue("@e", customer.email);
+                    cmd.Parameters.AddWithValue("@p", customer.phone_number);
 
                     if ((long)cmd.ExecuteScalar() > 0)
                     {
@@ -66,69 +102,67 @@ namespace SharedData.Repositories
                     }
                 }
 
-                // ✅ Generate customer_id
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.Transaction = tran;
-                    cmd.CommandText = @"
-                        SELECT 'C' || printf('%03d',
-                        IFNULL(MAX(CAST(SUBSTR(customer_id,2) AS INT)),0)+1)
-                        FROM customer";
-                    customer.customer_id = cmd.ExecuteScalar().ToString();
-                }
+                // ================================
+                // 2) TẠO ID
+                // ================================
+                string cid = GenerateCustomerId(conn, tran);
+                string aid = GenerateAccountId(conn, tran);
 
-                customer.create_date = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
+                customer.customer_id = cid;
+                account.customer_id = cid;
+                account.account_id = aid;
+                account.role_account ??= "customer";
 
-                // ✅ Insert customer
-                using (var cmd = conn.CreateCommand())
+                // Hash password
+                account.password = HashPassword(account.password);
+
+                // ================================
+                // 3) INSERT CUSTOMER
+                // ================================
+                string sqlCus = @"
+            INSERT INTO customer
+            (customer_id, full_name, email, phone_number, gender,
+             date_of_birth, address, create_date)
+            VALUES (@id, @name, @mail, @phone, @gender, @dob, @address, @created)
+        ";
+
+                using (var cmd = new SqliteCommand(sqlCus, conn, tran))
                 {
-                    cmd.Transaction = tran;
-                    cmd.CommandText = @"
-                        INSERT INTO customer
-                        (customer_id, full_name, email, phone_number, gender,
-                         date_of_birth, address, create_date)
-                        VALUES
-                        (@id,@name,@email,@phone,@gender,@dob,@addr,@created)";
                     cmd.Parameters.AddWithValue("@id", customer.customer_id);
-                    cmd.Parameters.AddWithValue("@name", customer.full_name ?? "");
-                    cmd.Parameters.AddWithValue("@email", customer.email ?? "");
-                    cmd.Parameters.AddWithValue("@phone", customer.phone_number ?? "");
-                    cmd.Parameters.AddWithValue("@gender", customer.gender ?? "");
-                    cmd.Parameters.AddWithValue("@dob",
-                        string.IsNullOrWhiteSpace(customer.date_of_birth) ? DBNull.Value : customer.date_of_birth);
-                    cmd.Parameters.AddWithValue("@addr", customer.address ?? "");
+                    cmd.Parameters.AddWithValue("@name", customer.full_name);
+                    cmd.Parameters.AddWithValue("@mail", customer.email);
+                    cmd.Parameters.AddWithValue("@phone", customer.phone_number);
+                    cmd.Parameters.AddWithValue("@gender", customer.gender);
+                    cmd.Parameters.AddWithValue("@dob", customer.date_of_birth);
+                    cmd.Parameters.AddWithValue("@address", customer.address);
                     cmd.Parameters.AddWithValue("@created", customer.create_date);
 
                     cmd.ExecuteNonQuery();
                 }
 
-                // ✅ Hash password
-                account.password = HashPassword(account.password);
-                account.account_id = Guid.NewGuid().ToString();
-                account.customer_id = customer.customer_id;
-                account.role_account ??= "customer";
+                // ================================
+                // 4) INSERT ACCOUNT
+                // ================================
+                string sqlAcc = @"
+            INSERT INTO account
+            (account_id, username, password, role_account, staff_id, customer_id)
+            VALUES (@id, @user, @pass, @role, NULL, @cid)
+        ";
 
-                // ✅ Insert account
-                using (var cmd = conn.CreateCommand())
+                using (var cmd = new SqliteCommand(sqlAcc, conn, tran))
                 {
-                    cmd.Transaction = tran;
-                    cmd.CommandText = @"
-                        INSERT INTO account
-                        (account_id, username, password, role_account, staff_id, customer_id)
-                        VALUES
-                        (@aid,@user,@pass,@role,@staff,@cid)";
-                    cmd.Parameters.AddWithValue("@aid", account.account_id);
-                    cmd.Parameters.AddWithValue("@user", account.username ?? customer.email);
+                    cmd.Parameters.AddWithValue("@id", account.account_id);
+                    cmd.Parameters.AddWithValue("@user", account.username);
                     cmd.Parameters.AddWithValue("@pass", account.password);
                     cmd.Parameters.AddWithValue("@role", account.role_account);
-                    cmd.Parameters.AddWithValue("@staff",
-                        string.IsNullOrWhiteSpace(account.staff_id) ? DBNull.Value : (object)account.staff_id);
                     cmd.Parameters.AddWithValue("@cid", account.customer_id);
 
                     cmd.ExecuteNonQuery();
                 }
 
+                // OK xong
                 tran.Commit();
+                message = "Đăng ký thành công!";
                 return true;
             }
             catch (Exception ex)
@@ -142,7 +176,7 @@ namespace SharedData.Repositories
         // =========================
         // LOGIN
         // =========================
-        public bool Login(string usernameOrEmail, string password, out Customer customer, out string msg)
+        public bool Login(string email , string password, out Customer customer, out string msg)
         {
             msg = "";
             customer = null;
@@ -153,13 +187,13 @@ namespace SharedData.Repositories
             using var cmd = conn.CreateCommand();
             cmd.CommandText = @"
                 SELECT a.password,
-                       c.customer_id,c.full_name,c.email,c.phone_number,
-                       c.gender,c.date_of_birth,c.address,c.create_date
+                       c.customer_id, c.full_name, c.email, c.phone_number,
+                       c.gender, c.date_of_birth, c.address, c.create_date
                 FROM account a
-                JOIN customer c ON a.customer_id = c.customer_id
-                WHERE a.username=@u OR c.email=@u";
+                JOIN customer c ON c.customer_id = a.customer_id
+                WHERE c.email = @e";
 
-            cmd.Parameters.AddWithValue("@u", usernameOrEmail);
+            cmd.Parameters.AddWithValue("@e", email);
 
             using var reader = cmd.ExecuteReader();
             if (!reader.Read())
@@ -237,7 +271,7 @@ namespace SharedData.Repositories
 
                 using var cmd = conn.CreateCommand();
 
-                // Cập nhật mật khẩu dựa trên Username (vì hệ thống bạn dùng Email làm Username)
+                // Cập nhật mật khẩu dựa trên Username 
                 cmd.CommandText = @"UPDATE account SET password = @p WHERE username = @u";
 
                 cmd.Parameters.AddWithValue("@p", secureHash);
