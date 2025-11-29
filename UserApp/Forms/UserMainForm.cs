@@ -19,12 +19,7 @@ namespace UserApp
             InitializeComponent();
             CurrentUser = customer;
             UpdateHeaderUI();
-        }
-
-        // Giữ lại cho các form khác cần khởi tạo mặc định (nếu có)
-        public UserMainForm()
-        {
-            InitializeComponent();
+            
         }
 
         // Cập nhật giao diện header
@@ -74,15 +69,21 @@ namespace UserApp
         // Nút đăng xuất
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show(
-                "Bạn có chắc chắn muốn đăng xuất?",
-                "Xác nhận",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            loginForm = new FormLogin(this);
+            OpenChildForm(loginForm);
+            loginForm.ShowLogin();
+            
+        }
 
-            if (result == DialogResult.Yes)
-            {
-                CurrentUser = null;
+        // Biến lưu thông tin user đã login
+        public Customer CurrentUser { get; private set; }
+
+        // Method để set thông tin user khi login thành công
+        public void SetCurrentUser(Customer customer)
+        {
+            CurrentUser = customer;
+            UpdateHeaderUI();
+        }
 
                 // Quay về FormLogin
                 // Mở lại FormLogin
@@ -148,32 +149,19 @@ namespace UserApp
             if (btn == null) return;
 
             ActivateButton(btn);
-
-            OpenChildForm(new FormMovieList(this));
-
+            
+            OpenChildForm(new FormShowtimeList());
         }
 
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
             if (btn == null) return;
 
-            if (currentButton != null)
-            {
-                currentButton.FillColor = currentButton.Tag != null
-                    ? (Color)currentButton.Tag
-                    : Color.FromArgb(44, 84, 115);
-
-                currentButton.ForeColor = Color.White;
-                currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
-            }
-
-            if (btn.Tag == null)
-                btn.Tag = btn.FillColor;
-
-            currentButton = btn;
-            currentButton.FillColor = Color.FromArgb(44, 84, 115);
-            currentButton.ForeColor = Color.FromArgb(255, 128, 0);
-            currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
+            ActivateButton(btn);
+           
+            OpenChildForm(new FormMovieList());
         }
+
+        
     }
 }
