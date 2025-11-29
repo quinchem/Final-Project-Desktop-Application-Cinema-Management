@@ -76,6 +76,54 @@ namespace SharedData.Repositories
             }
         }
 
+        /// Lưu Avatar Customer
+        /// </summary>
+        public bool SaveCustomerAvatar(string customerId, byte[] imageBytes)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+
+                // 1. Xóa ảnh cũ (nếu có)
+                string deleteSql = "DELETE FROM ImageStore WHERE related_id = @id AND image_type = 'customer';";
+                using (var cmd = new SqliteCommand(deleteSql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", customerId);
+                    cmd.ExecuteNonQuery();
+                }
+
+                // 2. Thêm ảnh mới
+                string insertSql = "INSERT INTO ImageStore (related_id, image_type, image_data) VALUES (@id, 'customer', @img);";
+                using (var cmd = new SqliteCommand(insertSql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", customerId);
+                    cmd.Parameters.Add("@img", SqliteType.Blob).Value = imageBytes;
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Lấy Avatar Customer
+        /// </summary>
+        public byte[] GetCustomerAvatar(string customerId)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                string sql = "SELECT image_data FROM ImageStore WHERE related_id = @id AND image_type = 'customer' LIMIT 1;";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", customerId);
+                    object result = cmd.ExecuteScalar();
+
+                    if (result == null || result == DBNull.Value) return null;
+                    return (byte[])result;
+                }
+            }
+        }
+
         /// <summary>
         /// Xóa ảnh staff
         /// </summary>
