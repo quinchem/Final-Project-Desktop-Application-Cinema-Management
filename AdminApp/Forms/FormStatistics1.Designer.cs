@@ -52,8 +52,38 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.Charts.WinForms.ChartFont chartFont1 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont2 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont3 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont4 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid1 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.Tick tick1 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont5 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid2 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.Tick tick2 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont6 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid3 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.PointLabel pointLabel1 = new Guna.Charts.WinForms.PointLabel();
+            Guna.Charts.WinForms.ChartFont chartFont7 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Tick tick3 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont8 = new Guna.Charts.WinForms.ChartFont();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.Charts.WinForms.ChartFont chartFont9 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont10 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont11 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont12 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid4 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.Tick tick4 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont13 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid5 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.Tick tick5 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont14 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid6 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.PointLabel pointLabel2 = new Guna.Charts.WinForms.PointLabel();
+            Guna.Charts.WinForms.ChartFont chartFont15 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Tick tick6 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont16 = new Guna.Charts.WinForms.ChartFont();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -63,41 +93,51 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             groupBox1 = new GroupBox();
-            guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            dtpFrom = new Guna.UI2.WinForms.Guna2DateTimePicker();
             groupBox2 = new GroupBox();
-            guna2DateTimePicker2 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            dtpTo = new Guna.UI2.WinForms.Guna2DateTimePicker();
             groupBox3 = new GroupBox();
-            guna2ComboBox3 = new Guna.UI2.WinForms.Guna2ComboBox();
+            YearCombo = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             label1 = new Label();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            lblTotalRevenue = new Guna.UI2.WinForms.Guna2HtmlLabel();
             pictureBox1 = new PictureBox();
             guna2CustomGradientPanel3 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            lblAvgRevenue = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            pictureBox3 = new PictureBox();
             guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             label2 = new Label();
             guna2CustomGradientPanel4 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            gunaChartRevenue = new Guna.Charts.WinForms.GunaChart();
             label3 = new Label();
             guna2CustomGradientPanel5 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            gunaChartTopMovies = new Guna.Charts.WinForms.GunaChart();
             label4 = new Label();
             guna2CustomGradientPanel6 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            lblTopMovie = new Label();
             pictureBox4 = new PictureBox();
             guna2CirclePictureBox4 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             label5 = new Label();
             guna2CustomGradientPanel7 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            lblTotalTickets = new Guna.UI2.WinForms.Guna2HtmlLabel();
             pictureBox5 = new PictureBox();
             guna2CirclePictureBox5 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             label7 = new Label();
             guna2CustomGradientPanel8 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            lblNewCustomer = new Guna.UI2.WinForms.Guna2HtmlLabel();
             pictureBox6 = new PictureBox();
             guna2CirclePictureBox6 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             label8 = new Label();
-            pictureBox3 = new PictureBox();
+            btnFilter = new Guna.UI2.WinForms.Guna2Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -105,6 +145,7 @@
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             guna2CustomGradientPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).BeginInit();
             guna2CustomGradientPanel4.SuspendLayout();
             guna2CustomGradientPanel5.SuspendLayout();
@@ -117,7 +158,6 @@
             guna2CustomGradientPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // guna2Button4
@@ -202,94 +242,97 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(guna2DateTimePicker1);
+            groupBox1.Controls.Add(dtpFrom);
             groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox1.Location = new Point(231, 123);
+            groupBox1.Location = new Point(150, 132);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(312, 74);
             groupBox1.TabIndex = 45;
             groupBox1.TabStop = false;
             groupBox1.Text = "Chọn ngày bắt đầu";
             // 
-            // guna2DateTimePicker1
+            // dtpFrom
             // 
-            guna2DateTimePicker1.BackColor = Color.White;
-            guna2DateTimePicker1.Checked = true;
-            guna2DateTimePicker1.CustomizableEdges = customizableEdges9;
-            guna2DateTimePicker1.FillColor = Color.White;
-            guna2DateTimePicker1.Font = new Font("Segoe UI", 9F);
-            guna2DateTimePicker1.ForeColor = Color.FromArgb(64, 64, 64);
-            guna2DateTimePicker1.Format = DateTimePickerFormat.Long;
-            guna2DateTimePicker1.Location = new Point(16, 26);
-            guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2DateTimePicker1.Size = new Size(279, 36);
-            guna2DateTimePicker1.TabIndex = 50;
-            guna2DateTimePicker1.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
+            dtpFrom.BackColor = Color.White;
+            dtpFrom.Checked = true;
+            dtpFrom.CustomizableEdges = customizableEdges9;
+            dtpFrom.FillColor = Color.White;
+            dtpFrom.Font = new Font("Segoe UI", 9F);
+            dtpFrom.ForeColor = Color.FromArgb(64, 64, 64);
+            dtpFrom.Format = DateTimePickerFormat.Long;
+            dtpFrom.Location = new Point(16, 26);
+            dtpFrom.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            dtpFrom.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            dtpFrom.Name = "dtpFrom";
+            dtpFrom.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            dtpFrom.Size = new Size(279, 36);
+            dtpFrom.TabIndex = 50;
+            dtpFrom.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
+            dtpFrom.ValueChanged += dtpFrom_ValueChanged;
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(guna2DateTimePicker2);
+            groupBox2.Controls.Add(dtpTo);
             groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox2.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox2.Location = new Point(567, 123);
+            groupBox2.Location = new Point(486, 132);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(312, 74);
             groupBox2.TabIndex = 48;
             groupBox2.TabStop = false;
             groupBox2.Text = "Chọn ngày kết thúc";
             // 
-            // guna2DateTimePicker2
+            // dtpTo
             // 
-            guna2DateTimePicker2.BackColor = Color.White;
-            guna2DateTimePicker2.Checked = true;
-            guna2DateTimePicker2.CustomizableEdges = customizableEdges11;
-            guna2DateTimePicker2.FillColor = Color.White;
-            guna2DateTimePicker2.FocusedColor = Color.White;
-            guna2DateTimePicker2.Font = new Font("Segoe UI", 9F);
-            guna2DateTimePicker2.ForeColor = Color.Black;
-            guna2DateTimePicker2.Format = DateTimePickerFormat.Long;
-            guna2DateTimePicker2.Location = new Point(16, 26);
-            guna2DateTimePicker2.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            guna2DateTimePicker2.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            guna2DateTimePicker2.Name = "guna2DateTimePicker2";
-            guna2DateTimePicker2.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2DateTimePicker2.Size = new Size(279, 36);
-            guna2DateTimePicker2.TabIndex = 51;
-            guna2DateTimePicker2.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
+            dtpTo.BackColor = Color.White;
+            dtpTo.Checked = true;
+            dtpTo.CustomizableEdges = customizableEdges11;
+            dtpTo.FillColor = Color.White;
+            dtpTo.FocusedColor = Color.White;
+            dtpTo.Font = new Font("Segoe UI", 9F);
+            dtpTo.ForeColor = Color.Black;
+            dtpTo.Format = DateTimePickerFormat.Long;
+            dtpTo.Location = new Point(16, 26);
+            dtpTo.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            dtpTo.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            dtpTo.Name = "dtpTo";
+            dtpTo.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            dtpTo.Size = new Size(279, 36);
+            dtpTo.TabIndex = 51;
+            dtpTo.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
+            dtpTo.ValueChanged += dtpTo_ValueChanged;
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(guna2ComboBox3);
+            groupBox3.Controls.Add(YearCombo);
             groupBox3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox3.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox3.Location = new Point(905, 123);
+            groupBox3.Location = new Point(824, 132);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(312, 74);
             groupBox3.TabIndex = 49;
             groupBox3.TabStop = false;
             groupBox3.Text = "Chọn năm";
             // 
-            // guna2ComboBox3
+            // YearCombo
             // 
-            guna2ComboBox3.BackColor = Color.White;
-            guna2ComboBox3.CustomizableEdges = customizableEdges13;
-            guna2ComboBox3.DrawMode = DrawMode.OwnerDrawFixed;
-            guna2ComboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
-            guna2ComboBox3.FocusedColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox3.Font = new Font("Segoe UI", 10F);
-            guna2ComboBox3.ForeColor = Color.FromArgb(68, 88, 112);
-            guna2ComboBox3.ItemHeight = 30;
-            guna2ComboBox3.Items.AddRange(new object[] { "2023", "2024", "2025" });
-            guna2ComboBox3.Location = new Point(17, 26);
-            guna2ComboBox3.Name = "guna2ComboBox3";
-            guna2ComboBox3.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2ComboBox3.Size = new Size(279, 36);
-            guna2ComboBox3.TabIndex = 47;
+            YearCombo.BackColor = Color.White;
+            YearCombo.CustomizableEdges = customizableEdges13;
+            YearCombo.DrawMode = DrawMode.OwnerDrawFixed;
+            YearCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            YearCombo.FocusedColor = Color.FromArgb(94, 148, 255);
+            YearCombo.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            YearCombo.Font = new Font("Segoe UI", 10F);
+            YearCombo.ForeColor = Color.FromArgb(68, 88, 112);
+            YearCombo.ItemHeight = 30;
+            YearCombo.Items.AddRange(new object[] { "2023", "2024", "2025" });
+            YearCombo.Location = new Point(17, 26);
+            YearCombo.Name = "YearCombo";
+            YearCombo.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            YearCombo.Size = new Size(279, 36);
+            YearCombo.TabIndex = 47;
+            YearCombo.SelectedIndexChanged += YearCombo_SelectedIndexChanged;
             // 
             // guna2CirclePictureBox1
             // 
@@ -320,6 +363,7 @@
             // 
             guna2CustomGradientPanel1.BorderColor = Color.FromArgb(92, 124, 150);
             guna2CustomGradientPanel1.BorderRadius = 10;
+            guna2CustomGradientPanel1.Controls.Add(lblTotalRevenue);
             guna2CustomGradientPanel1.Controls.Add(pictureBox1);
             guna2CustomGradientPanel1.Controls.Add(guna2CirclePictureBox1);
             guna2CustomGradientPanel1.Controls.Add(label1);
@@ -333,6 +377,17 @@
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2CustomGradientPanel1.Size = new Size(585, 125);
             guna2CustomGradientPanel1.TabIndex = 0;
+            // 
+            // lblTotalRevenue
+            // 
+            lblTotalRevenue.BackColor = Color.Transparent;
+            lblTotalRevenue.Font = new Font("Arial Black", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalRevenue.ForeColor = SystemColors.Info;
+            lblTotalRevenue.Location = new Point(154, 48);
+            lblTotalRevenue.Name = "lblTotalRevenue";
+            lblTotalRevenue.Size = new Size(61, 62);
+            lblTotalRevenue.TabIndex = 6;
+            lblTotalRevenue.Text = "40";
             // 
             // pictureBox1
             // 
@@ -349,6 +404,7 @@
             // 
             guna2CustomGradientPanel3.BorderColor = Color.FromArgb(92, 124, 150);
             guna2CustomGradientPanel3.BorderRadius = 10;
+            guna2CustomGradientPanel3.Controls.Add(lblAvgRevenue);
             guna2CustomGradientPanel3.Controls.Add(pictureBox3);
             guna2CustomGradientPanel3.Controls.Add(guna2CirclePictureBox2);
             guna2CustomGradientPanel3.Controls.Add(label2);
@@ -362,6 +418,27 @@
             guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2CustomGradientPanel3.Size = new Size(585, 125);
             guna2CustomGradientPanel3.TabIndex = 3;
+            // 
+            // lblAvgRevenue
+            // 
+            lblAvgRevenue.BackColor = Color.Transparent;
+            lblAvgRevenue.Font = new Font("Arial Black", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAvgRevenue.ForeColor = SystemColors.Info;
+            lblAvgRevenue.Location = new Point(194, 48);
+            lblAvgRevenue.Name = "lblAvgRevenue";
+            lblAvgRevenue.Size = new Size(61, 62);
+            lblAvgRevenue.TabIndex = 5;
+            lblAvgRevenue.Text = "40";
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = Color.White;
+            pictureBox3.Location = new Point(42, 30);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(66, 63);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 4;
+            pictureBox3.TabStop = false;
             // 
             // guna2CirclePictureBox2
             // 
@@ -381,17 +458,18 @@
             label2.BackColor = Color.FromArgb(125, 167, 199);
             label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(236, 21);
+            label2.Location = new Point(194, 21);
             label2.Name = "label2";
             label2.RightToLeft = RightToLeft.Yes;
-            label2.Size = new Size(242, 25);
+            label2.Size = new Size(339, 25);
             label2.TabIndex = 1;
-            label2.Text = "DOANH THU TRUNG BÌNH";
+            label2.Text = "DOANH THU TRUNG BÌNH MỖI NGÀY";
             // 
             // guna2CustomGradientPanel4
             // 
             guna2CustomGradientPanel4.BorderColor = Color.White;
             guna2CustomGradientPanel4.BorderRadius = 10;
+            guna2CustomGradientPanel4.Controls.Add(gunaChartRevenue);
             guna2CustomGradientPanel4.Controls.Add(label3);
             guna2CustomGradientPanel4.CustomizableEdges = customizableEdges21;
             guna2CustomGradientPanel4.FillColor = Color.FromArgb(125, 167, 199);
@@ -401,8 +479,42 @@
             guna2CustomGradientPanel4.Location = new Point(113, 549);
             guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
             guna2CustomGradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            guna2CustomGradientPanel4.Size = new Size(656, 248);
+            guna2CustomGradientPanel4.Size = new Size(656, 354);
             guna2CustomGradientPanel4.TabIndex = 3;
+            // 
+            // gunaChartRevenue
+            // 
+            chartFont1.FontName = "Arial";
+            gunaChartRevenue.Legend.LabelFont = chartFont1;
+            gunaChartRevenue.Location = new Point(22, 62);
+            gunaChartRevenue.Name = "gunaChartRevenue";
+            gunaChartRevenue.Size = new Size(605, 268);
+            gunaChartRevenue.TabIndex = 2;
+            chartFont2.FontName = "Arial";
+            chartFont2.Size = 12;
+            chartFont2.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
+            gunaChartRevenue.Title.Font = chartFont2;
+            chartFont3.FontName = "Arial";
+            gunaChartRevenue.Tooltips.BodyFont = chartFont3;
+            chartFont4.FontName = "Arial";
+            chartFont4.Size = 9;
+            chartFont4.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
+            gunaChartRevenue.Tooltips.TitleFont = chartFont4;
+            gunaChartRevenue.XAxes.GridLines = grid1;
+            chartFont5.FontName = "Arial";
+            tick1.Font = chartFont5;
+            gunaChartRevenue.XAxes.Ticks = tick1;
+            gunaChartRevenue.YAxes.GridLines = grid2;
+            chartFont6.FontName = "Arial";
+            tick2.Font = chartFont6;
+            gunaChartRevenue.YAxes.Ticks = tick2;
+            gunaChartRevenue.ZAxes.GridLines = grid3;
+            chartFont7.FontName = "Arial";
+            pointLabel1.Font = chartFont7;
+            gunaChartRevenue.ZAxes.PointLabels = pointLabel1;
+            chartFont8.FontName = "Arial";
+            tick3.Font = chartFont8;
+            gunaChartRevenue.ZAxes.Ticks = tick3;
             // 
             // label3
             // 
@@ -421,6 +533,7 @@
             // 
             guna2CustomGradientPanel5.BorderColor = Color.FromArgb(92, 124, 150);
             guna2CustomGradientPanel5.BorderRadius = 10;
+            guna2CustomGradientPanel5.Controls.Add(gunaChartTopMovies);
             guna2CustomGradientPanel5.Controls.Add(label4);
             guna2CustomGradientPanel5.CustomizableEdges = customizableEdges23;
             guna2CustomGradientPanel5.FillColor = Color.FromArgb(125, 167, 199);
@@ -430,8 +543,42 @@
             guna2CustomGradientPanel5.Location = new Point(787, 549);
             guna2CustomGradientPanel5.Name = "guna2CustomGradientPanel5";
             guna2CustomGradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            guna2CustomGradientPanel5.Size = new Size(520, 248);
+            guna2CustomGradientPanel5.Size = new Size(520, 354);
             guna2CustomGradientPanel5.TabIndex = 3;
+            // 
+            // gunaChartTopMovies
+            // 
+            chartFont9.FontName = "Arial";
+            gunaChartTopMovies.Legend.LabelFont = chartFont9;
+            gunaChartTopMovies.Location = new Point(25, 62);
+            gunaChartTopMovies.Name = "gunaChartTopMovies";
+            gunaChartTopMovies.Size = new Size(476, 268);
+            gunaChartTopMovies.TabIndex = 2;
+            chartFont10.FontName = "Arial";
+            chartFont10.Size = 12;
+            chartFont10.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
+            gunaChartTopMovies.Title.Font = chartFont10;
+            chartFont11.FontName = "Arial";
+            gunaChartTopMovies.Tooltips.BodyFont = chartFont11;
+            chartFont12.FontName = "Arial";
+            chartFont12.Size = 9;
+            chartFont12.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
+            gunaChartTopMovies.Tooltips.TitleFont = chartFont12;
+            gunaChartTopMovies.XAxes.GridLines = grid4;
+            chartFont13.FontName = "Arial";
+            tick4.Font = chartFont13;
+            gunaChartTopMovies.XAxes.Ticks = tick4;
+            gunaChartTopMovies.YAxes.GridLines = grid5;
+            chartFont14.FontName = "Arial";
+            tick5.Font = chartFont14;
+            gunaChartTopMovies.YAxes.Ticks = tick5;
+            gunaChartTopMovies.ZAxes.GridLines = grid6;
+            chartFont15.FontName = "Arial";
+            pointLabel2.Font = chartFont15;
+            gunaChartTopMovies.ZAxes.PointLabels = pointLabel2;
+            chartFont16.FontName = "Arial";
+            tick6.Font = chartFont16;
+            gunaChartTopMovies.ZAxes.Ticks = tick6;
             // 
             // label4
             // 
@@ -450,6 +597,7 @@
             // 
             guna2CustomGradientPanel6.BorderColor = Color.FromArgb(92, 124, 150);
             guna2CustomGradientPanel6.BorderRadius = 10;
+            guna2CustomGradientPanel6.Controls.Add(lblTopMovie);
             guna2CustomGradientPanel6.Controls.Add(pictureBox4);
             guna2CustomGradientPanel6.Controls.Add(guna2CirclePictureBox4);
             guna2CustomGradientPanel6.Controls.Add(label5);
@@ -463,6 +611,18 @@
             guna2CustomGradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges27;
             guna2CustomGradientPanel6.Size = new Size(391, 125);
             guna2CustomGradientPanel6.TabIndex = 7;
+            // 
+            // lblTopMovie
+            // 
+            lblTopMovie.AutoSize = true;
+            lblTopMovie.BackColor = Color.FromArgb(125, 167, 199);
+            lblTopMovie.Font = new Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTopMovie.ForeColor = SystemColors.Info;
+            lblTopMovie.Location = new Point(139, 49);
+            lblTopMovie.Name = "lblTopMovie";
+            lblTopMovie.Size = new Size(38, 27);
+            lblTopMovie.TabIndex = 3;
+            lblTopMovie.Text = "40";
             // 
             // pictureBox4
             // 
@@ -504,6 +664,7 @@
             // 
             guna2CustomGradientPanel7.BorderColor = Color.FromArgb(92, 124, 150);
             guna2CustomGradientPanel7.BorderRadius = 10;
+            guna2CustomGradientPanel7.Controls.Add(lblTotalTickets);
             guna2CustomGradientPanel7.Controls.Add(pictureBox5);
             guna2CustomGradientPanel7.Controls.Add(guna2CirclePictureBox5);
             guna2CustomGradientPanel7.Controls.Add(label7);
@@ -517,6 +678,17 @@
             guna2CustomGradientPanel7.ShadowDecoration.CustomizableEdges = customizableEdges30;
             guna2CustomGradientPanel7.Size = new Size(391, 125);
             guna2CustomGradientPanel7.TabIndex = 6;
+            // 
+            // lblTotalTickets
+            // 
+            lblTotalTickets.BackColor = Color.Transparent;
+            lblTotalTickets.Font = new Font("Arial Black", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalTickets.ForeColor = SystemColors.Info;
+            lblTotalTickets.Location = new Point(154, 49);
+            lblTotalTickets.Name = "lblTotalTickets";
+            lblTotalTickets.Size = new Size(61, 62);
+            lblTotalTickets.TabIndex = 6;
+            lblTotalTickets.Text = "40";
             // 
             // pictureBox5
             // 
@@ -558,6 +730,7 @@
             // 
             guna2CustomGradientPanel8.BorderColor = Color.FromArgb(92, 124, 150);
             guna2CustomGradientPanel8.BorderRadius = 10;
+            guna2CustomGradientPanel8.Controls.Add(lblNewCustomer);
             guna2CustomGradientPanel8.Controls.Add(pictureBox6);
             guna2CustomGradientPanel8.Controls.Add(guna2CirclePictureBox6);
             guna2CustomGradientPanel8.Controls.Add(label8);
@@ -571,6 +744,17 @@
             guna2CustomGradientPanel8.ShadowDecoration.CustomizableEdges = customizableEdges33;
             guna2CustomGradientPanel8.Size = new Size(391, 125);
             guna2CustomGradientPanel8.TabIndex = 5;
+            // 
+            // lblNewCustomer
+            // 
+            lblNewCustomer.BackColor = Color.Transparent;
+            lblNewCustomer.Font = new Font("Arial Black", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNewCustomer.ForeColor = SystemColors.Info;
+            lblNewCustomer.Location = new Point(173, 49);
+            lblNewCustomer.Name = "lblNewCustomer";
+            lblNewCustomer.Size = new Size(61, 62);
+            lblNewCustomer.TabIndex = 6;
+            lblNewCustomer.Text = "40";
             // 
             // pictureBox6
             // 
@@ -607,15 +791,28 @@
             label8.TabIndex = 1;
             label8.Text = "TỔNG SỐ KHÁCH HÀNG MỚI";
             // 
-            // pictureBox3
+            // btnFilter
             // 
-            pictureBox3.BackColor = Color.White;
-            pictureBox3.Location = new Point(42, 30);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(66, 63);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 4;
-            pictureBox3.TabStop = false;
+            btnFilter.BorderRadius = 8;
+            btnFilter.CustomizableEdges = customizableEdges34;
+            btnFilter.DisabledState.BorderColor = Color.DarkGray;
+            btnFilter.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnFilter.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnFilter.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnFilter.FillColor = Color.Silver;
+            btnFilter.FocusedColor = Color.FromArgb(245, 131, 35);
+            btnFilter.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnFilter.ForeColor = Color.White;
+            btnFilter.HoverState.FillColor = Color.FromArgb(255, 128, 0);
+            btnFilter.Image = Properties.Resources.search;
+            btnFilter.ImageAlign = HorizontalAlignment.Left;
+            btnFilter.Location = new Point(1168, 156);
+            btnFilter.Name = "btnFilter";
+            btnFilter.ShadowDecoration.CustomizableEdges = customizableEdges35;
+            btnFilter.Size = new Size(91, 38);
+            btnFilter.TabIndex = 50;
+            btnFilter.Text = "Tìm";
+            btnFilter.TextAlign = HorizontalAlignment.Right;
             // 
             // FormStatistics1
             // 
@@ -623,6 +820,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
             ClientSize = new Size(1402, 923);
+            Controls.Add(btnFilter);
             Controls.Add(guna2CustomGradientPanel6);
             Controls.Add(guna2CustomGradientPanel7);
             Controls.Add(guna2CustomGradientPanel5);
@@ -640,6 +838,7 @@
             Controls.Add(guna2Button4);
             Name = "FormStatistics1";
             Text = "FormStatistics";
+            Load += FormStatistics1_Load;
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
@@ -649,6 +848,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             guna2CustomGradientPanel3.ResumeLayout(false);
             guna2CustomGradientPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).EndInit();
             guna2CustomGradientPanel4.ResumeLayout(false);
             guna2CustomGradientPanel4.PerformLayout();
@@ -666,7 +866,6 @@
             guna2CustomGradientPanel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
         }
 
@@ -679,10 +878,10 @@
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
-        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker2;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtpFrom;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtpTo;
         private GroupBox groupBox3;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox3;
+        private Guna.UI2.WinForms.Guna2ComboBox YearCombo;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel8;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
         private Label label1;
@@ -708,6 +907,14 @@
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox6;
         private Label label8;
         private PictureBox pictureBox3;
+        private Guna.UI2.WinForms.Guna2Button btnFilter;
+        private Guna.Charts.WinForms.GunaChart gunaChartRevenue;
+        private Guna.Charts.WinForms.GunaChart gunaChartTopMovies;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTotalRevenue;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblAvgRevenue;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTotalTickets;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblNewCustomer;
+        private Label lblTopMovie;
     }
 }
 
