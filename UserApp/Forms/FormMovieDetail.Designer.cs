@@ -1,4 +1,6 @@
-﻿namespace UserApp
+﻿using Guna.UI2.WinForms.Suite;
+
+namespace UserApp
 {
     partial class FormMovieDetail
     {
@@ -28,15 +30,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            CustomizableEdges customizableEdges1 = new CustomizableEdges();
+            CustomizableEdges customizableEdges2 = new CustomizableEdges();
+            CustomizableEdges customizableEdges3 = new CustomizableEdges();
+            CustomizableEdges customizableEdges4 = new CustomizableEdges();
+            CustomizableEdges customizableEdges5 = new CustomizableEdges();
+            CustomizableEdges customizableEdges6 = new CustomizableEdges();
+            CustomizableEdges customizableEdges7 = new CustomizableEdges();
+            CustomizableEdges customizableEdges8 = new CustomizableEdges();
+            CustomizableEdges customizableEdges9 = new CustomizableEdges();
+            CustomizableEdges customizableEdges10 = new CustomizableEdges();
             panelChiTiet = new Panel();
+            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             lblGenre = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             Trailer = new Guna.UI2.WinForms.Guna2Button();
@@ -67,6 +72,7 @@
             panelChiTiet.AutoScrollMargin = new Size(0, 700);
             panelChiTiet.AutoScrollMinSize = new Size(0, 400);
             panelChiTiet.BackColor = Color.FromArgb(92, 124, 150);
+            panelChiTiet.Controls.Add(guna2Button1);
             panelChiTiet.Controls.Add(lblGenre);
             panelChiTiet.Controls.Add(guna2HtmlLabel14);
             panelChiTiet.Controls.Add(Trailer);
@@ -93,6 +99,33 @@
             panelChiTiet.Size = new Size(1196, 727);
             panelChiTiet.TabIndex = 0;
             // 
+            // guna2Button1
+            // 
+            guna2Button1.BackColor = Color.Transparent;
+            guna2Button1.BorderRadius = 28;
+            guna2Button1.CustomizableEdges = customizableEdges1;
+            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button1.FillColor = SystemColors.ActiveBorder;
+            guna2Button1.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button1.ForeColor = Color.White;
+            guna2Button1.ImageSize = new Size(30, 30);
+            guna2Button1.Location = new Point(895, 100);
+            guna2Button1.Margin = new Padding(2);
+            guna2Button1.Name = "guna2Button1";
+            guna2Button1.ShadowDecoration.BorderRadius = 28;
+            guna2Button1.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Button1.ShadowDecoration.Depth = 40;
+            guna2Button1.ShadowDecoration.Enabled = true;
+            guna2Button1.ShadowDecoration.Shadow = new Padding(0, 0, 3, 5);
+            guna2Button1.Size = new Size(155, 46);
+            guna2Button1.TabIndex = 21;
+            guna2Button1.Text = "QUAY LẠI";
+            guna2Button1.Click += btnQuayLai_Click;
+            // 
             // lblGenre
             // 
             lblGenre.BackColor = Color.Transparent;
@@ -118,7 +151,7 @@
             // Trailer
             // 
             Trailer.BorderRadius = 15;
-            Trailer.CustomizableEdges = customizableEdges9;
+            Trailer.CustomizableEdges = customizableEdges3;
             Trailer.DisabledState.BorderColor = Color.DarkGray;
             Trailer.DisabledState.CustomBorderColor = Color.DarkGray;
             Trailer.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -128,7 +161,7 @@
             Trailer.ForeColor = Color.FromArgb(245, 131, 35);
             Trailer.Location = new Point(117, 966);
             Trailer.Name = "Trailer";
-            Trailer.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            Trailer.ShadowDecoration.CustomizableEdges = customizableEdges4;
             Trailer.Size = new Size(145, 49);
             Trailer.TabIndex = 18;
             Trailer.Text = "Trailer";
@@ -148,7 +181,7 @@
             // btnMoTa
             // 
             btnMoTa.BorderRadius = 15;
-            btnMoTa.CustomizableEdges = customizableEdges11;
+            btnMoTa.CustomizableEdges = customizableEdges5;
             btnMoTa.DisabledState.BorderColor = Color.DarkGray;
             btnMoTa.DisabledState.CustomBorderColor = Color.DarkGray;
             btnMoTa.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -158,7 +191,7 @@
             btnMoTa.ForeColor = Color.FromArgb(245, 131, 35);
             btnMoTa.Location = new Point(106, 529);
             btnMoTa.Name = "btnMoTa";
-            btnMoTa.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            btnMoTa.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnMoTa.Size = new Size(145, 49);
             btnMoTa.TabIndex = 16;
             btnMoTa.Text = "Mô tả";
@@ -167,12 +200,12 @@
             // 
             btnDatVe.BackColor = Color.Transparent;
             btnDatVe.BorderRadius = 28;
-            btnDatVe.CustomizableEdges = customizableEdges13;
+            btnDatVe.CustomizableEdges = customizableEdges7;
             btnDatVe.DisabledState.BorderColor = Color.DarkGray;
             btnDatVe.DisabledState.CustomBorderColor = Color.DarkGray;
             btnDatVe.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnDatVe.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnDatVe.FillColor = Color.FromArgb(45, 76, 101);
+            btnDatVe.FillColor = Color.FromArgb(255, 128, 0);
             btnDatVe.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDatVe.ForeColor = Color.White;
             btnDatVe.Image = Properties.Resources.DatVe;
@@ -183,7 +216,7 @@
             btnDatVe.Name = "btnDatVe";
             btnDatVe.ShadowDecoration.BorderRadius = 28;
             btnDatVe.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            btnDatVe.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            btnDatVe.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnDatVe.ShadowDecoration.Depth = 40;
             btnDatVe.ShadowDecoration.Enabled = true;
             btnDatVe.ShadowDecoration.Shadow = new Padding(0, 0, 3, 5);
@@ -338,11 +371,11 @@
             // 
             // picPoster
             // 
-            picPoster.CustomizableEdges = customizableEdges15;
+            picPoster.CustomizableEdges = customizableEdges9;
             picPoster.ImageRotate = 0F;
             picPoster.Location = new Point(106, 116);
             picPoster.Name = "picPoster";
-            picPoster.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            picPoster.ShadowDecoration.CustomizableEdges = customizableEdges10;
             picPoster.Size = new Size(268, 392);
             picPoster.TabIndex = 0;
             picPoster.TabStop = false;
@@ -385,5 +418,7 @@
         private Guna.UI2.WinForms.Guna2Button Trailer;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblGenre;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
+        private Guna.UI2.WinForms.Guna2Button btnQuayLai;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
     }
 }
