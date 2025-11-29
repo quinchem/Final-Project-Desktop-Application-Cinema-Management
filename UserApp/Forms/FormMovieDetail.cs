@@ -97,7 +97,7 @@ namespace UserApp
 
             if (parent != null)
             {
-                parent.OpenChildForm(new FormShowtimeDetail(movieId));
+                _parentForm.OpenChildForm(new FormShowtimeDetail(_parentForm, movieId));
             }
         }
 
