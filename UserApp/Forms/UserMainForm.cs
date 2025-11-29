@@ -8,7 +8,7 @@ namespace UserApp
         {
             InitializeComponent();
             UpdateHeaderUI();
-            
+
         }
         private Guna.UI2.WinForms.Guna2Button currentButton;
 
@@ -64,7 +64,7 @@ namespace UserApp
             loginForm = new FormLogin(this);
             OpenChildForm(loginForm);
             loginForm.ShowLogin();
-            
+
         }
 
         // Biến lưu thông tin user đã login
@@ -75,6 +75,7 @@ namespace UserApp
         {
             CurrentUser = customer;
             UpdateHeaderUI();
+            
         }
 
         private void UpdateHeaderUI()
@@ -176,7 +177,7 @@ namespace UserApp
             if (btn == null) return;
 
             ActivateButton(btn);
-            
+
             OpenChildForm(new FormShowtimeList());
         }
 
@@ -186,9 +187,11 @@ namespace UserApp
             if (btn == null) return;
 
             ActivateButton(btn);
-           
+
             OpenChildForm(new FormMovieList());
         }
+
+        
     }
 }
 
