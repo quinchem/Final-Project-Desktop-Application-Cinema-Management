@@ -448,6 +448,7 @@ namespace UserApp
             string showtimeId = _selectedShowtime.showtime_id;
             string auditoriumId = _selectedShowtime.auditorium_id;
 
+
         }
 
         private void btnChonCho_Click(object sender, EventArgs e)

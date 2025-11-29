@@ -1,6 +1,6 @@
 [
   {
-    "SeatId": "A1",
+    "SeatId": "A01",
     "Row": "A",
     "Col": 1,
     "Type": "Thường",
@@ -9,16 +9,16 @@
     "Y": 90
   },
   {
-    "SeatId": "A2",
+    "SeatId": "A02",
     "Row": "A",
     "Col": 2,
     "Type": "Thường",
     "Status": "Bình thường",
     "X": 133,
-    "Y": 90
+    "Y": 91
   },
   {
-    "SeatId": "A3",
+    "SeatId": "A03",
     "Row": "A",
     "Col": 3,
     "Type": "Thường",
@@ -27,7 +27,7 @@
     "Y": 90
   },
   {
-    "SeatId": "A4",
+    "SeatId": "A04",
     "Row": "A",
     "Col": 4,
     "Type": "Thường",
@@ -36,7 +36,7 @@
     "Y": 90
   },
   {
-    "SeatId": "A5",
+    "SeatId": "A05",
     "Row": "A",
     "Col": 5,
     "Type": "Thường",
@@ -45,7 +45,7 @@
     "Y": 90
   },
   {
-    "SeatId": "A6",
+    "SeatId": "A06",
     "Row": "A",
     "Col": 6,
     "Type": "Thường",
@@ -54,7 +54,7 @@
     "Y": 90
   },
   {
-    "SeatId": "A7",
+    "SeatId": "A07",
     "Row": "A",
     "Col": 7,
     "Type": "Thường",
@@ -63,7 +63,7 @@
     "Y": 90
   },
   {
-    "SeatId": "A8",
+    "SeatId": "A08",
     "Row": "A",
     "Col": 8,
     "Type": "Thường",
@@ -72,7 +72,7 @@
     "Y": 90
   },
   {
-    "SeatId": "A9",
+    "SeatId": "A09",
     "Row": "A",
     "Col": 9,
     "Type": "Thường",
@@ -135,7 +135,7 @@
     "Y": 90
   },
   {
-    "SeatId": "B1",
+    "SeatId": "B01",
     "Row": "B",
     "Col": 1,
     "Type": "Thường",
@@ -144,7 +144,7 @@
     "Y": 150
   },
   {
-    "SeatId": "B2",
+    "SeatId": "B02",
     "Row": "B",
     "Col": 2,
     "Type": "Thường",
@@ -153,7 +153,7 @@
     "Y": 150
   },
   {
-    "SeatId": "B3",
+    "SeatId": "B03",
     "Row": "B",
     "Col": 3,
     "Type": "Thường",
@@ -162,7 +162,7 @@
     "Y": 150
   },
   {
-    "SeatId": "B4",
+    "SeatId": "B04",
     "Row": "B",
     "Col": 4,
     "Type": "Thường",
@@ -171,7 +171,7 @@
     "Y": 150
   },
   {
-    "SeatId": "B5",
+    "SeatId": "B05",
     "Row": "B",
     "Col": 5,
     "Type": "Thường",
@@ -180,7 +180,7 @@
     "Y": 150
   },
   {
-    "SeatId": "B6",
+    "SeatId": "B06",
     "Row": "B",
     "Col": 6,
     "Type": "Thường",
@@ -189,7 +189,7 @@
     "Y": 150
   },
   {
-    "SeatId": "B7",
+    "SeatId": "B07",
     "Row": "B",
     "Col": 7,
     "Type": "Thường",
@@ -198,7 +198,7 @@
     "Y": 150
   },
   {
-    "SeatId": "B8",
+    "SeatId": "B08",
     "Row": "B",
     "Col": 8,
     "Type": "Thường",
@@ -207,7 +207,7 @@
     "Y": 150
   },
   {
-    "SeatId": "B9",
+    "SeatId": "B09",
     "Row": "B",
     "Col": 9,
     "Type": "Thường",
@@ -270,7 +270,7 @@
     "Y": 150
   },
   {
-    "SeatId": "C1",
+    "SeatId": "C01",
     "Row": "C",
     "Col": 1,
     "Type": "Thường",
@@ -279,7 +279,7 @@
     "Y": 210
   },
   {
-    "SeatId": "C2",
+    "SeatId": "C02",
     "Row": "C",
     "Col": 2,
     "Type": "Thường",
@@ -288,7 +288,7 @@
     "Y": 210
   },
   {
-    "SeatId": "C3",
+    "SeatId": "C03",
     "Row": "C",
     "Col": 3,
     "Type": "Thường",
@@ -297,7 +297,7 @@
     "Y": 210
   },
   {
-    "SeatId": "C4",
+    "SeatId": "C04",
     "Row": "C",
     "Col": 4,
     "Type": "Thường",
@@ -306,7 +306,7 @@
     "Y": 210
   },
   {
-    "SeatId": "C5",
+    "SeatId": "C05",
     "Row": "C",
     "Col": 5,
     "Type": "Thường",
@@ -315,7 +315,7 @@
     "Y": 210
   },
   {
-    "SeatId": "C6",
+    "SeatId": "C06",
     "Row": "C",
     "Col": 6,
     "Type": "Thường",
@@ -324,7 +324,7 @@
     "Y": 210
   },
   {
-    "SeatId": "C7",
+    "SeatId": "C07",
     "Row": "C",
     "Col": 7,
     "Type": "Thường",
@@ -333,7 +333,7 @@
     "Y": 210
   },
   {
-    "SeatId": "C8",
+    "SeatId": "C08",
     "Row": "C",
     "Col": 8,
     "Type": "Thường",
@@ -342,7 +342,7 @@
     "Y": 210
   },
   {
-    "SeatId": "C9",
+    "SeatId": "C09",
     "Row": "C",
     "Col": 9,
     "Type": "Thường",
@@ -405,7 +405,7 @@
     "Y": 210
   },
   {
-    "SeatId": "D1",
+    "SeatId": "D01",
     "Row": "D",
     "Col": 1,
     "Type": "VIP",
@@ -414,7 +414,7 @@
     "Y": 270
   },
   {
-    "SeatId": "D2",
+    "SeatId": "D02",
     "Row": "D",
     "Col": 2,
     "Type": "VIP",
@@ -423,7 +423,7 @@
     "Y": 270
   },
   {
-    "SeatId": "D3",
+    "SeatId": "D03",
     "Row": "D",
     "Col": 3,
     "Type": "VIP",
@@ -432,7 +432,7 @@
     "Y": 270
   },
   {
-    "SeatId": "D4",
+    "SeatId": "D04",
     "Row": "D",
     "Col": 4,
     "Type": "VIP",
@@ -441,7 +441,7 @@
     "Y": 270
   },
   {
-    "SeatId": "D5",
+    "SeatId": "D05",
     "Row": "D",
     "Col": 5,
     "Type": "VIP",
@@ -450,7 +450,7 @@
     "Y": 270
   },
   {
-    "SeatId": "D6",
+    "SeatId": "D06",
     "Row": "D",
     "Col": 6,
     "Type": "VIP",
@@ -459,7 +459,7 @@
     "Y": 270
   },
   {
-    "SeatId": "D7",
+    "SeatId": "D07",
     "Row": "D",
     "Col": 7,
     "Type": "VIP",
@@ -468,7 +468,7 @@
     "Y": 270
   },
   {
-    "SeatId": "D8",
+    "SeatId": "D08",
     "Row": "D",
     "Col": 8,
     "Type": "VIP",
@@ -477,7 +477,7 @@
     "Y": 270
   },
   {
-    "SeatId": "D9",
+    "SeatId": "D09",
     "Row": "D",
     "Col": 9,
     "Type": "VIP",
@@ -540,7 +540,7 @@
     "Y": 270
   },
   {
-    "SeatId": "E1",
+    "SeatId": "E01",
     "Row": "E",
     "Col": 1,
     "Type": "VIP",
@@ -549,7 +549,7 @@
     "Y": 330
   },
   {
-    "SeatId": "E2",
+    "SeatId": "E02",
     "Row": "E",
     "Col": 2,
     "Type": "VIP",
@@ -558,7 +558,7 @@
     "Y": 330
   },
   {
-    "SeatId": "E3",
+    "SeatId": "E03",
     "Row": "E",
     "Col": 3,
     "Type": "VIP",
@@ -567,7 +567,7 @@
     "Y": 330
   },
   {
-    "SeatId": "E4",
+    "SeatId": "E04",
     "Row": "E",
     "Col": 4,
     "Type": "VIP",
@@ -576,7 +576,7 @@
     "Y": 330
   },
   {
-    "SeatId": "E5",
+    "SeatId": "E05",
     "Row": "E",
     "Col": 5,
     "Type": "VIP",
@@ -585,7 +585,7 @@
     "Y": 330
   },
   {
-    "SeatId": "E6",
+    "SeatId": "E06",
     "Row": "E",
     "Col": 6,
     "Type": "VIP",
@@ -594,7 +594,7 @@
     "Y": 330
   },
   {
-    "SeatId": "E7",
+    "SeatId": "E07",
     "Row": "E",
     "Col": 7,
     "Type": "VIP",
@@ -603,7 +603,7 @@
     "Y": 330
   },
   {
-    "SeatId": "E8",
+    "SeatId": "E08",
     "Row": "E",
     "Col": 8,
     "Type": "VIP",
@@ -612,7 +612,7 @@
     "Y": 330
   },
   {
-    "SeatId": "E9",
+    "SeatId": "E09",
     "Row": "E",
     "Col": 9,
     "Type": "VIP",
@@ -675,7 +675,7 @@
     "Y": 330
   },
   {
-    "SeatId": "F1",
+    "SeatId": "F01",
     "Row": "F",
     "Col": 1,
     "Type": "VIP",
@@ -684,7 +684,7 @@
     "Y": 390
   },
   {
-    "SeatId": "F2",
+    "SeatId": "F02",
     "Row": "F",
     "Col": 2,
     "Type": "VIP",
@@ -693,7 +693,7 @@
     "Y": 390
   },
   {
-    "SeatId": "F3",
+    "SeatId": "F03",
     "Row": "F",
     "Col": 3,
     "Type": "VIP",
@@ -702,7 +702,7 @@
     "Y": 390
   },
   {
-    "SeatId": "F4",
+    "SeatId": "F04",
     "Row": "F",
     "Col": 4,
     "Type": "VIP",
@@ -711,7 +711,7 @@
     "Y": 390
   },
   {
-    "SeatId": "F5",
+    "SeatId": "F05",
     "Row": "F",
     "Col": 5,
     "Type": "VIP",
@@ -720,7 +720,7 @@
     "Y": 390
   },
   {
-    "SeatId": "F6",
+    "SeatId": "F06",
     "Row": "F",
     "Col": 6,
     "Type": "VIP",
@@ -729,7 +729,7 @@
     "Y": 390
   },
   {
-    "SeatId": "F7",
+    "SeatId": "F07",
     "Row": "F",
     "Col": 7,
     "Type": "VIP",
@@ -738,7 +738,7 @@
     "Y": 390
   },
   {
-    "SeatId": "F8",
+    "SeatId": "F08",
     "Row": "F",
     "Col": 8,
     "Type": "VIP",
@@ -747,7 +747,7 @@
     "Y": 390
   },
   {
-    "SeatId": "F9",
+    "SeatId": "F09",
     "Row": "F",
     "Col": 9,
     "Type": "VIP",

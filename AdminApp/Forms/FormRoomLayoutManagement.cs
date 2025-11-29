@@ -242,7 +242,8 @@ WHERE a.auditorium_id = $id;
             {
                 Size = new Size(50, 50),
                 Location = new Point(seat.X, seat.Y),
-                Text = seat.SeatId,      // A01, A02,...
+                Text = $"{seat.Row}{seat.Col:00}",
+                // A01, A02,...
                 Font = new Font("Segoe UI", 7, FontStyle.Bold),
                 Tag = seat
             };
@@ -659,19 +660,16 @@ WHERE a.auditorium_id = $id;
                     seat.X = btn.Left;
                     seat.Y = btn.Top;
 
-                    // Chuẩn hóa Type cho DB + JSON
-                    string t = (seat.Type ?? "").Trim().ToLower();
-                    if (t == "vip" || t == "st02")
-                        seat.Type = "VIP";
-                    else
-                        seat.Type = "Thường";
+                    // CHUẨN HÓA TYPE
+                    seat.Type = (seat.Type ?? "").Trim().ToLower() == "vip" ? "VIP" : "Thường";
 
-                    // Chuẩn hóa Status cho DB
-                    string st = (seat.Status ?? "").Trim().ToLower();
-                    if (st == "bảo trì" || st == "bao tri")
-                        seat.Status = "Bảo trì";
-                    else
-                        seat.Status = "Bình thường";
+                    // CHUẨN HÓA STATUS
+                    seat.Status = (seat.Status ?? "").Trim().ToLower() == "bảo trì" ? "Bảo trì" : "Bình thường";
+
+                    // -----------------------------------------
+                    // ÉP MÃ GHẾ VỀ CHUẨN A01 (FIX 100% LỖI A1)
+                    // -----------------------------------------
+                    seat.SeatId = $"{seat.Row}{seat.Col:00}";
 
                     seats.Add(seat);
                 }
@@ -730,7 +728,7 @@ WHERE auditorium_id = $id;
                     updateAud.Parameters.AddWithValue("$id", auditoriumId);
                     updateAud.ExecuteNonQuery();
 
-                    // ----- 5. Đồng bộ seat_for_showtime -----
+                    // ----- 5. Đồng bộ seat_for_showtime (chỉ lưu Bảo trì) -----
                     var stCmd = conn.CreateCommand();
                     stCmd.Transaction = tran;
                     stCmd.CommandText = "SELECT showtime_id FROM showtime WHERE auditorium_id = $room";
@@ -751,59 +749,36 @@ WHERE auditorium_id = $id;
 
                             if (s.Status == "Bảo trì")
                             {
-                                // Bắt buộc = Bảo trì
                                 var up = conn.CreateCommand();
                                 up.Transaction = tran;
                                 up.CommandText = @"
-UPDATE seat_for_showtime
-SET status = 'Bảo trì'
-WHERE seat_id = $sid AND showtime_id = $stid;
-";
-                                up.Parameters.AddWithValue("$sid", dbSeatId);
-                                up.Parameters.AddWithValue("$stid", showId);
-
-                                int rows = up.ExecuteNonQuery();
-
-                                if (rows == 0)
-                                {
-                                    var ins = conn.CreateCommand();
-                                    ins.Transaction = tran;
-                                    ins.CommandText = @"
-INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
-VALUES ($sid, $stid, 'Bảo trì');
-";
-                                    ins.Parameters.AddWithValue("$sid", dbSeatId);
-                                    ins.Parameters.AddWithValue("$stid", showId);
-                                    ins.ExecuteNonQuery();
-                                }
-                            }
-                            else // Bình thường
-                            {
-                                // Nếu trước đó Bảo trì -> reset về Trống
-                                var up = conn.CreateCommand();
-                                up.Transaction = tran;
-                                up.CommandText = @"
-UPDATE seat_for_showtime
-SET status = 'Trống'
-WHERE seat_id = $sid AND showtime_id = $stid AND status = 'Bảo trì';
-";
+                INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
+                VALUES ($sid, $stid, 'Bảo trì')
+                ON CONFLICT(seat_id, showtime_id)
+                DO UPDATE SET status = 'Bảo trì';
+            ";
                                 up.Parameters.AddWithValue("$sid", dbSeatId);
                                 up.Parameters.AddWithValue("$stid", showId);
                                 up.ExecuteNonQuery();
-
-                                // Tạo mới nếu chưa có, mặc định Trống
-                                var ins = conn.CreateCommand();
-                                ins.Transaction = tran;
-                                ins.CommandText = @"
-INSERT OR IGNORE INTO seat_for_showtime(seat_id, showtime_id, status)
-VALUES ($sid, $stid, 'Trống');
-";
-                                ins.Parameters.AddWithValue("$sid", dbSeatId);
-                                ins.Parameters.AddWithValue("$stid", showId);
-                                ins.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                // Ghế thường → xóa mọi trạng thái custom (giữ mặc định Trống)
+                                var del = conn.CreateCommand();
+                                del.Transaction = tran;
+                                del.CommandText = @"
+                DELETE FROM seat_for_showtime
+                WHERE seat_id = $sid AND showtime_id = $stid
+                  AND status <> 'Full';
+            ";
+                                del.Parameters.AddWithValue("$sid", dbSeatId);
+                                del.Parameters.AddWithValue("$stid", showId);
+                                del.ExecuteNonQuery();
                             }
                         }
                     }
+                
+                    
 
                     tran.Commit();
                 }
@@ -859,8 +834,22 @@ VALUES ($sid, $stid, 'Trống');
             var btn = selectedSeats[0];
             var seat = (SeatData)btn.Tag;
 
-            seat.SeatId = txtMaGhe.Text;
-            btn.Text = seat.SeatId;
+            string input = txtMaGhe.Text.Trim().ToUpper();
+
+            // Tách Row (A,B,C...) và số ghế
+            if (input.Length >= 2)
+            {
+                string row = new string(input.TakeWhile(char.IsLetter).ToArray());
+                string numStr = new string(input.SkipWhile(char.IsLetter).ToArray());
+
+                if (int.TryParse(numStr, out int num))
+                {
+                    input = $"{row}{num:00}";   // Format thành A01
+                }
+            }
+
+            seat.SeatId = input;
+            btn.Text = input;
         }
 
         private void rdoVip_CheckedChanged(object sender, EventArgs e)

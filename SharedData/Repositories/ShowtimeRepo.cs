@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace SharedData.Repositories
 {
@@ -16,22 +17,7 @@ namespace SharedData.Repositories
         {
             return dt.ToString("dd/MM/yyyy");
         }
-        // =============================
-        // Generate Showtime ID: T001
-        // =============================
-        private static string GenerateShowtimeId(SqliteConnection conn)
-        {
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = @"SELECT showtime_id FROM showtime ORDER BY showtime_id DESC LIMIT 1";
 
-            var result = cmd.ExecuteScalar();
-
-            if (result == null)
-                return "T001";
-
-            int num = int.Parse(result.ToString().Substring(1));
-            return "T" + (num + 1).ToString("D3");
-        }
         // ===================== GET ALL =====================
         public static List<Showtime> GetAll()
         {
@@ -150,22 +136,22 @@ namespace SharedData.Repositories
 
                 // 1. Sửa lại câu Query dùng JOIN
                 string query = $@"
-                        SELECT 
-                            s.showtime_id, 
-                            s.show_date, 
-                            s.start_time, 
-                            s.end_time, 
-                            s.movie_id,
-                            m.title,    
-                            m.duration,
-                            a.name,     
-                            at.auditorium_type    
-                        FROM showtime s
-                        LEFT JOIN movie m ON s.movie_id = m.movie_id          -- Nối với bảng Phim
-                        LEFT JOIN auditorium a ON s.auditorium_id = a.auditorium_id  -- Nối với bảng Phòng
-                        LEFT JOIN auditorium_type at ON a.auditorium_type_id = at.auditorium_type_id -- Nối với bảng Loại Phòng  
-                       
-                        ORDER BY s.show_date, s.start_time
+            SELECT 
+                s.showtime_id,
+                s.movie_id,
+                s.auditorium_id,          
+                s.show_date,
+                s.start_time,
+                s.end_time,
+                m.title,
+                m.duration,
+                a.name AS auditorium_name, 
+                at.auditorium_type
+            FROM showtime s
+            LEFT JOIN movie m ON s.movie_id = m.movie_id
+            LEFT JOIN auditorium a ON s.auditorium_id = a.auditorium_id
+            LEFT JOIN auditorium_type at ON a.auditorium_type_id = at.auditorium_type_id
+            ORDER BY s.show_date, s.start_time
                     ";
 
                 using (var conn = DatabaseHelper.GetConnection())
@@ -184,13 +170,14 @@ namespace SharedData.Repositories
                                     // Đảm bảo tên cột trong chuỗi khớp với Database của bạn
                                     showtime_id = reader["showtime_id"]?.ToString(),
                                     movie_id = reader["movie_id"]?.ToString(),
+                                    auditorium_id = reader["auditorium_id"]?.ToString(),  // THÊM!!!
                                     title = reader["title"]?.ToString(),
+                                    duration = reader["duration"] != DBNull.Value ? Convert.ToInt32(reader["duration"]) : 0,
                                     show_date = reader["show_date"]?.ToString(),
                                     start_time = reader["start_time"]?.ToString(),
-                                    duration = reader["duration"] != DBNull.Value ? Convert.ToInt32(reader["duration"]) : 0,
-                                    auditorium_type = reader["auditorium_type"]?.ToString(),
-                                    name = reader["name"]?.ToString(),
-                                    // Nếu cột nào null thì bỏ qua hoặc handle, đừng để crash
+                                    end_time = reader["end_time"]?.ToString(),
+                                    name = reader["auditorium_name"]?.ToString(),        // tên phòng
+                                    auditorium_type = reader["auditorium_type"]?.ToString()
                                 };
                                 list.Add(info);
                             }
@@ -223,15 +210,23 @@ namespace SharedData.Repositories
                     // 🔥 CHỐT HẠ: CHỈ WHERE movie_id, BỎ HẾT ĐIỀU KIỆN NGÀY THÁNG
                     // Vì SQLite so sánh chuỗi ngày '29/11' > '28/11' bị sai logic nếu định dạng không chuẩn ISO
                     string query = @"
-                SELECT 
-                    s.showtime_id, s.show_date, s.start_time, s.end_time, 
-                    s.movie_id, m.title, m.duration,
-                    a.name, at.auditorium_type
+                   SELECT 
+                    s.showtime_id,
+                    s.movie_id,
+                    s.auditorium_id,
+                    s.show_date,
+                    s.start_time,
+                    s.end_time,
+                    m.title,
+                    m.duration,
+                    a.name AS auditorium_name,  
+                    at.auditorium_type
                 FROM showtime s
                 LEFT JOIN movie m ON s.movie_id = m.movie_id
                 LEFT JOIN auditorium a ON s.auditorium_id = a.auditorium_id
                 LEFT JOIN auditorium_type at ON a.auditorium_type_id = at.auditorium_type_id
-                WHERE s.movie_id = @movieId 
+                WHERE s.movie_id = @movieId
+                ORDER BY s.show_date, s.start_time
             ";
 
                     using (var cmd = conn.CreateCommand())
@@ -248,13 +243,14 @@ namespace SharedData.Repositories
                                 {
                                     showtime_id = reader["showtime_id"]?.ToString(),
                                     movie_id = reader["movie_id"]?.ToString(),
+                                    auditorium_id = reader["auditorium_id"]?.ToString(),  // THÊM!!!
                                     title = reader["title"]?.ToString(),
                                     duration = reader["duration"] != DBNull.Value ? Convert.ToInt32(reader["duration"]) : 0,
                                     show_date = reader["show_date"]?.ToString(),
                                     start_time = reader["start_time"]?.ToString(),
                                     end_time = reader["end_time"]?.ToString(),
-                                    auditorium_type = reader["auditorium_type"]?.ToString(),
-                                    name = reader["name"]?.ToString()
+                                    name = reader["auditorium_name"]?.ToString(),
+                                    auditorium_type = reader["auditorium_type"]?.ToString()
                                 });
                             }
                         }
@@ -287,18 +283,71 @@ namespace SharedData.Repositories
             }
         }
         // Thêm vào ShowtimeRepo.cs
-
-        // INSERT
-        public static void Insert(Showtime showtime)
+        private static string GenerateNextShowtimeId()
         {
+            int maxNum = 0;
+
             using (var conn = new SqliteConnection(connStr))
             {
                 conn.Open();
-                string query = @"INSERT INTO showtime (showtime_id, movie_id, auditorium_id, show_date, start_time, end_time)
-                        VALUES (@id, @mid, @aid, @date, @start, @end)";
+                string query = "SELECT showtime_id FROM showtime";
 
                 using (var cmd = new SqliteCommand(query, conn))
+                using (var rd = cmd.ExecuteReader())
                 {
+                    while (rd.Read())
+                    {
+                        var idRaw = rd["showtime_id"]?.ToString();
+                        if (string.IsNullOrWhiteSpace(idRaw)) continue;
+
+                        var id = idRaw.Trim();
+
+                        // Chỉ xét các id có prefix T hoặc t, theo mẫu T123
+                        var m = Regex.Match(id, @"^[Tt](\d+)$");
+                        if (m.Success && int.TryParse(m.Groups[1].Value, out int num))
+                        {
+                            if (num > maxNum) maxNum = num;
+                        }
+                    }
+                }
+            }
+
+            int next = maxNum + 1;
+            return "T" + next.ToString("D3"); // T001, T002...
+        }
+        // INSERT 
+        public static void Insert(Showtime showtime)
+        {
+            if (!string.IsNullOrWhiteSpace(showtime.showtime_id))
+            {
+                showtime.showtime_id = showtime.showtime_id.Trim().ToUpper();
+
+                // Nếu format không hợp lệ (không giống T + số), thì bỏ và tự sinh
+                if (!Regex.IsMatch(showtime.showtime_id, @"^[T]\d+$"))
+                {
+                    showtime.showtime_id = null;
+                }
+            }
+
+            // Nếu vẫn rỗng => tự sinh
+            if (string.IsNullOrWhiteSpace(showtime.showtime_id))
+            {
+                showtime.showtime_id = GenerateNextShowtimeId();
+            }
+            using (var conn = new SqliteConnection(connStr))
+            {
+                conn.Open();
+                using (var tran = conn.BeginTransaction())
+                {
+                    // ==========================
+                    // 2) INSERT SHOWTIME
+                    // ==========================
+                    var cmd = conn.CreateCommand();
+                    cmd.Transaction = tran;
+                    cmd.CommandText = @"
+                INSERT INTO showtime (showtime_id, movie_id, auditorium_id, show_date, start_time, end_time)
+                VALUES (@id, @mid, @aid, @date, @start, @end)";
+
                     cmd.Parameters.AddWithValue("@id", showtime.showtime_id);
                     cmd.Parameters.AddWithValue("@mid", showtime.movie_id);
                     cmd.Parameters.AddWithValue("@aid", showtime.auditorium_id);
@@ -306,7 +355,37 @@ namespace SharedData.Repositories
                     cmd.Parameters.AddWithValue("@start", showtime.start_time);
                     cmd.Parameters.AddWithValue("@end", showtime.end_time);
 
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (SqliteException ex) when (ex.SqliteErrorCode == 19) // UNIQUE error
+                    {
+                        // Nếu trùng ID (race condition) → sinh ID mới
+                        showtime.showtime_id = GenerateNextShowtimeId();
+                        cmd.Parameters["@id"].Value = showtime.showtime_id;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // ==========================
+                    // 3) AUTO SYNC SEAT_FOR_SHOWTIME
+                    // ==========================
+                    // Chỉ insert ghế đang Bảo trì
+                    var cmdMaint = conn.CreateCommand();
+                    cmdMaint.Transaction = tran;
+                    cmdMaint.CommandText = @"
+                INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
+                SELECT seat_id, @stid, 'Bảo trì'
+                FROM seat
+                WHERE auditorium_id = @aid
+                  AND status = 'Bảo trì';
+            ";
+
+                    cmdMaint.Parameters.AddWithValue("@stid", showtime.showtime_id);
+                    cmdMaint.Parameters.AddWithValue("@aid", showtime.auditorium_id);
+                    cmdMaint.ExecuteNonQuery();
+
+                    tran.Commit();
                 }
             }
         }
