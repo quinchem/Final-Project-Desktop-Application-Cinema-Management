@@ -17,9 +17,9 @@ namespace UserApp
         // =================================================================================
         // KEY ĐÃ ĐÚNG (GIỮ NGUYÊN)
         // =================================================================================
-        private const string PARTNER_CODE = "MOMO72VS20251130_TEST";
-        private const string ACCESS_KEY = "l1GvTJtskakJ3rY2";
-        private const string SECRET_KEY = "7JR4TUNDEPVo3gDHVh9wEkhhUpHghnBq";
+        private const string PARTNER_CODE = "MOMOFZTI20251130_TEST";
+        private const string ACCESS_KEY = "HTYX5Dl2Hao3j7Zk";
+        private const string SECRET_KEY = "7qHvdJbaJVbDlj5rGDXMecdpmzyEwYKg";
         // =================================================================================
 
         private ShowtimeInfo _showtime;

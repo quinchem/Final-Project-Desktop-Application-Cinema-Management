@@ -183,6 +183,7 @@ namespace UserApp
                             _parentForm.OpenChildForm(new FormShowtimeDetail(_parentForm, film.movie_id));
                         }
                     };
+
                 }
             };
 

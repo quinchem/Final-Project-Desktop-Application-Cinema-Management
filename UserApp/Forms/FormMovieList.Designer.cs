@@ -48,9 +48,9 @@
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.Controls.Add(panelTemplate);
             flowLayoutPanel1.Dock = DockStyle.Bottom;
-            flowLayoutPanel1.Location = new Point(0, 218);
+            flowLayoutPanel1.Location = new Point(0, 115);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1182, 485);
+            flowLayoutPanel1.Size = new Size(1182, 588);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // panelTemplate
