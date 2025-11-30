@@ -125,95 +125,79 @@ namespace UserApp
             UpdateTotal();
             UpdateSelectedSeatLabel();
 
-            // ====== 1) JSON sơ đồ phòng: Room_1.json, Room_5.json, ...
-            string digits = new string(auditoriumId.Where(char.IsDigit).ToArray()); // R05 -> "05"
-            int roomNumber = int.Parse(digits);                                     // -> 5
+            // ----- 1) Load JSON -----
+            string digits = new string(auditoriumId.Where(char.IsDigit).ToArray());
+            int roomNumber = int.Parse(digits);
             string jsonPath = Path.Combine(_roomJsonFolder, $"Room_{roomNumber}.json");
 
             if (!File.Exists(jsonPath))
             {
-                MessageBox.Show($"Không tìm thấy sơ đồ phòng: {jsonPath}",
-                    "Lỗi sơ đồ phòng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Không tìm thấy layout phòng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            var jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonPath))
-                            ?? new List<SeatData>();
+            var jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonPath));
 
-            // ====== 2) Load GHẾ từ database + loại ghế + giá
+            // ----- 2) Load ghế từ bảng seat -----
             var dbSeats = new Dictionary<string, (string type, string status, double price)>();
 
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
+
                 cmd.CommandText = @"
                     SELECT s.seat_id, st.seat_type, s.status, s.per_seat_ticket_price
                     FROM seat s
                     LEFT JOIN seat_type st ON s.seat_type_id = st.seat_type_id
-                    WHERE s.auditorium_id = @aud";
-                cmd.Parameters.AddWithValue("@aud", auditoriumId);
+                    WHERE s.auditorium_id = $aud";
+                cmd.Parameters.AddWithValue("$aud", auditoriumId);
 
-                using (var r = cmd.ExecuteReader())
+                using var r = cmd.ExecuteReader();
+                while (r.Read())
                 {
-                    while (r.Read())
-                    {
-                        string id = r.GetString(0);
-                        string type = r.GetString(1);   // VIP / thường
-                        string status = r.GetString(2); // Bình thường / Bảo trì
-                        double price = r.GetDouble(3);  // giá ghế
-
-                        dbSeats[id] = (type, status, price);
-                    }
+                    dbSeats[r.GetString(0)] = (
+                        r.GetString(1),
+                        r.GetString(2),
+                        r.GetDouble(3)
+                    );
                 }
             }
 
-            // ====== 3) Load trạng thái ghế theo suất chiếu
-            var stStatus = new Dictionary<string, string>();
+            // ----- 3) Load ghế FULL theo suất chiếu -----
+            var fullSeats = SeatForShowtimeRepo.GetSeatStatus(showtimeId);
+            // chỉ chứa FULL
 
-            using (var conn = DatabaseHelper.GetConnection())
-            {
-                conn.Open();
-                var cmd = conn.CreateCommand();
-                cmd.CommandText = @"
-                    SELECT seat_id, status 
-                    FROM seat_for_showtime 
-                    WHERE showtime_id = $id";
-                cmd.Parameters.AddWithValue("$id", showtimeId);
-
-                using (var r = cmd.ExecuteReader())
-                {
-                    while (r.Read())
-                    {
-                        stStatus[r.GetString(0)] = r.GetString(1); // Full / Bảo trì
-                    }
-                }
-            }
-
-            // ====== 4) Merge JSON + DB -> SeatUser + vẽ ghế
+            // ----- 4) Merge -----
             foreach (var s in jsonSeats)
             {
-                string logicalCode = $"{s.Row}{s.Col:00}";   // A01, B05...
-                string fullId = logicalCode + auditoriumId;  // A01R05
+                string logical = $"{s.Row}{s.Col:00}";
+                string fullId = logical + auditoriumId;
 
-                if (!dbSeats.TryGetValue(fullId, out var db))
-                    continue; // ghế chưa có trong DB thì bỏ qua
+                if (!dbSeats.ContainsKey(fullId)) continue;
 
-                string mergedStatus = stStatus.ContainsKey(fullId)
-                ? stStatus[fullId]        // Full / Bảo trì lấy từ seat_for_showtime
-                : "Trống";                // KHÔNG dùng db.status nữa
+                var db = dbSeats[fullId];
+                string finalStatus;
 
-                var seatUser = new SeatUser
+                // Ưu tiên 1: ghế Bảo trì từ bảng seat
+                if (db.status == "Bảo trì")
+                    finalStatus = "Bảo trì";
+
+                // Ưu tiên 2: ghế đã FULL ở suất chiếu
+                else if (fullSeats.ContainsKey(fullId))
+                    finalStatus = "Full";
+
+                // Còn lại → TRỐNG
+                else
+                    finalStatus = "Trống";
+
+                SeatUser seatUser = new SeatUser
                 {
                     SeatId = fullId,
                     Row = s.Row,
                     Col = s.Col,
-
                     Type = db.type,
-
-                    // TRẠNG THÁI
-                    Status = mergedStatus,
-
+                    Status = finalStatus,
                     Price = (int)db.price,
                     X = s.X,
                     Y = s.Y
@@ -244,25 +228,21 @@ namespace UserApp
 
         private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
         {
-            // Bảo trì
-            if (seat.Status.Equals("Bảo trì", StringComparison.OrdinalIgnoreCase))
+            if (seat.Status == "Bảo trì")
             {
                 btn.FillColor = Color.Gray;
-                btn.ForeColor = Color.White;
                 btn.Enabled = false;
                 return;
             }
 
-            // Đã đặt (Full)
-            if (seat.Status.Equals("Full", StringComparison.OrdinalIgnoreCase))
+            if (seat.Status == "Full")
             {
                 btn.FillColor = Color.LightCoral;
-                btn.ForeColor = Color.White;
                 btn.Enabled = false;
                 return;
             }
 
-            // Trống
+            // TRỐNG
             btn.FillColor = Color.White;
             btn.ForeColor = Color.Black;
             btn.BorderColor = seat.Type == "VIP" ? Color.Gold : Color.DimGray;

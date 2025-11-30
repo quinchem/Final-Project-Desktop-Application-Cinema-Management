@@ -283,16 +283,6 @@ namespace UserApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap mũi_tên_trái {
-            get {
-                object obj = ResourceManager.GetObject("mũi tên trái", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap phim {
             get {
                 object obj = ResourceManager.GetObject("phim", resourceCulture);
@@ -316,6 +306,16 @@ namespace UserApp.Properties {
         public static System.Drawing.Bitmap popcorn {
             get {
                 object obj = ResourceManager.GetObject("popcorn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap printing {
+            get {
+                object obj = ResourceManager.GetObject("printing", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -376,6 +376,16 @@ namespace UserApp.Properties {
         public static System.Drawing.Bitmap snack {
             get {
                 object obj = ResourceManager.GetObject("snack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap technical_support {
+            get {
+                object obj = ResourceManager.GetObject("technical-support", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
