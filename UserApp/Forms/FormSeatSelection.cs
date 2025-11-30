@@ -228,16 +228,9 @@ namespace UserApp
 
         private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
         {
-            if (seat.Status == "Bảo trì")
+            if (seat.Status == "Bảo trì" || seat.Status == "Full")
             {
                 btn.FillColor = Color.Gray;
-                btn.Enabled = false;
-                return;
-            }
-
-            if (seat.Status == "Full")
-            {
-                btn.FillColor = Color.LightCoral;
                 btn.Enabled = false;
                 return;
             }
