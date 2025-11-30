@@ -60,9 +60,10 @@ namespace UserApp
             lblLegendMaintenance = new Label();
             guna2Button93 = new Guna.UI2.WinForms.Guna2Button();
             panelHoaDon = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            lblSotien = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblGheDaChon = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblSuatChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -76,7 +77,6 @@ namespace UserApp
             panelRoom = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             timer1 = new System.Windows.Forms.Timer(components);
-            lblSotien = new Guna.UI2.WinForms.Guna2HtmlLabel();
             panel1.SuspendLayout();
             guna2CustomGradientPanel3.SuspendLayout();
             panelHoaDon.SuspendLayout();
@@ -225,7 +225,7 @@ namespace UserApp
             guna2Button93.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button93.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             guna2Button93.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button93.FillColor = Color.LightCoral;
+            guna2Button93.FillColor = Color.Gray;
             guna2Button93.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button93.ForeColor = Color.Gray;
             guna2Button93.Location = new Point(394, 16);
@@ -257,6 +257,29 @@ namespace UserApp
             panelHoaDon.Size = new Size(305, 692);
             panelHoaDon.TabIndex = 6;
             // 
+            // lblSotien
+            // 
+            lblSotien.AutoSize = false;
+            lblSotien.BackColor = Color.Transparent;
+            lblSotien.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSotien.ForeColor = Color.Black;
+            lblSotien.Location = new Point(128, 594);
+            lblSotien.Name = "lblSotien";
+            lblSotien.Size = new Size(146, 58);
+            lblSotien.TabIndex = 14;
+            lblSotien.Text = "Số tiền";
+            // 
+            // guna2HtmlLabel6
+            // 
+            guna2HtmlLabel6.BackColor = Color.Transparent;
+            guna2HtmlLabel6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel6.ForeColor = Color.FromArgb(245, 131, 35);
+            guna2HtmlLabel6.Location = new Point(29, 594);
+            guna2HtmlLabel6.Name = "guna2HtmlLabel6";
+            guna2HtmlLabel6.Size = new Size(93, 30);
+            guna2HtmlLabel6.TabIndex = 10;
+            guna2HtmlLabel6.Text = "Tạm tính:";
+            // 
             // lblGheDaChon
             // 
             lblGheDaChon.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
@@ -281,17 +304,6 @@ namespace UserApp
             lblSuatChieu.Size = new Size(132, 61);
             lblSuatChieu.TabIndex = 12;
             lblSuatChieu.Text = "Suất chiếu";
-            // 
-            // guna2HtmlLabel6
-            // 
-            guna2HtmlLabel6.BackColor = Color.Transparent;
-            guna2HtmlLabel6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel6.ForeColor = Color.FromArgb(245, 131, 35);
-            guna2HtmlLabel6.Location = new Point(29, 594);
-            guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            guna2HtmlLabel6.Size = new Size(93, 30);
-            guna2HtmlLabel6.TabIndex = 10;
-            guna2HtmlLabel6.Text = "Tạm tính:";
             // 
             // guna2HtmlLabel5
             // 
@@ -455,18 +467,6 @@ namespace UserApp
             timer1.Enabled = true;
             timer1.Interval = 1000;
             timer1.Tick += timer1_Tick;
-            // 
-            // lblSotien
-            // 
-            lblSotien.AutoSize = false;
-            lblSotien.BackColor = Color.Transparent;
-            lblSotien.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSotien.ForeColor = Color.Black;
-            lblSotien.Location = new Point(128, 594);
-            lblSotien.Name = "lblSotien";
-            lblSotien.Size = new Size(146, 58);
-            lblSotien.TabIndex = 14;
-            lblSotien.Text = "Số tiền";
             // 
             // FormSeatSelection
             // 
