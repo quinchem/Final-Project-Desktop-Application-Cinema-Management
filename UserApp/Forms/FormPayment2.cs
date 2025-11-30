@@ -33,6 +33,9 @@ namespace UserApp
         // Timer để tự động kiểm tra trạng thái giao dịch
         private System.Windows.Forms.Timer _checkStatusTimer;
 
+        // Timer đếm ngược 10 phút cho QR
+        private int _qrCountdown = 600; // 10 phút = 600 giây
+
         // Vẫn giữ callback server nếu muốn (nhưng logic chính sẽ dùng Timer)
         private readonly MomoCallbackServer _callbackServer = new MomoCallbackServer();
 
@@ -160,7 +163,7 @@ namespace UserApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi hiển thị Payment2: " + ex.Message);
+                MessageBox.Show("Lỗi hiển thị mã thanh toán: " + ex.Message);
             }
         }
 
@@ -312,6 +315,9 @@ namespace UserApp
 
                 // BẮT ĐẦU TIMER KIỂM TRA TRẠNG THÁI
                 _checkStatusTimer.Start();
+
+                // BẮT ĐẦU TIMER ĐẾM NGƯỢC QR
+                timer1.Start();
             }
             catch (Exception ex)
             {
@@ -367,6 +373,34 @@ namespace UserApp
             else
             {
                 this.Close();
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            _qrCountdown--;
+
+            // Chủ tịch muốn hiển thị đếm ngược trên label?
+            lblTimer.Text = $"{_qrCountdown / 60:00}:{_qrCountdown % 60:00}";
+
+            if (_qrCountdown <= 0)
+            {
+                timer1.Stop();
+                _checkStatusTimer.Stop(); // dừng check trạng thái
+
+                MessageBox.Show("Hết thời gian thanh toán (10 phút).\nVui lòng chọn ghế lại!",
+                    "Mã QR hết hạn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Quay lại sơ đồ ghế
+                var parent = this.ParentForm as UserMainForm;
+                if (parent != null)
+                {
+                    parent.OpenChildForm(new FormSeatSelection(parent, _showtime));
+                }
+                else
+                {
+                    this.Close();
+                }
             }
         }
     }
