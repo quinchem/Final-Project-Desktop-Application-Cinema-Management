@@ -487,7 +487,7 @@ namespace UserApp
                 return;
             }
 
-            parentForm.OpenChildForm(new FormSeatSelection(_selectedShowtime));
+            parentForm.OpenChildForm(new FormSeatSelection(parentForm, _selectedShowtime));
         }
     }
 }

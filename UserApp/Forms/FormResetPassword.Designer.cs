@@ -30,10 +30,8 @@
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -42,6 +40,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panelReset = new Panel();
             btnDangNhap = new Guna.UI2.WinForms.Guna2Button();
             panelResetPW = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -53,6 +55,7 @@
             lblyc = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblEmail = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtMKmoi = new Guna.UI2.WinForms.Guna2TextBox();
+            btnQuayLai = new Guna.UI2.WinForms.Guna2Button();
             panelReset.SuspendLayout();
             panelResetPW.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picEye1).BeginInit();
@@ -95,6 +98,7 @@
             panelResetPW.BackColor = Color.Transparent;
             panelResetPW.BorderColor = Color.FromArgb(236, 230, 224);
             panelResetPW.BorderRadius = 15;
+            panelResetPW.Controls.Add(btnQuayLai);
             panelResetPW.Controls.Add(picEye1);
             panelResetPW.Controls.Add(picEye2);
             panelResetPW.Controls.Add(guna2HtmlLabel1);
@@ -103,7 +107,7 @@
             panelResetPW.Controls.Add(lblyc);
             panelResetPW.Controls.Add(lblEmail);
             panelResetPW.Controls.Add(txtMKmoi);
-            panelResetPW.CustomizableEdges = customizableEdges13;
+            panelResetPW.CustomizableEdges = customizableEdges15;
             panelResetPW.FillColor = Color.FromArgb(236, 230, 224);
             panelResetPW.FillColor2 = Color.FromArgb(236, 230, 224);
             panelResetPW.FillColor3 = Color.FromArgb(236, 230, 224);
@@ -111,22 +115,22 @@
             panelResetPW.Location = new Point(261, 143);
             panelResetPW.Name = "panelResetPW";
             panelResetPW.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            panelResetPW.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            panelResetPW.ShadowDecoration.CustomizableEdges = customizableEdges16;
             panelResetPW.ShadowDecoration.Depth = 20;
             panelResetPW.ShadowDecoration.Enabled = true;
             panelResetPW.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            panelResetPW.Size = new Size(713, 373);
+            panelResetPW.Size = new Size(713, 401);
             panelResetPW.TabIndex = 7;
             // 
             // picEye1
             // 
             picEye1.BackColor = Color.White;
-            picEye1.CustomizableEdges = customizableEdges3;
+            picEye1.CustomizableEdges = customizableEdges5;
             picEye1.Image = Properties.Resources.hide;
             picEye1.ImageRotate = 0F;
-            picEye1.Location = new Point(591, 125);
+            picEye1.Location = new Point(591, 128);
             picEye1.Name = "picEye1";
-            picEye1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            picEye1.ShadowDecoration.CustomizableEdges = customizableEdges6;
             picEye1.Size = new Size(34, 37);
             picEye1.SizeMode = PictureBoxSizeMode.Zoom;
             picEye1.TabIndex = 13;
@@ -136,12 +140,12 @@
             // picEye2
             // 
             picEye2.BackColor = Color.White;
-            picEye2.CustomizableEdges = customizableEdges5;
+            picEye2.CustomizableEdges = customizableEdges7;
             picEye2.Image = Properties.Resources.hide;
             picEye2.ImageRotate = 0F;
             picEye2.Location = new Point(591, 225);
             picEye2.Name = "picEye2";
-            picEye2.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            picEye2.ShadowDecoration.CustomizableEdges = customizableEdges8;
             picEye2.Size = new Size(34, 37);
             picEye2.SizeMode = PictureBoxSizeMode.Zoom;
             picEye2.TabIndex = 12;
@@ -161,7 +165,7 @@
             // txtXacNhanMK
             // 
             txtXacNhanMK.BorderRadius = 8;
-            txtXacNhanMK.CustomizableEdges = customizableEdges7;
+            txtXacNhanMK.CustomizableEdges = customizableEdges9;
             txtXacNhanMK.DefaultText = "";
             txtXacNhanMK.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtXacNhanMK.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -176,7 +180,7 @@
             txtXacNhanMK.Name = "txtXacNhanMK";
             txtXacNhanMK.PlaceholderText = "";
             txtXacNhanMK.SelectedText = "";
-            txtXacNhanMK.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            txtXacNhanMK.ShadowDecoration.CustomizableEdges = customizableEdges10;
             txtXacNhanMK.Size = new Size(591, 45);
             txtXacNhanMK.TabIndex = 6;
             txtXacNhanMK.UseSystemPasswordChar = true;
@@ -184,7 +188,7 @@
             // btnGui
             // 
             btnGui.BorderRadius = 8;
-            btnGui.CustomizableEdges = customizableEdges9;
+            btnGui.CustomizableEdges = customizableEdges11;
             btnGui.DisabledState.BorderColor = Color.DarkGray;
             btnGui.DisabledState.CustomBorderColor = Color.DarkGray;
             btnGui.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -193,9 +197,9 @@
             btnGui.FocusedColor = Color.FromArgb(245, 131, 35);
             btnGui.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGui.ForeColor = Color.White;
-            btnGui.Location = new Point(543, 307);
+            btnGui.Location = new Point(518, 324);
             btnGui.Name = "btnGui";
-            btnGui.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnGui.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnGui.Size = new Size(131, 46);
             btnGui.TabIndex = 5;
             btnGui.Text = "ĐẶT LẠI";
@@ -225,7 +229,7 @@
             // txtMKmoi
             // 
             txtMKmoi.BorderRadius = 8;
-            txtMKmoi.CustomizableEdges = customizableEdges11;
+            txtMKmoi.CustomizableEdges = customizableEdges13;
             txtMKmoi.DefaultText = "";
             txtMKmoi.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtMKmoi.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -240,10 +244,33 @@
             txtMKmoi.Name = "txtMKmoi";
             txtMKmoi.PlaceholderText = "";
             txtMKmoi.SelectedText = "";
-            txtMKmoi.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            txtMKmoi.ShadowDecoration.CustomizableEdges = customizableEdges14;
             txtMKmoi.Size = new Size(591, 45);
             txtMKmoi.TabIndex = 1;
             txtMKmoi.UseSystemPasswordChar = true;
+            // 
+            // btnQuayLai
+            // 
+            btnQuayLai.BorderRadius = 8;
+            btnQuayLai.CustomizableEdges = customizableEdges3;
+            btnQuayLai.DisabledState.BorderColor = Color.DarkGray;
+            btnQuayLai.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnQuayLai.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnQuayLai.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnQuayLai.FillColor = Color.FromArgb(236, 230, 224);
+            btnQuayLai.FocusedColor = Color.FromArgb(245, 131, 35);
+            btnQuayLai.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnQuayLai.ForeColor = Color.FromArgb(245, 131, 35);
+            btnQuayLai.Image = Properties.Resources.back_arrow;
+            btnQuayLai.ImageAlign = HorizontalAlignment.Left;
+            btnQuayLai.Location = new Point(43, 335);
+            btnQuayLai.Name = "btnQuayLai";
+            btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnQuayLai.Size = new Size(124, 35);
+            btnQuayLai.TabIndex = 14;
+            btnQuayLai.Text = "Đổi email";
+            btnQuayLai.TextAlign = HorizontalAlignment.Left;
+            btnQuayLai.Click += btnQuayLai_Click;
             // 
             // FormResetPassword
             // 
@@ -274,5 +301,6 @@
         private Guna.UI2.WinForms.Guna2TextBox txtXacNhanMK;
         private Guna.UI2.WinForms.Guna2PictureBox picEye1;
         private Guna.UI2.WinForms.Guna2PictureBox picEye2;
+        private Guna.UI2.WinForms.Guna2Button btnQuayLai;
     }
 }

@@ -113,7 +113,7 @@ namespace UserApp
             panelLogin.Dock = DockStyle.Fill;
             panelLogin.Location = new Point(0, 0);
             panelLogin.Name = "panelLogin";
-            panelLogin.Size = new Size(1482, 753);
+            panelLogin.Size = new Size(1482, 812);
             panelLogin.TabIndex = 0;
             // 
             // btnDangKy
@@ -654,7 +654,7 @@ namespace UserApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1482, 753);
+            ClientSize = new Size(1482, 812);
             Controls.Add(panelLogin);
             IsMdiContainer = true;
             Name = "FormLogin";

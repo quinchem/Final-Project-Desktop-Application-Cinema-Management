@@ -27,7 +27,6 @@ namespace AdminApp
             {
         "Nam",
         "Nữ",
-        "Khác"
             });
             CbGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
             customer = c;

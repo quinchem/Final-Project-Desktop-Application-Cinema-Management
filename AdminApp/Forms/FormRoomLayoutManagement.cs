@@ -660,15 +660,13 @@ WHERE a.auditorium_id = $id;
                     seat.X = btn.Left;
                     seat.Y = btn.Top;
 
-                    // CHUẨN HÓA TYPE
-                    seat.Type = (seat.Type ?? "").Trim().ToLower() == "vip" ? "VIP" : "Thường";
+                    // Chuẩn hoá type
+                    seat.Type = seat.Type.Trim().ToLower() == "vip" ? "VIP" : "Thường";
 
-                    // CHUẨN HÓA STATUS
-                    seat.Status = (seat.Status ?? "").Trim().ToLower() == "bảo trì" ? "Bảo trì" : "Bình thường";
+                    // Chuẩn hoá status (bảo trì / bình thường)
+                    seat.Status = seat.Status.Trim().ToLower() == "bảo trì" ? "Bảo trì" : "Bình thường";
 
-                    // -----------------------------------------
-                    // ÉP MÃ GHẾ VỀ CHUẨN A01 (FIX 100% LỖI A1)
-                    // -----------------------------------------
+                    // Chuẩn SeatId A01
                     seat.SeatId = $"{seat.Row}{seat.Col:00}";
 
                     seats.Add(seat);
@@ -677,118 +675,73 @@ WHERE a.auditorium_id = $id;
 
             // 2) Lưu JSON
             Directory.CreateDirectory(roomDesignFolder);
-            string file = Path.Combine(roomDesignFolder, $"Room_{currentRoom}.json");
-            File.WriteAllText(file, JsonConvert.SerializeObject(seats, Formatting.Indented));
+            string jsonPath = Path.Combine(roomDesignFolder, $"Room_{currentRoom}.json");
+            File.WriteAllText(jsonPath, JsonConvert.SerializeObject(seats, Formatting.Indented));
 
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
-
                 using (var tran = conn.BeginTransaction())
                 {
-                    // ----- 3. Seat: xoá ghế cũ -----
+                    // 3) XÓA GHẾ CŨ TRONG DB (để insert mới)
                     var delSeat = conn.CreateCommand();
                     delSeat.Transaction = tran;
-                    delSeat.CommandText = "DELETE FROM Seat WHERE auditorium_id = $room";
-                    delSeat.Parameters.AddWithValue("$room", auditoriumId);
+                    delSeat.CommandText = "DELETE FROM seat WHERE auditorium_id = $aud";
+                    delSeat.Parameters.AddWithValue("$aud", auditoriumId);
                     delSeat.ExecuteNonQuery();
 
-                    // ----- 3b. Insert ghế mới -----
+                    // 4) XÓA seat_for_showtime của ghế bị xoá (chỉ xóa những seat FOR showtime thuộc phòng này)
+                    var delSfs = conn.CreateCommand();
+                    delSfs.Transaction = tran;
+                    delSfs.CommandText =
+                        @"DELETE FROM seat_for_showtime WHERE seat_id LIKE '%' || $aud";
+                    delSfs.Parameters.AddWithValue("$aud", auditoriumId);
+                    delSfs.ExecuteNonQuery();
+
+                    // 5) Insert GHẾ MỚI
                     foreach (var s in seats)
                     {
-                        string dbSeatId = $"{s.SeatId}{auditoriumId}";   // A01R01
-                        string seatTypeId = s.Type == "VIP" ? "ST02" : "ST01";
+                        string logicalId = $"{s.Row}{s.Col:00}";       // A01
+                        string dbSeatId = $"{logicalId}{auditoriumId}"; // A01R01
+
+                        string typeId = s.Type == "VIP" ? "ST02" : "ST01";
                         int price = s.Type == "VIP" ? 90000 : 70000;
 
                         var cmd = conn.CreateCommand();
                         cmd.Transaction = tran;
                         cmd.CommandText = @"
-INSERT INTO Seat(seat_id, seat_type_id, auditorium_id, location, status, per_seat_ticket_price)
-VALUES ($id, $type, $room, $loc, $status, $price);
-";
+                    INSERT INTO seat(seat_id, seat_type_id, auditorium_id, location, status, per_seat_ticket_price)
+                    VALUES ($id, $type, $aud, $loc, $status, $price)
+                ";
+
                         cmd.Parameters.AddWithValue("$id", dbSeatId);
-                        cmd.Parameters.AddWithValue("$type", seatTypeId);   // ST01 / ST02
-                        cmd.Parameters.AddWithValue("$room", auditoriumId);
-                        cmd.Parameters.AddWithValue("$loc", s.SeatId);      // A01
-                        cmd.Parameters.AddWithValue("$status", s.Status);   // Bình thường / Bảo trì
+                        cmd.Parameters.AddWithValue("$type", typeId);
+                        cmd.Parameters.AddWithValue("$aud", auditoriumId);
+                        cmd.Parameters.AddWithValue("$loc", logicalId);
+                        cmd.Parameters.AddWithValue("$status", s.Status); // Bình thường / Bảo trì
                         cmd.Parameters.AddWithValue("$price", price);
 
                         cmd.ExecuteNonQuery();
                     }
 
-                    // ----- 4. Cập nhật số ghế trong auditorium -----
+                    // 6) Update số ghế của phòng
                     var updateAud = conn.CreateCommand();
                     updateAud.Transaction = tran;
                     updateAud.CommandText = @"
-UPDATE auditorium
-SET number_of_seats = $count
-WHERE auditorium_id = $id;
-";
+                UPDATE auditorium 
+                SET number_of_seats = $count 
+                WHERE auditorium_id = $aud
+            ";
                     updateAud.Parameters.AddWithValue("$count", seats.Count);
-                    updateAud.Parameters.AddWithValue("$id", auditoriumId);
+                    updateAud.Parameters.AddWithValue("$aud", auditoriumId);
                     updateAud.ExecuteNonQuery();
-
-                    // ----- 5. Đồng bộ seat_for_showtime (chỉ lưu Bảo trì) -----
-                    var stCmd = conn.CreateCommand();
-                    stCmd.Transaction = tran;
-                    stCmd.CommandText = "SELECT showtime_id FROM showtime WHERE auditorium_id = $room";
-                    stCmd.Parameters.AddWithValue("$room", auditoriumId);
-
-                    var showtimes = new List<string>();
-                    using (var r = stCmd.ExecuteReader())
-                    {
-                        while (r.Read())
-                            showtimes.Add(r.GetString(0));
-                    }
-
-                    foreach (var showId in showtimes)
-                    {
-                        foreach (var s in seats)
-                        {
-                            string dbSeatId = $"{s.SeatId}{auditoriumId}";
-
-                            if (s.Status == "Bảo trì")
-                            {
-                                var up = conn.CreateCommand();
-                                up.Transaction = tran;
-                                up.CommandText = @"
-                INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
-                VALUES ($sid, $stid, 'Bảo trì')
-                ON CONFLICT(seat_id, showtime_id)
-                DO UPDATE SET status = 'Bảo trì';
-            ";
-                                up.Parameters.AddWithValue("$sid", dbSeatId);
-                                up.Parameters.AddWithValue("$stid", showId);
-                                up.ExecuteNonQuery();
-                            }
-                            else
-                            {
-                                // Ghế thường → xóa mọi trạng thái custom (giữ mặc định Trống)
-                                var del = conn.CreateCommand();
-                                del.Transaction = tran;
-                                del.CommandText = @"
-                DELETE FROM seat_for_showtime
-                WHERE seat_id = $sid AND showtime_id = $stid
-                  AND status <> 'Full';
-            ";
-                                del.Parameters.AddWithValue("$sid", dbSeatId);
-                                del.Parameters.AddWithValue("$stid", showId);
-                                del.ExecuteNonQuery();
-                            }
-                        }
-                    }
-                
-                    
 
                     tran.Commit();
                 }
             }
 
-            MessageBox.Show(
-                $"Đã lưu sơ đồ phòng {currentRoom}!",
-                "Thông báo",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // ==========================================
@@ -883,11 +836,59 @@ WHERE auditorium_id = $id;
             if (!editMode || !rdoBinhThuong.Checked || selectedSeats.Count == 0)
                 return;
 
-            foreach (var btn in selectedSeats)
+            string auditoriumId = $"R0{currentRoom}";
+
+            using (var conn = DatabaseHelper.GetConnection())
             {
-                var seat = (SeatData)btn.Tag;
-                seat.Status = "Bình thường";
-                ApplySeatStyle(btn, seat);
+                conn.Open();
+                using (var tran = conn.BeginTransaction())
+                {
+                    // Lấy danh sách showtime thuộc phòng
+                    var stCmd = conn.CreateCommand();
+                    stCmd.Transaction = tran;
+                    stCmd.CommandText = "SELECT showtime_id FROM showtime WHERE auditorium_id = $room";
+                    stCmd.Parameters.AddWithValue("$room", auditoriumId);
+
+                    List<string> showtimes = new();
+                    using (var r = stCmd.ExecuteReader())
+                        while (r.Read()) showtimes.Add(r.GetString(0));
+
+                    foreach (var btn in selectedSeats)
+                    {
+                        var seat = (SeatData)btn.Tag;
+                        seat.Status = "Bình thường";
+                        ApplySeatStyle(btn, seat);
+
+                        string seatId = $"{seat.SeatId}{auditoriumId}";
+
+                        // Update bảng Seat
+                        var upSeat = conn.CreateCommand();
+                        upSeat.Transaction = tran;
+                        upSeat.CommandText =
+                            @"UPDATE seat SET status = 'Bình thường' WHERE seat_id = $id";
+                        upSeat.Parameters.AddWithValue("$id", seatId);
+                        upSeat.ExecuteNonQuery();
+
+                        // GHẾ thường → seat_for_showtime = Trống
+                        foreach (var show in showtimes)
+                        {
+                            var upSfs = conn.CreateCommand();
+                            upSfs.Transaction = tran;
+                            upSfs.CommandText =
+                            @"
+                            INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
+                            VALUES ($sid, $stid, 'Trống')
+                            ON CONFLICT(seat_id, showtime_id)
+                            DO UPDATE SET status = 'Trống';
+                            ";
+                            upSfs.Parameters.AddWithValue("$sid", seatId);
+                            upSfs.Parameters.AddWithValue("$stid", show);
+                            upSfs.ExecuteNonQuery();
+                        }
+                    }
+
+                    tran.Commit();
+                }
             }
         }
 
@@ -896,11 +897,59 @@ WHERE auditorium_id = $id;
             if (!editMode || !rdoBaoTri.Checked || selectedSeats.Count == 0)
                 return;
 
-            foreach (var btn in selectedSeats)
+            string auditoriumId = $"R0{currentRoom}";
+
+            using (var conn = DatabaseHelper.GetConnection())
             {
-                var seat = (SeatData)btn.Tag;
-                seat.Status = "Bảo trì";
-                ApplySeatStyle(btn, seat);
+                conn.Open();
+                using (var tran = conn.BeginTransaction())
+                {
+                    // Lấy danh sách showtime thuộc phòng
+                    var stCmd = conn.CreateCommand();
+                    stCmd.Transaction = tran;
+                    stCmd.CommandText = "SELECT showtime_id FROM showtime WHERE auditorium_id = $room";
+                    stCmd.Parameters.AddWithValue("$room", auditoriumId);
+
+                    List<string> showtimes = new();
+                    using (var r = stCmd.ExecuteReader())
+                        while (r.Read()) showtimes.Add(r.GetString(0));
+
+                    foreach (var btn in selectedSeats)
+                    {
+                        var seat = (SeatData)btn.Tag;
+                        seat.Status = "Bảo trì";
+                        ApplySeatStyle(btn, seat);
+
+                        string seatId = $"{seat.SeatId}{auditoriumId}";
+
+                        // Update bảng Seat
+                        var upSeat = conn.CreateCommand();
+                        upSeat.Transaction = tran;
+                        upSeat.CommandText =
+                            @"UPDATE seat SET status = 'Bảo trì' WHERE seat_id = $id";
+                        upSeat.Parameters.AddWithValue("$id", seatId);
+                        upSeat.ExecuteNonQuery();
+
+                        // Update seat_for_showtime = Bảo trì (overwrite)
+                        foreach (var show in showtimes)
+                        {
+                            var upSfs = conn.CreateCommand();
+                            upSfs.Transaction = tran;
+                            upSfs.CommandText =
+                            @"
+                            INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
+                            VALUES ($sid, $stid, 'Bảo trì')
+                            ON CONFLICT(seat_id, showtime_id)
+                            DO UPDATE SET status = 'Bảo trì';
+                            ";
+                            upSfs.Parameters.AddWithValue("$sid", seatId);
+                            upSfs.Parameters.AddWithValue("$stid", show);
+                            upSfs.ExecuteNonQuery();
+                        }
+                    }
+
+                    tran.Commit();
+                }
             }
         }
 

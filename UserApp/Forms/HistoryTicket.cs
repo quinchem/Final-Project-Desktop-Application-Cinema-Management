@@ -1,31 +1,24 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharedData;
-
 
 namespace UserApp
 {
     public partial class HistoryTicket : UserControl
     {
         private string _customerId;
-        public HistoryTicket() : this("C001") { }
+
         public HistoryTicket(string customerId)
         {
             InitializeComponent();
-
             _customerId = customerId;
 
             dgvHistoryTicket.AutoGenerateColumns = false;
             LoadHistoryData();
         }
+
         private void LoadHistoryData()
         {
             dgvHistoryTicket.Rows.Clear();
@@ -35,26 +28,21 @@ namespace UserApp
                 conn.Open();
 
                 string query = @"
-                SELECT 
-                b.bill_id,
-                m.title AS movie_name,
-                s.show_date AS show_time,
-                b.bill_date,
-                b.quantity_ticket,
-                b.per_seat_ticket_price,
-                IFNULL(SUM(pd.quantity * pd.unit_price), 0) AS product_total
-            FROM Bill b
-            JOIN Showtime s ON b.showtime_id = s.showtime_id
-            JOIN Movie m ON s.movie_id = m.movie_id
-            LEFT JOIN Bill_detail pd ON b.bill_id = pd.bill_id
-            WHERE b.customer_id = @customer_id
-            GROUP BY b.bill_id, m.title, s.show_date, b.bill_date, b.quantity_ticket, b.per_seat_ticket_price
-            ORDER BY b.bill_date DESC;
-            ";
+                    SELECT 
+                        b.bill_id,
+                        m.title AS movie_name,
+                        s.show_date AS show_time,
+                        b.bill_date,
+                        b.total
+                    FROM Bill b
+                    JOIN Showtime s ON b.showtime_id = s.showtime_id
+                    JOIN Movie m ON s.movie_id = m.movie_id
+                    WHERE b.customer_id = @customer_id
+                    ORDER BY b.bill_date DESC;
+                ";
 
                 using (var cmd = new SqliteCommand(query, conn))
                 {
-                    // Gán đúng customerId khách đăng nhập
                     cmd.Parameters.AddWithValue("@customer_id", _customerId);
 
                     using (var reader = cmd.ExecuteReader())
@@ -63,19 +51,14 @@ namespace UserApp
                         bool hasRows = false;
 
                         while (reader.Read())
-
                         {
                             hasRows = true;
                             string billId = reader["bill_id"].ToString();
                             string movieName = reader["movie_name"].ToString();
                             string showTime = reader["show_time"].ToString();
-                            string billDate = Convert.ToDateTime(reader["bill_date"]).ToString("yyyy-MM-dd");
+                            string billDate = reader["bill_date"].ToString();
 
-                            int qtyTicket = Convert.ToInt32(reader["quantity_ticket"]);
-                            int ticketPrice = Convert.ToInt32(reader["per_seat_ticket_price"]);
-                            int productTotal = Convert.ToInt32(reader["product_total"]);
-
-                            int totalMoney = qtyTicket * ticketPrice + productTotal;
+                         
 
                             string ticketCode = GenerateRandomCode();
 
@@ -85,8 +68,6 @@ namespace UserApp
                                 movieName,
                                 showTime,
                                 billDate,
-                                totalMoney.ToString("N0"),
-                                ticketCode,
                                 "Xem"
                             );
                         }
@@ -99,6 +80,7 @@ namespace UserApp
                 }
             }
         }
+
         private string GenerateRandomCode()
         {
             return "TK" + Guid.NewGuid().ToString("N").Substring(0, 8).ToUpper();
@@ -106,16 +88,13 @@ namespace UserApp
 
         private void dgvHistoryTicket_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // Giả sử cột nút có index = 7 (thay bằng index cột nút của bạn)
-            if (e.ColumnIndex == 7 && e.RowIndex >= 0)
+            if (e.ColumnIndex == 7 && e.RowIndex >= 0) // index cột nút "Xem"
             {
-                e.Handled = true; // Đánh dấu tự vẽ
+                e.Handled = true;
 
-                // Vẽ nền nút màu #2C5473
                 Color btnColor = ColorTranslator.FromHtml("#2C5473");
                 e.Graphics.FillRectangle(new SolidBrush(btnColor), e.CellBounds);
 
-                // Vẽ chữ "Xem" ở giữa, màu trắng
                 TextRenderer.DrawText(
                     e.Graphics,
                     "Xem",
@@ -125,7 +104,6 @@ namespace UserApp
                     TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
                 );
 
-                // Vẽ viền nút nếu muốn
                 e.Graphics.DrawRectangle(Pens.Black, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width - 1, e.CellBounds.Height - 1);
             }
         }
@@ -139,12 +117,10 @@ namespace UserApp
             if (dgvHistoryTicket.Columns[e.ColumnIndex].Name == "XemChiTiet") // tên cột nút "Xem"
             {
                 string billId = dgvHistoryTicket.Rows[e.RowIndex].Cells["MaDatVe"].Value.ToString();
-
-                // Trigger event
                 OnViewBillDetail?.Invoke(billId);
             }
-
         }
     }
 }
+
 

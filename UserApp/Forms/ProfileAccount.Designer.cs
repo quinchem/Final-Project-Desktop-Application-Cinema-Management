@@ -132,7 +132,7 @@
             pctAvatar.Image = Properties.Resources.avata_user;
             pctAvatar.ImageRotate = 0F;
             pctAvatar.Location = new Point(43, 71);
-            pctAvatar.Margin = new Padding(2, 2, 2, 2);
+            pctAvatar.Margin = new Padding(2);
             pctAvatar.Name = "pctAvatar";
             pctAvatar.ShadowDecoration.CustomizableEdges = customizableEdges1;
             pctAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -144,7 +144,7 @@
             // 
             // txtHoTen
             // 
-            txtHoTen.BorderRadius = 10;
+            txtHoTen.BorderRadius = 5;
             txtHoTen.CustomizableEdges = customizableEdges2;
             txtHoTen.DefaultText = "";
             txtHoTen.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -153,6 +153,7 @@
             txtHoTen.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtHoTen.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtHoTen.Font = new Font("Segoe UI", 9F);
+            txtHoTen.ForeColor = Color.FromArgb(64, 64, 64);
             txtHoTen.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtHoTen.Location = new Point(226, 93);
             txtHoTen.Margin = new Padding(3, 4, 3, 4);
@@ -160,12 +161,12 @@
             txtHoTen.PlaceholderText = "";
             txtHoTen.SelectedText = "";
             txtHoTen.ShadowDecoration.CustomizableEdges = customizableEdges3;
-            txtHoTen.Size = new Size(253, 36);
+            txtHoTen.Size = new Size(282, 46);
             txtHoTen.TabIndex = 7;
             // 
             // txtEmail
             // 
-            txtEmail.BorderRadius = 10;
+            txtEmail.BorderRadius = 5;
             txtEmail.CustomizableEdges = customizableEdges4;
             txtEmail.DefaultText = "";
             txtEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -174,6 +175,7 @@
             txtEmail.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtEmail.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtEmail.Font = new Font("Segoe UI", 9F);
+            txtEmail.ForeColor = Color.FromArgb(64, 64, 64);
             txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtEmail.Location = new Point(226, 284);
             txtEmail.Margin = new Padding(3, 4, 3, 4);
@@ -181,7 +183,7 @@
             txtEmail.PlaceholderText = "";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            txtEmail.Size = new Size(253, 35);
+            txtEmail.Size = new Size(282, 46);
             txtEmail.TabIndex = 9;
             // 
             // btnSave
@@ -196,7 +198,7 @@
             btnSave.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnSave.ForeColor = Color.White;
             btnSave.Location = new Point(733, 378);
-            btnSave.Margin = new Padding(2, 2, 2, 2);
+            btnSave.Margin = new Padding(2);
             btnSave.Name = "btnSave";
             btnSave.ShadowDecoration.CustomizableEdges = customizableEdges7;
             btnSave.Size = new Size(184, 37);
@@ -206,7 +208,7 @@
             // 
             // txtDiachi
             // 
-            txtDiachi.BorderRadius = 10;
+            txtDiachi.BorderRadius = 5;
             txtDiachi.CustomizableEdges = customizableEdges8;
             txtDiachi.DefaultText = "";
             txtDiachi.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -215,6 +217,7 @@
             txtDiachi.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtDiachi.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtDiachi.Font = new Font("Segoe UI", 9F);
+            txtDiachi.ForeColor = Color.FromArgb(64, 64, 64);
             txtDiachi.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtDiachi.Location = new Point(582, 186);
             txtDiachi.Margin = new Padding(3, 4, 3, 4);
@@ -222,12 +225,12 @@
             txtDiachi.PlaceholderText = "";
             txtDiachi.SelectedText = "";
             txtDiachi.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            txtDiachi.Size = new Size(287, 37);
+            txtDiachi.Size = new Size(282, 47);
             txtDiachi.TabIndex = 18;
             // 
             // txtSDT
             // 
-            txtSDT.BorderRadius = 10;
+            txtSDT.BorderRadius = 5;
             txtSDT.CustomizableEdges = customizableEdges10;
             txtSDT.DefaultText = "";
             txtSDT.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -236,6 +239,7 @@
             txtSDT.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtSDT.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSDT.Font = new Font("Segoe UI", 9F);
+            txtSDT.ForeColor = Color.FromArgb(64, 64, 64);
             txtSDT.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSDT.Location = new Point(582, 284);
             txtSDT.Margin = new Padding(3, 4, 3, 4);
@@ -243,7 +247,7 @@
             txtSDT.PlaceholderText = "";
             txtSDT.SelectedText = "";
             txtSDT.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            txtSDT.Size = new Size(287, 35);
+            txtSDT.Size = new Size(282, 46);
             txtSDT.TabIndex = 19;
             // 
             // dtpNgaySinh
@@ -264,28 +268,29 @@
             dtpNgaySinh.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtpNgaySinh.Name = "dtpNgaySinh";
             dtpNgaySinh.ShadowDecoration.CustomizableEdges = customizableEdges13;
-            dtpNgaySinh.Size = new Size(253, 37);
+            dtpNgaySinh.Size = new Size(282, 47);
             dtpNgaySinh.TabIndex = 57;
             dtpNgaySinh.Value = new DateTime(2005, 11, 17, 2, 53, 0, 0);
             // 
             // CbGioiTinh
             // 
             CbGioiTinh.BackColor = Color.Transparent;
+            CbGioiTinh.BorderRadius = 5;
             CbGioiTinh.CustomizableEdges = customizableEdges14;
             CbGioiTinh.DrawMode = DrawMode.OwnerDrawFixed;
             CbGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
             CbGioiTinh.FocusedColor = Color.FromArgb(255, 192, 128);
             CbGioiTinh.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
             CbGioiTinh.Font = new Font("Segoe UI", 10F);
-            CbGioiTinh.ForeColor = Color.Gray;
+            CbGioiTinh.ForeColor = Color.FromArgb(64, 64, 64);
             CbGioiTinh.HoverState.BorderColor = Color.Silver;
             CbGioiTinh.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             CbGioiTinh.ItemHeight = 30;
             CbGioiTinh.Items.AddRange(new object[] { "Nam ", "Nữ ", "Khác" });
-            CbGioiTinh.Location = new Point(582, 93);
+            CbGioiTinh.Location = new Point(582, 95);
             CbGioiTinh.Name = "CbGioiTinh";
             CbGioiTinh.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            CbGioiTinh.Size = new Size(204, 36);
+            CbGioiTinh.Size = new Size(287, 36);
             CbGioiTinh.TabIndex = 58;
             // 
             // ProfileAccount
