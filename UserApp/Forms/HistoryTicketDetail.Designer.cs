@@ -50,8 +50,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             lblMaDatVe = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -60,7 +58,6 @@
             lblTinhTrang = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblPhongChieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblNgayDatVe = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblDichVu = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTongTien = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtTinhTrang = new Guna.UI2.WinForms.Guna2TextBox();
             txtGhe = new Guna.UI2.WinForms.Guna2TextBox();
@@ -69,7 +66,6 @@
             txtMaDatVe = new Guna.UI2.WinForms.Guna2TextBox();
             txtNgayDatVe = new Guna.UI2.WinForms.Guna2TextBox();
             txtPhongChieu = new Guna.UI2.WinForms.Guna2TextBox();
-            txtDichVu = new Guna.UI2.WinForms.Guna2TextBox();
             txtTongTien = new Guna.UI2.WinForms.Guna2TextBox();
             btnPrint = new Guna.UI2.WinForms.Guna2Button();
             btnReturn = new Guna.UI2.WinForms.Guna2Button();
@@ -147,7 +143,7 @@
             // 
             lblTinhTrang.BackColor = Color.Transparent;
             lblTinhTrang.Font = new Font("Segoe UI", 10.2F);
-            lblTinhTrang.Location = new Point(129, 386);
+            lblTinhTrang.Location = new Point(668, 320);
             lblTinhTrang.Margin = new Padding(2);
             lblTinhTrang.Name = "lblTinhTrang";
             lblTinhTrang.Size = new Size(197, 30);
@@ -176,22 +172,11 @@
             lblNgayDatVe.TabIndex = 9;
             lblNgayDatVe.Text = "Ngày đặt vé:";
             // 
-            // lblDichVu
-            // 
-            lblDichVu.BackColor = Color.Transparent;
-            lblDichVu.Font = new Font("Segoe UI", 10.2F);
-            lblDichVu.Location = new Point(668, 259);
-            lblDichVu.Margin = new Padding(2);
-            lblDichVu.Name = "lblDichVu";
-            lblDichVu.Size = new Size(72, 30);
-            lblDichVu.TabIndex = 10;
-            lblDichVu.Text = "Dịch vụ:";
-            // 
             // lblTongTien
             // 
             lblTongTien.BackColor = Color.Transparent;
             lblTongTien.Font = new Font("Segoe UI", 10.2F);
-            lblTongTien.Location = new Point(668, 325);
+            lblTongTien.Location = new Point(668, 252);
             lblTongTien.Margin = new Padding(2);
             lblTongTien.Name = "lblTongTien";
             lblTongTien.Size = new Size(90, 30);
@@ -210,7 +195,7 @@
             txtTinhTrang.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtTinhTrang.Font = new Font("Segoe UI", 9F);
             txtTinhTrang.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtTinhTrang.Location = new Point(354, 386);
+            txtTinhTrang.Location = new Point(896, 320);
             txtTinhTrang.Margin = new Padding(4, 5, 4, 5);
             txtTinhTrang.Name = "txtTinhTrang";
             txtTinhTrang.PlaceholderText = "";
@@ -315,7 +300,7 @@
             txtNgayDatVe.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtNgayDatVe.Font = new Font("Segoe UI", 9F);
             txtNgayDatVe.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtNgayDatVe.Location = new Point(819, 191);
+            txtNgayDatVe.Location = new Point(896, 184);
             txtNgayDatVe.Margin = new Padding(4, 5, 4, 5);
             txtNgayDatVe.Name = "txtNgayDatVe";
             txtNgayDatVe.PlaceholderText = "";
@@ -336,7 +321,7 @@
             txtPhongChieu.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtPhongChieu.Font = new Font("Segoe UI", 9F);
             txtPhongChieu.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPhongChieu.Location = new Point(819, 122);
+            txtPhongChieu.Location = new Point(896, 116);
             txtPhongChieu.Margin = new Padding(4, 5, 4, 5);
             txtPhongChieu.Name = "txtPhongChieu";
             txtPhongChieu.PlaceholderText = "";
@@ -345,31 +330,10 @@
             txtPhongChieu.Size = new Size(208, 38);
             txtPhongChieu.TabIndex = 18;
             // 
-            // txtDichVu
-            // 
-            txtDichVu.BorderRadius = 10;
-            txtDichVu.CustomizableEdges = customizableEdges17;
-            txtDichVu.DefaultText = "";
-            txtDichVu.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtDichVu.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtDichVu.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtDichVu.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtDichVu.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtDichVu.Font = new Font("Segoe UI", 9F);
-            txtDichVu.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtDichVu.Location = new Point(819, 251);
-            txtDichVu.Margin = new Padding(4, 5, 4, 5);
-            txtDichVu.Name = "txtDichVu";
-            txtDichVu.PlaceholderText = "";
-            txtDichVu.SelectedText = "";
-            txtDichVu.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            txtDichVu.Size = new Size(208, 38);
-            txtDichVu.TabIndex = 20;
-            // 
             // txtTongTien
             // 
             txtTongTien.BorderRadius = 10;
-            txtTongTien.CustomizableEdges = customizableEdges19;
+            txtTongTien.CustomizableEdges = customizableEdges17;
             txtTongTien.DefaultText = "";
             txtTongTien.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtTongTien.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -378,19 +342,19 @@
             txtTongTien.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtTongTien.Font = new Font("Segoe UI", 9F);
             txtTongTien.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtTongTien.Location = new Point(819, 325);
+            txtTongTien.Location = new Point(896, 252);
             txtTongTien.Margin = new Padding(4, 5, 4, 5);
             txtTongTien.Name = "txtTongTien";
             txtTongTien.PlaceholderText = "";
             txtTongTien.SelectedText = "";
-            txtTongTien.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            txtTongTien.ShadowDecoration.CustomizableEdges = customizableEdges18;
             txtTongTien.Size = new Size(208, 38);
             txtTongTien.TabIndex = 21;
             // 
             // btnPrint
             // 
             btnPrint.BorderRadius = 10;
-            btnPrint.CustomizableEdges = customizableEdges21;
+            btnPrint.CustomizableEdges = customizableEdges19;
             btnPrint.DisabledState.BorderColor = Color.DarkGray;
             btnPrint.DisabledState.CustomBorderColor = Color.DarkGray;
             btnPrint.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -401,7 +365,7 @@
             btnPrint.Location = new Point(949, 464);
             btnPrint.Margin = new Padding(2);
             btnPrint.Name = "btnPrint";
-            btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            btnPrint.ShadowDecoration.CustomizableEdges = customizableEdges20;
             btnPrint.Size = new Size(168, 50);
             btnPrint.TabIndex = 22;
             btnPrint.Text = "In phiếu";
@@ -409,7 +373,7 @@
             // 
             // btnReturn
             // 
-            btnReturn.CustomizableEdges = customizableEdges23;
+            btnReturn.CustomizableEdges = customizableEdges21;
             btnReturn.DisabledState.BorderColor = Color.DarkGray;
             btnReturn.DisabledState.CustomBorderColor = Color.DarkGray;
             btnReturn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -417,10 +381,11 @@
             btnReturn.FillColor = Color.FromArgb(236, 230, 224);
             btnReturn.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnReturn.ForeColor = Color.FromArgb(245, 131, 35);
+            btnReturn.Image = Properties.Resources.mũi_tên_trái;
             btnReturn.Location = new Point(58, 446);
             btnReturn.Margin = new Padding(2);
             btnReturn.Name = "btnReturn";
-            btnReturn.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            btnReturn.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btnReturn.Size = new Size(358, 68);
             btnReturn.TabIndex = 23;
             btnReturn.Text = "Quay lại trang Lịch sử đặt vé";
@@ -434,7 +399,6 @@
             Controls.Add(btnReturn);
             Controls.Add(btnPrint);
             Controls.Add(txtTongTien);
-            Controls.Add(txtDichVu);
             Controls.Add(txtPhongChieu);
             Controls.Add(txtNgayDatVe);
             Controls.Add(txtMaDatVe);
@@ -443,7 +407,6 @@
             Controls.Add(txtGhe);
             Controls.Add(txtTinhTrang);
             Controls.Add(lblTongTien);
-            Controls.Add(lblDichVu);
             Controls.Add(lblNgayDatVe);
             Controls.Add(lblPhongChieu);
             Controls.Add(lblTinhTrang);
@@ -469,7 +432,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTinhTrang;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPhongChieu;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNgayDatVe;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblDichVu;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTien;
         private Guna.UI2.WinForms.Guna2TextBox txtTinhTrang;
         private Guna.UI2.WinForms.Guna2TextBox txtGhe;
@@ -478,7 +440,6 @@
         private Guna.UI2.WinForms.Guna2TextBox txtMaDatVe;
         private Guna.UI2.WinForms.Guna2TextBox txtNgayDatVe;
         private Guna.UI2.WinForms.Guna2TextBox txtPhongChieu;
-        private Guna.UI2.WinForms.Guna2TextBox txtDichVu;
         private Guna.UI2.WinForms.Guna2TextBox txtTongTien;
         private Guna.UI2.WinForms.Guna2Button btnPrint;
         private Guna.UI2.WinForms.Guna2Button btnReturn;

@@ -65,8 +65,8 @@ namespace UserApp
             }
 
             // Tạo instance HistoryTicket với customerId
-            //HistoryTicket HistoryTicket = new HistoryTicket(currentUser.customer_id);
-            HistoryTicket HistoryTicket = new HistoryTicket("C001");
+            HistoryTicket HistoryTicket = new HistoryTicket(currentUser.customer_id);
+           
 
             HistoryTicket.OnViewBillDetail += (billId) =>
             {
