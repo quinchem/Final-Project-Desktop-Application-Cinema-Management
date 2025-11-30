@@ -38,7 +38,28 @@ namespace AdminApp
                 });
             }
 
+            // ✅ FORMAT DATE COLUMNS NGAY KHI KHỞI TẠO
+            SetupDateColumns();
+
             LoadCustomers();
+        }
+
+        // ✅ HÀM MỚI: Setup format cho các cột date
+        private void SetupDateColumns()
+        {
+            // Format cho cột ngày sinh
+            if (DataGridViewCustomerManagement.Columns["date_of_birth"] != null)
+            {
+                DataGridViewCustomerManagement.Columns["date_of_birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                DataGridViewCustomerManagement.Columns["date_of_birth"].DefaultCellStyle.NullValue = "";
+            }
+
+            // ✅ Format cho cột ngày tạo
+            if (DataGridViewCustomerManagement.Columns["create_date"] != null)
+            {
+                DataGridViewCustomerManagement.Columns["create_date"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                DataGridViewCustomerManagement.Columns["create_date"].DefaultCellStyle.NullValue = "";
+            }
         }
 
         protected override void OnActivated(EventArgs e)
@@ -50,84 +71,93 @@ namespace AdminApp
         private void LoadCustomers()
         {
             customerList = repo.GetAll();
-            DataGridViewCustomerManagement.DataSource = customerList;
-            if (DataGridViewCustomerManagement.Columns["date_of_birth"] != null)
-                DataGridViewCustomerManagement.Columns["date_of_birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
-            if (DataGridViewCustomerManagement.Columns["create_date"] != null)
-                DataGridViewCustomerManagement.Columns["create_date"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            // ✅ Convert date format nếu cần
+            foreach (var customer in customerList)
+            {
+                // Nếu date_of_birth là string, convert sang DateTime
+                if (!string.IsNullOrEmpty(customer.date_of_birth))
+                {
+                    if (DateTime.TryParse(customer.date_of_birth, out DateTime dob))
+                    {
+                        customer.date_of_birth = dob.ToString("dd/MM/yyyy");
+                    }
+                }
+
+                // ✅ Nếu create_date là string, convert sang DateTime
+                if (!string.IsNullOrEmpty(customer.create_date))
+                {
+                    if (DateTime.TryParse(customer.create_date, out DateTime cd))
+                    {
+                        customer.create_date = cd.ToString("dd/MM/yyyy");
+                    }
+                }
+            }
+
+            DataGridViewCustomerManagement.DataSource = null;
+            DataGridViewCustomerManagement.DataSource = customerList;
+
+            // ✅ Đảm bảo format được apply
+            SetupDateColumns();
         }
 
         private void btnTim_Click(object sender, EventArgs e)
         {
             SearchCustomers();
         }
+
         private void SearchCustomers()
         {
             string keyword = txtTimKiem.Text.Trim().ToLower();
 
+            // ✅ Nếu keyword rỗng → hiện toàn bộ
             if (string.IsNullOrEmpty(keyword))
             {
+                DataGridViewCustomerManagement.DataSource = null;
                 DataGridViewCustomerManagement.DataSource = customerList;
+                SetupDateColumns();
                 return;
             }
 
+            // ✅ Tìm kiếm theo nhiều trường
             var filtered = customerList.FindAll(c =>
-                c.full_name.ToLower().Contains(keyword) ||
-                c.email.ToLower().Contains(keyword) ||
-                c.phone_number.ToLower().Contains(keyword) ||
-                c.address.ToLower().Contains(keyword)
+                (c.full_name != null && c.full_name.ToLower().Contains(keyword)) ||
+                (c.email != null && c.email.ToLower().Contains(keyword)) ||
+                (c.phone_number != null && c.phone_number.ToLower().Contains(keyword)) ||
+                (c.address != null && c.address.ToLower().Contains(keyword))
             );
 
+            DataGridViewCustomerManagement.DataSource = null;
             DataGridViewCustomerManagement.DataSource = filtered;
+            SetupDateColumns();
+
+            // ✅ Thông báo nếu không tìm thấy
+            if (filtered.Count == 0)
+            {
+                MessageBox.Show("Không tìm thấy khách hàng nào!", "Kết quả tìm kiếm",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
         private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 SearchCustomers();
-                e.SuppressKeyPress = true;
+                e.SuppressKeyPress = true; // Ngăn tiếng "beep"
+                e.Handled = true;          // ✅ QUAN TRỌNG: Ngăn form xử lý thêm
             }
         }
+
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtTimKiem.Text))
             {
+                DataGridViewCustomerManagement.DataSource = null;
                 DataGridViewCustomerManagement.DataSource = customerList;
+                SetupDateColumns();
             }
         }
-
-        //private void btnXoa_Click(object sender, EventArgs e)
-        //{
-        //    if (DataGridViewCustomerManagement.SelectedRows.Count == 0)
-        //    {
-        //        MessageBox.Show("Vui lòng chọn khách hàng cần xóa!");
-        //        return;
-        //    }
-
-        //    string id = DataGridViewCustomerManagement.SelectedRows[0].Cells["customer_id"].Value.ToString();
-
-        //    DialogResult result = MessageBox.Show(
-        //        "Bạn có chắc muốn xóa khách hàng này?",
-        //        "Xác nhận",
-        //        MessageBoxButtons.YesNo,
-        //        MessageBoxIcon.Warning
-        //    );
-
-        //    if (result == DialogResult.Yes)
-        //    {
-        //        bool success = repo.DeleteCustomer(id);
-        //        if (success)
-        //        {
-        //            MessageBox.Show("Xóa thành công!");
-        //            LoadCustomers();     // load lại danh sách
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Xóa thất bại!");
-        //        }
-        //    }
-        //}
 
         private void btnXuatFile_Click(object sender, EventArgs e)
         {
@@ -164,19 +194,35 @@ namespace AdminApp
                         sheet.Cell(row, 3).Value = c.email;
                         sheet.Cell(row, 4).Value = c.phone_number;
                         sheet.Cell(row, 5).Value = c.gender;
-                        sheet.Cell(row, 6).Value = c.date_of_birth;
+
+                        // ✅ Format date cho Excel
+                        sheet.Cell(row, 6).Value = FormatDateForExcel(c.date_of_birth);
                         sheet.Cell(row, 7).Value = c.address;
-                        sheet.Cell(row, 8).Value = c.create_date;
+                        sheet.Cell(row, 8).Value = FormatDateForExcel(c.create_date);
+
                         row++;
                     }
 
                     sheet.Columns().AdjustToContents();
-
                     workbook.SaveAs(save.FileName);
                 }
 
                 MessageBox.Show("Xuất file thành công!");
             }
+        }
+
+        // ✅ HÀM MỚI: Format date cho Excel
+        private string FormatDateForExcel(string dateStr)
+        {
+            if (string.IsNullOrEmpty(dateStr))
+                return "";
+
+            if (DateTime.TryParse(dateStr, out DateTime dt))
+            {
+                return dt.ToString("dd/MM/yyyy");
+            }
+
+            return dateStr;
         }
 
         private void btnChinhSua_Click(object sender, EventArgs e)
@@ -205,14 +251,13 @@ namespace AdminApp
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
-                    LoadCustomers(); // reload sau khi sửa
+                    LoadCustomers();
                 }
             }
         }
 
-
         private void DataGridViewCustomerManagement_CellEndEdit(
-     object sender, DataGridViewCellEventArgs e)
+            object sender, DataGridViewCellEventArgs e)
         {
             if (DataGridViewCustomerManagement.Columns[e.ColumnIndex].Name == "customer_id")
                 return;
@@ -250,7 +295,7 @@ namespace AdminApp
                     return;
                 }
 
-                // ✅ BUILD MODEL – ĐÚNG CHUẨN REPO
+                // ✅ BUILD MODEL
                 Customer c = new Customer
                 {
                     customer_id = id,
@@ -263,10 +308,12 @@ namespace AdminApp
                     create_date = createFormatted
                 };
 
-                bool ok = repo.Update(c); // ✅ ĐÚNG CHỮ KÝ
+                bool ok = repo.Update(c);
 
                 if (!ok)
                     MessageBox.Show("Cập nhật thất bại!");
+                else
+                    LoadCustomers(); // ✅ Reload để hiện format mới
             }
             catch (Exception ex)
             {
@@ -281,7 +328,12 @@ namespace AdminApp
             if (string.IsNullOrWhiteSpace(input))
                 return true;
 
-            string[] formats = new[] { "dd/MM/yyyy", "dd-MM-yyyy", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd" };
+            string[] formats = new[] {
+                "dd/MM/yyyy",
+                "dd-MM-yyyy",
+                "yyyy-MM-dd HH:mm:ss",
+                "yyyy-MM-dd"
+            };
 
             if (DateTime.TryParseExact(
                 input,
@@ -303,9 +355,5 @@ namespace AdminApp
 
             return false;
         }
-
-
-
     }
 }
-
