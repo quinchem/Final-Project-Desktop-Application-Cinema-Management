@@ -14,10 +14,13 @@ namespace UserApp
 {
     public partial class FormSeatSelection : Form
     {
+        private UserMainForm parentForm;
+
         // ====== THÔNG TIN SUẤT CHIẾU ======
         private ShowtimeInfo _showtime;
         private string _auditoriumId;     // R01, R02...
         private string _showtimeId;       // T001, T002...
+        private ImageRepo _imageRepo = new ImageRepo();
 
         // ====== THƯ MỤC JSON SƠ ĐỒ PHÒNG ======
         private string _roomJsonFolder;
@@ -26,17 +29,25 @@ namespace UserApp
         private List<SeatUser> _allSeats = new();
         private List<SeatUser> _selectedSeats = new();
 
+        // ====== HẸN GIỜ CHỌN GHẾ (5 phút) ======
+        private int countdown = 300;
+        private bool isCounting = false;
+
         // ============================
         // CONSTRUCTOR
         // ============================
+
+        // 1. Constructor mặc định – cho Designer
         public FormSeatSelection()
         {
             InitializeComponent();
             _roomJsonFolder = GetRoomFolder();
         }
 
-        public FormSeatSelection(ShowtimeInfo showtime) : this()
+        // 2. Constructor dùng thật – có MainForm + Showtime
+        public FormSeatSelection(UserMainForm parent, ShowtimeInfo showtime) : this()
         {
+            parentForm = parent;
             _showtime = showtime;
             _auditoriumId = showtime.auditorium_id;
             _showtimeId = showtime.showtime_id;
@@ -66,8 +77,40 @@ namespace UserApp
             lblSuatChieu.Text = $"{_showtime.show_date} - {_showtime.start_time}";
 
             LoadRoom(_auditoriumId, _showtimeId);
+            LoadPoster();
 
-           
+            timer1.Stop();
+            isCounting = false;
+            countdown = 300;
+            lblTime.Text = "05:00";
+        }
+
+        // ===================================================
+        // LOAD POSTER PHIM
+        // ===================================================
+        private void LoadPoster()
+        {
+            try
+            {
+                byte[] imgData = _imageRepo.GetMoviePoster(_showtime.movie_id);
+
+                if (imgData != null && imgData.Length > 0)
+                {
+                    using (MemoryStream ms = new MemoryStream(imgData))
+                    {
+                        picturePhim.Image = Image.FromStream(ms);
+                        picturePhim.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                }
+                else
+                {
+                    picturePhim.Image = null; // hoặc ảnh default
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi load poster: " + ex.Message);
+            }
         }
 
         // ===================================================
@@ -82,8 +125,7 @@ namespace UserApp
             UpdateTotal();
             UpdateSelectedSeatLabel();
 
-
-            // ====== 1) JSON sơ đồ phòng: Room_5.json, Room_1.json, ...
+            // ====== 1) JSON sơ đồ phòng: Room_1.json, Room_5.json, ...
             string digits = new string(auditoriumId.Where(char.IsDigit).ToArray()); // R05 -> "05"
             int roomNumber = int.Parse(digits);                                     // -> 5
             string jsonPath = Path.Combine(_roomJsonFolder, $"Room_{roomNumber}.json");
@@ -97,21 +139,19 @@ namespace UserApp
 
             var jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonPath))
                             ?? new List<SeatData>();
-        
 
             // ====== 2) Load GHẾ từ database + loại ghế + giá
             var dbSeats = new Dictionary<string, (string type, string status, double price)>();
-         
 
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = @"
-                SELECT s.seat_id, st.seat_type, s.status, s.per_seat_ticket_price
-                FROM seat s
-                LEFT JOIN seat_type st ON s.seat_type_id = st.seat_type_id
-                WHERE s.auditorium_id = @aud";
+                    SELECT s.seat_id, st.seat_type, s.status, s.per_seat_ticket_price
+                    FROM seat s
+                    LEFT JOIN seat_type st ON s.seat_type_id = st.seat_type_id
+                    WHERE s.auditorium_id = @aud";
                 cmd.Parameters.AddWithValue("@aud", auditoriumId);
 
                 using (var r = cmd.ExecuteReader())
@@ -119,14 +159,13 @@ namespace UserApp
                     while (r.Read())
                     {
                         string id = r.GetString(0);
-                        string type = r.GetString(1);   // VIP / Thường
+                        string type = r.GetString(1);   // VIP / thường
                         string status = r.GetString(2); // Bình thường / Bảo trì
                         double price = r.GetDouble(3);  // giá ghế
 
                         dbSeats[id] = (type, status, price);
                     }
                 }
-
             }
 
             // ====== 3) Load trạng thái ghế theo suất chiếu
@@ -154,27 +193,28 @@ namespace UserApp
             // ====== 4) Merge JSON + DB -> SeatUser + vẽ ghế
             foreach (var s in jsonSeats)
             {
-                // chuẩn hóa từ Row + Col: A + 1 => A01
                 string logicalCode = $"{s.Row}{s.Col:00}";   // A01, B05...
                 string fullId = logicalCode + auditoriumId;  // A01R05
 
                 if (!dbSeats.TryGetValue(fullId, out var db))
                     continue; // ghế chưa có trong DB thì bỏ qua
 
-                // Nếu có record trong seat_for_showtime → Full / Bảo trì
-                // Nếu không có → dùng status gốc của seat (Bình thường / Bảo trì)
                 string mergedStatus = stStatus.ContainsKey(fullId)
-                    ? stStatus[fullId]
-                    : db.status;
+                ? stStatus[fullId]        // Full / Bảo trì lấy từ seat_for_showtime
+                : "Trống";                // KHÔNG dùng db.status nữa
 
                 var seatUser = new SeatUser
                 {
                     SeatId = fullId,
                     Row = s.Row,
                     Col = s.Col,
+
                     Type = db.type,
+
+                    // TRẠNG THÁI
                     Status = mergedStatus,
-                    Price = (int)db.price,  
+
+                    Price = (int)db.price,
                     X = s.X,
                     Y = s.Y
                 };
@@ -194,7 +234,7 @@ namespace UserApp
             btn.Location = new Point(seat.X, seat.Y);
             btn.Text = $"{seat.Row}{seat.Col:00}";
             btn.Tag = seat;
-            btn.Font = new Font("Segoe UI", 8, FontStyle.Bold);
+            btn.Font = new Font("Segoe UI", 7, FontStyle.Bold);
 
             ApplySeatStyle(btn, seat);
             btn.Click += Seat_Click;
@@ -205,7 +245,7 @@ namespace UserApp
         private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
         {
             // Bảo trì
-            if (seat.Status == "Bảo trì")
+            if (seat.Status.Equals("Bảo trì", StringComparison.OrdinalIgnoreCase))
             {
                 btn.FillColor = Color.Gray;
                 btn.ForeColor = Color.White;
@@ -214,9 +254,9 @@ namespace UserApp
             }
 
             // Đã đặt (Full)
-            if (seat.Status == "Full")
+            if (seat.Status.Equals("Full", StringComparison.OrdinalIgnoreCase))
             {
-                btn.FillColor = Color.DarkRed;
+                btn.FillColor = Color.LightCoral;
                 btn.ForeColor = Color.White;
                 btn.Enabled = false;
                 return;
@@ -253,7 +293,22 @@ namespace UserApp
 
             UpdateTotal();
             UpdateSelectedSeatLabel();
-            timer1.Start();
+
+            // Bắt đầu đếm ngược 5 phút lần đầu chọn
+            if (!isCounting && _selectedSeats.Count > 0)
+            {
+                countdown = 300;
+                isCounting = true;
+                timer1.Start();
+            }
+            // Nếu bỏ hết ghế → dừng đếm
+            else if (_selectedSeats.Count == 0)
+            {
+                isCounting = false;
+                timer1.Stop();
+                countdown = 300;
+                lblTime.Text = "05:00";
+            }
         }
 
         private void UpdateSelectedSeatLabel()
@@ -278,9 +333,8 @@ namespace UserApp
         private void UpdateTotal()
         {
             double total = _selectedSeats.Sum(s => s.Price);
-            lblSotien.Text = total.ToString("N0") + " đ";
+            lblSotien.Text = total.ToString("N0") + " VND";
         }
-
 
         // ===================================================
         // MÀN HÌNH
@@ -297,15 +351,16 @@ namespace UserApp
             l.Text = "MÀN HÌNH";
             l.Font = new Font("Segoe UI", 16, FontStyle.Bold);
             l.AutoSize = true;
-            l.Left = (p.Width - l.Width) / 2;   // sửa lại Left (chữ hoa)
+            l.Left = (p.Width - l.Width) / 2;
             l.Top = (p.Height - l.Height) / 2;
+            l.BackColor = Color.Transparent;
 
             p.Controls.Add(l);
             panelRoom.Controls.Add(p);
         }
 
         // ===================================================
-        // THANH TOÁN → CẬP NHẬT seat_for_showtime
+        // NÚT THANH TOÁN → CHUYỂN PAYMENT1
         // ===================================================
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
@@ -316,41 +371,44 @@ namespace UserApp
                 return;
             }
 
-            using (var conn = DatabaseHelper.GetConnection())
+            // Dừng timer giữ ghế (phần lock ghế / cập nhật DB để Payment2 xử lý)
+            isCounting = false;
+            timer1.Stop();
+
+            var parent = this.ParentForm as UserMainForm ?? parentForm;
+            if (parent != null)
             {
-                conn.Open();
-                using (var tran = conn.BeginTransaction())
-                {
-                    foreach (var seat in _selectedSeats)
-                    {
-                        string seatId = seat.SeatId;    // A01R05
-                        string showId = _showtimeId;    // T001
+                parent.OpenChildForm(new FormPayment1(_showtime, _selectedSeats, parent.CurrentUser));
+            }
+        }
 
-                        var cmd = conn.CreateCommand();
-                        cmd.Transaction = tran;
-                        cmd.CommandText = @"
-INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
-VALUES ($sid, $stid, 'Full')
-ON CONFLICT(seat_id, showtime_id)
-DO UPDATE SET status = 'Full';";
+        // ===================================================
+        // TIMER GIỮ GHẾ
+        // ===================================================
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (countdown <= 0)
+            {
+                timer1.Stop();
+                isCounting = false;
 
-                        cmd.Parameters.AddWithValue("$sid", seatId);
-                        cmd.Parameters.AddWithValue("$stid", showId);
-                        cmd.ExecuteNonQuery();
-                    }
+                MessageBox.Show("Hết thời gian giữ ghế! Vui lòng chọn lại.",
+                                "Hết hạn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                    tran.Commit();
-                }
+                _selectedSeats.Clear();
+                UpdateSelectedSeatLabel();
+                UpdateTotal();
+                LoadRoom(_auditoriumId, _showtimeId);
+                lblTime.Text = "05:00";
+                return;
             }
 
-            MessageBox.Show("Đặt vé thành công! Ghế đã được giữ.", "Thành công",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            countdown--;
 
-            // Reload để lock ghế Full
-            LoadRoom(_auditoriumId, _showtimeId);
-            _selectedSeats.Clear();
-            UpdateTotal();
-            UpdateSelectedSeatLabel();
+            int minutes = countdown / 60;
+            int seconds = countdown % 60;
+
+            lblTime.Text = $"{minutes:00}:{seconds:00}";
         }
     }
 }

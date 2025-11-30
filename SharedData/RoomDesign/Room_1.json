@@ -5,8 +5,8 @@
     "Col": 1,
     "Type": "Thường",
     "Status": "Bình thường",
-    "X": 75,
-    "Y": 90
+    "X": 73,
+    "Y": 92
   },
   {
     "SeatId": "A02",
@@ -85,7 +85,7 @@
     "Row": "A",
     "Col": 10,
     "Type": "Thường",
-    "Status": "Bảo trì",
+    "Status": "Bình thường",
     "X": 597,
     "Y": 90
   },
@@ -266,7 +266,7 @@
     "Col": 15,
     "Type": "Thường",
     "Status": "Bình thường",
-    "X": 887,
+    "X": 886,
     "Y": 150
   },
   {
@@ -292,7 +292,7 @@
     "Row": "C",
     "Col": 3,
     "Type": "Thường",
-    "Status": "Bảo trì",
+    "Status": "Bình thường",
     "X": 191,
     "Y": 210
   },
@@ -301,8 +301,8 @@
     "Row": "C",
     "Col": 4,
     "Type": "Thường",
-    "Status": "Bảo trì",
-    "X": 249,
+    "Status": "Bình thường",
+    "X": 248,
     "Y": 210
   },
   {
@@ -337,7 +337,7 @@
     "Row": "C",
     "Col": 8,
     "Type": "Thường",
-    "Status": "Bảo trì",
+    "Status": "Bình thường",
     "X": 481,
     "Y": 210
   },
@@ -393,7 +393,7 @@
     "Type": "Thường",
     "Status": "Bình thường",
     "X": 829,
-    "Y": 210
+    "Y": 209
   },
   {
     "SeatId": "C15",
@@ -445,7 +445,7 @@
     "Row": "D",
     "Col": 5,
     "Type": "VIP",
-    "Status": "Bảo trì",
+    "Status": "Bình thường",
     "X": 307,
     "Y": 270
   },
@@ -454,8 +454,8 @@
     "Row": "D",
     "Col": 6,
     "Type": "VIP",
-    "Status": "Bảo trì",
-    "X": 365,
+    "Status": "Bình thường",
+    "X": 363,
     "Y": 270
   },
   {
