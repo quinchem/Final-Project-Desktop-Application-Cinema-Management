@@ -38,7 +38,7 @@ namespace UserApp
 
         // Vẫn giữ callback server nếu muốn (nhưng logic chính sẽ dùng Timer)
         private readonly MomoCallbackServer _callbackServer = new MomoCallbackServer();
-
+        public UserMainForm parentForm;
         public FormPayment2(ShowtimeInfo showtime, List<SeatUser> seats, Customer customer, double total)
         {
             InitializeComponent();
@@ -148,7 +148,7 @@ namespace UserApp
 
                 lblPhim.Text = film != null ? $"{film.title} ({film.age_restriction})" : _showtime.title;
 
-                lblLoaiRap.Text = $"{_showtime.auditorium_type} - Phòng {_showtime.name}";
+                lblLoaiRap.Text = $"{_showtime.auditorium_type} - {_showtime.name}";
                 lblNgay.Text = _showtime.show_date;
                 lblGio.Text = $"{_showtime.start_time} - {_showtime.end_time}";
 
@@ -402,6 +402,15 @@ namespace UserApp
                     this.Close();
                 }
             }
+        }
+
+        private void btnQuayLai_Click(object sender, EventArgs e)
+        {
+            parentForm.OpenChildForm(new FormPayment1(
+                _showtime,
+                _seats,
+                _customer
+            ));
         }
     }
 }

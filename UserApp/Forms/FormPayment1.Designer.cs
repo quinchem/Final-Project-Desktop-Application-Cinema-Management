@@ -107,7 +107,7 @@
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2HtmlLabel1.ForeColor = Color.Black;
-            guna2HtmlLabel1.Location = new Point(539, 268);
+            guna2HtmlLabel1.Location = new Point(539, 271);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(135, 33);
             guna2HtmlLabel1.TabIndex = 87;
@@ -118,7 +118,7 @@
             lblKhachHang.AutoSize = false;
             lblKhachHang.BackColor = Color.Transparent;
             lblKhachHang.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblKhachHang.Location = new Point(693, 268);
+            lblKhachHang.Location = new Point(693, 271);
             lblKhachHang.Name = "lblKhachHang";
             lblKhachHang.Size = new Size(217, 80);
             lblKhachHang.TabIndex = 86;
@@ -132,13 +132,13 @@
             btnQuayLai.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnQuayLai.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnQuayLai.FillColor = Color.Transparent;
-            btnQuayLai.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnQuayLai.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnQuayLai.ForeColor = Color.FromArgb(245, 131, 35);
             btnQuayLai.Image = Properties.Resources.back_arrow;
             btnQuayLai.Location = new Point(44, 534);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnQuayLai.Size = new Size(195, 35);
+            btnQuayLai.Size = new Size(204, 35);
             btnQuayLai.TabIndex = 85;
             btnQuayLai.Text = "Quay lại chọn ghế";
             btnQuayLai.Click += btnQuayLai_Click;
@@ -251,7 +251,7 @@
             lblGio.AutoSize = false;
             lblGio.BackColor = Color.Transparent;
             lblGio.Font = new Font("Segoe UI", 13.8F);
-            lblGio.Location = new Point(693, 193);
+            lblGio.Location = new Point(693, 196);
             lblGio.Name = "lblGio";
             lblGio.Size = new Size(210, 57);
             lblGio.TabIndex = 75;
@@ -273,7 +273,7 @@
             lblThoiGian.BackColor = Color.Transparent;
             lblThoiGian.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblThoiGian.ForeColor = Color.Black;
-            lblThoiGian.Location = new Point(539, 193);
+            lblThoiGian.Location = new Point(539, 196);
             lblThoiGian.Name = "lblThoiGian";
             lblThoiGian.Size = new Size(110, 33);
             lblThoiGian.TabIndex = 73;
@@ -308,7 +308,7 @@
             lblRap.Font = new Font("Segoe UI", 13.8F);
             lblRap.Location = new Point(693, 116);
             lblRap.Name = "lblRap";
-            lblRap.Size = new Size(210, 66);
+            lblRap.Size = new Size(232, 49);
             lblRap.TabIndex = 68;
             lblRap.Text = "Loại rạp";
             // 

@@ -127,9 +127,9 @@ namespace UserApp
             btnQuayLai.Location = new Point(44, 269);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnQuayLai.Size = new Size(293, 35);
+            btnQuayLai.Size = new Size(253, 35);
             btnQuayLai.TabIndex = 7;
-            btnQuayLai.Text = "QUAY VỀ TRANG ĐĂNG NHẬP";
+            btnQuayLai.Text = "Quay về trang đăng nhập";
             btnQuayLai.TextAlign = HorizontalAlignment.Left;
             btnQuayLai.Click += btnQuayLai_Click;
             // 
@@ -155,10 +155,10 @@ namespace UserApp
             btnGui.FocusedColor = Color.FromArgb(245, 131, 35);
             btnGui.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGui.ForeColor = Color.White;
-            btnGui.Location = new Point(558, 261);
+            btnGui.Location = new Point(541, 261);
             btnGui.Name = "btnGui";
             btnGui.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnGui.Size = new Size(91, 35);
+            btnGui.Size = new Size(108, 43);
             btnGui.TabIndex = 5;
             btnGui.Text = "GỬI";
             btnGui.Click += btnGui_Click;
