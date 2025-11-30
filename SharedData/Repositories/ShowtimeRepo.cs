@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+using Microsoft.Data.Sqlite;
 using SharedData.Models;
 using System;
 using System.Collections.Generic;

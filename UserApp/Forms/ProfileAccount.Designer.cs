@@ -97,7 +97,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            label4.Location = new Point(569, 63);
+            label4.Location = new Point(582, 63);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(79, 23);
@@ -108,7 +108,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            label5.Location = new Point(569, 155);
+            label5.Location = new Point(582, 155);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(66, 23);
@@ -119,7 +119,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            label6.Location = new Point(569, 253);
+            label6.Location = new Point(582, 253);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
             label6.Size = new Size(115, 23);
@@ -132,7 +132,7 @@
             pctAvatar.Image = Properties.Resources.avata_user;
             pctAvatar.ImageRotate = 0F;
             pctAvatar.Location = new Point(43, 71);
-            pctAvatar.Margin = new Padding(2);
+            pctAvatar.Margin = new Padding(2, 2, 2, 2);
             pctAvatar.Name = "pctAvatar";
             pctAvatar.ShadowDecoration.CustomizableEdges = customizableEdges1;
             pctAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -140,6 +140,7 @@
             pctAvatar.SizeMode = PictureBoxSizeMode.Zoom;
             pctAvatar.TabIndex = 6;
             pctAvatar.TabStop = false;
+            pctAvatar.Click += pctAvatar_Click;
             // 
             // txtHoTen
             // 
@@ -159,7 +160,7 @@
             txtHoTen.PlaceholderText = "";
             txtHoTen.SelectedText = "";
             txtHoTen.ShadowDecoration.CustomizableEdges = customizableEdges3;
-            txtHoTen.Size = new Size(220, 23);
+            txtHoTen.Size = new Size(253, 36);
             txtHoTen.TabIndex = 7;
             // 
             // txtEmail
@@ -180,7 +181,7 @@
             txtEmail.PlaceholderText = "";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            txtEmail.Size = new Size(220, 23);
+            txtEmail.Size = new Size(253, 35);
             txtEmail.TabIndex = 9;
             // 
             // btnSave
@@ -194,8 +195,8 @@
             btnSave.FillColor = Color.FromArgb(44, 84, 115);
             btnSave.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(672, 349);
-            btnSave.Margin = new Padding(2);
+            btnSave.Location = new Point(733, 378);
+            btnSave.Margin = new Padding(2, 2, 2, 2);
             btnSave.Name = "btnSave";
             btnSave.ShadowDecoration.CustomizableEdges = customizableEdges7;
             btnSave.Size = new Size(184, 37);
@@ -215,13 +216,13 @@
             txtDiachi.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtDiachi.Font = new Font("Segoe UI", 9F);
             txtDiachi.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtDiachi.Location = new Point(569, 186);
+            txtDiachi.Location = new Point(582, 186);
             txtDiachi.Margin = new Padding(3, 4, 3, 4);
             txtDiachi.Name = "txtDiachi";
             txtDiachi.PlaceholderText = "";
             txtDiachi.SelectedText = "";
             txtDiachi.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            txtDiachi.Size = new Size(220, 23);
+            txtDiachi.Size = new Size(287, 37);
             txtDiachi.TabIndex = 18;
             // 
             // txtSDT
@@ -236,13 +237,13 @@
             txtSDT.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSDT.Font = new Font("Segoe UI", 9F);
             txtSDT.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSDT.Location = new Point(569, 284);
+            txtSDT.Location = new Point(582, 284);
             txtSDT.Margin = new Padding(3, 4, 3, 4);
             txtSDT.Name = "txtSDT";
             txtSDT.PlaceholderText = "";
             txtSDT.SelectedText = "";
             txtSDT.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            txtSDT.Size = new Size(220, 23);
+            txtSDT.Size = new Size(287, 35);
             txtSDT.TabIndex = 19;
             // 
             // dtpNgaySinh
@@ -281,10 +282,10 @@
             CbGioiTinh.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             CbGioiTinh.ItemHeight = 30;
             CbGioiTinh.Items.AddRange(new object[] { "Nam ", "Nữ ", "Khác" });
-            CbGioiTinh.Location = new Point(569, 93);
+            CbGioiTinh.Location = new Point(582, 93);
             CbGioiTinh.Name = "CbGioiTinh";
             CbGioiTinh.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            CbGioiTinh.Size = new Size(220, 36);
+            CbGioiTinh.Size = new Size(204, 36);
             CbGioiTinh.TabIndex = 58;
             // 
             // ProfileAccount
@@ -307,7 +308,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "ProfileAccount";
-            Size = new Size(945, 413);
+            Size = new Size(984, 449);
             Click += ProfileAccount_Load;
             ((System.ComponentModel.ISupportInitialize)pctAvatar).EndInit();
             ResumeLayout(false);

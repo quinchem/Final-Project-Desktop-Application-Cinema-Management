@@ -86,7 +86,22 @@ namespace SharedData.Repositories
                 }
             }
         }
-        
+
+        public void UpdateAvatarPath(string customerId, string avatarPath)
+        {
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE customer SET avatar_path = @p WHERE customer_id = @id";
+                    cmd.Parameters.AddWithValue("@p", avatarPath);
+                    cmd.Parameters.AddWithValue("@id", customerId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public bool Update(Customer c)
         {
             using var conn = new SqliteConnection(ConnStr);

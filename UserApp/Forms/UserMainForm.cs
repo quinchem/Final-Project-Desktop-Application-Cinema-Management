@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using SharedData.Models;
+using UserApp.Forms;
 
 namespace UserApp
 {
@@ -174,6 +175,11 @@ namespace UserApp
             currentButton.FillColor = Color.FromArgb(44, 84, 115);
             currentButton.ForeColor = Color.FromArgb(255, 128, 0);
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
+        }
+
+        private void btnChatbot_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new FormChatbot(this));
         }
     }
 }
