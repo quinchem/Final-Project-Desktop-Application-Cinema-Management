@@ -33,8 +33,7 @@ namespace UserApp
                         m.title AS movie_name,
                         s.show_date AS show_time,
                         b.bill_date,
-                        b.quantity_ticket,
-                        b.per_seat_ticket_price
+                        b.total
                     FROM Bill b
                     JOIN Showtime s ON b.showtime_id = s.showtime_id
                     JOIN Movie m ON s.movie_id = m.movie_id
@@ -57,12 +56,9 @@ namespace UserApp
                             string billId = reader["bill_id"].ToString();
                             string movieName = reader["movie_name"].ToString();
                             string showTime = reader["show_time"].ToString();
-                            string billDate = Convert.ToDateTime(reader["bill_date"]).ToString("yyyy-MM-dd");
+                            string billDate = reader["bill_date"].ToString();
 
-                            int qtyTicket = Convert.ToInt32(reader["quantity_ticket"]);
-                            int ticketPrice = Convert.ToInt32(reader["per_seat_ticket_price"]);
-
-                            int totalMoney = qtyTicket * ticketPrice;
+                         
 
                             string ticketCode = GenerateRandomCode();
 
@@ -72,8 +68,6 @@ namespace UserApp
                                 movieName,
                                 showTime,
                                 billDate,
-                                totalMoney.ToString("N0"),
-                                ticketCode,
                                 "Xem"
                             );
                         }

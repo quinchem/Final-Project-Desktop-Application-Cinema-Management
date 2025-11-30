@@ -177,7 +177,7 @@ namespace UserApp
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
         }
 
-        private void btnChatbot_Click(object sender, EventArgs e)
+        private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
             OpenChildForm(new FormChatbot(this));
         }
