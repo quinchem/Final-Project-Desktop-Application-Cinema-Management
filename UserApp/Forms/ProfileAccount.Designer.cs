@@ -161,7 +161,7 @@
             txtHoTen.PlaceholderText = "";
             txtHoTen.SelectedText = "";
             txtHoTen.ShadowDecoration.CustomizableEdges = customizableEdges3;
-            txtHoTen.Size = new Size(253, 36);
+            txtHoTen.Size = new Size(282, 46);
             txtHoTen.TabIndex = 7;
             // 
             // txtEmail
@@ -183,7 +183,7 @@
             txtEmail.PlaceholderText = "";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            txtEmail.Size = new Size(253, 35);
+            txtEmail.Size = new Size(282, 46);
             txtEmail.TabIndex = 9;
             // 
             // btnSave
@@ -225,7 +225,7 @@
             txtDiachi.PlaceholderText = "";
             txtDiachi.SelectedText = "";
             txtDiachi.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            txtDiachi.Size = new Size(287, 37);
+            txtDiachi.Size = new Size(282, 47);
             txtDiachi.TabIndex = 18;
             // 
             // txtSDT
@@ -247,7 +247,7 @@
             txtSDT.PlaceholderText = "";
             txtSDT.SelectedText = "";
             txtSDT.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            txtSDT.Size = new Size(287, 35);
+            txtSDT.Size = new Size(282, 46);
             txtSDT.TabIndex = 19;
             // 
             // dtpNgaySinh
@@ -268,7 +268,7 @@
             dtpNgaySinh.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtpNgaySinh.Name = "dtpNgaySinh";
             dtpNgaySinh.ShadowDecoration.CustomizableEdges = customizableEdges13;
-            dtpNgaySinh.Size = new Size(253, 37);
+            dtpNgaySinh.Size = new Size(282, 47);
             dtpNgaySinh.TabIndex = 57;
             dtpNgaySinh.Value = new DateTime(2005, 11, 17, 2, 53, 0, 0);
             // 
@@ -287,7 +287,7 @@
             CbGioiTinh.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             CbGioiTinh.ItemHeight = 30;
             CbGioiTinh.Items.AddRange(new object[] { "Nam ", "Nữ ", "Khác" });
-            CbGioiTinh.Location = new Point(582, 93);
+            CbGioiTinh.Location = new Point(582, 95);
             CbGioiTinh.Name = "CbGioiTinh";
             CbGioiTinh.ShadowDecoration.CustomizableEdges = customizableEdges15;
             CbGioiTinh.Size = new Size(287, 36);
