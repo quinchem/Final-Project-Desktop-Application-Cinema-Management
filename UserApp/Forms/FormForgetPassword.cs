@@ -65,11 +65,10 @@ namespace UserApp
             }
         }
 
-        // Nút Quay Lại → quay về panel Đăng nhập trong FormLogin (cha)
+        // Nút Quay Lại 
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
-            parentForm.ShowLogin();   
-            this.Close();        
+            parentForm.OpenChildForm(new FormLogin());
         }
     }
 }

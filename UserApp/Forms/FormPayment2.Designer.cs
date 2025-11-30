@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
             guna2CustomGradientPanel3 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             picQR = new PictureBox();
@@ -60,6 +62,7 @@
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             timer1 = new System.Windows.Forms.Timer(components);
+            btnQuayLai = new Guna.UI2.WinForms.Guna2Button();
             panel1.SuspendLayout();
             guna2CustomGradientPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picQR).BeginInit();
@@ -71,6 +74,7 @@
             // 
             panel1.AutoScroll = true;
             panel1.BackColor = Color.FromArgb(92, 124, 150);
+            panel1.Controls.Add(btnQuayLai);
             panel1.Controls.Add(guna2CustomGradientPanel3);
             panel1.Controls.Add(guna2CustomGradientPanel2);
             panel1.Controls.Add(guna2CustomGradientPanel1);
@@ -87,7 +91,7 @@
             guna2CustomGradientPanel3.Controls.Add(picQR);
             guna2CustomGradientPanel3.Controls.Add(guna2HtmlLabel18);
             guna2CustomGradientPanel3.Controls.Add(lblTrangThai);
-            guna2CustomGradientPanel3.CustomizableEdges = customizableEdges1;
+            guna2CustomGradientPanel3.CustomizableEdges = customizableEdges3;
             guna2CustomGradientPanel3.FillColor = Color.FromArgb(231, 30, 140);
             guna2CustomGradientPanel3.FillColor2 = Color.FromArgb(231, 30, 140);
             guna2CustomGradientPanel3.FillColor3 = Color.FromArgb(231, 30, 140);
@@ -95,7 +99,7 @@
             guna2CustomGradientPanel3.Location = new Point(544, 58);
             guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             guna2CustomGradientPanel3.ShadowDecoration.Color = Color.FromArgb(70, 70, 70);
-            guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2CustomGradientPanel3.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel3.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel3.ShadowDecoration.Shadow = new Padding(2, 2, 8, 8);
@@ -142,7 +146,7 @@
             guna2CustomGradientPanel2.BorderRadius = 15;
             guna2CustomGradientPanel2.Controls.Add(lblTimer);
             guna2CustomGradientPanel2.Controls.Add(guna2HtmlLabel16);
-            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges3;
+            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges5;
             guna2CustomGradientPanel2.FillColor = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(246, 233, 238);
@@ -150,7 +154,7 @@
             guna2CustomGradientPanel2.Location = new Point(163, 535);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
@@ -198,7 +202,7 @@
             guna2CustomGradientPanel1.Controls.Add(lblPhim);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel2);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel3);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges5;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges7;
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(246, 233, 238);
@@ -206,7 +210,7 @@
             guna2CustomGradientPanel1.Location = new Point(163, 58);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2CustomGradientPanel1.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel1.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel1.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
@@ -365,7 +369,7 @@
             // 
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel3.Location = new Point(70, 12);
+            guna2HtmlLabel3.Location = new Point(80, 12);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(192, 30);
             guna2HtmlLabel3.TabIndex = 0;
@@ -375,6 +379,25 @@
             // 
             timer1.Interval = 1000;
             timer1.Tick += timer1_Tick;
+            // 
+            // btnQuayLai
+            // 
+            btnQuayLai.CustomizableEdges = customizableEdges1;
+            btnQuayLai.DisabledState.BorderColor = Color.DarkGray;
+            btnQuayLai.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnQuayLai.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnQuayLai.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnQuayLai.FillColor = Color.Transparent;
+            btnQuayLai.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnQuayLai.ForeColor = Color.FromArgb(255, 128, 0);
+            btnQuayLai.Image = Properties.Resources.back_arrow;
+            btnQuayLai.Location = new Point(53, 728);
+            btnQuayLai.Name = "btnQuayLai";
+            btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnQuayLai.Size = new Size(204, 35);
+            btnQuayLai.TabIndex = 86;
+            btnQuayLai.Text = "Quay lại chọn ghế";
+            btnQuayLai.Click += btnQuayLai_Click;
             // 
             // FormPayment2
             // 
@@ -420,5 +443,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblKhachHang;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTimer;
+        private Guna.UI2.WinForms.Guna2Button btnQuayLai;
     }
 }

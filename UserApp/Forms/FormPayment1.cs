@@ -48,7 +48,7 @@ namespace UserApp
                     lblTenPhim.Text = _showtime.title;
 
                 // --- LOẠI RẠP ---
-                lblLoaiRap.Text = $"{_showtime.auditorium_type} - Phòng {_showtime.name}";
+                lblLoaiRap.Text = $"{_showtime.auditorium_type} - {_showtime.name}";
 
 
                 lblNgay.Text = _showtime.show_date;
