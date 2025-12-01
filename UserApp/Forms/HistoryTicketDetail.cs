@@ -23,7 +23,7 @@ namespace UserApp
             LoadDetail();
         }
 
-        private string GenerateTicketCode(string billId)
+        /*private string GenerateTicketCode(string billId)
         {
             using (SHA256 sha = SHA256.Create())
             {
@@ -31,7 +31,7 @@ namespace UserApp
                 string hash = BitConverter.ToString(bytes).Replace("-", "");
                 return $"TK-{billId}-{hash.Substring(0, 4)}";
             }
-        }
+        }*/
 
         private void LoadDetail()
         {
@@ -110,7 +110,7 @@ namespace UserApp
                                 {
                                     MaPhieu = "TT" + DateTime.Now.ToString("ddMMyyyy") + "-" + _billId.Substring(Math.Max(0, _billId.Length - 4)),
                                     MaDonDatVe = _billId,
-                                    TicketCode = GenerateTicketCode(_billId),
+                                    //TicketCode = GenerateTicketCode(_billId),
                                     HoTen = fullName,
                                     Email = email,
                                     NgayDatVe = DateTime.Now.ToString("dd/MM/yyyy"),
@@ -132,8 +132,8 @@ namespace UserApp
                                 txtNgayDatVe.Text = _printData.NgayDatVe;
                                 txtTongTien.Text = $"{_printData.TongTien:N0} VNĐ";
 
-                                if (this.Controls.Find("txtTicketCode", true).Length > 0)
-                                    ((TextBox)this.Controls.Find("txtTicketCode", true)[0]).Text = _printData.TicketCode;
+                                /*if (this.Controls.Find("txtTicketCode", true).Length > 0)
+                                    ((TextBox)this.Controls.Find("txtTicketCode", true)[0]).Text = _printData.TicketCode;*/
                             }
                             else
                             {
@@ -184,92 +184,96 @@ namespace UserApp
         private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
         {
             Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // Fonts
             Font titleFont = new Font("Segoe UI", 20, FontStyle.Bold);
             Font headerFont = new Font("Segoe UI", 10, FontStyle.Bold);
             Font normalFont = new Font("Segoe UI", 10);
+            Font smallFont = new Font("Segoe UI", 9, FontStyle.Italic);
             Font totalFont = new Font("Segoe UI", 12, FontStyle.Bold);
 
+            // Brushes
             Brush blackBrush = Brushes.Black;
             Brush grayBrush = Brushes.Gray;
             Brush redBrush = Brushes.Red;
+            Brush greenBrush = Brushes.Green;
 
             int leftMargin = 50;
             int topMargin = 50;
             int yPos = topMargin;
 
             // Nền trang
-            g.FillRectangle(new SolidBrush(ColorTranslator.FromHtml("#ece6e0")), e.PageBounds);
+            g.FillRectangle(Brushes.White, e.PageBounds);
 
-            // ⭐ VẼ LOGO
+            // 1. Logo góc trái
+            int logoWidth = 80;
+            int logoHeight = 80;
             try
             {
-                byte[] logoBytes = Properties.Resources.Logo_trang; // logo ở dạng byte[]
+                byte[] logoBytes = Properties.Resources.Logo_trang; // logo byte[]
                 using (var ms = new System.IO.MemoryStream(logoBytes))
                 {
                     Image logo = Image.FromStream(ms);
-                    int logoWidth = 120;
-                    int logoHeight = 120;
-                    int centerX = (e.PageBounds.Width - logoWidth) / 2;
-                    g.DrawImage(logo, centerX, yPos, logoWidth, logoHeight);
+                    g.DrawImage(logo, leftMargin, yPos, logoWidth, logoHeight);
                 }
-            
             }
             catch { }
 
-            yPos += 140;
+            // 2. Tên công ty căn giữa theo chiều cao logo
+            SizeF companySize = g.MeasureString("CÔNG TY TNHH HAMSTER", headerFont);
+            float companyY = yPos + (logoHeight - companySize.Height) / 2;
+            g.DrawString("CÔNG TY TNHH HAMSTER", headerFont, blackBrush, leftMargin + logoWidth + 20, companyY);
 
-            g.DrawString("CÔNG TY TNHH HAMSTER", headerFont, blackBrush, leftMargin + 120, yPos);
-            yPos += 120;
-
-            g.DrawString("PHIẾU ĐẶT VÉ", titleFont, blackBrush, e.PageBounds.Width / 2 - 150, yPos);
-
+            // 3. Thời gian in (top right)
             string printTime = $"Thời gian in: {DateTime.Now:dd/MM/yyyy HH:mm}";
-            g.DrawString(printTime, new Font("Segoe UI", 9, FontStyle.Italic), grayBrush, e.PageBounds.Width - 250, yPos + 5);
-            yPos += 80;
+            g.DrawString(printTime, smallFont, grayBrush, e.PageBounds.Width - 250, yPos + 30);
+            yPos += logoHeight + 20;
 
-            Rectangle infoBox = new Rectangle(leftMargin, yPos, e.PageBounds.Width - 100, 450);
-            g.FillRectangle(new SolidBrush(Color.FromArgb(245, 245, 245)), infoBox);
-            g.DrawRectangle(Pens.Black, infoBox);
-            yPos += 30;
-
-            DrawInfoLine(g, "Mã phiếu:", _printData.MaPhieu, leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Mã vé (Ticket Code):", _printData.TicketCode, leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Mã đơn đặt vé:", _printData.MaDonDatVe, leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Họ và tên:", _printData.HoTen, leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Email:", _printData.Email, leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Ngày đặt vé:", _printData.NgayDatVe, leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Tên phim:", _printData.TenPhim, leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Suất chiếu:", _printData.SuatChieu, leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Số lượng ghế:", _printData.SoLuongGhe.ToString(), leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Danh sách ghế:", _printData.Ghe, leftMargin + 30, yPos, normalFont);
-            yPos += 30;
-            DrawInfoLine(g, "Phòng chiếu:", _printData.PhongChieu, leftMargin + 30, yPos, normalFont);
-            yPos += 50;
-
-            g.DrawLine(Pens.Gray, leftMargin + 30, yPos, e.PageBounds.Width - 70, yPos);
-            yPos += 30;
-
-            DrawInfoLine(g, "Tổng tiền:", $"{_printData.TongTien:N0} VNĐ", leftMargin + 30, yPos, totalFont, redBrush);
+            // 4. Tiêu đề phiếu
+            g.DrawString("PHIẾU ĐẶT VÉ", titleFont, blackBrush, e.PageBounds.Width / 2 - 100, yPos);
             yPos += 40;
-            DrawInfoLine(g, "Tổng tiền (bằng chữ):", NumberToVietnameseWords(_printData.TongTien), leftMargin + 30, yPos, normalFont);
-            yPos += 40;
-            DrawInfoLine(g, "Tình trạng:", "Thành công", leftMargin + 30, yPos, normalFont, Brushes.Green);
+
+            // 5. Khung chữ nhật bao quát toàn bộ thông tin
+            int boxHeight = 500; // chiều cao có thể điều chỉnh tùy số lượng thông tin
+            Rectangle infoBox = new Rectangle(leftMargin, yPos, e.PageBounds.Width - 2 * leftMargin, boxHeight);
+            g.FillRectangle(new SolidBrush(ColorTranslator.FromHtml("#ECE6E0")), infoBox);
+            g.DrawRectangle(Pens.Gray, infoBox);
+
+            int labelX = leftMargin + 20;
+            int valueX = labelX + 200;
+            int lineHeight = 30;
+            int infoY = yPos + 20;
+
+            // 6. Thông tin chi tiết
+            DrawInfoLine(g, "Mã phiếu:", _printData.MaPhieu, labelX, infoY, normalFont); infoY += lineHeight;
+            //DrawInfoLine(g, "Mã vé (Ticket Code):", _printData.TicketCode, labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Mã đơn đặt vé:", _printData.MaDonDatVe, labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Họ và tên:", _printData.HoTen, labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Email:", _printData.Email, labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Ngày đặt vé:", _printData.NgayDatVe, labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Tên phim:", _printData.TenPhim, labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Suất chiếu:", _printData.SuatChieu, labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Số lượng ghế:", _printData.SoLuongGhe.ToString(), labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Danh sách ghế:", _printData.Ghe, labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Phòng chiếu:", _printData.PhongChieu, labelX, infoY, normalFont); infoY += lineHeight + 10;
+
+            g.DrawLine(Pens.Gray, labelX, infoY, e.PageBounds.Width - leftMargin - 20, infoY);
+            infoY += 10;
+
+            // Tổng tiền, bằng chữ, tình trạng
+            DrawInfoLine(g, "Tổng tiền:", $"{_printData.TongTien:N0} VNĐ", labelX, infoY, totalFont, redBrush); infoY += 35;
+            DrawInfoLine(g, "Tổng tiền (bằng chữ):", NumberToVietnameseWords(_printData.TongTien), labelX, infoY, normalFont); infoY += 35;
+            DrawInfoLine(g, "Tình trạng:", "Thành công", labelX, infoY, normalFont, greenBrush);
         }
 
+        // Hàm vẽ 1 dòng thông tin
         private void DrawInfoLine(Graphics g, string label, string value, int x, int y, Font font, Brush valueBrush = null)
         {
             g.DrawString(label, font, Brushes.Black, x, y);
             g.DrawString(value, font, valueBrush ?? Brushes.Black, x + 200, y);
         }
+
 
         private string NumberToVietnameseWords(decimal number)
         {
