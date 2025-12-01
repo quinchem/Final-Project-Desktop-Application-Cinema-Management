@@ -584,7 +584,7 @@ namespace AdminApp
             panelMain.Location = new Point(0, 128);
             panelMain.Name = "panelMain";
             panelMain.ShadowDecoration.CustomizableEdges = customizableEdges34;
-            panelMain.Size = new Size(1508, 793);
+            panelMain.Size = new Size(1508, 1204);
             panelMain.TabIndex = 1;
             // 
             // panelDangNhap

@@ -10,9 +10,13 @@ namespace AdminApp
 {
     public partial class FormStatistics2 : Form
     {
-        public FormStatistics2()
+        private AdminMainForm _parent;
+
+        public FormStatistics2(AdminMainForm mainForm)
         {
             InitializeComponent();
+            _parent = mainForm;
+
         }
 
         private void FormStatistics2_Load(object sender, EventArgs e)
@@ -376,5 +380,32 @@ WHERE create_date IS NOT NULL
                 }
             }
         }
+
+
+        private void btnTongQuan_Click(object sender, EventArgs e)
+        {
+            _parent.OpenChildForm(new FormStatistics1(_parent));
+        }
+
+        // 2. Nút Khách hàng (Đang ở đây rồi thì không làm gì hoặc reload)
+        private void btnKhachHang_Click(object sender, EventArgs e)
+        {
+            // Đang ở trang này, không cần chuyển
+        }
+
+        // 3. Nút Phim (Chuyển sang FormStatistics3)
+        private void btnPhim_Click(object sender, EventArgs e)
+        {
+            _parent.OpenChildForm(new FormStatistics3(_parent));
+        }
+
+        // 4. Nút Phòng chiếu (Chuyển sang FormStatistics4)
+        private void btnPhongChieu_Click(object sender, EventArgs e)
+        {
+            _parent.OpenChildForm(new FormStatistics4(_parent));
+
+        }
     }
 }
+
+

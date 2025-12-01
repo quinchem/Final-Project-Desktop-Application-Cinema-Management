@@ -138,7 +138,7 @@ namespace AdminApp
 
             var btn = sender as Guna.UI2.WinForms.Guna2Button;
             ActivateButton(btn);
-            OpenChildForm(new FormStatistics1());
+            OpenChildForm(new FormStatistics1(this));
         }
 
         private void btnPhim_Click(object sender, EventArgs e)
@@ -287,7 +287,7 @@ namespace AdminApp
 
                             // MỞ FORM MẶC ĐỊNH
                             ActivateButton(btnThongKe);
-                            OpenChildForm(new FormStatistics1());
+                            OpenChildForm(new FormStatistics1(this));
                         }
                         else
                         {
