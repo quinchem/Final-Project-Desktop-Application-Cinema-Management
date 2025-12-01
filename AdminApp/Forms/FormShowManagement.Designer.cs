@@ -155,7 +155,7 @@
             dgvShowtime.ReadOnly = true;
             dgvShowtime.RowHeadersVisible = false;
             dgvShowtime.RowHeadersWidth = 51;
-            dgvShowtime.Size = new Size(1530, 539);
+            dgvShowtime.Size = new Size(1530, 558);
             dgvShowtime.TabIndex = 36;
             dgvShowtime.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgvShowtime.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -491,7 +491,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1633, 703);
+            ClientSize = new Size(1632, 810);
             Controls.Add(guna2PictureBox1);
             Controls.Add(label1);
             Controls.Add(dtpNgayChieu);

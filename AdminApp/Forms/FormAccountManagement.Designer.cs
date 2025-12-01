@@ -104,7 +104,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1420, 750);
+            panel1.Size = new Size(1624, 750);
             panel1.TabIndex = 5;
             // 
             // PanelChinhSua
@@ -132,7 +132,7 @@
             PanelChinhSua.Controls.Add(picAvatar);
             PanelChinhSua.Controls.Add(guna2HtmlLabel4);
             PanelChinhSua.CustomizableEdges = customizableEdges23;
-            PanelChinhSua.Location = new Point(49, 92);
+            PanelChinhSua.Location = new Point(135, 91);
             PanelChinhSua.Name = "PanelChinhSua";
             PanelChinhSua.ShadowDecoration.Color = Color.FromArgb(80, 80, 80);
             PanelChinhSua.ShadowDecoration.CustomizableEdges = customizableEdges24;
@@ -595,7 +595,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1420, 750);
+            ClientSize = new Size(1624, 750);
             Controls.Add(panel1);
             Name = "FormAccountManagement";
             Text = "Quản lý tài khoản cá nhân";

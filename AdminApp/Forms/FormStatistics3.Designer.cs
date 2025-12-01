@@ -49,6 +49,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
+            Stt = new DataGridViewTextBoxColumn();
+            TenPhim = new DataGridViewTextBoxColumn();
+            SoVePhim = new DataGridViewTextBoxColumn();
+            DoanhThuPhim = new DataGridViewTextBoxColumn();
             label1 = new Label();
             groupBox3 = new GroupBox();
             guna2ComboBox3 = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -61,10 +65,6 @@
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
-            Stt = new DataGridViewTextBoxColumn();
-            TenPhim = new DataGridViewTextBoxColumn();
-            SoVePhim = new DataGridViewTextBoxColumn();
-            DoanhThuPhim = new DataGridViewTextBoxColumn();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
             groupBox3.SuspendLayout();
@@ -83,7 +83,7 @@
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel1.Location = new Point(44, 206);
+            guna2CustomGradientPanel1.Location = new Point(126, 202);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2CustomGradientPanel1.Size = new Size(1314, 461);
@@ -143,189 +143,6 @@
             guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.FromArgb(125, 167, 199);
-            label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(23, 6);
-            label1.Name = "label1";
-            label1.RightToLeft = RightToLeft.Yes;
-            label1.Size = new Size(330, 25);
-            label1.TabIndex = 1;
-            label1.Text = "BẢNG XẾP HẠNG DOANH THU PHIM";
-            // 
-            // groupBox3
-            // 
-            groupBox3.Controls.Add(guna2ComboBox3);
-            groupBox3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox3.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox3.Location = new Point(907, 111);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(312, 74);
-            groupBox3.TabIndex = 69;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Chọn năm";
-            // 
-            // guna2ComboBox3
-            // 
-            guna2ComboBox3.BackColor = Color.White;
-            guna2ComboBox3.CustomizableEdges = customizableEdges3;
-            guna2ComboBox3.DrawMode = DrawMode.OwnerDrawFixed;
-            guna2ComboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
-            guna2ComboBox3.FocusedColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox3.Font = new Font("Segoe UI", 10F);
-            guna2ComboBox3.ForeColor = Color.FromArgb(68, 88, 112);
-            guna2ComboBox3.ItemHeight = 30;
-            guna2ComboBox3.Items.AddRange(new object[] { "2023", "2024", "2025" });
-            guna2ComboBox3.Location = new Point(17, 26);
-            guna2ComboBox3.Name = "guna2ComboBox3";
-            guna2ComboBox3.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2ComboBox3.Size = new Size(279, 36);
-            guna2ComboBox3.TabIndex = 47;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(guna2DateTimePicker2);
-            groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox2.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox2.Location = new Point(569, 111);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(312, 74);
-            groupBox2.TabIndex = 68;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Chọn ngày kết thúc";
-            // 
-            // guna2DateTimePicker2
-            // 
-            guna2DateTimePicker2.BackColor = Color.White;
-            guna2DateTimePicker2.Checked = true;
-            guna2DateTimePicker2.CustomizableEdges = customizableEdges5;
-            guna2DateTimePicker2.FillColor = Color.White;
-            guna2DateTimePicker2.FocusedColor = Color.White;
-            guna2DateTimePicker2.Font = new Font("Segoe UI", 9F);
-            guna2DateTimePicker2.ForeColor = Color.Black;
-            guna2DateTimePicker2.Format = DateTimePickerFormat.Long;
-            guna2DateTimePicker2.Location = new Point(16, 26);
-            guna2DateTimePicker2.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            guna2DateTimePicker2.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            guna2DateTimePicker2.Name = "guna2DateTimePicker2";
-            guna2DateTimePicker2.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2DateTimePicker2.Size = new Size(279, 36);
-            guna2DateTimePicker2.TabIndex = 51;
-            guna2DateTimePicker2.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(guna2DateTimePicker1);
-            groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox1.Location = new Point(233, 111);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(312, 74);
-            groupBox1.TabIndex = 67;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Chọn ngày bắt đầu";
-            // 
-            // guna2DateTimePicker1
-            // 
-            guna2DateTimePicker1.BackColor = Color.White;
-            guna2DateTimePicker1.Checked = true;
-            guna2DateTimePicker1.CustomizableEdges = customizableEdges7;
-            guna2DateTimePicker1.FillColor = Color.White;
-            guna2DateTimePicker1.Font = new Font("Segoe UI", 9F);
-            guna2DateTimePicker1.ForeColor = Color.FromArgb(64, 64, 64);
-            guna2DateTimePicker1.Format = DateTimePickerFormat.Long;
-            guna2DateTimePicker1.Location = new Point(16, 26);
-            guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2DateTimePicker1.Size = new Size(279, 36);
-            guna2DateTimePicker1.TabIndex = 50;
-            guna2DateTimePicker1.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
-            // 
-            // guna2Separator1
-            // 
-            guna2Separator1.Location = new Point(44, 85);
-            guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1314, 12);
-            guna2Separator1.TabIndex = 66;
-            // 
-            // guna2Button3
-            // 
-            guna2Button3.BorderRadius = 5;
-            guna2Button3.CustomizableEdges = customizableEdges9;
-            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button3.FillColor = Color.Silver;
-            guna2Button3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button3.ForeColor = Color.White;
-            guna2Button3.Location = new Point(844, 35);
-            guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button3.Size = new Size(135, 37);
-            guna2Button3.TabIndex = 65;
-            guna2Button3.Text = "Dịch vụ";
-            // 
-            // guna2Button2
-            // 
-            guna2Button2.BorderRadius = 5;
-            guna2Button2.CustomizableEdges = customizableEdges11;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.FromArgb(255, 128, 0);
-            guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Location = new Point(690, 35);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2Button2.Size = new Size(135, 37);
-            guna2Button2.TabIndex = 64;
-            guna2Button2.Text = "Phim";
-            // 
-            // guna2Button1
-            // 
-            guna2Button1.BorderRadius = 5;
-            guna2Button1.CustomizableEdges = customizableEdges13;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.Silver;
-            guna2Button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(531, 35);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2Button1.Size = new Size(135, 37);
-            guna2Button1.TabIndex = 63;
-            guna2Button1.Text = "Khách hàng";
-            // 
-            // guna2Button4
-            // 
-            guna2Button4.BorderRadius = 5;
-            guna2Button4.CustomizableEdges = customizableEdges15;
-            guna2Button4.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button4.FillColor = Color.Silver;
-            guna2Button4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button4.ForeColor = Color.White;
-            guna2Button4.Location = new Point(371, 35);
-            guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2Button4.Size = new Size(135, 37);
-            guna2Button4.TabIndex = 62;
-            guna2Button4.Text = "Tổng quan";
-            // 
             // Stt
             // 
             Stt.Frozen = true;
@@ -364,12 +181,195 @@
             DoanhThuPhim.Name = "DoanhThuPhim";
             DoanhThuPhim.Width = 350;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.FromArgb(125, 167, 199);
+            label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(23, 6);
+            label1.Name = "label1";
+            label1.RightToLeft = RightToLeft.Yes;
+            label1.Size = new Size(330, 25);
+            label1.TabIndex = 1;
+            label1.Text = "BẢNG XẾP HẠNG DOANH THU PHIM";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(guna2ComboBox3);
+            groupBox3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox3.ForeColor = Color.FromArgb(255, 128, 0);
+            groupBox3.Location = new Point(989, 107);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(312, 74);
+            groupBox3.TabIndex = 69;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Chọn năm";
+            // 
+            // guna2ComboBox3
+            // 
+            guna2ComboBox3.BackColor = Color.White;
+            guna2ComboBox3.CustomizableEdges = customizableEdges3;
+            guna2ComboBox3.DrawMode = DrawMode.OwnerDrawFixed;
+            guna2ComboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
+            guna2ComboBox3.FocusedColor = Color.FromArgb(94, 148, 255);
+            guna2ComboBox3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2ComboBox3.Font = new Font("Segoe UI", 10F);
+            guna2ComboBox3.ForeColor = Color.FromArgb(68, 88, 112);
+            guna2ComboBox3.ItemHeight = 30;
+            guna2ComboBox3.Items.AddRange(new object[] { "2023", "2024", "2025" });
+            guna2ComboBox3.Location = new Point(17, 26);
+            guna2ComboBox3.Name = "guna2ComboBox3";
+            guna2ComboBox3.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2ComboBox3.Size = new Size(279, 36);
+            guna2ComboBox3.TabIndex = 47;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(guna2DateTimePicker2);
+            groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox2.ForeColor = Color.FromArgb(255, 128, 0);
+            groupBox2.Location = new Point(651, 107);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(312, 74);
+            groupBox2.TabIndex = 68;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Chọn ngày kết thúc";
+            // 
+            // guna2DateTimePicker2
+            // 
+            guna2DateTimePicker2.BackColor = Color.White;
+            guna2DateTimePicker2.Checked = true;
+            guna2DateTimePicker2.CustomizableEdges = customizableEdges5;
+            guna2DateTimePicker2.FillColor = Color.White;
+            guna2DateTimePicker2.FocusedColor = Color.White;
+            guna2DateTimePicker2.Font = new Font("Segoe UI", 9F);
+            guna2DateTimePicker2.ForeColor = Color.Black;
+            guna2DateTimePicker2.Format = DateTimePickerFormat.Long;
+            guna2DateTimePicker2.Location = new Point(16, 26);
+            guna2DateTimePicker2.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            guna2DateTimePicker2.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            guna2DateTimePicker2.Name = "guna2DateTimePicker2";
+            guna2DateTimePicker2.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2DateTimePicker2.Size = new Size(279, 36);
+            guna2DateTimePicker2.TabIndex = 51;
+            guna2DateTimePicker2.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(guna2DateTimePicker1);
+            groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.ForeColor = Color.FromArgb(255, 128, 0);
+            groupBox1.Location = new Point(315, 107);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(312, 74);
+            groupBox1.TabIndex = 67;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Chọn ngày bắt đầu";
+            // 
+            // guna2DateTimePicker1
+            // 
+            guna2DateTimePicker1.BackColor = Color.White;
+            guna2DateTimePicker1.Checked = true;
+            guna2DateTimePicker1.CustomizableEdges = customizableEdges7;
+            guna2DateTimePicker1.FillColor = Color.White;
+            guna2DateTimePicker1.Font = new Font("Segoe UI", 9F);
+            guna2DateTimePicker1.ForeColor = Color.FromArgb(64, 64, 64);
+            guna2DateTimePicker1.Format = DateTimePickerFormat.Long;
+            guna2DateTimePicker1.Location = new Point(16, 26);
+            guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            guna2DateTimePicker1.Name = "guna2DateTimePicker1";
+            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2DateTimePicker1.Size = new Size(279, 36);
+            guna2DateTimePicker1.TabIndex = 50;
+            guna2DateTimePicker1.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
+            // 
+            // guna2Separator1
+            // 
+            guna2Separator1.Location = new Point(126, 81);
+            guna2Separator1.Name = "guna2Separator1";
+            guna2Separator1.Size = new Size(1314, 12);
+            guna2Separator1.TabIndex = 66;
+            // 
+            // guna2Button3
+            // 
+            guna2Button3.BorderRadius = 5;
+            guna2Button3.CustomizableEdges = customizableEdges9;
+            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button3.FillColor = Color.Silver;
+            guna2Button3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button3.ForeColor = Color.White;
+            guna2Button3.Location = new Point(926, 31);
+            guna2Button3.Name = "guna2Button3";
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2Button3.Size = new Size(135, 37);
+            guna2Button3.TabIndex = 65;
+            guna2Button3.Text = "Dịch vụ";
+            // 
+            // guna2Button2
+            // 
+            guna2Button2.BorderRadius = 5;
+            guna2Button2.CustomizableEdges = customizableEdges11;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = Color.FromArgb(255, 128, 0);
+            guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button2.ForeColor = Color.White;
+            guna2Button2.Location = new Point(772, 31);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            guna2Button2.Size = new Size(135, 37);
+            guna2Button2.TabIndex = 64;
+            guna2Button2.Text = "Phim";
+            // 
+            // guna2Button1
+            // 
+            guna2Button1.BorderRadius = 5;
+            guna2Button1.CustomizableEdges = customizableEdges13;
+            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button1.FillColor = Color.Silver;
+            guna2Button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button1.ForeColor = Color.White;
+            guna2Button1.Location = new Point(613, 31);
+            guna2Button1.Name = "guna2Button1";
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            guna2Button1.Size = new Size(135, 37);
+            guna2Button1.TabIndex = 63;
+            guna2Button1.Text = "Khách hàng";
+            // 
+            // guna2Button4
+            // 
+            guna2Button4.BorderRadius = 5;
+            guna2Button4.CustomizableEdges = customizableEdges15;
+            guna2Button4.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button4.FillColor = Color.Silver;
+            guna2Button4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2Button4.ForeColor = Color.White;
+            guna2Button4.Location = new Point(453, 31);
+            guna2Button4.Name = "guna2Button4";
+            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2Button4.Size = new Size(135, 37);
+            guna2Button4.TabIndex = 62;
+            guna2Button4.Text = "Tổng quan";
+            // 
             // FormStatistics3
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1402, 703);
+            ClientSize = new Size(1624, 703);
             Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);

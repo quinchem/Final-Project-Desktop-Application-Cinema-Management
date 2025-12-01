@@ -68,7 +68,7 @@ namespace AdminApp
             txtTimKiem.Font = new Font("Segoe UI", 10.5F);
             txtTimKiem.ForeColor = Color.Black;
             txtTimKiem.HoverState.BorderColor = Color.FromArgb(0, 120, 215);
-            txtTimKiem.Location = new Point(68, 54);
+            txtTimKiem.Location = new Point(126, 54);
             txtTimKiem.Margin = new Padding(3, 4, 3, 4);
             txtTimKiem.Name = "txtTimKiem";
             txtTimKiem.PlaceholderForeColor = Color.Gray;
@@ -92,7 +92,7 @@ namespace AdminApp
             btnTim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTim.ForeColor = Color.Black;
             btnTim.Image = Properties.Resources.search;
-            btnTim.Location = new Point(372, 54);
+            btnTim.Location = new Point(430, 54);
             btnTim.Name = "btnTim";
             btnTim.ShadowDecoration.CustomizableEdges = customizableEdges3;
             btnTim.Size = new Size(75, 37);
@@ -112,7 +112,7 @@ namespace AdminApp
             btnXuatFile.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnXuatFile.ForeColor = Color.Black;
             btnXuatFile.Image = (Image)resources.GetObject("btnXuatFile.Image");
-            btnXuatFile.Location = new Point(897, 54);
+            btnXuatFile.Location = new Point(1071, 54);
             btnXuatFile.Name = "btnXuatFile";
             btnXuatFile.ShadowDecoration.CustomizableEdges = customizableEdges5;
             btnXuatFile.Size = new Size(189, 37);
@@ -132,7 +132,7 @@ namespace AdminApp
             btnChinhSua.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnChinhSua.ForeColor = Color.Black;
             btnChinhSua.Image = Properties.Resources.pen;
-            btnChinhSua.Location = new Point(1104, 54);
+            btnChinhSua.Location = new Point(1278, 54);
             btnChinhSua.Name = "btnChinhSua";
             btnChinhSua.ShadowDecoration.CustomizableEdges = customizableEdges7;
             btnChinhSua.Size = new Size(122, 37);
@@ -152,7 +152,7 @@ namespace AdminApp
             btnXoa.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnXoa.ForeColor = Color.Black;
             btnXoa.Image = Properties.Resources.trash;
-            btnXoa.Location = new Point(1251, 54);
+            btnXoa.Location = new Point(1425, 54);
             btnXoa.Name = "btnXoa";
             btnXoa.ShadowDecoration.CustomizableEdges = customizableEdges9;
             btnXoa.Size = new Size(97, 37);
@@ -185,7 +185,7 @@ namespace AdminApp
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             DataGridViewCustomerManagement.DefaultCellStyle = dataGridViewCellStyle3;
             DataGridViewCustomerManagement.GridColor = Color.WhiteSmoke;
-            DataGridViewCustomerManagement.Location = new Point(12, 157);
+            DataGridViewCustomerManagement.Location = new Point(126, 165);
             DataGridViewCustomerManagement.Name = "DataGridViewCustomerManagement";
             DataGridViewCustomerManagement.ReadOnly = true;
             DataGridViewCustomerManagement.RowHeadersVisible = false;
@@ -222,7 +222,7 @@ namespace AdminApp
             HoTen.Frozen = true;
             HoTen.HeaderText = "Họ và tên";
             HoTen.MinimumWidth = 6;
-            HoTen.Name = "full_name";
+            HoTen.Name = "HoTen";
             HoTen.ReadOnly = true;
             HoTen.Width = 220;
             // 
@@ -234,7 +234,7 @@ namespace AdminApp
             GioiTinh.Frozen = true;
             GioiTinh.HeaderText = "Giới tính";
             GioiTinh.MinimumWidth = 6;
-            GioiTinh.Name = "gender";
+            GioiTinh.Name = "GioiTinh";
             GioiTinh.ReadOnly = true;
             GioiTinh.Width = 175;
             // 
@@ -246,7 +246,7 @@ namespace AdminApp
             NgaySinh.Frozen = true;
             NgaySinh.HeaderText = "Ngày sinh";
             NgaySinh.MinimumWidth = 6;
-            NgaySinh.Name = "date_of_birth";
+            NgaySinh.Name = "NgaySinh";
             NgaySinh.ReadOnly = true;
             NgaySinh.Width = 175;
             // 
@@ -258,7 +258,7 @@ namespace AdminApp
             SĐT.Frozen = true;
             SĐT.HeaderText = "Số điện thoại";
             SĐT.MinimumWidth = 6;
-            SĐT.Name = "phone_number";
+            SĐT.Name = "SĐT";
             SĐT.ReadOnly = true;
             SĐT.Width = 175;
             // 
@@ -270,7 +270,7 @@ namespace AdminApp
             Email.Frozen = true;
             Email.HeaderText = "Email";
             Email.MinimumWidth = 6;
-            Email.Name = "email";
+            Email.Name = "Email";
             Email.ReadOnly = true;
             Email.Width = 200;
             // 
@@ -281,7 +281,7 @@ namespace AdminApp
             DiaChi.FillWeight = 65.33226F;
             DiaChi.HeaderText = "Địa chỉ";
             DiaChi.MinimumWidth = 6;
-            DiaChi.Name = "address";
+            DiaChi.Name = "DiaChi";
             DiaChi.ReadOnly = true;
             DiaChi.Width = 200;
             // 
@@ -292,7 +292,7 @@ namespace AdminApp
             ThoiGianTaoTK.FillWeight = 65.33226F;
             ThoiGianTaoTK.HeaderText = "Thời gian tạo tài khoản";
             ThoiGianTaoTK.MinimumWidth = 6;
-            ThoiGianTaoTK.Name = "create_date";
+            ThoiGianTaoTK.Name = "ThoiGianTaoTK";
             ThoiGianTaoTK.ReadOnly = true;
             ThoiGianTaoTK.Width = 250;
             // 
@@ -301,7 +301,7 @@ namespace AdminApp
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1420, 750);
+            ClientSize = new Size(1624, 781);
             Controls.Add(DataGridViewCustomerManagement);
             Controls.Add(btnXoa);
             Controls.Add(btnChinhSua);

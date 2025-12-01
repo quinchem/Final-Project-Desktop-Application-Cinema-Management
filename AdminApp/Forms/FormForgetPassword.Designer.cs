@@ -65,7 +65,7 @@
             panelQMK.FillColor2 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor3 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelQMK.Location = new Point(280, 196);
+            panelQMK.Location = new Point(395, 197);
             panelQMK.Name = "panelQMK";
             panelQMK.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelQMK.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -184,7 +184,7 @@
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.doi_mk;
-            btnDangNhap.Location = new Point(289, 102);
+            btnDangNhap.Location = new Point(404, 103);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btnDangNhap.Size = new Size(197, 46);
@@ -196,7 +196,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1420, 750);
+            ClientSize = new Size(1624, 750);
             Controls.Add(btnDangNhap);
             Controls.Add(panelQMK);
             Name = "FormForgetPassword";

@@ -69,7 +69,8 @@
             btnDangNhap.FocusedColor = Color.FromArgb(245, 131, 35);
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
-            btnDangNhap.Location = new Point(241, 108);
+            btnDangNhap.Image = Properties.Resources.doi_mk;
+            btnDangNhap.Location = new Point(373, 96);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnDangNhap.Size = new Size(213, 46);
@@ -94,7 +95,7 @@
             panelResetPW.FillColor2 = Color.FromArgb(236, 230, 224);
             panelResetPW.FillColor3 = Color.FromArgb(236, 230, 224);
             panelResetPW.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelResetPW.Location = new Point(241, 199);
+            panelResetPW.Location = new Point(373, 187);
             panelResetPW.Name = "panelResetPW";
             panelResetPW.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelResetPW.ShadowDecoration.CustomizableEdges = customizableEdges14;
@@ -236,7 +237,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1200, 750);
+            ClientSize = new Size(1624, 750);
             Controls.Add(panelResetPW);
             Controls.Add(btnDangNhap);
             Name = "FormResetPassword";
