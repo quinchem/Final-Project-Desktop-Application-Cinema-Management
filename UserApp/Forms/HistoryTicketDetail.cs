@@ -1,13 +1,10 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharedData;
 
@@ -19,7 +16,6 @@ namespace UserApp
         private TicketPrintData _printData;
         public event EventHandler BackToHistory;
 
-
         public HistoryTicketDetail(string billId)
         {
             InitializeComponent();
@@ -27,36 +23,40 @@ namespace UserApp
             LoadDetail();
         }
 
+        private string GenerateTicketCode(string billId)
+        {
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(billId));
+                string hash = BitConverter.ToString(bytes).Replace("-", "");
+                return $"TK-{billId}-{hash.Substring(0, 4)}";
+            }
+        }
+
         private void LoadDetail()
         {
             try
             {
-                // Kết nối DB và load thông tin bill chi tiết
                 using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
                 {
                     conn.Open();
+
                     string query = @"
                         SELECT 
                             b.bill_id,
-                            b.bill_date,
-                            b.quantity_ticket,
-                            b.Total,
                             m.title AS movie_title,
                             s.show_date,
                             s.start_time,
                             s.end_time,
                             a.name AS auditorium_name,
-                            at.auditorium_type,
-                            GROUP_CONCAT(DISTINCT se.location) AS seats
-                        FROM Bill b
-                        INNER JOIN Showtime s ON b.showtime_id = s.showtime_id
-                        INNER JOIN Movie m ON s.movie_id = m.movie_id
-                        INNER JOIN Auditorium a ON s.auditorium_id = a.auditorium_id
-                        INNER JOIN Auditorium_type at ON a.auditorium_type_id = at.auditorium_type_id
-                        LEFT JOIN Bill_seat bs ON b.bill_id = bs.bill_id
-                        LEFT JOIN Seat se ON bs.seat_id = se.seat_id
-                        WHERE b.bill_id = @billId
-                        GROUP BY b.bill_id";
+                            c.full_name,
+                            c.email
+                        FROM bill b
+                        INNER JOIN customer c ON b.customer_id = c.customer_id
+                        INNER JOIN showtime s ON b.showtime_id = s.showtime_id
+                        INNER JOIN movie m ON s.movie_id = m.movie_id
+                        INNER JOIN auditorium a ON s.auditorium_id = a.auditorium_id
+                        WHERE b.bill_id = @billId";
 
                     using (var cmd = new SqliteCommand(query, conn))
                     {
@@ -66,41 +66,74 @@ namespace UserApp
                         {
                             if (reader.Read())
                             {
+                                string fullName = reader["full_name"].ToString();
+                                string email = reader["email"].ToString();
+                                string movieTitle = reader["movie_title"].ToString();
+                                string showDate = reader["show_date"].ToString();
+                                string startTime = reader["start_time"].ToString();
+                                string endTime = reader["end_time"].ToString();
+                                string auditoriumName = reader["auditorium_name"].ToString();
+
+                                string seatQuery = @"
+                                    SELECT 
+                                        se.seat_id,
+                                        se.location,
+                                        se.per_seat_ticket_price
+                                    FROM bill_seat bs
+                                    INNER JOIN seat se ON bs.seat_id = se.seat_id
+                                    WHERE bs.bill_id = @billId
+                                    ORDER BY se.seat_id";
+
+                                List<string> seatLocations = new List<string>();
+                                decimal totalPrice = 0;
+
+                                using (var seatCmd = new SqliteCommand(seatQuery, conn))
+                                {
+                                    seatCmd.Parameters.AddWithValue("@billId", _billId);
+
+                                    using (var seatReader = seatCmd.ExecuteReader())
+                                    {
+                                        while (seatReader.Read())
+                                        {
+                                            string location = seatReader["location"].ToString();
+                                            decimal price = Convert.ToDecimal(seatReader["per_seat_ticket_price"]);
+                                            seatLocations.Add(location);
+                                            totalPrice += price;
+                                        }
+                                    }
+                                }
+
+                                int seatCount = seatLocations.Count;
+                                string seatList = string.Join(", ", seatLocations);
+
                                 _printData = new TicketPrintData
                                 {
-                                    MaPhieu = "TT" + DateTime.Now.ToString("ddMMyyyy") + "-" + _billId.Substring(Math.Max(0, _billId.Length - 5)),
-                                    MaDonDatVe = reader["bill_id"].ToString(),
-                                    //HoTen = reader["full_name"].ToString(),
-                                    //Email = reader["email"].ToString(),
-                                    NgayDatVe = Convert.ToDateTime(reader["bill_date"]).ToString("dd/MM/yyyy"),
-                                    TenPhim = reader["movie_title"].ToString(),
-                                    SuatChieu = $"{reader["start_time"]} - {reader["end_time"]}, {reader["show_date"]}",
-                                    Ghe = reader["seats"].ToString(),
-                                    PhongChieu = $"{reader["auditorium_type"]} - {reader["auditorium_name"]}",
-                                    DichVu = GetProducts(_billId),
-                                    TongTien = Convert.ToDecimal(reader["Total"])
+                                    MaPhieu = "TT" + DateTime.Now.ToString("ddMMyyyy") + "-" + _billId.Substring(Math.Max(0, _billId.Length - 4)),
+                                    MaDonDatVe = _billId,
+                                    TicketCode = GenerateTicketCode(_billId),
+                                    HoTen = fullName,
+                                    Email = email,
+                                    NgayDatVe = DateTime.Now.ToString("dd/MM/yyyy"),
+                                    TenPhim = movieTitle,
+                                    SuatChieu = $"{startTime} - {endTime}, {showDate}",
+                                    Ghe = seatList,
+                                    SoLuongGhe = seatCount,
+                                    PhongChieu = auditoriumName,
+                                    TongTien = totalPrice
                                 };
 
-                                // Gán dữ liệu vào các label trong form của bạn
-                                txtMaDatVe.Text = reader["bill_id"].ToString();
-                                txtTenPhim.Text = reader["movie_title"].ToString();
-
-                                string showtime = $"{reader["start_time"]} - {reader["end_time"]}, {reader["show_date"]}";
-                                txtSuatChieu.Text = showtime;
-
-                                txtGhe.Text = reader["seats"].ToString();
+                                // Gán lên UI
+                                txtMaDatVe.Text = _printData.MaDonDatVe;
+                                txtTenPhim.Text = _printData.TenPhim;
+                                txtSuatChieu.Text = _printData.SuatChieu;
+                                txtGhe.Text = $"{_printData.SoLuongGhe} ghế ({_printData.Ghe})";
                                 txtTinhTrang.Text = "Thành công";
+                                txtPhongChieu.Text = _printData.PhongChieu;
+                                txtNgayDatVe.Text = _printData.NgayDatVe;
+                                txtTongTien.Text = $"{_printData.TongTien:N0} VNĐ";
 
-                                string auditorium = $"{reader["auditorium_type"]} - {reader["auditorium_name"]}";
-                                txtPhongChieu.Text = auditorium;
-
-                                txtNgayDatVe.Text = Convert.ToDateTime(reader["bill_date"]).ToString("dd/MM/yyyy");
-
-                                // Lấy sản phẩm/dịch vụ
-                                txtDichVu.Text = GetProducts(_billId);
-
-                                decimal total = Convert.ToDecimal(reader["Total"]);
-                                txtTongTien.Text = $"{total:N0} VND";
+                                if (this.Controls.Find("txtTicketCode", true).Length > 0)
+                                    ((TextBox)this.Controls.Find("txtTicketCode", true)[0]).Text = _printData.TicketCode;
                             }
                             else
                             {
@@ -113,49 +146,16 @@ namespace UserApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải thông tin: {ex.Message}", "Lỗi",
+                MessageBox.Show($"Lỗi khi load thông tin:\n{ex.Message}\n\nStack Trace:\n{ex.StackTrace}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private string GetProducts(string billId)
+        private void btnReturn_Click(object sender, EventArgs e)
         {
-            string products = "";
-            try
-            {
-                using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
-                {
-                    conn.Open();
-                    string query = @"
-                        SELECT 
-                            p.name,
-                            bd.quantity
-                        FROM Bill_detail bd
-                        INNER JOIN Product p ON bd.product_id = p.product_id
-                        WHERE bd.bill_id = @billId";
-
-                    using (var cmd = new SqliteCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@billId", billId);
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                products += $"{reader["quantity"]} {reader["name"]}\n";
-                            }
-                        }
-                    }
-                }
-
-                return string.IsNullOrEmpty(products) ? "Không có" : products.TrimEnd('\n');
-            }
-            catch
-            {
-                return "Không có";
-            }
+            BackToHistory?.Invoke(this, EventArgs.Empty);
         }
 
-        // Sự kiện nút In phiếu (nếu có)
         private void btnPrint_Click(object sender, EventArgs e)
         {
             if (_printData == null)
@@ -168,11 +168,12 @@ namespace UserApp
             PrintDocument printDoc = new PrintDocument();
             printDoc.PrintPage += PrintDoc_PrintPage;
 
-            // Hiển thị hộp thoại xem trước và in
-            PrintPreviewDialog previewDialog = new PrintPreviewDialog();
-            previewDialog.Document = printDoc;
-            previewDialog.Width = 800;
-            previewDialog.Height = 1000;
+            PrintPreviewDialog previewDialog = new PrintPreviewDialog
+            {
+                Document = printDoc,
+                Width = 800,
+                Height = 1000
+            };
 
             if (previewDialog.ShowDialog() == DialogResult.OK)
             {
@@ -196,80 +197,75 @@ namespace UserApp
             int topMargin = 50;
             int yPos = topMargin;
 
-            // Header - Logo và Công ty
-            g.DrawString("CÔNG TY TNHH HAMSTER", headerFont, blackBrush, leftMargin, yPos);
-            yPos += 60;
+            // Nền trang
+            g.FillRectangle(new SolidBrush(ColorTranslator.FromHtml("#ece6e0")), e.PageBounds);
 
-            // Tiêu đề
-            g.DrawString("PHIẾU ĐẶT VÉ", titleFont, blackBrush,
-                e.PageBounds.Width / 2 - 150, yPos);
+            // ⭐ VẼ LOGO
+            try
+            {
+                byte[] logoBytes = Properties.Resources.Logo_trang; // logo ở dạng byte[]
+                using (var ms = new System.IO.MemoryStream(logoBytes))
+                {
+                    Image logo = Image.FromStream(ms);
+                    int logoWidth = 120;
+                    int logoHeight = 120;
+                    int centerX = (e.PageBounds.Width - logoWidth) / 2;
+                    g.DrawImage(logo, centerX, yPos, logoWidth, logoHeight);
+                }
+            
+            }
+            catch { }
 
-            // Thời gian in
-            string printTime = $"Thời gian in: {DateTime.Now:dd/MM/yyyy}";
-            g.DrawString(printTime, new Font("Segoe UI", 9, FontStyle.Italic),
-                grayBrush, e.PageBounds.Width - 250, yPos + 5);
+            yPos += 140;
+
+            g.DrawString("CÔNG TY TNHH HAMSTER", headerFont, blackBrush, leftMargin + 120, yPos);
+            yPos += 120;
+
+            g.DrawString("PHIẾU ĐẶT VÉ", titleFont, blackBrush, e.PageBounds.Width / 2 - 150, yPos);
+
+            string printTime = $"Thời gian in: {DateTime.Now:dd/MM/yyyy HH:mm}";
+            g.DrawString(printTime, new Font("Segoe UI", 9, FontStyle.Italic), grayBrush, e.PageBounds.Width - 250, yPos + 5);
             yPos += 80;
 
-            // Vẽ box thông tin
-            Rectangle infoBox = new Rectangle(leftMargin, yPos,
-                e.PageBounds.Width - 100, 500);
+            Rectangle infoBox = new Rectangle(leftMargin, yPos, e.PageBounds.Width - 100, 450);
             g.FillRectangle(new SolidBrush(Color.FromArgb(245, 245, 245)), infoBox);
             g.DrawRectangle(Pens.Black, infoBox);
-
             yPos += 30;
 
-            // Thông tin chi tiết
             DrawInfoLine(g, "Mã phiếu:", _printData.MaPhieu, leftMargin + 30, yPos, normalFont);
-            yPos += 35;
-
+            yPos += 30;
+            DrawInfoLine(g, "Mã vé (Ticket Code):", _printData.TicketCode, leftMargin + 30, yPos, normalFont);
+            yPos += 30;
             DrawInfoLine(g, "Mã đơn đặt vé:", _printData.MaDonDatVe, leftMargin + 30, yPos, normalFont);
-            yPos += 35;
-
-            //DrawInfoLine(g, "Họ và tên:", _printData.HoTen, leftMargin + 30, yPos, normalFont);
-            //yPos += 35;
-
-            //DrawInfoLine(g, "Email:", _printData.Email, leftMargin + 30, yPos, normalFont);
-            //yPos += 35;
-
+            yPos += 30;
+            DrawInfoLine(g, "Họ và tên:", _printData.HoTen, leftMargin + 30, yPos, normalFont);
+            yPos += 30;
+            DrawInfoLine(g, "Email:", _printData.Email, leftMargin + 30, yPos, normalFont);
+            yPos += 30;
             DrawInfoLine(g, "Ngày đặt vé:", _printData.NgayDatVe, leftMargin + 30, yPos, normalFont);
-            yPos += 35;
-
+            yPos += 30;
             DrawInfoLine(g, "Tên phim:", _printData.TenPhim, leftMargin + 30, yPos, normalFont);
-            yPos += 35;
-
+            yPos += 30;
             DrawInfoLine(g, "Suất chiếu:", _printData.SuatChieu, leftMargin + 30, yPos, normalFont);
-            yPos += 35;
-
-            DrawInfoLine(g, "Ghế:", _printData.Ghe, leftMargin + 30, yPos, normalFont);
-            yPos += 35;
-
+            yPos += 30;
+            DrawInfoLine(g, "Số lượng ghế:", _printData.SoLuongGhe.ToString(), leftMargin + 30, yPos, normalFont);
+            yPos += 30;
+            DrawInfoLine(g, "Danh sách ghế:", _printData.Ghe, leftMargin + 30, yPos, normalFont);
+            yPos += 30;
             DrawInfoLine(g, "Phòng chiếu:", _printData.PhongChieu, leftMargin + 30, yPos, normalFont);
-            yPos += 35;
-
-            DrawInfoLine(g, "Dịch vụ:", _printData.DichVu, leftMargin + 30, yPos, normalFont);
             yPos += 50;
 
-            // Đường kẻ
-            g.DrawLine(Pens.Gray, leftMargin + 30, yPos,
-                e.PageBounds.Width - 70, yPos);
+            g.DrawLine(Pens.Gray, leftMargin + 30, yPos, e.PageBounds.Width - 70, yPos);
             yPos += 30;
 
-            // Tổng tiền
-            DrawInfoLine(g, "Tổng tiền:", $"{_printData.TongTien:N0} VND",
-                leftMargin + 30, yPos, totalFont, redBrush);
+            DrawInfoLine(g, "Tổng tiền:", $"{_printData.TongTien:N0} VNĐ", leftMargin + 30, yPos, totalFont, redBrush);
             yPos += 40;
-
-            DrawInfoLine(g, "Tổng tiền (bằng chữ):",
-                NumberToVietnameseWords(_printData.TongTien),
-                leftMargin + 30, yPos, normalFont);
+            DrawInfoLine(g, "Tổng tiền (bằng chữ):", NumberToVietnameseWords(_printData.TongTien), leftMargin + 30, yPos, normalFont);
             yPos += 40;
-
-            DrawInfoLine(g, "Tình trạng thanh toán:", "Thành công",
-                leftMargin + 30, yPos, normalFont, Brushes.Green);
+            DrawInfoLine(g, "Tình trạng:", "Thành công", leftMargin + 30, yPos, normalFont, Brushes.Green);
         }
 
-        private void DrawInfoLine(Graphics g, string label, string value,
-            int x, int y, Font font, Brush valueBrush = null)
+        private void DrawInfoLine(Graphics g, string label, string value, int x, int y, Font font, Brush valueBrush = null)
         {
             g.DrawString(label, font, Brushes.Black, x, y);
             g.DrawString(value, font, valueBrush ?? Brushes.Black, x + 200, y);
@@ -322,23 +318,19 @@ namespace UserApp
             return result.Trim();
         }
 
-        // Sự kiện quay lại (nếu có - nếu là UserControl thì ẩn control thay vì Close)
-        private void btnReturn_Click(object sender, EventArgs e)
-        {
-            BackToHistory?.Invoke(this, EventArgs.Empty);
-        }
         private class TicketPrintData
         {
             public string MaPhieu { get; set; }
             public string MaDonDatVe { get; set; }
-            //public string HoTen { get; set; }
-           // public string Email { get; set; }
+            public string TicketCode { get; set; }
+            public string HoTen { get; set; }
+            public string Email { get; set; }
             public string NgayDatVe { get; set; }
             public string TenPhim { get; set; }
             public string SuatChieu { get; set; }
             public string Ghe { get; set; }
+            public int SoLuongGhe { get; set; }
             public string PhongChieu { get; set; }
-            public string DichVu { get; set; }
             public decimal TongTien { get; set; }
         }
     }

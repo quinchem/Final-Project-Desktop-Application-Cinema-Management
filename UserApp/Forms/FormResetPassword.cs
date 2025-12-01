@@ -105,5 +105,10 @@ namespace UserApp
                 picEye2.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
             }
         }
+
+        private void btnQuayLai_Click(object sender, EventArgs e)
+        {
+            parentForm.OpenChildForm(new FormForgetPassword());
+        }
     }
 }

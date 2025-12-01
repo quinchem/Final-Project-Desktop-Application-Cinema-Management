@@ -36,76 +36,55 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            lblThanhToan = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            btnMiniDN = new Guna.UI2.WinForms.Guna2Button();
+            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblKhachHang = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            btnQuayLai = new Guna.UI2.WinForms.Guna2Button();
+            lblNgay = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            btnThanhToan = new Guna.UI2.WinForms.Guna2Button();
             lblMomo = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             lblPTTT = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTong = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTongTien = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             lblTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblTG = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblGio = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblLoaiRap = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblThoiGian = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblNgay = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblDv = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblGhe1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblRap = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblDichVu1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lbl11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblGhe = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblRap = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblGhe2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblNDThanhtoan = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            lblTime = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
-            guna2CustomGradientPanel2.SuspendLayout();
             SuspendLayout();
-            // 
-            // lblThanhToan
-            // 
-            lblThanhToan.BackColor = Color.Transparent;
-            lblThanhToan.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblThanhToan.ForeColor = Color.FromArgb(245, 131, 35);
-            lblThanhToan.Location = new Point(125, 77);
-            lblThanhToan.Name = "lblThanhToan";
-            lblThanhToan.Size = new Size(228, 59);
-            lblThanhToan.TabIndex = 28;
-            lblThanhToan.Text = "Thanh toán";
             // 
             // guna2CustomGradientPanel1
             // 
+            guna2CustomGradientPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             guna2CustomGradientPanel1.BackColor = Color.Transparent;
             guna2CustomGradientPanel1.BorderColor = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel1.BorderRadius = 15;
-            guna2CustomGradientPanel1.Controls.Add(btnMiniDN);
+            guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel1);
+            guna2CustomGradientPanel1.Controls.Add(lblKhachHang);
+            guna2CustomGradientPanel1.Controls.Add(btnQuayLai);
+            guna2CustomGradientPanel1.Controls.Add(lblNgay);
+            guna2CustomGradientPanel1.Controls.Add(btnThanhToan);
             guna2CustomGradientPanel1.Controls.Add(lblMomo);
             guna2CustomGradientPanel1.Controls.Add(guna2PictureBox1);
             guna2CustomGradientPanel1.Controls.Add(lblPTTT);
             guna2CustomGradientPanel1.Controls.Add(lblTong);
             guna2CustomGradientPanel1.Controls.Add(lblTongTien);
-            guna2CustomGradientPanel1.Controls.Add(guna2DateTimePicker1);
             guna2CustomGradientPanel1.Controls.Add(lblTenPhim);
-            guna2CustomGradientPanel1.Controls.Add(lblTG);
+            guna2CustomGradientPanel1.Controls.Add(lblGio);
             guna2CustomGradientPanel1.Controls.Add(lblLoaiRap);
             guna2CustomGradientPanel1.Controls.Add(lblThoiGian);
-            guna2CustomGradientPanel1.Controls.Add(lblNgay);
-            guna2CustomGradientPanel1.Controls.Add(lblDv);
-            guna2CustomGradientPanel1.Controls.Add(lblGhe1);
-            guna2CustomGradientPanel1.Controls.Add(lblRap);
-            guna2CustomGradientPanel1.Controls.Add(lblDichVu1);
+            guna2CustomGradientPanel1.Controls.Add(lbl11);
             guna2CustomGradientPanel1.Controls.Add(lblGhe);
+            guna2CustomGradientPanel1.Controls.Add(lblRap);
+            guna2CustomGradientPanel1.Controls.Add(lblGhe2);
             guna2CustomGradientPanel1.Controls.Add(lblPhim);
             guna2CustomGradientPanel1.Controls.Add(lblNDThanhtoan);
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges7;
@@ -113,43 +92,95 @@
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(236, 230, 224);
-            guna2CustomGradientPanel1.Location = new Point(208, 164);
-            guna2CustomGradientPanel1.Margin = new Padding(4);
+            guna2CustomGradientPanel1.Location = new Point(224, 54);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2CustomGradientPanel1.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel1.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel1.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel1.Size = new Size(1187, 763);
+            guna2CustomGradientPanel1.Size = new Size(1007, 611);
             guna2CustomGradientPanel1.TabIndex = 67;
             // 
-            // btnMiniDN
+            // guna2HtmlLabel1
             // 
-            btnMiniDN.BorderRadius = 8;
-            btnMiniDN.CustomizableEdges = customizableEdges1;
-            btnMiniDN.DisabledState.BorderColor = Color.DarkGray;
-            btnMiniDN.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnMiniDN.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnMiniDN.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnMiniDN.FillColor = Color.FromArgb(44, 84, 115);
-            btnMiniDN.FocusedColor = Color.FromArgb(245, 131, 35);
-            btnMiniDN.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnMiniDN.ForeColor = Color.White;
-            btnMiniDN.Location = new Point(887, 672);
-            btnMiniDN.Margin = new Padding(4);
-            btnMiniDN.Name = "btnMiniDN";
-            btnMiniDN.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnMiniDN.Size = new Size(204, 52);
-            btnMiniDN.TabIndex = 83;
-            btnMiniDN.Text = "THANH TOÁN";
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel1.ForeColor = Color.Black;
+            guna2HtmlLabel1.Location = new Point(539, 271);
+            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            guna2HtmlLabel1.Size = new Size(135, 33);
+            guna2HtmlLabel1.TabIndex = 87;
+            guna2HtmlLabel1.Text = "Khách hàng:";
+            // 
+            // lblKhachHang
+            // 
+            lblKhachHang.AutoSize = false;
+            lblKhachHang.BackColor = Color.Transparent;
+            lblKhachHang.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblKhachHang.Location = new Point(693, 271);
+            lblKhachHang.Name = "lblKhachHang";
+            lblKhachHang.Size = new Size(217, 80);
+            lblKhachHang.TabIndex = 86;
+            lblKhachHang.Text = "guna2HtmlLabel1";
+            // 
+            // btnQuayLai
+            // 
+            btnQuayLai.CustomizableEdges = customizableEdges1;
+            btnQuayLai.DisabledState.BorderColor = Color.DarkGray;
+            btnQuayLai.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnQuayLai.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnQuayLai.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnQuayLai.FillColor = Color.Transparent;
+            btnQuayLai.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnQuayLai.ForeColor = Color.FromArgb(245, 131, 35);
+            btnQuayLai.Image = Properties.Resources.back_arrow;
+            btnQuayLai.Location = new Point(44, 534);
+            btnQuayLai.Name = "btnQuayLai";
+            btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnQuayLai.Size = new Size(204, 35);
+            btnQuayLai.TabIndex = 85;
+            btnQuayLai.Text = "Quay lại chọn ghế";
+            btnQuayLai.Click += btnQuayLai_Click;
+            // 
+            // lblNgay
+            // 
+            lblNgay.BackColor = Color.Transparent;
+            lblNgay.Font = new Font("Segoe UI", 13.8F);
+            lblNgay.Location = new Point(196, 203);
+            lblNgay.Name = "lblNgay";
+            lblNgay.Size = new Size(99, 33);
+            lblNgay.TabIndex = 84;
+            lblNgay.Text = "Tên phim";
+            // 
+            // btnThanhToan
+            // 
+            btnThanhToan.BorderRadius = 8;
+            btnThanhToan.CustomizableEdges = customizableEdges3;
+            btnThanhToan.DisabledState.BorderColor = Color.DarkGray;
+            btnThanhToan.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnThanhToan.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnThanhToan.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnThanhToan.FillColor = Color.FromArgb(44, 84, 115);
+            btnThanhToan.FocusedColor = Color.FromArgb(245, 131, 35);
+            btnThanhToan.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnThanhToan.ForeColor = Color.White;
+            btnThanhToan.HoverState.FillColor = Color.FromArgb(245, 131, 35);
+            btnThanhToan.Image = Properties.Resources.credit_card;
+            btnThanhToan.ImageSize = new Size(30, 30);
+            btnThanhToan.Location = new Point(693, 507);
+            btnThanhToan.Name = "btnThanhToan";
+            btnThanhToan.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnThanhToan.Size = new Size(223, 63);
+            btnThanhToan.TabIndex = 83;
+            btnThanhToan.Text = "THANH TOÁN";
+            btnThanhToan.Click += btnThanhToan_Click;
             // 
             // lblMomo
             // 
             lblMomo.BackColor = Color.Transparent;
-            lblMomo.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblMomo.Location = new Point(547, 603);
-            lblMomo.Margin = new Padding(4);
+            lblMomo.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMomo.Location = new Point(459, 431);
             lblMomo.Name = "lblMomo";
             lblMomo.Size = new Size(184, 33);
             lblMomo.TabIndex = 82;
@@ -158,13 +189,14 @@
             // guna2PictureBox1
             // 
             guna2PictureBox1.BorderRadius = 11;
-            guna2PictureBox1.CustomizableEdges = customizableEdges3;
+            guna2PictureBox1.CustomizableEdges = customizableEdges5;
             guna2PictureBox1.Image = Properties.Resources.MoMo_Logo;
             guna2PictureBox1.ImageRotate = 0F;
-            guna2PictureBox1.Location = new Point(430, 574);
+            guna2PictureBox1.Location = new Point(371, 414);
+            guna2PictureBox1.Margin = new Padding(2);
             guna2PictureBox1.Name = "guna2PictureBox1";
-            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2PictureBox1.Size = new Size(88, 78);
+            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2PictureBox1.Size = new Size(86, 69);
             guna2PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             guna2PictureBox1.TabIndex = 81;
             guna2PictureBox1.TabStop = false;
@@ -172,313 +204,161 @@
             // lblPTTT
             // 
             lblPTTT.BackColor = Color.Transparent;
-            lblPTTT.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
+            lblPTTT.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPTTT.ForeColor = Color.Black;
-            lblPTTT.Location = new Point(84, 598);
-            lblPTTT.Margin = new Padding(4);
+            lblPTTT.Location = new Point(93, 431);
             lblPTTT.Name = "lblPTTT";
-            lblPTTT.Size = new Size(311, 38);
+            lblPTTT.Size = new Size(273, 33);
             lblPTTT.TabIndex = 80;
             lblPTTT.Text = "Phương thức thanh toán:";
             // 
             // lblTong
             // 
+            lblTong.AutoSize = false;
             lblTong.BackColor = Color.Transparent;
-            lblTong.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTong.Location = new Point(239, 492);
-            lblTong.Margin = new Padding(4);
+            lblTong.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTong.ForeColor = Color.FromArgb(45, 76, 101);
+            lblTong.Location = new Point(235, 343);
             lblTong.Name = "lblTong";
-            lblTong.Size = new Size(50, 33);
+            lblTong.Size = new Size(191, 42);
             lblTong.TabIndex = 79;
             lblTong.Text = "VND";
             // 
             // lblTongTien
             // 
             lblTongTien.BackColor = Color.Transparent;
-            lblTongTien.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
+            lblTongTien.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTongTien.ForeColor = Color.Black;
-            lblTongTien.Location = new Point(84, 487);
-            lblTongTien.Margin = new Padding(4);
+            lblTongTien.Location = new Point(93, 346);
             lblTongTien.Name = "lblTongTien";
-            lblTongTien.Size = new Size(127, 38);
+            lblTongTien.Size = new Size(112, 33);
             lblTongTien.TabIndex = 78;
             lblTongTien.Text = "Tổng tiền:";
             // 
-            // guna2DateTimePicker1
-            // 
-            guna2DateTimePicker1.BorderRadius = 11;
-            guna2DateTimePicker1.Checked = true;
-            guna2DateTimePicker1.CustomizableEdges = customizableEdges5;
-            guna2DateTimePicker1.Font = new Font("Segoe UI", 9F);
-            guna2DateTimePicker1.ForeColor = SystemColors.ButtonHighlight;
-            guna2DateTimePicker1.Format = DateTimePickerFormat.Long;
-            guna2DateTimePicker1.Location = new Point(239, 268);
-            guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2DateTimePicker1.Size = new Size(350, 63);
-            guna2DateTimePicker1.TabIndex = 77;
-            guna2DateTimePicker1.Value = new DateTime(2025, 11, 22, 0, 40, 33, 158);
-            // 
             // lblTenPhim
             // 
+            lblTenPhim.AutoSize = false;
             lblTenPhim.BackColor = Color.Transparent;
-            lblTenPhim.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTenPhim.Location = new Point(239, 166);
-            lblTenPhim.Margin = new Padding(4);
+            lblTenPhim.Font = new Font("Segoe UI", 13.8F);
+            lblTenPhim.Location = new Point(196, 116);
             lblTenPhim.Name = "lblTenPhim";
-            lblTenPhim.Size = new Size(99, 33);
+            lblTenPhim.Size = new Size(250, 66);
             lblTenPhim.TabIndex = 76;
             lblTenPhim.Text = "Tên phim";
             // 
-            // lblTG
+            // lblGio
             // 
-            lblTG.BackColor = Color.Transparent;
-            lblTG.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTG.Location = new Point(922, 273);
-            lblTG.Margin = new Padding(4);
-            lblTG.Name = "lblTG";
-            lblTG.Size = new Size(92, 33);
-            lblTG.TabIndex = 75;
-            lblTG.Text = "giờ - giờ";
+            lblGio.AutoSize = false;
+            lblGio.BackColor = Color.Transparent;
+            lblGio.Font = new Font("Segoe UI", 13.8F);
+            lblGio.Location = new Point(693, 196);
+            lblGio.Name = "lblGio";
+            lblGio.Size = new Size(210, 57);
+            lblGio.TabIndex = 75;
+            lblGio.Text = "giờ - giờ";
             // 
             // lblLoaiRap
             // 
             lblLoaiRap.BackColor = Color.Transparent;
-            lblLoaiRap.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
+            lblLoaiRap.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblLoaiRap.ForeColor = Color.Black;
-            lblLoaiRap.Location = new Point(724, 161);
-            lblLoaiRap.Margin = new Padding(4);
+            lblLoaiRap.Location = new Point(539, 116);
             lblLoaiRap.Name = "lblLoaiRap";
-            lblLoaiRap.Size = new Size(107, 38);
+            lblLoaiRap.Size = new Size(95, 33);
             lblLoaiRap.TabIndex = 74;
             lblLoaiRap.Text = "Loại rạp:";
             // 
             // lblThoiGian
             // 
             lblThoiGian.BackColor = Color.Transparent;
-            lblThoiGian.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
+            lblThoiGian.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblThoiGian.ForeColor = Color.Black;
-            lblThoiGian.Location = new Point(724, 268);
-            lblThoiGian.Margin = new Padding(4);
+            lblThoiGian.Location = new Point(539, 196);
             lblThoiGian.Name = "lblThoiGian";
-            lblThoiGian.Size = new Size(124, 38);
+            lblThoiGian.Size = new Size(110, 33);
             lblThoiGian.TabIndex = 73;
             lblThoiGian.Text = "Thời gian:";
             // 
-            // lblNgay
+            // lbl11
             // 
-            lblNgay.BackColor = Color.Transparent;
-            lblNgay.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
-            lblNgay.ForeColor = Color.Black;
-            lblNgay.Location = new Point(84, 268);
-            lblNgay.Margin = new Padding(4);
-            lblNgay.Name = "lblNgay";
-            lblNgay.Size = new Size(75, 38);
-            lblNgay.TabIndex = 72;
-            lblNgay.Text = "Ngày:";
-            // 
-            // lblDv
-            // 
-            lblDv.BackColor = Color.Transparent;
-            lblDv.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDv.Location = new Point(922, 386);
-            lblDv.Margin = new Padding(4);
-            lblDv.Name = "lblDv";
-            lblDv.Size = new Size(79, 33);
-            lblDv.TabIndex = 70;
-            lblDv.Text = "Dịch vụ";
-            // 
-            // lblGhe1
-            // 
-            lblGhe1.BackColor = Color.Transparent;
-            lblGhe1.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblGhe1.Location = new Point(239, 386);
-            lblGhe1.Margin = new Padding(4);
-            lblGhe1.Name = "lblGhe1";
-            lblGhe1.Size = new Size(44, 33);
-            lblGhe1.TabIndex = 69;
-            lblGhe1.Text = "Ghế";
-            // 
-            // lblRap
-            // 
-            lblRap.BackColor = Color.Transparent;
-            lblRap.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblRap.Location = new Point(922, 166);
-            lblRap.Margin = new Padding(4);
-            lblRap.Name = "lblRap";
-            lblRap.Size = new Size(85, 33);
-            lblRap.TabIndex = 68;
-            lblRap.Text = "Loại rạp";
-            // 
-            // lblDichVu1
-            // 
-            lblDichVu1.BackColor = Color.Transparent;
-            lblDichVu1.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
-            lblDichVu1.ForeColor = Color.Black;
-            lblDichVu1.Location = new Point(724, 381);
-            lblDichVu1.Margin = new Padding(4);
-            lblDichVu1.Name = "lblDichVu1";
-            lblDichVu1.Size = new Size(101, 38);
-            lblDichVu1.TabIndex = 13;
-            lblDichVu1.Text = "Dịch vụ:";
+            lbl11.BackColor = Color.Transparent;
+            lbl11.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl11.ForeColor = Color.Black;
+            lbl11.Location = new Point(93, 203);
+            lbl11.Name = "lbl11";
+            lbl11.Size = new Size(65, 33);
+            lbl11.TabIndex = 72;
+            lbl11.Text = "Ngày:";
             // 
             // lblGhe
             // 
+            lblGhe.AutoSize = false;
             lblGhe.BackColor = Color.Transparent;
-            lblGhe.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
-            lblGhe.ForeColor = Color.Black;
-            lblGhe.Location = new Point(84, 381);
-            lblGhe.Margin = new Padding(4);
+            lblGhe.Font = new Font("Segoe UI", 13.8F);
+            lblGhe.Location = new Point(196, 263);
             lblGhe.Name = "lblGhe";
-            lblGhe.Size = new Size(58, 38);
-            lblGhe.TabIndex = 12;
-            lblGhe.Text = "Ghế:";
+            lblGhe.Size = new Size(201, 64);
+            lblGhe.TabIndex = 69;
+            lblGhe.Text = "Ghế";
+            // 
+            // lblRap
+            // 
+            lblRap.AutoSize = false;
+            lblRap.BackColor = Color.Transparent;
+            lblRap.Font = new Font("Segoe UI", 13.8F);
+            lblRap.Location = new Point(693, 116);
+            lblRap.Name = "lblRap";
+            lblRap.Size = new Size(232, 49);
+            lblRap.TabIndex = 68;
+            lblRap.Text = "Loại rạp";
+            // 
+            // lblGhe2
+            // 
+            lblGhe2.BackColor = Color.Transparent;
+            lblGhe2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGhe2.ForeColor = Color.Black;
+            lblGhe2.Location = new Point(93, 263);
+            lblGhe2.Name = "lblGhe2";
+            lblGhe2.Size = new Size(51, 33);
+            lblGhe2.TabIndex = 12;
+            lblGhe2.Text = "Ghế:";
             // 
             // lblPhim
             // 
             lblPhim.BackColor = Color.Transparent;
-            lblPhim.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
+            lblPhim.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPhim.ForeColor = Color.Black;
-            lblPhim.Location = new Point(84, 161);
-            lblPhim.Margin = new Padding(4);
+            lblPhim.Location = new Point(93, 116);
             lblPhim.Name = "lblPhim";
-            lblPhim.Size = new Size(73, 38);
+            lblPhim.Size = new Size(65, 33);
             lblPhim.TabIndex = 11;
             lblPhim.Text = "Phim:";
             // 
             // lblNDThanhtoan
             // 
             lblNDThanhtoan.BackColor = Color.Transparent;
-            lblNDThanhtoan.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNDThanhtoan.ForeColor = Color.FromArgb(45, 76, 101);
-            lblNDThanhtoan.Location = new Point(51, 45);
-            lblNDThanhtoan.Margin = new Padding(4);
+            lblNDThanhtoan.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNDThanhtoan.ForeColor = Color.FromArgb(245, 131, 35);
+            lblNDThanhtoan.Location = new Point(93, 33);
             lblNDThanhtoan.Name = "lblNDThanhtoan";
-            lblNDThanhtoan.Size = new Size(279, 40);
+            lblNDThanhtoan.Size = new Size(327, 47);
             lblNDThanhtoan.TabIndex = 9;
             lblNDThanhtoan.Text = "Nội dung thanh toán";
             // 
-            // guna2CustomGradientPanel2
-            // 
-            guna2CustomGradientPanel2.BackColor = Color.Transparent;
-            guna2CustomGradientPanel2.BorderColor = Color.FromArgb(236, 230, 224);
-            guna2CustomGradientPanel2.BorderRadius = 15;
-            guna2CustomGradientPanel2.Controls.Add(lblTime);
-            guna2CustomGradientPanel2.Controls.Add(guna2Button2);
-            guna2CustomGradientPanel2.Controls.Add(guna2HtmlLabel2);
-            guna2CustomGradientPanel2.Controls.Add(guna2HtmlLabel1);
-            guna2CustomGradientPanel2.Controls.Add(guna2CircleButton1);
-            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges12;
-            guna2CustomGradientPanel2.FillColor = Color.FromArgb(217, 217, 217);
-            guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(217, 217, 217);
-            guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(217, 217, 217);
-            guna2CustomGradientPanel2.FillColor4 = Color.FromArgb(217, 217, 217);
-            guna2CustomGradientPanel2.Location = new Point(-374, 1034);
-            guna2CustomGradientPanel2.Margin = new Padding(4);
-            guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
-            guna2CustomGradientPanel2.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges13;
-            guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
-            guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
-            guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel2.Size = new Size(2352, 105);
-            guna2CustomGradientPanel2.TabIndex = 68;
-            // 
-            // guna2HtmlLabel2
-            // 
-            guna2HtmlLabel2.BackColor = Color.Transparent;
-            guna2HtmlLabel2.Font = new Font("Segoe UI", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel2.ForeColor = Color.FromArgb(245, 131, 35);
-            guna2HtmlLabel2.Location = new Point(950, 30);
-            guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(322, 47);
-            guna2HtmlLabel2.TabIndex = 28;
-            guna2HtmlLabel2.Text = "THỜI GIAN GIỮ CHỖ";
-            // 
-            // guna2HtmlLabel1
-            // 
-            guna2HtmlLabel1.BackColor = Color.Transparent;
-            guna2HtmlLabel1.Font = new Font("Segoe UI", 9.857143F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.ForeColor = Color.FromArgb(245, 131, 35);
-            guna2HtmlLabel1.Location = new Point(105, 40);
-            guna2HtmlLabel1.Margin = new Padding(4);
-            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(190, 33);
-            guna2HtmlLabel1.TabIndex = 23;
-            guna2HtmlLabel1.Text = "Quay lại chỗ ngồi";
-            // 
-            // guna2CircleButton1
-            // 
-            guna2CircleButton1.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButton1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButton1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButton1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButton1.FillColor = Color.FromArgb(217, 217, 217);
-            guna2CircleButton1.Font = new Font("Segoe UI", 9F);
-            guna2CircleButton1.ForeColor = Color.Black;
-            guna2CircleButton1.Image = Properties.Resources.back_arrow;
-            guna2CircleButton1.ImageSize = new Size(40, 40);
-            guna2CircleButton1.Location = new Point(54, 40);
-            guna2CircleButton1.Name = "guna2CircleButton1";
-            guna2CircleButton1.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton1.Size = new Size(44, 37);
-            guna2CircleButton1.TabIndex = 24;
-            // 
-            // guna2Button2
-            // 
-            guna2Button2.CustomizableEdges = customizableEdges9;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.Transparent;
-            guna2Button2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button2.ForeColor = Color.FromArgb(245, 131, 35);
-            guna2Button2.Image = Properties.Resources.right_arrow1;
-            guna2Button2.ImageAlign = HorizontalAlignment.Right;
-            guna2Button2.Location = new Point(408, 30);
-            guna2Button2.Margin = new Padding(4);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button2.Size = new Size(288, 52);
-            guna2Button2.TabIndex = 29;
-            guna2Button2.Text = "Quay lại đặt dịch vụ";
-            // 
-            // lblTime
-            // 
-            lblTime.AutoSize = false;
-            lblTime.BackColor = Color.FromArgb(245, 131, 35);
-            lblTime.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTime.ForeColor = SystemColors.ButtonHighlight;
-            lblTime.Location = new Point(1306, 16);
-            lblTime.Margin = new Padding(4);
-            lblTime.Name = "lblTime";
-            lblTime.Size = new Size(170, 66);
-            lblTime.TabIndex = 30;
-            lblTime.Text = "meo";
-            lblTime.TextAlignment = ContentAlignment.MiddleCenter;
-            // 
             // FormPayment1
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1650, 1127);
-            Controls.Add(guna2CustomGradientPanel2);
+            ClientSize = new Size(1399, 706);
             Controls.Add(guna2CustomGradientPanel1);
-            Controls.Add(lblThanhToan);
+            Margin = new Padding(2);
             Name = "FormPayment1";
             Text = "FormPayment1";
             guna2CustomGradientPanel1.ResumeLayout(false);
             guna2CustomGradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
-            guna2CustomGradientPanel2.ResumeLayout(false);
-            guna2CustomGradientPanel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -486,29 +366,26 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblThanhToan;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblDv;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblGhe1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblGhe;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblRap;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblDichVu1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblGhe;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblGhe2;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPhim;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNDThanhtoan;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblNgay;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lbl11;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblLoaiRap;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblThoiGian;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTenPhim;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTG;
-        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblGio;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblMomo;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPTTT;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTong;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTien;
-        private Guna.UI2.WinForms.Guna2Button btnMiniDN;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2Button btnThanhToan;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblNgay;
+        private Guna.UI2.WinForms.Guna2Button btnQuayLai;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblKhachHang;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTime;
     }
 }
