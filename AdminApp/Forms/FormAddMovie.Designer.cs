@@ -555,6 +555,8 @@
             // 
             // txtMoTa
             // 
+            txtMoTa.AutoScroll = true;
+            txtMoTa.AutoScrollMinSize = new Size(1, 1);
             txtMoTa.BorderThickness = 2;
             txtMoTa.CustomizableEdges = customizableEdges25;
             txtMoTa.DefaultText = "";
@@ -576,6 +578,7 @@
             txtMoTa.Name = "txtMoTa";
             txtMoTa.PlaceholderForeColor = SystemColors.AppWorkspace;
             txtMoTa.PlaceholderText = "Giới thiệu phim";
+            txtMoTa.ScrollBars = ScrollBars.Vertical;
             txtMoTa.SelectedText = "";
             txtMoTa.ShadowDecoration.CustomizableEdges = customizableEdges26;
             txtMoTa.Size = new Size(286, 200);

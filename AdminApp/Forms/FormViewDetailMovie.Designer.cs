@@ -344,6 +344,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            AutoScrollMinSize = new Size(1, 1);
             BackColor = Color.White;
             ClientSize = new Size(1028, 667);
             Controls.Add(guna2vSeparator1);

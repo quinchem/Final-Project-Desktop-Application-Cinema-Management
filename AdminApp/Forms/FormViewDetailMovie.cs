@@ -48,12 +48,12 @@ namespace AdminApp
 
                     // --- Giới hạn xuống dòng cho diễn viên ---
                     lblActor.AutoSize = true;
-                    lblActor.MaximumSize = new Size(350, 0); // 400 là bề rộng label, có thể chỉnh
+                    lblActor.MaximumSize = new Size(350, 0); 
                     lblActor.Text = film.actor;
 
                     // --- Giới hạn xuống dòng cho mô tả ---
                     lblDescription.AutoSize = true;
-                    lblDescription.MaximumSize = new Size(400, 0); // 400 là bề rộng label, có thể chỉnh
+                    lblDescription.MaximumSize = new Size(700, 0);
                     lblDescription.Text = film.description;
                 }
                 else
