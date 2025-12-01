@@ -15,7 +15,6 @@ namespace UserApp
 
         private FormLogin parentForm;
 
-        // Constructor cha-truy-con
         public FormForgetPassword(FormLogin parent)
         {
             InitializeComponent();
@@ -55,8 +54,7 @@ namespace UserApp
                     MessageBox.Show("Email hợp lệ! Vui lòng đặt lại mật khẩu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // 4. Mở form Reset Password
-                    FormResetPassword resetForm = new FormResetPassword(parentForm, emailInput);
-                    parentForm.OpenChildForm(resetForm);
+                    parentForm.OpenChildForm(new FormResetPassword(parentForm, emailInput));
                 }
             }
             catch (Exception ex)
@@ -65,10 +63,11 @@ namespace UserApp
             }
         }
 
-        // Nút Quay Lại 
+     
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
-            parentForm.OpenChildForm(new FormLogin());
+            parentForm.ShowLogin();
+
         }
     }
 }

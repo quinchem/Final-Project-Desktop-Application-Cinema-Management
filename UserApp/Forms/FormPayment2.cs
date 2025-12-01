@@ -76,7 +76,7 @@ namespace UserApp
                 string queryRequestId = Guid.NewGuid().ToString();
 
                 // Tạo chữ ký cho Query Request
-                // Chuẩn chữ ký Query: accessKey=$accessKey&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId
+                // Chuẩn chữ ký Query: 
                 string rawHash = "accessKey=" + ACCESS_KEY +
                                  "&orderId=" + _orderId +
                                  "&partnerCode=" + PARTNER_CODE +
@@ -146,7 +146,7 @@ namespace UserApp
                 var filmRepo = new FilmRepo();
                 var film = filmRepo.GetById(_showtime.movie_id);
 
-                lblPhim.Text = film != null ? $"{film.title} ({film.age_restriction})" : _showtime.title;
+                lblPhim.Text = film != null ? $"{film.title}" : _showtime.title;
 
                 lblLoaiRap.Text = $"{_showtime.auditorium_type} - {_showtime.name}";
                 lblNgay.Text = _showtime.show_date;
@@ -402,15 +402,6 @@ namespace UserApp
                     this.Close();
                 }
             }
-        }
-
-        private void btnQuayLai_Click(object sender, EventArgs e)
-        {
-            parentForm.OpenChildForm(new FormPayment1(
-                _showtime,
-                _seats,
-                _customer
-            ));
         }
     }
 }

@@ -88,8 +88,8 @@ namespace UserApp
                 MessageBox.Show("Lỗi khi load poster: " + ex.Message);
             }
         }
-        
-        
+
+
         private void btnDatVe_Click(object sender, EventArgs e)
         {
             // Tìm MainForm để gọi OpenChildForm()

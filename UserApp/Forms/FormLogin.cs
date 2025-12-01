@@ -32,8 +32,8 @@ namespace UserApp
             child.Dock = DockStyle.Fill;
 
             panelDangNhap.Visible = false;
-            panelDangKy.Visible = false;  // Xóa form cũ
-            panelLogin.Controls.Add(child);  // Chỉ chứa form con
+            panelDangKy.Visible = false;  
+            panelLogin.Controls.Add(child);  
             panelLogin.Tag = child;
 
             child.BringToFront();
@@ -300,10 +300,7 @@ namespace UserApp
 
         private void btnQuenMk_Click(object sender, EventArgs e)
         {
-            panelDangNhap.Visible = false;
-            panelDangNhap.Enabled = false;
-
-            OpenChildForm(new FormForgetPassword(this));
+            this.OpenChildForm(new FormForgetPassword(this));
         }
 
         private void FormLogin_KeyDown(object sender, KeyEventArgs e)
@@ -337,7 +334,7 @@ namespace UserApp
                 txtPassDN.UseSystemPasswordChar = true;
 
                 // Đổi ảnh đóng ở đây
-                guna2PictureBox1.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+                guna2PictureBox1.Image = Properties.Resources.hide; 
             }
         }
     }

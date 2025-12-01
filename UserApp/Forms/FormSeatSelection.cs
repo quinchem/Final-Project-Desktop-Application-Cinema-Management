@@ -30,7 +30,7 @@ namespace UserApp
         private List<SeatUser> _selectedSeats = new();
 
         // ====== HẸN GIỜ CHỌN GHẾ (5 phút) ======
-        private int countdown = 300;
+        private int countdown = 600;
         private bool isCounting = false;
 
         // ============================
@@ -214,11 +214,11 @@ namespace UserApp
         private Guna2Button CreateSeatButton(SeatUser seat)
         {
             var btn = new Guna2Button();
-            btn.Size = new Size(50, 50);
+            btn.Size = new Size(55, 55);
             btn.Location = new Point(seat.X, seat.Y);
             btn.Text = $"{seat.Row}{seat.Col:00}";
             btn.Tag = seat;
-            btn.Font = new Font("Segoe UI", 7, FontStyle.Bold);
+            btn.Font = new Font("Segoe UI", 8, FontStyle.Bold);
 
             ApplySeatStyle(btn, seat);
             btn.Click += Seat_Click;

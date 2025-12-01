@@ -96,7 +96,7 @@ namespace UserApp
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1400, 753);
+            panel1.Size = new Size(1902, 808);
             panel1.TabIndex = 0;
             // 
             // guna2CustomGradientPanel3
@@ -118,7 +118,7 @@ namespace UserApp
             guna2CustomGradientPanel3.FillColor2 = Color.Transparent;
             guna2CustomGradientPanel3.FillColor3 = Color.Transparent;
             guna2CustomGradientPanel3.FillColor4 = Color.Transparent;
-            guna2CustomGradientPanel3.Location = new Point(154, 613);
+            guna2CustomGradientPanel3.Location = new Point(318, 659);
             guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2CustomGradientPanel3.Size = new Size(786, 64);
@@ -251,10 +251,10 @@ namespace UserApp
             panelHoaDon.FillColor2 = Color.FromArgb(236, 230, 224);
             panelHoaDon.FillColor3 = Color.FromArgb(236, 230, 224);
             panelHoaDon.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelHoaDon.Location = new Point(1095, 0);
+            panelHoaDon.Location = new Point(1597, 0);
             panelHoaDon.Name = "panelHoaDon";
             panelHoaDon.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            panelHoaDon.Size = new Size(305, 692);
+            panelHoaDon.Size = new Size(305, 747);
             panelHoaDon.TabIndex = 6;
             // 
             // lblSotien
@@ -289,7 +289,7 @@ namespace UserApp
             lblGheDaChon.ForeColor = Color.Black;
             lblGheDaChon.Location = new Point(90, 452);
             lblGheDaChon.Name = "lblGheDaChon";
-            lblGheDaChon.Size = new Size(173, 66);
+            lblGheDaChon.Size = new Size(173, 121);
             lblGheDaChon.TabIndex = 13;
             lblGheDaChon.Text = "Ghế";
             // 
@@ -356,7 +356,7 @@ namespace UserApp
             lblPhong.BackColor = Color.Transparent;
             lblPhong.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPhong.ForeColor = Color.FromArgb(245, 131, 35);
-            lblPhong.Location = new Point(231, 30);
+            lblPhong.Location = new Point(318, 33);
             lblPhong.Name = "lblPhong";
             lblPhong.Size = new Size(95, 39);
             lblPhong.TabIndex = 5;
@@ -370,9 +370,9 @@ namespace UserApp
             panel2.Controls.Add(guna2HtmlLabel3);
             panel2.Controls.Add(guna2Button1);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 692);
+            panel2.Location = new Point(0, 747);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1400, 61);
+            panel2.Size = new Size(1902, 61);
             panel2.TabIndex = 4;
             // 
             // btnThanhToan
@@ -387,7 +387,7 @@ namespace UserApp
             btnThanhToan.ForeColor = Color.FromArgb(245, 131, 35);
             btnThanhToan.Image = Properties.Resources.right_arrow1;
             btnThanhToan.ImageAlign = HorizontalAlignment.Right;
-            btnThanhToan.Location = new Point(1217, 14);
+            btnThanhToan.Location = new Point(1697, 14);
             btnThanhToan.Name = "btnThanhToan";
             btnThanhToan.ShadowDecoration.CustomizableEdges = customizableEdges16;
             btnThanhToan.Size = new Size(130, 35);
@@ -406,7 +406,7 @@ namespace UserApp
             lblTime.Name = "lblTime";
             lblTime.Size = new Size(113, 44);
             lblTime.TabIndex = 8;
-            lblTime.Text = "05:00";
+            lblTime.Text = "10:00";
             lblTime.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // guna2HtmlLabel3
@@ -431,7 +431,7 @@ namespace UserApp
             guna2Button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button1.ForeColor = Color.FromArgb(245, 131, 35);
             guna2Button1.Image = Properties.Resources.back_arrow;
-            guna2Button1.Location = new Point(22, 14);
+            guna2Button1.Location = new Point(46, 14);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges18;
             guna2Button1.Size = new Size(225, 35);
@@ -445,10 +445,10 @@ namespace UserApp
             panelRoom.FillColor2 = Color.Transparent;
             panelRoom.FillColor3 = Color.Transparent;
             panelRoom.FillColor4 = Color.Transparent;
-            panelRoom.Location = new Point(46, 91);
+            panelRoom.Location = new Point(101, 91);
             panelRoom.Name = "panelRoom";
             panelRoom.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            panelRoom.Size = new Size(1012, 506);
+            panelRoom.Size = new Size(1333, 533);
             panelRoom.TabIndex = 3;
             // 
             // guna2HtmlLabel1
@@ -456,7 +456,7 @@ namespace UserApp
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2HtmlLabel1.ForeColor = Color.FromArgb(245, 131, 35);
-            guna2HtmlLabel1.Location = new Point(78, 30);
+            guna2HtmlLabel1.Location = new Point(165, 33);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(147, 39);
             guna2HtmlLabel1.TabIndex = 0;
@@ -472,7 +472,7 @@ namespace UserApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1400, 753);
+            ClientSize = new Size(1902, 808);
             Controls.Add(panel1);
             Name = "FormSeatSelection";
             Text = "FormSeatSelection";
