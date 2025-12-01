@@ -118,24 +118,18 @@
             // 
             // gunaStatistics1
             // 
-            gunaStatistics1.BorderColor = Color.FromArgb(92, 124, 150);
-            gunaStatistics1.BorderRadius = 10;
+            gunaStatistics1.BorderColor = Color.FromArgb(224, 230, 237);
+            gunaStatistics1.BorderRadius = 15;
+            gunaStatistics1.BorderThickness = 1;
             gunaStatistics1.Controls.Add(guna2GradientPanel1);
             gunaStatistics1.Controls.Add(gunaTable);
             gunaStatistics1.Controls.Add(gunaChartGender);
             gunaStatistics1.Controls.Add(gunaChartCustomer);
             gunaStatistics1.Controls.Add(label1);
             gunaStatistics1.CustomizableEdges = customizableEdges3;
-            gunaStatistics1.BorderColor = Color.FromArgb(224, 230, 237);
-            gunaStatistics1.BorderRadius = 15;
-            gunaStatistics1.BorderThickness = 1;
-            gunaStatistics1.FillColor = Color.White;
-            gunaStatistics1.FillColor2 = Color.White;
-            gunaStatistics1.FillColor3 = Color.White;
-            gunaStatistics1.FillColor4 = Color.White;
-            gunaStatistics1.Padding = new Padding(20);
             gunaStatistics1.Location = new Point(48, 230);
             gunaStatistics1.Name = "gunaStatistics1";
+            gunaStatistics1.Padding = new Padding(20);
             gunaStatistics1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             gunaStatistics1.Size = new Size(1314, 461);
             gunaStatistics1.TabIndex = 50;
@@ -300,7 +294,6 @@
             gunaChartGender.Name = "gunaChartGender";
             gunaChartGender.Size = new Size(508, 189);
             gunaChartGender.TabIndex = 3;
-
             chartFont2.FontName = "Arial";
             chartFont2.Size = 12;
             chartFont2.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
@@ -335,7 +328,6 @@
             gunaChartCustomer.Name = "gunaChartCustomer";
             gunaChartCustomer.Size = new Size(508, 241);
             gunaChartCustomer.TabIndex = 2;
-
             chartFont10.FontName = "Arial";
             chartFont10.Size = 12;
             chartFont10.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
@@ -365,15 +357,15 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.BackColor = Color.FromArgb(125, 167, 199);
+            label1.BackColor = Color.White;
             label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
+            label1.ForeColor = Color.FromArgb(125, 167, 199);
             label1.Location = new Point(23, 9);
             label1.Name = "label1";
             label1.RightToLeft = RightToLeft.Yes;
-            label1.Size = new Size(242, 25);
+            label1.Size = new Size(299, 25);
             label1.TabIndex = 1;
-            label1.Text = "BẢNG XẾP HẠNG CHI TIÊU";
+            label1.Text = "BẢNG THÔNG TIN KHÁCH HÀNG";
             // 
             // groupBox3
             // 
@@ -430,6 +422,7 @@
             btnDichVu.Size = new Size(135, 37);
             btnDichVu.TabIndex = 56;
             btnDichVu.Text = "Dịch vụ";
+            btnDichVu.Click += btnPhongChieu_Click;
             // 
             // btnPhim
             // 
@@ -448,6 +441,7 @@
             btnPhim.Size = new Size(135, 37);
             btnPhim.TabIndex = 55;
             btnPhim.Text = "Phim";
+            btnPhim.Click += btnPhim_Click;
             // 
             // btnKhachHang
             // 
@@ -466,6 +460,7 @@
             btnKhachHang.Size = new Size(135, 37);
             btnKhachHang.TabIndex = 54;
             btnKhachHang.Text = "Khách hàng";
+            btnKhachHang.Click += btnKhachHang_Click;
             // 
             // btnTongQuan
             // 
@@ -484,6 +479,7 @@
             btnTongQuan.Size = new Size(135, 37);
             btnTongQuan.TabIndex = 53;
             btnTongQuan.Text = "Tổng quan";
+            btnTongQuan.Click += btnTongQuan_Click;
             // 
             // guna2CustomGradientPanel1
             // 

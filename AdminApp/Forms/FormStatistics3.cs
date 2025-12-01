@@ -9,15 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace AdminApp
 {
     public partial class FormStatistics3 : Form
     {
-
+        private AdminMainForm _parent;
         private StatisticRepo _statisticsRepo = new StatisticRepo();
         private bool isFilteringByYear = false;
-        public FormStatistics3()
+        public FormStatistics3(AdminMainForm parent)
         {
             InitializeComponent();
             LoadYearCombo();
@@ -26,6 +27,7 @@ namespace AdminApp
             // Thêm event handler cho MouseDown để catch khi user click vào DateTimePicker bị disabled
             dtpFrom.MouseDown += DateTimePicker_MouseDown;
             dtpTo.MouseDown += DateTimePicker_MouseDown;
+            _parent = parent;
         }
 
         private void FormStatistics3_Load(object sender, EventArgs e)
@@ -111,22 +113,21 @@ namespace AdminApp
             gunaChartRevenue.Datasets.Clear();
             string selectedMovie = GetSelectedMovie();
 
-            var totalLine = new GunaLineDataset { Label = "Tổng doanh thu", BorderColor = Color.Blue };
-            var topMovieLine = new GunaLineDataset { Label = "Doanh thu phim nổi bật", BorderColor = Color.Red };
+            var revenueLine = new GunaLineDataset
+            {
+                Label = selectedMovie == null ? "Tổng doanh thu tất cả phim" : $"Doanh thu phim: {selectedMovie}",
+                BorderColor = Color.Blue,
+                BorderWidth = 2,
+            };
 
-            var data = _statisticsRepo.GetRevenueWithTopMovieByDay(dtpFrom.Value, dtpTo.Value, selectedMovie);
+            var data = _statisticsRepo.GetRevenueByDay(dtpFrom.Value, dtpTo.Value, selectedMovie);
 
             foreach (var item in data)
             {
-                totalLine.DataPoints.Add(item.date, (double)item.totalRevenue);
-
-                string movieName = item.topMovieName ?? (selectedMovie ?? "N/A");
-                string customLabel = $"{item.date} - {movieName}";
-                topMovieLine.DataPoints.Add(customLabel, (double)item.topMovieRevenue);
+                revenueLine.DataPoints.Add(item.date, (double)item.revenue);
             }
 
-            gunaChartRevenue.Datasets.Add(totalLine);
-            gunaChartRevenue.Datasets.Add(topMovieLine);
+            gunaChartRevenue.Datasets.Add(revenueLine);
             gunaChartRevenue.Legend.Display = true;
             gunaChartRevenue.Update();
         }
@@ -262,5 +263,32 @@ namespace AdminApp
         }
 
         private void MovieCombo_SelectedIndexChanged(object sender, EventArgs e) => ReloadAll();
+
+
+        // 1. Nút Tổng quan (Quay lại FormStatistics1)
+        private void btnTongQuan_Click(object sender, EventArgs e)
+        {
+            _parent.OpenChildForm(new FormStatistics1(_parent));
+        }
+
+        // 2. Nút Khách hàng (Đang ở đây rồi thì không làm gì hoặc reload)
+        private void btnKhachHang_Click(object sender, EventArgs e)
+        {
+            _parent.OpenChildForm(new FormStatistics2(_parent));
+        }
+
+        // 3. Nút Phim (Chuyển sang FormStatistics3)
+        private void btnPhim_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // 4. Nút Phòng chiếu (Chuyển sang FormStatistics4)
+        private void btnPhongChieu_Click(object sender, EventArgs e)
+        {
+            _parent.OpenChildForm(new FormStatistics4(_parent));
+        }
+
+      
     }
 }
