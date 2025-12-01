@@ -43,7 +43,7 @@ namespace UserApp
                 var film = filmRepo.GetById(_showtime.movie_id);
                 // --- PHIM ---
                 if (film != null)
-                    lblTenPhim.Text = $"{film.title} ({film.age_restriction})";
+                    lblTenPhim.Text = $"{film.title}";
                 else
                     lblTenPhim.Text = _showtime.title;
 

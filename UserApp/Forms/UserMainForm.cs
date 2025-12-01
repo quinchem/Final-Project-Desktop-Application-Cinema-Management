@@ -179,7 +179,8 @@ namespace UserApp
 
         private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormChatbot(this));
+            FormChatbot f = new FormChatbot(this);
+            f.Show();
         }
     }
 }

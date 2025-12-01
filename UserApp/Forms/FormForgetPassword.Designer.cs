@@ -61,7 +61,7 @@ namespace UserApp
             panelQuenMK.Dock = DockStyle.Fill;
             panelQuenMK.Location = new Point(0, 0);
             panelQuenMK.Name = "panelQuenMK";
-            panelQuenMK.Size = new Size(1200, 750);
+            panelQuenMK.Size = new Size(1902, 973);
             panelQuenMK.TabIndex = 0;
             // 
             // btnDangNhap
@@ -77,7 +77,7 @@ namespace UserApp
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.QuenMK;
-            btnDangNhap.Location = new Point(307, 80);
+            btnDangNhap.Location = new Point(595, 182);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnDangNhap.Size = new Size(197, 46);
@@ -100,7 +100,7 @@ namespace UserApp
             panelQMK.FillColor2 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor3 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelQMK.Location = new Point(288, 147);
+            panelQMK.Location = new Point(576, 249);
             panelQMK.Name = "panelQMK";
             panelQMK.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelQMK.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -210,14 +210,16 @@ namespace UserApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1200, 750);
+            ClientSize = new Size(1902, 973);
             Controls.Add(panelQuenMK);
             Name = "FormForgetPassword";
+            StartPosition = FormStartPosition.Manual;
             Text = "Quên mật khẩu";
             panelQuenMK.ResumeLayout(false);
             panelQMK.ResumeLayout(false);
             panelQMK.PerformLayout();
             ResumeLayout(false);
+
         }
 
         #endregion

@@ -32,6 +32,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -42,11 +44,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panelReset = new Panel();
             btnDangNhap = new Guna.UI2.WinForms.Guna2Button();
             panelResetPW = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            btnQuayLai = new Guna.UI2.WinForms.Guna2Button();
             picEye1 = new Guna.UI2.WinForms.Guna2PictureBox();
             picEye2 = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -55,7 +56,6 @@
             lblyc = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblEmail = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtMKmoi = new Guna.UI2.WinForms.Guna2TextBox();
-            btnQuayLai = new Guna.UI2.WinForms.Guna2Button();
             panelReset.SuspendLayout();
             panelResetPW.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picEye1).BeginInit();
@@ -70,7 +70,7 @@
             panelReset.Dock = DockStyle.Fill;
             panelReset.Location = new Point(0, 0);
             panelReset.Name = "panelReset";
-            panelReset.Size = new Size(1182, 703);
+            panelReset.Size = new Size(1902, 973);
             panelReset.TabIndex = 1;
             // 
             // btnDangNhap
@@ -86,7 +86,7 @@
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.DatlaiMK;
-            btnDangNhap.Location = new Point(280, 76);
+            btnDangNhap.Location = new Point(597, 202);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnDangNhap.Size = new Size(213, 46);
@@ -112,7 +112,7 @@
             panelResetPW.FillColor2 = Color.FromArgb(236, 230, 224);
             panelResetPW.FillColor3 = Color.FromArgb(236, 230, 224);
             panelResetPW.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelResetPW.Location = new Point(261, 143);
+            panelResetPW.Location = new Point(578, 269);
             panelResetPW.Name = "panelResetPW";
             panelResetPW.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelResetPW.ShadowDecoration.CustomizableEdges = customizableEdges16;
@@ -121,6 +121,29 @@
             panelResetPW.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
             panelResetPW.Size = new Size(713, 401);
             panelResetPW.TabIndex = 7;
+            // 
+            // btnQuayLai
+            // 
+            btnQuayLai.BorderRadius = 8;
+            btnQuayLai.CustomizableEdges = customizableEdges3;
+            btnQuayLai.DisabledState.BorderColor = Color.DarkGray;
+            btnQuayLai.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnQuayLai.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnQuayLai.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnQuayLai.FillColor = Color.FromArgb(236, 230, 224);
+            btnQuayLai.FocusedColor = Color.FromArgb(245, 131, 35);
+            btnQuayLai.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnQuayLai.ForeColor = Color.FromArgb(245, 131, 35);
+            btnQuayLai.Image = Properties.Resources.back_arrow;
+            btnQuayLai.ImageAlign = HorizontalAlignment.Left;
+            btnQuayLai.Location = new Point(43, 335);
+            btnQuayLai.Name = "btnQuayLai";
+            btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnQuayLai.Size = new Size(124, 35);
+            btnQuayLai.TabIndex = 14;
+            btnQuayLai.Text = "Đổi email";
+            btnQuayLai.TextAlign = HorizontalAlignment.Left;
+            btnQuayLai.Click += btnQuayLai_Click;
             // 
             // picEye1
             // 
@@ -249,36 +272,14 @@
             txtMKmoi.TabIndex = 1;
             txtMKmoi.UseSystemPasswordChar = true;
             // 
-            // btnQuayLai
-            // 
-            btnQuayLai.BorderRadius = 8;
-            btnQuayLai.CustomizableEdges = customizableEdges3;
-            btnQuayLai.DisabledState.BorderColor = Color.DarkGray;
-            btnQuayLai.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnQuayLai.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnQuayLai.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnQuayLai.FillColor = Color.FromArgb(236, 230, 224);
-            btnQuayLai.FocusedColor = Color.FromArgb(245, 131, 35);
-            btnQuayLai.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnQuayLai.ForeColor = Color.FromArgb(245, 131, 35);
-            btnQuayLai.Image = Properties.Resources.back_arrow;
-            btnQuayLai.ImageAlign = HorizontalAlignment.Left;
-            btnQuayLai.Location = new Point(43, 335);
-            btnQuayLai.Name = "btnQuayLai";
-            btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnQuayLai.Size = new Size(124, 35);
-            btnQuayLai.TabIndex = 14;
-            btnQuayLai.Text = "Đổi email";
-            btnQuayLai.TextAlign = HorizontalAlignment.Left;
-            btnQuayLai.Click += btnQuayLai_Click;
-            // 
             // FormResetPassword
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1182, 703);
+            ClientSize = new Size(1902, 973);
             Controls.Add(panelReset);
             Name = "FormResetPassword";
+            StartPosition = FormStartPosition.Manual;
             Text = "FormResetPassword";
             panelReset.ResumeLayout(false);
             panelResetPW.ResumeLayout(false);
@@ -286,6 +287,7 @@
             ((System.ComponentModel.ISupportInitialize)picEye1).EndInit();
             ((System.ComponentModel.ISupportInitialize)picEye2).EndInit();
             ResumeLayout(false);
+
         }
 
         #endregion
