@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,10 +64,11 @@ namespace UserApp
                 MessageBox.Show("Vui lòng đăng nhập trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            //string customer_id;
             // Tạo instance HistoryTicket với customerId
             HistoryTicket HistoryTicket = new HistoryTicket(currentUser.customer_id);
-           
+            //string customer_id = "C021";
+            //HistoryTicket HistoryTicket = new HistoryTicket(customer_id);
 
             HistoryTicket.OnViewBillDetail += (billId) =>
             {
