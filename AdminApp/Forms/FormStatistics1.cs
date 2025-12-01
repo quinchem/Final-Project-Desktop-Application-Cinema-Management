@@ -148,23 +148,35 @@ namespace AdminApp
                 }
 
                 // New customers
+                // 3️⃣ Khách hàng mới
+                // 3️⃣ Khách hàng mới - fix lỗi định dạng create_date
                 cmd.CommandText = @"
-                    SELECT COUNT(*)
-                    FROM customer
-                    WHERE create_date IS NOT NULL
-                        AND substr(create_date, 7, 4) || '-' || 
-                            substr(create_date, 4, 2) || '-' || 
-                            substr(create_date, 1, 2) 
-                            BETWEEN @from AND @to";
-
+                SELECT COUNT(*)
+                FROM customer
+                WHERE create_date IS NOT NULL
+                  AND (date(substr(create_date, -10, 10), 'DD-MM-YYYY') BETWEEN @from AND @to
+                       OR date(create_date) BETWEEN @from AND @to)";
                 using (var reader = cmd.ExecuteReader())
                 {
-                    lblNewCustomer.Text = reader.Read()
-                        ? reader.GetInt32(0).ToString()
-                        : "0";
+                    lblNewCustomer.Text = reader.Read() ? reader.GetInt32(0).ToString() : "0";
                 }
+                //cmd.CommandText = @"
+                //    SELECT COUNT(*)
+                //    FROM customer
+                //    WHERE create_date IS NOT NULL
+                //        AND substr(create_date, 7, 4) || '-' || 
+                //            substr(create_date, 4, 2) || '-' || 
+                //            substr(create_date, 1, 2) 
+                //            BETWEEN @from AND @to";
+
+                //using (var reader = cmd.ExecuteReader())
+                //{
+                //    lblNewCustomer.Text = reader.Read()
+                //        ? reader.GetInt32(0).ToString()
+                //        : "0";
             }
-        }
+            }
+   
 
         // ==============================================
         // Line chart: doanh thu theo ngày
