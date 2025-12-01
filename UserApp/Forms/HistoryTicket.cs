@@ -1,121 +1,148 @@
-﻿using Microsoft.Data.Sqlite;
+﻿
+using Microsoft.Data.Sqlite;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharedData;
-
+using System.Security.Cryptography;
+using System.Text;
 
 namespace UserApp
 {
     public partial class HistoryTicket : UserControl
     {
         private string _customerId;
-        public HistoryTicket() : this("C001") { }
+
         public HistoryTicket(string customerId)
         {
             InitializeComponent();
-
             _customerId = customerId;
 
             dgvHistoryTicket.AutoGenerateColumns = false;
             LoadHistoryData();
         }
+
         private void LoadHistoryData()
         {
             dgvHistoryTicket.Rows.Clear();
 
-            using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
+            try
             {
-                conn.Open();
-
-                string query = @"
-                SELECT 
-                b.bill_id,
-                m.title AS movie_name,
-                s.show_date AS show_time,
-                b.bill_date,
-                b.quantity_ticket,
-                b.per_seat_ticket_price,
-                IFNULL(SUM(pd.quantity * pd.unit_price), 0) AS product_total
-            FROM Bill b
-            JOIN Showtime s ON b.showtime_id = s.showtime_id
-            JOIN Movie m ON s.movie_id = m.movie_id
-            LEFT JOIN Bill_detail pd ON b.bill_id = pd.bill_id
-            WHERE b.customer_id = @customer_id
-            GROUP BY b.bill_id, m.title, s.show_date, b.bill_date, b.quantity_ticket, b.per_seat_ticket_price
-            ORDER BY b.bill_date DESC;
-            ";
-
-                using (var cmd = new SqliteCommand(query, conn))
+                using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
                 {
-                    // Gán đúng customerId khách đăng nhập
-                    cmd.Parameters.AddWithValue("@customer_id", _customerId);
+                    conn.Open();
 
-                    using (var reader = cmd.ExecuteReader())
+                    // Debug: Kiểm tra xem có bill nào của customer không
+                    /*string checkQuery = "SELECT COUNT(*) FROM bill WHERE customer_id = @customer_id";
+                    using (var checkCmd = new SqliteCommand(checkQuery, conn))
                     {
-                        int stt = 1;
-                        bool hasRows = false;
+                        checkCmd.Parameters.AddWithValue("@customer_id", _customerId);
+                        long count = (long)checkCmd.ExecuteScalar();
+                        MessageBox.Show($"Tìm thấy {count} bill của khách hàng {_customerId}", "Debug Info");
+                    }*/
 
-                        while (reader.Read())
+                    string query = @"
+                        SELECT 
+                            b.bill_id,
+                            m.title AS movie_name,
+                            s.show_date,
+                            s.start_time,
+                            SUM(se.per_seat_ticket_price) as total
+                        FROM bill b
+                        JOIN showtime s ON b.showtime_id = s.showtime_id
+                        JOIN movie m ON s.movie_id = m.movie_id
+                        JOIN bill_seat bs ON b.bill_id = bs.bill_id
+                        JOIN seat se ON bs.seat_id = se.seat_id
+                        WHERE b.customer_id = @customer_id
+                        GROUP BY b.bill_id, m.title, s.show_date, s.start_time
+                        ORDER BY s.show_date DESC, s.start_time DESC;
+                    ";
 
+                    using (var cmd = new SqliteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@customer_id", _customerId);
+
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            hasRows = true;
-                            string billId = reader["bill_id"].ToString();
-                            string movieName = reader["movie_name"].ToString();
-                            string showTime = reader["show_time"].ToString();
-                            string billDate = Convert.ToDateTime(reader["bill_date"]).ToString("yyyy-MM-dd");
+                            int stt = 1;
+                            bool hasRows = false;
 
-                            int qtyTicket = Convert.ToInt32(reader["quantity_ticket"]);
-                            int ticketPrice = Convert.ToInt32(reader["per_seat_ticket_price"]);
-                            int productTotal = Convert.ToInt32(reader["product_total"]);
+                            while (reader.Read())
+                            {
+                                hasRows = true;
+                                string billId = reader["bill_id"].ToString();
+                                string movieName = reader["movie_name"].ToString();
+                                string showDate = reader["show_date"].ToString();
+                                string startTime = reader["start_time"].ToString();
 
-                            int totalMoney = qtyTicket * ticketPrice + productTotal;
+                                // Kết hợp ngày và giờ để hiển thị suất chiếu
+                                string showDateTime = $"{startTime}"; // Chỉ giờ chiếu
 
-                            string ticketCode = GenerateRandomCode();
+                                // Ngày đặt vé (dùng show_date vì database không có bill_date)
+                                string bookingDate = showDate;
 
-                            dgvHistoryTicket.Rows.Add(
-                                stt++,
-                                billId,
-                                movieName,
-                                showTime,
-                                billDate,
-                                totalMoney.ToString("N0"),
-                                ticketCode,
-                                "Xem"
-                            );
-                        }
+                                // Format tiền tệ VND
+                                decimal total = Convert.ToDecimal(reader["total"]);
+                                string formattedTotal = total.ToString("N0") + " VNĐ";
 
-                        if (!hasRows)
-                        {
-                            MessageBox.Show("Khách hàng chưa có lịch sử vé nào.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                // Tự sinh Ticket Code
+                                //string ticketCode = GenerateTicketCode(billId);
+
+                                dgvHistoryTicket.Rows.Add(
+                                    stt++,              // Cột 0: STT
+                                    billId,             // Cột 1: Mã đặt vé
+                                    movieName,          // Cột 2: Tên phim
+                                    showDateTime,       // Cột 3: Suất chiếu (giờ)
+                                    bookingDate,        // Cột 4: Ngày đặt vé
+                                    formattedTotal,     // Cột 5: Tổng tiền
+                                    //ticketCode,         // Cột 6: Ticket Code
+                                    "Xem"               // Cột 7: Xem chi tiết
+                                );
+                            }
+
+                            if (!hasRows)
+                            {
+                                MessageBox.Show($"Khách hàng {_customerId} chưa có lịch sử vé nào.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            /*else
+                            {
+                                MessageBox.Show($"Đã load {stt - 1} vé thành công!", "Thành công");
+                            }*/
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi load dữ liệu:\n{ex.Message}\n\nStack Trace:\n{ex.StackTrace}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        private string GenerateRandomCode()
+
+        // Hàm tự sinh Ticket Code
+        /*private string GenerateTicketCode(string billId)
         {
-            return "TK" + Guid.NewGuid().ToString("N").Substring(0, 8).ToUpper();
-        }
+            // Tạo SHA256 hash cố định từ billId
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(billId));
+
+                // Lấy 4 ký tự đầu tiên của hash dưới dạng HEX
+                string hashPart = BitConverter.ToString(bytes).Replace("-", "").Substring(0, 4);
+
+                return $"TK-{billId}-{hashPart}";
+            }
+        }*/
 
         private void dgvHistoryTicket_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // Giả sử cột nút có index = 7 (thay bằng index cột nút của bạn)
-            if (e.ColumnIndex == 7 && e.RowIndex >= 0)
+            // Kiểm tra cột "Xem" - cột cuối cùng
+            if (e.ColumnIndex == dgvHistoryTicket.Columns["XemChiTiet"]?.Index && e.RowIndex >= 0)
             {
-                e.Handled = true; // Đánh dấu tự vẽ
+                e.Handled = true;
 
-                // Vẽ nền nút màu #2C5473
                 Color btnColor = ColorTranslator.FromHtml("#2C5473");
                 e.Graphics.FillRectangle(new SolidBrush(btnColor), e.CellBounds);
 
-                // Vẽ chữ "Xem" ở giữa, màu trắng
                 TextRenderer.DrawText(
                     e.Graphics,
                     "Xem",
@@ -125,7 +152,6 @@ namespace UserApp
                     TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter
                 );
 
-                // Vẽ viền nút nếu muốn
                 e.Graphics.DrawRectangle(Pens.Black, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width - 1, e.CellBounds.Height - 1);
             }
         }
@@ -139,12 +165,8 @@ namespace UserApp
             if (dgvHistoryTicket.Columns[e.ColumnIndex].Name == "XemChiTiet") // tên cột nút "Xem"
             {
                 string billId = dgvHistoryTicket.Rows[e.RowIndex].Cells["MaDatVe"].Value.ToString();
-
-                // Trigger event
                 OnViewBillDetail?.Invoke(billId);
             }
-
         }
     }
 }
-

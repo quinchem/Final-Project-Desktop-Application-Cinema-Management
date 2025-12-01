@@ -78,6 +78,7 @@ namespace AdminApp
             txtTimKiem.Size = new Size(270, 35);
             txtTimKiem.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtTimKiem.TabIndex = 0;
+            txtTimKiem.TextChanged += txtTimKiem_TextChanged;
             // 
             // btnTim
             // 
@@ -99,6 +100,7 @@ namespace AdminApp
             btnTim.TabIndex = 29;
             btnTim.Text = "Tìm";
             btnTim.Click += btnTim_Click;
+            btnTim.KeyDown += txtTimKiem_KeyDown;
             // 
             // btnXuatFile
             // 

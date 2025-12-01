@@ -5,10 +5,6 @@ using System.Windows.Forms;
 using Microsoft.Data.Sqlite;
 using Guna.UI2.WinForms;
 using Guna.Charts.WinForms;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.ExtendedProperties;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace AdminApp
 {
@@ -22,15 +18,12 @@ namespace AdminApp
         private void FormStatistics2_Load(object sender, EventArgs e)
         {
             gunaTable.AutoGenerateColumns = false;
-
             SetupCustomerTableColumns();
-
-            StartTime.Value = DateTime.Now.AddDays(-7);
-            EndTime.Value = DateTime.Now;
 
             LoadYearCombo();
             ReloadAll();
         }
+
         private void SetupCustomerTableColumns()
         {
             HoTen.DataPropertyName = "HoTen";
@@ -48,80 +41,145 @@ namespace AdminApp
             LoadGenderPie();
             LoadCustomerRanking();
         }
+
         private void LoadYearCombo()
         {
+            YearSort.BeginUpdate();
             YearSort.Items.Clear();
-            YearSort.Items.Add("Tất cả");
 
-            using var conn = DatabaseHelper.GetConnection();
-            conn.Open();
-
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
-        SELECT DISTINCT strftime('%Y', create_date)
-        FROM customer
-        WHERE create_date IS NOT NULL
-        ORDER BY 1 DESC"
-            ;
-
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                if (!reader.IsDBNull(0))   // ✅ chống crash
+                using var conn = DatabaseHelper.GetConnection();
+                conn.Open();
+                using var cmd = conn.CreateCommand();
+
+                // ✅ Query các năm từ create_date (DATETIME)
+                cmd.CommandText = @"
+SELECT DISTINCT strftime('%Y', create_date) AS Y
+FROM customer
+WHERE create_date IS NOT NULL
+ORDER BY Y DESC";
+
+                using var rd = cmd.ExecuteReader();
+
+                YearSort.Items.Add("Tất cả");
+
+                while (rd.Read())
                 {
-                    YearSort.Items.Add(reader.GetString(0));
+                    if (!rd.IsDBNull(0))
+                    {
+                        string year = rd.GetString(0);
+                        YearSort.Items.Add(year);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi load năm: {ex.Message}",
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                YearSort.EndUpdate();
+            }
 
-            YearSort.SelectedIndex = 0;
+            if (YearSort.Items.Count > 0)
+                YearSort.SelectedIndex = 0;
         }
 
 
+
+
         // =======================
-        // 1. Khách mới theo ngày
+        // 1. Khách mới theo tháng (Biểu đồ cột)
         // =======================
         private void LoadCustomerByDayChart()
         {
             gunaChartCustomer.Datasets.Clear();
-            var bar = new GunaBarDataset { Label = "Khách mới" };
+            GetCreateDateRange(out DateTime? from, out DateTime? to);
+
+            var bar = new GunaBarDataset
+            {
+                Label = "Khách đăng ký"
+            };
 
             using var conn = DatabaseHelper.GetConnection();
             conn.Open();
             using var cmd = conn.CreateCommand();
 
-            cmd.CommandText = @"
-    SELECT 
-        date(
-            CASE 
-                WHEN length(create_date) >= 10
-                     AND substr(create_date,1,4) BETWEEN '1900' AND '2100'
-                THEN create_date
-                ELSE NULL
-            END
-        ) AS Ngay,
-        COUNT(*) AS Total
-    FROM customer
-    WHERE create_date IS NOT NULL
-    GROUP BY Ngay
-    HAVING Ngay IS NOT NULL
-    ORDER BY Ngay";
-
-            using var rd = cmd.ExecuteReader();
-            while (rd.Read())
+            if (from == null)
             {
-                if (rd.IsDBNull(0)) continue;
-
-                bar.DataPoints.Add(
-                    rd.GetString(0),
-                    rd.GetInt32(1)
-                );
+                // ✅ TẤT CẢ - Hiển thị theo tháng/năm (MM/yyyy)
+                cmd.CommandText = @"
+SELECT 
+    strftime('%Y-%m', create_date) AS Thang,
+    COUNT(*) AS Total
+FROM customer
+WHERE create_date IS NOT NULL
+GROUP BY strftime('%Y-%m', create_date)
+ORDER BY Thang";
             }
+            else
+            {
+                // ✅ THEO NĂM - Hiển thị 12 tháng trong năm (01, 02, ..., 12)
+                cmd.CommandText = @"
+SELECT 
+    strftime('%m', create_date) AS Thang,
+    COUNT(*) AS Total
+FROM customer
+WHERE create_date IS NOT NULL
+  AND date(create_date) BETWEEN date(@from) AND date(@to)
+GROUP BY strftime('%m', create_date)
+ORDER BY Thang";
+
+                cmd.Parameters.AddWithValue("@from", from.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@to", to.Value.ToString("yyyy-MM-dd"));
+            }
+
+            // ✅ Đọc dữ liệu từ database
+            var monthData = new System.Collections.Generic.Dictionary<string, int>();
+            using (var rd = cmd.ExecuteReader())
+            {
+                while (rd.Read())
+                {
+                    if (rd.IsDBNull(0) || rd.IsDBNull(1)) continue;
+                    monthData[rd.GetString(0)] = rd.GetInt32(1);
+                }
+            }
+
+            // ✅ Hiển thị dữ liệu lên chart
+            if (from == null)
+            {
+                // Hiển thị theo format "MM/yyyy"
+                foreach (var item in monthData)
+                {
+                    // Convert "2024-01" thành "T1/2024"
+                    string[] parts = item.Key.Split('-');
+                    string label = $"T{int.Parse(parts[1])}/{parts[0]}";
+                    bar.DataPoints.Add(label, item.Value);
+                }
+            }
+            else
+            {
+                // Hiển thị 12 tháng đầy đủ (01 -> 12)
+                string[] monthNames = { "T1", "T2", "T3", "T4", "T5", "T6",
+                                       "T7", "T8", "T9", "T10", "T11", "T12" };
+
+                for (int i = 1; i <= 12; i++)
+                {
+                    string monthKey = i.ToString("00"); // 01, 02, ..., 12
+                    int count = monthData.ContainsKey(monthKey) ? monthData[monthKey] : 0;
+                    bar.DataPoints.Add(monthNames[i - 1], count);
+                }
+            }
+
+            // ✅ ĐẶT MÀU SAU KHI THÊM DATAPOINTS
+            bar.FillColors.Clear();
+            bar.FillColors.Add(Color.FromArgb(94, 114, 228)); // Xanh primary
 
             gunaChartCustomer.Datasets.Add(bar);
             gunaChartCustomer.Update();
         }
-
-
 
 
 
@@ -133,55 +191,62 @@ namespace AdminApp
         {
             gunaChartGender.Datasets.Clear();
             var pie = new GunaPieDataset();
-            string yearFilter = YearSort.SelectedItem?.ToString() ?? "Tất cả";
+
+            GetCreateDateRange(out DateTime? from, out DateTime? to);
 
             using var conn = DatabaseHelper.GetConnection();
             conn.Open();
             using var cmd = conn.CreateCommand();
 
-            if (yearFilter == "Tất cả")
+            if (from == null)
             {
                 cmd.CommandText = @"
-        SELECT 
-            CASE
-                WHEN lower(trim(gender)) IN ('nam','male') THEN 'Nam'
-                WHEN lower(trim(gender)) IN ('nữ','nu','female') THEN 'Nữ'
-                ELSE 'Không rõ'
-            END,
-            COUNT(*)
-        FROM customer
-        GROUP BY 1";
+SELECT 
+    CASE
+        WHEN lower(trim(gender)) IN ('nam','male') THEN 'Nam'
+        WHEN lower(trim(gender)) IN ('nữ','nu','female') THEN 'Nữ'
+        ELSE 'Không rõ'
+    END AS GioiTinh,
+    COUNT(*) AS Total
+FROM customer
+WHERE create_date IS NOT NULL
+GROUP BY GioiTinh";
             }
             else
             {
                 cmd.CommandText = @"
-        SELECT 
-            CASE
-                WHEN lower(trim(gender)) IN ('nam','male') THEN 'Nam'
-                WHEN lower(trim(gender)) IN ('nữ','nu','female') THEN 'Nữ'
-                ELSE 'Không rõ'
-            END,
-            COUNT(*)
-        FROM customer
-        WHERE create_date IS NOT NULL
-          AND date(create_date) BETWEEN date(@from) AND date(@to)
-          AND strftime('%Y', create_date) = @year
-        GROUP BY 1";
+SELECT 
+    CASE
+        WHEN lower(trim(gender)) IN ('nam','male') THEN 'Nam'
+        WHEN lower(trim(gender)) IN ('nữ','nu','female') THEN 'Nữ'
+        ELSE 'Không rõ'
+    END AS GioiTinh,
+    COUNT(*) AS Total
+FROM customer
+WHERE create_date IS NOT NULL
+  AND date(create_date) BETWEEN date(@from) AND date(@to)
+GROUP BY GioiTinh";
 
-                cmd.Parameters.AddWithValue("@from", StartTime.Value.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("@to", EndTime.Value.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("@year", yearFilter);
+                cmd.Parameters.AddWithValue("@from", from.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@to", to.Value.ToString("yyyy-MM-dd"));
             }
 
             using var rd = cmd.ExecuteReader();
             while (rd.Read())
+            {
+                if (rd.IsDBNull(0) || rd.IsDBNull(1)) continue;
                 pie.DataPoints.Add(rd.GetString(0), rd.GetInt32(1));
+            }
+
+            // ✅ ĐẶT MÀU SAU KHI THÊM DATAPOINTS
+            pie.FillColors.Clear();
+            pie.FillColors.Add(Color.FromArgb(94, 114, 228));   // Nam - Xanh primary
+            pie.FillColors.Add(Color.FromArgb(255, 107, 129));  // Nữ - Hồng
+            pie.FillColors.Add(Color.FromArgb(189, 195, 199));  // Không rõ - Xám
 
             gunaChartGender.Datasets.Add(pie);
             gunaChartGender.Update();
         }
-
-
 
 
         // =======================
@@ -190,71 +255,83 @@ namespace AdminApp
         private void LoadCustomerRanking()
         {
             var dt = new DataTable();
-            string yearFilter = YearSort.SelectedItem?.ToString() ?? "Tất cả";
+            GetCreateDateRange(out DateTime? from, out DateTime? to);
 
             using var conn = DatabaseHelper.GetConnection();
             conn.Open();
-
             using var cmd = conn.CreateCommand();
 
-            // ✅ QUERY CHUNG – đủ cột cho DataGridView
-            cmd.CommandText = @"
+            if (from == null)
+            {
+                cmd.CommandText = @"
 SELECT 
     c.full_name     AS HoTen,
     c.email         AS Email,
     c.phone_number  AS SDT,
     c.date_of_birth AS DateOfBirth,
     c.address       AS Address,
-    SUM(b.total + IFNULL(bd.total,0)) AS ChiTieu
+    IFNULL(SUM(b.total),0) AS ChiTieu
 FROM customer c
 LEFT JOIN bill b ON c.customer_id = b.customer_id
-LEFT JOIN bill_detail bd ON b.bill_id = bd.bill_id
-WHERE
-    (@year = 'Tất cả'
-     OR (
-         b.bill_date IS NOT NULL
-         AND date(b.bill_date) BETWEEN date(@from) AND date(@to)
-         AND strftime('%Y', b.bill_date) = @year
-     ))
+WHERE c.create_date IS NOT NULL
+GROUP BY c.customer_id
+ORDER BY ChiTieu DESC";
+            }
+            else
+            {
+                cmd.CommandText = @"
+SELECT 
+    c.full_name     AS HoTen,
+    c.email         AS Email,
+    c.phone_number  AS SDT,
+    c.date_of_birth AS DateOfBirth,
+    c.address       AS Address,
+    IFNULL(SUM(b.total),0) AS ChiTieu
+FROM customer c
+LEFT JOIN bill b ON c.customer_id = b.customer_id
+WHERE c.create_date IS NOT NULL
+  AND date(c.create_date) BETWEEN date(@from) AND date(@to)
 GROUP BY c.customer_id
 ORDER BY ChiTieu DESC";
 
-            cmd.Parameters.AddWithValue("@from", StartTime.Value.ToString("yyyy-MM-dd"));
-            cmd.Parameters.AddWithValue("@to", EndTime.Value.ToString("yyyy-MM-dd"));
-            cmd.Parameters.AddWithValue("@year", yearFilter);
+                cmd.Parameters.AddWithValue("@from", from.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@to", to.Value.ToString("yyyy-MM-dd"));
+            }
 
             using var reader = cmd.ExecuteReader();
             dt.Load(reader);
-
             gunaTable.DataSource = dt;
         }
+
+
         // =======================
         // 0. Tổng số khách hàng
         // =======================
         private void LoadTotalCustomer()
         {
-            string yearFilter = YearSort.SelectedItem?.ToString() ?? "Tất cả";
+            GetCreateDateRange(out DateTime? from, out DateTime? to);
 
             using var conn = DatabaseHelper.GetConnection();
             conn.Open();
             using var cmd = conn.CreateCommand();
 
-            if (yearFilter == "Tất cả")
+            if (from == null)
             {
-                cmd.CommandText = "SELECT COUNT(*) FROM customer";
+                cmd.CommandText = @"
+SELECT COUNT(*) 
+FROM customer 
+WHERE create_date IS NOT NULL";
             }
             else
             {
                 cmd.CommandText = @"
-        SELECT COUNT(*) 
-        FROM customer
-        WHERE create_date IS NOT NULL
-          AND date(create_date) BETWEEN date(@from) AND date(@to)
-          AND strftime('%Y', create_date) = @year";
+SELECT COUNT(*) 
+FROM customer
+WHERE create_date IS NOT NULL
+  AND date(create_date) BETWEEN date(@from) AND date(@to)";
 
-                cmd.Parameters.AddWithValue("@from", StartTime.Value.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("@to", EndTime.Value.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("@year", yearFilter);
+                cmd.Parameters.AddWithValue("@from", from.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@to", to.Value.ToString("yyyy-MM-dd"));
             }
 
             lbTongKhachHang.Text = cmd.ExecuteScalar().ToString();
@@ -275,7 +352,29 @@ ORDER BY ChiTieu DESC";
         {
             ReloadAll();
         }
+
+        private void GetCreateDateRange(out DateTime? from, out DateTime? to)
+        {
+            string year = YearSort.SelectedItem?.ToString() ?? "Tất cả";
+
+            if (year == "Tất cả")
+            {
+                from = null;
+                to = null;
+            }
+            else
+            {
+                if (int.TryParse(year, out int y))
+                {
+                    from = new DateTime(y, 1, 1);
+                    to = new DateTime(y, 12, 31);
+                }
+                else
+                {
+                    from = null;
+                    to = null;
+                }
+            }
+        }
     }
 }
-
-

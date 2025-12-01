@@ -75,13 +75,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormStatistics2));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             gunaStatistics1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -100,10 +97,6 @@
             label1 = new Label();
             groupBox3 = new GroupBox();
             YearSort = new Guna.UI2.WinForms.Guna2ComboBox();
-            groupBox2 = new GroupBox();
-            EndTime = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            groupBox1 = new GroupBox();
-            StartTime = new Guna.UI2.WinForms.Guna2DateTimePicker();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             btnDichVu = new Guna.UI2.WinForms.Guna2Button();
             btnPhim = new Guna.UI2.WinForms.Guna2Button();
@@ -118,8 +111,6 @@
             guna2GradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gunaTable).BeginInit();
             groupBox3.SuspendLayout();
-            groupBox2.SuspendLayout();
-            groupBox1.SuspendLayout();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).BeginInit();
@@ -135,11 +126,15 @@
             gunaStatistics1.Controls.Add(gunaChartCustomer);
             gunaStatistics1.Controls.Add(label1);
             gunaStatistics1.CustomizableEdges = customizableEdges3;
-            gunaStatistics1.FillColor = Color.FromArgb(125, 167, 199);
-            gunaStatistics1.FillColor2 = Color.FromArgb(125, 167, 199);
-            gunaStatistics1.FillColor3 = Color.FromArgb(125, 167, 199);
-            gunaStatistics1.FillColor4 = Color.FromArgb(125, 167, 199);
-            gunaStatistics1.Location = new Point(134, 231);
+            gunaStatistics1.BorderColor = Color.FromArgb(224, 230, 237);
+            gunaStatistics1.BorderRadius = 15;
+            gunaStatistics1.BorderThickness = 1;
+            gunaStatistics1.FillColor = Color.White;
+            gunaStatistics1.FillColor2 = Color.White;
+            gunaStatistics1.FillColor3 = Color.White;
+            gunaStatistics1.FillColor4 = Color.White;
+            gunaStatistics1.Padding = new Padding(20);
+            gunaStatistics1.Location = new Point(48, 230);
             gunaStatistics1.Name = "gunaStatistics1";
             gunaStatistics1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             gunaStatistics1.Size = new Size(1314, 461);
@@ -305,6 +300,7 @@
             gunaChartGender.Name = "gunaChartGender";
             gunaChartGender.Size = new Size(508, 189);
             gunaChartGender.TabIndex = 3;
+
             chartFont2.FontName = "Arial";
             chartFont2.Size = 12;
             chartFont2.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
@@ -339,6 +335,7 @@
             gunaChartCustomer.Name = "gunaChartCustomer";
             gunaChartCustomer.Size = new Size(508, 241);
             gunaChartCustomer.TabIndex = 2;
+
             chartFont10.FontName = "Arial";
             chartFont10.Size = 12;
             chartFont10.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
@@ -383,7 +380,7 @@
             groupBox3.Controls.Add(YearSort);
             groupBox3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox3.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox3.Location = new Point(802, 136);
+            groupBox3.Location = new Point(358, 131);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(312, 74);
             groupBox3.TabIndex = 60;
@@ -409,72 +406,9 @@
             YearSort.TabIndex = 47;
             YearSort.SelectedIndexChanged += YearSort_SelectedIndexChanged;
             // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(EndTime);
-            groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox2.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox2.Location = new Point(473, 136);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(312, 74);
-            groupBox2.TabIndex = 59;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Chọn ngày kết thúc";
-            // 
-            // EndTime
-            // 
-            EndTime.BackColor = Color.White;
-            EndTime.Checked = true;
-            EndTime.CustomizableEdges = customizableEdges7;
-            EndTime.FillColor = Color.White;
-            EndTime.FocusedColor = Color.White;
-            EndTime.Font = new Font("Segoe UI", 9F);
-            EndTime.ForeColor = Color.Black;
-            EndTime.Format = DateTimePickerFormat.Long;
-            EndTime.Location = new Point(16, 26);
-            EndTime.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            EndTime.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            EndTime.Name = "EndTime";
-            EndTime.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            EndTime.Size = new Size(279, 36);
-            EndTime.TabIndex = 51;
-            EndTime.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
-            EndTime.ValueChanged += EndTime_ValueChanged;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(StartTime);
-            groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox1.Location = new Point(146, 135);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(312, 74);
-            groupBox1.TabIndex = 58;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Chọn ngày bắt đầu";
-            // 
-            // StartTime
-            // 
-            StartTime.BackColor = Color.White;
-            StartTime.Checked = true;
-            StartTime.CustomizableEdges = customizableEdges9;
-            StartTime.FillColor = Color.White;
-            StartTime.Font = new Font("Segoe UI", 9F);
-            StartTime.ForeColor = Color.FromArgb(64, 64, 64);
-            StartTime.Format = DateTimePickerFormat.Long;
-            StartTime.Location = new Point(16, 26);
-            StartTime.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            StartTime.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            StartTime.Name = "StartTime";
-            StartTime.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            StartTime.Size = new Size(279, 36);
-            StartTime.TabIndex = 50;
-            StartTime.Value = new DateTime(2025, 11, 23, 18, 55, 42, 755);
-            StartTime.ValueChanged += StartTime_ValueChanged;
-            // 
             // guna2Separator1
             // 
-            guna2Separator1.Location = new Point(134, 110);
+            guna2Separator1.Location = new Point(48, 109);
             guna2Separator1.Name = "guna2Separator1";
             guna2Separator1.Size = new Size(1314, 12);
             guna2Separator1.TabIndex = 57;
@@ -482,7 +416,7 @@
             // btnDichVu
             // 
             btnDichVu.BorderRadius = 5;
-            btnDichVu.CustomizableEdges = customizableEdges11;
+            btnDichVu.CustomizableEdges = customizableEdges7;
             btnDichVu.DisabledState.BorderColor = Color.DarkGray;
             btnDichVu.DisabledState.CustomBorderColor = Color.DarkGray;
             btnDichVu.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -490,9 +424,9 @@
             btnDichVu.FillColor = Color.Silver;
             btnDichVu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDichVu.ForeColor = Color.White;
-            btnDichVu.Location = new Point(934, 60);
+            btnDichVu.Location = new Point(848, 59);
             btnDichVu.Name = "btnDichVu";
-            btnDichVu.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            btnDichVu.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnDichVu.Size = new Size(135, 37);
             btnDichVu.TabIndex = 56;
             btnDichVu.Text = "Dịch vụ";
@@ -500,7 +434,7 @@
             // btnPhim
             // 
             btnPhim.BorderRadius = 5;
-            btnPhim.CustomizableEdges = customizableEdges13;
+            btnPhim.CustomizableEdges = customizableEdges9;
             btnPhim.DisabledState.BorderColor = Color.DarkGray;
             btnPhim.DisabledState.CustomBorderColor = Color.DarkGray;
             btnPhim.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -508,9 +442,9 @@
             btnPhim.FillColor = Color.Silver;
             btnPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPhim.ForeColor = Color.White;
-            btnPhim.Location = new Point(780, 60);
+            btnPhim.Location = new Point(694, 59);
             btnPhim.Name = "btnPhim";
-            btnPhim.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            btnPhim.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btnPhim.Size = new Size(135, 37);
             btnPhim.TabIndex = 55;
             btnPhim.Text = "Phim";
@@ -518,7 +452,7 @@
             // btnKhachHang
             // 
             btnKhachHang.BorderRadius = 5;
-            btnKhachHang.CustomizableEdges = customizableEdges15;
+            btnKhachHang.CustomizableEdges = customizableEdges11;
             btnKhachHang.DisabledState.BorderColor = Color.DarkGray;
             btnKhachHang.DisabledState.CustomBorderColor = Color.DarkGray;
             btnKhachHang.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -526,9 +460,9 @@
             btnKhachHang.FillColor = Color.FromArgb(255, 128, 0);
             btnKhachHang.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKhachHang.ForeColor = Color.White;
-            btnKhachHang.Location = new Point(621, 60);
+            btnKhachHang.Location = new Point(535, 59);
             btnKhachHang.Name = "btnKhachHang";
-            btnKhachHang.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            btnKhachHang.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnKhachHang.Size = new Size(135, 37);
             btnKhachHang.TabIndex = 54;
             btnKhachHang.Text = "Khách hàng";
@@ -536,7 +470,7 @@
             // btnTongQuan
             // 
             btnTongQuan.BorderRadius = 5;
-            btnTongQuan.CustomizableEdges = customizableEdges17;
+            btnTongQuan.CustomizableEdges = customizableEdges13;
             btnTongQuan.DisabledState.BorderColor = Color.DarkGray;
             btnTongQuan.DisabledState.CustomBorderColor = Color.DarkGray;
             btnTongQuan.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -544,9 +478,9 @@
             btnTongQuan.FillColor = Color.Silver;
             btnTongQuan.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTongQuan.ForeColor = Color.White;
-            btnTongQuan.Location = new Point(461, 60);
+            btnTongQuan.Location = new Point(375, 59);
             btnTongQuan.Name = "btnTongQuan";
-            btnTongQuan.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            btnTongQuan.ShadowDecoration.CustomizableEdges = customizableEdges14;
             btnTongQuan.Size = new Size(135, 37);
             btnTongQuan.TabIndex = 53;
             btnTongQuan.Text = "Tổng quan";
@@ -559,14 +493,14 @@
             guna2CustomGradientPanel1.Controls.Add(pictureBox1);
             guna2CustomGradientPanel1.Controls.Add(guna2CirclePictureBox1);
             guna2CustomGradientPanel1.Controls.Add(label2);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges20;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges16;
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel1.Location = new Point(1120, 132);
+            guna2CustomGradientPanel1.Location = new Point(694, 123);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges21;
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2CustomGradientPanel1.Size = new Size(328, 90);
             guna2CustomGradientPanel1.TabIndex = 61;
             // 
@@ -586,6 +520,7 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.White;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(16, 15);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(51, 52);
@@ -599,7 +534,7 @@
             guna2CirclePictureBox1.ImageRotate = 0F;
             guna2CirclePictureBox1.Location = new Point(3, 3);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges15;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CirclePictureBox1.Size = new Size(81, 81);
             guna2CirclePictureBox1.TabIndex = 0;
@@ -623,12 +558,10 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1642, 784);
+            ClientSize = new Size(1402, 703);
             Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(gunaStatistics1);
             Controls.Add(groupBox3);
-            Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
             Controls.Add(guna2Separator1);
             Controls.Add(btnDichVu);
             Controls.Add(btnPhim);
@@ -644,8 +577,6 @@
             guna2GradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gunaTable).EndInit();
             groupBox3.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
             guna2CustomGradientPanel1.ResumeLayout(false);
             guna2CustomGradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -658,10 +589,6 @@
         private Label label1;
         private GroupBox groupBox3;
         private Guna.UI2.WinForms.Guna2ComboBox YearSort;
-        private GroupBox groupBox2;
-        private Guna.UI2.WinForms.Guna2DateTimePicker EndTime;
-        private GroupBox groupBox1;
-        private Guna.UI2.WinForms.Guna2DateTimePicker StartTime;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private Guna.UI2.WinForms.Guna2Button btnDichVu;
         private Guna.UI2.WinForms.Guna2Button btnPhim;

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using SharedData.Models;
+using SharedData.Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +15,99 @@ namespace UserApp
 {
     public partial class FormPayment1 : Form
     {
-        public FormPayment1()
+        private ShowtimeInfo _showtime;
+        private List<SeatUser> _selectedSeats;
+        private Customer _customer;
+        private double _total;
+
+        public FormPayment1(ShowtimeInfo showtime, List<SeatUser> seats, Customer customer)
         {
             InitializeComponent();
+
+            _showtime = showtime;
+            _selectedSeats = seats;
+            _customer = customer;
+
+            LoadPaymentInfo();
+        }
+
+        // ======================================================
+        // HIỂN THỊ THÔNG TIN TẠI PAYMENT 1
+        // ======================================================
+        private void LoadPaymentInfo()
+        {
+            try
+            {
+                // --- LẤY THÔNG TIN PHIM ---
+                var filmRepo = new FilmRepo();
+                var film = filmRepo.GetById(_showtime.movie_id);
+                // --- PHIM ---
+                if (film != null)
+                    lblTenPhim.Text = $"{film.title} ({film.age_restriction})";
+                else
+                    lblTenPhim.Text = _showtime.title;
+
+                // --- LOẠI RẠP ---
+                lblLoaiRap.Text = $"{_showtime.auditorium_type} - {_showtime.name}";
+
+
+                lblNgay.Text = _showtime.show_date;
+                lblGio.Text = $"{_showtime.start_time} - {_showtime.end_time}";
+
+                // ===== GHẾ =====
+                lblGhe.Text = string.Join(", ",
+                    _selectedSeats.OrderBy(s => s.Row)
+                                  .ThenBy(s => s.Col)
+                                  .Select(s => $"{s.Row}{s.Col:00}"));
+
+
+                // ===== TỔNG TIỀN =====
+                _total = _selectedSeats.Sum(s => s.Price);
+                lblTong.Text = _total.ToString("N0") + " VND";
+                lblKhachHang.Text = _customer.full_name;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi hiển thị Payment1: " + ex.Message);
+            }
+        }
+
+        private void FormPayment1_Load(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var parent = this.ParentForm as UserMainForm;
+
+                parent.OpenChildForm(new FormPayment2(
+                    _showtime,
+                    _selectedSeats,
+                    _customer,
+                    _total
+                ));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể chuyển sang giao diện thanh toán: " + ex.Message);
+            }
+        }
+
+        private void btnQuayLai_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var parent = this.ParentForm as UserMainForm;
+                parent.OpenChildForm(new FormSeatSelection(parent, _showtime));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể quay lại: " + ex.Message);
+            }
         }
     }
 }

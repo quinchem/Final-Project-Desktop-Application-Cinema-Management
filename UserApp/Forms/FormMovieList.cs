@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.VisualBasic.ApplicationServices;
 using SharedData.Models;
 using SharedData.Repositories;
 using System;
@@ -176,7 +176,14 @@ namespace UserApp
             {
                 if (_parentForm != null)
                 {
-                    _parentForm.OpenChildForm(new FormShowtimeDetail(_parentForm, film.movie_id));
+                    btn.Click += (s, e) =>
+                    {
+                        if (_parentForm != null)
+                        {
+                            _parentForm.OpenChildForm(new FormShowtimeDetail(_parentForm, film.movie_id));
+                        }
+                    };
+
                 }
             };
 
