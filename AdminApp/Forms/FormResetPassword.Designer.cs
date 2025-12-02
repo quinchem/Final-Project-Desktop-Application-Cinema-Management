@@ -70,10 +70,10 @@
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.doi_mk;
-            btnDangNhap.Location = new Point(373, 96);
+            btnDangNhap.Location = new Point(373, 90);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnDangNhap.Size = new Size(213, 46);
+            btnDangNhap.Size = new Size(213, 58);
             btnDangNhap.TabIndex = 9;
             btnDangNhap.Text = "ĐẶT LẠI MẬT KHẨU";
             // 
@@ -102,7 +102,7 @@
             panelResetPW.ShadowDecoration.Depth = 20;
             panelResetPW.ShadowDecoration.Enabled = true;
             panelResetPW.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            panelResetPW.Size = new Size(781, 415);
+            panelResetPW.Size = new Size(1120, 484);
             panelResetPW.TabIndex = 10;
             // 
             // picEye2
@@ -111,10 +111,10 @@
             picEye2.CustomizableEdges = customizableEdges3;
             picEye2.Image = Properties.Resources.hide;
             picEye2.ImageRotate = 0F;
-            picEye2.Location = new Point(594, 260);
+            picEye2.Location = new Point(788, 307);
             picEye2.Name = "picEye2";
             picEye2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            picEye2.Size = new Size(34, 31);
+            picEye2.Size = new Size(77, 31);
             picEye2.SizeMode = PictureBoxSizeMode.Zoom;
             picEye2.TabIndex = 10;
             picEye2.TabStop = false;
@@ -126,10 +126,10 @@
             picEye1.CustomizableEdges = customizableEdges5;
             picEye1.Image = Properties.Resources.hide;
             picEye1.ImageRotate = 0F;
-            picEye1.Location = new Point(594, 134);
+            picEye1.Location = new Point(776, 162);
             picEye1.Name = "picEye1";
             picEye1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            picEye1.Size = new Size(34, 31);
+            picEye1.Size = new Size(98, 31);
             picEye1.SizeMode = PictureBoxSizeMode.Zoom;
             picEye1.TabIndex = 9;
             picEye1.TabStop = false;
@@ -139,7 +139,7 @@
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.Location = new Point(58, 210);
+            guna2HtmlLabel1.Location = new Point(82, 242);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(262, 30);
             guna2HtmlLabel1.TabIndex = 7;
@@ -158,13 +158,13 @@
             txtXacNhanMK.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtXacNhanMK.ForeColor = Color.FromArgb(64, 64, 64);
             txtXacNhanMK.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtXacNhanMK.Location = new Point(58, 253);
+            txtXacNhanMK.Location = new Point(82, 294);
             txtXacNhanMK.Margin = new Padding(3, 5, 3, 5);
             txtXacNhanMK.Name = "txtXacNhanMK";
             txtXacNhanMK.PlaceholderText = "";
             txtXacNhanMK.SelectedText = "";
             txtXacNhanMK.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            txtXacNhanMK.Size = new Size(591, 45);
+            txtXacNhanMK.Size = new Size(800, 57);
             txtXacNhanMK.TabIndex = 6;
             txtXacNhanMK.UseSystemPasswordChar = true;
             // 
@@ -180,10 +180,10 @@
             btnDatLaiMK.FocusedColor = Color.FromArgb(245, 131, 35);
             btnDatLaiMK.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDatLaiMK.ForeColor = Color.White;
-            btnDatLaiMK.Location = new Point(605, 342);
+            btnDatLaiMK.Location = new Point(931, 389);
             btnDatLaiMK.Name = "btnDatLaiMK";
             btnDatLaiMK.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            btnDatLaiMK.Size = new Size(149, 46);
+            btnDatLaiMK.Size = new Size(149, 55);
             btnDatLaiMK.TabIndex = 5;
             btnDatLaiMK.Text = "ĐẶT LẠI";
             btnDatLaiMK.Click += btnDatLaiMK_Click;
@@ -203,7 +203,7 @@
             // 
             lblEmail.BackColor = Color.Transparent;
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(58, 85);
+            lblEmail.Location = new Point(82, 96);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(141, 30);
             lblEmail.TabIndex = 2;
@@ -222,13 +222,13 @@
             txtMKmoi.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtMKmoi.ForeColor = Color.FromArgb(64, 64, 64);
             txtMKmoi.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMKmoi.Location = new Point(58, 127);
+            txtMKmoi.Location = new Point(82, 149);
             txtMKmoi.Margin = new Padding(3, 5, 3, 5);
             txtMKmoi.Name = "txtMKmoi";
             txtMKmoi.PlaceholderText = "";
             txtMKmoi.SelectedText = "";
             txtMKmoi.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            txtMKmoi.Size = new Size(591, 45);
+            txtMKmoi.Size = new Size(800, 57);
             txtMKmoi.TabIndex = 1;
             txtMKmoi.UseSystemPasswordChar = true;
             // 
@@ -237,7 +237,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1624, 750);
+            ClientSize = new Size(1902, 790);
             Controls.Add(panelResetPW);
             Controls.Add(btnDangNhap);
             Name = "FormResetPassword";

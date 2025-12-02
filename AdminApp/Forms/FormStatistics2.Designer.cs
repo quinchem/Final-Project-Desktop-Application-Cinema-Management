@@ -127,11 +127,11 @@
             gunaStatistics1.Controls.Add(gunaChartCustomer);
             gunaStatistics1.Controls.Add(label1);
             gunaStatistics1.CustomizableEdges = customizableEdges3;
-            gunaStatistics1.Location = new Point(48, 230);
+            gunaStatistics1.Location = new Point(274, 241);
             gunaStatistics1.Name = "gunaStatistics1";
             gunaStatistics1.Padding = new Padding(20);
             gunaStatistics1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            gunaStatistics1.Size = new Size(1314, 461);
+            gunaStatistics1.Size = new Size(1398, 490);
             gunaStatistics1.TabIndex = 50;
             // 
             // guna2GradientPanel1
@@ -143,7 +143,7 @@
             guna2GradientPanel1.Controls.Add(guna2HtmlLabel2);
             guna2GradientPanel1.Controls.Add(guna2HtmlLabel1);
             guna2GradientPanel1.CustomizableEdges = customizableEdges1;
-            guna2GradientPanel1.Location = new Point(12, 37);
+            guna2GradientPanel1.Location = new Point(21, 46);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
             guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2GradientPanel1.Size = new Size(769, 50);
@@ -223,7 +223,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             gunaTable.DefaultCellStyle = dataGridViewCellStyle3;
             gunaTable.GridColor = Color.FromArgb(231, 229, 255);
-            gunaTable.Location = new Point(12, 83);
+            gunaTable.Location = new Point(20, 95);
             gunaTable.Name = "gunaTable";
             gunaTable.RowHeadersVisible = false;
             gunaTable.RowHeadersWidth = 51;
@@ -290,7 +290,7 @@
             // 
             chartFont1.FontName = "Arial";
             gunaChartGender.Legend.LabelFont = chartFont1;
-            gunaChartGender.Location = new Point(791, 9);
+            gunaChartGender.Location = new Point(820, 13);
             gunaChartGender.Name = "gunaChartGender";
             gunaChartGender.Size = new Size(508, 189);
             gunaChartGender.TabIndex = 3;
@@ -324,7 +324,7 @@
             // 
             chartFont9.FontName = "Arial";
             gunaChartCustomer.Legend.LabelFont = chartFont9;
-            gunaChartCustomer.Location = new Point(791, 204);
+            gunaChartCustomer.Location = new Point(820, 230);
             gunaChartCustomer.Name = "gunaChartCustomer";
             gunaChartCustomer.Size = new Size(508, 241);
             gunaChartCustomer.TabIndex = 2;
@@ -372,7 +372,7 @@
             groupBox3.Controls.Add(YearSort);
             groupBox3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox3.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox3.Location = new Point(358, 131);
+            groupBox3.Location = new Point(517, 135);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(312, 74);
             groupBox3.TabIndex = 60;
@@ -400,7 +400,7 @@
             // 
             // guna2Separator1
             // 
-            guna2Separator1.Location = new Point(48, 109);
+            guna2Separator1.Location = new Point(253, 105);
             guna2Separator1.Name = "guna2Separator1";
             guna2Separator1.Size = new Size(1314, 12);
             guna2Separator1.TabIndex = 57;
@@ -416,12 +416,12 @@
             btnDichVu.FillColor = Color.Silver;
             btnDichVu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDichVu.ForeColor = Color.White;
-            btnDichVu.Location = new Point(848, 59);
+            btnDichVu.Location = new Point(1201, 44);
             btnDichVu.Name = "btnDichVu";
             btnDichVu.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnDichVu.Size = new Size(135, 37);
+            btnDichVu.Size = new Size(146, 44);
             btnDichVu.TabIndex = 56;
-            btnDichVu.Text = "Dịch vụ";
+            btnDichVu.Text = "DỊCH VỤ";
             btnDichVu.Click += btnPhongChieu_Click;
             // 
             // btnPhim
@@ -435,12 +435,12 @@
             btnPhim.FillColor = Color.Silver;
             btnPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPhim.ForeColor = Color.White;
-            btnPhim.Location = new Point(694, 59);
+            btnPhim.Location = new Point(994, 44);
             btnPhim.Name = "btnPhim";
             btnPhim.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            btnPhim.Size = new Size(135, 37);
+            btnPhim.Size = new Size(146, 44);
             btnPhim.TabIndex = 55;
-            btnPhim.Text = "Phim";
+            btnPhim.Text = "PHIM";
             btnPhim.Click += btnPhim_Click;
             // 
             // btnKhachHang
@@ -454,12 +454,12 @@
             btnKhachHang.FillColor = Color.FromArgb(255, 128, 0);
             btnKhachHang.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKhachHang.ForeColor = Color.White;
-            btnKhachHang.Location = new Point(535, 59);
+            btnKhachHang.Location = new Point(768, 44);
             btnKhachHang.Name = "btnKhachHang";
             btnKhachHang.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            btnKhachHang.Size = new Size(135, 37);
+            btnKhachHang.Size = new Size(176, 44);
             btnKhachHang.TabIndex = 54;
-            btnKhachHang.Text = "Khách hàng";
+            btnKhachHang.Text = "KHÁCH HÀNG";
             btnKhachHang.Click += btnKhachHang_Click;
             // 
             // btnTongQuan
@@ -473,12 +473,12 @@
             btnTongQuan.FillColor = Color.Silver;
             btnTongQuan.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTongQuan.ForeColor = Color.White;
-            btnTongQuan.Location = new Point(375, 59);
+            btnTongQuan.Location = new Point(530, 44);
             btnTongQuan.Name = "btnTongQuan";
             btnTongQuan.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            btnTongQuan.Size = new Size(135, 37);
+            btnTongQuan.Size = new Size(188, 44);
             btnTongQuan.TabIndex = 53;
-            btnTongQuan.Text = "Tổng quan";
+            btnTongQuan.Text = "TỔNG QUAN";
             btnTongQuan.Click += btnTongQuan_Click;
             // 
             // guna2CustomGradientPanel1
@@ -494,7 +494,7 @@
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel1.Location = new Point(694, 123);
+            guna2CustomGradientPanel1.Location = new Point(1034, 131);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2CustomGradientPanel1.Size = new Size(328, 90);
@@ -554,7 +554,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1402, 703);
+            ClientSize = new Size(1920, 782);
             Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(gunaStatistics1);
             Controls.Add(groupBox3);

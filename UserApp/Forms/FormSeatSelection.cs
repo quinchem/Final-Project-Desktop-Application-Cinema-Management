@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
 
 namespace UserApp
@@ -102,6 +103,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi khi load poster: " + ex.Message);
             }
         }
@@ -122,6 +125,8 @@ namespace UserApp
 
             if (!File.Exists(jsonPath))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không tìm thấy layout phòng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -326,6 +331,8 @@ namespace UserApp
         {
             if (_selectedSeats.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn ít nhất 1 ghế trước khi thanh toán!",
                     "Chưa chọn ghế", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -348,7 +355,8 @@ namespace UserApp
             {
                 timer1.Stop();
                 isCounting = false;
-
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hết thời gian giữ ghế! Vui lòng chọn lại.",
                                 "Hết hạn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 

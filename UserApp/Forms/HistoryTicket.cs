@@ -1,11 +1,12 @@
 ﻿
 using Microsoft.Data.Sqlite;
+using SharedData;
 using System;
 using System.Drawing;
-using System.Windows.Forms;
-using SharedData;
+using System.Media;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace UserApp
 {
@@ -102,6 +103,8 @@ namespace UserApp
 
                             if (!hasRows)
                             {
+                                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                                player.Play();
                                 MessageBox.Show($"Khách hàng {_customerId} chưa có lịch sử vé nào.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             /*else

@@ -60,6 +60,7 @@ namespace AdminApp
             // txtTimKiem
             // 
             txtTimKiem.BorderColor = Color.Transparent;
+            txtTimKiem.BorderRadius = 10;
             txtTimKiem.BorderThickness = 0;
             txtTimKiem.CustomizableEdges = null;
             txtTimKiem.DefaultText = "";
@@ -68,14 +69,14 @@ namespace AdminApp
             txtTimKiem.Font = new Font("Segoe UI", 10.5F);
             txtTimKiem.ForeColor = Color.Black;
             txtTimKiem.HoverState.BorderColor = Color.FromArgb(0, 120, 215);
-            txtTimKiem.Location = new Point(126, 54);
+            txtTimKiem.Location = new Point(120, 54);
             txtTimKiem.Margin = new Padding(3, 4, 3, 4);
             txtTimKiem.Name = "txtTimKiem";
             txtTimKiem.PlaceholderForeColor = Color.Gray;
             txtTimKiem.PlaceholderText = "Hãy nhập từ khóa";
             txtTimKiem.SelectedText = "";
             txtTimKiem.ShadowDecoration.CustomizableEdges = customizableEdges1;
-            txtTimKiem.Size = new Size(270, 35);
+            txtTimKiem.Size = new Size(324, 47);
             txtTimKiem.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtTimKiem.TabIndex = 0;
             txtTimKiem.TextChanged += txtTimKiem_TextChanged;
@@ -93,12 +94,12 @@ namespace AdminApp
             btnTim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTim.ForeColor = Color.Black;
             btnTim.Image = Properties.Resources.search;
-            btnTim.Location = new Point(430, 54);
+            btnTim.Location = new Point(478, 54);
             btnTim.Name = "btnTim";
             btnTim.ShadowDecoration.CustomizableEdges = customizableEdges3;
-            btnTim.Size = new Size(75, 37);
+            btnTim.Size = new Size(105, 47);
             btnTim.TabIndex = 29;
-            btnTim.Text = "Tìm";
+            btnTim.Text = "TÌM";
             btnTim.Click += btnTim_Click;
             btnTim.KeyDown += txtTimKiem_KeyDown;
             // 
@@ -114,12 +115,12 @@ namespace AdminApp
             btnXuatFile.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnXuatFile.ForeColor = Color.Black;
             btnXuatFile.Image = (Image)resources.GetObject("btnXuatFile.Image");
-            btnXuatFile.Location = new Point(1071, 54);
+            btnXuatFile.Location = new Point(1198, 54);
             btnXuatFile.Name = "btnXuatFile";
             btnXuatFile.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            btnXuatFile.Size = new Size(189, 37);
+            btnXuatFile.Size = new Size(189, 47);
             btnXuatFile.TabIndex = 30;
-            btnXuatFile.Text = "Xuất file excel";
+            btnXuatFile.Text = "XUẤT FILE EXEL";
             btnXuatFile.Click += btnXuatFile_Click;
             // 
             // btnChinhSua
@@ -134,12 +135,12 @@ namespace AdminApp
             btnChinhSua.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnChinhSua.ForeColor = Color.Black;
             btnChinhSua.Image = Properties.Resources.pen;
-            btnChinhSua.Location = new Point(1278, 54);
+            btnChinhSua.Location = new Point(1405, 54);
             btnChinhSua.Name = "btnChinhSua";
             btnChinhSua.ShadowDecoration.CustomizableEdges = customizableEdges7;
-            btnChinhSua.Size = new Size(122, 37);
+            btnChinhSua.Size = new Size(148, 47);
             btnChinhSua.TabIndex = 32;
-            btnChinhSua.Text = "Chỉnh sửa";
+            btnChinhSua.Text = "CHỈNH SỬA";
             btnChinhSua.Click += btnChinhSua_Click;
             // 
             // btnXoa
@@ -154,12 +155,12 @@ namespace AdminApp
             btnXoa.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnXoa.ForeColor = Color.Black;
             btnXoa.Image = Properties.Resources.trash;
-            btnXoa.Location = new Point(1425, 54);
+            btnXoa.Location = new Point(1581, 54);
             btnXoa.Name = "btnXoa";
             btnXoa.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            btnXoa.Size = new Size(97, 37);
+            btnXoa.Size = new Size(109, 47);
             btnXoa.TabIndex = 33;
-            btnXoa.Text = "Xóa";
+            btnXoa.Text = "XÓA";
             // 
             // DataGridViewCustomerManagement
             // 
@@ -187,12 +188,12 @@ namespace AdminApp
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             DataGridViewCustomerManagement.DefaultCellStyle = dataGridViewCellStyle3;
             DataGridViewCustomerManagement.GridColor = Color.WhiteSmoke;
-            DataGridViewCustomerManagement.Location = new Point(126, 165);
+            DataGridViewCustomerManagement.Location = new Point(207, 157);
             DataGridViewCustomerManagement.Name = "DataGridViewCustomerManagement";
             DataGridViewCustomerManagement.ReadOnly = true;
             DataGridViewCustomerManagement.RowHeadersVisible = false;
             DataGridViewCustomerManagement.RowHeadersWidth = 51;
-            DataGridViewCustomerManagement.Size = new Size(1396, 539);
+            DataGridViewCustomerManagement.Size = new Size(1518, 562);
             DataGridViewCustomerManagement.TabIndex = 34;
             DataGridViewCustomerManagement.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             DataGridViewCustomerManagement.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -303,7 +304,7 @@ namespace AdminApp
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1624, 781);
+            ClientSize = new Size(1902, 781);
             Controls.Add(DataGridViewCustomerManagement);
             Controls.Add(btnXoa);
             Controls.Add(btnChinhSua);

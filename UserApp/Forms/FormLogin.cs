@@ -143,42 +143,56 @@ namespace UserApp
 
             if (string.IsNullOrWhiteSpace(txtHoTen.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 msg = "Vui lòng nhập họ tên.";
                 return false;
             }
 
             if (!txtEmailDK.Text.Contains("@"))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 msg = "Email không hợp lệ.";
                 return false;
             }
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(txtSDT.Text ?? "", @"^\d{10}$"))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 msg = "Số điện thoại phải gồm 10 chữ số.";
                 return false;
             }
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(txtPassDK.Text, @"^(?=.*[A-Z])(?=.*\W).{8,}$"))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 msg = "Mật khẩu phải có chữ hoa + ký tự đặc biệt và >= 8 ký tự.";
                 return false;
             }
 
             if (txtPassDK.Text != txtPassCF.Text)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 msg = "Mật khẩu xác nhận không khớp.";
                 return false;
             }
 
             if (dtpNgaySinh.Value.Date > DateTime.Today)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 msg = "Ngày sinh không hợp lệ.";
                 return false;
             }
 
             if (!chkDieuKhoan.Checked)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 msg = "Bạn phải đồng ý điều khoản.";
                 return false;
             }
@@ -186,9 +200,6 @@ namespace UserApp
             return true;
         }
 
-        // ================================
-        // REGISTER new account
-        // ================================
         private bool InsertNewAccount(out string message)
         {
             message = "";
@@ -244,7 +255,8 @@ namespace UserApp
             }
             else
             {
-                System.Media.SystemSounds.Hand.Play();
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Đăng ký thất bại: " + msg, "Lỗi",
                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -274,6 +286,8 @@ namespace UserApp
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập email và mật khẩu.",
                                  "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -293,6 +307,8 @@ namespace UserApp
             }
             else
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Đăng nhập thất bại: " + msg,
                                  "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -300,10 +316,7 @@ namespace UserApp
 
         private void btnQuenMk_Click(object sender, EventArgs e)
         {
-            panelDangNhap.Visible = false;
-            panelDangNhap.Enabled = false;
-
-            OpenChildForm(new FormForgetPassword(this));
+            this.OpenChildForm(new FormForgetPassword(this));
         }
 
         private void FormLogin_KeyDown(object sender, KeyEventArgs e)
@@ -312,11 +325,11 @@ namespace UserApp
             {
                 if (panelDangNhap.Visible)
                 {
-                    btnMiniDN.PerformClick(); // ENTER -> Đăng nhập
+                    btnMiniDN.PerformClick(); 
                 }
                 else if (panelDangKy.Visible)
                 {
-                    btnminiDK.PerformClick(); // ENTER -> Đăng ký
+                    btnminiDK.PerformClick(); 
                 }
             }
         }
@@ -337,7 +350,7 @@ namespace UserApp
                 txtPassDN.UseSystemPasswordChar = true;
 
                 // Đổi ảnh đóng ở đây
-                guna2PictureBox1.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+                guna2PictureBox1.Image = Properties.Resources.hide; 
             }
         }
     }

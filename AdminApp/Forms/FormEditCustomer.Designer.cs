@@ -91,17 +91,18 @@
             // LbTenKH
             // 
             LbTenKH.BackColor = Color.Transparent;
-            LbTenKH.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbTenKH.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbTenKH.ForeColor = Color.Coral;
-            LbTenKH.Location = new Point(162, 95);
+            LbTenKH.Location = new Point(84, 95);
             LbTenKH.Name = "LbTenKH";
-            LbTenKH.Size = new Size(86, 27);
+            LbTenKH.Size = new Size(95, 30);
             LbTenKH.TabIndex = 31;
             LbTenKH.Text = "Họ và tên";
             // 
             // txtTenKH
             // 
             txtTenKH.BorderColor = SystemColors.ControlLight;
+            txtTenKH.BorderRadius = 7;
             txtTenKH.CustomizableEdges = customizableEdges1;
             txtTenKH.DefaultText = "";
             txtTenKH.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -117,53 +118,54 @@
             txtTenKH.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtTenKH.HoverState.ForeColor = Color.White;
             txtTenKH.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtTenKH.Location = new Point(162, 140);
+            txtTenKH.Location = new Point(84, 145);
             txtTenKH.Margin = new Padding(3, 4, 3, 4);
             txtTenKH.Name = "txtTenKH";
             txtTenKH.PlaceholderForeColor = SystemColors.AppWorkspace;
             txtTenKH.PlaceholderText = "Nhập tên khách hàng";
             txtTenKH.SelectedText = "";
             txtTenKH.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            txtTenKH.Size = new Size(290, 33);
+            txtTenKH.Size = new Size(290, 41);
             txtTenKH.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtTenKH.TabIndex = 32;
             // 
             // LbNgaySinh
             // 
             LbNgaySinh.BackColor = Color.Transparent;
-            LbNgaySinh.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbNgaySinh.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbNgaySinh.ForeColor = Color.Coral;
             LbNgaySinh.Location = new Point(509, 95);
             LbNgaySinh.Name = "LbNgaySinh";
-            LbNgaySinh.Size = new Size(88, 27);
+            LbNgaySinh.Size = new Size(98, 30);
             LbNgaySinh.TabIndex = 35;
             LbNgaySinh.Text = "Ngày sinh";
             // 
             // LbGioiTinh
             // 
             LbGioiTinh.BackColor = Color.Transparent;
-            LbGioiTinh.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbGioiTinh.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbGioiTinh.ForeColor = Color.Coral;
-            LbGioiTinh.Location = new Point(162, 230);
+            LbGioiTinh.Location = new Point(84, 230);
             LbGioiTinh.Name = "LbGioiTinh";
-            LbGioiTinh.Size = new Size(76, 27);
+            LbGioiTinh.Size = new Size(86, 30);
             LbGioiTinh.TabIndex = 45;
             LbGioiTinh.Text = "Giới tính";
             // 
             // lbSDT
             // 
             lbSDT.BackColor = Color.Transparent;
-            lbSDT.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbSDT.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lbSDT.ForeColor = Color.Coral;
             lbSDT.Location = new Point(509, 230);
             lbSDT.Name = "lbSDT";
-            lbSDT.Size = new Size(115, 27);
+            lbSDT.Size = new Size(129, 30);
             lbSDT.TabIndex = 47;
             lbSDT.Text = "Số điện thoại";
             // 
             // txtSDT
             // 
             txtSDT.BorderColor = SystemColors.ControlLight;
+            txtSDT.BorderRadius = 7;
             txtSDT.CustomizableEdges = customizableEdges3;
             txtSDT.DefaultText = "";
             txtSDT.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -179,31 +181,32 @@
             txtSDT.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtSDT.HoverState.ForeColor = Color.White;
             txtSDT.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtSDT.Location = new Point(509, 277);
+            txtSDT.Location = new Point(509, 282);
             txtSDT.Margin = new Padding(3, 4, 3, 4);
             txtSDT.Name = "txtSDT";
             txtSDT.PlaceholderForeColor = SystemColors.AppWorkspace;
             txtSDT.PlaceholderText = "Nhập số";
             txtSDT.SelectedText = "";
             txtSDT.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            txtSDT.Size = new Size(290, 33);
+            txtSDT.Size = new Size(290, 41);
             txtSDT.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtSDT.TabIndex = 48;
             // 
             // lbEmail
             // 
             lbEmail.BackColor = Color.Transparent;
-            lbEmail.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lbEmail.ForeColor = Color.Coral;
-            lbEmail.Location = new Point(863, 95);
+            lbEmail.Location = new Point(971, 95);
             lbEmail.Name = "lbEmail";
-            lbEmail.Size = new Size(49, 27);
+            lbEmail.Size = new Size(55, 30);
             lbEmail.TabIndex = 49;
             lbEmail.Text = "Email";
             // 
             // txtEmail
             // 
             txtEmail.BorderColor = SystemColors.ControlLight;
+            txtEmail.BorderRadius = 7;
             txtEmail.CustomizableEdges = customizableEdges5;
             txtEmail.DefaultText = "";
             txtEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -219,31 +222,32 @@
             txtEmail.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtEmail.HoverState.ForeColor = Color.White;
             txtEmail.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtEmail.Location = new Point(863, 140);
+            txtEmail.Location = new Point(971, 145);
             txtEmail.Margin = new Padding(3, 4, 3, 4);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderForeColor = SystemColors.AppWorkspace;
             txtEmail.PlaceholderText = "Nhập email";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            txtEmail.Size = new Size(286, 33);
+            txtEmail.Size = new Size(286, 41);
             txtEmail.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtEmail.TabIndex = 50;
             // 
             // lbDiaChi
             // 
             lbDiaChi.BackColor = Color.Transparent;
-            lbDiaChi.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbDiaChi.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lbDiaChi.ForeColor = Color.Coral;
-            lbDiaChi.Location = new Point(863, 230);
+            lbDiaChi.Location = new Point(971, 230);
             lbDiaChi.Name = "lbDiaChi";
-            lbDiaChi.Size = new Size(61, 27);
+            lbDiaChi.Size = new Size(69, 30);
             lbDiaChi.TabIndex = 51;
             lbDiaChi.Text = "Địa chỉ";
             // 
             // txtDiaChi
             // 
             txtDiaChi.BorderColor = SystemColors.ControlLight;
+            txtDiaChi.BorderRadius = 7;
             txtDiaChi.CustomizableEdges = customizableEdges7;
             txtDiaChi.DefaultText = "";
             txtDiaChi.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -259,31 +263,32 @@
             txtDiaChi.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtDiaChi.HoverState.ForeColor = Color.White;
             txtDiaChi.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtDiaChi.Location = new Point(863, 277);
+            txtDiaChi.Location = new Point(971, 282);
             txtDiaChi.Margin = new Padding(3, 4, 3, 4);
             txtDiaChi.Name = "txtDiaChi";
             txtDiaChi.PlaceholderForeColor = SystemColors.AppWorkspace;
             txtDiaChi.PlaceholderText = "Nhập địa chỉ";
             txtDiaChi.SelectedText = "";
             txtDiaChi.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            txtDiaChi.Size = new Size(286, 33);
+            txtDiaChi.Size = new Size(286, 41);
             txtDiaChi.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtDiaChi.TabIndex = 52;
             // 
             // lbThoiGian
             // 
             lbThoiGian.BackColor = Color.Transparent;
-            lbThoiGian.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbThoiGian.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lbThoiGian.ForeColor = Color.Coral;
-            lbThoiGian.Location = new Point(509, 362);
+            lbThoiGian.Location = new Point(84, 390);
             lbThoiGian.Name = "lbThoiGian";
-            lbThoiGian.Size = new Size(201, 27);
+            lbThoiGian.Size = new Size(225, 30);
             lbThoiGian.TabIndex = 53;
             lbThoiGian.Text = "Thời gian tạo tài khoản";
             // 
             // txtThoiGian
             // 
             txtThoiGian.BorderColor = SystemColors.ControlLight;
+            txtThoiGian.BorderRadius = 7;
             txtThoiGian.CustomizableEdges = customizableEdges9;
             txtThoiGian.DefaultText = "";
             txtThoiGian.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -299,7 +304,7 @@
             txtThoiGian.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtThoiGian.HoverState.ForeColor = Color.White;
             txtThoiGian.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtThoiGian.Location = new Point(509, 410);
+            txtThoiGian.Location = new Point(84, 443);
             txtThoiGian.Margin = new Padding(3, 4, 3, 4);
             txtThoiGian.Name = "txtThoiGian";
             txtThoiGian.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -307,7 +312,7 @@
             txtThoiGian.ReadOnly = true;
             txtThoiGian.SelectedText = "";
             txtThoiGian.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            txtThoiGian.Size = new Size(290, 33);
+            txtThoiGian.Size = new Size(290, 41);
             txtThoiGian.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtThoiGian.TabIndex = 54;
             // 
@@ -322,19 +327,19 @@
             btnLuu.FillColor = Color.SteelBlue;
             btnLuu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLuu.ForeColor = Color.White;
-            btnLuu.Location = new Point(509, 543);
+            btnLuu.Location = new Point(1114, 531);
             btnLuu.Name = "btnLuu";
             btnLuu.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            btnLuu.Size = new Size(290, 37);
+            btnLuu.Size = new Size(219, 53);
             btnLuu.TabIndex = 55;
-            btnLuu.Text = "Lưu";
+            btnLuu.Text = "LƯU";
             btnLuu.Click += btnLuu_Click;
             // 
             // dtpNgaySinh
             // 
             dtpNgaySinh.BackColor = Color.Transparent;
             dtpNgaySinh.BorderColor = Color.White;
-            dtpNgaySinh.BorderRadius = 5;
+            dtpNgaySinh.BorderRadius = 7;
             dtpNgaySinh.Checked = true;
             dtpNgaySinh.CheckedState.ForeColor = Color.Black;
             dtpNgaySinh.CustomizableEdges = customizableEdges13;
@@ -343,18 +348,19 @@
             dtpNgaySinh.ForeColor = Color.LightGray;
             dtpNgaySinh.Format = DateTimePickerFormat.Long;
             dtpNgaySinh.HoverState.BorderColor = Color.Gray;
-            dtpNgaySinh.Location = new Point(509, 140);
+            dtpNgaySinh.Location = new Point(509, 145);
             dtpNgaySinh.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dtpNgaySinh.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtpNgaySinh.Name = "dtpNgaySinh";
             dtpNgaySinh.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            dtpNgaySinh.Size = new Size(290, 45);
+            dtpNgaySinh.Size = new Size(290, 53);
             dtpNgaySinh.TabIndex = 56;
             dtpNgaySinh.Value = new DateTime(2005, 11, 17, 2, 53, 0, 0);
             // 
             // CbGioiTinh
             // 
             CbGioiTinh.BackColor = Color.Transparent;
+            CbGioiTinh.BorderRadius = 7;
             CbGioiTinh.CustomizableEdges = customizableEdges15;
             CbGioiTinh.DrawMode = DrawMode.OwnerDrawFixed;
             CbGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -366,7 +372,7 @@
             CbGioiTinh.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             CbGioiTinh.ItemHeight = 30;
             CbGioiTinh.Items.AddRange(new object[] { "Nam ", "Nữ " });
-            CbGioiTinh.Location = new Point(162, 277);
+            CbGioiTinh.Location = new Point(84, 282);
             CbGioiTinh.Name = "CbGioiTinh";
             CbGioiTinh.ShadowDecoration.CustomizableEdges = customizableEdges16;
             CbGioiTinh.Size = new Size(290, 36);
@@ -376,7 +382,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1420, 750);
+            ClientSize = new Size(1420, 668);
             Controls.Add(CbGioiTinh);
             Controls.Add(dtpNgaySinh);
             Controls.Add(btnLuu);

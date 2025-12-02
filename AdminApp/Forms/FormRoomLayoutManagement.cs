@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using Microsoft.Data.Sqlite;
+using Newtonsoft.Json;
+using SharedData.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
-using Guna.UI2.WinForms;
-using Microsoft.Data.Sqlite;
-using Newtonsoft.Json;
-using SharedData.Models;
 
 namespace AdminApp
 {
@@ -520,6 +521,8 @@ namespace AdminApp
         {
             if (selectedSeats.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hãy chọn 1 ghế trong hàng trước khi thêm!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -575,6 +578,8 @@ namespace AdminApp
         {
             if (selectedSeats.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hãy chọn ít nhất 1 ghế!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -600,6 +605,8 @@ namespace AdminApp
         {
             if (selectedSeats.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hãy chọn ít nhất 1 ghế!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -727,6 +734,8 @@ namespace AdminApp
                 }
             }
 
+            SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+            player.Play();
             MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -943,6 +952,8 @@ namespace AdminApp
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
             LoadRoom(currentRoom);
+            SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+            player.Play();
             MessageBox.Show("Đã khôi phục về ban đầu!",
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

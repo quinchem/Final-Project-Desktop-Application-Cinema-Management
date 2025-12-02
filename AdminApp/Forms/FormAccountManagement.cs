@@ -1,9 +1,10 @@
 ﻿using SharedData.Models;
 using SharedData.Repositories;
 using System;
-using System.Windows.Forms;
-using System.IO;
 using System.Drawing;
+using System.IO;
+using System.Media;
+using System.Windows.Forms;
 
 namespace AdminApp
 {
@@ -28,6 +29,8 @@ namespace AdminApp
 
             if (staff == null)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không tìm thấy thông tin nhân viên.");
                 Close();
                 return;
@@ -40,7 +43,6 @@ namespace AdminApp
             txtSDT.Text = staff.phone_number;
             txtChucVu.Text = staff.role;
 
-            // ✅ LOAD AVATAR
             byte[] img = _imageRepo.GetStaffImage(_staff_id);
             if (img != null)
             {
@@ -51,7 +53,7 @@ namespace AdminApp
             }
             else
             {
-                picAvatar.Image = null; // hoặc ảnh mặc định
+                picAvatar.Image = null; 
             }
         }
 
@@ -80,7 +82,7 @@ namespace AdminApp
             // mở dạng modal
             if (formEdit.ShowDialog() == DialogResult.OK)
             {
-                LoadStaffInfo(); // ✅ reload sau khi chỉnh
+                LoadStaffInfo();
             }
         }
         private bool SaveStaffInfo()
@@ -106,12 +108,18 @@ namespace AdminApp
 
             if (success)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Cập nhật thông tin thành công!");
                 return true;
             }
-
-            MessageBox.Show("Cập nhật thất bại!");
-            return false;
+            else
+            {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
+                MessageBox.Show("Cập nhật thất bại!");
+                return false;
+            }    
         }
     }
 }

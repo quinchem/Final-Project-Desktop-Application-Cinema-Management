@@ -1,12 +1,13 @@
 ﻿using Microsoft.Data.Sqlite;
+using SharedData;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Media;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using SharedData;
 
 namespace UserApp
 {
@@ -137,6 +138,8 @@ namespace UserApp
                             }
                             else
                             {
+                                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                                player.Play();
                                 MessageBox.Show("Không tìm thấy thông tin đặt vé!", "Lỗi",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
@@ -146,6 +149,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi load thông tin:\n{ex.Message}\n\nStack Trace:\n{ex.StackTrace}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -160,6 +165,8 @@ namespace UserApp
         {
             if (_printData == null)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không có dữ liệu để in!", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

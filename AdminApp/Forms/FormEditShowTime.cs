@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -49,6 +50,8 @@ namespace AdminApp.Forms
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi tải danh sách phim: {ex.Message}", "Lỗi");
             }
         }
@@ -64,6 +67,8 @@ namespace AdminApp.Forms
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi tải danh sách phòng: {ex.Message}", "Lỗi");
             }
         }
@@ -79,6 +84,8 @@ namespace AdminApp.Forms
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi tải định dạng: {ex.Message}", "Lỗi");
             }
         }
@@ -92,6 +99,8 @@ namespace AdminApp.Forms
 
                 if (_currentShowtime == null)
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Không tìm thấy suất chiếu!", "Lỗi");
                     this.Close();
                     return;
@@ -114,6 +123,8 @@ namespace AdminApp.Forms
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi");
             }
         }
@@ -148,17 +159,23 @@ namespace AdminApp.Forms
         {
             if (cboChonPhim.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn phim!", "Thông báo");
                 return;
             }
 
             if (cboChonPhong.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn phòng!", "Thông báo");
                 return;
             }
             if (string.IsNullOrWhiteSpace(lblGiaVe.Text) || lblGiaVe.Text == "0")
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Giá vé chưa hợp lệ (bằng 0 hoặc rỗng)!", "Thông báo");
                 return;
             }
@@ -172,7 +189,8 @@ namespace AdminApp.Forms
                 _currentShowtime.end_time = CalculateEndTime(dtpGioBD.Value).ToString("HH:mm:ss");
 
                 ShowtimeRepo.Update(_currentShowtime);
-
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Cập nhật suất chiếu thành công!", "Thành công",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -181,6 +199,8 @@ namespace AdminApp.Forms
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi cập nhật: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

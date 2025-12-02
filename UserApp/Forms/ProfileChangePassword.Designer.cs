@@ -158,6 +158,7 @@
             btnSavePassword.Size = new Size(198, 54);
             btnSavePassword.TabIndex = 6;
             btnSavePassword.Text = "LƯU MẬT KHẨU";
+            btnSavePassword.Click += btnSavePassword_Click;
             // 
             // ProfileChangePassword
             // 

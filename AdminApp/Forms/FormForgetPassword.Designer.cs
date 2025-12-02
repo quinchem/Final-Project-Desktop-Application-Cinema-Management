@@ -65,14 +65,14 @@
             panelQMK.FillColor2 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor3 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelQMK.Location = new Point(395, 197);
+            panelQMK.Location = new Point(395, 210);
             panelQMK.Name = "panelQMK";
             panelQMK.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelQMK.ShadowDecoration.CustomizableEdges = customizableEdges8;
             panelQMK.ShadowDecoration.Depth = 20;
             panelQMK.ShadowDecoration.Enabled = true;
             panelQMK.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            panelQMK.Size = new Size(829, 367);
+            panelQMK.Size = new Size(982, 402);
             panelQMK.TabIndex = 8;
             // 
             // btnQuayLai
@@ -89,7 +89,7 @@
             btnQuayLai.ForeColor = Color.FromArgb(245, 131, 35);
             btnQuayLai.Image = Properties.Resources.back;
             btnQuayLai.ImageAlign = HorizontalAlignment.Left;
-            btnQuayLai.Location = new Point(46, 301);
+            btnQuayLai.Location = new Point(39, 337);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnQuayLai.Size = new Size(287, 35);
@@ -120,7 +120,7 @@
             btnGui.FocusedColor = Color.FromArgb(245, 131, 35);
             btnGui.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGui.ForeColor = Color.White;
-            btnGui.Location = new Point(673, 273);
+            btnGui.Location = new Point(847, 329);
             btnGui.Name = "btnGui";
             btnGui.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnGui.Size = new Size(91, 43);
@@ -133,7 +133,7 @@
             lblyc.AutoSize = false;
             lblyc.BackColor = Color.Transparent;
             lblyc.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblyc.Location = new Point(46, 27);
+            lblyc.Location = new Point(49, 29);
             lblyc.Name = "lblyc";
             lblyc.Size = new Size(652, 59);
             lblyc.TabIndex = 0;
@@ -143,7 +143,7 @@
             // 
             lblEmail.BackColor = Color.Transparent;
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(58, 92);
+            lblEmail.Location = new Point(58, 98);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(60, 30);
             lblEmail.TabIndex = 2;
@@ -168,7 +168,7 @@
             txtEmail.PlaceholderText = "";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            txtEmail.Size = new Size(660, 45);
+            txtEmail.Size = new Size(731, 51);
             txtEmail.TabIndex = 1;
             // 
             // btnDangNhap
@@ -184,10 +184,10 @@
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.doi_mk;
-            btnDangNhap.Location = new Point(404, 103);
+            btnDangNhap.Location = new Point(395, 94);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            btnDangNhap.Size = new Size(197, 46);
+            btnDangNhap.Size = new Size(197, 59);
             btnDangNhap.TabIndex = 9;
             btnDangNhap.Text = "QUÊN MẬT KHẨU";
             // 
@@ -196,7 +196,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1624, 750);
+            ClientSize = new Size(1902, 750);
             Controls.Add(btnDangNhap);
             Controls.Add(panelQMK);
             Name = "FormForgetPassword";

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,22 +37,30 @@ namespace UserApp
 
             if (string.IsNullOrEmpty(newPass) || string.IsNullOrEmpty(confirmPass))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập đầy đủ mật khẩu.");
                 return;
             }
 
             if (newPass != confirmPass)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Mật khẩu xác nhận không khớp.");
                 return;
             }
             if (!System.Text.RegularExpressions.Regex.IsMatch(newPass, @"^(?=.{8,})(?=.*\W).*$"))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Mật khẩu phải >= 8 ký tự và có ký tự đặc biệt.");
                 return;
             }
             if (_accountRepo.ResetPassword(_userEmail, newPass, out string msg))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Đổi mật khẩu thành công! Hãy đăng nhập lại.");
 
                 parentForm.ShowLogin();
@@ -59,6 +68,8 @@ namespace UserApp
             }
             else
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi: " + msg);
             }
         }

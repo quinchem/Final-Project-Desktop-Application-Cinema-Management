@@ -4,6 +4,7 @@ using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
 
 namespace AdminApp
@@ -115,6 +116,8 @@ namespace AdminApp
             }
             else
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Không tìm thấy phim có tên: '{search}'", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _filterFilmId = null;
@@ -133,6 +136,8 @@ namespace AdminApp
         {
             if (dgvShowtime.SelectedRows.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn suất chiếu cần chỉnh sửa!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -156,6 +161,8 @@ namespace AdminApp
         {
             if (dgvShowtime.SelectedRows.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn suất chiếu cần xóa!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -170,12 +177,16 @@ namespace AdminApp
                     return;
 
                 ShowtimeRepo.Delete(id);
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Xóa suất chiếu thành công!", "Thành công",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadShow();
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi xóa: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -210,6 +221,8 @@ namespace AdminApp
             }
             else
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Không tìm thấy {roomName} trong database!", "Lỗi");
             }
         }

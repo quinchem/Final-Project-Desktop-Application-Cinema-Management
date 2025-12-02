@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,7 +16,7 @@ using System.Windows.Forms;
 
 namespace AdminApp
 {
-    
+
     public partial class FormStatistics1 : Form
     {
         private bool isFilteringByYear = false;
@@ -43,6 +44,8 @@ namespace AdminApp
         {
             if (isFilteringByYear)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Bạn đang lọc theo năm. Hãy chọn 'Tất cả' để dùng lọc theo ngày!",
                     "Không thể chọn ngày", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -175,8 +178,8 @@ namespace AdminApp
                 //        ? reader.GetInt32(0).ToString()
                 //        : "0";
             }
-            }
-   
+        }
+
 
         // ==============================================
         // Line chart: doanh thu theo ngày
@@ -271,6 +274,8 @@ namespace AdminApp
 
             if (dtpFrom.Value > dtpTo.Value)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Ngày bắt đầu phải trước ngày kết thúc!");
                 dtpFrom.Value = dtpTo.Value;
             }
@@ -284,6 +289,8 @@ namespace AdminApp
 
             if (dtpTo.Value < dtpFrom.Value)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Ngày kết thúc phải sau ngày bắt đầu!");
                 dtpTo.Value = dtpFrom.Value;
             }
@@ -318,7 +325,7 @@ namespace AdminApp
             ReloadAll();
         }
 
-     
+
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics2(_parent));

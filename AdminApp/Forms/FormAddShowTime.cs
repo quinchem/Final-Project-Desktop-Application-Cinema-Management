@@ -1,8 +1,9 @@
 ﻿using SharedData.Models;
+using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Media;
 using System.Windows.Forms;
-using SharedData.Repositories;
 
 namespace AdminApp
 {
@@ -97,21 +98,29 @@ namespace AdminApp
         {
             if (cboChonPhim.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn phim!", "Thông báo");
                 return;
             }
             if (cboChonPhong.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn phòng!", "Thông báo");
                 return;
             }
             if (cboDinhDang.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn định dạng phòng!", "Thông báo");
                 return;
             }
             if (string.IsNullOrWhiteSpace(lblGiaVe.Text) || lblGiaVe.Text == "0")
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Giá vé chưa hợp lệ!", "Thông báo");
                 return;
             }
@@ -132,12 +141,16 @@ namespace AdminApp
 
                 ShowtimeRepo.Insert(showtime);
 
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Thêm suất chiếu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi thêm: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

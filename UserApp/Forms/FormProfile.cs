@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SharedData.Models;
+using SharedData.Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,11 +8,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SharedData.Models;
-using SharedData.Repositories;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
@@ -53,7 +54,8 @@ namespace UserApp
         // Nút Đổi mật khẩu
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
-            LoadUserControl(new ProfileChangePassword());
+            LoadUserControl(new ProfileChangePassword(currentUser));
+
         }
 
         // Nút Lịch sử
@@ -61,6 +63,8 @@ namespace UserApp
         {
             if (currentUser == null)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng đăng nhập trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }

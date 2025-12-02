@@ -76,14 +76,14 @@
             txtSearch.HoverState.BorderColor = SystemColors.ActiveBorder;
             txtSearch.HoverState.ForeColor = Color.FromArgb(92, 124, 150);
             txtSearch.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtSearch.Location = new Point(154, 85);
+            txtSearch.Location = new Point(116, 60);
             txtSearch.Margin = new Padding(3, 5, 3, 5);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderForeColor = Color.FromArgb(92, 124, 150);
             txtSearch.PlaceholderText = "Nhập tên phim";
             txtSearch.SelectedText = "";
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            txtSearch.Size = new Size(508, 45);
+            txtSearch.Size = new Size(549, 54);
             txtSearch.TabIndex = 1;
             // 
             // btnTimPhim
@@ -98,12 +98,12 @@
             btnTimPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTimPhim.ForeColor = Color.White;
             btnTimPhim.Image = Properties.Resources.search;
-            btnTimPhim.Location = new Point(671, 92);
+            btnTimPhim.Location = new Point(703, 60);
             btnTimPhim.Name = "btnTimPhim";
             btnTimPhim.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnTimPhim.Size = new Size(75, 37);
+            btnTimPhim.Size = new Size(116, 46);
             btnTimPhim.TabIndex = 28;
-            btnTimPhim.Text = "Tìm";
+            btnTimPhim.Text = "TÌM";
             btnTimPhim.Click += BtnSearch_Click;
             // 
             // guna2Button1
@@ -118,12 +118,12 @@
             guna2Button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button1.ForeColor = Color.White;
             guna2Button1.Image = Properties.Resources.add;
-            guna2Button1.Location = new Point(1138, 93);
+            guna2Button1.Location = new Point(1263, 60);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button1.Size = new Size(97, 37);
+            guna2Button1.Size = new Size(115, 45);
             guna2Button1.TabIndex = 29;
-            guna2Button1.Text = "Thêm";
+            guna2Button1.Text = "THÊM";
             guna2Button1.Click += btnThem_Click;
             // 
             // dgvMovies
@@ -152,12 +152,12 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvMovies.DefaultCellStyle = dataGridViewCellStyle3;
             dgvMovies.GridColor = Color.WhiteSmoke;
-            dgvMovies.Location = new Point(156, 170);
+            dgvMovies.Location = new Point(243, 180);
             dgvMovies.Name = "dgvMovies";
             dgvMovies.ReadOnly = true;
             dgvMovies.RowHeadersVisible = false;
             dgvMovies.RowHeadersWidth = 51;
-            dgvMovies.Size = new Size(1293, 561);
+            dgvMovies.Size = new Size(1383, 577);
             dgvMovies.TabIndex = 30;
             dgvMovies.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgvMovies.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -262,12 +262,12 @@
             btnXuatFile.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnXuatFile.ForeColor = Color.White;
             btnXuatFile.Image = (Image)resources.GetObject("btnXuatFile.Image");
-            btnXuatFile.Location = new Point(1260, 92);
+            btnXuatFile.Location = new Point(1419, 60);
             btnXuatFile.Name = "btnXuatFile";
             btnXuatFile.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnXuatFile.Size = new Size(189, 38);
+            btnXuatFile.Size = new Size(207, 46);
             btnXuatFile.TabIndex = 32;
-            btnXuatFile.Text = "Xuất file excel";
+            btnXuatFile.Text = "XUẤT FILE EXCEL";
             btnXuatFile.Click += btnExportExcel_Click;
             // 
             // FormMovieManagement
@@ -277,7 +277,7 @@
             AutoScroll = true;
             AutoScrollMinSize = new Size(800, 800);
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1624, 785);
+            ClientSize = new Size(1902, 815);
             Controls.Add(btnXuatFile);
             Controls.Add(dgvMovies);
             Controls.Add(guna2Button1);
