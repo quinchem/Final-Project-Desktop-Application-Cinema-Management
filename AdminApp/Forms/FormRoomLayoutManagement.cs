@@ -73,18 +73,14 @@ namespace AdminApp
             return folder;
         }
 
-        // ==========================================
-        //  FORM LOAD
-        // ==========================================
+        // Form load
         private void FormRoomLayoutManagement_Load(object sender, EventArgs e)
         {
             LoadRoom(1);
             if (btnPhong1 != null) btnPhong1.Checked = true;
         }
 
-        // ==========================================
-        //  LOAD PHÒNG
-        // ==========================================
+        // Load room
         private void LoadRoom(int roomIndex)
         {
             currentRoom = roomIndex;
@@ -97,14 +93,14 @@ namespace AdminApp
             {
                 conn.Open();
 
-                // ----- 1. Đọc thông tin PHÒNG từ bảng auditorium + auditorium_type -----
+                // 1. Đọc thông tin phòng từ bảng auditorium và auditorium_type 
                 var cmdInfo = conn.CreateCommand();
                 cmdInfo.CommandText = @"
-SELECT atype.auditorium_type, a.number_of_seats
-FROM auditorium a
-LEFT JOIN auditorium_type atype
-    ON a.auditorium_type_id = atype.auditorium_type_id
-WHERE a.auditorium_id = $id;
+                SELECT atype.auditorium_type, a.number_of_seats
+                FROM auditorium a
+                LEFT JOIN auditorium_type atype
+                    ON a.auditorium_type_id = atype.auditorium_type_id
+                WHERE a.auditorium_id = $id;
 ";
                 cmdInfo.Parameters.AddWithValue("$id", auditoriumId);
 
@@ -112,16 +108,15 @@ WHERE a.auditorium_id = $id;
                 {
                     if (reader.Read())
                     {
-                        auditoriumTypeName = reader.IsDBNull(0) ? "" : reader.GetString(0); // 2D / 3D
-                        seatCount = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);           // 90
+                        auditoriumTypeName = reader.IsDBNull(0) ? "" : reader.GetString(0); 
+                        seatCount = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);           
                     }
                 }
 
-                // Gán UI
                 txtSoGhe.Text = seatCount.ToString();
                 txtDinhDang.Text = auditoriumTypeName;
 
-                // ----- 2. Load JSON layout ghế -----
+                // 2. Load JSON layout ghế
                 Directory.CreateDirectory(roomDesignFolder);
                 string jsonFile = Path.Combine(roomDesignFolder, $"Room_{roomIndex}.json");
 
@@ -137,16 +132,14 @@ WHERE a.auditorium_id = $id;
 
                     foreach (var seat in list)
                     {
-                        // Chuẩn hóa Type từ file cũ: Normal / VIP / ST01 / ST02 / thường / Thường
                         string t = (seat.Type ?? "").Trim().ToLower();
                         if (t == "vip" || t == "st02")
                             seat.Type = "VIP";
                         else
                             seat.Type = "Thường";
 
-                        // Chuẩn hóa Status: Active/Disabled → Bình thường/Bảo trì
                         string st = (seat.Status ?? "").Trim().ToLower();
-                        if (st == "bảo trì" || st == "bao tri" || st == "disabled")
+                        if (st == "bảo trì" || st == "bao tri")
                             seat.Status = "Bảo trì";
                         else
                             seat.Status = "Bình thường";
@@ -165,9 +158,9 @@ WHERE a.auditorium_id = $id;
             }
         }
 
-        // ==========================================
+        // 
         //  MÀN HÌNH
-        // ==========================================
+        // 
         private void CreateScreenBar()
         {
             var screen = new Guna2Panel
@@ -233,9 +226,6 @@ WHERE a.auditorium_id = $id;
             screen.FillColor = Color.WhiteSmoke;
         }
 
-        // ==========================================
-        //  TẠO GHẾ + CHỌN GHẾ
-        // ==========================================
         private Guna2Button CreateSeat(SeatData seat)
         {
             var btn = new Guna2Button
@@ -364,7 +354,6 @@ WHERE a.auditorium_id = $id;
 
             int maxSeats = seatMap.Max(r => r.Value);
 
-            // ======= SCALE GHẾ THEO PANEL =======
             int wantedWidth = (maxSeats * baseSeatW) + ((maxSeats - 1) * baseSpaceX);
             float scale = (float)(panelW - 40) / wantedWidth;
             if (scale > 1) scale = 1;
@@ -441,9 +430,9 @@ WHERE a.auditorium_id = $id;
             seat.Y = draggingSeat.Location.Y;
         }
 
-        // ==========================================
+        // 
         //  TẠO LAYOUT TỰ ĐỘNG
-        // ==========================================
+        // 
         private void GenerateSeatLayout()
         {
             panelRoomLayout.Controls.Clear();
@@ -479,7 +468,7 @@ WHERE a.auditorium_id = $id;
 
                 for (int col = 1; col <= count; col++)
                 {
-                    string displayId = $"{rowName}{col:00}"; // A01, A02...
+                    string displayId = $"{rowName}{col:00}"; 
 
                     var seat = new SeatData
                     {
@@ -644,9 +633,6 @@ WHERE a.auditorium_id = $id;
             UpdateSeatCountUI();
         }
 
-        // ==========================================
-        //  LƯU → JSON + SEAT + SEAT_FOR_SHOWTIME + AUDITORIUM
-        // ==========================================
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string auditoriumId = $"R0{currentRoom}";
