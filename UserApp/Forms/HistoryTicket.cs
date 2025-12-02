@@ -32,8 +32,6 @@ namespace UserApp
                 using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
                 {
                     conn.Open();
-
-                    // Debug: Kiểm tra xem có bill nào của customer không
                     /*string checkQuery = "SELECT COUNT(*) FROM bill WHERE customer_id = @customer_id";
                     using (var checkCmd = new SqliteCommand(checkQuery, conn))
                     {
@@ -79,10 +77,8 @@ namespace UserApp
                                 // Kết hợp ngày và giờ để hiển thị suất chiếu
                                 string showDateTime = $"{startTime}"; 
 
-                                
                                 string bookingDate = showDate;
 
-                            
                                 decimal total = Convert.ToDecimal(reader["total"]);
                                 string formattedTotal = total.ToString("N0") + " VNĐ";
 
