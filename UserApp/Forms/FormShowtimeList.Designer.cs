@@ -126,7 +126,7 @@ namespace UserApp
             lblMonth.BackColor = Color.Transparent;
             lblMonth.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMonth.ForeColor = Color.FromArgb(92, 124, 150);
-            lblMonth.Location = new Point(454, 26);
+            lblMonth.Location = new Point(491, 26);
             lblMonth.Name = "lblMonth";
             lblMonth.Size = new Size(74, 30);
             lblMonth.TabIndex = 30;
@@ -251,7 +251,7 @@ namespace UserApp
             btnPrevWeek.ForeColor = Color.Black;
             btnPrevWeek.Image = Properties.Resources.left_arrow;
             btnPrevWeek.ImageSize = new Size(40, 40);
-            btnPrevWeek.Location = new Point(85, 102);
+            btnPrevWeek.Location = new Point(70, 104);
             btnPrevWeek.Margin = new Padding(2);
             btnPrevWeek.Name = "btnPrevWeek";
             btnPrevWeek.ShadowDecoration.CustomizableEdges = customizableEdges7;
@@ -271,7 +271,7 @@ namespace UserApp
             btnNextWeek.ForeColor = Color.Black;
             btnNextWeek.Image = Properties.Resources.right_arrow;
             btnNextWeek.ImageSize = new Size(40, 40);
-            btnNextWeek.Location = new Point(956, 102);
+            btnNextWeek.Location = new Point(977, 104);
             btnNextWeek.Margin = new Padding(2);
             btnNextWeek.Name = "btnNextWeek";
             btnNextWeek.ShadowDecoration.CustomizableEdges = customizableEdges8;
