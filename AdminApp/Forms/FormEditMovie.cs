@@ -34,19 +34,17 @@ namespace AdminApp
         {
             try
             {
-                // 3.2: Load độ tuổi (dữ liệu cố định, không cần lấy từ DB)
-                // ------------------------------------
-                // P: Phổ thông, K: Trẻ em, T13: Trên 13 tuổi, T16: Trên 16, T18: Trên 18
+                // Load độ tuổi (dữ liệu cố định, không cần lấy từ DB)
+                
                 cboDoTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18" });
 
-                // 3.3: Load trạng thái (dữ liệu cố định)
-                // ------------------------------------
+                // Load trạng thái (dữ liệu cố định)
                 cboTrangThai.Items.AddRange(new object[] { "Đang chiếu", "Sắp chiếu" });
-                cboTrangThai.SelectedIndex = 0; // Mặc định chọn item đầu tiên
+                cboTrangThai.SelectedIndex = 0; 
             }
             catch (Exception ex)
             {
-                // Bắt lỗi và hiển thị thông báo nếu có lỗi xảy ra
+            
                 MessageBox.Show("Lỗi khi load dữ liệu: " + ex.Message, "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
