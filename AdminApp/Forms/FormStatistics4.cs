@@ -139,12 +139,10 @@ namespace AdminApp
             ReloadAll();
         }
 
-        // 3. Sự kiện thay đổi Ngày Kết Thúc
         private void dptdateTo_ValueChanged(object sender, EventArgs e)
         {
             if (isFilteringByYear) return;
 
-            // Nếu Ngày Kết Thúc nhỏ hơn Ngày Bắt Đầu -> Báo lỗi và Reset ngay
             if (dptdateTo.Value.Date < dptdateFrom.Value.Date)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -152,7 +150,6 @@ namespace AdminApp
                 MessageBox.Show("Ngày kết thúc không được nhỏ hơn ngày bắt đầu!",
                                 "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                // Đặt lại ngày kết thúc bằng ngày bắt đầu
                 dptdateTo.Value = dptdateFrom.Value;
                 return; // Dừng lại, không ReloadAll
             }
@@ -195,19 +192,15 @@ namespace AdminApp
             DateTime to = dptdateTo.Value;
             string roomFilter = GetSelectedRoom();
 
-            // 1. Tổng số phòng hoạt động
             int totalRooms = _repo.GetActiveRoomCount(from, to);
             lblTotalRooms.Text = totalRooms.ToString();
 
-            // 2. Tổng số suất chiếu
             int totalShowtime = _repo.GetTotalShowtimes(from, to, roomFilter);
             lblTotalShowtime.Text = totalShowtime.ToString();
 
-            // 3. Phòng có hiệu suất cao nhất (dựa trên doanh thu)
             var topRoom = _repo.GetTopRevenueRoom(from, to);
             if (!string.IsNullOrEmpty(topRoom.RoomName) && topRoom.RoomName != "N/A")
             {
-                // Sửa: Dùng topRoom.RoomName và topRoom.Percentage (viết hoa chữ đầu)
                 lblTopRoom.Text = $"{topRoom.RoomName} ({topRoom.Percentage:0.0}%)";
             }
             else
@@ -216,7 +209,7 @@ namespace AdminApp
             }
         }
 
-        // ===================== Chart 2: Line Chart - Doanh thu (theo giờ hoặc theo ngày) =====================
+        // =====================  Line Chart - Doanh thu (theo giờ hoặc theo ngày) =====================
         private void LoadShowtimeLineChart()
         {
             lineChartShowtime.Datasets.Clear();
@@ -241,7 +234,6 @@ namespace AdminApp
 
             if (isSingleDay)
             {
-                // === TRƯỜNG HỢP 1 NGÀY: Hiện theo Giờ ===
                 datasetRevenue.Label = $"Doanh thu theo giờ ({from:dd/MM/yyyy})";
                 var revenueData = _repo.GetRevenueByHour(from, to, roomFilter);
 
@@ -262,7 +254,6 @@ namespace AdminApp
             }
             else
             {
-                // === TRƯỜNG HỢP NHIỀU NGÀY: Hiện theo Ngày ===
                 datasetRevenue.Label = "Doanh thu theo ngày (VNĐ)";
                 var revenueData = _repo.GetRevenueShowTimeByDay(from, to, roomFilter);
 
@@ -276,7 +267,7 @@ namespace AdminApp
             lineChartShowtime.Update();
         }
 
-        // ===================== Chart 3: Column Chart - Doanh thu theo phòng =====================
+        // ===================== Column Chart - Doanh thu theo phòng =====================
         private void LoadRevenueByRoomColumnChart()
         {
             columnChartRevenue.Datasets.Clear();
@@ -311,25 +302,21 @@ namespace AdminApp
             columnChartRevenue.Update();
         }
 
-        // 1. Nút Tổng quan (Quay lại FormStatistics1)
         private void btnTongQuan_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics1(_parent));
         }
 
-        // 2. Nút Khách hàng (Đang ở đây rồi thì không làm gì hoặc reload)
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics2(_parent));
         }
 
-        // 3. Nút Phim (Chuyển sang FormStatistics3)
         private void btnPhim_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics3(_parent));
         }
 
-        // 4. Nút Phòng chiếu (Chuyển sang FormStatistics4)
         private void btnPhongChieu_Click(object sender, EventArgs e)
         {
 
