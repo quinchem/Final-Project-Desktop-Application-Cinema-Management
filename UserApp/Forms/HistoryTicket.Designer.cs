@@ -37,7 +37,7 @@
             SuatChieu = new DataGridViewTextBoxColumn();
             NgayDatVe = new DataGridViewTextBoxColumn();
             TongTien = new DataGridViewTextBoxColumn();
-            //TicketCode = new DataGridViewTextBoxColumn();
+            TicketCode = new DataGridViewTextBoxColumn();
             XemChiTiet = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dgvHistoryTicket).BeginInit();
             SuspendLayout();
@@ -72,7 +72,7 @@
             dgvHistoryTicket.Size = new Size(1328, 552);
             dgvHistoryTicket.TabIndex = 0;
             dgvHistoryTicket.CellContentClick += dgvHistoryTicket_CellContentClick;
-            //dgvHistoryTicket.CellPainting += dgvHistoryTicket_CellPainting;
+            dgvHistoryTicket.CellPainting += dgvHistoryTicket_CellPainting;
             // 
             // STT
             // 
@@ -119,10 +119,10 @@
             // 
             // TicketCode
             // 
-            /*TicketCode.FillWeight = 90.9091F;
+            TicketCode.FillWeight = 90.9091F;
             TicketCode.HeaderText = "Ticket Code";
             TicketCode.MinimumWidth = 8;
-            TicketCode.Name = "TicketCode";*/
+            TicketCode.Name = "TicketCode";
             // 
             // XemChiTiet
             // 
@@ -154,7 +154,7 @@
         private DataGridViewTextBoxColumn SuatChieu;
         private DataGridViewTextBoxColumn NgayDatVe;
         private DataGridViewTextBoxColumn TongTien;
-        //private DataGridViewTextBoxColumn TicketCode;
+        private DataGridViewTextBoxColumn TicketCode;
         private DataGridViewButtonColumn XemChiTiet;
     }
 }

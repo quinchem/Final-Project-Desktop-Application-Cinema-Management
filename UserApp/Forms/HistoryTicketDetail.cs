@@ -6,7 +6,7 @@ using System.Drawing.Printing;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using SharedData;
+using SharedData.Models;
 
 namespace UserApp
 {
@@ -23,7 +23,7 @@ namespace UserApp
             LoadDetail();
         }
 
-        /*private string GenerateTicketCode(string billId)
+        private string GenerateTicketCode(string billId)
         {
             using (SHA256 sha = SHA256.Create())
             {
@@ -31,7 +31,7 @@ namespace UserApp
                 string hash = BitConverter.ToString(bytes).Replace("-", "");
                 return $"TK-{billId}-{hash.Substring(0, 4)}";
             }
-        }*/
+        }
 
         private void LoadDetail()
         {
@@ -110,7 +110,7 @@ namespace UserApp
                                 {
                                     MaPhieu = "TT" + DateTime.Now.ToString("ddMMyyyy") + "-" + _billId.Substring(Math.Max(0, _billId.Length - 4)),
                                     MaDonDatVe = _billId,
-                                    //TicketCode = GenerateTicketCode(_billId),
+                                    TicketCode = GenerateTicketCode(_billId),
                                     HoTen = fullName,
                                     Email = email,
                                     NgayDatVe = DateTime.Now.ToString("dd/MM/yyyy"),
@@ -130,10 +130,10 @@ namespace UserApp
                                 txtTinhTrang.Text = "Thành công";
                                 txtPhongChieu.Text = _printData.PhongChieu;
                                 txtNgayDatVe.Text = _printData.NgayDatVe;
-                                txtTongTien.Text = $"{_printData.TongTien:N0} VNĐ";
+                                txtTongTien.Text = $"{_printData.TongTien:N0} VND";
 
-                                /*if (this.Controls.Find("txtTicketCode", true).Length > 0)
-                                    ((TextBox)this.Controls.Find("txtTicketCode", true)[0]).Text = _printData.TicketCode;*/
+                                if (this.Controls.Find("txtTicketCode", true).Length > 0)
+                                    ((TextBox)this.Controls.Find("txtTicketCode", true)[0]).Text = _printData.TicketCode;
                             }
                             else
                             {
@@ -247,7 +247,7 @@ namespace UserApp
 
             // 6. Thông tin chi tiết
             DrawInfoLine(g, "Mã phiếu:", _printData.MaPhieu, labelX, infoY, normalFont); infoY += lineHeight;
-            //DrawInfoLine(g, "Mã vé (Ticket Code):", _printData.TicketCode, labelX, infoY, normalFont); infoY += lineHeight;
+            DrawInfoLine(g, "Mã vé (Ticket Code):", _printData.TicketCode, labelX, infoY, normalFont); infoY += lineHeight;
             DrawInfoLine(g, "Mã đơn đặt vé:", _printData.MaDonDatVe, labelX, infoY, normalFont); infoY += lineHeight;
             DrawInfoLine(g, "Họ và tên:", _printData.HoTen, labelX, infoY, normalFont); infoY += lineHeight;
             DrawInfoLine(g, "Email:", _printData.Email, labelX, infoY, normalFont); infoY += lineHeight;
@@ -262,7 +262,7 @@ namespace UserApp
             infoY += 10;
 
             // Tổng tiền, bằng chữ, tình trạng
-            DrawInfoLine(g, "Tổng tiền:", $"{_printData.TongTien:N0} VNĐ", labelX, infoY, totalFont, redBrush); infoY += 35;
+            DrawInfoLine(g, "Tổng tiền:", $"{_printData.TongTien:N0} VND", labelX, infoY, totalFont, redBrush); infoY += 35;
             DrawInfoLine(g, "Tổng tiền (bằng chữ):", NumberToVietnameseWords(_printData.TongTien), labelX, infoY, normalFont); infoY += 35;
             DrawInfoLine(g, "Tình trạng:", "Thành công", labelX, infoY, normalFont, greenBrush);
         }
@@ -322,20 +322,6 @@ namespace UserApp
             return result.Trim();
         }
 
-        private class TicketPrintData
-        {
-            public string MaPhieu { get; set; }
-            public string MaDonDatVe { get; set; }
-            public string TicketCode { get; set; }
-            public string HoTen { get; set; }
-            public string Email { get; set; }
-            public string NgayDatVe { get; set; }
-            public string TenPhim { get; set; }
-            public string SuatChieu { get; set; }
-            public string Ghe { get; set; }
-            public int SoLuongGhe { get; set; }
-            public string PhongChieu { get; set; }
-            public decimal TongTien { get; set; }
-        }
+        
     }
 }

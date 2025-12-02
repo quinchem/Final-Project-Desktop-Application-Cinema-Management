@@ -114,7 +114,7 @@
             lblMonth.BackColor = Color.Transparent;
             lblMonth.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMonth.ForeColor = Color.FromArgb(92, 124, 150);
-            lblMonth.Location = new Point(507, 23);
+            lblMonth.Location = new Point(484, 20);
             lblMonth.Name = "lblMonth";
             lblMonth.Size = new Size(74, 30);
             lblMonth.TabIndex = 37;
