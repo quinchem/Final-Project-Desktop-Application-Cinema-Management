@@ -15,7 +15,7 @@ namespace UserApp
 {
     public partial class FormResetPassword : Form
     {
-        private string _userEmail; // Biến lưu email để dùng lúc đổi pass
+        private string _userEmail; 
         private readonly AccountRepo _accountRepo = new AccountRepo();
         public FormResetPassword()
         {
@@ -27,7 +27,7 @@ namespace UserApp
         {
             InitializeComponent();
             parentForm = parent;
-            this._userEmail = email; // Lưu lại email
+            this._userEmail = email; 
         }
 
         private void btnGui_Click(object sender, EventArgs e)
@@ -78,18 +78,18 @@ namespace UserApp
         {
             if (txtMKmoi.UseSystemPasswordChar == true)
             {
-                // Hiện lên + Đổi ảnh mở
+                // Hiện lên và đổi ảnh mở
                 txtMKmoi.UseSystemPasswordChar = false;
                 txtMKmoi.PasswordChar = '\0';
                 picEye1.Image = Properties.Resources.view;
             }
             else
             {
-                // Ẩn đi + Đổi ảnh đóng
+                // Ẩn đi và đổi ảnh đóng
                 txtMKmoi.UseSystemPasswordChar = true;
 
                 // Đổi ảnh đóng ở đây
-                picEye1.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+                picEye1.Image = Properties.Resources.hide; 
             }
         }
 
@@ -104,7 +104,7 @@ namespace UserApp
             }
             else
             {
-                // Ẩn đi + Đổi ảnh đóng
+                // Ẩn đi và đổi ảnh đóng
                 txtXacNhanMK.UseSystemPasswordChar = true;
 
                 // Đổi ảnh đóng ở đây
