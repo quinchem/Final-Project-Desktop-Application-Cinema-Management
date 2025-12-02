@@ -46,7 +46,7 @@ namespace UserApp
 
                 if (!isExist)
                 {
-                    // Trường hợp Email KHÔNG tồn tại
+                    // Trường hợp Email không tồn tại
                     SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
                     player.Play();
                     MessageBox.Show("Email này không tồn tại trong hệ thống. Vui lòng kiểm tra lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -55,7 +55,7 @@ namespace UserApp
                 }
                 else
                 {
-                    // Trường hợp Email Có tồn tại
+                    // Trường hợp Email có tồn tại
                     SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
                     player.Play();
                     MessageBox.Show("Email hợp lệ! Vui lòng đặt lại mật khẩu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
