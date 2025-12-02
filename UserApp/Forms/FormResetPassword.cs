@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,6 +21,7 @@ namespace UserApp
         {
             InitializeComponent();
         }
+
         private FormLogin parentForm;
         public FormResetPassword(FormLogin parent, string email)
         {
@@ -30,40 +32,44 @@ namespace UserApp
 
         private void btnGui_Click(object sender, EventArgs e)
         {
-            // Kiểm tra dữ liệu nhập vào
             string newPass = txtMKmoi.Text.Trim();
             string confirmPass = txtXacNhanMK.Text.Trim();
 
             if (string.IsNullOrEmpty(newPass) || string.IsNullOrEmpty(confirmPass))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập đầy đủ mật khẩu.");
                 return;
             }
 
             if (newPass != confirmPass)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Mật khẩu xác nhận không khớp.");
                 return;
             }
-
-            // Validate độ mạnh mật khẩu (nếu cần giống lúc đăng ký)
             if (!System.Text.RegularExpressions.Regex.IsMatch(newPass, @"^(?=.{8,})(?=.*\W).*$"))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Mật khẩu phải >= 8 ký tự và có ký tự đặc biệt.");
                 return;
             }
-
-            // --- GỌI HÀM MỚI VIẾT TRONG REPO ---
-            // Truyền _userEmail (biến lưu email từ form trước) và mật khẩu mới
             if (_accountRepo.ResetPassword(_userEmail, newPass, out string msg))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Đổi mật khẩu thành công! Hãy đăng nhập lại.");
 
-                parentForm.ShowLogin(); // Quay về login
+                parentForm.ShowLogin();
                 this.Close();
             }
             else
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi: " + msg);
             }
         }
@@ -102,7 +108,7 @@ namespace UserApp
                 txtXacNhanMK.UseSystemPasswordChar = true;
 
                 // Đổi ảnh đóng ở đây
-                picEye2.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+                picEye2.Image = Properties.Resources.hide; 
             }
         }
 

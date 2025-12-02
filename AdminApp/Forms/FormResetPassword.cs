@@ -1,22 +1,23 @@
 ﻿using Microsoft.Data.Sqlite;
+using SharedData.Models;
+using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SharedData.Models;
-using SharedData.Repositories;
 
 namespace AdminApp.Forms
 {
     public partial class FormResetPassword : Form
     {
         private AdminMainForm parentForm;
-        private string _userEmail; // Biến lưu email để dùng lúc đổi pass
+        private string _userEmail;
         public FormResetPassword(AdminMainForm parent, string email)
         {
             InitializeComponent();
@@ -32,12 +33,16 @@ namespace AdminApp.Forms
 
             if (string.IsNullOrEmpty(newPass) || string.IsNullOrEmpty(confirmPass))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
                 return;
             }
 
             if (newPass != confirmPass)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Mật khẩu xác nhận không khớp");
                 return;
             }
@@ -59,12 +64,16 @@ namespace AdminApp.Forms
 
                     if (rows > 0)
                     {
+                        SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                        player.Play();
                         MessageBox.Show("Đặt lại mật khẩu thành công!");
                         parentForm.ShowLoginPanel();
                         this.Close();
                     }
                     else
                     {
+                        SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                        player.Play();
                         MessageBox.Show("Không tìm thấy tài khoản");
                     }
                 }
@@ -86,7 +95,7 @@ namespace AdminApp.Forms
                 txtMKmoi.UseSystemPasswordChar = true;
 
                 // Đổi ảnh đóng ở đây
-                picEye1.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+                picEye1.Image = Properties.Resources.hide; 
             }
         }
 
@@ -105,7 +114,7 @@ namespace AdminApp.Forms
                 txtXacNhanMK.UseSystemPasswordChar = true;
 
                 // Đổi ảnh đóng ở đây
-                picEye2.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+                picEye2.Image = Properties.Resources.hide; 
             }
         }
     }

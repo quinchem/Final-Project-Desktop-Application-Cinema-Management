@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
             guna2CustomGradientPanel3 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             picQR = new PictureBox();
@@ -62,7 +60,6 @@
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             timer1 = new System.Windows.Forms.Timer(components);
-            btnQuayLai = new Guna.UI2.WinForms.Guna2Button();
             panel1.SuspendLayout();
             guna2CustomGradientPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picQR).BeginInit();
@@ -74,14 +71,13 @@
             // 
             panel1.AutoScroll = true;
             panel1.BackColor = Color.FromArgb(92, 124, 150);
-            panel1.Controls.Add(btnQuayLai);
             panel1.Controls.Add(guna2CustomGradientPanel3);
             panel1.Controls.Add(guna2CustomGradientPanel2);
             panel1.Controls.Add(guna2CustomGradientPanel1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1338, 787);
+            panel1.Size = new Size(1904, 808);
             panel1.TabIndex = 11;
             // 
             // guna2CustomGradientPanel3
@@ -91,15 +87,15 @@
             guna2CustomGradientPanel3.Controls.Add(picQR);
             guna2CustomGradientPanel3.Controls.Add(guna2HtmlLabel18);
             guna2CustomGradientPanel3.Controls.Add(lblTrangThai);
-            guna2CustomGradientPanel3.CustomizableEdges = customizableEdges3;
+            guna2CustomGradientPanel3.CustomizableEdges = customizableEdges1;
             guna2CustomGradientPanel3.FillColor = Color.FromArgb(231, 30, 140);
             guna2CustomGradientPanel3.FillColor2 = Color.FromArgb(231, 30, 140);
             guna2CustomGradientPanel3.FillColor3 = Color.FromArgb(231, 30, 140);
             guna2CustomGradientPanel3.FillColor4 = Color.FromArgb(231, 30, 140);
-            guna2CustomGradientPanel3.Location = new Point(544, 58);
+            guna2CustomGradientPanel3.Location = new Point(857, 58);
             guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             guna2CustomGradientPanel3.ShadowDecoration.Color = Color.FromArgb(70, 70, 70);
-            guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2CustomGradientPanel3.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel3.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel3.ShadowDecoration.Shadow = new Padding(2, 2, 8, 8);
@@ -108,7 +104,7 @@
             // 
             // picQR
             // 
-            picQR.Location = new Point(124, 124);
+            picQR.Location = new Point(134, 139);
             picQR.Name = "picQR";
             picQR.Size = new Size(350, 350);
             picQR.TabIndex = 17;
@@ -120,7 +116,7 @@
             guna2HtmlLabel18.BackColor = Color.Transparent;
             guna2HtmlLabel18.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2HtmlLabel18.ForeColor = Color.White;
-            guna2HtmlLabel18.Location = new Point(77, 526);
+            guna2HtmlLabel18.Location = new Point(82, 538);
             guna2HtmlLabel18.Name = "guna2HtmlLabel18";
             guna2HtmlLabel18.Size = new Size(443, 61);
             guna2HtmlLabel18.TabIndex = 16;
@@ -146,19 +142,19 @@
             guna2CustomGradientPanel2.BorderRadius = 15;
             guna2CustomGradientPanel2.Controls.Add(lblTimer);
             guna2CustomGradientPanel2.Controls.Add(guna2HtmlLabel16);
-            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges5;
+            guna2CustomGradientPanel2.CustomizableEdges = customizableEdges3;
             guna2CustomGradientPanel2.FillColor = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel2.FillColor4 = Color.FromArgb(246, 233, 238);
-            guna2CustomGradientPanel2.Location = new Point(163, 535);
+            guna2CustomGradientPanel2.Location = new Point(420, 561);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel2.Size = new Size(350, 169);
+            guna2CustomGradientPanel2.Size = new Size(406, 143);
             guna2CustomGradientPanel2.TabIndex = 16;
             // 
             // lblTimer
@@ -166,7 +162,7 @@
             lblTimer.BackColor = Color.Transparent;
             lblTimer.Font = new Font("Segoe UI Black", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTimer.ForeColor = Color.FromArgb(231, 30, 140);
-            lblTimer.Location = new Point(91, 49);
+            lblTimer.Location = new Point(126, 48);
             lblTimer.Name = "lblTimer";
             lblTimer.Size = new Size(159, 83);
             lblTimer.TabIndex = 17;
@@ -177,7 +173,7 @@
             guna2HtmlLabel16.BackColor = Color.Transparent;
             guna2HtmlLabel16.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2HtmlLabel16.ForeColor = Color.FromArgb(219, 64, 120);
-            guna2HtmlLabel16.Location = new Point(100, 13);
+            guna2HtmlLabel16.Location = new Point(137, 15);
             guna2HtmlLabel16.Name = "guna2HtmlLabel16";
             guna2HtmlLabel16.Size = new Size(139, 30);
             guna2HtmlLabel16.TabIndex = 16;
@@ -202,26 +198,26 @@
             guna2CustomGradientPanel1.Controls.Add(lblPhim);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel2);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel3);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges7;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges5;
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(246, 233, 238);
-            guna2CustomGradientPanel1.Location = new Point(163, 58);
+            guna2CustomGradientPanel1.Location = new Point(420, 58);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2CustomGradientPanel1.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel1.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel1.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel1.Size = new Size(350, 459);
+            guna2CustomGradientPanel1.Size = new Size(406, 476);
             guna2CustomGradientPanel1.TabIndex = 7;
             // 
             // guna2HtmlLabel1
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.Location = new Point(33, 330);
+            guna2HtmlLabel1.Location = new Point(33, 356);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(101, 25);
             guna2HtmlLabel1.TabIndex = 17;
@@ -232,7 +228,7 @@
             lblKhachHang.BackColor = Color.Transparent;
             lblKhachHang.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblKhachHang.ForeColor = Color.Black;
-            lblKhachHang.Location = new Point(140, 330);
+            lblKhachHang.Location = new Point(140, 357);
             lblKhachHang.Name = "lblKhachHang";
             lblKhachHang.Size = new Size(100, 25);
             lblKhachHang.TabIndex = 16;
@@ -243,7 +239,7 @@
             lblTien.BackColor = Color.Transparent;
             lblTien.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTien.ForeColor = Color.Black;
-            lblTien.Location = new Point(130, 394);
+            lblTien.Location = new Point(130, 410);
             lblTien.Name = "lblTien";
             lblTien.Size = new Size(162, 39);
             lblTien.TabIndex = 15;
@@ -253,7 +249,7 @@
             // 
             guna2HtmlLabel14.BackColor = Color.Transparent;
             guna2HtmlLabel14.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel14.Location = new Point(32, 402);
+            guna2HtmlLabel14.Location = new Point(33, 419);
             guna2HtmlLabel14.Name = "guna2HtmlLabel14";
             guna2HtmlLabel14.Size = new Size(85, 25);
             guna2HtmlLabel14.TabIndex = 14;
@@ -264,7 +260,7 @@
             lblGio.BackColor = Color.Transparent;
             lblGio.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblGio.ForeColor = Color.Black;
-            lblGio.Location = new Point(123, 274);
+            lblGio.Location = new Point(123, 297);
             lblGio.Name = "lblGio";
             lblGio.Size = new Size(100, 25);
             lblGio.TabIndex = 11;
@@ -274,7 +270,7 @@
             // 
             guna2HtmlLabel10.BackColor = Color.Transparent;
             guna2HtmlLabel10.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel10.Location = new Point(33, 274);
+            guna2HtmlLabel10.Location = new Point(33, 297);
             guna2HtmlLabel10.Name = "guna2HtmlLabel10";
             guna2HtmlLabel10.Size = new Size(84, 25);
             guna2HtmlLabel10.TabIndex = 10;
@@ -285,7 +281,7 @@
             lblLoaiRap.BackColor = Color.Transparent;
             lblLoaiRap.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblLoaiRap.ForeColor = Color.Black;
-            lblLoaiRap.Location = new Point(123, 219);
+            lblLoaiRap.Location = new Point(123, 238);
             lblLoaiRap.Name = "lblLoaiRap";
             lblLoaiRap.Size = new Size(24, 25);
             lblLoaiRap.TabIndex = 9;
@@ -295,7 +291,7 @@
             // 
             guna2HtmlLabel8.BackColor = Color.Transparent;
             guna2HtmlLabel8.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel8.Location = new Point(33, 219);
+            guna2HtmlLabel8.Location = new Point(33, 238);
             guna2HtmlLabel8.Name = "guna2HtmlLabel8";
             guna2HtmlLabel8.Size = new Size(73, 25);
             guna2HtmlLabel8.TabIndex = 8;
@@ -306,7 +302,7 @@
             lblGhe.BackColor = Color.Transparent;
             lblGhe.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblGhe.ForeColor = Color.Black;
-            lblGhe.Location = new Point(123, 170);
+            lblGhe.Location = new Point(123, 180);
             lblGhe.Name = "lblGhe";
             lblGhe.Size = new Size(43, 25);
             lblGhe.TabIndex = 7;
@@ -316,7 +312,7 @@
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel6.Location = new Point(33, 170);
+            guna2HtmlLabel6.Location = new Point(33, 180);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(39, 25);
             guna2HtmlLabel6.TabIndex = 6;
@@ -327,7 +323,7 @@
             lblNgay.BackColor = Color.Transparent;
             lblNgay.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblNgay.ForeColor = Color.Black;
-            lblNgay.Location = new Point(123, 122);
+            lblNgay.Location = new Point(123, 120);
             lblNgay.Name = "lblNgay";
             lblNgay.Size = new Size(80, 25);
             lblNgay.TabIndex = 5;
@@ -337,7 +333,7 @@
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.Location = new Point(33, 119);
+            guna2HtmlLabel4.Location = new Point(33, 120);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(50, 25);
             guna2HtmlLabel4.TabIndex = 4;
@@ -351,7 +347,7 @@
             lblPhim.ForeColor = Color.Black;
             lblPhim.Location = new Point(123, 59);
             lblPhim.Name = "lblPhim";
-            lblPhim.Size = new Size(173, 50);
+            lblPhim.Size = new Size(215, 50);
             lblPhim.TabIndex = 3;
             lblPhim.Text = "Cục vàng của Ngoại (T13)";
             // 
@@ -369,7 +365,7 @@
             // 
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel3.Location = new Point(80, 12);
+            guna2HtmlLabel3.Location = new Point(114, 14);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(192, 30);
             guna2HtmlLabel3.TabIndex = 0;
@@ -380,30 +376,11 @@
             timer1.Interval = 1000;
             timer1.Tick += timer1_Tick;
             // 
-            // btnQuayLai
-            // 
-            btnQuayLai.CustomizableEdges = customizableEdges1;
-            btnQuayLai.DisabledState.BorderColor = Color.DarkGray;
-            btnQuayLai.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnQuayLai.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnQuayLai.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnQuayLai.FillColor = Color.Transparent;
-            btnQuayLai.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnQuayLai.ForeColor = Color.FromArgb(255, 128, 0);
-            btnQuayLai.Image = Properties.Resources.back_arrow;
-            btnQuayLai.Location = new Point(53, 728);
-            btnQuayLai.Name = "btnQuayLai";
-            btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnQuayLai.Size = new Size(204, 35);
-            btnQuayLai.TabIndex = 86;
-            btnQuayLai.Text = "Quay lại chọn ghế";
-            btnQuayLai.Click += btnQuayLai_Click;
-            // 
             // FormPayment2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1338, 787);
+            ClientSize = new Size(1904, 808);
             Controls.Add(panel1);
             Name = "FormPayment2";
             Text = "Thanh toán";
@@ -443,6 +420,5 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblKhachHang;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTimer;
-        private Guna.UI2.WinForms.Guna2Button btnQuayLai;
     }
 }

@@ -33,7 +33,6 @@ namespace SharedData.Repositories
                     }
                 }
             }
-
             return list;
         }
 

@@ -11,7 +11,6 @@ namespace SharedData.Repositories
     {
         private static string ConnStr => DatabaseHelper.GetConnectionString();
 
-        // Lấy trạng thái (Full / Bảo trì)
         public static Dictionary<string, string> GetSeatStatus(string showtimeId)
         {
             var dict = new Dictionary<string, string>();
@@ -36,20 +35,5 @@ namespace SharedData.Repositories
             return dict;
         }
 
-        public static void SetFull(string seatId, string showId)
-        {
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
-
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
-                INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
-                VALUES ($sid, $stid, 'Full')
-                ON CONFLICT(seat_id, showtime_id)
-                DO UPDATE SET status = 'Full'";
-            cmd.Parameters.AddWithValue("$sid", seatId);
-            cmd.Parameters.AddWithValue("$stid", showId);
-            cmd.ExecuteNonQuery();
-        }
     }
 }

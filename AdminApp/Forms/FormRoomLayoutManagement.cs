@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using Microsoft.Data.Sqlite;
+using Newtonsoft.Json;
+using SharedData.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
-using Guna.UI2.WinForms;
-using Microsoft.Data.Sqlite;
-using Newtonsoft.Json;
-using SharedData.Models;
 
 namespace AdminApp
 {
@@ -19,13 +20,13 @@ namespace AdminApp
         // Folder RoomDesign đặt trong solution:  <SolutionRoot>\SharedData\RoomDesign
         private readonly string roomDesignFolder;
 
-        private int currentRoom = 1;                       // 1..5
-        private Dictionary<string, int> initialSeatMap;    // lưu cấu trúc rows ban đầu
+        private Dictionary<string, int> initialSeatMap;
 
         // GHẾ ĐANG DRAG
         private Guna2Button draggingSeat = null;
         private bool dragging = false;
         private Point dragCursorPoint, dragStartPoint;
+        private int currentRoom = 1;
 
         // DRAG MÀN HÌNH
         private bool draggingScreen = false;
@@ -73,18 +74,14 @@ namespace AdminApp
             return folder;
         }
 
-        // ==========================================
-        //  FORM LOAD
-        // ==========================================
+        // Form load
         private void FormRoomLayoutManagement_Load(object sender, EventArgs e)
         {
             LoadRoom(1);
             if (btnPhong1 != null) btnPhong1.Checked = true;
         }
 
-        // ==========================================
-        //  LOAD PHÒNG
-        // ==========================================
+        // Load room
         private void LoadRoom(int roomIndex)
         {
             currentRoom = roomIndex;
@@ -97,14 +94,14 @@ namespace AdminApp
             {
                 conn.Open();
 
-                // ----- 1. Đọc thông tin PHÒNG từ bảng auditorium + auditorium_type -----
+                // 1. Đọc thông tin phòng từ bảng auditorium và auditorium_type 
                 var cmdInfo = conn.CreateCommand();
                 cmdInfo.CommandText = @"
-SELECT atype.auditorium_type, a.number_of_seats
-FROM auditorium a
-LEFT JOIN auditorium_type atype
-    ON a.auditorium_type_id = atype.auditorium_type_id
-WHERE a.auditorium_id = $id;
+                SELECT atype.auditorium_type, a.number_of_seats
+                FROM auditorium a
+                LEFT JOIN auditorium_type atype
+                    ON a.auditorium_type_id = atype.auditorium_type_id
+                WHERE a.auditorium_id = $id;
 ";
                 cmdInfo.Parameters.AddWithValue("$id", auditoriumId);
 
@@ -112,16 +109,15 @@ WHERE a.auditorium_id = $id;
                 {
                     if (reader.Read())
                     {
-                        auditoriumTypeName = reader.IsDBNull(0) ? "" : reader.GetString(0); // 2D / 3D
-                        seatCount = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);           // 90
+                        auditoriumTypeName = reader.IsDBNull(0) ? "" : reader.GetString(0); 
+                        seatCount = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);           
                     }
                 }
 
-                // Gán UI
                 txtSoGhe.Text = seatCount.ToString();
                 txtDinhDang.Text = auditoriumTypeName;
 
-                // ----- 2. Load JSON layout ghế -----
+                // 2. Load JSON layout ghế
                 Directory.CreateDirectory(roomDesignFolder);
                 string jsonFile = Path.Combine(roomDesignFolder, $"Room_{roomIndex}.json");
 
@@ -137,16 +133,14 @@ WHERE a.auditorium_id = $id;
 
                     foreach (var seat in list)
                     {
-                        // Chuẩn hóa Type từ file cũ: Normal / VIP / ST01 / ST02 / thường / Thường
                         string t = (seat.Type ?? "").Trim().ToLower();
                         if (t == "vip" || t == "st02")
                             seat.Type = "VIP";
                         else
                             seat.Type = "Thường";
 
-                        // Chuẩn hóa Status: Active/Disabled → Bình thường/Bảo trì
                         string st = (seat.Status ?? "").Trim().ToLower();
-                        if (st == "bảo trì" || st == "bao tri" || st == "disabled")
+                        if (st == "bảo trì" || st == "bao tri")
                             seat.Status = "Bảo trì";
                         else
                             seat.Status = "Bình thường";
@@ -165,9 +159,9 @@ WHERE a.auditorium_id = $id;
             }
         }
 
-        // ==========================================
+        // 
         //  MÀN HÌNH
-        // ==========================================
+        // 
         private void CreateScreenBar()
         {
             var screen = new Guna2Panel
@@ -233,18 +227,15 @@ WHERE a.auditorium_id = $id;
             screen.FillColor = Color.WhiteSmoke;
         }
 
-        // ==========================================
-        //  TẠO GHẾ + CHỌN GHẾ
-        // ==========================================
         private Guna2Button CreateSeat(SeatData seat)
         {
             var btn = new Guna2Button
             {
-                Size = new Size(50, 50),
+                Size = new Size(60, 60),
                 Location = new Point(seat.X, seat.Y),
                 Text = $"{seat.Row}{seat.Col:00}",
                 // A01, A02,...
-                Font = new Font("Segoe UI", 7, FontStyle.Bold),
+                Font = new Font("Segoe UI", 8, FontStyle.Bold),
                 Tag = seat
             };
 
@@ -328,6 +319,7 @@ WHERE a.auditorium_id = $id;
                 btn.BorderColor = Color.DimGray;
                 btn.BorderThickness = 4;
             }
+
         }
 
         private void Seat_Hover(object sender, EventArgs e)
@@ -356,14 +348,13 @@ WHERE a.auditorium_id = $id;
             int panelW = panelRoomLayout.Width;
 
             // Request GHẾ SIZE CƠ BẢN
-            int baseSeatW = 50;
-            int baseSeatH = 50;
-            int baseSpaceX = 8;
+            int baseSeatW = 60;
+            int baseSeatH = 60;
+            int baseSpaceX = 10;
             int baseSpaceY = 10;
 
             int maxSeats = seatMap.Max(r => r.Value);
 
-            // ======= SCALE GHẾ THEO PANEL =======
             int wantedWidth = (maxSeats * baseSeatW) + ((maxSeats - 1) * baseSpaceX);
             float scale = (float)(panelW - 40) / wantedWidth;
             if (scale > 1) scale = 1;
@@ -440,9 +431,9 @@ WHERE a.auditorium_id = $id;
             seat.Y = draggingSeat.Location.Y;
         }
 
-        // ==========================================
+        // 
         //  TẠO LAYOUT TỰ ĐỘNG
-        // ==========================================
+        // 
         private void GenerateSeatLayout()
         {
             panelRoomLayout.Controls.Clear();
@@ -450,10 +441,10 @@ WHERE a.auditorium_id = $id;
 
             int panelW = panelRoomLayout.Width;
 
-            int baseSeatW = 50;
-            int baseSeatH = 50;
-            int baseSpaceX = 8;
-            int baseSpaceY = 10;
+            int baseSeatW = 60;
+            int baseSeatH = 60;
+            int baseSpaceX = 12;
+            int baseSpaceY = 12;
 
             int maxSeats = seatMap.Max(r => r.Value);
             int wantedWidth = (maxSeats * baseSeatW) + ((maxSeats - 1) * baseSpaceX);
@@ -478,7 +469,7 @@ WHERE a.auditorium_id = $id;
 
                 for (int col = 1; col <= count; col++)
                 {
-                    string displayId = $"{rowName}{col:00}"; // A01, A02...
+                    string displayId = $"{rowName}{col:00}"; 
 
                     var seat = new SeatData
                     {
@@ -530,6 +521,8 @@ WHERE a.auditorium_id = $id;
         {
             if (selectedSeats.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hãy chọn 1 ghế trong hàng trước khi thêm!",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -585,6 +578,8 @@ WHERE a.auditorium_id = $id;
         {
             if (selectedSeats.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hãy chọn ít nhất 1 ghế!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -610,6 +605,8 @@ WHERE a.auditorium_id = $id;
         {
             if (selectedSeats.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hãy chọn ít nhất 1 ghế!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -643,9 +640,6 @@ WHERE a.auditorium_id = $id;
             UpdateSeatCountUI();
         }
 
-        // ==========================================
-        //  LƯU → JSON + SEAT + SEAT_FOR_SHOWTIME + AUDITORIUM
-        // ==========================================
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string auditoriumId = $"R0{currentRoom}";
@@ -740,6 +734,8 @@ WHERE a.auditorium_id = $id;
                 }
             }
 
+            SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+            player.Play();
             MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -956,6 +952,8 @@ WHERE a.auditorium_id = $id;
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
             LoadRoom(currentRoom);
+            SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+            player.Play();
             MessageBox.Show("Đã khôi phục về ban đầu!",
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

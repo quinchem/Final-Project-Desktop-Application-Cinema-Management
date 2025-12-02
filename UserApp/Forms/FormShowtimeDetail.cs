@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
@@ -14,7 +15,6 @@ namespace UserApp
 {
     public partial class FormShowtimeDetail : Form
     {
-        // --- KHAI BÁO BIẾN ---
         private ShowtimeRepo repo = new ShowtimeRepo();
         private ImageRepo _imageRepo = new ImageRepo();
         private List<ShowtimeInfo> currentShowtimes;
@@ -28,8 +28,6 @@ namespace UserApp
         private Guna2Panel _selectedPanel = null;
 
         private string _targetMovieId = null;
-
-        //CONSTRUCTOR 1: Mặc định (Hiện tất cả)
         public FormShowtimeDetail(UserMainForm parent, string movieId)
         {
             InitializeComponent();
@@ -40,13 +38,9 @@ namespace UserApp
         private void SetupForm()
         {
             InitializeFlowLayoutPanel();
-
-            // Khởi tạo ngày
             selectedMonth = DateTime.Today.Month;
             currentStartDate = GetMondayOfWeek(DateTime.Today);
             selectedDate = DateTime.Today;
-
-            // Load ComboBox -> Cái này sẽ kích hoạt OnMonthChanged -> LoadShowtimes
             LoadMonthsLabel();
             this.Shown += (s, e) => InitCalendar();
         }
@@ -75,19 +69,15 @@ namespace UserApp
             else
                 currentStartDate = GetMondayOfWeek(currentStartDate);
 
-            // đảm bảo selectedDate có giá trị và là ngày (no time)
             if (selectedDate == default || selectedDate == DateTime.MinValue)
                 selectedDate = DateTime.Today;
             selectedDate = selectedDate.Date;
-
-            // Update label tháng, nút ngày, load dữ liệu tuần, và chọn ngày hiện tại
             UpdateMonthLabelByWeek();
-            UpdateDateButtons();  // set text, Tag và click handler cho 7 nút
-            LoadShowtimes();      // load currentShowtimes cho tuần hiện tại
+            UpdateDateButtons();  
+            LoadShowtimes();    
             SelectDate(selectedDate);
         }
-        // --- LOGIC XỬ LÝ NGÀY THÁNG ---
-
+ 
         private DateTime GetMondayOfWeek(DateTime date)
         {
             int diff = (7 + (date.DayOfWeek - DayOfWeek.Monday)) % 7;
@@ -107,10 +97,7 @@ namespace UserApp
 
         private void btnPrevWeek_Click(object sender, EventArgs e)
         {
-            // Lùi 1 tuần (trừ 7 ngày)
             currentStartDate = currentStartDate.AddDays(-7);
-
-            // đảm bảo Monday
             currentStartDate = GetMondayOfWeek(currentStartDate);
 
             selectedDate = currentStartDate;
@@ -121,8 +108,6 @@ namespace UserApp
         private void btnNextWeek_Click(object sender, EventArgs e)
         {
             currentStartDate = currentStartDate.AddDays(7);
-
-            // đảm bảo là Monday (nếu tiền lệ ko phải Monday)
             currentStartDate = GetMondayOfWeek(currentStartDate);
 
             selectedDate = currentStartDate;
@@ -209,7 +194,6 @@ namespace UserApp
             UpdateDateButtons();
             try
             {
-                // 1. Gọi Repo lấy dữ liệu
                 if (!string.IsNullOrEmpty(_targetMovieId))
             { currentShowtimes = repo.GetShowtimesByDateRangeAndMovie(currentStartDate, 30, _targetMovieId);
                 }
@@ -218,13 +202,13 @@ namespace UserApp
                     currentShowtimes = repo.GetShowtimesByDateRange(currentStartDate, 7);
                 }
 
-                
                 if (currentShowtimes == null) currentShowtimes = new List<ShowtimeInfo>();
-                // 3. Hiển thị
                 DisplayShowtimes();
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
             }
         }
@@ -238,7 +222,6 @@ namespace UserApp
             {
                 if (currentShowtimes == null || currentShowtimes.Count == 0)
                 {
-                    // Thông báo rõ ràng hơn
                     string msg = !string.IsNullOrEmpty(_targetMovieId)
                         ? "Phim này chưa có lịch chiếu trong tuần này."
                         : "Chưa có lịch chiếu nào.";
@@ -466,11 +449,11 @@ namespace UserApp
             {
                 if (_selectedPanel != null)
                 {
-                    _selectedPanel.FillColor = Color.FromArgb(236, 230, 224); // Trả màu cũ
+                    _selectedPanel.FillColor = Color.FromArgb(236, 230, 224); 
                     _selectedPanel.BorderThickness = 0;
                 }
 
-                clickedPanel.FillColor = Color.FromArgb(245, 131, 35); // Tô màu cam chọn
+                clickedPanel.FillColor = Color.FromArgb(245, 131, 35); 
                 clickedPanel.BorderThickness = 2;
 
                 _selectedPanel = clickedPanel;
@@ -482,11 +465,12 @@ namespace UserApp
         {
             if (_selectedShowtime == null)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn suất chiếu trước khi tiếp tục!", "Chưa chọn",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             parentForm.OpenChildForm(new FormSeatSelection(parentForm, _selectedShowtime));
         }
     }

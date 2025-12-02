@@ -1,8 +1,9 @@
 ﻿using SharedData.Models;
+using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Media;
 using System.Windows.Forms;
-using SharedData.Repositories;
 
 namespace AdminApp
 {
@@ -28,10 +29,9 @@ namespace AdminApp
             dtpGioBD.Value = DateTime.Now;
             dtpGioBD.Format = DateTimePickerFormat.Time;
             dtpGioBD.ShowUpDown = true;
-
-            // Cập nhật giá vé mặc định lúc load (nếu có chọn sẵn)
             UpdateTicketPrice();
         }
+
 
         private void LoadFilms()
         {
@@ -70,7 +70,6 @@ namespace AdminApp
         // Hàm cập nhật giá vé
         private void UpdateTicketPrice()
         {
-            // đảm bảo DataSource đã load và có item
             if (cboDinhDang.DataSource == null || cboDinhDang.SelectedIndex == -1 || cboDinhDang.SelectedValue == null)
             {
                 lblGiaVe.Text = "0";
@@ -87,14 +86,10 @@ namespace AdminApp
                 }
 
                 double price = _seatRepo.GetTicketPriceByAuditoriumType(auditoriumTypeId);
-
-                // Nếu repo trả 0 (không tìm thấy), hiển thị 0 — hoặc bạn có thể show lỗi debug
                 lblGiaVe.Text = price > 0 ? price.ToString("N0") : "0";
             }
             catch (Exception ex)
             {
-                // Nếu cần debug, hiện message
-                // MessageBox.Show("UpdateTicketPrice error: " + ex.Message);
                 lblGiaVe.Text = "0";
             }
         }
@@ -103,31 +98,34 @@ namespace AdminApp
         {
             if (cboChonPhim.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn phim!", "Thông báo");
                 return;
             }
-
             if (cboChonPhong.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn phòng!", "Thông báo");
                 return;
             }
-
             if (cboDinhDang.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn định dạng phòng!", "Thông báo");
                 return;
             }
-
-            // SỬA: Kiểm tra thuộc tính .Text của Label
             if (string.IsNullOrWhiteSpace(lblGiaVe.Text) || lblGiaVe.Text == "0")
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Giá vé chưa hợp lệ!", "Thông báo");
                 return;
             }
             double currentPrice = 0;
             double.TryParse(lblGiaVe.Text.Replace(",", ""), out currentPrice);
-
             
             try
             {
@@ -143,12 +141,16 @@ namespace AdminApp
 
                 ShowtimeRepo.Insert(showtime);
 
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Thêm suất chiếu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi thêm: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -161,7 +163,6 @@ namespace AdminApp
 
         private string GenerateShowtimeId()
         {
-            // (Code cũ của bạn giữ nguyên)
             var all = ShowtimeRepo.GetAll();
             int maxNum = 0;
             foreach (var s in all)
@@ -178,7 +179,6 @@ namespace AdminApp
 
         private DateTime CalculateEndTime(DateTime startTime)
         {
-            // (Code cũ của bạn giữ nguyên)
             if (cboChonPhim.SelectedValue != null)
             {
                 var film = _filmRepo.GetById(cboChonPhim.SelectedValue.ToString());

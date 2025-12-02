@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
 
 namespace UserApp
@@ -16,13 +17,11 @@ namespace UserApp
     {
         private UserMainForm parentForm;
 
-        // ====== THÔNG TIN SUẤT CHIẾU ======
+        // Khai báo thông tin suất chiếu và sơ đồ ghế
         private ShowtimeInfo _showtime;
-        private string _auditoriumId;     // R01, R02...
-        private string _showtimeId;       // T001, T002...
+        private string _auditoriumId;
+        private string _showtimeId;
         private ImageRepo _imageRepo = new ImageRepo();
-
-        // ====== THƯ MỤC JSON SƠ ĐỒ PHÒNG ======
         private string _roomJsonFolder;
 
         // ====== DANH SÁCH GHẾ ======
@@ -30,12 +29,10 @@ namespace UserApp
         private List<SeatUser> _selectedSeats = new();
 
         // ====== HẸN GIỜ CHỌN GHẾ (5 phút) ======
-        private int countdown = 300;
+        private int countdown = 600;
         private bool isCounting = false;
 
-        // ============================
-        // CONSTRUCTOR
-        // ============================
+
 
         // 1. Constructor mặc định – cho Designer
         public FormSeatSelection()
@@ -82,12 +79,9 @@ namespace UserApp
             timer1.Stop();
             isCounting = false;
             countdown = 300;
-            lblTime.Text = "05:00";
+            lblTime.Text = "10:00";
         }
 
-        // ===================================================
-        // LOAD POSTER PHIM
-        // ===================================================
         private void LoadPoster()
         {
             try
@@ -109,13 +103,12 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi khi load poster: " + ex.Message);
             }
         }
 
-        // ===================================================
-        // LOAD PHÒNG: JSON + DB
-        // ===================================================
         private void LoadRoom(string auditoriumId, string showtimeId)
         {
             _allSeats.Clear();
@@ -125,20 +118,22 @@ namespace UserApp
             UpdateTotal();
             UpdateSelectedSeatLabel();
 
-            // ----- 1) Load JSON -----
+            //  1) Load file JSON
             string digits = new string(auditoriumId.Where(char.IsDigit).ToArray());
             int roomNumber = int.Parse(digits);
             string jsonPath = Path.Combine(_roomJsonFolder, $"Room_{roomNumber}.json");
 
             if (!File.Exists(jsonPath))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không tìm thấy layout phòng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonPath));
 
-            // ----- 2) Load ghế từ bảng seat -----
+            // 2) Load ghế từ bảng seat
             var dbSeats = new Dictionary<string, (string type, string status, double price)>();
 
             using (var conn = DatabaseHelper.GetConnection())
@@ -164,11 +159,11 @@ namespace UserApp
                 }
             }
 
-            // ----- 3) Load ghế FULL theo suất chiếu -----
+            // 3) Load ghế FULL theo suất chiếu 
             var fullSeats = SeatForShowtimeRepo.GetSeatStatus(showtimeId);
             // chỉ chứa FULL
 
-            // ----- 4) Merge -----
+            // 4) Merge
             foreach (var s in jsonSeats)
             {
                 string logical = $"{s.Row}{s.Col:00}";
@@ -179,15 +174,15 @@ namespace UserApp
                 var db = dbSeats[fullId];
                 string finalStatus;
 
-                // Ưu tiên 1: ghế Bảo trì từ bảng seat
+                // Ghế Bảo trì từ bảng seat
                 if (db.status == "Bảo trì")
                     finalStatus = "Bảo trì";
 
-                // Ưu tiên 2: ghế đã FULL ở suất chiếu
+                // Ghế đã FULL ở suất chiếu
                 else if (fullSeats.ContainsKey(fullId))
                     finalStatus = "Full";
 
-                // Còn lại → TRỐNG
+                // Còn lại là TRỐNG
                 else
                     finalStatus = "Trống";
 
@@ -214,11 +209,11 @@ namespace UserApp
         private Guna2Button CreateSeatButton(SeatUser seat)
         {
             var btn = new Guna2Button();
-            btn.Size = new Size(50, 50);
+            btn.Size = new Size(55, 55);
             btn.Location = new Point(seat.X, seat.Y);
             btn.Text = $"{seat.Row}{seat.Col:00}";
             btn.Tag = seat;
-            btn.Font = new Font("Segoe UI", 7, FontStyle.Bold);
+            btn.Font = new Font("Segoe UI", 8, FontStyle.Bold);
 
             ApplySeatStyle(btn, seat);
             btn.Click += Seat_Click;
@@ -332,19 +327,18 @@ namespace UserApp
             panelRoom.Controls.Add(p);
         }
 
-        // ===================================================
-        // NÚT THANH TOÁN → CHUYỂN PAYMENT1
-        // ===================================================
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
             if (_selectedSeats.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn ít nhất 1 ghế trước khi thanh toán!",
                     "Chưa chọn ghế", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Dừng timer giữ ghế (phần lock ghế / cập nhật DB để Payment2 xử lý)
+            // Dừng timer giữ ghế 
             isCounting = false;
             timer1.Stop();
 
@@ -355,16 +349,14 @@ namespace UserApp
             }
         }
 
-        // ===================================================
-        // TIMER GIỮ GHẾ
-        // ===================================================
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (countdown <= 0)
             {
                 timer1.Stop();
                 isCounting = false;
-
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hết thời gian giữ ghế! Vui lòng chọn lại.",
                                 "Hết hạn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 

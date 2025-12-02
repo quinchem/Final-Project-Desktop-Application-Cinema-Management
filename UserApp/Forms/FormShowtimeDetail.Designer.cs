@@ -44,6 +44,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            lblMonth = new Guna.UI2.WinForms.Guna2HtmlLabel();
             btnSun = new Guna.UI2.WinForms.Guna2CircleButton();
             btnSat = new Guna.UI2.WinForms.Guna2CircleButton();
             btnFri = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -66,7 +67,6 @@
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             flpShowtimes = new FlowLayoutPanel();
             lblSuatchieu = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblMonth = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2CustomGradientPanel1.SuspendLayout();
             guna2CustomGradientPanel2.SuspendLayout();
             SuspendLayout();
@@ -99,15 +99,26 @@
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(236, 230, 224);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(236, 230, 224);
-            guna2CustomGradientPanel1.Location = new Point(91, 115);
+            guna2CustomGradientPanel1.Location = new Point(436, 35);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges11;
             guna2CustomGradientPanel1.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel1.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel1.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel1.Size = new Size(954, 193);
+            guna2CustomGradientPanel1.Size = new Size(1048, 193);
             guna2CustomGradientPanel1.TabIndex = 15;
+            // 
+            // lblMonth
+            // 
+            lblMonth.BackColor = Color.Transparent;
+            lblMonth.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMonth.ForeColor = Color.FromArgb(92, 124, 150);
+            lblMonth.Location = new Point(484, 20);
+            lblMonth.Name = "lblMonth";
+            lblMonth.Size = new Size(74, 30);
+            lblMonth.TabIndex = 37;
+            lblMonth.Text = "THÁNG ";
             // 
             // btnSun
             // 
@@ -118,7 +129,7 @@
             btnSun.FillColor = Color.FromArgb(236, 230, 224);
             btnSun.Font = new Font("Segoe UI", 9F);
             btnSun.ForeColor = Color.Black;
-            btnSun.Location = new Point(773, 109);
+            btnSun.Location = new Point(830, 106);
             btnSun.Margin = new Padding(2);
             btnSun.Name = "btnSun";
             btnSun.ShadowDecoration.CustomizableEdges = customizableEdges1;
@@ -136,7 +147,7 @@
             btnSat.FillColor = Color.FromArgb(236, 230, 224);
             btnSat.Font = new Font("Segoe UI", 9F);
             btnSat.ForeColor = Color.Black;
-            btnSat.Location = new Point(658, 109);
+            btnSat.Location = new Point(715, 106);
             btnSat.Margin = new Padding(2);
             btnSat.Name = "btnSat";
             btnSat.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -154,7 +165,7 @@
             btnFri.FillColor = Color.FromArgb(236, 230, 224);
             btnFri.Font = new Font("Segoe UI", 9F);
             btnFri.ForeColor = Color.Black;
-            btnFri.Location = new Point(556, 109);
+            btnFri.Location = new Point(613, 106);
             btnFri.Margin = new Padding(2);
             btnFri.Name = "btnFri";
             btnFri.ShadowDecoration.CustomizableEdges = customizableEdges3;
@@ -172,7 +183,7 @@
             btnThu.FillColor = Color.FromArgb(236, 230, 224);
             btnThu.Font = new Font("Segoe UI", 9F);
             btnThu.ForeColor = Color.Black;
-            btnThu.Location = new Point(448, 109);
+            btnThu.Location = new Point(505, 106);
             btnThu.Margin = new Padding(2);
             btnThu.Name = "btnThu";
             btnThu.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -190,7 +201,7 @@
             btnWed.FillColor = Color.FromArgb(236, 230, 224);
             btnWed.Font = new Font("Segoe UI", 9F);
             btnWed.ForeColor = Color.Black;
-            btnWed.Location = new Point(351, 109);
+            btnWed.Location = new Point(408, 106);
             btnWed.Margin = new Padding(2);
             btnWed.Name = "btnWed";
             btnWed.ShadowDecoration.CustomizableEdges = customizableEdges5;
@@ -208,7 +219,7 @@
             btnTue.FillColor = Color.FromArgb(236, 230, 224);
             btnTue.Font = new Font("Segoe UI", 9F);
             btnTue.ForeColor = Color.Black;
-            btnTue.Location = new Point(250, 109);
+            btnTue.Location = new Point(307, 106);
             btnTue.Margin = new Padding(2);
             btnTue.Name = "btnTue";
             btnTue.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -226,7 +237,7 @@
             btnMon.FillColor = Color.FromArgb(236, 230, 224);
             btnMon.Font = new Font("Segoe UI", 9F);
             btnMon.ForeColor = Color.Black;
-            btnMon.Location = new Point(144, 109);
+            btnMon.Location = new Point(201, 106);
             btnMon.Margin = new Padding(2);
             btnMon.Name = "btnMon";
             btnMon.ShadowDecoration.CustomizableEdges = customizableEdges7;
@@ -246,7 +257,7 @@
             guna2CircleButton9.ForeColor = Color.Black;
             guna2CircleButton9.Image = Properties.Resources.left_arrow;
             guna2CircleButton9.ImageSize = new Size(40, 40);
-            guna2CircleButton9.Location = new Point(75, 117);
+            guna2CircleButton9.Location = new Point(60, 106);
             guna2CircleButton9.Margin = new Padding(2);
             guna2CircleButton9.Name = "guna2CircleButton9";
             guna2CircleButton9.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -266,7 +277,7 @@
             guna2CircleButton8.ForeColor = Color.Black;
             guna2CircleButton8.Image = Properties.Resources.right_arrow;
             guna2CircleButton8.ImageSize = new Size(40, 40);
-            guna2CircleButton8.Location = new Point(862, 117);
+            guna2CircleButton8.Location = new Point(957, 106);
             guna2CircleButton8.Margin = new Padding(2);
             guna2CircleButton8.Name = "guna2CircleButton8";
             guna2CircleButton8.ShadowDecoration.CustomizableEdges = customizableEdges9;
@@ -279,7 +290,7 @@
             // 
             guna2HtmlLabel7.BackColor = Color.Transparent;
             guna2HtmlLabel7.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel7.Location = new Point(766, 82);
+            guna2HtmlLabel7.Location = new Point(823, 79);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             guna2HtmlLabel7.Size = new Size(66, 23);
             guna2HtmlLabel7.TabIndex = 14;
@@ -289,7 +300,7 @@
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel6.Location = new Point(665, 82);
+            guna2HtmlLabel6.Location = new Point(722, 79);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(42, 23);
             guna2HtmlLabel6.TabIndex = 13;
@@ -299,7 +310,7 @@
             // 
             guna2HtmlLabel5.BackColor = Color.Transparent;
             guna2HtmlLabel5.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel5.Location = new Point(560, 82);
+            guna2HtmlLabel5.Location = new Point(617, 79);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             guna2HtmlLabel5.Size = new Size(42, 23);
             guna2HtmlLabel5.TabIndex = 12;
@@ -309,7 +320,7 @@
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.Location = new Point(456, 82);
+            guna2HtmlLabel4.Location = new Point(513, 79);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(42, 23);
             guna2HtmlLabel4.TabIndex = 11;
@@ -319,7 +330,7 @@
             // 
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel3.Location = new Point(358, 82);
+            guna2HtmlLabel3.Location = new Point(415, 79);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(42, 23);
             guna2HtmlLabel3.TabIndex = 10;
@@ -329,7 +340,7 @@
             // 
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel2.Location = new Point(254, 82);
+            guna2HtmlLabel2.Location = new Point(311, 79);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(42, 23);
             guna2HtmlLabel2.TabIndex = 9;
@@ -339,7 +350,7 @@
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.Location = new Point(153, 82);
+            guna2HtmlLabel1.Location = new Point(210, 79);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(42, 23);
             guna2HtmlLabel1.TabIndex = 8;
@@ -349,7 +360,7 @@
             // 
             lblNgayChieu.BackColor = Color.Transparent;
             lblNgayChieu.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
-            lblNgayChieu.Location = new Point(35, 26);
+            lblNgayChieu.Location = new Point(35, 23);
             lblNgayChieu.Name = "lblNgayChieu";
             lblNgayChieu.Size = new Size(151, 27);
             lblNgayChieu.TabIndex = 6;
@@ -360,7 +371,7 @@
             lblLichChieu.BackColor = Color.Transparent;
             lblLichChieu.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblLichChieu.ForeColor = Color.FromArgb(245, 131, 35);
-            lblLichChieu.Location = new Point(81, 52);
+            lblLichChieu.Location = new Point(91, 35);
             lblLichChieu.Margin = new Padding(2);
             lblLichChieu.Name = "lblLichChieu";
             lblLichChieu.Size = new Size(142, 43);
@@ -371,21 +382,21 @@
             // 
             guna2CustomGradientPanel2.BackColor = Color.Transparent;
             guna2CustomGradientPanel2.BorderColor = Color.FromArgb(236, 230, 224);
-            guna2CustomGradientPanel2.BorderRadius = 15;
             guna2CustomGradientPanel2.Controls.Add(guna2Button2);
             guna2CustomGradientPanel2.CustomizableEdges = customizableEdges14;
+            guna2CustomGradientPanel2.Dock = DockStyle.Bottom;
             guna2CustomGradientPanel2.FillColor = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(217, 217, 217);
             guna2CustomGradientPanel2.FillColor4 = Color.FromArgb(217, 217, 217);
-            guna2CustomGradientPanel2.Location = new Point(-12, 861);
+            guna2CustomGradientPanel2.Location = new Point(0, 738);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges15;
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel2.Size = new Size(1197, 94);
+            guna2CustomGradientPanel2.Size = new Size(1884, 70);
             guna2CustomGradientPanel2.TabIndex = 35;
             // 
             // guna2Button2
@@ -400,7 +411,7 @@
             guna2Button2.ForeColor = Color.FromArgb(245, 131, 35);
             guna2Button2.Image = Properties.Resources.right_arrow1;
             guna2Button2.ImageAlign = HorizontalAlignment.Right;
-            guna2Button2.Location = new Point(958, 20);
+            guna2Button2.Location = new Point(1682, 19);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges13;
             guna2Button2.Size = new Size(172, 35);
@@ -410,9 +421,9 @@
             // 
             // flpShowtimes
             // 
-            flpShowtimes.Location = new Point(91, 405);
+            flpShowtimes.Location = new Point(406, 332);
             flpShowtimes.Name = "flpShowtimes";
-            flpShowtimes.Size = new Size(954, 425);
+            flpShowtimes.Size = new Size(1109, 323);
             flpShowtimes.TabIndex = 36;
             // 
             // lblSuatchieu
@@ -420,30 +431,18 @@
             lblSuatchieu.BackColor = Color.Transparent;
             lblSuatchieu.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Bold);
             lblSuatchieu.ForeColor = SystemColors.ButtonHighlight;
-            lblSuatchieu.Location = new Point(91, 349);
+            lblSuatchieu.Location = new Point(169, 278);
             lblSuatchieu.Name = "lblSuatchieu";
             lblSuatchieu.Size = new Size(208, 27);
             lblSuatchieu.TabIndex = 37;
             lblSuatchieu.Text = "Chọn suất chiếu chi tiết";
             // 
-            // lblMonth
-            // 
-            lblMonth.BackColor = Color.Transparent;
-            lblMonth.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMonth.ForeColor = Color.FromArgb(92, 124, 150);
-            lblMonth.Location = new Point(425, 23);
-            lblMonth.Name = "lblMonth";
-            lblMonth.Size = new Size(74, 30);
-            lblMonth.TabIndex = 37;
-            lblMonth.Text = "THÁNG ";
-            // 
             // FormShowtimeDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1164, 932);
+            ClientSize = new Size(1884, 808);
             Controls.Add(lblSuatchieu);
             Controls.Add(flpShowtimes);
             Controls.Add(guna2CustomGradientPanel2);

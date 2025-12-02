@@ -1,11 +1,12 @@
 ﻿
 using Microsoft.Data.Sqlite;
+using SharedData;
 using System;
 using System.Drawing;
-using System.Windows.Forms;
-using SharedData;
+using System.Media;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace UserApp
 {
@@ -86,7 +87,7 @@ namespace UserApp
                                 string formattedTotal = total.ToString("N0") + " VNĐ";
 
                                 // Tự sinh Ticket Code
-                                //string ticketCode = GenerateTicketCode(billId);
+                                string ticketCode = GenerateTicketCode(billId);
 
                                 dgvHistoryTicket.Rows.Add(
                                     stt++,              // Cột 0: STT
@@ -95,13 +96,15 @@ namespace UserApp
                                     showDateTime,       // Cột 3: Suất chiếu (giờ)
                                     bookingDate,        // Cột 4: Ngày đặt vé
                                     formattedTotal,     // Cột 5: Tổng tiền
-                                    //ticketCode,         // Cột 6: Ticket Code
+                                    ticketCode,         // Cột 6: Ticket Code
                                     "Xem"               // Cột 7: Xem chi tiết
                                 );
                             }
 
                             if (!hasRows)
                             {
+                                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                                player.Play();
                                 MessageBox.Show($"Khách hàng {_customerId} chưa có lịch sử vé nào.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             /*else
@@ -119,7 +122,7 @@ namespace UserApp
         }
 
         // Hàm tự sinh Ticket Code
-        /*private string GenerateTicketCode(string billId)
+        private string GenerateTicketCode(string billId)
         {
             // Tạo SHA256 hash cố định từ billId
             using (SHA256 sha = SHA256.Create())
@@ -131,7 +134,7 @@ namespace UserApp
 
                 return $"TK-{billId}-{hashPart}";
             }
-        }*/
+        }
 
         private void dgvHistoryTicket_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {

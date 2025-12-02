@@ -1,26 +1,23 @@
 ﻿using Newtonsoft.Json.Linq;
-using SharedData.MoMo;
 using SharedData.Models;
+using SharedData.MoMo;
 using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using System.Net; // Dùng cho WebClient và SecurityProtocol
-using System.Drawing; // Dùng cho Image và PictureBox
 using System.Diagnostics; // Dùng cho Process
+using System.Drawing; // Dùng cho Image và PictureBox
+using System.Linq;
+using System.Net; // Dùng cho WebClient và SecurityProtocol
+using System.Windows.Forms;
+using System.Media; // Dùng cho SoundPlayer
 
 namespace UserApp
 {
     public partial class FormPayment2 : Form
     {
-        // =================================================================================
-        // KEY ĐÃ ĐÚNG (GIỮ NGUYÊN)
-        // =================================================================================
         private const string PARTNER_CODE = "MOMOFZTI20251130_TEST";
         private const string ACCESS_KEY = "HTYX5Dl2Hao3j7Zk";
         private const string SECRET_KEY = "7qHvdJbaJVbDlj5rGDXMecdpmzyEwYKg";
-        // =================================================================================
 
         private ShowtimeInfo _showtime;
         private List<SeatUser> _seats;
@@ -36,8 +33,6 @@ namespace UserApp
         // Timer đếm ngược 10 phút cho QR
         private int _qrCountdown = 600; // 10 phút = 600 giây
 
-        // Vẫn giữ callback server nếu muốn (nhưng logic chính sẽ dùng Timer)
-        private readonly MomoCallbackServer _callbackServer = new MomoCallbackServer();
         public UserMainForm parentForm;
         public FormPayment2(ShowtimeInfo showtime, List<SeatUser> seats, Customer customer, double total)
         {
@@ -76,7 +71,7 @@ namespace UserApp
                 string queryRequestId = Guid.NewGuid().ToString();
 
                 // Tạo chữ ký cho Query Request
-                // Chuẩn chữ ký Query: accessKey=$accessKey&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId
+                // Chuẩn chữ ký Query: 
                 string rawHash = "accessKey=" + ACCESS_KEY +
                                  "&orderId=" + _orderId +
                                  "&partnerCode=" + PARTNER_CODE +
@@ -106,7 +101,6 @@ namespace UserApp
             }
             catch (Exception)
             {
-                // Lỗi mạng hoặc lỗi API thì bỏ qua, chờ lần tick tiếp theo
             }
         }
 
@@ -119,6 +113,8 @@ namespace UserApp
                     SaveBillToDatabase();
 
                     lblTrangThai.Text = "Thanh toán thành công!";
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.purchase_sound);
+                    player.Play();
                     MessageBox.Show("Thanh toán MOMO thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -134,6 +130,8 @@ namespace UserApp
                 }
                 catch (Exception ex)
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Lỗi sau thanh toán: " + ex.Message);
                 }
             }));
@@ -146,7 +144,7 @@ namespace UserApp
                 var filmRepo = new FilmRepo();
                 var film = filmRepo.GetById(_showtime.movie_id);
 
-                lblPhim.Text = film != null ? $"{film.title} ({film.age_restriction})" : _showtime.title;
+                lblPhim.Text = film != null ? $"{film.title}" : _showtime.title;
 
                 lblLoaiRap.Text = $"{_showtime.auditorium_type} - {_showtime.name}";
                 lblNgay.Text = _showtime.show_date;
@@ -163,36 +161,12 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi hiển thị mã thanh toán: " + ex.Message);
             }
         }
 
-        // Tạm thời không cần CallbackServer vì đã dùng Timer
-        private void StartCallbackServer()
-        {
-            try
-            {
-                _callbackServer.Start();
-                _callbackServer.OnPaymentSuccess += CallbackSuccess;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi khởi động Callback Server: " + ex.Message);
-            }
-        }
-
-        private void CallbackSuccess(MomoCallbackData data)
-        {
-            // Logic cũ (giữ lại để tham khảo)
-            if (!string.Equals(data.orderId, _orderId, StringComparison.OrdinalIgnoreCase))
-                return;
-
-            if (data.resultCode == 0)
-            {
-                _checkStatusTimer.Stop();
-                HandlePaymentSuccess();
-            }
-        }
 
         private void CreateMomoPayment()
         {
@@ -260,6 +234,8 @@ namespace UserApp
 
                 if (string.IsNullOrEmpty(response) || !response.TrimStart().StartsWith("{"))
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Phản hồi không hợp lệ:\n" + response);
                     lblTrangThai.Text = "Lỗi kết nối";
                     return;
@@ -272,11 +248,15 @@ namespace UserApp
                     string errorCode = json["resultCode"]?.ToString();
                     if (errorCode == "11007" || errorCode == "1001")
                     {
+                        SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                        player.Play();
                         Clipboard.SetText(rawHash);
                         MessageBox.Show($"Lỗi chữ ký (11007). RawHash đã copy vào Clipboard.", "Lỗi Key", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
+                        SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                        player.Play();
                         MessageBox.Show($"Lỗi MoMo: {json["message"]} (Mã: {errorCode})", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     lblTrangThai.Text = "Tạo QR thất bại";
@@ -286,7 +266,7 @@ namespace UserApp
                 string qrUrl = json["qrCodeUrl"]?.ToString();
                 string payUrl = json["payUrl"]?.ToString();
 
-                // NẾU MOMO KHÔNG TRẢ VỀ QR -> TỰ TẠO TỪ PAYURL
+               
                 if (string.IsNullOrEmpty(qrUrl) && !string.IsNullOrEmpty(payUrl))
                 {
                     string encodedPayUrl = System.Net.WebUtility.UrlEncode(payUrl);
@@ -295,6 +275,8 @@ namespace UserApp
 
                 if (string.IsNullOrEmpty(qrUrl))
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Không tạo được mã QR.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     lblTrangThai.Text = "Lỗi tạo QR";
                     return;
@@ -321,6 +303,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi hệ thống: " + ex.Message);
             }
         }
@@ -345,6 +329,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không thể mở trình duyệt: " + ex.Message);
             }
         }
@@ -387,7 +373,8 @@ namespace UserApp
             {
                 timer1.Stop();
                 _checkStatusTimer.Stop(); // dừng check trạng thái
-
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hết thời gian thanh toán (10 phút).\nVui lòng chọn ghế lại!",
                     "Mã QR hết hạn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -402,15 +389,6 @@ namespace UserApp
                     this.Close();
                 }
             }
-        }
-
-        private void btnQuayLai_Click(object sender, EventArgs e)
-        {
-            parentForm.OpenChildForm(new FormPayment1(
-                _showtime,
-                _seats,
-                _customer
-            ));
         }
     }
 }

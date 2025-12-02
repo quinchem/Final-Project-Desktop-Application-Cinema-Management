@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,6 +38,8 @@ namespace AdminApp
             // 2. Kiểm tra rỗng
             if (string.IsNullOrEmpty(emailInput))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập địa chỉ Email!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtEmail.Focus();
                 return;
@@ -50,14 +53,16 @@ namespace AdminApp
 
                 if (!isExist)
                 {
-                    // Trường hợp Email KHÔNG tồn tại
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Email này không tồn tại trong hệ thống. Vui lòng kiểm tra lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtEmail.SelectAll();
                     txtEmail.Focus();
                 }
                 else
                 {
-                    // Trường hợp Email Có tồn tại
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                    player.Play();
                     MessageBox.Show("Email hợp lệ! Vui lòng đặt lại mật khẩu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // 4. Mở form Reset Password
@@ -67,6 +72,8 @@ namespace AdminApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Đã xảy ra lỗi kết nối: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

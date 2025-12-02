@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,45 +31,39 @@ namespace UserApp
 
             LoadPaymentInfo();
         }
-
-        // ======================================================
-        // HIỂN THỊ THÔNG TIN TẠI PAYMENT 1
-        // ======================================================
         private void LoadPaymentInfo()
         {
             try
             {
-                // --- LẤY THÔNG TIN PHIM ---
+                // Lấy thông tin phim
                 var filmRepo = new FilmRepo();
                 var film = filmRepo.GetById(_showtime.movie_id);
-                // --- PHIM ---
+
+                //Hiển thị thông tin đơn đặt vé
                 if (film != null)
-                    lblTenPhim.Text = $"{film.title} ({film.age_restriction})";
+                    lblTenPhim.Text = $"{film.title}";
                 else
                     lblTenPhim.Text = _showtime.title;
 
-                // --- LOẠI RẠP ---
                 lblLoaiRap.Text = $"{_showtime.auditorium_type} - {_showtime.name}";
 
 
                 lblNgay.Text = _showtime.show_date;
                 lblGio.Text = $"{_showtime.start_time} - {_showtime.end_time}";
-
-                // ===== GHẾ =====
                 lblGhe.Text = string.Join(", ",
                     _selectedSeats.OrderBy(s => s.Row)
                                   .ThenBy(s => s.Col)
                                   .Select(s => $"{s.Row}{s.Col:00}"));
 
-
-                // ===== TỔNG TIỀN =====
                 _total = _selectedSeats.Sum(s => s.Price);
                 lblTong.Text = _total.ToString("N0") + " VND";
                 lblKhachHang.Text = _customer.full_name;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi hiển thị Payment1: " + ex.Message);
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
+                MessageBox.Show("Lỗi hiển thị giao diện: " + ex.Message);
             }
         }
 
@@ -93,6 +88,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không thể chuyển sang giao diện thanh toán: " + ex.Message);
             }
         }
@@ -106,6 +103,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không thể quay lại: " + ex.Message);
             }
         }

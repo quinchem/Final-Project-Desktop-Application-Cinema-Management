@@ -37,7 +37,7 @@ namespace SharedData.MoMo
             }
             catch (WebException e)
             {
-                // 🔥 Quan trọng: vẫn cố đọc body JSON trong trường hợp lỗi 400/401/403...
+
                 if (e.Response != null)
                 {
                     using (var resp = (HttpWebResponse)e.Response)
@@ -46,12 +46,10 @@ namespace SharedData.MoMo
                         string body = reader.ReadToEnd();
                         if (!string.IsNullOrWhiteSpace(body))
                         {
-                            return body; // nhiều khả năng là JSON của MoMo
+                            return body;
                         }
                     }
                 }
-
-                // fallback: nếu thật sự không có body thì trả message
                 return e.Message;
             }
         }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using Microsoft.VisualBasic.Devices;
+using SharedData.Models;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using SharedData.Models;
 using UserApp.Forms;
 
 namespace UserApp
@@ -13,6 +15,7 @@ namespace UserApp
 
         private Form currentFormChild;
         private Guna.UI2.WinForms.Guna2Button currentButton;
+        Guna2PictureBox currentSelected = null;
 
         // Nhận user từ FormLogin
         public UserMainForm(Customer customer)
@@ -116,10 +119,7 @@ namespace UserApp
         }
 
         // Mở form tìm kiếm
-        private void txtTimKiem_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormSearch());
-        }
+
 
         // Mở chi tiết phim
         //private void guna2PictureBox1_Click(object sender, EventArgs e)
@@ -179,7 +179,53 @@ namespace UserApp
 
         private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormChatbot(this));
+            FormChatbot f = new FormChatbot(this);
+            f.Show();
+        }
+
+        private void LoadDanhSachPhim(List<Film> listPhim)
+        {
+            flowPanelList.Controls.Clear();
+            foreach (var phim in listPhim)
+            {
+                Guna2PictureBox picSmall = new Guna2PictureBox();
+
+                picSmall.Size = new Size(200, 110);
+                picSmall.SizeMode = PictureBoxSizeMode.Zoom;
+                picSmall.BorderRadius = 15;
+                picSmall.Cursor = Cursors.Hand;
+                picSmall.Click += picSmall_Click;
+
+                // --- 4. THÊM VÀO DANH SÁCH ---
+                flowPanelList.Controls.Add(picSmall);
+            }
+        }
+
+        private void picSmall_Click(object sender, EventArgs e)
+        {
+            var clickedPic = (Guna2PictureBox)sender;
+
+            // A. Tắt hiệu ứng của cái cũ (nếu có)
+            if (currentSelected != null)
+            {
+                currentSelected.ShadowDecoration.Enabled = false;
+            }
+
+            // B. Bật hiệu ứng cho cái mới vừa click
+            clickedPic.ShadowDecoration.Enabled = true;
+            clickedPic.ShadowDecoration.Color = Color.FromArgb(245, 131, 35); 
+            clickedPic.ShadowDecoration.Depth = 15;        
+
+            // C. LẤY ẢNH TỪ NHỎ -> GÁN LÊN TO
+            // Logic: Cái nhỏ đang hiện hình gì thì gán y chang lên trên
+            if (clickedPic.Image != null)
+            {
+                gunaPicBig.Image = clickedPic.Image;
+                gunaPicBig.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+
+            // D. Lưu lại cái này để lần sau click cái khác thì biết đường tắt
+            currentSelected = clickedPic;
         }
     }
 }
