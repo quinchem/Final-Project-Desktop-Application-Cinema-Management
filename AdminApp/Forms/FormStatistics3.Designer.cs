@@ -383,7 +383,6 @@
             // 
             // panelDTTB
             // 
-            panelDTTB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panelDTTB.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panelDTTB.BorderColor = Color.FromArgb(92, 124, 150);
             panelDTTB.BorderRadius = 10;
@@ -419,7 +418,7 @@
             label7.BackColor = Color.FromArgb(125, 167, 199);
             label7.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(179, 12);
+            label7.Location = new Point(178, 12);
             label7.Name = "label7";
             label7.RightToLeft = RightToLeft.Yes;
             label7.Size = new Size(337, 25);

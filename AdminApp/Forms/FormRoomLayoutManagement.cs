@@ -146,8 +146,8 @@ namespace AdminApp
                             seat.Status = "Bình thường";
 
                         var btn = CreateSeat(seat);
-                        btn.Width = 50;
-                        btn.Height = 50;
+                        btn.Width = 60;
+                        btn.Height = 60;
                     }
                 }
                 else
@@ -438,39 +438,30 @@ namespace AdminApp
         {
             panelRoomLayout.Controls.Clear();
             CreateScreenBar();
-
             int panelW = panelRoomLayout.Width;
-
             int baseSeatW = 60;
             int baseSeatH = 60;
             int baseSpaceX = 12;
             int baseSpaceY = 12;
-
             int maxSeats = seatMap.Max(r => r.Value);
             int wantedWidth = (maxSeats * baseSeatW) + ((maxSeats - 1) * baseSpaceX);
-
             float scale = (float)(panelW - 40) / wantedWidth;
             if (scale > 1) scale = 1;
-
             int seatW = (int)(baseSeatW * scale);
             int seatH = (int)(baseSeatH * scale);
             int spaceX = (int)(baseSpaceX * scale);
             int spaceY = baseSpaceY;
-
             int startY = 90;
-
             foreach (var row in seatMap)
             {
                 string rowName = row.Key;
                 int count = row.Value;
-
                 int rowWidth = (count * seatW) + ((count - 1) * spaceX);
                 int startX = (panelW - rowWidth) / 2;
 
                 for (int col = 1; col <= count; col++)
                 {
-                    string displayId = $"{rowName}{col:00}"; 
-
+                    string displayId = $"{rowName}{col:00}";
                     var seat = new SeatData
                     {
                         SeatId = displayId,
@@ -491,6 +482,7 @@ namespace AdminApp
 
                 startY += seatH + spaceY;
             }
+
         }
 
         // ==========================================

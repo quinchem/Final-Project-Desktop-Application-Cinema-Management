@@ -14,7 +14,7 @@ namespace UserApp.Forms
     public partial class FormChatbot : Form
     {
         private UserMainForm _parentForm;
-        private const string API_KEY = "Your_Key";
+        private const string API_KEY = "AIzaSyDQ1U67zJGBaLZwpMI4jz2c_ZzRvWYfxZE";
 
         private readonly List<string> _userHistoryGenres = new();
 
