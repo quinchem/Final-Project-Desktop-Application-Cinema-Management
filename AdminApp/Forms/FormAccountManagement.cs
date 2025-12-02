@@ -66,11 +66,9 @@ namespace AdminApp
             txtGioiTinh.Enabled = !isLocked;
             txtEmail.Enabled = !isLocked;
             txtSDT.Enabled = !isLocked;
-
-            // Chức vụ luôn khóa
             txtChucVu.Enabled = false;
 
-            // 🔐 MẬT KHẨU – KHÓA HOÀN TOÀN
+            // Khóa mật khẩu
             txtMKcu.Enabled = !isLocked;
             txtMKmoi.Enabled = !isLocked;
             txtNhapLaiMK.Enabled = !isLocked;
@@ -78,8 +76,6 @@ namespace AdminApp
         private void btnChinhSua_Click(object sender, EventArgs e)
         {
             FormEditAccount formEdit = new FormEditAccount(_staff_id);
-
-            // mở dạng modal
             if (formEdit.ShowDialog() == DialogResult.OK)
             {
                 LoadStaffInfo();
