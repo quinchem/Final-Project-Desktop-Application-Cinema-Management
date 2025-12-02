@@ -1,16 +1,17 @@
 ﻿using SharedData.Models;
 using SharedData.Repositories;
+using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using SharedData.Repositories;
 
 namespace AdminApp
 {
@@ -38,6 +39,8 @@ namespace AdminApp
             Staff staff = _staffRepo.GetStaffById(_staff_id);
             if (staff == null)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không tìm thấy nhân viên");
                 Close();
                 return;
@@ -65,6 +68,8 @@ namespace AdminApp
         {
             if (string.IsNullOrWhiteSpace(txtHoTen.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Họ tên không được để trống");
                 return;
             }
@@ -74,11 +79,13 @@ namespace AdminApp
                 !string.IsNullOrWhiteSpace(txtMKmoi.Text) ||
                 !string.IsNullOrWhiteSpace(txtNhapLaiMK.Text);
 
-            // 🔐 XỬ LÝ ĐỔI MẬT KHẨU
+            //XỬ LÝ ĐỔI MẬT KHẨU
             if (wantChangePassword)
             {
                 if (string.IsNullOrWhiteSpace(txtMKcu.Text))
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Vui lòng nhập mật khẩu cũ");
                     return;
                 }
@@ -86,32 +93,38 @@ namespace AdminApp
                 if (string.IsNullOrWhiteSpace(txtMKmoi.Text) ||
                     string.IsNullOrWhiteSpace(txtNhapLaiMK.Text))
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Vui lòng nhập đầy đủ mật khẩu mới");
                     return;
                 }
 
-                // ✅ kiểm tra mật khẩu cũ
+                // kiểm tra mật khẩu cũ
                 bool correctOldPass =
                     _accountRepo.CheckOldPassword(_staff_id, txtMKcu.Text);
 
                 if (!correctOldPass)
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Mật khẩu cũ không đúng");
                     return;
                 }
 
-                // ✅ kiểm tra nhập lại
+                // kiểm tra nhập lại
                 if (txtMKmoi.Text != txtNhapLaiMK.Text)
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Mật khẩu mới nhập lại không khớp");
                     return;
                 }
 
-                // ✅ update mật khẩu
+                //update mật khẩu
                 _accountRepo.UpdatePassword(_staff_id, txtMKmoi.Text);
             }
 
-            // ✅ UPDATE THÔNG TIN NHÂN VIÊN
+            //UPDATE THÔNG TIN NHÂN VIÊN
             Staff staff = new Staff
             {
                 staff_id = _staff_id,
@@ -130,12 +143,16 @@ namespace AdminApp
                     _imageRepo.SaveStaffImage(_staff_id, _selectedImageBytes);
                 }
 
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Cập nhật thành công");
                 DialogResult = DialogResult.OK;
                 Close();
             }
             else
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Cập nhật thất bại");
             }
         }

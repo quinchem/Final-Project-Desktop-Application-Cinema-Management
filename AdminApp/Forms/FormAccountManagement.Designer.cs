@@ -104,7 +104,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1420, 750);
+            panel1.Size = new Size(1624, 750);
             panel1.TabIndex = 5;
             // 
             // PanelChinhSua
@@ -132,14 +132,14 @@
             PanelChinhSua.Controls.Add(picAvatar);
             PanelChinhSua.Controls.Add(guna2HtmlLabel4);
             PanelChinhSua.CustomizableEdges = customizableEdges23;
-            PanelChinhSua.Location = new Point(49, 92);
+            PanelChinhSua.Location = new Point(135, 91);
             PanelChinhSua.Name = "PanelChinhSua";
             PanelChinhSua.ShadowDecoration.Color = Color.FromArgb(80, 80, 80);
             PanelChinhSua.ShadowDecoration.CustomizableEdges = customizableEdges24;
             PanelChinhSua.ShadowDecoration.Depth = 10;
             PanelChinhSua.ShadowDecoration.Enabled = true;
             PanelChinhSua.ShadowDecoration.Shadow = new Padding(3, 3, 7, 7);
-            PanelChinhSua.Size = new Size(1324, 549);
+            PanelChinhSua.Size = new Size(1347, 581);
             PanelChinhSua.TabIndex = 7;
             // 
             // guna2CustomGradientPanel2
@@ -158,7 +158,7 @@
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(245, 245, 245);
             guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(245, 245, 245);
             guna2CustomGradientPanel2.FillColor4 = Color.FromArgb(245, 245, 245);
-            guna2CustomGradientPanel2.Location = new Point(44, 312);
+            guna2CustomGradientPanel2.Location = new Point(52, 342);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2CustomGradientPanel2.Size = new Size(1240, 201);
@@ -166,6 +166,7 @@
             // 
             // txtNhapLaiMK
             // 
+            txtNhapLaiMK.BorderRadius = 6;
             txtNhapLaiMK.CustomizableEdges = customizableEdges1;
             txtNhapLaiMK.DefaultText = "";
             txtNhapLaiMK.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -175,20 +176,20 @@
             txtNhapLaiMK.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtNhapLaiMK.Font = new Font("Segoe UI", 9F);
             txtNhapLaiMK.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtNhapLaiMK.Location = new Point(275, 139);
+            txtNhapLaiMK.Location = new Point(275, 142);
             txtNhapLaiMK.Margin = new Padding(3, 4, 3, 4);
             txtNhapLaiMK.Name = "txtNhapLaiMK";
             txtNhapLaiMK.PlaceholderText = "";
             txtNhapLaiMK.SelectedText = "";
             txtNhapLaiMK.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            txtNhapLaiMK.Size = new Size(349, 30);
+            txtNhapLaiMK.Size = new Size(451, 38);
             txtNhapLaiMK.TabIndex = 20;
             // 
             // guna2HtmlLabel15
             // 
             guna2HtmlLabel15.BackColor = Color.Transparent;
             guna2HtmlLabel15.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel15.Location = new Point(27, 139);
+            guna2HtmlLabel15.Location = new Point(27, 142);
             guna2HtmlLabel15.Name = "guna2HtmlLabel15";
             guna2HtmlLabel15.Size = new Size(170, 30);
             guna2HtmlLabel15.TabIndex = 19;
@@ -196,6 +197,7 @@
             // 
             // txtMKmoi
             // 
+            txtMKmoi.BorderRadius = 6;
             txtMKmoi.CustomizableEdges = customizableEdges3;
             txtMKmoi.DefaultText = "";
             txtMKmoi.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -205,20 +207,20 @@
             txtMKmoi.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtMKmoi.Font = new Font("Segoe UI", 9F);
             txtMKmoi.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMKmoi.Location = new Point(275, 76);
+            txtMKmoi.Location = new Point(275, 79);
             txtMKmoi.Margin = new Padding(3, 4, 3, 4);
             txtMKmoi.Name = "txtMKmoi";
             txtMKmoi.PlaceholderText = "";
             txtMKmoi.SelectedText = "";
             txtMKmoi.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            txtMKmoi.Size = new Size(349, 30);
+            txtMKmoi.Size = new Size(451, 38);
             txtMKmoi.TabIndex = 18;
             // 
             // guna2HtmlLabel14
             // 
             guna2HtmlLabel14.BackColor = Color.Transparent;
             guna2HtmlLabel14.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel14.Location = new Point(27, 76);
+            guna2HtmlLabel14.Location = new Point(27, 79);
             guna2HtmlLabel14.Name = "guna2HtmlLabel14";
             guna2HtmlLabel14.Size = new Size(130, 30);
             guna2HtmlLabel14.TabIndex = 17;
@@ -226,6 +228,7 @@
             // 
             // txtMKcu
             // 
+            txtMKcu.BorderRadius = 6;
             txtMKcu.CustomizableEdges = customizableEdges5;
             txtMKcu.DefaultText = "";
             txtMKcu.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -241,7 +244,7 @@
             txtMKcu.PlaceholderText = "";
             txtMKcu.SelectedText = "";
             txtMKcu.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            txtMKcu.Size = new Size(349, 30);
+            txtMKcu.Size = new Size(451, 38);
             txtMKcu.TabIndex = 16;
             // 
             // guna2HtmlLabel13
@@ -258,7 +261,7 @@
             // 
             guna2HtmlLabel12.BackColor = Color.Transparent;
             guna2HtmlLabel12.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel12.Location = new Point(44, 273);
+            guna2HtmlLabel12.Location = new Point(93, 293);
             guna2HtmlLabel12.Name = "guna2HtmlLabel12";
             guna2HtmlLabel12.Size = new Size(148, 33);
             guna2HtmlLabel12.TabIndex = 15;
@@ -266,6 +269,7 @@
             // 
             // txtSDT
             // 
+            txtSDT.BorderRadius = 6;
             txtSDT.CustomizableEdges = customizableEdges9;
             txtSDT.DefaultText = "";
             txtSDT.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -276,7 +280,7 @@
             txtSDT.Font = new Font("Segoe UI", 9F);
             txtSDT.ForeColor = Color.Black;
             txtSDT.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSDT.Location = new Point(1064, 144);
+            txtSDT.Location = new Point(1080, 167);
             txtSDT.Margin = new Padding(3, 4, 3, 4);
             txtSDT.Name = "txtSDT";
             txtSDT.PlaceholderText = "";
@@ -287,6 +291,7 @@
             // 
             // txtGioiTinh
             // 
+            txtGioiTinh.BorderRadius = 6;
             txtGioiTinh.CustomizableEdges = customizableEdges11;
             txtGioiTinh.DefaultText = "";
             txtGioiTinh.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -297,7 +302,7 @@
             txtGioiTinh.Font = new Font("Segoe UI", 9F);
             txtGioiTinh.ForeColor = Color.Black;
             txtGioiTinh.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtGioiTinh.Location = new Point(1064, 66);
+            txtGioiTinh.Location = new Point(1080, 89);
             txtGioiTinh.Margin = new Padding(3, 4, 3, 4);
             txtGioiTinh.Name = "txtGioiTinh";
             txtGioiTinh.PlaceholderText = "";
@@ -310,7 +315,7 @@
             // 
             lbSDT.BackColor = Color.Transparent;
             lbSDT.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbSDT.Location = new Point(934, 144);
+            lbSDT.Location = new Point(943, 167);
             lbSDT.Name = "lbSDT";
             lbSDT.Size = new Size(124, 30);
             lbSDT.TabIndex = 12;
@@ -320,7 +325,7 @@
             // 
             lbGioiTinh.BackColor = Color.Transparent;
             lbGioiTinh.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbGioiTinh.Location = new Point(934, 66);
+            lbGioiTinh.Location = new Point(943, 89);
             lbGioiTinh.Name = "lbGioiTinh";
             lbGioiTinh.Size = new Size(81, 30);
             lbGioiTinh.TabIndex = 11;
@@ -328,6 +333,7 @@
             // 
             // txtChucVu
             // 
+            txtChucVu.BorderRadius = 6;
             txtChucVu.CustomizableEdges = customizableEdges13;
             txtChucVu.DefaultText = "";
             txtChucVu.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -338,7 +344,7 @@
             txtChucVu.Font = new Font("Segoe UI", 9F);
             txtChucVu.ForeColor = Color.Black;
             txtChucVu.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtChucVu.Location = new Point(690, 144);
+            txtChucVu.Location = new Point(690, 167);
             txtChucVu.Margin = new Padding(3, 4, 3, 4);
             txtChucVu.Name = "txtChucVu";
             txtChucVu.PlaceholderText = "";
@@ -349,6 +355,7 @@
             // 
             // txtEmail
             // 
+            txtEmail.BorderRadius = 6;
             txtEmail.CustomizableEdges = customizableEdges15;
             txtEmail.DefaultText = "";
             txtEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -359,7 +366,7 @@
             txtEmail.Font = new Font("Segoe UI", 9F);
             txtEmail.ForeColor = Color.Black;
             txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmail.Location = new Point(690, 66);
+            txtEmail.Location = new Point(690, 89);
             txtEmail.Margin = new Padding(3, 4, 3, 4);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "";
@@ -372,7 +379,7 @@
             // 
             lbChucVu.BackColor = Color.Transparent;
             lbChucVu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbChucVu.Location = new Point(605, 144);
+            lbChucVu.Location = new Point(605, 167);
             lbChucVu.Name = "lbChucVu";
             lbChucVu.Size = new Size(76, 30);
             lbChucVu.TabIndex = 8;
@@ -382,7 +389,7 @@
             // 
             lbEmail.BackColor = Color.Transparent;
             lbEmail.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbEmail.Location = new Point(605, 66);
+            lbEmail.Location = new Point(605, 89);
             lbEmail.Name = "lbEmail";
             lbEmail.Size = new Size(51, 30);
             lbEmail.TabIndex = 7;
@@ -390,6 +397,7 @@
             // 
             // txtNgaySinh
             // 
+            txtNgaySinh.BorderRadius = 6;
             txtNgaySinh.CustomizableEdges = customizableEdges17;
             txtNgaySinh.DefaultText = "";
             txtNgaySinh.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -400,7 +408,7 @@
             txtNgaySinh.Font = new Font("Segoe UI", 9F);
             txtNgaySinh.ForeColor = Color.Black;
             txtNgaySinh.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtNgaySinh.Location = new Point(360, 144);
+            txtNgaySinh.Location = new Point(354, 167);
             txtNgaySinh.Margin = new Padding(3, 4, 3, 4);
             txtNgaySinh.Name = "txtNgaySinh";
             txtNgaySinh.PlaceholderText = "";
@@ -413,7 +421,7 @@
             // 
             lbNgaySinh.BackColor = Color.Transparent;
             lbNgaySinh.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbNgaySinh.Location = new Point(260, 144);
+            lbNgaySinh.Location = new Point(254, 167);
             lbNgaySinh.Name = "lbNgaySinh";
             lbNgaySinh.Size = new Size(94, 30);
             lbNgaySinh.TabIndex = 5;
@@ -421,6 +429,7 @@
             // 
             // txtHoTen
             // 
+            txtHoTen.BorderRadius = 6;
             txtHoTen.CustomizableEdges = customizableEdges19;
             txtHoTen.DefaultText = "";
             txtHoTen.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -431,7 +440,7 @@
             txtHoTen.Font = new Font("Segoe UI", 9F);
             txtHoTen.ForeColor = Color.Black;
             txtHoTen.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtHoTen.Location = new Point(360, 66);
+            txtHoTen.Location = new Point(354, 89);
             txtHoTen.Margin = new Padding(3, 4, 3, 4);
             txtHoTen.Name = "txtHoTen";
             txtHoTen.PlaceholderText = "";
@@ -444,7 +453,7 @@
             // 
             lbHoTen.BackColor = Color.Transparent;
             lbHoTen.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbHoTen.Location = new Point(260, 66);
+            lbHoTen.Location = new Point(254, 89);
             lbHoTen.Name = "lbHoTen";
             lbHoTen.Size = new Size(66, 30);
             lbHoTen.TabIndex = 3;
@@ -459,23 +468,23 @@
             btnChinhSua.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnChinhSua.ForeColor = Color.White;
             btnChinhSua.ImageAlign = HorizontalAlignment.Left;
-            btnChinhSua.Location = new Point(26, 199);
+            btnChinhSua.Location = new Point(52, 239);
             btnChinhSua.Name = "btnChinhSua";
             btnChinhSua.ShadowDecoration.BorderRadius = 8;
             btnChinhSua.ShadowDecoration.Color = Color.FromArgb(100, 100, 100);
             btnChinhSua.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btnChinhSua.ShadowDecoration.Depth = 3;
             btnChinhSua.ShadowDecoration.Enabled = true;
-            btnChinhSua.Size = new Size(198, 41);
+            btnChinhSua.Size = new Size(249, 41);
             btnChinhSua.TabIndex = 0;
-            btnChinhSua.Text = "Chỉnh sửa thông tin";
+            btnChinhSua.Text = "CHỈNH SỬA THÔNG TIN";
             btnChinhSua.Click += btnChinhSua_Click;
             // 
             // guna2HtmlLabel5
             // 
             guna2HtmlLabel5.BackColor = Color.Transparent;
             guna2HtmlLabel5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel5.Location = new Point(99, 40);
+            guna2HtmlLabel5.Location = new Point(99, 49);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             guna2HtmlLabel5.Size = new Size(61, 30);
             guna2HtmlLabel5.TabIndex = 2;
@@ -483,9 +492,9 @@
             // 
             // picAvatar
             // 
-            picAvatar.Location = new Point(71, 76);
+            picAvatar.Location = new Point(71, 85);
             picAvatar.Name = "picAvatar";
-            picAvatar.Size = new Size(125, 117);
+            picAvatar.Size = new Size(125, 134);
             picAvatar.SizeMode = PictureBoxSizeMode.Zoom;
             picAvatar.TabIndex = 1;
             picAvatar.TabStop = false;
@@ -494,11 +503,11 @@
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.Location = new Point(44, 1);
+            guna2HtmlLabel4.Location = new Point(44, 10);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(197, 33);
+            guna2HtmlLabel4.Size = new Size(241, 33);
             guna2HtmlLabel4.TabIndex = 0;
-            guna2HtmlLabel4.Text = "Thông tin cá nhân";
+            guna2HtmlLabel4.Text = "THÔNG TIN CÁ NHÂN";
             // 
             // guna2HtmlLabel1
             // 
@@ -595,7 +604,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1420, 750);
+            ClientSize = new Size(1624, 750);
             Controls.Add(panel1);
             Name = "FormAccountManagement";
             Text = "Quản lý tài khoản cá nhân";

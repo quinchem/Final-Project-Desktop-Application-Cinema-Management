@@ -89,7 +89,7 @@
             // 
             picPoster.Location = new Point(33, 99);
             picPoster.Name = "picPoster";
-            picPoster.Size = new Size(243, 360);
+            picPoster.Size = new Size(243, 395);
             picPoster.SizeMode = PictureBoxSizeMode.Zoom;
             picPoster.TabIndex = 52;
             picPoster.TabStop = false;
@@ -97,99 +97,99 @@
             // LbThoiLuong
             // 
             LbThoiLuong.BackColor = Color.Transparent;
-            LbThoiLuong.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbThoiLuong.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbThoiLuong.ForeColor = Color.Coral;
-            LbThoiLuong.Location = new Point(657, 240);
+            LbThoiLuong.Location = new Point(660, 261);
             LbThoiLuong.Name = "LbThoiLuong";
-            LbThoiLuong.Size = new Size(96, 27);
+            LbThoiLuong.Size = new Size(108, 30);
             LbThoiLuong.TabIndex = 63;
             LbThoiLuong.Text = "Thời lượng";
             // 
             // LbDoTuoi
             // 
             LbDoTuoi.BackColor = Color.Transparent;
-            LbDoTuoi.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbDoTuoi.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbDoTuoi.ForeColor = Color.Coral;
-            LbDoTuoi.Location = new Point(657, 165);
+            LbDoTuoi.Location = new Point(660, 177);
             LbDoTuoi.Name = "LbDoTuoi";
-            LbDoTuoi.Size = new Size(66, 27);
+            LbDoTuoi.Size = new Size(74, 30);
             LbDoTuoi.TabIndex = 62;
             LbDoTuoi.Text = "Độ tuổi";
             // 
             // LbGiaNhap
             // 
             LbGiaNhap.BackColor = Color.Transparent;
-            LbGiaNhap.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbGiaNhap.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbGiaNhap.ForeColor = Color.Coral;
-            LbGiaNhap.Location = new Point(657, 99);
+            LbGiaNhap.Location = new Point(660, 102);
             LbGiaNhap.Name = "LbGiaNhap";
-            LbGiaNhap.Size = new Size(127, 27);
+            LbGiaNhap.Size = new Size(141, 30);
             LbGiaNhap.TabIndex = 61;
             LbGiaNhap.Text = "Giá nhập phim";
             // 
             // LbDienVien
             // 
             LbDienVien.BackColor = Color.Transparent;
-            LbDienVien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbDienVien.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbDienVien.ForeColor = Color.Coral;
-            LbDienVien.Location = new Point(657, 393);
+            LbDienVien.Location = new Point(661, 429);
             LbDienVien.Name = "LbDienVien";
-            LbDienVien.Size = new Size(83, 27);
+            LbDienVien.Size = new Size(93, 30);
             LbDienVien.TabIndex = 60;
             LbDienVien.Text = "Diễn viên";
             // 
             // LbNgonNgu
             // 
             LbNgonNgu.BackColor = Color.Transparent;
-            LbNgonNgu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbNgonNgu.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbNgonNgu.ForeColor = Color.Coral;
-            LbNgonNgu.Location = new Point(310, 240);
+            LbNgonNgu.Location = new Point(310, 262);
             LbNgonNgu.Name = "LbNgonNgu";
-            LbNgonNgu.Size = new Size(89, 27);
+            LbNgonNgu.Size = new Size(98, 30);
             LbNgonNgu.TabIndex = 59;
             LbNgonNgu.Text = "Ngôn ngữ";
             // 
             // LbTheLoaiPhim
             // 
             LbTheLoaiPhim.BackColor = Color.Transparent;
-            LbTheLoaiPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbTheLoaiPhim.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbTheLoaiPhim.ForeColor = Color.Coral;
-            LbTheLoaiPhim.Location = new Point(310, 165);
+            LbTheLoaiPhim.Location = new Point(310, 178);
             LbTheLoaiPhim.Name = "LbTheLoaiPhim";
-            LbTheLoaiPhim.Size = new Size(71, 27);
+            LbTheLoaiPhim.Size = new Size(79, 30);
             LbTheLoaiPhim.TabIndex = 58;
             LbTheLoaiPhim.Text = "Thể loại";
             // 
             // LbDaoDien
             // 
             LbDaoDien.BackColor = Color.Transparent;
-            LbDaoDien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbDaoDien.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbDaoDien.ForeColor = Color.Coral;
-            LbDaoDien.Location = new Point(310, 393);
+            LbDaoDien.Location = new Point(311, 430);
             LbDaoDien.Name = "LbDaoDien";
-            LbDaoDien.Size = new Size(79, 27);
+            LbDaoDien.Size = new Size(88, 30);
             LbDaoDien.TabIndex = 57;
             LbDaoDien.Text = "Đạo diễn";
             // 
             // LbNgayChieu
             // 
             LbNgayChieu.BackColor = Color.Transparent;
-            LbNgayChieu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbNgayChieu.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbNgayChieu.ForeColor = Color.Coral;
-            LbNgayChieu.Location = new Point(310, 315);
+            LbNgayChieu.Location = new Point(310, 346);
             LbNgayChieu.Name = "LbNgayChieu";
-            LbNgayChieu.Size = new Size(99, 27);
+            LbNgayChieu.Size = new Size(110, 30);
             LbNgayChieu.TabIndex = 56;
             LbNgayChieu.Text = "Ngày chiếu";
             // 
             // LbTenPhim
             // 
             LbTenPhim.BackColor = Color.Transparent;
-            LbTenPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbTenPhim.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbTenPhim.ForeColor = Color.Coral;
-            LbTenPhim.Location = new Point(310, 99);
+            LbTenPhim.Location = new Point(310, 103);
             LbTenPhim.Name = "LbTenPhim";
-            LbTenPhim.Size = new Size(83, 27);
+            LbTenPhim.Size = new Size(92, 30);
             LbTenPhim.TabIndex = 54;
             LbTenPhim.Text = "Tên Phim";
             // 
@@ -204,110 +204,119 @@
             btnThemPhim.FillColor = Color.Gray;
             btnThemPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnThemPhim.ForeColor = Color.White;
-            btnThemPhim.Location = new Point(863, 606);
+            btnThemPhim.Location = new Point(868, 644);
             btnThemPhim.Name = "btnThemPhim";
             btnThemPhim.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnThemPhim.Size = new Size(80, 37);
+            btnThemPhim.Size = new Size(119, 45);
             btnThemPhim.TabIndex = 71;
-            btnThemPhim.Text = "Đóng";
-            btnThemPhim.Click += btnThemPhim_Click;
+            btnThemPhim.Text = "ĐÓNG";
+            btnThemPhim.Click += btnDong_Click;
             // 
             // lblTitle
             // 
             lblTitle.BackColor = Color.Transparent;
-            lblTitle.Location = new Point(310, 129);
+            lblTitle.Font = new Font("Segoe UI", 10.2F);
+            lblTitle.Location = new Point(318, 140);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(37, 22);
+            lblTitle.Size = new Size(42, 25);
             lblTitle.TabIndex = 72;
             lblTitle.Text = "phim";
             // 
             // lblLanguage
             // 
             lblLanguage.BackColor = Color.Transparent;
-            lblLanguage.Location = new Point(310, 276);
+            lblLanguage.Font = new Font("Segoe UI", 10.2F);
+            lblLanguage.Location = new Point(318, 305);
             lblLanguage.Name = "lblLanguage";
-            lblLanguage.Size = new Size(67, 22);
+            lblLanguage.Size = new Size(78, 25);
             lblLanguage.TabIndex = 73;
             lblLanguage.Text = "ngôn ngữ";
             // 
             // lblGenre
             // 
             lblGenre.BackColor = Color.Transparent;
-            lblGenre.Location = new Point(310, 197);
+            lblGenre.Font = new Font("Segoe UI", 10.2F);
+            lblGenre.Location = new Point(318, 217);
             lblGenre.Name = "lblGenre";
-            lblGenre.Size = new Size(53, 22);
+            lblGenre.Size = new Size(60, 25);
             lblGenre.TabIndex = 74;
             lblGenre.Text = "thể loại";
             // 
             // lblAge
             // 
             lblAge.BackColor = Color.Transparent;
-            lblAge.Location = new Point(657, 203);
+            lblAge.Font = new Font("Segoe UI", 10.2F);
+            lblAge.Location = new Point(668, 222);
             lblAge.Name = "lblAge";
-            lblAge.Size = new Size(51, 22);
+            lblAge.Size = new Size(58, 25);
             lblAge.TabIndex = 75;
             lblAge.Text = "độ tuổi";
             // 
             // lblPrice
             // 
             lblPrice.BackColor = Color.Transparent;
-            lblPrice.Location = new Point(657, 129);
+            lblPrice.Font = new Font("Segoe UI", 10.2F);
+            lblPrice.Location = new Point(668, 139);
             lblPrice.Name = "lblPrice";
-            lblPrice.Size = new Size(61, 22);
+            lblPrice.Size = new Size(70, 25);
             lblPrice.TabIndex = 76;
             lblPrice.Text = "giá nhập";
             // 
             // lblReleaseDate
             // 
             lblReleaseDate.BackColor = Color.Transparent;
-            lblReleaseDate.Location = new Point(310, 348);
+            lblReleaseDate.Font = new Font("Segoe UI", 10.2F);
+            lblReleaseDate.Location = new Point(318, 386);
             lblReleaseDate.Name = "lblReleaseDate";
-            lblReleaseDate.Size = new Size(74, 22);
+            lblReleaseDate.Size = new Size(86, 25);
             lblReleaseDate.TabIndex = 77;
             lblReleaseDate.Text = "ngày chiếu";
             // 
             // lblDirector
             // 
             lblDirector.BackColor = Color.Transparent;
-            lblDirector.Location = new Point(310, 426);
+            lblDirector.Font = new Font("Segoe UI", 10.2F);
+            lblDirector.Location = new Point(319, 470);
             lblDirector.Name = "lblDirector";
-            lblDirector.Size = new Size(62, 22);
+            lblDirector.Size = new Size(70, 25);
             lblDirector.TabIndex = 78;
             lblDirector.Text = "đạo diễn";
             // 
             // lblDuration
             // 
             lblDuration.BackColor = Color.Transparent;
-            lblDuration.Location = new Point(657, 276);
+            lblDuration.Font = new Font("Segoe UI", 10.2F);
+            lblDuration.Location = new Point(668, 304);
             lblDuration.Name = "lblDuration";
-            lblDuration.Size = new Size(72, 22);
+            lblDuration.Size = new Size(82, 25);
             lblDuration.TabIndex = 79;
             lblDuration.Text = "thời lượng";
             // 
             // lblActor
             // 
             lblActor.BackColor = Color.Transparent;
-            lblActor.Location = new Point(658, 426);
+            lblActor.Font = new Font("Segoe UI", 10.2F);
+            lblActor.Location = new Point(670, 469);
             lblActor.Name = "lblActor";
-            lblActor.Size = new Size(63, 22);
+            lblActor.Size = new Size(72, 25);
             lblActor.TabIndex = 80;
             lblActor.Text = "diễn viên";
             // 
             // guna2HtmlLabel10
             // 
             guna2HtmlLabel10.BackColor = Color.Transparent;
-            guna2HtmlLabel10.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel10.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2HtmlLabel10.ForeColor = Color.Coral;
-            guna2HtmlLabel10.Location = new Point(33, 483);
+            guna2HtmlLabel10.Location = new Point(33, 519);
             guna2HtmlLabel10.Name = "guna2HtmlLabel10";
-            guna2HtmlLabel10.Size = new Size(53, 27);
+            guna2HtmlLabel10.Size = new Size(59, 30);
             guna2HtmlLabel10.TabIndex = 81;
             guna2HtmlLabel10.Text = "Mô tả";
             // 
             // lblDescription
             // 
             lblDescription.BackColor = Color.Transparent;
-            lblDescription.Location = new Point(33, 516);
+            lblDescription.Location = new Point(36, 555);
             lblDescription.Name = "lblDescription";
             lblDescription.Size = new Size(42, 22);
             lblDescription.TabIndex = 82;
@@ -316,20 +325,21 @@
             // lblStatus
             // 
             lblStatus.BackColor = Color.Transparent;
-            lblStatus.Location = new Point(659, 348);
+            lblStatus.Font = new Font("Segoe UI", 10.2F);
+            lblStatus.Location = new Point(670, 385);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(67, 22);
+            lblStatus.Size = new Size(79, 25);
             lblStatus.TabIndex = 84;
             lblStatus.Text = "tình trạng";
             // 
             // guna2HtmlLabel2
             // 
             guna2HtmlLabel2.BackColor = Color.Transparent;
-            guna2HtmlLabel2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             guna2HtmlLabel2.ForeColor = Color.Coral;
-            guna2HtmlLabel2.Location = new Point(658, 315);
+            guna2HtmlLabel2.Location = new Point(661, 345);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(92, 27);
+            guna2HtmlLabel2.Size = new Size(102, 30);
             guna2HtmlLabel2.TabIndex = 83;
             guna2HtmlLabel2.Text = "Tình trạng";
             // 
@@ -337,7 +347,7 @@
             // 
             guna2vSeparator1.Location = new Point(612, 99);
             guna2vSeparator1.Name = "guna2vSeparator1";
-            guna2vSeparator1.Size = new Size(12, 360);
+            guna2vSeparator1.Size = new Size(12, 396);
             guna2vSeparator1.TabIndex = 86;
             // 
             // FormViewDetailMovie
@@ -347,7 +357,7 @@
             AutoScroll = true;
             AutoScrollMinSize = new Size(1, 1);
             BackColor = Color.White;
-            ClientSize = new Size(1028, 667);
+            ClientSize = new Size(1028, 712);
             Controls.Add(guna2vSeparator1);
             Controls.Add(lblStatus);
             Controls.Add(guna2HtmlLabel2);

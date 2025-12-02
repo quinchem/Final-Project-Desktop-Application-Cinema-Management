@@ -70,7 +70,7 @@ namespace SharedData.Repositories
         public static List<Showtime> GetByDate(DateTime date)
         {
             List<Showtime> list = new List<Showtime>();
-            string dateStr = ConvertDate(date); // dd/MM/yyyy
+            string dateStr = ConvertDate(date); 
 
             using (var conn = new SqliteConnection(connStr))
             {
@@ -127,14 +127,10 @@ namespace SharedData.Repositories
         public List<ShowtimeInfo> GetShowtimesByDateRange(DateTime startDate, int days)
         {
             List<ShowtimeInfo> list = new List<ShowtimeInfo>();
-
             try
             {
-                // 1️⃣ Format ngày chuẩn ISO yyyy-MM-dd
                 string strStart = startDate.ToString("yyyy-MM-dd");
                 string strEnd = startDate.AddDays(days - 1).ToString("yyyy-MM-dd");
-
-                // 1. Sửa lại câu Query dùng JOIN
                 string query = $@"
             SELECT 
                 s.showtime_id,
@@ -167,16 +163,15 @@ namespace SharedData.Repositories
                             {
                                 var info = new ShowtimeInfo
                                 {
-                                    // Đảm bảo tên cột trong chuỗi khớp với Database của bạn
                                     showtime_id = reader["showtime_id"]?.ToString(),
                                     movie_id = reader["movie_id"]?.ToString(),
-                                    auditorium_id = reader["auditorium_id"]?.ToString(),  // THÊM!!!
+                                    auditorium_id = reader["auditorium_id"]?.ToString(),
                                     title = reader["title"]?.ToString(),
                                     duration = reader["duration"] != DBNull.Value ? Convert.ToInt32(reader["duration"]) : 0,
                                     show_date = reader["show_date"]?.ToString(),
                                     start_time = reader["start_time"]?.ToString(),
                                     end_time = reader["end_time"]?.ToString(),
-                                    name = reader["auditorium_name"]?.ToString(),        // tên phòng
+                                    name = reader["auditorium_name"]?.ToString(),  
                                     auditorium_type = reader["auditorium_type"]?.ToString()
                                 };
                                 list.Add(info);
@@ -187,7 +182,6 @@ namespace SharedData.Repositories
             }
             catch (Exception ex)
             {
-                // 🔥 QUAN TRỌNG: Hiện lỗi lên để biết đường sửa
                 throw new Exception("Lỗi tại GetShowtimesByDateRange: " + ex.Message);
             }
 
@@ -299,10 +293,7 @@ namespace SharedData.Repositories
                     {
                         var idRaw = rd["showtime_id"]?.ToString();
                         if (string.IsNullOrWhiteSpace(idRaw)) continue;
-
                         var id = idRaw.Trim();
-
-                        // Chỉ xét các id có prefix T hoặc t, theo mẫu T123
                         var m = Regex.Match(id, @"^[Tt](\d+)$");
                         if (m.Success && int.TryParse(m.Groups[1].Value, out int num))
                         {
@@ -313,7 +304,7 @@ namespace SharedData.Repositories
             }
 
             int next = maxNum + 1;
-            return "T" + next.ToString("D3"); // T001, T002...
+            return "T" + next.ToString("D3");
         }
         // INSERT 
         public static void Insert(Showtime showtime)
@@ -321,15 +312,11 @@ namespace SharedData.Repositories
             if (!string.IsNullOrWhiteSpace(showtime.showtime_id))
             {
                 showtime.showtime_id = showtime.showtime_id.Trim().ToUpper();
-
-                // Nếu format không hợp lệ (không giống T + số), thì bỏ và tự sinh
                 if (!Regex.IsMatch(showtime.showtime_id, @"^[T]\d+$"))
                 {
                     showtime.showtime_id = null;
                 }
             }
-
-            // Nếu vẫn rỗng => tự sinh
             if (string.IsNullOrWhiteSpace(showtime.showtime_id))
             {
                 showtime.showtime_id = GenerateNextShowtimeId();
@@ -339,9 +326,6 @@ namespace SharedData.Repositories
                 conn.Open();
                 using (var tran = conn.BeginTransaction())
                 {
-                    // ==========================
-                    // 2) INSERT SHOWTIME
-                    // ==========================
                     var cmd = conn.CreateCommand();
                     cmd.Transaction = tran;
                     cmd.CommandText = @"
@@ -359,18 +343,12 @@ namespace SharedData.Repositories
                     {
                         cmd.ExecuteNonQuery();
                     }
-                    catch (SqliteException ex) when (ex.SqliteErrorCode == 19) // UNIQUE error
+                    catch (SqliteException ex) when (ex.SqliteErrorCode == 19) 
                     {
-                        // Nếu trùng ID (race condition) → sinh ID mới
                         showtime.showtime_id = GenerateNextShowtimeId();
                         cmd.Parameters["@id"].Value = showtime.showtime_id;
                         cmd.ExecuteNonQuery();
                     }
-
-                    // ==========================
-                    // 3) AUTO SYNC SEAT_FOR_SHOWTIME
-                    // ==========================
-                    // Chỉ insert ghế đang Bảo trì
                     var cmdMaint = conn.CreateCommand();
                     cmdMaint.Transaction = tran;
                     cmdMaint.CommandText = @"
@@ -380,7 +358,6 @@ namespace SharedData.Repositories
                 WHERE auditorium_id = @aid
                   AND status = 'Bảo trì';
             ";
-
                     cmdMaint.Parameters.AddWithValue("@stid", showtime.showtime_id);
                     cmdMaint.Parameters.AddWithValue("@aid", showtime.auditorium_id);
                     cmdMaint.ExecuteNonQuery();

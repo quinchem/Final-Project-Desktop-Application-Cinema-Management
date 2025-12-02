@@ -1,8 +1,9 @@
-using SharedData.Models;
 using ClosedXML.Excel;
 using Microsoft.Data.Sqlite;
+using SharedData.Models;
 using System;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace AdminApp
@@ -17,7 +18,7 @@ namespace AdminApp
             InitializeComponent();
             _staffId = staffId;
 
-            panelDangNhap.Visible = true;      // hiện panel đăng nhập
+            panelDangNhap.Visible = true; 
             //btnDangNhap.Visible = true;
             btnDangXuat.Visible = false;
 
@@ -42,7 +43,6 @@ namespace AdminApp
             //lblTen.Visible = false;
             lblChucVu.Visible = false;
 
-            // CHƯA đăng nhập → khóa chức năng (logic), nhưng không đổi màu nút
             SetMenuEnabled(false);
         }
 
@@ -112,6 +112,8 @@ namespace AdminApp
         {
             if (!_isLoggedIn)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show(
                     "Vui lòng đăng nhập để sử dụng chức năng này",
                     "Chưa đăng nhập",
@@ -159,14 +161,6 @@ namespace AdminApp
             OpenChildForm(new FormRoomLayoutManagement());
         }
 
-        private void btnDichVu_Click(object sender, EventArgs e)
-        {
-            if (!CheckLogin()) return;
-
-            var btn = sender as Guna.UI2.WinForms.Guna2Button;
-            ActivateButton(btn);
-            OpenChildForm(new FormProduct());
-        }
 
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
@@ -242,6 +236,8 @@ namespace AdminApp
 
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 lblError.Text = "Vui lòng nhập đầy đủ tài khoản và mật khẩu";
                 lblError.Visible = true;
                 return;
@@ -352,7 +348,7 @@ namespace AdminApp
                 txtPassword.UseSystemPasswordChar = true;
 
                 // Đổi ảnh đóng ở đây
-                picEye.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+                picEye.Image = Properties.Resources.hide; 
             }
         }
     }

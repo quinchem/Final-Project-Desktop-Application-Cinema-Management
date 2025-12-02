@@ -106,7 +106,7 @@
             txtTenPhim.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtTenPhim.HoverState.ForeColor = Color.White;
             txtTenPhim.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtTenPhim.Location = new Point(12, 100);
+            txtTenPhim.Location = new Point(12, 103);
             txtTenPhim.Margin = new Padding(3, 4, 3, 4);
             txtTenPhim.Name = "txtTenPhim";
             txtTenPhim.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -148,7 +148,7 @@
             guna2ShadowPanel1.Location = new Point(0, 0);
             guna2ShadowPanel1.Name = "guna2ShadowPanel1";
             guna2ShadowPanel1.ShadowColor = Color.Black;
-            guna2ShadowPanel1.Size = new Size(1028, 56);
+            guna2ShadowPanel1.Size = new Size(1065, 56);
             guna2ShadowPanel1.TabIndex = 4;
             // 
             // txtDaoDien
@@ -169,7 +169,7 @@
             txtDaoDien.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtDaoDien.HoverState.ForeColor = Color.White;
             txtDaoDien.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtDaoDien.Location = new Point(16, 283);
+            txtDaoDien.Location = new Point(16, 322);
             txtDaoDien.Margin = new Padding(3, 4, 3, 4);
             txtDaoDien.Name = "txtDaoDien";
             txtDaoDien.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -185,7 +185,7 @@
             LbNgayChieu.BackColor = Color.Transparent;
             LbNgayChieu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbNgayChieu.ForeColor = Color.Coral;
-            LbNgayChieu.Location = new Point(16, 156);
+            LbNgayChieu.Location = new Point(16, 172);
             LbNgayChieu.Name = "LbNgayChieu";
             LbNgayChieu.Size = new Size(99, 27);
             LbNgayChieu.TabIndex = 6;
@@ -196,7 +196,7 @@
             LbDaoDien.BackColor = Color.Transparent;
             LbDaoDien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbDaoDien.ForeColor = Color.Coral;
-            LbDaoDien.Location = new Point(16, 249);
+            LbDaoDien.Location = new Point(16, 286);
             LbDaoDien.Name = "LbDaoDien";
             LbDaoDien.Size = new Size(79, 27);
             LbDaoDien.TabIndex = 7;
@@ -218,7 +218,7 @@
             LbNgonNgu.BackColor = Color.Transparent;
             LbNgonNgu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbNgonNgu.ForeColor = Color.Coral;
-            LbNgonNgu.Location = new Point(353, 156);
+            LbNgonNgu.Location = new Point(353, 172);
             LbNgonNgu.Name = "LbNgonNgu";
             LbNgonNgu.Size = new Size(89, 27);
             LbNgonNgu.TabIndex = 9;
@@ -229,7 +229,7 @@
             LbDienVien.BackColor = Color.Transparent;
             LbDienVien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbDienVien.ForeColor = Color.Coral;
-            LbDienVien.Location = new Point(353, 249);
+            LbDienVien.Location = new Point(353, 286);
             LbDienVien.Name = "LbDienVien";
             LbDienVien.Size = new Size(83, 27);
             LbDienVien.TabIndex = 10;
@@ -251,7 +251,7 @@
             LbDoTuoi.BackColor = Color.Transparent;
             LbDoTuoi.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbDoTuoi.ForeColor = Color.Coral;
-            LbDoTuoi.Location = new Point(676, 156);
+            LbDoTuoi.Location = new Point(676, 172);
             LbDoTuoi.Name = "LbDoTuoi";
             LbDoTuoi.Size = new Size(66, 27);
             LbDoTuoi.TabIndex = 12;
@@ -262,7 +262,7 @@
             LbThoiLuong.BackColor = Color.Transparent;
             LbThoiLuong.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbThoiLuong.ForeColor = Color.Coral;
-            LbThoiLuong.Location = new Point(676, 249);
+            LbThoiLuong.Location = new Point(676, 286);
             LbThoiLuong.Name = "LbThoiLuong";
             LbThoiLuong.Size = new Size(96, 27);
             LbThoiLuong.TabIndex = 13;
@@ -273,7 +273,7 @@
             LbMoTa.BackColor = Color.Transparent;
             LbMoTa.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbMoTa.ForeColor = Color.Coral;
-            LbMoTa.Location = new Point(16, 346);
+            LbMoTa.Location = new Point(15, 396);
             LbMoTa.Name = "LbMoTa";
             LbMoTa.Size = new Size(53, 27);
             LbMoTa.TabIndex = 14;
@@ -284,7 +284,7 @@
             LbPoster.BackColor = Color.Transparent;
             LbPoster.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbPoster.ForeColor = Color.Coral;
-            LbPoster.Location = new Point(353, 346);
+            LbPoster.Location = new Point(358, 396);
             LbPoster.Name = "LbPoster";
             LbPoster.Size = new Size(57, 27);
             LbPoster.TabIndex = 15;
@@ -295,7 +295,7 @@
             LbTrangThai.BackColor = Color.Transparent;
             LbTrangThai.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LbTrangThai.ForeColor = Color.Coral;
-            LbTrangThai.Location = new Point(676, 346);
+            LbTrangThai.Location = new Point(676, 385);
             LbTrangThai.Name = "LbTrangThai";
             LbTrangThai.Size = new Size(91, 27);
             LbTrangThai.TabIndex = 16;
@@ -319,7 +319,7 @@
             txtTheLoai.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtTheLoai.HoverState.ForeColor = Color.White;
             txtTheLoai.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtTheLoai.Location = new Point(353, 100);
+            txtTheLoai.Location = new Point(353, 103);
             txtTheLoai.Margin = new Padding(3, 4, 3, 4);
             txtTheLoai.Name = "txtTheLoai";
             txtTheLoai.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -348,7 +348,7 @@
             txtDienVien.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtDienVien.HoverState.ForeColor = Color.White;
             txtDienVien.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtDienVien.Location = new Point(353, 283);
+            txtDienVien.Location = new Point(353, 322);
             txtDienVien.Margin = new Padding(3, 4, 3, 4);
             txtDienVien.Name = "txtDienVien";
             txtDienVien.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -377,7 +377,7 @@
             txtThoiLuong.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtThoiLuong.HoverState.ForeColor = Color.White;
             txtThoiLuong.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtThoiLuong.Location = new Point(676, 283);
+            txtThoiLuong.Location = new Point(676, 322);
             txtThoiLuong.Margin = new Padding(3, 4, 3, 4);
             txtThoiLuong.Name = "txtThoiLuong";
             txtThoiLuong.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -387,6 +387,7 @@
             txtThoiLuong.Size = new Size(286, 33);
             txtThoiLuong.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtThoiLuong.TabIndex = 19;
+            txtThoiLuong.KeyPress += txtThoiLuong_KeyPress;
             // 
             // txtGiaNhap
             // 
@@ -406,7 +407,7 @@
             txtGiaNhap.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtGiaNhap.HoverState.ForeColor = Color.White;
             txtGiaNhap.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtGiaNhap.Location = new Point(676, 100);
+            txtGiaNhap.Location = new Point(676, 103);
             txtGiaNhap.Margin = new Padding(3, 4, 3, 4);
             txtGiaNhap.Name = "txtGiaNhap";
             txtGiaNhap.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -416,6 +417,7 @@
             txtGiaNhap.Size = new Size(286, 33);
             txtGiaNhap.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtGiaNhap.TabIndex = 20;
+            txtGiaNhap.KeyPress += txtGiaNhap_KeyPress;
             // 
             // txtNgonNgu
             // 
@@ -435,7 +437,7 @@
             txtNgonNgu.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtNgonNgu.HoverState.ForeColor = Color.White;
             txtNgonNgu.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtNgonNgu.Location = new Point(353, 190);
+            txtNgonNgu.Location = new Point(353, 210);
             txtNgonNgu.Margin = new Padding(3, 4, 3, 4);
             txtNgonNgu.Name = "txtNgonNgu";
             txtNgonNgu.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -459,7 +461,7 @@
             dtNgayChieu.ForeColor = Color.LightGray;
             dtNgayChieu.Format = DateTimePickerFormat.Long;
             dtNgayChieu.HoverState.BorderColor = Color.Gray;
-            dtNgayChieu.Location = new Point(12, 190);
+            dtNgayChieu.Location = new Point(12, 210);
             dtNgayChieu.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dtNgayChieu.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtNgayChieu.Name = "dtNgayChieu";
@@ -481,7 +483,7 @@
             cboDoTuoi.HoverState.BorderColor = Color.Silver;
             cboDoTuoi.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             cboDoTuoi.ItemHeight = 30;
-            cboDoTuoi.Location = new Point(676, 188);
+            cboDoTuoi.Location = new Point(676, 208);
             cboDoTuoi.Name = "cboDoTuoi";
             cboDoTuoi.ShadowDecoration.CustomizableEdges = customizableEdges18;
             cboDoTuoi.Size = new Size(145, 36);
@@ -500,7 +502,7 @@
             cboTrangThai.HoverState.BorderColor = Color.Silver;
             cboTrangThai.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             cboTrangThai.ItemHeight = 30;
-            cboTrangThai.Location = new Point(676, 379);
+            cboTrangThai.Location = new Point(676, 421);
             cboTrangThai.Name = "cboTrangThai";
             cboTrangThai.ShadowDecoration.CustomizableEdges = customizableEdges20;
             cboTrangThai.Size = new Size(286, 36);
@@ -508,7 +510,7 @@
             // 
             // picPoster
             // 
-            picPoster.Location = new Point(354, 384);
+            picPoster.Location = new Point(359, 434);
             picPoster.Name = "picPoster";
             picPoster.Size = new Size(135, 200);
             picPoster.SizeMode = PictureBoxSizeMode.Zoom;
@@ -527,10 +529,10 @@
             btnUpPoster.Font = new Font("Segoe UI", 9F);
             btnUpPoster.ForeColor = Color.White;
             btnUpPoster.Image = Properties.Resources.push_icon;
-            btnUpPoster.Location = new Point(514, 558);
+            btnUpPoster.Location = new Point(519, 597);
             btnUpPoster.Name = "btnUpPoster";
             btnUpPoster.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            btnUpPoster.Size = new Size(43, 26);
+            btnUpPoster.Size = new Size(59, 37);
             btnUpPoster.TabIndex = 26;
             btnUpPoster.Click += btnUploadImage_Click;
             // 
@@ -545,12 +547,12 @@
             btnThemPhim.FillColor = Color.SteelBlue;
             btnThemPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnThemPhim.ForeColor = Color.White;
-            btnThemPhim.Location = new Point(874, 547);
+            btnThemPhim.Location = new Point(874, 597);
             btnThemPhim.Name = "btnThemPhim";
             btnThemPhim.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            btnThemPhim.Size = new Size(88, 37);
+            btnThemPhim.Size = new Size(135, 37);
             btnThemPhim.TabIndex = 27;
-            btnThemPhim.Text = "Thêm";
+            btnThemPhim.Text = "THÊM";
             btnThemPhim.Click += btnThem_Click;
             // 
             // txtMoTa
@@ -572,7 +574,7 @@
             txtMoTa.HoverState.BorderColor = SystemColors.AppWorkspace;
             txtMoTa.HoverState.FillColor = Color.Transparent;
             txtMoTa.HoverState.ForeColor = Color.White;
-            txtMoTa.Location = new Point(16, 384);
+            txtMoTa.Location = new Point(15, 434);
             txtMoTa.Margin = new Padding(3, 4, 3, 4);
             txtMoTa.Multiline = true;
             txtMoTa.Name = "txtMoTa";
@@ -595,12 +597,12 @@
             btnClose.FillColor = Color.Gray;
             btnClose.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(779, 547);
+            btnClose.Location = new Point(718, 597);
             btnClose.Name = "btnClose";
             btnClose.ShadowDecoration.CustomizableEdges = customizableEdges28;
-            btnClose.Size = new Size(80, 37);
+            btnClose.Size = new Size(127, 37);
             btnClose.TabIndex = 72;
-            btnClose.Text = "Đóng";
+            btnClose.Text = "ĐÓNG";
             btnClose.Click += btnClose_Click;
             // 
             // FormAddMovie
@@ -608,7 +610,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1028, 601);
+            ClientSize = new Size(1065, 669);
             Controls.Add(btnClose);
             Controls.Add(txtMoTa);
             Controls.Add(btnThemPhim);

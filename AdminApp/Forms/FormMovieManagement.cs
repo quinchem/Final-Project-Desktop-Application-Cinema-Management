@@ -8,11 +8,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace AdminApp
 {
@@ -42,6 +43,8 @@ namespace AdminApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Error loading films: " + ex.Message);
             }
         }
@@ -78,7 +81,7 @@ namespace AdminApp
         {
 
             var f = new FormAddMovie();
-            f.FilmAdded += (s, ev) => LoadFilmData(); // Khi có phim mới, load lại DGV
+            f.FilmAdded += (s, ev) => LoadFilmData(); 
             f.Show();
         }
 
@@ -155,6 +158,8 @@ namespace AdminApp
 
                 if (movies == null || movies.Count == 0)
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo");
                     return;
                 }
@@ -209,6 +214,8 @@ namespace AdminApp
                             worksheet.Columns().AdjustToContents();
 
                             workbook.SaveAs(sfd.FileName);
+                            SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                            player.Play();
                             MessageBox.Show("Xuất file Excel thành công!", "Thông báo");
                         }
                     }
@@ -216,6 +223,8 @@ namespace AdminApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi khi xuất file Excel: " + ex.Message, "Lỗi");
             }
         }

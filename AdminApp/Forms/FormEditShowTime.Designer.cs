@@ -75,12 +75,12 @@
             guna2Button1.FillColor = SystemColors.ControlDark;
             guna2Button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(758, 431);
+            guna2Button1.Location = new Point(719, 433);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button1.Size = new Size(88, 37);
+            guna2Button1.Size = new Size(110, 46);
             guna2Button1.TabIndex = 46;
-            guna2Button1.Text = "Đóng";
+            guna2Button1.Text = "ĐÓNG ";
             guna2Button1.Click += btnDong_Click;
             // 
             // btnThemPhim
@@ -94,12 +94,12 @@
             btnThemPhim.FillColor = Color.SteelBlue;
             btnThemPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnThemPhim.ForeColor = Color.White;
-            btnThemPhim.Location = new Point(872, 431);
+            btnThemPhim.Location = new Point(855, 433);
             btnThemPhim.Name = "btnThemPhim";
             btnThemPhim.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnThemPhim.Size = new Size(88, 37);
+            btnThemPhim.Size = new Size(117, 46);
             btnThemPhim.TabIndex = 45;
-            btnThemPhim.Text = "Chỉnh";
+            btnThemPhim.Text = "CHỈNH";
             btnThemPhim.Click += btnChinh_Click;
             // 
             // dtpGioBD
@@ -115,7 +115,7 @@
             dtpGioBD.ForeColor = Color.LightGray;
             dtpGioBD.Format = DateTimePickerFormat.Time;
             dtpGioBD.HoverState.BorderColor = Color.Gray;
-            dtpGioBD.Location = new Point(354, 287);
+            dtpGioBD.Location = new Point(354, 305);
             dtpGioBD.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dtpGioBD.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtpGioBD.Name = "dtpGioBD";
@@ -128,6 +128,7 @@
             // cboDinhDang
             // 
             cboDinhDang.BackColor = Color.Transparent;
+            cboDinhDang.BorderRadius = 8;
             cboDinhDang.CustomizableEdges = customizableEdges7;
             cboDinhDang.DrawMode = DrawMode.OwnerDrawFixed;
             cboDinhDang.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -149,6 +150,7 @@
             // cboChonPhong
             // 
             cboChonPhong.BackColor = Color.Transparent;
+            cboChonPhong.BorderRadius = 8;
             cboChonPhong.CustomizableEdges = customizableEdges9;
             cboChonPhong.DrawMode = DrawMode.OwnerDrawFixed;
             cboChonPhong.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -169,6 +171,7 @@
             // cboChonPhim
             // 
             cboChonPhim.BackColor = Color.Transparent;
+            cboChonPhim.BorderRadius = 8;
             cboChonPhim.CustomizableEdges = customizableEdges11;
             cboChonPhim.DrawMode = DrawMode.OwnerDrawFixed;
             cboChonPhim.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -198,7 +201,7 @@
             dtpNgayChieu.ForeColor = Color.LightGray;
             dtpNgayChieu.Format = DateTimePickerFormat.Long;
             dtpNgayChieu.HoverState.BorderColor = Color.Gray;
-            dtpNgayChieu.Location = new Point(14, 287);
+            dtpNgayChieu.Location = new Point(14, 305);
             dtpNgayChieu.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dtpNgayChieu.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtpNgayChieu.Name = "dtpNgayChieu";
@@ -210,66 +213,66 @@
             // guna2HtmlLabel5
             // 
             guna2HtmlLabel5.BackColor = Color.Transparent;
-            guna2HtmlLabel5.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel5.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             guna2HtmlLabel5.ForeColor = Color.Coral;
             guna2HtmlLabel5.Location = new Point(687, 87);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            guna2HtmlLabel5.Size = new Size(91, 27);
+            guna2HtmlLabel5.Size = new Size(101, 30);
             guna2HtmlLabel5.TabIndex = 38;
             guna2HtmlLabel5.Text = "Định dạng";
             // 
             // guna2HtmlLabel4
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
-            guna2HtmlLabel4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             guna2HtmlLabel4.ForeColor = Color.Coral;
-            guna2HtmlLabel4.Location = new Point(685, 230);
+            guna2HtmlLabel4.Location = new Point(685, 248);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            guna2HtmlLabel4.Size = new Size(56, 27);
+            guna2HtmlLabel4.Size = new Size(62, 30);
             guna2HtmlLabel4.TabIndex = 37;
             guna2HtmlLabel4.Text = "Giá vé";
             // 
             // guna2HtmlLabel3
             // 
             guna2HtmlLabel3.BackColor = Color.Transparent;
-            guna2HtmlLabel3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             guna2HtmlLabel3.ForeColor = Color.Coral;
-            guna2HtmlLabel3.Location = new Point(350, 231);
+            guna2HtmlLabel3.Location = new Point(350, 249);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            guna2HtmlLabel3.Size = new Size(102, 27);
+            guna2HtmlLabel3.Size = new Size(115, 30);
             guna2HtmlLabel3.TabIndex = 36;
             guna2HtmlLabel3.Text = "Giờ bắt đầu";
             // 
             // guna2HtmlLabel2
             // 
             guna2HtmlLabel2.BackColor = Color.Transparent;
-            guna2HtmlLabel2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             guna2HtmlLabel2.ForeColor = Color.Coral;
             guna2HtmlLabel2.Location = new Point(352, 87);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(107, 27);
+            guna2HtmlLabel2.Size = new Size(117, 30);
             guna2HtmlLabel2.TabIndex = 35;
             guna2HtmlLabel2.Text = "Chọn phòng";
             // 
             // guna2HtmlLabel1
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
-            guna2HtmlLabel1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             guna2HtmlLabel1.ForeColor = Color.Coral;
-            guna2HtmlLabel1.Location = new Point(10, 231);
+            guna2HtmlLabel1.Location = new Point(10, 249);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(99, 27);
+            guna2HtmlLabel1.Size = new Size(110, 30);
             guna2HtmlLabel1.TabIndex = 34;
             guna2HtmlLabel1.Text = "Ngày chiếu";
             // 
             // LbTenPhim
             // 
             LbTenPhim.BackColor = Color.Transparent;
-            LbTenPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbTenPhim.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbTenPhim.ForeColor = Color.Coral;
             LbTenPhim.Location = new Point(12, 87);
             LbTenPhim.Name = "LbTenPhim";
-            LbTenPhim.Size = new Size(95, 27);
+            LbTenPhim.Size = new Size(105, 30);
             LbTenPhim.TabIndex = 33;
             LbTenPhim.Text = "Chọn phim";
             // 
@@ -302,7 +305,7 @@
             lblGiaVe.BackColor = Color.Transparent;
             lblGiaVe.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblGiaVe.ForeColor = SystemColors.ActiveCaptionText;
-            lblGiaVe.Location = new Point(697, 295);
+            lblGiaVe.Location = new Point(697, 313);
             lblGiaVe.Name = "lblGiaVe";
             lblGiaVe.Size = new Size(62, 27);
             lblGiaVe.TabIndex = 47;
@@ -311,8 +314,8 @@
             // guna2CustomGradientPanel1
             // 
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges15;
-            guna2CustomGradientPanel1.Location = new Point(689, 291);
-            guna2CustomGradientPanel1.Margin = new Padding(2, 2, 2, 2);
+            guna2CustomGradientPanel1.Location = new Point(689, 309);
+            guna2CustomGradientPanel1.Margin = new Padding(2);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
             guna2CustomGradientPanel1.Size = new Size(273, 34);

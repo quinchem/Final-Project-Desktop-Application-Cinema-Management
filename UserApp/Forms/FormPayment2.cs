@@ -1,14 +1,15 @@
 ﻿using Newtonsoft.Json.Linq;
-using SharedData.MoMo;
 using SharedData.Models;
+using SharedData.MoMo;
 using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using System.Net; // Dùng cho WebClient và SecurityProtocol
-using System.Drawing; // Dùng cho Image và PictureBox
 using System.Diagnostics; // Dùng cho Process
+using System.Drawing; // Dùng cho Image và PictureBox
+using System.Linq;
+using System.Net; // Dùng cho WebClient và SecurityProtocol
+using System.Windows.Forms;
+using System.Media; // Dùng cho SoundPlayer
 
 namespace UserApp
 {
@@ -112,6 +113,8 @@ namespace UserApp
                     SaveBillToDatabase();
 
                     lblTrangThai.Text = "Thanh toán thành công!";
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.purchase_sound);
+                    player.Play();
                     MessageBox.Show("Thanh toán MOMO thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -127,6 +130,8 @@ namespace UserApp
                 }
                 catch (Exception ex)
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Lỗi sau thanh toán: " + ex.Message);
                 }
             }));
@@ -156,6 +161,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi hiển thị mã thanh toán: " + ex.Message);
             }
         }
@@ -227,6 +234,8 @@ namespace UserApp
 
                 if (string.IsNullOrEmpty(response) || !response.TrimStart().StartsWith("{"))
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Phản hồi không hợp lệ:\n" + response);
                     lblTrangThai.Text = "Lỗi kết nối";
                     return;
@@ -239,11 +248,15 @@ namespace UserApp
                     string errorCode = json["resultCode"]?.ToString();
                     if (errorCode == "11007" || errorCode == "1001")
                     {
+                        SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                        player.Play();
                         Clipboard.SetText(rawHash);
                         MessageBox.Show($"Lỗi chữ ký (11007). RawHash đã copy vào Clipboard.", "Lỗi Key", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
+                        SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                        player.Play();
                         MessageBox.Show($"Lỗi MoMo: {json["message"]} (Mã: {errorCode})", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     lblTrangThai.Text = "Tạo QR thất bại";
@@ -262,6 +275,8 @@ namespace UserApp
 
                 if (string.IsNullOrEmpty(qrUrl))
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Không tạo được mã QR.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     lblTrangThai.Text = "Lỗi tạo QR";
                     return;
@@ -288,6 +303,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi hệ thống: " + ex.Message);
             }
         }
@@ -312,6 +329,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không thể mở trình duyệt: " + ex.Message);
             }
         }
@@ -354,7 +373,8 @@ namespace UserApp
             {
                 timer1.Stop();
                 _checkStatusTimer.Stop(); // dừng check trạng thái
-
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Hết thời gian thanh toán (10 phút).\nVui lòng chọn ghế lại!",
                     "Mã QR hết hạn", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
