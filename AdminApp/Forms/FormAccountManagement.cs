@@ -85,42 +85,6 @@ namespace AdminApp
                 LoadStaffInfo();
             }
         }
-        private bool SaveStaffInfo()
-        {
-            if (string.IsNullOrWhiteSpace(txtHoTen.Text))
-            {
-                MessageBox.Show("Họ tên không được để trống");
-                return false;
-            }
-
-            Staff staff = new Staff
-            {
-                staff_id = _staff_id,
-                full_name = txtHoTen.Text.Trim(),
-                date_of_birth = txtNgaySinh.Text.Trim(),
-                gender = txtGioiTinh.Text.Trim(),
-                email = txtEmail.Text.Trim(),
-                phone_number = txtSDT.Text.Trim(),
-                role = txtChucVu.Text.Trim()
-            };
-
-            bool success = _staffRepo.UpdateStaff(staff);
-
-            if (success)
-            {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
-                player.Play();
-                MessageBox.Show("Cập nhật thông tin thành công!");
-                return true;
-            }
-            else
-            {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
-                MessageBox.Show("Cập nhật thất bại!");
-                return false;
-            }    
-        }
     }
 }
 
