@@ -114,7 +114,7 @@ namespace UserApp
             UpdateTotal();
             UpdateSelectedSeatLabel();
 
-            //  1) Load file JSON
+            //Load file JSON
             string digits = new string(auditoriumId.Where(char.IsDigit).ToArray());
             int roomNumber = int.Parse(digits);
             string jsonPath = Path.Combine(_roomJsonFolder, $"Room_{roomNumber}.json");
@@ -129,7 +129,7 @@ namespace UserApp
 
             var jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonPath));
 
-            // 2) Load ghế từ bảng seat
+            //Load ghế từ bảng seat
             var dbSeats = new Dictionary<string, (string type, string status, double price)>();
 
             using (var conn = DatabaseHelper.GetConnection())
@@ -155,11 +155,10 @@ namespace UserApp
                 }
             }
 
-            // 3) Load ghế FULL theo suất chiếu 
+            // Load ghế FULL theo suất chiếu 
             var fullSeats = SeatForShowtimeRepo.GetSeatStatus(showtimeId);
             // chỉ chứa FULL
 
-            // 4) Merge
             foreach (var s in jsonSeats)
             {
                 string logical = $"{s.Row}{s.Col:00}";
