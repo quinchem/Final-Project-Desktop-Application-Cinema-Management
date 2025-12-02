@@ -10,30 +10,7 @@ namespace SharedData.Repositories
 {
     public class SeatRepo
     {
-
             private static string ConnStr => DatabaseHelper.GetConnectionString();
-            
-            public double GetTicketPriceByAuditorium(string auditoriumId)
-            {
-                using var conn = new SqliteConnection(ConnStr);
-                conn.Open();
-
-                string sql = @"
-                SELECT per_seat_ticket_price
-                FROM seat
-                WHERE auditorium_id = @aid
-                AND per_seat_ticket_price > 0
-                LIMIT 1
-            ";
-
-                using var cmd = new SqliteCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@aid", auditoriumId);
-
-                var result = cmd.ExecuteScalar();
-                return result != null && result != DBNull.Value
-                    ? Convert.ToDouble(result)
-                    : 0;
-            }
             public double GetTicketPriceByAuditoriumType(string auditoriumTypeId)
             {
                 using var conn = new SqliteConnection(ConnStr);

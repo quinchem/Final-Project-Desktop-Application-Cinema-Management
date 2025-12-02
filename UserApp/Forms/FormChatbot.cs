@@ -14,7 +14,7 @@ namespace UserApp.Forms
     public partial class FormChatbot : Form
     {
         private UserMainForm _parentForm;
-        private const string API_KEY = "AIzaSyCpeacB0RcYcJy80boByR1VrrRX79oAg8M";
+        private const string API_KEY = "Your_Key";
 
         private readonly List<string> _userHistoryGenres = new();
 
@@ -23,6 +23,10 @@ namespace UserApp.Forms
             InitializeComponent();
             _parentForm = parentForm;
             btnSend.Click += btnSend_Click;
+            this.Shown += (s, e) =>
+            {
+                txtChat.Focus();
+            };
         }
         private async void btnSend_Click(object sender, EventArgs e)
         {
@@ -331,6 +335,13 @@ namespace UserApp.Forms
             }
         }
 
-
+        private void txtChat_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !e.Shift)
+            {
+                e.SuppressKeyPress = true; 
+                btnSend.PerformClick();    
+            }
+        }
     }
 }
