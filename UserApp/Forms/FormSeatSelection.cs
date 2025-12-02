@@ -34,14 +34,14 @@ namespace UserApp
 
 
 
-        // 1. Constructor mặc định – cho Designer
+        // Các constructor
         public FormSeatSelection()
         {
             InitializeComponent();
             _roomJsonFolder = GetRoomFolder();
         }
 
-        // 2. Constructor dùng thật – có MainForm + Showtime
+        
         public FormSeatSelection(UserMainForm parent, ShowtimeInfo showtime) : this()
         {
             parentForm = parent;
@@ -49,10 +49,6 @@ namespace UserApp
             _auditoriumId = showtime.auditorium_id;
             _showtimeId = showtime.showtime_id;
         }
-
-        // ============================
-        // PATH ĐẾN FOLDER ROOM JSON
-        // ============================
         private string GetRoomFolder()
         {
             var csb = new SqliteConnectionStringBuilder(DatabaseHelper.GetConnectionString());
@@ -78,7 +74,7 @@ namespace UserApp
 
             timer1.Stop();
             isCounting = false;
-            countdown = 300;
+            countdown = 600;
             lblTime.Text = "10:00";
         }
 
@@ -265,7 +261,7 @@ namespace UserApp
             // Bắt đầu đếm ngược 5 phút lần đầu chọn
             if (!isCounting && _selectedSeats.Count > 0)
             {
-                countdown = 300;
+                countdown = 600;
                 isCounting = true;
                 timer1.Start();
             }
@@ -274,8 +270,8 @@ namespace UserApp
             {
                 isCounting = false;
                 timer1.Stop();
-                countdown = 300;
-                lblTime.Text = "05:00";
+                countdown = 600;
+                lblTime.Text = "10:00";
             }
         }
 

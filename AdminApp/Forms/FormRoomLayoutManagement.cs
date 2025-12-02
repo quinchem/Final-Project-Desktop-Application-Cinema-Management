@@ -676,7 +676,7 @@ namespace AdminApp
                     delSeat.Parameters.AddWithValue("$aud", auditoriumId);
                     delSeat.ExecuteNonQuery();
 
-                    // 4) XÓA seat_for_showtime của ghế bị xoá (chỉ xóa những seat FOR showtime thuộc phòng này)
+                    // 4) XÓA seat_for_showtime của ghế bị xoá 
                     var delSfs = conn.CreateCommand();
                     delSfs.Transaction = tran;
                     delSfs.CommandText =
