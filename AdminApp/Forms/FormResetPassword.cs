@@ -22,12 +22,12 @@ namespace AdminApp.Forms
         {
             InitializeComponent();
             parentForm = parent;
-            this._userEmail = email; // Lưu lại email
+            this._userEmail = email;
         }
 
         private void btnDatLaiMK_Click(object sender, EventArgs e)
         {
-            string username = "admin"; // hoặc truyền từ form Quên MK qua
+            string username = "admin"; 
             string newPass = txtMKmoi.Text.Trim();
             string confirmPass = txtXacNhanMK.Text.Trim();
 
@@ -84,17 +84,13 @@ namespace AdminApp.Forms
         {
             if (txtMKmoi.UseSystemPasswordChar == true)
             {
-                // Hiện lên + Đổi ảnh mở
                 txtMKmoi.UseSystemPasswordChar = false;
                 txtMKmoi.PasswordChar = '\0';
                 picEye1.Image = Properties.Resources.view;
             }
             else
             {
-                // Ẩn đi + Đổi ảnh đóng
                 txtMKmoi.UseSystemPasswordChar = true;
-
-                // Đổi ảnh đóng ở đây
                 picEye1.Image = Properties.Resources.hide; 
             }
         }
@@ -103,17 +99,13 @@ namespace AdminApp.Forms
         {
             if (txtXacNhanMK.UseSystemPasswordChar == true)
             {
-                // Hiện lên + Đổi ảnh mở
                 txtXacNhanMK.UseSystemPasswordChar = false;
                 txtXacNhanMK.PasswordChar = '\0';
                 picEye2.Image = Properties.Resources.view;
             }
             else
             {
-                // Ẩn đi + Đổi ảnh đóng
                 txtXacNhanMK.UseSystemPasswordChar = true;
-
-                // Đổi ảnh đóng ở đây
                 picEye2.Image = Properties.Resources.hide; 
             }
         }
