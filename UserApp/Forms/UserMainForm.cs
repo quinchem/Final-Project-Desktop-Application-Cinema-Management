@@ -87,16 +87,9 @@ namespace UserApp
             if (result == DialogResult.Yes)
             {
                 CurrentUser = null;
-
-                // Quay về FormLogin
-                // Mở lại FormLogin
                 FormLogin login = new FormLogin();
                 login.Show();
-
-                // Ẩn UserMainForm (không đóng ngay để tránh tắt app)
                 this.Hide();
-
-                // Khi FormLogin đóng → đóng luôn UserMainForm
                 login.FormClosed += (s2, e2) => this.Close();
             }
         }
@@ -112,26 +105,14 @@ namespace UserApp
 
             this.AutoScroll = true;
         }
-
+        
+        // Hàm xử lý các sự kiện click
         private void logo_Click(object sender, EventArgs e)
         {
             GoHome();
         }
 
-        // Mở form tìm kiếm
-
-
-        // Mở chi tiết phim
-        //private void guna2PictureBox1_Click(object sender, EventArgs e)
-        //{
-        //    OpenChildForm(new FormMovieDetail());
-        //}
-
-        //private void Poster_Click(object sender, EventArgs e)
-        //{
-        //    OpenChildForm(new FormMovieDetail());
-        //}
-
+       
         private void btnLichChieu_Click(object sender, EventArgs e)
         {
             Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
@@ -153,7 +134,8 @@ namespace UserApp
             OpenChildForm(new FormMovieList(this));
 
         }
-
+        
+    // Tạo hiệu ứng Hover cho các nút
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
             if (btn == null) return;
@@ -176,7 +158,8 @@ namespace UserApp
             currentButton.ForeColor = Color.FromArgb(255, 128, 0);
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
         }
-
+        
+    // Hàm xử lý sự kiện chọn Chatbot
         private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
             FormChatbot f = new FormChatbot(this);
@@ -209,3 +192,4 @@ namespace UserApp
         }
     }
 }
+
