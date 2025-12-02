@@ -39,9 +39,12 @@
             // 
             // rctChat
             // 
-            rctChat.Location = new Point(-2, 3);
+            rctChat.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rctChat.Location = new Point(11, 11);
+            rctChat.Margin = new Padding(2);
             rctChat.Name = "rctChat";
-            rctChat.Size = new Size(1062, 437);
+            rctChat.ReadOnly = true;
+            rctChat.Size = new Size(763, 424);
             rctChat.TabIndex = 0;
             rctChat.Text = "";
             // 
@@ -54,41 +57,47 @@
             txtChat.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
             txtChat.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtChat.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtChat.Font = new Font("Segoe UI", 9F);
+            txtChat.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtChat.ForeColor = Color.FromArgb(64, 64, 64);
             txtChat.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtChat.Location = new Point(-2, 461);
+            txtChat.Location = new Point(13, 442);
             txtChat.Margin = new Padding(4, 5, 4, 5);
             txtChat.Name = "txtChat";
             txtChat.PlaceholderText = "";
             txtChat.SelectedText = "";
             txtChat.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            txtChat.Size = new Size(970, 40);
+            txtChat.Size = new Size(659, 43);
             txtChat.TabIndex = 1;
+            txtChat.KeyDown += txtChat_KeyDown;
             // 
             // btnSend
             // 
+            btnSend.BorderRadius = 3;
             btnSend.CustomizableEdges = customizableEdges3;
             btnSend.DisabledState.BorderColor = Color.DarkGray;
             btnSend.DisabledState.CustomBorderColor = Color.DarkGray;
             btnSend.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnSend.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnSend.Font = new Font("Segoe UI", 9F);
+            btnSend.FillColor = Color.FromArgb(255, 128, 0);
+            btnSend.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSend.ForeColor = Color.White;
-            btnSend.Location = new Point(975, 461);
+            btnSend.Location = new Point(678, 442);
+            btnSend.Margin = new Padding(2);
             btnSend.Name = "btnSend";
             btnSend.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnSend.Size = new Size(74, 40);
+            btnSend.Size = new Size(96, 43);
             btnSend.TabIndex = 2;
-            btnSend.Text = "Send";
+            btnSend.Text = "Gửi";
             // 
             // FormChatbot
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1061, 515);
+            ClientSize = new Size(787, 499);
             Controls.Add(btnSend);
             Controls.Add(txtChat);
             Controls.Add(rctChat);
+            Margin = new Padding(2);
             Name = "FormChatbot";
             Text = "FormChatbot";
             ResumeLayout(false);

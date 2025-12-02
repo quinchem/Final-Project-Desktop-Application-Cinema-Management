@@ -39,6 +39,18 @@ namespace UserApp
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             btnLogout = new Button();
             btnUserName = new Button();
@@ -46,14 +58,27 @@ namespace UserApp
             label2 = new Label();
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             btnPhim = new Guna.UI2.WinForms.Guna2Button();
-            btnDangNhap = new Button();
             btnLichChieu = new Guna.UI2.WinForms.Guna2Button();
             logo = new PictureBox();
             mainpanel = new Panel();
+            flowPanelList = new FlowLayoutPanel();
+            picSmall = new Guna.UI2.WinForms.Guna2PictureBox();
+            guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
+            guna2PictureBox3 = new Guna.UI2.WinForms.Guna2PictureBox();
+            guna2PictureBox4 = new Guna.UI2.WinForms.Guna2PictureBox();
+            guna2PictureBox5 = new Guna.UI2.WinForms.Guna2PictureBox();
+            gunaPicBig = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2ImageButton1 = new Guna.UI2.WinForms.Guna2ImageButton();
             guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             mainpanel.SuspendLayout();
+            flowPanelList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picSmall).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gunaPicBig).BeginInit();
             SuspendLayout();
             // 
             // guna2Panel2
@@ -67,7 +92,6 @@ namespace UserApp
             guna2Panel2.Controls.Add(label2);
             guna2Panel2.Controls.Add(guna2Button3);
             guna2Panel2.Controls.Add(btnPhim);
-            guna2Panel2.Controls.Add(btnDangNhap);
             guna2Panel2.Controls.Add(btnLichChieu);
             guna2Panel2.Controls.Add(logo);
             guna2Panel2.CustomizableEdges = customizableEdges9;
@@ -79,7 +103,7 @@ namespace UserApp
             guna2Panel2.ShadowDecoration.Depth = 60;
             guna2Panel2.ShadowDecoration.Enabled = true;
             guna2Panel2.ShadowDecoration.Shadow = new Padding(0, 0, 0, 6);
-            guna2Panel2.Size = new Size(1400, 126);
+            guna2Panel2.Size = new Size(1902, 166);
             guna2Panel2.TabIndex = 2;
             // 
             // btnLogout
@@ -88,7 +112,7 @@ namespace UserApp
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogout.ForeColor = SystemColors.ActiveBorder;
-            btnLogout.Location = new Point(1170, 48);
+            btnLogout.Location = new Point(1661, 75);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(159, 33);
             btnLogout.TabIndex = 33;
@@ -102,7 +126,7 @@ namespace UserApp
             btnUserName.FlatStyle = FlatStyle.Flat;
             btnUserName.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnUserName.ForeColor = SystemColors.ActiveBorder;
-            btnUserName.Location = new Point(861, 44);
+            btnUserName.Location = new Point(1297, 70);
             btnUserName.Name = "btnUserName";
             btnUserName.Size = new Size(297, 45);
             btnUserName.TabIndex = 32;
@@ -123,7 +147,7 @@ namespace UserApp
             guna2Button4.ForeColor = Color.White;
             guna2Button4.Image = Properties.Resources.TinTuc;
             guna2Button4.ImageSize = new Size(25, 25);
-            guna2Button4.Location = new Point(686, 40);
+            guna2Button4.Location = new Point(968, 65);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2Button4.Size = new Size(120, 45);
@@ -135,7 +159,7 @@ namespace UserApp
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ActiveBorder;
-            label2.Location = new Point(1162, 50);
+            label2.Location = new Point(1627, 77);
             label2.Name = "label2";
             label2.Size = new Size(17, 28);
             label2.TabIndex = 24;
@@ -153,7 +177,7 @@ namespace UserApp
             guna2Button3.ForeColor = Color.White;
             guna2Button3.Image = Properties.Resources.KhuyenMai;
             guna2Button3.ImageSize = new Size(30, 30);
-            guna2Button3.Location = new Point(498, 40);
+            guna2Button3.Location = new Point(713, 65);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2Button3.Size = new Size(160, 45);
@@ -172,7 +196,7 @@ namespace UserApp
             btnPhim.ForeColor = Color.White;
             btnPhim.Image = Properties.Resources.phim;
             btnPhim.ImageSize = new Size(25, 25);
-            btnPhim.Location = new Point(372, 40);
+            btnPhim.Location = new Point(517, 65);
             btnPhim.Margin = new Padding(4);
             btnPhim.Name = "btnPhim";
             btnPhim.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -180,19 +204,6 @@ namespace UserApp
             btnPhim.TabIndex = 29;
             btnPhim.Text = "PHIM";
             btnPhim.Click += btnPhim_Click;
-            // 
-            // btnDangNhap
-            // 
-            btnDangNhap.FlatAppearance.BorderSize = 0;
-            btnDangNhap.FlatStyle = FlatStyle.Flat;
-            btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDangNhap.ForeColor = SystemColors.ActiveBorder;
-            btnDangNhap.Location = new Point(1014, 47);
-            btnDangNhap.Name = "btnDangNhap";
-            btnDangNhap.Size = new Size(143, 29);
-            btnDangNhap.TabIndex = 22;
-            btnDangNhap.Text = "ĐĂNG NHẬP";
-            btnDangNhap.UseVisualStyleBackColor = true;
             // 
             // btnLichChieu
             // 
@@ -206,7 +217,7 @@ namespace UserApp
             btnLichChieu.ForeColor = Color.White;
             btnLichChieu.Image = Properties.Resources.shooting_schedule;
             btnLichChieu.ImageSize = new Size(25, 25);
-            btnLichChieu.Location = new Point(210, 40);
+            btnLichChieu.Location = new Point(282, 65);
             btnLichChieu.Name = "btnLichChieu";
             btnLichChieu.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnLichChieu.Size = new Size(144, 45);
@@ -217,9 +228,9 @@ namespace UserApp
             // logo
             // 
             logo.Image = Properties.Resources.Logo_hamster;
-            logo.Location = new Point(30, 7);
+            logo.Location = new Point(50, 13);
             logo.Name = "logo";
-            logo.Size = new Size(127, 114);
+            logo.Size = new Size(151, 139);
             logo.SizeMode = PictureBoxSizeMode.Zoom;
             logo.TabIndex = 17;
             logo.TabStop = false;
@@ -231,27 +242,126 @@ namespace UserApp
             mainpanel.AutoScrollMinSize = new Size(0, 500);
             mainpanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             mainpanel.BackColor = Color.FromArgb(92, 124, 150);
+            mainpanel.Controls.Add(flowPanelList);
+            mainpanel.Controls.Add(gunaPicBig);
             mainpanel.Controls.Add(guna2ImageButton1);
             mainpanel.Controls.Add(guna2Panel2);
             mainpanel.Dock = DockStyle.Fill;
             mainpanel.Location = new Point(0, 0);
             mainpanel.Name = "mainpanel";
-            mainpanel.Size = new Size(1400, 844);
+            mainpanel.Size = new Size(1902, 1055);
             mainpanel.TabIndex = 0;
+            // 
+            // flowPanelList
+            // 
+            flowPanelList.AutoScroll = true;
+            flowPanelList.AutoScrollMinSize = new Size(1300, 0);
+            flowPanelList.Controls.Add(picSmall);
+            flowPanelList.Controls.Add(guna2PictureBox2);
+            flowPanelList.Controls.Add(guna2PictureBox3);
+            flowPanelList.Controls.Add(guna2PictureBox4);
+            flowPanelList.Controls.Add(guna2PictureBox5);
+            flowPanelList.Location = new Point(461, 789);
+            flowPanelList.Name = "flowPanelList";
+            flowPanelList.Size = new Size(1083, 173);
+            flowPanelList.TabIndex = 6;
+            flowPanelList.WrapContents = false;
+            // 
+            // picSmall
+            // 
+            picSmall.CustomizableEdges = customizableEdges11;
+            picSmall.Image = Properties.Resources.poster;
+            picSmall.ImageRotate = 0F;
+            picSmall.Location = new Point(3, 3);
+            picSmall.Name = "picSmall";
+            picSmall.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            picSmall.Size = new Size(242, 133);
+            picSmall.SizeMode = PictureBoxSizeMode.Zoom;
+            picSmall.TabIndex = 4;
+            picSmall.TabStop = false;
+            picSmall.Click += picSmall_Click;
+            // 
+            // guna2PictureBox2
+            // 
+            guna2PictureBox2.CustomizableEdges = customizableEdges13;
+            guna2PictureBox2.Image = Properties.Resources.poster_1;
+            guna2PictureBox2.ImageRotate = 0F;
+            guna2PictureBox2.Location = new Point(251, 3);
+            guna2PictureBox2.Name = "guna2PictureBox2";
+            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            guna2PictureBox2.Size = new Size(238, 133);
+            guna2PictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            guna2PictureBox2.TabIndex = 0;
+            guna2PictureBox2.TabStop = false;
+            guna2PictureBox2.Click += picSmall_Click;
+            // 
+            // guna2PictureBox3
+            // 
+            guna2PictureBox3.CustomizableEdges = customizableEdges15;
+            guna2PictureBox3.Image = Properties.Resources.poster_2;
+            guna2PictureBox3.ImageRotate = 0F;
+            guna2PictureBox3.Location = new Point(495, 3);
+            guna2PictureBox3.Name = "guna2PictureBox3";
+            guna2PictureBox3.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2PictureBox3.Size = new Size(250, 133);
+            guna2PictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            guna2PictureBox3.TabIndex = 1;
+            guna2PictureBox3.TabStop = false;
+            guna2PictureBox3.Click += picSmall_Click;
+            // 
+            // guna2PictureBox4
+            // 
+            guna2PictureBox4.CustomizableEdges = customizableEdges17;
+            guna2PictureBox4.Image = Properties.Resources.poster_3;
+            guna2PictureBox4.ImageRotate = 0F;
+            guna2PictureBox4.Location = new Point(751, 3);
+            guna2PictureBox4.Name = "guna2PictureBox4";
+            guna2PictureBox4.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            guna2PictureBox4.Size = new Size(252, 133);
+            guna2PictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            guna2PictureBox4.TabIndex = 2;
+            guna2PictureBox4.TabStop = false;
+            guna2PictureBox4.Click += picSmall_Click;
+            // 
+            // guna2PictureBox5
+            // 
+            guna2PictureBox5.CustomizableEdges = customizableEdges19;
+            guna2PictureBox5.Image = Properties.Resources.poster_4;
+            guna2PictureBox5.ImageRotate = 0F;
+            guna2PictureBox5.Location = new Point(1009, 3);
+            guna2PictureBox5.Name = "guna2PictureBox5";
+            guna2PictureBox5.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            guna2PictureBox5.Size = new Size(253, 133);
+            guna2PictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
+            guna2PictureBox5.TabIndex = 3;
+            guna2PictureBox5.TabStop = false;
+            guna2PictureBox5.Click += picSmall_Click;
+            // 
+            // gunaPicBig
+            // 
+            gunaPicBig.CustomizableEdges = customizableEdges21;
+            gunaPicBig.Image = Properties.Resources.poster;
+            gunaPicBig.ImageRotate = 0F;
+            gunaPicBig.Location = new Point(474, 204);
+            gunaPicBig.Name = "gunaPicBig";
+            gunaPicBig.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            gunaPicBig.Size = new Size(1058, 566);
+            gunaPicBig.TabIndex = 5;
+            gunaPicBig.TabStop = false;
             // 
             // guna2ImageButton1
             // 
             guna2ImageButton1.CheckedState.ImageSize = new Size(64, 64);
             guna2ImageButton1.HoverState.ImageSize = new Size(64, 64);
-            guna2ImageButton1.Image = Properties.Resources.technical_support;
+            guna2ImageButton1.Image = Properties.Resources.chatbot;
             guna2ImageButton1.ImageOffset = new Point(0, 0);
             guna2ImageButton1.ImageRotate = 0F;
-            guna2ImageButton1.ImageSize = new Size(90, 90);
-            guna2ImageButton1.Location = new Point(1131, 552);
+            guna2ImageButton1.ImageSize = new Size(120, 120);
+            guna2ImageButton1.Location = new Point(1582, 725);
             guna2ImageButton1.Name = "guna2ImageButton1";
             guna2ImageButton1.PressedState.ImageSize = new Size(64, 64);
-            guna2ImageButton1.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            guna2ImageButton1.Size = new Size(135, 130);
+            guna2ImageButton1.ShadowDecoration.CustomizableEdges = customizableEdges23;
+            guna2ImageButton1.Size = new Size(272, 210);
             guna2ImageButton1.TabIndex = 4;
             guna2ImageButton1.Click += guna2ImageButton1_Click;
             // 
@@ -259,23 +369,30 @@ namespace UserApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1400, 844);
+            ClientSize = new Size(1902, 1055);
             Controls.Add(mainpanel);
             IsMdiContainer = true;
             Name = "UserMainForm";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.Manual;
             Text = "Trang chủ";
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             mainpanel.ResumeLayout(false);
+            flowPanelList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picSmall).EndInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gunaPicBig).EndInit();
             ResumeLayout(false);
+
         }
 
         #endregion
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Label label2;
-        private Button btnDangNhap;
         private PictureBox logo;
         private Panel mainpanel;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
@@ -285,6 +402,13 @@ namespace UserApp
         private Button btnUserName;
         private Button btnLogout;
         private Guna.UI2.WinForms.Guna2ImageButton guna2ImageButton1;
+        private Guna.UI2.WinForms.Guna2PictureBox gunaPicBig;
+        private FlowLayoutPanel flowPanelList;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox3;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox4;
+        private Guna.UI2.WinForms.Guna2PictureBox picSmall;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox5;
     }
 }
 

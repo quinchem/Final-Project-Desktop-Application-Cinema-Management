@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -64,6 +65,8 @@ namespace AdminApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi load phòng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -81,6 +84,8 @@ namespace AdminApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi load dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -96,6 +101,8 @@ namespace AdminApp
         {
             if (isFilteringByYear)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Đang lọc theo năm. Vui lòng chọn 'Không' ở Năm để lọc theo ngày!",
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -118,6 +125,8 @@ namespace AdminApp
             // Nếu Ngày Bắt Đầu lớn hơn Ngày Kết Thúc -> Báo lỗi và Reset ngay
             if (dptdateFrom.Value.Date > dptdateTo.Value.Date)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Ngày bắt đầu không được lớn hơn ngày kết thúc!",
                                 "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -138,6 +147,8 @@ namespace AdminApp
             // Nếu Ngày Kết Thúc nhỏ hơn Ngày Bắt Đầu -> Báo lỗi và Reset ngay
             if (dptdateTo.Value.Date < dptdateFrom.Value.Date)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Ngày kết thúc không được nhỏ hơn ngày bắt đầu!",
                                 "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
@@ -289,7 +300,7 @@ namespace AdminApp
 
             foreach (var item in data)
             {
-                // SỬA LỖI TẠI ĐÂY: item.RoomName (thay vì roomId) và item.Revenue (Viết hoa R)
+               
                 dataset.DataPoints.Add(item.RoomName, (double)item.Revenue);
             }
 

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -53,18 +54,21 @@ namespace UserApp
                     lblActor.Text = film.actor;
 
                     // --- Giới hạn xuống dòng cho mô tả ---
-                    lblDescription.AutoSize = true;
-                    lblDescription.MaximumSize = new Size(800, 0); // 400 là bề rộng label, có thể chỉnh
+                    
                     lblDescription.Text = film.description;
                 }
                 else
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Không tìm thấy thông tin phim!");
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi khi load thông tin phim: " + ex.Message);
             }
         }
@@ -79,17 +83,19 @@ namespace UserApp
                     using (MemoryStream ms = new MemoryStream(imgData))
                     {
                         picPoster.Image = Image.FromStream(ms);
-                        picPoster.SizeMode = PictureBoxSizeMode.Zoom; // hiển thị vừa khung
+                        picPoster.SizeMode = PictureBoxSizeMode.Zoom; 
                     }
                 }
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi khi load poster: " + ex.Message);
             }
         }
-        
-        
+
+
         private void btnDatVe_Click(object sender, EventArgs e)
         {
             // Tìm MainForm để gọi OpenChildForm()

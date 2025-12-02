@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Guna.Charts.WinForms;
+using Guna.UI2.WinForms;
+using Microsoft.Data.Sqlite;
+using System;
 using System.Data;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
-using Microsoft.Data.Sqlite;
-using Guna.UI2.WinForms;
-using Guna.Charts.WinForms;
 
 namespace AdminApp
 {
@@ -59,10 +60,10 @@ namespace AdminApp
 
                 // ✅ Query các năm từ create_date (DATETIME)
                 cmd.CommandText = @"
-SELECT DISTINCT strftime('%Y', create_date) AS Y
-FROM customer
-WHERE create_date IS NOT NULL
-ORDER BY Y DESC";
+                    SELECT DISTINCT strftime('%Y', create_date) AS Y
+                    FROM customer
+                    WHERE create_date IS NOT NULL
+                    ORDER BY Y DESC";
 
                 using var rd = cmd.ExecuteReader();
 
@@ -79,6 +80,8 @@ ORDER BY Y DESC";
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show($"Lỗi khi load năm: {ex.Message}",
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -115,26 +118,26 @@ ORDER BY Y DESC";
             {
                 // ✅ TẤT CẢ - Hiển thị theo tháng/năm (MM/yyyy)
                 cmd.CommandText = @"
-SELECT 
-    strftime('%Y-%m', create_date) AS Thang,
-    COUNT(*) AS Total
-FROM customer
-WHERE create_date IS NOT NULL
-GROUP BY strftime('%Y-%m', create_date)
-ORDER BY Thang";
+                SELECT 
+                    strftime('%Y-%m', create_date) AS Thang,
+                    COUNT(*) AS Total
+                FROM customer
+                WHERE create_date IS NOT NULL
+                GROUP BY strftime('%Y-%m', create_date)
+                ORDER BY Thang";
             }
             else
             {
-                // ✅ THEO NĂM - Hiển thị 12 tháng trong năm (01, 02, ..., 12)
+                // THEO NĂM - Hiển thị 12 tháng trong năm (01, 02, ..., 12)
                 cmd.CommandText = @"
-SELECT 
-    strftime('%m', create_date) AS Thang,
-    COUNT(*) AS Total
-FROM customer
-WHERE create_date IS NOT NULL
-  AND date(create_date) BETWEEN date(@from) AND date(@to)
-GROUP BY strftime('%m', create_date)
-ORDER BY Thang";
+                SELECT 
+                    strftime('%m', create_date) AS Thang,
+                    COUNT(*) AS Total
+                FROM customer
+                WHERE create_date IS NOT NULL
+                  AND date(create_date) BETWEEN date(@from) AND date(@to)
+                GROUP BY strftime('%m', create_date)
+                ORDER BY Thang";
 
                 cmd.Parameters.AddWithValue("@from", from.Value.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@to", to.Value.ToString("yyyy-MM-dd"));
@@ -205,31 +208,31 @@ ORDER BY Thang";
             if (from == null)
             {
                 cmd.CommandText = @"
-SELECT 
-    CASE
-        WHEN lower(trim(gender)) IN ('nam','male') THEN 'Nam'
-        WHEN lower(trim(gender)) IN ('nữ','nu','female') THEN 'Nữ'
-        ELSE 'Không rõ'
-    END AS GioiTinh,
-    COUNT(*) AS Total
-FROM customer
-WHERE create_date IS NOT NULL
-GROUP BY GioiTinh";
+                SELECT 
+                    CASE
+                        WHEN lower(trim(gender)) IN ('nam','male') THEN 'Nam'
+                        WHEN lower(trim(gender)) IN ('nữ','nu','female') THEN 'Nữ'
+                        ELSE 'Không rõ'
+                    END AS GioiTinh,
+                    COUNT(*) AS Total
+                FROM customer
+                WHERE create_date IS NOT NULL
+                GROUP BY GioiTinh";
             }
             else
             {
                 cmd.CommandText = @"
-SELECT 
-    CASE
-        WHEN lower(trim(gender)) IN ('nam','male') THEN 'Nam'
-        WHEN lower(trim(gender)) IN ('nữ','nu','female') THEN 'Nữ'
-        ELSE 'Không rõ'
-    END AS GioiTinh,
-    COUNT(*) AS Total
-FROM customer
-WHERE create_date IS NOT NULL
-  AND date(create_date) BETWEEN date(@from) AND date(@to)
-GROUP BY GioiTinh";
+                SELECT 
+                    CASE
+                        WHEN lower(trim(gender)) IN ('nam','male') THEN 'Nam'
+                        WHEN lower(trim(gender)) IN ('nữ','nu','female') THEN 'Nữ'
+                        ELSE 'Không rõ'
+                    END AS GioiTinh,
+                    COUNT(*) AS Total
+                FROM customer
+                WHERE create_date IS NOT NULL
+                  AND date(create_date) BETWEEN date(@from) AND date(@to)
+                GROUP BY GioiTinh";
 
                 cmd.Parameters.AddWithValue("@from", from.Value.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@to", to.Value.ToString("yyyy-MM-dd"));
@@ -242,7 +245,7 @@ GROUP BY GioiTinh";
                 pie.DataPoints.Add(rd.GetString(0), rd.GetInt32(1));
             }
 
-            // ✅ ĐẶT MÀU SAU KHI THÊM DATAPOINTS
+            //ĐẶT MÀU SAU KHI THÊM DATAPOINTS
             pie.FillColors.Clear();
             pie.FillColors.Add(Color.FromArgb(94, 114, 228));   // Nam - Xanh primary
             pie.FillColors.Add(Color.FromArgb(255, 107, 129));  // Nữ - Hồng
@@ -268,35 +271,35 @@ GROUP BY GioiTinh";
             if (from == null)
             {
                 cmd.CommandText = @"
-SELECT 
-    c.full_name     AS HoTen,
-    c.email         AS Email,
-    c.phone_number  AS SDT,
-    c.date_of_birth AS DateOfBirth,
-    c.address       AS Address,
-    IFNULL(SUM(b.total),0) AS ChiTieu
-FROM customer c
-LEFT JOIN bill b ON c.customer_id = b.customer_id
-WHERE c.create_date IS NOT NULL
-GROUP BY c.customer_id
-ORDER BY ChiTieu DESC";
+                SELECT 
+                    c.full_name     AS HoTen,
+                    c.email         AS Email,
+                    c.phone_number  AS SDT,
+                    c.date_of_birth AS DateOfBirth,
+                    c.address       AS Address,
+                    IFNULL(SUM(b.total),0) AS ChiTieu
+                FROM customer c
+                LEFT JOIN bill b ON c.customer_id = b.customer_id
+                WHERE c.create_date IS NOT NULL
+                GROUP BY c.customer_id
+                ORDER BY ChiTieu DESC";
             }
             else
             {
                 cmd.CommandText = @"
-SELECT 
-    c.full_name     AS HoTen,
-    c.email         AS Email,
-    c.phone_number  AS SDT,
-    c.date_of_birth AS DateOfBirth,
-    c.address       AS Address,
-    IFNULL(SUM(b.total),0) AS ChiTieu
-FROM customer c
-LEFT JOIN bill b ON c.customer_id = b.customer_id
-WHERE c.create_date IS NOT NULL
-  AND date(c.create_date) BETWEEN date(@from) AND date(@to)
-GROUP BY c.customer_id
-ORDER BY ChiTieu DESC";
+                    SELECT 
+                        c.full_name     AS HoTen,
+                        c.email         AS Email,
+                        c.phone_number  AS SDT,
+                        c.date_of_birth AS DateOfBirth,
+                        c.address       AS Address,
+                        IFNULL(SUM(b.total),0) AS ChiTieu
+                    FROM customer c
+                    LEFT JOIN bill b ON c.customer_id = b.customer_id
+                    WHERE c.create_date IS NOT NULL
+                      AND date(c.create_date) BETWEEN date(@from) AND date(@to)
+                    GROUP BY c.customer_id
+                    ORDER BY ChiTieu DESC";
 
                 cmd.Parameters.AddWithValue("@from", from.Value.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@to", to.Value.ToString("yyyy-MM-dd"));
@@ -322,17 +325,17 @@ ORDER BY ChiTieu DESC";
             if (from == null)
             {
                 cmd.CommandText = @"
-SELECT COUNT(*) 
-FROM customer 
-WHERE create_date IS NOT NULL";
-            }
+                SELECT COUNT(*) 
+                FROM customer 
+                WHERE create_date IS NOT NULL";
+                            }
             else
             {
                 cmd.CommandText = @"
-SELECT COUNT(*) 
-FROM customer
-WHERE create_date IS NOT NULL
-  AND date(create_date) BETWEEN date(@from) AND date(@to)";
+                    SELECT COUNT(*) 
+                    FROM customer
+                    WHERE create_date IS NOT NULL
+                      AND date(create_date) BETWEEN date(@from) AND date(@to)";
 
                 cmd.Parameters.AddWithValue("@from", from.Value.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@to", to.Value.ToString("yyyy-MM-dd"));

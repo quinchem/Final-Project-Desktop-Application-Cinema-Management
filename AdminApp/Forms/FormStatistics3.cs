@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,6 +24,9 @@ namespace AdminApp
             InitializeComponent();
             LoadYearCombo();
             LoadMovieCombo();
+            this.AutoScaleMode = AutoScaleMode.None;   
+            this.AutoScroll = true;                  
+            this.Dock = DockStyle.Top;            
 
             // Thêm event handler cho MouseDown để catch khi user click vào DateTimePicker bị disabled
             dtpFrom.MouseDown += DateTimePicker_MouseDown;
@@ -182,6 +186,8 @@ namespace AdminApp
         {
             if (isFilteringByYear)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Đang lọc theo năm. Vui lòng chọn 'Không' ở Năm để lọc theo ngày!",
                                 "Thông báo",
                                 MessageBoxButtons.OK,
@@ -194,6 +200,8 @@ namespace AdminApp
         {
             if (dtpFrom.Value > dtpTo.Value)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Ngày bắt đầu không được sau ngày kết thúc!",
                                 "Lỗi",
                                 MessageBoxButtons.OK,
@@ -289,6 +297,5 @@ namespace AdminApp
             _parent.OpenChildForm(new FormStatistics4(_parent));
         }
 
-      
     }
 }

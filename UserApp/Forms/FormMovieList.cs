@@ -54,7 +54,7 @@ namespace UserApp
             poster.Size = new Size(180, 230);
             poster.SizeMode = PictureBoxSizeMode.Zoom;
             poster.Location = new Point((panel.Width - poster.Width) / 2, 10);
-            poster.Cursor = Cursors.Hand; // đổi con trỏ chuột khi hover
+            poster.Cursor = Cursors.Hand; 
 
             if (posterBytes != null)
             {

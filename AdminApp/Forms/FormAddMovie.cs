@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -91,6 +92,8 @@ namespace AdminApp
                 }
                 catch (OutOfMemoryException)
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Ảnh quá lớn hoặc hệ thống không đủ bộ nhớ. Vui lòng chọn ảnh nhỏ hơn.",
                         "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     picPoster.Image = null;
@@ -169,6 +172,8 @@ VALUES
                     }
                 }
 
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Thêm phim thành công!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 FilmAdded?.Invoke(this, EventArgs.Empty); // Báo cho FormMovieManagement
@@ -190,6 +195,8 @@ VALUES
             // --- TÊN PHIM ---
             if (string.IsNullOrWhiteSpace(txtTenPhim.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập tên phim!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTenPhim.Focus();
@@ -199,6 +206,8 @@ VALUES
             // --- THỂ LOẠI ---
             if (string.IsNullOrWhiteSpace(txtTheLoai.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập thể loại!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTheLoai.Focus();
@@ -207,6 +216,8 @@ VALUES
 
             if (!IsAlphabetic(txtTheLoai.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Thể loại chỉ được chứa chữ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTheLoai.Focus();
@@ -216,6 +227,8 @@ VALUES
             // --- NGÔN NGỮ ---
             if (string.IsNullOrWhiteSpace(txtNgonNgu.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập ngôn ngữ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNgonNgu.Focus();
@@ -224,6 +237,8 @@ VALUES
 
             if (!IsAlphabetic(txtNgonNgu.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Ngôn ngữ chỉ được chứa chữ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNgonNgu.Focus();
@@ -233,6 +248,8 @@ VALUES
             // --- ĐẠO DIỄN ---
             if (string.IsNullOrWhiteSpace(txtDaoDien.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập tên đạo diễn!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDaoDien.Focus();
@@ -241,6 +258,8 @@ VALUES
 
             if (!IsAlphabetic(txtDaoDien.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Tên đạo diễn chỉ được chứa chữ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDaoDien.Focus();
@@ -250,6 +269,8 @@ VALUES
             // --- DIỄN VIÊN ---
             if (string.IsNullOrWhiteSpace(txtDienVien.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập diễn viên!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDienVien.Focus();
@@ -258,6 +279,8 @@ VALUES
 
             if (!IsAlphabetic(txtDienVien.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Tên diễn viên chỉ được chứa chữ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDienVien.Focus();
@@ -277,6 +300,8 @@ VALUES
             decimal giaNhap;
             if (!decimal.TryParse(txtGiaNhap.Text, out giaNhap) || giaNhap < 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Giá nhập phim không hợp lệ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtGiaNhap.Focus();
@@ -286,6 +311,8 @@ VALUES
             // --- ĐỘ TUỔI ---
             if (cboDoTuoi.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn độ tuổi!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -294,6 +321,8 @@ VALUES
             // --- THỜI LƯỢNG ---
             if (string.IsNullOrWhiteSpace(txtThoiLuong.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng nhập thời lượng!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtThoiLuong.Focus();

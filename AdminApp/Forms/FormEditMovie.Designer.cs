@@ -99,7 +99,7 @@
             guna2ShadowPanel1.Location = new Point(0, 0);
             guna2ShadowPanel1.Name = "guna2ShadowPanel1";
             guna2ShadowPanel1.ShadowColor = Color.Black;
-            guna2ShadowPanel1.Size = new Size(1028, 56);
+            guna2ShadowPanel1.Size = new Size(1271, 56);
             guna2ShadowPanel1.TabIndex = 5;
             // 
             // LbThemPhim
@@ -129,7 +129,7 @@
             txtMoTa.FocusedState.ForeColor = Color.Black;
             txtMoTa.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtMoTa.Font = new Font("Segoe UI", 9F);
-            txtMoTa.Location = new Point(16, 389);
+            txtMoTa.Location = new Point(20, 434);
             txtMoTa.Margin = new Padding(3, 4, 3, 4);
             txtMoTa.Multiline = true;
             txtMoTa.Name = "txtMoTa";
@@ -152,12 +152,12 @@
             btnThemPhim.FillColor = Color.SteelBlue;
             btnThemPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnThemPhim.ForeColor = Color.White;
-            btnThemPhim.Location = new Point(874, 552);
+            btnThemPhim.Location = new Point(1096, 597);
             btnThemPhim.Name = "btnThemPhim";
             btnThemPhim.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnThemPhim.Size = new Size(88, 37);
+            btnThemPhim.Size = new Size(129, 37);
             btnThemPhim.TabIndex = 53;
-            btnThemPhim.Text = "Lưu";
+            btnThemPhim.Text = "LƯU";
             btnThemPhim.Click += btnSave_Click;
             // 
             // btnUpPoster
@@ -172,16 +172,16 @@
             btnUpPoster.Font = new Font("Segoe UI", 9F);
             btnUpPoster.ForeColor = Color.White;
             btnUpPoster.Image = Properties.Resources.push_icon;
-            btnUpPoster.Location = new Point(514, 563);
+            btnUpPoster.Location = new Point(561, 587);
             btnUpPoster.Name = "btnUpPoster";
             btnUpPoster.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnUpPoster.Size = new Size(43, 26);
+            btnUpPoster.Size = new Size(77, 47);
             btnUpPoster.TabIndex = 52;
             btnUpPoster.Click += btnUploadPoster_Click;
             // 
             // picPoster
             // 
-            picPoster.Location = new Point(354, 389);
+            picPoster.Location = new Point(378, 434);
             picPoster.Name = "picPoster";
             picPoster.Size = new Size(135, 200);
             picPoster.SizeMode = PictureBoxSizeMode.Zoom;
@@ -199,7 +199,7 @@
             cboTrangThai.Font = new Font("Segoe UI", 10F);
             cboTrangThai.ForeColor = Color.Gray;
             cboTrangThai.ItemHeight = 30;
-            cboTrangThai.Location = new Point(676, 384);
+            cboTrangThai.Location = new Point(759, 423);
             cboTrangThai.Name = "cboTrangThai";
             cboTrangThai.ShadowDecoration.CustomizableEdges = customizableEdges8;
             cboTrangThai.Size = new Size(286, 36);
@@ -216,7 +216,7 @@
             cboDoTuoi.Font = new Font("Segoe UI", 10F);
             cboDoTuoi.ForeColor = Color.Gray;
             cboDoTuoi.ItemHeight = 30;
-            cboDoTuoi.Location = new Point(676, 193);
+            cboDoTuoi.Location = new Point(759, 206);
             cboDoTuoi.Name = "cboDoTuoi";
             cboDoTuoi.ShadowDecoration.CustomizableEdges = customizableEdges10;
             cboDoTuoi.Size = new Size(145, 36);
@@ -235,7 +235,7 @@
             dtNgayChieu.ForeColor = Color.LightGray;
             dtNgayChieu.Format = DateTimePickerFormat.Long;
             dtNgayChieu.HoverState.BorderColor = Color.Gray;
-            dtNgayChieu.Location = new Point(12, 195);
+            dtNgayChieu.Location = new Point(12, 208);
             dtNgayChieu.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dtNgayChieu.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtNgayChieu.Name = "dtNgayChieu";
@@ -259,7 +259,7 @@
             txtNgonNgu.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtNgonNgu.Font = new Font("Segoe UI", 9F);
             txtNgonNgu.ForeColor = Color.Black;
-            txtNgonNgu.Location = new Point(353, 195);
+            txtNgonNgu.Location = new Point(395, 208);
             txtNgonNgu.Margin = new Padding(3, 4, 3, 4);
             txtNgonNgu.Name = "txtNgonNgu";
             txtNgonNgu.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -285,7 +285,7 @@
             txtGiaNhap.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtGiaNhap.Font = new Font("Segoe UI", 9F);
             txtGiaNhap.ForeColor = Color.Black;
-            txtGiaNhap.Location = new Point(676, 105);
+            txtGiaNhap.Location = new Point(759, 109);
             txtGiaNhap.Margin = new Padding(3, 4, 3, 4);
             txtGiaNhap.Name = "txtGiaNhap";
             txtGiaNhap.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -311,7 +311,7 @@
             txtThoiLuong.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtThoiLuong.Font = new Font("Segoe UI", 9F);
             txtThoiLuong.ForeColor = Color.Black;
-            txtThoiLuong.Location = new Point(676, 288);
+            txtThoiLuong.Location = new Point(759, 311);
             txtThoiLuong.Margin = new Padding(3, 4, 3, 4);
             txtThoiLuong.Name = "txtThoiLuong";
             txtThoiLuong.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -337,7 +337,7 @@
             txtDienVien.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtDienVien.Font = new Font("Segoe UI", 9F);
             txtDienVien.ForeColor = Color.Black;
-            txtDienVien.Location = new Point(353, 288);
+            txtDienVien.Location = new Point(395, 311);
             txtDienVien.Margin = new Padding(3, 4, 3, 4);
             txtDienVien.Name = "txtDienVien";
             txtDienVien.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -363,7 +363,7 @@
             txtTheLoai.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtTheLoai.Font = new Font("Segoe UI", 9F);
             txtTheLoai.ForeColor = Color.Black;
-            txtTheLoai.Location = new Point(353, 105);
+            txtTheLoai.Location = new Point(395, 109);
             txtTheLoai.Margin = new Padding(3, 4, 3, 4);
             txtTheLoai.Name = "txtTheLoai";
             txtTheLoai.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -377,121 +377,121 @@
             // LbTrangThai
             // 
             LbTrangThai.BackColor = Color.Transparent;
-            LbTrangThai.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbTrangThai.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbTrangThai.ForeColor = Color.Coral;
-            LbTrangThai.Location = new Point(676, 351);
+            LbTrangThai.Location = new Point(759, 390);
             LbTrangThai.Name = "LbTrangThai";
-            LbTrangThai.Size = new Size(91, 27);
+            LbTrangThai.Size = new Size(101, 30);
             LbTrangThai.TabIndex = 42;
             LbTrangThai.Text = "Trạng thái";
             // 
             // LbPoster
             // 
             LbPoster.BackColor = Color.Transparent;
-            LbPoster.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbPoster.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbPoster.ForeColor = Color.Coral;
-            LbPoster.Location = new Point(353, 351);
+            LbPoster.Location = new Point(377, 396);
             LbPoster.Name = "LbPoster";
-            LbPoster.Size = new Size(57, 27);
+            LbPoster.Size = new Size(63, 30);
             LbPoster.TabIndex = 41;
             LbPoster.Text = "Poster";
             // 
             // LbMoTa
             // 
             LbMoTa.BackColor = Color.Transparent;
-            LbMoTa.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbMoTa.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbMoTa.ForeColor = Color.Coral;
-            LbMoTa.Location = new Point(16, 351);
+            LbMoTa.Location = new Point(20, 396);
             LbMoTa.Name = "LbMoTa";
-            LbMoTa.Size = new Size(53, 27);
+            LbMoTa.Size = new Size(59, 30);
             LbMoTa.TabIndex = 40;
             LbMoTa.Text = "Mô tả";
             // 
             // LbThoiLuong
             // 
             LbThoiLuong.BackColor = Color.Transparent;
-            LbThoiLuong.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbThoiLuong.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbThoiLuong.ForeColor = Color.Coral;
-            LbThoiLuong.Location = new Point(676, 254);
+            LbThoiLuong.Location = new Point(759, 277);
             LbThoiLuong.Name = "LbThoiLuong";
-            LbThoiLuong.Size = new Size(96, 27);
+            LbThoiLuong.Size = new Size(108, 30);
             LbThoiLuong.TabIndex = 39;
             LbThoiLuong.Text = "Thời lượng";
             // 
             // LbDoTuoi
             // 
             LbDoTuoi.BackColor = Color.Transparent;
-            LbDoTuoi.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbDoTuoi.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbDoTuoi.ForeColor = Color.Coral;
-            LbDoTuoi.Location = new Point(676, 161);
+            LbDoTuoi.Location = new Point(759, 174);
             LbDoTuoi.Name = "LbDoTuoi";
-            LbDoTuoi.Size = new Size(66, 27);
+            LbDoTuoi.Size = new Size(74, 30);
             LbDoTuoi.TabIndex = 38;
             LbDoTuoi.Text = "Độ tuổi";
             // 
             // LbGiaNhap
             // 
             LbGiaNhap.BackColor = Color.Transparent;
-            LbGiaNhap.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbGiaNhap.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbGiaNhap.ForeColor = Color.Coral;
-            LbGiaNhap.Location = new Point(676, 71);
+            LbGiaNhap.Location = new Point(759, 71);
             LbGiaNhap.Name = "LbGiaNhap";
-            LbGiaNhap.Size = new Size(127, 27);
+            LbGiaNhap.Size = new Size(141, 30);
             LbGiaNhap.TabIndex = 37;
             LbGiaNhap.Text = "Giá nhập phim";
             // 
             // LbDienVien
             // 
             LbDienVien.BackColor = Color.Transparent;
-            LbDienVien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbDienVien.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbDienVien.ForeColor = Color.Coral;
-            LbDienVien.Location = new Point(353, 254);
+            LbDienVien.Location = new Point(395, 277);
             LbDienVien.Name = "LbDienVien";
-            LbDienVien.Size = new Size(83, 27);
+            LbDienVien.Size = new Size(93, 30);
             LbDienVien.TabIndex = 36;
             LbDienVien.Text = "Diễn viên";
             // 
             // LbNgonNgu
             // 
             LbNgonNgu.BackColor = Color.Transparent;
-            LbNgonNgu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbNgonNgu.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbNgonNgu.ForeColor = Color.Coral;
-            LbNgonNgu.Location = new Point(353, 161);
+            LbNgonNgu.Location = new Point(395, 174);
             LbNgonNgu.Name = "LbNgonNgu";
-            LbNgonNgu.Size = new Size(89, 27);
+            LbNgonNgu.Size = new Size(98, 30);
             LbNgonNgu.TabIndex = 35;
             LbNgonNgu.Text = "Ngôn ngữ";
             // 
             // LbTheLoaiPhim
             // 
             LbTheLoaiPhim.BackColor = Color.Transparent;
-            LbTheLoaiPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbTheLoaiPhim.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbTheLoaiPhim.ForeColor = Color.Coral;
-            LbTheLoaiPhim.Location = new Point(353, 71);
+            LbTheLoaiPhim.Location = new Point(395, 71);
             LbTheLoaiPhim.Name = "LbTheLoaiPhim";
-            LbTheLoaiPhim.Size = new Size(71, 27);
+            LbTheLoaiPhim.Size = new Size(79, 30);
             LbTheLoaiPhim.TabIndex = 34;
             LbTheLoaiPhim.Text = "Thể loại";
             // 
             // LbDaoDien
             // 
             LbDaoDien.BackColor = Color.Transparent;
-            LbDaoDien.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbDaoDien.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbDaoDien.ForeColor = Color.Coral;
-            LbDaoDien.Location = new Point(16, 254);
+            LbDaoDien.Location = new Point(16, 277);
             LbDaoDien.Name = "LbDaoDien";
-            LbDaoDien.Size = new Size(79, 27);
+            LbDaoDien.Size = new Size(88, 30);
             LbDaoDien.TabIndex = 33;
             LbDaoDien.Text = "Đạo diễn";
             // 
             // LbNgayChieu
             // 
             LbNgayChieu.BackColor = Color.Transparent;
-            LbNgayChieu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbNgayChieu.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbNgayChieu.ForeColor = Color.Coral;
-            LbNgayChieu.Location = new Point(16, 161);
+            LbNgayChieu.Location = new Point(16, 174);
             LbNgayChieu.Name = "LbNgayChieu";
-            LbNgayChieu.Size = new Size(99, 27);
+            LbNgayChieu.Size = new Size(110, 30);
             LbNgayChieu.TabIndex = 32;
             LbNgayChieu.Text = "Ngày chiếu";
             // 
@@ -510,7 +510,7 @@
             txtDaoDien.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtDaoDien.Font = new Font("Segoe UI", 9F);
             txtDaoDien.ForeColor = Color.Black;
-            txtDaoDien.Location = new Point(16, 288);
+            txtDaoDien.Location = new Point(16, 311);
             txtDaoDien.Margin = new Padding(3, 4, 3, 4);
             txtDaoDien.Name = "txtDaoDien";
             txtDaoDien.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -524,11 +524,11 @@
             // LbTenPhim
             // 
             LbTenPhim.BackColor = Color.Transparent;
-            LbTenPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbTenPhim.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             LbTenPhim.ForeColor = Color.Coral;
             LbTenPhim.Location = new Point(16, 71);
             LbTenPhim.Name = "LbTenPhim";
-            LbTenPhim.Size = new Size(83, 27);
+            LbTenPhim.Size = new Size(92, 30);
             LbTenPhim.TabIndex = 30;
             LbTenPhim.Text = "Tên Phim";
             // 
@@ -547,7 +547,7 @@
             txtTenPhim.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtTenPhim.Font = new Font("Segoe UI", 9F);
             txtTenPhim.ForeColor = Color.Black;
-            txtTenPhim.Location = new Point(12, 105);
+            txtTenPhim.Location = new Point(12, 109);
             txtTenPhim.Margin = new Padding(3, 4, 3, 4);
             txtTenPhim.Name = "txtTenPhim";
             txtTenPhim.PlaceholderForeColor = SystemColors.AppWorkspace;
@@ -569,12 +569,12 @@
             btnClose.FillColor = Color.Gray;
             btnClose.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(788, 552);
+            btnClose.Location = new Point(944, 597);
             btnClose.Name = "btnClose";
             btnClose.ShadowDecoration.CustomizableEdges = customizableEdges28;
-            btnClose.Size = new Size(80, 37);
+            btnClose.Size = new Size(121, 37);
             btnClose.TabIndex = 72;
-            btnClose.Text = "Đóng";
+            btnClose.Text = "ĐÓNG";
             btnClose.Click += btnClose_Click;
             // 
             // FormEditMovie
@@ -582,7 +582,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1028, 601);
+            ClientSize = new Size(1271, 664);
             Controls.Add(btnClose);
             Controls.Add(txtMoTa);
             Controls.Add(btnThemPhim);

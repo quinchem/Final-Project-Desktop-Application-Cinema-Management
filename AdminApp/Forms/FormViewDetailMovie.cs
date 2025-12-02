@@ -1,11 +1,12 @@
-﻿using SharedData.Repositories;
-using DocumentFormat.OpenXml.Office2010.Excel;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -58,12 +59,16 @@ namespace AdminApp
                 }
                 else
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Không tìm thấy thông tin phim!");
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi khi load thông tin phim: " + ex.Message);
             }
         }
@@ -84,11 +89,13 @@ namespace AdminApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi khi load poster: " + ex.Message);
             }
         }
 
-        private void btnThemPhim_Click(object sender, EventArgs e)
+        private void btnDong_Click(object sender, EventArgs e)
         {
             this.Close();
         }

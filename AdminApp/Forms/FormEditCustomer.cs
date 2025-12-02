@@ -1,5 +1,5 @@
-﻿using SharedData.Repositories;
-using SharedData.Models;
+﻿using SharedData.Models;
+using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,22 +19,22 @@ namespace AdminApp
         private readonly CustomerRepo repo = new CustomerRepo();
         private readonly Customer customer;
 
-        // ✅ Constructor nhận khách hàng từ form cha
+        // Constructor nhận khách hàng từ form cha
         public FormEditCustomer(Customer c)
         {
             InitializeComponent();
             CbGioiTinh.Items.Clear();
             CbGioiTinh.Items.AddRange(new string[]
             {
-        "Nam",
-        "Nữ",
+                    "Nam",
+                    "Nữ",
             });
             CbGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
             customer = c;
             LoadCustomerToForm();
         }
 
-        // ✅ Load dữ liệu lên form con
+        // Load dữ liệu lên form con
         private void LoadCustomerToForm()
         {
             if (customer == null) return;
@@ -66,44 +67,52 @@ namespace AdminApp
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            // ✅ Validate
+            // Validate
             if (string.IsNullOrWhiteSpace(txtTenKH.Text))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Họ tên không được để trống");
                 return;
             }
 
             if (CbGioiTinh.SelectedIndex == -1)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn giới tính");
                 return;
             }
 
-            // ✅ Build Customer object (CHUẨN CustomerRepo)
+            // Build Customer object (CHUẨN CustomerRepo)
             Customer updatedCustomer = new Customer
             {
-                customer_id = customer.customer_id,           // KHÔNG ĐỔI
+                customer_id = customer.customer_id,          
                 full_name = txtTenKH.Text.Trim(),
                 gender = CbGioiTinh.SelectedItem.ToString(),
                 date_of_birth = dtpNgaySinh.Value.ToString("dd/MM/yyyy"),
                 phone_number = txtSDT.Text.Trim(),
                 email = txtEmail.Text.Trim(),
                 address = txtDiaChi.Text.Trim(),
-                create_date = customer.create_date            // GIỮ NGUYÊN
+                create_date = customer.create_date            
             };
 
-            // ✅ Update DB
-            bool ok = repo.Update(updatedCustomer);           // ✅ ĐÚNG CHỮ KÝ
+            // Update DB
+            bool ok = repo.Update(updatedCustomer);         
 
             if (ok)
             {
-                MessageBox.Show("✅ Cập nhật thông tin khách hàng thành công!");
-                DialogResult = DialogResult.OK; // báo form cha reload
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
+                MessageBox.Show("Cập nhật thông tin khách hàng thành công!");
+                DialogResult = DialogResult.OK; 
                 Close();
             }
             else
             {
-                MessageBox.Show("❌ Không thể cập nhật khách hàng!");
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
+                MessageBox.Show("Không thể cập nhật khách hàng!");
             }
         }
 

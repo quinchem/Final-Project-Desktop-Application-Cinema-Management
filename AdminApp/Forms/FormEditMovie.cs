@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -102,12 +103,16 @@ namespace AdminApp
                 }
                 else
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Không tìm thấy thông tin phim!");
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Error loading movie: " + ex.Message);
             }
         }
@@ -130,6 +135,8 @@ namespace AdminApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi load poster: " + ex.Message);
             }
         }
@@ -154,6 +161,8 @@ namespace AdminApp
                     }
                     catch (Exception ex)
                     {
+                        SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                        player.Play();
                         MessageBox.Show("Không thể tải ảnh: " + ex.Message);
                     }
                 }
@@ -189,11 +198,15 @@ namespace AdminApp
                     _imageRepo.SaveMoviePoster(movieId, _posterImageBytes);
                 }
 
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Cập nhật phim thành công!");
                 this.Close();
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi cập nhật phim: " + ex.Message);
             }
         }

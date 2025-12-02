@@ -65,6 +65,8 @@ namespace UserApp
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panelLogin = new Panel();
             btnDangKy = new Guna2Button();
             btnDangNhap = new Guna2Button();
@@ -96,10 +98,12 @@ namespace UserApp
             guna2HtmlLabel2 = new Guna2HtmlLabel();
             txtHoTen = new Guna2TextBox();
             guna2HtmlLabel3 = new Guna2HtmlLabel();
+            guna2PictureBox2 = new Guna2PictureBox();
             panelLogin.SuspendLayout();
             panelDangNhap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             panelDangKy.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox2).BeginInit();
             SuspendLayout();
             // 
             // panelLogin
@@ -110,10 +114,11 @@ namespace UserApp
             panelLogin.Controls.Add(btnDangNhap);
             panelLogin.Controls.Add(panelDangNhap);
             panelLogin.Controls.Add(panelDangKy);
+            panelLogin.Controls.Add(guna2PictureBox2);
             panelLogin.Dock = DockStyle.Fill;
             panelLogin.Location = new Point(0, 0);
             panelLogin.Name = "panelLogin";
-            panelLogin.Size = new Size(1482, 812);
+            panelLogin.Size = new Size(1902, 973);
             panelLogin.TabIndex = 0;
             // 
             // btnDangKy
@@ -129,7 +134,7 @@ namespace UserApp
             btnDangKy.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangKy.ForeColor = SystemColors.Window;
             btnDangKy.Image = Properties.Resources.DangKy;
-            btnDangKy.Location = new Point(555, 79);
+            btnDangKy.Location = new Point(1116, 172);
             btnDangKy.Name = "btnDangKy";
             btnDangKy.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnDangKy.Size = new Size(151, 46);
@@ -150,7 +155,7 @@ namespace UserApp
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.DangNhap;
-            btnDangNhap.Location = new Point(369, 79);
+            btnDangNhap.Location = new Point(930, 172);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnDangNhap.Size = new Size(151, 46);
@@ -175,7 +180,7 @@ namespace UserApp
             panelDangNhap.FillColor2 = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor3 = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelDangNhap.Location = new Point(354, 165);
+            panelDangNhap.Location = new Point(580, 242);
             panelDangNhap.Name = "panelDangNhap";
             panelDangNhap.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges16;
@@ -335,7 +340,7 @@ namespace UserApp
             panelDangKy.FillColor2 = Color.FromArgb(236, 230, 224);
             panelDangKy.FillColor3 = Color.FromArgb(236, 230, 224);
             panelDangKy.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelDangKy.Location = new Point(272, 164);
+            panelDangKy.Location = new Point(498, 241);
             panelDangKy.Name = "panelDangKy";
             panelDangKy.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelDangKy.ShadowDecoration.CustomizableEdges = customizableEdges34;
@@ -650,14 +655,28 @@ namespace UserApp
             guna2HtmlLabel3.TabIndex = 0;
             guna2HtmlLabel3.Text = "Họ và tên:";
             // 
+            // guna2PictureBox2
+            // 
+            guna2PictureBox2.CustomizableEdges = customizableEdges35;
+            guna2PictureBox2.Image = Properties.Resources.FINAL;
+            guna2PictureBox2.ImageRotate = 0F;
+            guna2PictureBox2.Location = new Point(576, 63);
+            guna2PictureBox2.Name = "guna2PictureBox2";
+            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            guna2PictureBox2.Size = new Size(248, 227);
+            guna2PictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            guna2PictureBox2.TabIndex = 11;
+            guna2PictureBox2.TabStop = false;
+            // 
             // FormLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1482, 812);
+            ClientSize = new Size(1902, 973);
             Controls.Add(panelLogin);
             IsMdiContainer = true;
             Name = "FormLogin";
+            StartPosition = FormStartPosition.Manual;
             Text = "Đăng nhập";
             Load += FormLogin_Load;
             KeyDown += FormLogin_KeyDown;
@@ -666,6 +685,7 @@ namespace UserApp
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
             panelDangKy.ResumeLayout(false);
             panelDangKy.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)guna2PictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -702,5 +722,6 @@ namespace UserApp
         private Guna2HtmlLabel lblEmail;
         private Guna2Button btnMiniDN;
         private Guna2PictureBox guna2PictureBox1;
+        private Guna2PictureBox guna2PictureBox2;
     }
 }
