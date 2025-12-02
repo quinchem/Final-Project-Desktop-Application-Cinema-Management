@@ -78,7 +78,7 @@ namespace UserApp
             timer1.Stop();
             isCounting = false;
             countdown = 300;
-            lblTime.Text = "05:00";
+            lblTime.Text = "10:00";
         }
 
         private void LoadPoster()
@@ -106,9 +106,6 @@ namespace UserApp
             }
         }
 
-        // ===================================================
-        // LOAD PHÒNG: JSON + DB
-        // ===================================================
         private void LoadRoom(string auditoriumId, string showtimeId)
         {
             _allSeats.Clear();
@@ -345,9 +342,6 @@ namespace UserApp
             }
         }
 
-        // ===================================================
-        // TIMER GIỮ GHẾ
-        // ===================================================
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (countdown <= 0)
