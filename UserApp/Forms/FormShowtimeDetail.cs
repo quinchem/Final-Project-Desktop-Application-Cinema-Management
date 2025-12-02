@@ -276,10 +276,10 @@ namespace UserApp
             string displayTitle = string.IsNullOrEmpty(movieTitle) ? "Tên phim đang cập nhật" : movieTitle.ToUpper();
 
             // Màu sắc
-            Color mainBgColor = Color.FromArgb(92, 124, 150); // Nền Xanh
+            Color mainBgColor = Color.FromArgb(92, 124, 150); 
             Color titleColor = Color.White;
-            Color timeBgColor = Color.FromArgb(236, 230, 224); // Nút Kem
-            Color accentColor = Color.FromArgb(45, 87, 154);   // Chữ Xanh đậm
+            Color timeBgColor = Color.FromArgb(236, 230, 224); 
+            Color accentColor = Color.FromArgb(45, 87, 154);   
 
             int panelHeight = 280;
 
