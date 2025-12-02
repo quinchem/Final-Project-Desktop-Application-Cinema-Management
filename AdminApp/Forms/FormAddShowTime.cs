@@ -59,15 +59,12 @@ namespace AdminApp
             cboDinhDang.ValueMember = "auditorium_type_id";
             cboDinhDang.SelectedIndex = -1;
         }
-
-        // Sự kiện khi chọn thay đổi định dạng
         private void cboDinhDang_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTicketPrice();
         }
 
-        // --- HÀM CẬP NHẬT GIÁ VÉ ---
-        // Hàm cập nhật giá vé
+        // Hàm giúp nhóm cập nhật giá vé
         private void UpdateTicketPrice()
         {
             if (cboDinhDang.DataSource == null || cboDinhDang.SelectedIndex == -1 || cboDinhDang.SelectedValue == null)
