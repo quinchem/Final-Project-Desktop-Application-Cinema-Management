@@ -213,8 +213,8 @@ namespace UserApp
 
             // B. Bật hiệu ứng cho cái mới vừa click
             clickedPic.ShadowDecoration.Enabled = true;
-            clickedPic.ShadowDecoration.Color = Color.FromArgb(245, 131, 35); 
-            clickedPic.ShadowDecoration.Depth = 15;        
+            clickedPic.ShadowDecoration.Color = Color.FromArgb(245, 131, 35);
+            clickedPic.ShadowDecoration.Depth = 15;
 
             // C. LẤY ẢNH TỪ NHỎ -> GÁN LÊN TO
             // Logic: Cái nhỏ đang hiện hình gì thì gán y chang lên trên

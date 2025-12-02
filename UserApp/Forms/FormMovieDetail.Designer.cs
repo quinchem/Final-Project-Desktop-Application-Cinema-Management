@@ -146,16 +146,20 @@ namespace UserApp
             // lblDescription
             // 
             lblDescription.AutoSize = false;
-            lblDescription.AutoSizeHeightOnly = true;
             lblDescription.BackColor = Color.Transparent;
-            lblDescription.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDescription.Font = new Font("Segoe UI", 13.8F);
             lblDescription.ForeColor = Color.White;
             lblDescription.Location = new Point(181, 635);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(1593, 32);
-            lblDescription.TabIndex = 17;
-            lblDescription.Text = "Chi tiết mô tả";
-            // 
+            lblDescription.Size = new Size(1593, 0);
+            lblDescription.MaximumSize = new Size(1593, 0);
+           
+            lblDescription.MaximumSize = new Size(1593, 0);
+            lblDescription.AutoSizeHeightOnly = true;
+            lblDescription.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            lblDescription.AutoSizeHeightOnly = true;
+            lblDescription.Text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
             // btnMoTa
             // 
             btnMoTa.BorderRadius = 15;

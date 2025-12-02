@@ -168,7 +168,7 @@
             guna2Button4.FillColor = Color.FromArgb(255, 128, 0);
             guna2Button4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button4.ForeColor = Color.White;
-            guna2Button4.Location = new Point(488, 42);
+            guna2Button4.Location = new Point(488, 25);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2Button4.Size = new Size(173, 49);
@@ -187,7 +187,7 @@
             guna2Button1.FillColor = Color.Silver;
             guna2Button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(724, 42);
+            guna2Button1.Location = new Point(724, 25);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2Button1.Size = new Size(173, 49);
@@ -206,7 +206,7 @@
             guna2Button2.FillColor = Color.Silver;
             guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button2.ForeColor = Color.White;
-            guna2Button2.Location = new Point(958, 42);
+            guna2Button2.Location = new Point(958, 25);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2Button2.Size = new Size(173, 49);
@@ -216,7 +216,7 @@
             // 
             // guna2Separator1
             // 
-            guna2Separator1.Location = new Point(355, 118);
+            guna2Separator1.Location = new Point(355, 83);
             guna2Separator1.Name = "guna2Separator1";
             guna2Separator1.Size = new Size(1194, 12);
             guna2Separator1.TabIndex = 44;
@@ -226,7 +226,7 @@
             groupBox1.Controls.Add(dtpFrom);
             groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox1.Location = new Point(401, 150);
+            groupBox1.Location = new Point(401, 102);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(312, 74);
             groupBox1.TabIndex = 45;
@@ -257,7 +257,7 @@
             groupBox2.Controls.Add(dtpTo);
             groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox2.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox2.Location = new Point(793, 150);
+            groupBox2.Location = new Point(793, 102);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(312, 74);
             groupBox2.TabIndex = 48;
@@ -289,7 +289,7 @@
             groupBox3.Controls.Add(YearCombo);
             groupBox3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox3.ForeColor = Color.FromArgb(255, 128, 0);
-            groupBox3.Location = new Point(1210, 150);
+            groupBox3.Location = new Point(1210, 102);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(312, 74);
             groupBox3.TabIndex = 49;
@@ -353,10 +353,10 @@
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel1.Location = new Point(337, 253);
+            guna2CustomGradientPanel1.Location = new Point(338, 188);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            guna2CustomGradientPanel1.Size = new Size(602, 131);
+            guna2CustomGradientPanel1.Size = new Size(627, 131);
             guna2CustomGradientPanel1.TabIndex = 0;
             // 
             // lblTotalRevenue
@@ -394,7 +394,7 @@
             guna2CustomGradientPanel3.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel3.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel3.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel3.Location = new Point(984, 253);
+            guna2CustomGradientPanel3.Location = new Point(984, 188);
             guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges18;
             guna2CustomGradientPanel3.Size = new Size(599, 131);
@@ -458,7 +458,7 @@
             guna2CustomGradientPanel4.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel4.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel4.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel4.Location = new Point(338, 565);
+            guna2CustomGradientPanel4.Location = new Point(338, 478);
             guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
             guna2CustomGradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2CustomGradientPanel4.Size = new Size(656, 354);
@@ -522,10 +522,10 @@
             guna2CustomGradientPanel5.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel5.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel5.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel5.Location = new Point(1063, 565);
+            guna2CustomGradientPanel5.Location = new Point(1029, 478);
             guna2CustomGradientPanel5.Name = "guna2CustomGradientPanel5";
             guna2CustomGradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            guna2CustomGradientPanel5.Size = new Size(520, 354);
+            guna2CustomGradientPanel5.Size = new Size(554, 354);
             guna2CustomGradientPanel5.TabIndex = 3;
             // 
             // gunaChartTopMovies
@@ -534,7 +534,7 @@
             gunaChartTopMovies.Legend.LabelFont = chartFont9;
             gunaChartTopMovies.Location = new Point(25, 62);
             gunaChartTopMovies.Name = "gunaChartTopMovies";
-            gunaChartTopMovies.Size = new Size(476, 268);
+            gunaChartTopMovies.Size = new Size(495, 268);
             gunaChartTopMovies.TabIndex = 2;
             chartFont10.FontName = "Arial";
             chartFont10.Size = 12;
@@ -588,7 +588,7 @@
             guna2CustomGradientPanel6.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel6.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel6.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel6.Location = new Point(1165, 409);
+            guna2CustomGradientPanel6.Location = new Point(1165, 335);
             guna2CustomGradientPanel6.Name = "guna2CustomGradientPanel6";
             guna2CustomGradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges25;
             guna2CustomGradientPanel6.Size = new Size(418, 125);
@@ -654,7 +654,7 @@
             guna2CustomGradientPanel7.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel7.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel7.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel7.Location = new Point(337, 409);
+            guna2CustomGradientPanel7.Location = new Point(338, 335);
             guna2CustomGradientPanel7.Name = "guna2CustomGradientPanel7";
             guna2CustomGradientPanel7.ShadowDecoration.CustomizableEdges = customizableEdges28;
             guna2CustomGradientPanel7.Size = new Size(391, 125);
@@ -720,7 +720,7 @@
             guna2CustomGradientPanel8.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel8.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel8.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel8.Location = new Point(751, 409);
+            guna2CustomGradientPanel8.Location = new Point(752, 335);
             guna2CustomGradientPanel8.Name = "guna2CustomGradientPanel8";
             guna2CustomGradientPanel8.ShadowDecoration.CustomizableEdges = customizableEdges31;
             guna2CustomGradientPanel8.Size = new Size(391, 125);
@@ -784,7 +784,7 @@
             guna2Button3.FillColor = Color.Silver;
             guna2Button3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button3.ForeColor = Color.White;
-            guna2Button3.Location = new Point(1191, 42);
+            guna2Button3.Location = new Point(1191, 25);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges33;
             guna2Button3.Size = new Size(187, 49);
@@ -797,7 +797,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1902, 951);
+            ClientSize = new Size(1902, 843);
             Controls.Add(guna2Button3);
             Controls.Add(guna2CustomGradientPanel6);
             Controls.Add(guna2CustomGradientPanel7);

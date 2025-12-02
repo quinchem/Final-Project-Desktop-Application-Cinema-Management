@@ -54,8 +54,7 @@ namespace UserApp
                     lblActor.Text = film.actor;
 
                     // --- Giới hạn xuống dòng cho mô tả ---
-                    lblDescription.AutoSize = true;
-                    lblDescription.MaximumSize = new Size(800, 0); // 400 là bề rộng label, có thể chỉnh
+                    
                     lblDescription.Text = film.description;
                 }
                 else

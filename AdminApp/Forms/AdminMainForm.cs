@@ -60,11 +60,13 @@ namespace AdminApp
 
         public void OpenChildForm(Form childForm)
         {
-            // Nếu có form con đang mở thì đóng
+             // Nếu có form con đang mở thì đóng
             if (currentFormChild != null)
                 currentFormChild.Close();
 
             panelMain.AutoScroll = false;
+            panelMain.HorizontalScroll.Enabled = false;
+            panelMain.HorizontalScroll.Visible = false;
 
             currentFormChild = childForm;
             childForm.TopLevel = false;
@@ -74,12 +76,7 @@ namespace AdminApp
             panelMain.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-
-            // Khi form con đóng, bật lại AutoScroll
-            childForm.FormClosed += (s, e) =>
-            {
-                panelMain.AutoScroll = true;
-            };
+        
         }
 
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
