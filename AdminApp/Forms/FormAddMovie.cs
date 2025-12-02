@@ -23,33 +23,25 @@ namespace AdminApp
         private byte[] _posterImageData = null;
         public FormAddMovie()
         {
-            InitializeComponent(); // Khởi tạo các control trên form
-            LoadComboBoxData(); // Load dữ liệu vào các ComboBox
+            InitializeComponent(); 
+            LoadComboBoxData(); 
         }
 
         private void LoadComboBoxData()
         {
             try
-            {
-                // 3.2: Load độ tuổi (dữ liệu cố định, không cần lấy từ DB)
-                // ------------------------------------
-                // P: Phổ thông, K: Trẻ em, T13: Trên 13 tuổi, T16: Trên 16, T18: Trên 18
+            { 
                 cboDoTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18" });
-
-                // 3.3: Load trạng thái (dữ liệu cố định)
-                // ------------------------------------
                 cboTrangThai.Items.AddRange(new object[] { "Đang chiếu", "Sắp chiếu" });
-                cboTrangThai.SelectedIndex = 0; // Mặc định chọn item đầu tiên
+                cboTrangThai.SelectedIndex = 0; 
             }
             catch (Exception ex)
             {
-                // Bắt lỗi và hiển thị thông báo nếu có lỗi xảy ra
+                // Giúp bắt lỗi và hiển thị thông báo nếu có lỗi xảy ra
                 MessageBox.Show("Lỗi khi load dữ liệu: " + ex.Message, "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
 
         public string GenerateNextMovieId()
         {
@@ -58,13 +50,12 @@ namespace AdminApp
 
             if (movies.Count > 0)
             {
-                // Lấy movie_id lớn nhất hiện tại
-                var lastId = movies.OrderByDescending(m => m.movie_id).First().movie_id; // M001, M002…
-                int lastNum = int.Parse(lastId.Substring(1)); // cắt chữ M ra
+                var lastId = movies.OrderByDescending(m => m.movie_id).First().movie_id; 
+                int lastNum = int.Parse(lastId.Substring(1));
                 nextNumber = lastNum + 1;
             }
 
-            return "M" + nextNumber.ToString("D3"); // M001, M002, …
+            return "M" + nextNumber.ToString("D3"); 
         }
         public event EventHandler FilmAdded;
 
@@ -77,17 +68,17 @@ namespace AdminApp
             {
                 try
                 {
-                    // Dispose the old image first
+                    // Giúp bỏ ảnh cũ
                     if (picPoster.Image != null)
                     {
                         picPoster.Image.Dispose();
                         picPoster.Image = null;
                     }
 
-                    // Load the new image
+                    // Giúp load ảnh mới
                     picPoster.Image = Image.FromFile(ofd.FileName);
 
-                    // Read image into byte array
+                    // Giúp đọc file ảnh ở dạng byte
                     _posterImageData = File.ReadAllBytes(ofd.FileName);
                 }
                 catch (OutOfMemoryException)
@@ -106,14 +97,11 @@ namespace AdminApp
         {
             try
             {
-                //  Kiểm tra dữ liệu hợp lệ
+                //  Giúp kiểm tra dữ liệu hợp lệ
                 if (!ValidateInput())
                     return;
-
-
-                // 3. Lấy dữ liệu từ form
+                // Giúp lấy dữ liệu từ form
                 string movieId = GenerateNextMovieId();
-
                 string title = txtTenPhim.Text;
                 string genre = txtTheLoai.Text;
                 string language = txtNgonNgu.Text;
@@ -125,9 +113,7 @@ namespace AdminApp
                 int duration = int.Parse(txtThoiLuong.Text);
                 string age = cboDoTuoi.Text;
                 string releaseDate = dtNgayChieu.Value.ToString("dd/MM/yyyy");
-
-
-                // 4. Lưu vào SQLite
+                // Giúp lưu vào SQLite
                 using (var conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
@@ -139,7 +125,6 @@ VALUES
 
                     using (var cmd = new SqliteCommand(sql, conn))
                     {
-                        // Tạo id (GUID)
                         cmd.Parameters.AddWithValue("@id", movieId);
                         cmd.Parameters.AddWithValue("@title", title);
                         cmd.Parameters.AddWithValue("@genre", genre);
@@ -152,7 +137,6 @@ VALUES
                         cmd.Parameters.AddWithValue("@duration", duration);
                         cmd.Parameters.AddWithValue("@description", description);
                         cmd.Parameters.AddWithValue("@status", status);
-
                         cmd.ExecuteNonQuery();
                     }
                     if (_posterImageData != null)
@@ -176,7 +160,7 @@ VALUES
                 player.Play();
                 MessageBox.Show("Thêm phim thành công!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FilmAdded?.Invoke(this, EventArgs.Empty); // Báo cho FormMovieManagement
+                FilmAdded?.Invoke(this, EventArgs.Empty); 
                 ClearForm();
             }
             catch (Exception ex)
@@ -192,7 +176,7 @@ VALUES
         }
         private bool ValidateInput()
         {
-            // --- TÊN PHIM ---
+            // Tên phim
             if (string.IsNullOrWhiteSpace(txtTenPhim.Text))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -203,7 +187,7 @@ VALUES
                 return false;
             }
 
-            // --- THỂ LOẠI ---
+            // Thể loại
             if (string.IsNullOrWhiteSpace(txtTheLoai.Text))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -224,7 +208,7 @@ VALUES
                 return false;
             }
 
-            // --- NGÔN NGỮ ---
+            // Ngôn ngữ
             if (string.IsNullOrWhiteSpace(txtNgonNgu.Text))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -245,7 +229,7 @@ VALUES
                 return false;
             }
 
-            // --- ĐẠO DIỄN ---
+            // Ngôn ngữ
             if (string.IsNullOrWhiteSpace(txtDaoDien.Text))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -266,7 +250,7 @@ VALUES
                 return false;
             }
 
-            // --- DIỄN VIÊN ---
+            // Diễn viên
             if (string.IsNullOrWhiteSpace(txtDienVien.Text))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -288,7 +272,7 @@ VALUES
             }
 
 
-            // --- GIÁ NHẬP ---
+            // Giá nhập
             if (string.IsNullOrWhiteSpace(txtGiaNhap.Text))
             {
                 MessageBox.Show("Vui lòng nhập giá nhập phim!", "Thông báo",
@@ -308,7 +292,7 @@ VALUES
                 return false;
             }
 
-            // --- ĐỘ TUỔI ---
+            // Độ tuổi
             if (cboDoTuoi.SelectedIndex == -1)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -318,7 +302,7 @@ VALUES
                 return false;
             }
 
-            // --- THỜI LƯỢNG ---
+            // Thời lượng
             if (string.IsNullOrWhiteSpace(txtThoiLuong.Text))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -331,15 +315,9 @@ VALUES
             return true;
         }
 
-
-
-
-        // PHẦN 8: XÓA FORM (RESET)
-        // =====================================================
-        // Được gọi sau khi thêm phim thành công để nhập phim mới
+        // Giúp xóa form sau khi thêm phim thành công để nhập phim mới
         private void ClearForm()
         {
-            // Xóa tất cả TextBox
             txtTenPhim.Clear();
             txtGiaNhap.Clear();
             txtNgonNgu.Clear();
@@ -348,8 +326,6 @@ VALUES
             txtThoiLuong.Clear();
             txtMoTa.Clear();
             txtTheLoai.Clear();
-            
-            // Properly dispose image
             if (picPoster.Image != null)
             {
                 picPoster.Image.Dispose();
@@ -359,34 +335,19 @@ VALUES
             _posterImageData = null;
             dtNgayChieu.Value = DateTime.Now;
         }
-
-
-
-        // PHẦN 9: VALIDATE INPUT TRONG TEXTBOX
-        // =====================================================
-
-        // 9.1: Chỉ cho phép nhập số và dấu chấm cho giá nhập
-        // ------------------------------------
-        // KeyPress: Sự kiện khi user nhấn phím
+        // Giúp hạn chế chỉ cho nhập số và dấu chấm cho giá nhập
         private void txtGiaNhap_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // char.IsControl: Cho phép các phím điều khiển (Backspace, Delete...)
-            // char.IsDigit: Kiểm tra có phải số (0-9)
-            // e.KeyChar != '.': Cho phép dấu chấm
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-                e.Handled = true; // Chặn ký tự không hợp lệ
-
-            // Chặn nhập nhiều dấu chấm
-            // IndexOf('.'): Tìm vị trí dấu chấm, trả về -1 nếu không tìm thấy
+                e.Handled = true; 
+            // Giúp chặn nhập nhiều dấu chấm
             if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
                 e.Handled = true;
         }
 
-        // 9.2: Chỉ cho phép nhập số nguyên cho thời lượng
-        // ------------------------------------
+        // Giúp hạn chế chỉ cho phép nhập số nguyên cho thời lượng
         private void txtThoiLuong_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Chỉ cho phép số và phím điều khiển
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
         }
