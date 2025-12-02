@@ -183,48 +183,28 @@ namespace UserApp
             f.Show();
         }
 
-        private void LoadDanhSachPhim(List<Film> listPhim)
-        {
-            flowPanelList.Controls.Clear();
-            foreach (var phim in listPhim)
-            {
-                Guna2PictureBox picSmall = new Guna2PictureBox();
-
-                picSmall.Size = new Size(200, 110);
-                picSmall.SizeMode = PictureBoxSizeMode.Zoom;
-                picSmall.BorderRadius = 15;
-                picSmall.Cursor = Cursors.Hand;
-                picSmall.Click += picSmall_Click;
-
-                // --- 4. THÊM VÀO DANH SÁCH ---
-                flowPanelList.Controls.Add(picSmall);
-            }
-        }
 
         private void picSmall_Click(object sender, EventArgs e)
         {
             var clickedPic = (Guna2PictureBox)sender;
 
-            // A. Tắt hiệu ứng của cái cũ (nếu có)
+            // Tắt hiệu ứng của cái cũ (nếu có)
             if (currentSelected != null)
             {
                 currentSelected.ShadowDecoration.Enabled = false;
             }
 
-            // B. Bật hiệu ứng cho cái mới vừa click
+            // Bật hiệu ứng cho cái mới vừa click
             clickedPic.ShadowDecoration.Enabled = true;
             clickedPic.ShadowDecoration.Color = Color.FromArgb(245, 131, 35);
             clickedPic.ShadowDecoration.Depth = 15;
 
-            // C. LẤY ẢNH TỪ NHỎ -> GÁN LÊN TO
-            // Logic: Cái nhỏ đang hiện hình gì thì gán y chang lên trên
+            // Lấy ảnh nhỏ gắn lên khung lớn
             if (clickedPic.Image != null)
             {
                 gunaPicBig.Image = clickedPic.Image;
                 gunaPicBig.SizeMode = PictureBoxSizeMode.Zoom;
             }
-
-            // D. Lưu lại cái này để lần sau click cái khác thì biết đường tắt
             currentSelected = clickedPic;
         }
     }
