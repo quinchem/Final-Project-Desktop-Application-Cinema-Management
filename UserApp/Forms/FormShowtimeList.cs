@@ -52,7 +52,7 @@ namespace UserApp
             // Màu nền trong suốt để thấy màu form
             flpShowtimes.BackColor = Color.Transparent;
 
-            // 🔥 QUAN TRỌNG: Đẩy xuống dưới cùng để không che cái Lịch
+            //Đẩy xuống dưới cùng để không che cái Lịch
             flpShowtimes.SendToBack();
         }
 
@@ -184,8 +184,6 @@ namespace UserApp
             }
         }
 
-        // --- TẢI VÀ HIỂN THỊ DỮ LIỆU ---
-
         private void LoadShowtimes()
         {
             UpdateDateButtons();
@@ -257,7 +255,6 @@ namespace UserApp
             flpShowtimes.Controls.Add(lbl);
         }
 
-        // --- TẠO GIAO DIỆN PHIM ĐẸP (Xanh Hamster) ---
         private Guna2Panel CreateMoviePanel(string movieTitle, List<ShowtimeInfo> showtimes)
         {
             if (showtimes == null || showtimes.Count == 0) return null;
