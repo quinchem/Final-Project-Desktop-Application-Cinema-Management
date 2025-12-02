@@ -52,8 +52,7 @@ namespace AdminApp
             txtEmail.Text = staff.email;
             txtSDT.Text = staff.phone_number;
             txtChucVu.Text = staff.role;
-
-            txtChucVu.ReadOnly = true; // không cho sửa chức vụ
+            txtChucVu.ReadOnly = true; 
             byte[] img = _imageRepo.GetStaffImage(_staff_id);
             if (img != null)
             {
@@ -79,7 +78,7 @@ namespace AdminApp
                 !string.IsNullOrWhiteSpace(txtMKmoi.Text) ||
                 !string.IsNullOrWhiteSpace(txtNhapLaiMK.Text);
 
-            //XỬ LÝ ĐỔI MẬT KHẨU
+            //Phần xử lý đổi mật khẩu
             if (wantChangePassword)
             {
                 if (string.IsNullOrWhiteSpace(txtMKcu.Text))
@@ -99,7 +98,7 @@ namespace AdminApp
                     return;
                 }
 
-                // kiểm tra mật khẩu cũ
+                // Phần kiểm tra mật khẩu cũ
                 bool correctOldPass =
                     _accountRepo.CheckOldPassword(_staff_id, txtMKcu.Text);
 
@@ -111,7 +110,7 @@ namespace AdminApp
                     return;
                 }
 
-                // kiểm tra nhập lại
+                // Phần kiểm tra nhập lại
                 if (txtMKmoi.Text != txtNhapLaiMK.Text)
                 {
                     SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
