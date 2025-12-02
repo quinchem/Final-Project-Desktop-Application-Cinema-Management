@@ -10,36 +10,9 @@ namespace SharedData.Repositories
 {
     public class SeatRepo
     {
-            // Connection dùng chung
+
             private static string ConnStr => DatabaseHelper.GetConnectionString();
-
-            // ============================================================
-            // INSERT SEAT (dùng khi lưu layout phòng)
-            // ============================================================
-            public static void InsertSeat(Seat s)
-            {
-                using var conn = new SqliteConnection(ConnStr);
-                conn.Open();
-
-                var cmd = conn.CreateCommand();
-                cmd.CommandText = @"
-                INSERT INTO seat(seat_id, seat_type_id, auditorium_id, location, status, per_seat_ticket_price)
-                VALUES ($id, $type, $aud, $loc, $st, $price)
-            ";
-
-                cmd.Parameters.AddWithValue("$id", s.seat_id);
-                cmd.Parameters.AddWithValue("$type", s.seat_type_id);
-                cmd.Parameters.AddWithValue("$aud", s.auditorium_id);
-                cmd.Parameters.AddWithValue("$loc", s.location);
-                cmd.Parameters.AddWithValue("$st", s.status);
-                cmd.Parameters.AddWithValue("$price", s.per_seat_ticket_price);
-
-                cmd.ExecuteNonQuery();
-            }
-
-            // ============================================================
-            // LẤY GIÁ GHẾ THEO PHÒNG
-            // ============================================================
+            
             public double GetTicketPriceByAuditorium(string auditoriumId)
             {
                 using var conn = new SqliteConnection(ConnStr);
@@ -61,10 +34,6 @@ namespace SharedData.Repositories
                     ? Convert.ToDouble(result)
                     : 0;
             }
-
-            // ============================================================
-            // LẤY GIÁ GHẾ THEO LOẠI PHÒNG (auditorium_type_id)
-            // ============================================================
             public double GetTicketPriceByAuditoriumType(string auditoriumTypeId)
             {
                 using var conn = new SqliteConnection(ConnStr);

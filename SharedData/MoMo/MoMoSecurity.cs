@@ -13,10 +13,6 @@ namespace SharedData.MoMo
         public MoMoSecurity()
         {
         }
-
-        // ==================================================
-        // HMAC SHA256 (Cái quan trọng nhất — Momo đang dùng)
-        // ==================================================
         public string signSHA256(string message, string key)
         {
             byte[] keyByte = Encoding.UTF8.GetBytes(key);
@@ -27,11 +23,6 @@ namespace SharedData.MoMo
                 return BitConverter.ToString(hashmessage).Replace("-", "").ToLower();
             }
         }
-
-        // ================================================
-        // RSA Encrypt (không dùng trong project của chủ tịch)
-        // Giữ lại cho đúng cấu trúc nhưng không đổi namespace
-        // ================================================
         public string RSAEncrypt(string data, string publicKeyXml)
         {
             using (var rsa = new RSACryptoServiceProvider())
