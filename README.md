@@ -9,7 +9,7 @@ Sau khi chạy lệnh này, thư mục dự án sẽ được tải xuống hệ
 
 Mở Visual Studio và tìm câu lệnh khai báo API key "private const string API_KEY = "Your_key"" trong file FormChatbot.cs
 
-Thay "Your_key" bằng API key /*AIzaSyDQ1U67zJGBaLZwpMI4jz2c_ZzRvWYfxZEtest*/.
+Thay "Your_key" bằng API key /*AIzaSyA3o7LHNHl2_xJyBUjrBHaIURDFJ_r0W3Atest*/.
 
 Lưu ý: Bỏ dấu "/" và bỏ từ "test" ở cuối API Key khi nhập vào code
 
