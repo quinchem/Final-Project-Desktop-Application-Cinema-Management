@@ -114,7 +114,7 @@ namespace UserApp
             lblDuration.BackColor = Color.Transparent;
             lblDuration.Text = $"{film.duration} PHÚT";
 
-            // Label dấu |
+            // Label dấu
             Label lblSeparator = new Label();
             lblSeparator.AutoSize = true;
             lblSeparator.Font = new Font("Segoe UI ", 10F, FontStyle.Regular);
