@@ -18,7 +18,6 @@ namespace AdminApp
 {
     public partial class FormStatistics4 : Form
     {
-        // Lưu ý: Đảm bảo tên class Repo khớp với file StatisticsRepo.cs của bạn (có 's' hay không)
         private StatisticRepo _repo = new StatisticRepo();
         private bool isFilteringByYear = false;
         private AdminMainForm _parent;
