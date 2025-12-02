@@ -15,7 +15,6 @@ namespace UserApp
 
         private FormLogin parentForm;
 
-        // Constructor cha-truy-con
         public FormForgetPassword(FormLogin parent)
         {
             InitializeComponent();
@@ -25,29 +24,37 @@ namespace UserApp
         // Nút Gửi → mở FormResetPassword trong FormLogin (cha)
         private void btnGui_Click(object sender, EventArgs e)
         {
+            // 1. Lấy email từ TextBox (Giả sử tên control là txtEmail)
             string emailInput = txtEmail.Text.Trim();
 
+            // 2. Kiểm tra rỗng
             if (string.IsNullOrEmpty(emailInput))
             {
                 MessageBox.Show("Vui lòng nhập địa chỉ Email!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtEmail.Focus();
                 return;
             }
+
             try
             {
+                // 3. Kiểm tra email có tồn tại trong Database không
+                // Hàm CheckEmailExist cần trả về true nếu tìm thấy, false nếu không
                 bool isExist = _customerRepo.CheckEmailExist(emailInput);
 
                 if (!isExist)
                 {
+                    // Trường hợp Email KHÔNG tồn tại
                     MessageBox.Show("Email này không tồn tại trong hệ thống. Vui lòng kiểm tra lại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtEmail.SelectAll();
                     txtEmail.Focus();
                 }
                 else
                 {
+                    // Trường hợp Email Có tồn tại
                     MessageBox.Show("Email hợp lệ! Vui lòng đặt lại mật khẩu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    FormResetPassword resetForm = new FormResetPassword(parentForm, emailInput);
-                    parentForm.OpenChildForm(resetForm);
+
+                    // 4. Mở form Reset Password
+                    parentForm.OpenChildForm(new FormResetPassword(parentForm, emailInput));
                 }
             }
             catch (Exception ex)
@@ -56,10 +63,11 @@ namespace UserApp
             }
         }
 
-        // Nút Quay Lại 
+     
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
-            parentForm.OpenChildForm(new FormLogin());
+            parentForm.ShowLogin();
+
         }
     }
 }

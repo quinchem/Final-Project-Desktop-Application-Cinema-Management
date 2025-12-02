@@ -45,6 +45,7 @@
             // btnInformation
             // 
             btnInformation.BorderRadius = 10;
+            btnInformation.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             btnInformation.CustomizableEdges = customizableEdges1;
             btnInformation.DisabledState.BorderColor = Color.DarkGray;
             btnInformation.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -54,11 +55,13 @@
             btnInformation.FocusedColor = Color.FromArgb(245, 131, 35);
             btnInformation.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnInformation.ForeColor = Color.White;
+            btnInformation.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnInformation.Image = Properties.Resources.ThongtinChung;
-            btnInformation.Location = new Point(105, 75);
+            btnInformation.Location = new Point(227, 75);
+            btnInformation.Margin = new Padding(2);
             btnInformation.Name = "btnInformation";
             btnInformation.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnInformation.Size = new Size(254, 58);
+            btnInformation.Size = new Size(203, 46);
             btnInformation.TabIndex = 1;
             btnInformation.Text = "THÔNG TIN CHUNG";
             btnInformation.Click += btnInformation_Click;
@@ -66,6 +69,7 @@
             // btnChangPassword
             // 
             btnChangPassword.BorderRadius = 10;
+            btnChangPassword.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             btnChangPassword.CustomizableEdges = customizableEdges3;
             btnChangPassword.DisabledState.BorderColor = Color.DarkGray;
             btnChangPassword.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -75,11 +79,13 @@
             btnChangPassword.FocusedColor = Color.FromArgb(245, 131, 35);
             btnChangPassword.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnChangPassword.ForeColor = Color.White;
+            btnChangPassword.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnChangPassword.Image = Properties.Resources.DatlaiMK;
-            btnChangPassword.Location = new Point(446, 75);
+            btnChangPassword.Location = new Point(500, 75);
+            btnChangPassword.Margin = new Padding(2);
             btnChangPassword.Name = "btnChangPassword";
             btnChangPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnChangPassword.Size = new Size(207, 58);
+            btnChangPassword.Size = new Size(166, 46);
             btnChangPassword.TabIndex = 2;
             btnChangPassword.Text = "ĐỔI MẬT KHẨU";
             btnChangPassword.Click += btnChangePassword_Click;
@@ -87,6 +93,7 @@
             // btnHistory
             // 
             btnHistory.BorderRadius = 10;
+            btnHistory.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             btnHistory.CustomizableEdges = customizableEdges5;
             btnHistory.DisabledState.BorderColor = Color.DarkGray;
             btnHistory.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -96,11 +103,13 @@
             btnHistory.FocusedColor = Color.FromArgb(245, 131, 35);
             btnHistory.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnHistory.ForeColor = Color.White;
+            btnHistory.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnHistory.Image = Properties.Resources.BookingHistory;
-            btnHistory.Location = new Point(731, 75);
+            btnHistory.Location = new Point(728, 75);
+            btnHistory.Margin = new Padding(2);
             btnHistory.Name = "btnHistory";
             btnHistory.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnHistory.Size = new Size(207, 58);
+            btnHistory.Size = new Size(166, 46);
             btnHistory.TabIndex = 3;
             btnHistory.Text = "LỊCH SỬ ĐẶT VÉ";
             btnHistory.Click += btnHistory_Click;
@@ -109,27 +118,32 @@
             // 
             panelContent.BorderRadius = 20;
             panelContent.CustomizableEdges = customizableEdges7;
-            panelContent.Location = new Point(34, 190);
+            panelContent.Location = new Point(168, 148);
+            panelContent.Margin = new Padding(2);
             panelContent.Name = "panelContent";
             panelContent.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            panelContent.Size = new Size(1417, 620);
+            panelContent.Size = new Size(1548, 577);
             panelContent.TabIndex = 4;
             // 
             // FormProfile
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1500, 938);
+            ClientSize = new Size(1902, 760);
             Controls.Add(panelContent);
             Controls.Add(btnHistory);
             Controls.Add(btnChangPassword);
             Controls.Add(btnInformation);
             ForeColor = SystemColors.ActiveCaptionText;
+            Margin = new Padding(2);
             Name = "FormProfile";
+            StartPosition = FormStartPosition.Manual;
             Text = "FormProfile";
             Load += FormProfile_Load;
             ResumeLayout(false);
+
+
         }
 
         #endregion

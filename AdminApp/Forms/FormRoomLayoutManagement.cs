@@ -19,13 +19,13 @@ namespace AdminApp
         // Folder RoomDesign đặt trong solution:  <SolutionRoot>\SharedData\RoomDesign
         private readonly string roomDesignFolder;
 
-        private int currentRoom = 1;                       // 1..5
-        private Dictionary<string, int> initialSeatMap;    // lưu cấu trúc rows ban đầu
+        private Dictionary<string, int> initialSeatMap;
 
         // GHẾ ĐANG DRAG
         private Guna2Button draggingSeat = null;
         private bool dragging = false;
         private Point dragCursorPoint, dragStartPoint;
+        private int currentRoom = 1;
 
         // DRAG MÀN HÌNH
         private bool draggingScreen = false;
@@ -240,11 +240,11 @@ WHERE a.auditorium_id = $id;
         {
             var btn = new Guna2Button
             {
-                Size = new Size(50, 50),
+                Size = new Size(60, 60),
                 Location = new Point(seat.X, seat.Y),
                 Text = $"{seat.Row}{seat.Col:00}",
                 // A01, A02,...
-                Font = new Font("Segoe UI", 7, FontStyle.Bold),
+                Font = new Font("Segoe UI", 8, FontStyle.Bold),
                 Tag = seat
             };
 
@@ -328,6 +328,7 @@ WHERE a.auditorium_id = $id;
                 btn.BorderColor = Color.DimGray;
                 btn.BorderThickness = 4;
             }
+
         }
 
         private void Seat_Hover(object sender, EventArgs e)
@@ -356,9 +357,9 @@ WHERE a.auditorium_id = $id;
             int panelW = panelRoomLayout.Width;
 
             // Request GHẾ SIZE CƠ BẢN
-            int baseSeatW = 50;
-            int baseSeatH = 50;
-            int baseSpaceX = 8;
+            int baseSeatW = 60;
+            int baseSeatH = 60;
+            int baseSpaceX = 10;
             int baseSpaceY = 10;
 
             int maxSeats = seatMap.Max(r => r.Value);
@@ -450,10 +451,10 @@ WHERE a.auditorium_id = $id;
 
             int panelW = panelRoomLayout.Width;
 
-            int baseSeatW = 50;
-            int baseSeatH = 50;
-            int baseSpaceX = 8;
-            int baseSpaceY = 10;
+            int baseSeatW = 60;
+            int baseSeatH = 60;
+            int baseSpaceX = 12;
+            int baseSpaceY = 12;
 
             int maxSeats = seatMap.Max(r => r.Value);
             int wantedWidth = (maxSeats * baseSeatW) + ((maxSeats - 1) * baseSpaceX);

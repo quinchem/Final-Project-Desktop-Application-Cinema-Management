@@ -9,9 +9,9 @@ namespace SharedData.Models
   public class SeatUser
     {
         public string SeatId { get; set; }
-        public string Location { get; set; }     // A04, B10
-        public string Type { get; set; }         // seat_type_id => đổi sang VIP / Normal
-        public string Status { get; set; }       // Full / Bảo trì / Bình thường
+        public string Location { get; set; }     
+        public string Type { get; set; }         
+        public string Status { get; set; }       
         public int Price { get; set; }
 
         // từ JSON

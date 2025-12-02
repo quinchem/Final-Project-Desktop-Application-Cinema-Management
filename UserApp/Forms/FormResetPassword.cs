@@ -97,7 +97,7 @@ namespace UserApp
                 txtXacNhanMK.UseSystemPasswordChar = true;
 
                 // Đổi ảnh đóng ở đây
-                picEye2.Image = Properties.Resources.hide; // <--- THÊM DÒNG NÀY VÀO
+                picEye2.Image = Properties.Resources.hide; 
             }
         }
 

@@ -115,6 +115,8 @@
             // 
             // txtMoTa
             // 
+            txtMoTa.AutoScroll = true;
+            txtMoTa.AutoScrollMinSize = new Size(1, 1);
             txtMoTa.BorderThickness = 2;
             txtMoTa.CustomizableEdges = customizableEdges1;
             txtMoTa.DefaultText = "";
@@ -127,15 +129,13 @@
             txtMoTa.FocusedState.ForeColor = Color.Black;
             txtMoTa.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtMoTa.Font = new Font("Segoe UI", 9F);
-            txtMoTa.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtMoTa.HoverState.FillColor = Color.Transparent;
-            txtMoTa.HoverState.ForeColor = Color.White;
             txtMoTa.Location = new Point(16, 389);
             txtMoTa.Margin = new Padding(3, 4, 3, 4);
             txtMoTa.Multiline = true;
             txtMoTa.Name = "txtMoTa";
             txtMoTa.PlaceholderForeColor = SystemColors.AppWorkspace;
             txtMoTa.PlaceholderText = "Giới thiệu phim";
+            txtMoTa.ScrollBars = ScrollBars.Vertical;
             txtMoTa.SelectedText = "";
             txtMoTa.ShadowDecoration.CustomizableEdges = customizableEdges2;
             txtMoTa.Size = new Size(286, 200);
@@ -198,8 +198,6 @@
             cboTrangThai.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
             cboTrangThai.Font = new Font("Segoe UI", 10F);
             cboTrangThai.ForeColor = Color.Gray;
-            cboTrangThai.HoverState.BorderColor = Color.Silver;
-            cboTrangThai.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             cboTrangThai.ItemHeight = 30;
             cboTrangThai.Location = new Point(676, 384);
             cboTrangThai.Name = "cboTrangThai";
@@ -217,8 +215,6 @@
             cboDoTuoi.FocusedState.BorderColor = Color.FromArgb(255, 192, 128);
             cboDoTuoi.Font = new Font("Segoe UI", 10F);
             cboDoTuoi.ForeColor = Color.Gray;
-            cboDoTuoi.HoverState.BorderColor = Color.Silver;
-            cboDoTuoi.HoverState.FillColor = Color.FromArgb(224, 224, 224);
             cboDoTuoi.ItemHeight = 30;
             cboDoTuoi.Location = new Point(676, 193);
             cboDoTuoi.Name = "cboDoTuoi";
@@ -263,9 +259,6 @@
             txtNgonNgu.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtNgonNgu.Font = new Font("Segoe UI", 9F);
             txtNgonNgu.ForeColor = Color.Black;
-            txtNgonNgu.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtNgonNgu.HoverState.ForeColor = Color.White;
-            txtNgonNgu.HoverState.PlaceholderForeColor = Color.Transparent;
             txtNgonNgu.Location = new Point(353, 195);
             txtNgonNgu.Margin = new Padding(3, 4, 3, 4);
             txtNgonNgu.Name = "txtNgonNgu";
@@ -292,9 +285,6 @@
             txtGiaNhap.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtGiaNhap.Font = new Font("Segoe UI", 9F);
             txtGiaNhap.ForeColor = Color.Black;
-            txtGiaNhap.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtGiaNhap.HoverState.ForeColor = Color.White;
-            txtGiaNhap.HoverState.PlaceholderForeColor = Color.Transparent;
             txtGiaNhap.Location = new Point(676, 105);
             txtGiaNhap.Margin = new Padding(3, 4, 3, 4);
             txtGiaNhap.Name = "txtGiaNhap";
@@ -321,9 +311,6 @@
             txtThoiLuong.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtThoiLuong.Font = new Font("Segoe UI", 9F);
             txtThoiLuong.ForeColor = Color.Black;
-            txtThoiLuong.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtThoiLuong.HoverState.ForeColor = Color.White;
-            txtThoiLuong.HoverState.PlaceholderForeColor = Color.Transparent;
             txtThoiLuong.Location = new Point(676, 288);
             txtThoiLuong.Margin = new Padding(3, 4, 3, 4);
             txtThoiLuong.Name = "txtThoiLuong";
@@ -350,9 +337,6 @@
             txtDienVien.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtDienVien.Font = new Font("Segoe UI", 9F);
             txtDienVien.ForeColor = Color.Black;
-            txtDienVien.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtDienVien.HoverState.ForeColor = Color.White;
-            txtDienVien.HoverState.PlaceholderForeColor = Color.Transparent;
             txtDienVien.Location = new Point(353, 288);
             txtDienVien.Margin = new Padding(3, 4, 3, 4);
             txtDienVien.Name = "txtDienVien";
@@ -379,9 +363,6 @@
             txtTheLoai.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtTheLoai.Font = new Font("Segoe UI", 9F);
             txtTheLoai.ForeColor = Color.Black;
-            txtTheLoai.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtTheLoai.HoverState.ForeColor = Color.White;
-            txtTheLoai.HoverState.PlaceholderForeColor = Color.Transparent;
             txtTheLoai.Location = new Point(353, 105);
             txtTheLoai.Margin = new Padding(3, 4, 3, 4);
             txtTheLoai.Name = "txtTheLoai";
@@ -529,9 +510,6 @@
             txtDaoDien.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtDaoDien.Font = new Font("Segoe UI", 9F);
             txtDaoDien.ForeColor = Color.Black;
-            txtDaoDien.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtDaoDien.HoverState.ForeColor = Color.White;
-            txtDaoDien.HoverState.PlaceholderForeColor = Color.Transparent;
             txtDaoDien.Location = new Point(16, 288);
             txtDaoDien.Margin = new Padding(3, 4, 3, 4);
             txtDaoDien.Name = "txtDaoDien";
@@ -569,9 +547,6 @@
             txtTenPhim.FocusedState.PlaceholderForeColor = Color.Transparent;
             txtTenPhim.Font = new Font("Segoe UI", 9F);
             txtTenPhim.ForeColor = Color.Black;
-            txtTenPhim.HoverState.BorderColor = SystemColors.AppWorkspace;
-            txtTenPhim.HoverState.ForeColor = Color.White;
-            txtTenPhim.HoverState.PlaceholderForeColor = Color.Transparent;
             txtTenPhim.Location = new Point(12, 105);
             txtTenPhim.Margin = new Padding(3, 4, 3, 4);
             txtTenPhim.Name = "txtTenPhim";

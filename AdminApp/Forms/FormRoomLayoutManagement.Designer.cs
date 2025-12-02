@@ -126,7 +126,7 @@
             // 
             lblTitle.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.FromArgb(255, 128, 0);
-            lblTitle.Location = new Point(192, 114);
+            lblTitle.Location = new Point(118, 108);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(214, 38);
             lblTitle.TabIndex = 1;
@@ -312,7 +312,7 @@
             guna2CustomGradientPanel3.FillColor2 = Color.Transparent;
             guna2CustomGradientPanel3.FillColor3 = Color.Transparent;
             guna2CustomGradientPanel3.FillColor4 = Color.Transparent;
-            guna2CustomGradientPanel3.Location = new Point(231, 787);
+            guna2CustomGradientPanel3.Location = new Point(333, 732);
             guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2CustomGradientPanel3.Size = new Size(795, 84);
@@ -452,7 +452,7 @@
             btnLuu.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLuu.ForeColor = Color.White;
             btnLuu.Image = (Image)resources.GetObject("btnLuu.Image");
-            btnLuu.Location = new Point(1231, 750);
+            btnLuu.Location = new Point(1529, 751);
             btnLuu.Name = "btnLuu";
             btnLuu.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btnLuu.Size = new Size(119, 47);
@@ -463,10 +463,10 @@
             // panelRoomLayout
             // 
             panelRoomLayout.CustomizableEdges = customizableEdges23;
-            panelRoomLayout.Location = new Point(112, 174);
+            panelRoomLayout.Location = new Point(69, 167);
             panelRoomLayout.Name = "panelRoomLayout";
             panelRoomLayout.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            panelRoomLayout.Size = new Size(1012, 585);
+            panelRoomLayout.Size = new Size(1333, 533);
             panelRoomLayout.TabIndex = 159;
             // 
             // cmsSeat
@@ -524,7 +524,7 @@
             btnFormat.ForeColor = Color.White;
             btnFormat.Image = Properties.Resources.simple_data_format;
             btnFormat.ImageSize = new Size(25, 25);
-            btnFormat.Location = new Point(1375, 750);
+            btnFormat.Location = new Point(1673, 751);
             btnFormat.Name = "btnFormat";
             btnFormat.ShadowDecoration.CustomizableEdges = customizableEdges26;
             btnFormat.Size = new Size(119, 45);
@@ -544,7 +544,7 @@
             btnXoa.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnXoa.ForeColor = Color.White;
             btnXoa.Image = Properties.Resources.trash;
-            btnXoa.Location = new Point(1231, 677);
+            btnXoa.Location = new Point(1529, 680);
             btnXoa.Name = "btnXoa";
             btnXoa.ShadowDecoration.CustomizableEdges = customizableEdges28;
             btnXoa.Size = new Size(119, 46);
@@ -565,7 +565,7 @@
             btnChinhSua.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnChinhSua.ForeColor = Color.White;
             btnChinhSua.Image = (Image)resources.GetObject("btnChinhSua.Image");
-            btnChinhSua.Location = new Point(1231, 534);
+            btnChinhSua.Location = new Point(1529, 537);
             btnChinhSua.Name = "btnChinhSua";
             btnChinhSua.ShadowDecoration.CustomizableEdges = customizableEdges30;
             btnChinhSua.Size = new Size(119, 46);
@@ -578,7 +578,7 @@
             lblMaGhe.BackColor = Color.Transparent;
             lblMaGhe.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMaGhe.ForeColor = Color.FromArgb(12, 41, 64);
-            lblMaGhe.Location = new Point(1279, 154);
+            lblMaGhe.Location = new Point(1577, 157);
             lblMaGhe.Name = "lblMaGhe";
             lblMaGhe.Size = new Size(65, 27);
             lblMaGhe.TabIndex = 164;
@@ -596,7 +596,7 @@
             btnThemHang.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnThemHang.ForeColor = Color.White;
             btnThemHang.Image = Properties.Resources.add;
-            btnThemHang.Location = new Point(1375, 604);
+            btnThemHang.Location = new Point(1673, 607);
             btnThemHang.Name = "btnThemHang";
             btnThemHang.ShadowDecoration.CustomizableEdges = customizableEdges32;
             btnThemHang.Size = new Size(119, 46);
@@ -616,7 +616,7 @@
             btnThemGhe.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnThemGhe.ForeColor = Color.White;
             btnThemGhe.Image = Properties.Resources.add;
-            btnThemGhe.Location = new Point(1231, 604);
+            btnThemGhe.Location = new Point(1529, 607);
             btnThemGhe.Name = "btnThemGhe";
             btnThemGhe.ShadowDecoration.CustomizableEdges = customizableEdges34;
             btnThemGhe.Size = new Size(119, 46);
@@ -630,7 +630,7 @@
             groupBox1.Controls.Add(rdoThuong);
             groupBox1.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(12, 41, 64);
-            groupBox1.Location = new Point(1269, 217);
+            groupBox1.Location = new Point(1567, 220);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(187, 125);
             groupBox1.TabIndex = 167;
@@ -643,7 +643,7 @@
             groupBox2.Controls.Add(rdoBinhThuong);
             groupBox2.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox2.ForeColor = Color.FromArgb(12, 41, 64);
-            groupBox2.Location = new Point(1269, 373);
+            groupBox2.Location = new Point(1567, 376);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(187, 125);
             groupBox2.TabIndex = 168;
@@ -663,7 +663,7 @@
             btnQuayLai.ForeColor = Color.White;
             btnQuayLai.Image = Properties.Resources.refresh;
             btnQuayLai.ImageSize = new Size(30, 30);
-            btnQuayLai.Location = new Point(1375, 535);
+            btnQuayLai.Location = new Point(1673, 538);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges36;
             btnQuayLai.Size = new Size(119, 45);
@@ -684,7 +684,7 @@
             txtMaGhe.Font = new Font("Segoe UI", 11F);
             txtMaGhe.ForeColor = Color.Black;
             txtMaGhe.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMaGhe.Location = new Point(1359, 145);
+            txtMaGhe.Location = new Point(1657, 148);
             txtMaGhe.Margin = new Padding(3, 4, 3, 4);
             txtMaGhe.Name = "txtMaGhe";
             txtMaGhe.PlaceholderText = "";
@@ -706,7 +706,7 @@
             btnXoaHang.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnXoaHang.ForeColor = Color.White;
             btnXoaHang.Image = Properties.Resources.trash;
-            btnXoaHang.Location = new Point(1375, 677);
+            btnXoaHang.Location = new Point(1673, 680);
             btnXoaHang.Name = "btnXoaHang";
             btnXoaHang.ShadowDecoration.CustomizableEdges = customizableEdges40;
             btnXoaHang.Size = new Size(119, 46);
@@ -731,7 +731,7 @@
             panelRoomTabs.Location = new Point(0, 0);
             panelRoomTabs.Name = "panelRoomTabs";
             panelRoomTabs.ShadowDecoration.CustomizableEdges = customizableEdges42;
-            panelRoomTabs.Size = new Size(1624, 98);
+            panelRoomTabs.Size = new Size(1902, 98);
             panelRoomTabs.TabIndex = 171;
             // 
             // lblPhong
@@ -739,7 +739,7 @@
             lblPhong.BackColor = Color.Transparent;
             lblPhong.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPhong.ForeColor = Color.FromArgb(12, 41, 64);
-            lblPhong.Location = new Point(814, 125);
+            lblPhong.Location = new Point(740, 119);
             lblPhong.Name = "lblPhong";
             lblPhong.Size = new Size(148, 27);
             lblPhong.TabIndex = 172;
@@ -758,7 +758,7 @@
             txtDinhDang.Font = new Font("Segoe UI", 11F);
             txtDinhDang.ForeColor = Color.Black;
             txtDinhDang.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtDinhDang.Location = new Point(968, 114);
+            txtDinhDang.Location = new Point(894, 108);
             txtDinhDang.Margin = new Padding(3, 4, 3, 4);
             txtDinhDang.Name = "txtDinhDang";
             txtDinhDang.PlaceholderText = "";
@@ -773,11 +773,11 @@
             lblSoGhe.BackColor = Color.Transparent;
             lblSoGhe.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblSoGhe.ForeColor = Color.FromArgb(12, 41, 64);
-            lblSoGhe.Location = new Point(538, 125);
+            lblSoGhe.Location = new Point(544, 119);
             lblSoGhe.Name = "lblSoGhe";
-            lblSoGhe.Size = new Size(148, 27);
+            lblSoGhe.Size = new Size(60, 27);
             lblSoGhe.TabIndex = 174;
-            lblSoGhe.Text = "Định dạng phòng\r\n";
+            lblSoGhe.Text = "Số ghế";
             // 
             // txtSoGhe
             // 
@@ -792,7 +792,7 @@
             txtSoGhe.Font = new Font("Segoe UI", 11F);
             txtSoGhe.ForeColor = Color.Black;
             txtSoGhe.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSoGhe.Location = new Point(692, 114);
+            txtSoGhe.Location = new Point(618, 108);
             txtSoGhe.Margin = new Padding(3, 4, 3, 4);
             txtSoGhe.Name = "txtSoGhe";
             txtSoGhe.PlaceholderText = "";
@@ -810,7 +810,7 @@
             AutoScroll = true;
             AutoScrollMinSize = new Size(800, 800);
             BackColor = Color.FromArgb(88, 115, 140);
-            ClientSize = new Size(1624, 907);
+            ClientSize = new Size(1902, 843);
             Controls.Add(txtSoGhe);
             Controls.Add(lblSoGhe);
             Controls.Add(txtDinhDang);
