@@ -268,7 +268,7 @@ namespace UserApp
             flpShowtimes.Controls.Add(lbl);
         }
 
-        // --- TẠO GIAO DIỆN PHIM ĐẸP (Xanh Hamster) ---
+        //TẠO GIAO DIỆN SUẤT CHIẾU 
         private Guna2Panel CreateMoviePanel(string movieTitle, List<ShowtimeInfo> showtimes)
         {
             if (showtimes == null || showtimes.Count == 0) return null;
@@ -290,7 +290,7 @@ namespace UserApp
                 Height = panelHeight,
                 FillColor = mainBgColor,
                 BackColor = Color.Transparent,
-                UseTransparentBackground = true, // Fix góc trắng
+                UseTransparentBackground = true,
                 BorderRadius = 15,
                 Margin = new Padding(5, 5, 5, 25)
             };
