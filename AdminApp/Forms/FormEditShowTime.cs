@@ -28,18 +28,13 @@ namespace AdminApp.Forms
             InitializeComponent();
             _showtimeId = showtimeId;
         }
-
         private void FrmEditShowTime_Load(object sender, EventArgs e)
         {
             LoadFilms();
             LoadRooms();
             LoadAuditoriumTypes();
-
-            // Cấu hình DateTimePicker
             dtpGioBD.Format = DateTimePickerFormat.Time;
             dtpGioBD.ShowUpDown = true;
-
-
             LoadShowtimeData();
         }
 
@@ -101,22 +96,15 @@ namespace AdminApp.Forms
                     this.Close();
                     return;
                 }
-
-                // --- Fill dữ liệu vào form ---
                 cboChonPhim.SelectedValue = _currentShowtime.movie_id;
-
-                // Khi gán SelectedValue cho Phòng, sự kiện cboChonPhong_SelectedIndexChanged sẽ chạy
-                // -> Nó tự gán Định dạng -> Sự kiện Định dạng chạy -> Tự gán Giá vé
                 cboChonPhong.SelectedValue = _currentShowtime.auditorium_id;
 
-                // Parse ngày chiếu
                 if (DateTime.TryParseExact(_currentShowtime.show_date, "dd/MM/yyyy",
                     CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime showDate))
                 {
                     dtpNgayChieu.Value = showDate;
                 }
 
-                // Parse giờ chiếu
                 if (DateTime.TryParseExact(_currentShowtime.start_time, "HH:mm:ss",
                     CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startTime))
                 {
@@ -130,7 +118,6 @@ namespace AdminApp.Forms
             }
         }
 
-        //Chọn định dạng thì đổi giá vé
         private void cboDinhDang_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTicketPrice();
@@ -140,26 +127,16 @@ namespace AdminApp.Forms
         // Hàm cập nhật giá vé
         private void UpdateTicketPrice()
         {
-            // 1.Kiểm tra xem đã chọn Định dạng chưa
             if (cboDinhDang.SelectedValue == null)
             {
                 lblGiaVe.Text = "0";
                 return;
             }
-
             try
             {
-                // 2. Lấy ID của loại phòng (Ví dụ: "AT01", "2D"...)
                 string typeId = cboDinhDang.SelectedValue.ToString();
-
-                // 3. Gọi hàm vừa sửa trong SeatRepo
                 double price = _seatRepo.GetTicketPriceByAuditoriumType(typeId);
-
-                // 4. Hiển thị
                 lblGiaVe.Text = price.ToString("N0");
-
-                // Debug chơi: Nếu vẫn ra 0 thì show cái này lên xem code lấy ID gì
-                // MessageBox.Show($"Type ID: {typeId} - Giá tìm được: {price}");
             }
             catch
             {
@@ -169,7 +146,6 @@ namespace AdminApp.Forms
 
         private void btnChinh_Click(object sender, EventArgs e)
         {
-            // Validate
             if (cboChonPhim.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng chọn phim!", "Thông báo");
@@ -181,8 +157,6 @@ namespace AdminApp.Forms
                 MessageBox.Show("Vui lòng chọn phòng!", "Thông báo");
                 return;
             }
-
-            // Kiểm tra Label giá vé
             if (string.IsNullOrWhiteSpace(lblGiaVe.Text) || lblGiaVe.Text == "0")
             {
                 MessageBox.Show("Giá vé chưa hợp lệ (bằng 0 hoặc rỗng)!", "Thông báo");
@@ -191,14 +165,12 @@ namespace AdminApp.Forms
 
             try
             {
-                // Cập nhật thông tin object
                 _currentShowtime.movie_id = cboChonPhim.SelectedValue.ToString();
                 _currentShowtime.auditorium_id = cboChonPhong.SelectedValue.ToString();
                 _currentShowtime.show_date = dtpNgayChieu.Value.ToString("dd/MM/yyyy");
                 _currentShowtime.start_time = dtpGioBD.Value.ToString("HH:mm:ss");
                 _currentShowtime.end_time = CalculateEndTime(dtpGioBD.Value).ToString("HH:mm:ss");
 
-                // Lưu vào database
                 ShowtimeRepo.Update(_currentShowtime);
 
                 MessageBox.Show("Cập nhật suất chiếu thành công!", "Thành công",

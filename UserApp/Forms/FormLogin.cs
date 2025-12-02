@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using SharedData.Models;
 using SharedData.Repositories;
+using System.Media;
 
 namespace UserApp
 {
@@ -32,8 +33,8 @@ namespace UserApp
             child.Dock = DockStyle.Fill;
 
             panelDangNhap.Visible = false;
-            panelDangKy.Visible = false;  // Xóa form cũ
-            panelLogin.Controls.Add(child);  // Chỉ chứa form con
+            panelDangKy.Visible = false; 
+            panelLogin.Controls.Add(child); 
             panelLogin.Tag = child;
 
             child.BringToFront();
@@ -200,14 +201,14 @@ namespace UserApp
                     date_of_birth = dtpNgaySinh.Value.ToString("dd/MM/yyyy"),
                     gender = radNam.Checked ? "Nam" : "Nữ",
                     address = txtDiachi.Text.Trim(),
-                    email = txtEmailDK.Text.Trim(),   // EMAIL -> lưu vào customer.email
+                    email = txtEmailDK.Text.Trim(),   
                     phone_number = txtSDT.Text.Trim(),
                     create_date = DateTime.UtcNow.ToString("HH:mm:ss dd-MM-yyyy")
                 };
 
                 var account = new Account
                 {
-                    username = txtEmailDK.Text.Trim(),  // USERNAME = EMAIL
+                    username = txtEmailDK.Text.Trim(),
                     password = txtPassDK.Text,
                     role_account = "Khách hàng",
                     staff_id = null
@@ -233,6 +234,8 @@ namespace UserApp
 
             if (InsertNewAccount(out string msg))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Đăng ký thành công!", "Thành công",
                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -241,6 +244,7 @@ namespace UserApp
             }
             else
             {
+                System.Media.SystemSounds.Hand.Play();
                 MessageBox.Show("Đăng ký thất bại: " + msg, "Lỗi",
                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -277,18 +281,14 @@ namespace UserApp
 
             if (AccountRepo.Login(email, password, out Customer customer, out string msg))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show($"Đăng nhập thành công! Xin chào {customer.full_name}",
                                  "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // MỞ MAIN FORM
-                // Lưu ý: Cần đảm bảo class UserMainForm có tồn tại và constructor nhận đối tượng Customer
                 UserMainForm main = new UserMainForm(customer);
                 main.Show();
-
-                // ẨN LOGIN FORM 
                 this.Hide();
-
-                // Khi MAIN FORM đóng → đóng luôn LOGIN FORM → app tắt đúng cách
                 main.FormClosed += (s, args) => this.Close();
             }
             else

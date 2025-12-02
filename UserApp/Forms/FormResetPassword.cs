@@ -20,6 +20,7 @@ namespace UserApp
         {
             InitializeComponent();
         }
+
         private FormLogin parentForm;
         public FormResetPassword(FormLogin parent, string email)
         {
@@ -30,7 +31,6 @@ namespace UserApp
 
         private void btnGui_Click(object sender, EventArgs e)
         {
-            // Kiểm tra dữ liệu nhập vào
             string newPass = txtMKmoi.Text.Trim();
             string confirmPass = txtXacNhanMK.Text.Trim();
 
@@ -45,21 +45,16 @@ namespace UserApp
                 MessageBox.Show("Mật khẩu xác nhận không khớp.");
                 return;
             }
-
-            // Validate độ mạnh mật khẩu (nếu cần giống lúc đăng ký)
             if (!System.Text.RegularExpressions.Regex.IsMatch(newPass, @"^(?=.{8,})(?=.*\W).*$"))
             {
                 MessageBox.Show("Mật khẩu phải >= 8 ký tự và có ký tự đặc biệt.");
                 return;
             }
-
-            // --- GỌI HÀM MỚI VIẾT TRONG REPO ---
-            // Truyền _userEmail (biến lưu email từ form trước) và mật khẩu mới
             if (_accountRepo.ResetPassword(_userEmail, newPass, out string msg))
             {
                 MessageBox.Show("Đổi mật khẩu thành công! Hãy đăng nhập lại.");
 
-                parentForm.ShowLogin(); // Quay về login
+                parentForm.ShowLogin();
                 this.Close();
             }
             else

@@ -13,7 +13,7 @@ namespace AdminApp
         private readonly FilmRepo _filmRepo = new FilmRepo();
         private readonly AuditoriumRepo _audRepo = new AuditoriumRepo();
         private readonly AuditoriumTypeRepo _audTypeRepo = new AuditoriumTypeRepo();
-        private readonly SeatRepo _seatRepo = new SeatRepo();   // ⭐ Thêm repo giá vé
+        private readonly SeatRepo _seatRepo = new SeatRepo(); 
 
         private string _filterFilmId = null;
         private string _filterRoomId = null;
@@ -50,8 +50,6 @@ namespace AdminApp
                 shows = shows.Where(s => s.auditorium_id == _filterRoomId).ToList();
             shows = shows.OrderBy(s =>
             {
-                // Cố gắng ép kiểu chuỗi ngày về DateTime để sắp xếp chuẩn
-                // Nếu DB lưu dd/MM/yyyy thì phải ParseExact, nếu yyyy-MM-dd thì Parse thường
                 DateTime dt;
                 string[] formats = { "dd/MM/yyyy", "yyyy-MM-dd", "MM/dd/yyyy" };
 
@@ -61,10 +59,11 @@ namespace AdminApp
                 {
                     return dt;
                 }
-                return DateTime.MaxValue; // Nếu lỗi ngày thì đẩy xuống cuối
+                return DateTime.MaxValue; 
             })
-    .ThenBy(s => s.start_time) // Sắp xếp tiếp theo giờ chiếu (Sáng -> Tối)
-    .ToList();
+            .ThenBy(s => s.start_time) 
+            .ToList();
+            
             var display = new List<ShowtimeDisplay>();
 
             foreach (var s in shows)
@@ -104,8 +103,6 @@ namespace AdminApp
                 LoadShow();
                 return;
             }
-
-            // Tìm kiếm không phân biệt hoa thường
             var allFilms = _filmRepo.GetAllFilms();
             var film = allFilms.FirstOrDefault(f =>
                 f.title.ToLower().Contains(search.ToLower())
@@ -143,7 +140,6 @@ namespace AdminApp
 
             try
             {
-                // Lấy từ cột showtime_id (chữ thường)
                 string id = dgvShowtime.SelectedRows[0].Cells["showtime_id"].Value.ToString();
 
                 var f = new FrmEditShowTime(id);
@@ -167,7 +163,6 @@ namespace AdminApp
 
             try
             {
-                // Lấy từ cột showtime_id (chữ thường)
                 string id = dgvShowtime.SelectedRows[0].Cells["showtime_id"].Value.ToString();
 
                 if (MessageBox.Show("Bạn có chắc chắn muốn xóa suất chiếu này?", "Xác nhận",

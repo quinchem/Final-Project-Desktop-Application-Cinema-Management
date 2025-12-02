@@ -11,8 +11,8 @@ namespace SharedData.Models
         public string seat_id { get; set; }
         public string seat_type_id { get; set; }
         public string auditorium_id { get; set; }
-        public string location { get; set; }          // A04, B05...
-        public string status { get; set; }            // Bình thường / Bảo trì
+        public string location { get; set; }    
+        public string status { get; set; }   
         public int per_seat_ticket_price { get; set; }
     }
 }

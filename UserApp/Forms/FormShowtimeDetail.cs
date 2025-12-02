@@ -14,7 +14,6 @@ namespace UserApp
 {
     public partial class FormShowtimeDetail : Form
     {
-        // --- KHAI BÁO BIẾN ---
         private ShowtimeRepo repo = new ShowtimeRepo();
         private ImageRepo _imageRepo = new ImageRepo();
         private List<ShowtimeInfo> currentShowtimes;
@@ -28,8 +27,6 @@ namespace UserApp
         private Guna2Panel _selectedPanel = null;
 
         private string _targetMovieId = null;
-
-        //CONSTRUCTOR 1: Mặc định (Hiện tất cả)
         public FormShowtimeDetail(UserMainForm parent, string movieId)
         {
             InitializeComponent();
@@ -40,13 +37,9 @@ namespace UserApp
         private void SetupForm()
         {
             InitializeFlowLayoutPanel();
-
-            // Khởi tạo ngày
             selectedMonth = DateTime.Today.Month;
             currentStartDate = GetMondayOfWeek(DateTime.Today);
             selectedDate = DateTime.Today;
-
-            // Load ComboBox -> Cái này sẽ kích hoạt OnMonthChanged -> LoadShowtimes
             LoadMonthsLabel();
             this.Shown += (s, e) => InitCalendar();
         }
@@ -75,19 +68,15 @@ namespace UserApp
             else
                 currentStartDate = GetMondayOfWeek(currentStartDate);
 
-            // đảm bảo selectedDate có giá trị và là ngày (no time)
             if (selectedDate == default || selectedDate == DateTime.MinValue)
                 selectedDate = DateTime.Today;
             selectedDate = selectedDate.Date;
-
-            // Update label tháng, nút ngày, load dữ liệu tuần, và chọn ngày hiện tại
             UpdateMonthLabelByWeek();
-            UpdateDateButtons();  // set text, Tag và click handler cho 7 nút
-            LoadShowtimes();      // load currentShowtimes cho tuần hiện tại
+            UpdateDateButtons();  
+            LoadShowtimes();    
             SelectDate(selectedDate);
         }
-        // --- LOGIC XỬ LÝ NGÀY THÁNG ---
-
+ 
         private DateTime GetMondayOfWeek(DateTime date)
         {
             int diff = (7 + (date.DayOfWeek - DayOfWeek.Monday)) % 7;
@@ -107,10 +96,7 @@ namespace UserApp
 
         private void btnPrevWeek_Click(object sender, EventArgs e)
         {
-            // Lùi 1 tuần (trừ 7 ngày)
             currentStartDate = currentStartDate.AddDays(-7);
-
-            // đảm bảo Monday
             currentStartDate = GetMondayOfWeek(currentStartDate);
 
             selectedDate = currentStartDate;
@@ -121,8 +107,6 @@ namespace UserApp
         private void btnNextWeek_Click(object sender, EventArgs e)
         {
             currentStartDate = currentStartDate.AddDays(7);
-
-            // đảm bảo là Monday (nếu tiền lệ ko phải Monday)
             currentStartDate = GetMondayOfWeek(currentStartDate);
 
             selectedDate = currentStartDate;
@@ -209,7 +193,6 @@ namespace UserApp
             UpdateDateButtons();
             try
             {
-                // 1. Gọi Repo lấy dữ liệu
                 if (!string.IsNullOrEmpty(_targetMovieId))
             { currentShowtimes = repo.GetShowtimesByDateRangeAndMovie(currentStartDate, 30, _targetMovieId);
                 }
@@ -218,9 +201,7 @@ namespace UserApp
                     currentShowtimes = repo.GetShowtimesByDateRange(currentStartDate, 7);
                 }
 
-                
                 if (currentShowtimes == null) currentShowtimes = new List<ShowtimeInfo>();
-                // 3. Hiển thị
                 DisplayShowtimes();
             }
             catch (Exception ex)
@@ -238,7 +219,6 @@ namespace UserApp
             {
                 if (currentShowtimes == null || currentShowtimes.Count == 0)
                 {
-                    // Thông báo rõ ràng hơn
                     string msg = !string.IsNullOrEmpty(_targetMovieId)
                         ? "Phim này chưa có lịch chiếu trong tuần này."
                         : "Chưa có lịch chiếu nào.";
@@ -466,11 +446,11 @@ namespace UserApp
             {
                 if (_selectedPanel != null)
                 {
-                    _selectedPanel.FillColor = Color.FromArgb(236, 230, 224); // Trả màu cũ
+                    _selectedPanel.FillColor = Color.FromArgb(236, 230, 224); 
                     _selectedPanel.BorderThickness = 0;
                 }
 
-                clickedPanel.FillColor = Color.FromArgb(245, 131, 35); // Tô màu cam chọn
+                clickedPanel.FillColor = Color.FromArgb(245, 131, 35); 
                 clickedPanel.BorderThickness = 2;
 
                 _selectedPanel = clickedPanel;
@@ -486,7 +466,6 @@ namespace UserApp
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             parentForm.OpenChildForm(new FormSeatSelection(parentForm, _selectedShowtime));
         }
     }
