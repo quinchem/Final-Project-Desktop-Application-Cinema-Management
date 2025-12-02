@@ -147,7 +147,7 @@ namespace AdminApp
                 {
                     lblTopMovie.Text = reader.Read() ? reader.GetString(0) : "-";
                     lblTopMovie.AutoSize = true;
-                    lblTopMovie.MaximumSize = new Size(200, 0);
+                    lblTopMovie.MaximumSize = new Size(250, 0);
                 }
 
                 // New customers

@@ -333,7 +333,7 @@
             label1.BackColor = Color.FromArgb(125, 167, 199);
             label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(221, 21);
+            label1.Location = new Point(221, 15);
             label1.Name = "label1";
             label1.RightToLeft = RightToLeft.Yes;
             label1.Size = new Size(209, 25);
@@ -353,20 +353,20 @@
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel1.Location = new Point(337, 259);
+            guna2CustomGradientPanel1.Location = new Point(337, 253);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            guna2CustomGradientPanel1.Size = new Size(602, 125);
+            guna2CustomGradientPanel1.Size = new Size(602, 131);
             guna2CustomGradientPanel1.TabIndex = 0;
             // 
             // lblTotalRevenue
             // 
             lblTotalRevenue.BackColor = Color.Transparent;
-            lblTotalRevenue.Font = new Font("Arial Black", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalRevenue.Font = new Font("Segoe UI Black", 25.8000011F, FontStyle.Bold);
             lblTotalRevenue.ForeColor = SystemColors.Info;
-            lblTotalRevenue.Location = new Point(298, 49);
+            lblTotalRevenue.Location = new Point(166, 49);
             lblTotalRevenue.Name = "lblTotalRevenue";
-            lblTotalRevenue.Size = new Size(61, 62);
+            lblTotalRevenue.Size = new Size(56, 61);
             lblTotalRevenue.TabIndex = 6;
             lblTotalRevenue.Text = "40";
             // 
@@ -394,20 +394,20 @@
             guna2CustomGradientPanel3.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel3.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel3.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel3.Location = new Point(984, 259);
+            guna2CustomGradientPanel3.Location = new Point(984, 253);
             guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            guna2CustomGradientPanel3.Size = new Size(599, 125);
+            guna2CustomGradientPanel3.Size = new Size(599, 131);
             guna2CustomGradientPanel3.TabIndex = 3;
             // 
             // lblAvgRevenue
             // 
             lblAvgRevenue.BackColor = Color.Transparent;
-            lblAvgRevenue.Font = new Font("Arial Black", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAvgRevenue.Font = new Font("Segoe UI Black", 25.8000011F, FontStyle.Bold);
             lblAvgRevenue.ForeColor = SystemColors.Info;
-            lblAvgRevenue.Location = new Point(333, 49);
+            lblAvgRevenue.Location = new Point(181, 49);
             lblAvgRevenue.Name = "lblAvgRevenue";
-            lblAvgRevenue.Size = new Size(61, 62);
+            lblAvgRevenue.Size = new Size(56, 61);
             lblAvgRevenue.TabIndex = 5;
             lblAvgRevenue.Text = "40";
             // 
@@ -440,7 +440,7 @@
             label2.BackColor = Color.FromArgb(125, 167, 199);
             label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(194, 21);
+            label2.Location = new Point(179, 16);
             label2.Name = "label2";
             label2.RightToLeft = RightToLeft.Yes;
             label2.Size = new Size(339, 25);
@@ -588,21 +588,20 @@
             guna2CustomGradientPanel6.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel6.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel6.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel6.Location = new Point(1192, 409);
+            guna2CustomGradientPanel6.Location = new Point(1165, 409);
             guna2CustomGradientPanel6.Name = "guna2CustomGradientPanel6";
             guna2CustomGradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges25;
-            guna2CustomGradientPanel6.Size = new Size(391, 125);
+            guna2CustomGradientPanel6.Size = new Size(418, 125);
             guna2CustomGradientPanel6.TabIndex = 7;
             // 
             // lblTopMovie
             // 
-            lblTopMovie.AutoSize = true;
             lblTopMovie.BackColor = Color.FromArgb(125, 167, 199);
-            lblTopMovie.Font = new Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTopMovie.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTopMovie.ForeColor = SystemColors.Info;
-            lblTopMovie.Location = new Point(217, 69);
+            lblTopMovie.Location = new Point(139, 54);
             lblTopMovie.Name = "lblTopMovie";
-            lblTopMovie.Size = new Size(38, 27);
+            lblTopMovie.Size = new Size(233, 55);
             lblTopMovie.TabIndex = 3;
             lblTopMovie.Text = "40";
             // 
@@ -664,11 +663,11 @@
             // lblTotalTickets
             // 
             lblTotalTickets.BackColor = Color.Transparent;
-            lblTotalTickets.Font = new Font("Arial Black", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalTickets.Font = new Font("Segoe UI Black", 25.8000011F, FontStyle.Bold);
             lblTotalTickets.ForeColor = SystemColors.Info;
-            lblTotalTickets.Location = new Point(198, 48);
+            lblTotalTickets.Location = new Point(195, 48);
             lblTotalTickets.Name = "lblTotalTickets";
-            lblTotalTickets.Size = new Size(61, 62);
+            lblTotalTickets.Size = new Size(56, 61);
             lblTotalTickets.TabIndex = 6;
             lblTotalTickets.Text = "40";
             // 
@@ -721,7 +720,7 @@
             guna2CustomGradientPanel8.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel8.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel8.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel8.Location = new Point(770, 409);
+            guna2CustomGradientPanel8.Location = new Point(751, 409);
             guna2CustomGradientPanel8.Name = "guna2CustomGradientPanel8";
             guna2CustomGradientPanel8.ShadowDecoration.CustomizableEdges = customizableEdges31;
             guna2CustomGradientPanel8.Size = new Size(391, 125);
@@ -730,11 +729,11 @@
             // lblNewCustomer
             // 
             lblNewCustomer.BackColor = Color.Transparent;
-            lblNewCustomer.Font = new Font("Arial Black", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNewCustomer.Font = new Font("Segoe UI Black", 25.8000011F, FontStyle.Bold);
             lblNewCustomer.ForeColor = SystemColors.Info;
             lblNewCustomer.Location = new Point(207, 48);
             lblNewCustomer.Name = "lblNewCustomer";
-            lblNewCustomer.Size = new Size(61, 62);
+            lblNewCustomer.Size = new Size(56, 61);
             lblNewCustomer.TabIndex = 6;
             lblNewCustomer.Text = "40";
             // 
@@ -767,7 +766,7 @@
             label8.BackColor = Color.FromArgb(125, 167, 199);
             label8.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(124, 21);
+            label8.Location = new Point(123, 21);
             label8.Name = "label8";
             label8.RightToLeft = RightToLeft.Yes;
             label8.Size = new Size(263, 25);

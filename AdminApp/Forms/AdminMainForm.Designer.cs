@@ -332,7 +332,6 @@ namespace AdminApp
             btnDichVu.Size = new Size(118, 51);
             btnDichVu.TabIndex = 31;
             btnDichVu.Text = "DỊCH VỤ";
-            btnDichVu.Click += btnDichVu_Click;
             // 
             // btnSoDoGhe
             // 
@@ -521,7 +520,6 @@ namespace AdminApp
             guna2Button2.Size = new Size(118, 51);
             guna2Button2.TabIndex = 31;
             guna2Button2.Text = "DỊCH VỤ";
-            guna2Button2.Click += btnDichVu_Click;
             // 
             // guna2Button1
             // 
