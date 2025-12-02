@@ -111,14 +111,16 @@
             // 
             // lblMonth
             // 
+            lblMonth.AutoSize = false;
             lblMonth.BackColor = Color.Transparent;
             lblMonth.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMonth.ForeColor = Color.FromArgb(92, 124, 150);
-            lblMonth.Location = new Point(484, 20);
+            lblMonth.Location = new Point(394, 20);
             lblMonth.Name = "lblMonth";
-            lblMonth.Size = new Size(74, 30);
+            lblMonth.Size = new Size(267, 30);
             lblMonth.TabIndex = 37;
             lblMonth.Text = "THÁNG ";
+            lblMonth.TextAlignment = ContentAlignment.TopCenter;
             // 
             // btnSun
             // 
@@ -129,7 +131,7 @@
             btnSun.FillColor = Color.FromArgb(236, 230, 224);
             btnSun.Font = new Font("Segoe UI", 9F);
             btnSun.ForeColor = Color.Black;
-            btnSun.Location = new Point(830, 106);
+            btnSun.Location = new Point(825, 106);
             btnSun.Margin = new Padding(2);
             btnSun.Name = "btnSun";
             btnSun.ShadowDecoration.CustomizableEdges = customizableEdges1;
@@ -147,7 +149,7 @@
             btnSat.FillColor = Color.FromArgb(236, 230, 224);
             btnSat.Font = new Font("Segoe UI", 9F);
             btnSat.ForeColor = Color.Black;
-            btnSat.Location = new Point(715, 106);
+            btnSat.Location = new Point(710, 106);
             btnSat.Margin = new Padding(2);
             btnSat.Name = "btnSat";
             btnSat.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -165,7 +167,7 @@
             btnFri.FillColor = Color.FromArgb(236, 230, 224);
             btnFri.Font = new Font("Segoe UI", 9F);
             btnFri.ForeColor = Color.Black;
-            btnFri.Location = new Point(613, 106);
+            btnFri.Location = new Point(608, 106);
             btnFri.Margin = new Padding(2);
             btnFri.Name = "btnFri";
             btnFri.ShadowDecoration.CustomizableEdges = customizableEdges3;
@@ -183,7 +185,7 @@
             btnThu.FillColor = Color.FromArgb(236, 230, 224);
             btnThu.Font = new Font("Segoe UI", 9F);
             btnThu.ForeColor = Color.Black;
-            btnThu.Location = new Point(505, 106);
+            btnThu.Location = new Point(500, 106);
             btnThu.Margin = new Padding(2);
             btnThu.Name = "btnThu";
             btnThu.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -201,7 +203,7 @@
             btnWed.FillColor = Color.FromArgb(236, 230, 224);
             btnWed.Font = new Font("Segoe UI", 9F);
             btnWed.ForeColor = Color.Black;
-            btnWed.Location = new Point(408, 106);
+            btnWed.Location = new Point(403, 106);
             btnWed.Margin = new Padding(2);
             btnWed.Name = "btnWed";
             btnWed.ShadowDecoration.CustomizableEdges = customizableEdges5;
@@ -219,7 +221,7 @@
             btnTue.FillColor = Color.FromArgb(236, 230, 224);
             btnTue.Font = new Font("Segoe UI", 9F);
             btnTue.ForeColor = Color.Black;
-            btnTue.Location = new Point(307, 106);
+            btnTue.Location = new Point(302, 106);
             btnTue.Margin = new Padding(2);
             btnTue.Name = "btnTue";
             btnTue.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -237,7 +239,7 @@
             btnMon.FillColor = Color.FromArgb(236, 230, 224);
             btnMon.Font = new Font("Segoe UI", 9F);
             btnMon.ForeColor = Color.Black;
-            btnMon.Location = new Point(201, 106);
+            btnMon.Location = new Point(196, 106);
             btnMon.Margin = new Padding(2);
             btnMon.Name = "btnMon";
             btnMon.ShadowDecoration.CustomizableEdges = customizableEdges7;
@@ -290,7 +292,7 @@
             // 
             guna2HtmlLabel7.BackColor = Color.Transparent;
             guna2HtmlLabel7.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel7.Location = new Point(823, 79);
+            guna2HtmlLabel7.Location = new Point(818, 79);
             guna2HtmlLabel7.Name = "guna2HtmlLabel7";
             guna2HtmlLabel7.Size = new Size(66, 23);
             guna2HtmlLabel7.TabIndex = 14;
@@ -300,7 +302,7 @@
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel6.Location = new Point(722, 79);
+            guna2HtmlLabel6.Location = new Point(717, 79);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(42, 23);
             guna2HtmlLabel6.TabIndex = 13;
@@ -310,7 +312,7 @@
             // 
             guna2HtmlLabel5.BackColor = Color.Transparent;
             guna2HtmlLabel5.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel5.Location = new Point(617, 79);
+            guna2HtmlLabel5.Location = new Point(612, 79);
             guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             guna2HtmlLabel5.Size = new Size(42, 23);
             guna2HtmlLabel5.TabIndex = 12;
@@ -320,7 +322,7 @@
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.Location = new Point(513, 79);
+            guna2HtmlLabel4.Location = new Point(508, 79);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(42, 23);
             guna2HtmlLabel4.TabIndex = 11;
@@ -330,7 +332,7 @@
             // 
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel3.Location = new Point(415, 79);
+            guna2HtmlLabel3.Location = new Point(410, 79);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(42, 23);
             guna2HtmlLabel3.TabIndex = 10;
@@ -340,7 +342,7 @@
             // 
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel2.Location = new Point(311, 79);
+            guna2HtmlLabel2.Location = new Point(306, 79);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(42, 23);
             guna2HtmlLabel2.TabIndex = 9;
@@ -350,7 +352,7 @@
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.Location = new Point(210, 79);
+            guna2HtmlLabel1.Location = new Point(205, 79);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(42, 23);
             guna2HtmlLabel1.TabIndex = 8;

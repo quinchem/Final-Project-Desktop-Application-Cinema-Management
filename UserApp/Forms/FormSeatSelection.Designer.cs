@@ -118,7 +118,7 @@ namespace UserApp
             guna2CustomGradientPanel3.FillColor2 = Color.Transparent;
             guna2CustomGradientPanel3.FillColor3 = Color.Transparent;
             guna2CustomGradientPanel3.FillColor4 = Color.Transparent;
-            guna2CustomGradientPanel3.Location = new Point(318, 659);
+            guna2CustomGradientPanel3.Location = new Point(358, 651);
             guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2CustomGradientPanel3.Size = new Size(786, 64);
@@ -251,10 +251,10 @@ namespace UserApp
             panelHoaDon.FillColor2 = Color.FromArgb(236, 230, 224);
             panelHoaDon.FillColor3 = Color.FromArgb(236, 230, 224);
             panelHoaDon.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelHoaDon.Location = new Point(1597, 0);
+            panelHoaDon.Location = new Point(1553, 0);
             panelHoaDon.Name = "panelHoaDon";
             panelHoaDon.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            panelHoaDon.Size = new Size(305, 747);
+            panelHoaDon.Size = new Size(349, 747);
             panelHoaDon.TabIndex = 6;
             // 
             // lblSotien
@@ -263,7 +263,7 @@ namespace UserApp
             lblSotien.BackColor = Color.Transparent;
             lblSotien.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblSotien.ForeColor = Color.Black;
-            lblSotien.Location = new Point(128, 594);
+            lblSotien.Location = new Point(128, 598);
             lblSotien.Name = "lblSotien";
             lblSotien.Size = new Size(146, 58);
             lblSotien.TabIndex = 14;
@@ -274,7 +274,7 @@ namespace UserApp
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2HtmlLabel6.ForeColor = Color.FromArgb(245, 131, 35);
-            guna2HtmlLabel6.Location = new Point(29, 594);
+            guna2HtmlLabel6.Location = new Point(29, 598);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(93, 30);
             guna2HtmlLabel6.TabIndex = 10;
@@ -287,9 +287,9 @@ namespace UserApp
             lblGheDaChon.BackColor = Color.Transparent;
             lblGheDaChon.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblGheDaChon.ForeColor = Color.Black;
-            lblGheDaChon.Location = new Point(90, 452);
+            lblGheDaChon.Location = new Point(91, 452);
             lblGheDaChon.Name = "lblGheDaChon";
-            lblGheDaChon.Size = new Size(173, 121);
+            lblGheDaChon.Size = new Size(199, 121);
             lblGheDaChon.TabIndex = 13;
             lblGheDaChon.Text = "Ghế";
             // 
@@ -333,7 +333,7 @@ namespace UserApp
             lblTenPhim.BackColor = Color.Transparent;
             lblTenPhim.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTenPhim.ForeColor = Color.FromArgb(45, 76, 101);
-            lblTenPhim.Location = new Point(29, 259);
+            lblTenPhim.Location = new Point(62, 260);
             lblTenPhim.Name = "lblTenPhim";
             lblTenPhim.Size = new Size(245, 92);
             lblTenPhim.TabIndex = 7;
@@ -344,10 +344,10 @@ namespace UserApp
             // 
             picturePhim.CustomizableEdges = customizableEdges11;
             picturePhim.ImageRotate = 0F;
-            picturePhim.Location = new Point(77, 33);
+            picturePhim.Location = new Point(91, 33);
             picturePhim.Name = "picturePhim";
             picturePhim.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            picturePhim.Size = new Size(153, 206);
+            picturePhim.Size = new Size(183, 220);
             picturePhim.TabIndex = 0;
             picturePhim.TabStop = false;
             // 
@@ -402,7 +402,7 @@ namespace UserApp
             lblTime.BackColor = Color.FromArgb(245, 131, 35);
             lblTime.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTime.ForeColor = SystemColors.ButtonHighlight;
-            lblTime.Location = new Point(712, 10);
+            lblTime.Location = new Point(942, 9);
             lblTime.Name = "lblTime";
             lblTime.Size = new Size(113, 44);
             lblTime.TabIndex = 8;
@@ -414,7 +414,7 @@ namespace UserApp
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2HtmlLabel3.ForeColor = Color.FromArgb(245, 131, 35);
-            guna2HtmlLabel3.Location = new Point(499, 17);
+            guna2HtmlLabel3.Location = new Point(729, 16);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(198, 30);
             guna2HtmlLabel3.TabIndex = 7;

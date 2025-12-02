@@ -112,7 +112,7 @@ namespace UserApp
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogout.ForeColor = SystemColors.ActiveBorder;
-            btnLogout.Location = new Point(1661, 67);
+            btnLogout.Location = new Point(1661, 75);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(159, 33);
             btnLogout.TabIndex = 33;
@@ -126,7 +126,7 @@ namespace UserApp
             btnUserName.FlatStyle = FlatStyle.Flat;
             btnUserName.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnUserName.ForeColor = SystemColors.ActiveBorder;
-            btnUserName.Location = new Point(1297, 62);
+            btnUserName.Location = new Point(1297, 70);
             btnUserName.Name = "btnUserName";
             btnUserName.Size = new Size(297, 45);
             btnUserName.TabIndex = 32;
@@ -147,7 +147,7 @@ namespace UserApp
             guna2Button4.ForeColor = Color.White;
             guna2Button4.Image = Properties.Resources.TinTuc;
             guna2Button4.ImageSize = new Size(25, 25);
-            guna2Button4.Location = new Point(968, 62);
+            guna2Button4.Location = new Point(968, 65);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2Button4.Size = new Size(120, 45);
@@ -159,7 +159,7 @@ namespace UserApp
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ActiveBorder;
-            label2.Location = new Point(1627, 69);
+            label2.Location = new Point(1627, 77);
             label2.Name = "label2";
             label2.Size = new Size(17, 28);
             label2.TabIndex = 24;
@@ -177,7 +177,7 @@ namespace UserApp
             guna2Button3.ForeColor = Color.White;
             guna2Button3.Image = Properties.Resources.KhuyenMai;
             guna2Button3.ImageSize = new Size(30, 30);
-            guna2Button3.Location = new Point(713, 62);
+            guna2Button3.Location = new Point(713, 65);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2Button3.Size = new Size(160, 45);
@@ -196,7 +196,7 @@ namespace UserApp
             btnPhim.ForeColor = Color.White;
             btnPhim.Image = Properties.Resources.phim;
             btnPhim.ImageSize = new Size(25, 25);
-            btnPhim.Location = new Point(517, 62);
+            btnPhim.Location = new Point(517, 65);
             btnPhim.Margin = new Padding(4);
             btnPhim.Name = "btnPhim";
             btnPhim.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -217,7 +217,7 @@ namespace UserApp
             btnLichChieu.ForeColor = Color.White;
             btnLichChieu.Image = Properties.Resources.shooting_schedule;
             btnLichChieu.ImageSize = new Size(25, 25);
-            btnLichChieu.Location = new Point(282, 62);
+            btnLichChieu.Location = new Point(282, 65);
             btnLichChieu.Name = "btnLichChieu";
             btnLichChieu.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnLichChieu.Size = new Size(144, 45);
@@ -228,9 +228,9 @@ namespace UserApp
             // logo
             // 
             logo.Image = Properties.Resources.Logo_hamster;
-            logo.Location = new Point(50, 12);
+            logo.Location = new Point(50, 13);
             logo.Name = "logo";
-            logo.Size = new Size(146, 148);
+            logo.Size = new Size(151, 139);
             logo.SizeMode = PictureBoxSizeMode.Zoom;
             logo.TabIndex = 17;
             logo.TabStop = false;
@@ -249,7 +249,7 @@ namespace UserApp
             mainpanel.Dock = DockStyle.Fill;
             mainpanel.Location = new Point(0, 0);
             mainpanel.Name = "mainpanel";
-            mainpanel.Size = new Size(1902, 1074);
+            mainpanel.Size = new Size(1902, 1055);
             mainpanel.TabIndex = 0;
             // 
             // flowPanelList
@@ -261,7 +261,7 @@ namespace UserApp
             flowPanelList.Controls.Add(guna2PictureBox3);
             flowPanelList.Controls.Add(guna2PictureBox4);
             flowPanelList.Controls.Add(guna2PictureBox5);
-            flowPanelList.Location = new Point(449, 856);
+            flowPanelList.Location = new Point(461, 789);
             flowPanelList.Name = "flowPanelList";
             flowPanelList.Size = new Size(1083, 173);
             flowPanelList.TabIndex = 6;
@@ -342,10 +342,10 @@ namespace UserApp
             gunaPicBig.CustomizableEdges = customizableEdges21;
             gunaPicBig.Image = Properties.Resources.poster;
             gunaPicBig.ImageRotate = 0F;
-            gunaPicBig.Location = new Point(449, 214);
+            gunaPicBig.Location = new Point(474, 204);
             gunaPicBig.Name = "gunaPicBig";
             gunaPicBig.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            gunaPicBig.Size = new Size(1096, 604);
+            gunaPicBig.Size = new Size(1058, 566);
             gunaPicBig.TabIndex = 5;
             gunaPicBig.TabStop = false;
             // 
@@ -357,7 +357,7 @@ namespace UserApp
             guna2ImageButton1.ImageOffset = new Point(0, 0);
             guna2ImageButton1.ImageRotate = 0F;
             guna2ImageButton1.ImageSize = new Size(120, 120);
-            guna2ImageButton1.Location = new Point(1618, 819);
+            guna2ImageButton1.Location = new Point(1582, 725);
             guna2ImageButton1.Name = "guna2ImageButton1";
             guna2ImageButton1.PressedState.ImageSize = new Size(64, 64);
             guna2ImageButton1.ShadowDecoration.CustomizableEdges = customizableEdges23;
@@ -369,7 +369,7 @@ namespace UserApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 1074);
+            ClientSize = new Size(1902, 1055);
             Controls.Add(mainpanel);
             IsMdiContainer = true;
             Name = "UserMainForm";

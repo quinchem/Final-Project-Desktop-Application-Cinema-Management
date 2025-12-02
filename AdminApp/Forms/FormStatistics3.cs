@@ -24,6 +24,9 @@ namespace AdminApp
             InitializeComponent();
             LoadYearCombo();
             LoadMovieCombo();
+            this.AutoScaleMode = AutoScaleMode.None;   
+            this.AutoScroll = true;                  
+            this.Dock = DockStyle.Top;            
 
             // Thêm event handler cho MouseDown để catch khi user click vào DateTimePicker bị disabled
             dtpFrom.MouseDown += DateTimePicker_MouseDown;
