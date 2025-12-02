@@ -162,7 +162,7 @@
             lblTimer.BackColor = Color.Transparent;
             lblTimer.Font = new Font("Segoe UI Black", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTimer.ForeColor = Color.FromArgb(231, 30, 140);
-            lblTimer.Location = new Point(128, 48);
+            lblTimer.Location = new Point(126, 48);
             lblTimer.Name = "lblTimer";
             lblTimer.Size = new Size(159, 83);
             lblTimer.TabIndex = 17;
@@ -173,7 +173,7 @@
             guna2HtmlLabel16.BackColor = Color.Transparent;
             guna2HtmlLabel16.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2HtmlLabel16.ForeColor = Color.FromArgb(219, 64, 120);
-            guna2HtmlLabel16.Location = new Point(139, 15);
+            guna2HtmlLabel16.Location = new Point(136, 15);
             guna2HtmlLabel16.Name = "guna2HtmlLabel16";
             guna2HtmlLabel16.Size = new Size(139, 30);
             guna2HtmlLabel16.TabIndex = 16;
