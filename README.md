@@ -16,6 +16,13 @@ Lưu ý: Bỏ dấu "/" và bỏ từ "test" ở cuối API Key khi nhập vào 
 **3. Cách chạy giao diện**
 
 Đầu tiên trên thanh công cụ, chọn UserApp nếu muốn chạy giao diện của người dùng, chọn AdminApp nếu muốn chạy giao diện của quản lý
+Nếu chọn UserApp, khi đăng nhập điền thông tin như sau:
+Email: quynhtram18@gmail.com
+Password:Qtram185@
+
+Nếu chọn AdminApp, khi đăng nhập điền thông tin như sau:
+Username: admin
+Password: admin12345
 
 <img width="1919" height="151" alt="image" src="https://github.com/user-attachments/assets/50747b93-68a9-46d3-84f6-44ed25cac9f2" />
 
