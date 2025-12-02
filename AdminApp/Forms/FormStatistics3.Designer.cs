@@ -397,7 +397,7 @@
             panelDTTB.Location = new Point(934, 377);
             panelDTTB.Name = "panelDTTB";
             panelDTTB.ShadowDecoration.CustomizableEdges = customizableEdges17;
-            panelDTTB.Size = new Size(650, 119);
+            panelDTTB.Size = new Size(671, 119);
             panelDTTB.TabIndex = 75;
             // 
             // lblAvgRevenue
@@ -547,7 +547,7 @@
             label3.BackColor = Color.FromArgb(125, 167, 199);
             label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(639, 15);
+            label3.Location = new Point(504, 18);
             label3.Name = "label3";
             label3.RightToLeft = RightToLeft.Yes;
             label3.Size = new Size(278, 25);
