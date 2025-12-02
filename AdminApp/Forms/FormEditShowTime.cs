@@ -133,9 +133,6 @@ namespace AdminApp.Forms
         {
             UpdateTicketPrice();
         }
-
-        // Hàm cập nhật giá vé riêng để tái sử dụng
-        // Hàm cập nhật giá vé
         private void UpdateTicketPrice()
         {
             if (cboDinhDang.SelectedValue == null)
