@@ -17,50 +17,35 @@ namespace AdminApp
         {
             InitializeComponent();
             _staffId = staffId;
-
             panelDangNhap.Visible = true; 
-            //btnDangNhap.Visible = true;
             btnDangXuat.Visible = false;
-
-            // Ẩn thông tin nhân viên
             picAvatar.Visible = false;
             lblChucVu.Visible = false;
-            //lblTen.Visible = false;
             this.KeyPreview = true;
             this.AcceptButton = btnDN;
-
 
         }
 
         private void AdminMainForm_Load(object sender, EventArgs e)
         {
             panelDangNhap.Visible = true;
-
-            //btnDangNhap.Visible = true;
             btnDangXuat.Visible = false;
-
             picAvatar.Visible = false;
-            //lblTen.Visible = false;
             lblChucVu.Visible = false;
-
             SetMenuEnabled(false);
         }
 
         private Form currentFormChild;
         private Guna.UI2.WinForms.Guna2Button currentButton;
-
-        // Chỉ cập nhật trạng thái đăng nhập và hiển thị avatar.
-        // KHÔNG set Enabled cho các nút để tránh "xám".
+        
         private void SetMenuEnabled(bool enabled)
         {
             _isLoggedIn = enabled;
             picAvatar.Visible = enabled;
-            // Nếu muốn hiển thị tên/role khi đăng nhập thì gán ở chỗ login thành công
         }
 
         public void OpenChildForm(Form childForm)
         {
-             // Nếu có form con đang mở thì đóng
             if (currentFormChild != null)
                 currentFormChild.Close();
 
@@ -82,23 +67,16 @@ namespace AdminApp
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
             if (btn == null) return;
-
-            // Reset nút cũ về trạng thái Design
             if (currentButton != null)
             {
-                // Reset về trạng thái mặc định trong Designer
                 currentButton.FillColor = currentButton.Tag != null
                     ? (Color)currentButton.Tag
-                    : Color.FromArgb(44, 84, 115); // fallback
+                    : Color.FromArgb(44, 84, 115); 
                 currentButton.ForeColor = Color.White;
                 currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
             }
-
-            // Lưu màu gốc của nút mới (nếu chưa lưu)
             if (btn.Tag == null)
-                btn.Tag = btn.FillColor; // lưu FillColor gốc vào Tag
-
-            // Set nút hiện tại active
+                btn.Tag = btn.FillColor; 
             currentButton = btn;
             currentButton.FillColor = Color.FromArgb(44, 84, 115);
             currentButton.ForeColor = Color.FromArgb(255, 128, 0);
@@ -165,14 +143,12 @@ namespace AdminApp
 
             var btn = sender as Guna.UI2.WinForms.Guna2Button;
             ActivateButton(btn);
-            OpenChildForm(new FormCustomerManagement()); // sửa đúng form
+            OpenChildForm(new FormCustomerManagement()); 
         }
 
         private void picUserIcon_Click(object sender, EventArgs e)
         {
             if (!CheckLogin()) return;
-
-            // picUserIcon là PictureBox (hoặc control khác) — không ActivateButton trên nó
             OpenChildForm(new FormAccountManagement(_staffId));
         }
 
@@ -186,8 +162,6 @@ namespace AdminApp
             }
 
             panelMain.AutoScroll = true;
-
-            // Reset nút active
             if (currentButton != null)
             {
                 currentButton.BackColor = Color.FromArgb(51, 51, 76);
@@ -206,17 +180,11 @@ namespace AdminApp
             _isLoggedIn = false;
 
             picAvatar.Visible = false;
-            //lblTen.Visible = false;
             lblChucVu.Visible = false;
-
-            //btnDangNhap.Visible = true;
             btnDangXuat.Visible = false;
-
             panelDangNhap.Visible = true;
             panelDangNhap.Enabled = true;
             panelDangNhap.BringToFront();
-
-            // set menu state (logic)
             SetMenuEnabled(false);
 
             if (currentFormChild != null)
@@ -262,24 +230,15 @@ namespace AdminApp
                         if (reader.Read())
                         {
                             _staffId = reader["staff_id"].ToString();
-
-                            //lblTen.Text = "Admin";
                             lblChucVu.Text = reader["role_account"].ToString();
-
                             picAvatar.Visible = true;
-                            //lblTen.Visible = true;
                             lblChucVu.Visible = true;
-
-                            //btnDangNhap.Visible = false;
                             btnDangXuat.Visible = true;
-
-                            // ẨN & ĐẨY PANEL LOGIN XUỐNG
+                            // Giúp ẩn và đẩy panel xuống
                             HideLoginPanel();
-
-                            // MỞ MENU (logic) — không đổi màu nút
+                            // Giúp mở Menu
                             SetMenuEnabled(true);
-
-                            // MỞ FORM MẶC ĐỊNH
+                            // Giúp mở form mặc định
                             ActivateButton(btnThongKe);
                             OpenChildForm(new FormStatistics1(this));
                         }
@@ -313,19 +272,17 @@ namespace AdminApp
         {
             panelDangNhap.Visible = false;
             panelDangNhap.Enabled = false;
-
             // Mở form Quên mật khẩu vào panelMain
             OpenChildForm(new FormForgetPassword(this));
         }
         public void ShowLoginPanel()
         {
-            // đóng form con nếu còn
+            // Đóng form con nếu còn
             if (currentFormChild != null)
             {
                 currentFormChild.Close();
                 currentFormChild = null;
             }
-
             panelDangNhap.Visible = true;
             panelDangNhap.Enabled = true;
             panelDangNhap.BringToFront();
@@ -335,17 +292,13 @@ namespace AdminApp
         {
             if (txtPassword.UseSystemPasswordChar == true)
             {
-                // Hiện lên + Đổi ảnh mở
                 txtPassword.UseSystemPasswordChar = false;
                 txtPassword.PasswordChar = '\0';
                 picEye.Image = Properties.Resources.view;
             }
             else
             {
-                // Ẩn đi + Đổi ảnh đóng
                 txtPassword.UseSystemPasswordChar = true;
-
-                // Đổi ảnh đóng ở đây
                 picEye.Image = Properties.Resources.hide; 
             }
         }
