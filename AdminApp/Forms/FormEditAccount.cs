@@ -119,11 +119,9 @@ namespace AdminApp
                     return;
                 }
 
-                //update mật khẩu
                 _accountRepo.UpdatePassword(_staff_id, txtMKmoi.Text);
             }
 
-            //UPDATE THÔNG TIN NHÂN VIÊN
             Staff staff = new Staff
             {
                 staff_id = _staff_id,
