@@ -31,9 +31,9 @@ namespace SharedData.Repositories
             return "B" + Guid.NewGuid().ToString().Substring(0, 4).ToUpper();
         }
 
-        // ======================================================
+        // 
         //  TẠO BILL + BILL_SEAT + SEAT_FOR_SHOWTIME
-        // ======================================================
+        //
         public string CreateBill(string customerId, string showtimeId, double total, List<string> seatIds)
         {
             using (var conn = new SqliteConnection(ConnStr))

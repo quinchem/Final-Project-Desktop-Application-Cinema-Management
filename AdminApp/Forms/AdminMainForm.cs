@@ -180,6 +180,7 @@ namespace AdminApp
         {
             if (currentFormChild != null)
             {
+                panelMain.Controls.Remove(currentFormChild);  
                 currentFormChild.Close();
                 currentFormChild = null;
             }

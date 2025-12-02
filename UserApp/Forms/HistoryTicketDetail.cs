@@ -133,9 +133,8 @@ namespace UserApp
                                 txtPhongChieu.Text = _printData.PhongChieu;
                                 txtNgayDatVe.Text = _printData.NgayDatVe;
                                 txtTongTien.Text = $"{_printData.TongTien:N0} VND";
+                                txtTicketCode.Text = _printData.TicketCode;
 
-                                if (this.Controls.Find("txtTicketCode", true).Length > 0)
-                                    ((TextBox)this.Controls.Find("txtTicketCode", true)[0]).Text = _printData.TicketCode;
                             }
                             else
                             {
