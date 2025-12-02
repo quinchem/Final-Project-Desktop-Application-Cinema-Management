@@ -53,15 +53,11 @@ namespace SharedData.Repositories
                 message = "Customer hoặc Account không hợp lệ.";
                 return false;
             }
-
-            // Validate phone
             if (!Regex.IsMatch(customer.phone_number ?? "", @"^\d{10}$"))
             {
                 message = "Số điện thoại phải đúng 10 chữ số.";
                 return false;
             }
-
-            // Validate password
             if (!Regex.IsMatch(account.password ?? "", @"^(?=.{8,})(?=.*\W).*$"))
             {
                 message = "Mật khẩu phải lớn hơn hoặc bằng 8 ký tự và có ký tự đặc biệt.";
@@ -71,21 +67,16 @@ namespace SharedData.Repositories
             using var conn = new SqliteConnection(ConnStr);
             conn.Open();
 
-            // Bật FK
             using (var pragma = conn.CreateCommand())
             {
                 pragma.CommandText = "PRAGMA foreign_keys = ON;";
                 pragma.ExecuteNonQuery();
             }
 
-            // Bắt đầu transaction
             using var tran = conn.BeginTransaction();
 
             try
             {
-                // ================================
-                // 1) CHECK EMAIL / PHONE TRÙNG
-                // ================================
                 using (var cmd = new SqliteCommand(
                     @"SELECT COUNT(*) FROM customer 
               WHERE email=@e OR phone_number=@p",
@@ -101,10 +92,6 @@ namespace SharedData.Repositories
                         return false;
                     }
                 }
-
-                // ================================
-                // 2) TẠO ID
-                // ================================
                 string cid = GenerateCustomerId(conn, tran);
                 string aid = GenerateAccountId(conn, tran);
 
@@ -112,13 +99,8 @@ namespace SharedData.Repositories
                 account.customer_id = cid;
                 account.account_id = aid;
                 account.role_account ??= "customer";
-
-                // Hash password
                 account.password = HashPassword(account.password);
 
-                // ================================
-                // 3) INSERT CUSTOMER
-                // ================================
                 string sqlCus = @"
             INSERT INTO customer
             (customer_id, full_name, email, phone_number, gender,
@@ -140,9 +122,6 @@ namespace SharedData.Repositories
                     cmd.ExecuteNonQuery();
                 }
 
-                // ================================
-                // 4) INSERT ACCOUNT
-                // ================================
                 string sqlAcc = @"
             INSERT INTO account
             (account_id, username, password, role_account, staff_id, customer_id)
@@ -159,8 +138,6 @@ namespace SharedData.Repositories
 
                     cmd.ExecuteNonQuery();
                 }
-
-                // OK xong
                 tran.Commit();
                 message = "Đăng ký thành công!";
                 return true;
@@ -262,16 +239,12 @@ namespace SharedData.Repositories
             msg = "";
             try
             {
-                // 1. Tận dụng hàm HashPassword "xịn" có sẵn của class này
-                // Nó sẽ tự sinh Salt và tạo chuỗi đúng định dạng: iter.salt.hash
                 string secureHash = HashPassword(newPassword);
 
                 using var conn = new SqliteConnection(ConnStr);
                 conn.Open();
 
                 using var cmd = conn.CreateCommand();
-
-                // Cập nhật mật khẩu dựa trên Username 
                 cmd.CommandText = @"UPDATE account SET password = @p WHERE username = @u";
 
                 cmd.Parameters.AddWithValue("@p", secureHash);

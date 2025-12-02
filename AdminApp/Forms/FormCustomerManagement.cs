@@ -1,11 +1,12 @@
-﻿using SharedData.Models;
+﻿using ClosedXML.Excel;
+using SharedData.Models;
 using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using ClosedXML.Excel;
-using System.IO;
 using System.Globalization;
+using System.IO;
+using System.Media;
+using System.Windows.Forms;
 
 
 namespace AdminApp
@@ -134,6 +135,8 @@ namespace AdminApp
             // ✅ Thông báo nếu không tìm thấy
             if (filtered.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không tìm thấy khách hàng nào!", "Kết quả tìm kiếm",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -144,8 +147,8 @@ namespace AdminApp
             if (e.KeyCode == Keys.Enter)
             {
                 SearchCustomers();
-                e.SuppressKeyPress = true; // Ngăn tiếng "beep"
-                e.Handled = true;          // ✅ QUAN TRỌNG: Ngăn form xử lý thêm
+                e.SuppressKeyPress = true; 
+                e.Handled = true;          
             }
         }
 
@@ -163,6 +166,8 @@ namespace AdminApp
         {
             if (customerList == null || customerList.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không có dữ liệu để xuất!");
                 return;
             }
@@ -207,6 +212,8 @@ namespace AdminApp
                     workbook.SaveAs(save.FileName);
                 }
 
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
                 MessageBox.Show("Xuất file thành công!");
             }
         }
@@ -229,6 +236,8 @@ namespace AdminApp
         {
             if (DataGridViewCustomerManagement.SelectedRows.Count == 0)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Vui lòng chọn 1 khách hàng!");
                 return;
             }
@@ -290,6 +299,8 @@ namespace AdminApp
                 string createDate = row.Cells["create_date"].Value?.ToString() ?? "";
                 if (!TryNormalizeDate(createDate, out string createFormatted))
                 {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                    player.Play();
                     MessageBox.Show("Ngày tạo không đúng định dạng dd/MM/yyyy");
                     LoadCustomers();
                     return;
@@ -311,6 +322,7 @@ namespace AdminApp
                 bool ok = repo.Update(c);
 
                 if (!ok)
+
                     MessageBox.Show("Cập nhật thất bại!");
                 else
                     LoadCustomers(); // ✅ Reload để hiện format mới

@@ -332,7 +332,6 @@ namespace AdminApp
             btnDichVu.Size = new Size(118, 51);
             btnDichVu.TabIndex = 31;
             btnDichVu.Text = "DỊCH VỤ";
-            btnDichVu.Click += btnDichVu_Click;
             // 
             // btnSoDoGhe
             // 
@@ -521,7 +520,6 @@ namespace AdminApp
             guna2Button2.Size = new Size(118, 51);
             guna2Button2.TabIndex = 31;
             guna2Button2.Text = "DỊCH VỤ";
-            guna2Button2.Click += btnDichVu_Click;
             // 
             // guna2Button1
             // 
@@ -608,14 +606,14 @@ namespace AdminApp
             panelDangNhap.FillColor2 = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor3 = Color.FromArgb(236, 230, 224);
             panelDangNhap.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelDangNhap.Location = new Point(544, 146);
+            panelDangNhap.Location = new Point(483, 163);
             panelDangNhap.Name = "panelDangNhap";
             panelDangNhap.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges44;
             panelDangNhap.ShadowDecoration.Depth = 20;
             panelDangNhap.ShadowDecoration.Enabled = true;
             panelDangNhap.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            panelDangNhap.Size = new Size(713, 357);
+            panelDangNhap.Size = new Size(808, 432);
             panelDangNhap.TabIndex = 11;
             // 
             // picEye
@@ -624,7 +622,7 @@ namespace AdminApp
             picEye.CustomizableEdges = customizableEdges33;
             picEye.Image = Properties.Resources.hide;
             picEye.ImageRotate = 0F;
-            picEye.Location = new Point(596, 189);
+            picEye.Location = new Point(654, 212);
             picEye.Name = "picEye";
             picEye.ShadowDecoration.CustomizableEdges = customizableEdges34;
             picEye.Size = new Size(34, 31);
@@ -637,7 +635,7 @@ namespace AdminApp
             // 
             lblError.AutoSize = true;
             lblError.ForeColor = Color.Red;
-            lblError.Location = new Point(70, 276);
+            lblError.Location = new Point(70, 272);
             lblError.Name = "lblError";
             lblError.Size = new Size(0, 20);
             lblError.TabIndex = 7;
@@ -653,7 +651,7 @@ namespace AdminApp
             btnQuenMk.FillColor = Color.FromArgb(236, 230, 224);
             btnQuenMk.Font = new Font("Segoe UI", 10.2F, FontStyle.Italic);
             btnQuenMk.ForeColor = SystemColors.GrayText;
-            btnQuenMk.Location = new Point(54, 241);
+            btnQuenMk.Location = new Point(70, 302);
             btnQuenMk.Name = "btnQuenMk";
             btnQuenMk.ShadowDecoration.CustomizableEdges = customizableEdges36;
             btnQuenMk.Size = new Size(152, 27);
@@ -674,10 +672,10 @@ namespace AdminApp
             btnDN.FocusedColor = Color.FromArgb(245, 131, 35);
             btnDN.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDN.ForeColor = Color.White;
-            btnDN.Location = new Point(503, 286);
+            btnDN.Location = new Point(576, 345);
             btnDN.Name = "btnDN";
             btnDN.ShadowDecoration.CustomizableEdges = customizableEdges38;
-            btnDN.Size = new Size(171, 43);
+            btnDN.Size = new Size(171, 52);
             btnDN.TabIndex = 5;
             btnDN.Text = "ĐĂNG NHẬP";
             btnDN.Click += btnDangNhap_Click;
@@ -696,13 +694,13 @@ namespace AdminApp
             txtPassword.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPassword.ForeColor = Color.FromArgb(64, 64, 64);
             txtPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPassword.Location = new Point(60, 181);
+            txtPassword.Location = new Point(78, 204);
             txtPassword.Margin = new Padding(3, 5, 3, 5);
             txtPassword.Name = "txtPassword";
             txtPassword.PlaceholderText = "";
             txtPassword.SelectedText = "";
             txtPassword.ShadowDecoration.CustomizableEdges = customizableEdges40;
-            txtPassword.Size = new Size(591, 45);
+            txtPassword.Size = new Size(637, 45);
             txtPassword.TabIndex = 3;
             txtPassword.UseSystemPasswordChar = true;
             // 
@@ -710,7 +708,7 @@ namespace AdminApp
             // 
             lblPass.BackColor = Color.Transparent;
             lblPass.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPass.Location = new Point(60, 143);
+            lblPass.Location = new Point(78, 161);
             lblPass.Name = "lblPass";
             lblPass.Size = new Size(207, 30);
             lblPass.TabIndex = 2;
@@ -729,20 +727,20 @@ namespace AdminApp
             txtUsername.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtUsername.ForeColor = Color.FromArgb(64, 64, 64);
             txtUsername.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtUsername.Location = new Point(60, 79);
+            txtUsername.Location = new Point(78, 80);
             txtUsername.Margin = new Padding(3, 5, 3, 5);
             txtUsername.Name = "txtUsername";
             txtUsername.PlaceholderText = "";
             txtUsername.SelectedText = "";
             txtUsername.ShadowDecoration.CustomizableEdges = customizableEdges42;
-            txtUsername.Size = new Size(591, 45);
+            txtUsername.Size = new Size(637, 45);
             txtUsername.TabIndex = 1;
             // 
             // lblEmail
             // 
             lblEmail.BackColor = Color.Transparent;
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(60, 33);
+            lblEmail.Location = new Point(78, 33);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(102, 30);
             lblEmail.TabIndex = 0;

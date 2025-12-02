@@ -65,23 +65,15 @@ namespace SharedData.Repositories
        
         public bool CheckEmailExist(string email)
         {
-            // Dùng lại DatabaseHelper 
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
-
-                // Câu lệnh SQL đếm xem có bao nhiêu dòng có email trùng khớp
                 string sql = "SELECT COUNT(*) FROM Customer WHERE email = @email";
 
                 using (var cmd = new SqliteCommand(sql, conn))
                 {
-                    // Truyền tham số để tránh lỗi SQL Injection
                     cmd.Parameters.AddWithValue("@email", email);
-
-                    // ExecuteScalar trả về giá trị đầu tiên (số lượng đếm được)
                     long count = (long)cmd.ExecuteScalar();
-
-                    // Nếu đếm được > 0 tức là email đã tồn tại
                     return count > 0;
                 }
             }

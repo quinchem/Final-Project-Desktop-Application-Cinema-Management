@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11222.15 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserApp", "UserApp\UserApp.csproj", "{67D13AC9-8158-4732-8CC2-F63DAB7A9373}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminApp", "AdminApp\AdminApp.csproj", "{0C06C16E-C3D6-41E3-B442-1A08FE73B285}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaServer", "CinemaServer\CinemaServer.csproj", "{33AF3AE2-3C92-491B-A074-A30DEEBB34D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedDatabase", "SharedDatabase", "{25CA267B-E420-40DA-8BB9-9A8854EBC53B}"
 	ProjectSection(SolutionItems) = preProject
@@ -30,10 +28,6 @@ Global
 		{0C06C16E-C3D6-41E3-B442-1A08FE73B285}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C06C16E-C3D6-41E3-B442-1A08FE73B285}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C06C16E-C3D6-41E3-B442-1A08FE73B285}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33AF3AE2-3C92-491B-A074-A30DEEBB34D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33AF3AE2-3C92-491B-A074-A30DEEBB34D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33AF3AE2-3C92-491B-A074-A30DEEBB34D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33AF3AE2-3C92-491B-A074-A30DEEBB34D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1519EB68-EF9E-4507-9E14-A936A94A16DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1519EB68-EF9E-4507-9E14-A936A94A16DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1519EB68-EF9E-4507-9E14-A936A94A16DC}.Release|Any CPU.ActiveCfg = Release|Any CPU

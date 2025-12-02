@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
-using System.Linq;
-using System.Windows.Forms;
 using System.IO;
+using System.Linq;
+using System.Media;
+using System.Windows.Forms;
 
 namespace UserApp
 {
@@ -101,6 +102,8 @@ namespace UserApp
         {
             if (currentUser == null || string.IsNullOrWhiteSpace(currentUser.customer_id))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Không tìm thấy thông tin người dùng!", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -118,6 +121,8 @@ namespace UserApp
                 string.IsNullOrWhiteSpace(newEmail) ||
                 string.IsNullOrWhiteSpace(newPhone))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Họ tên, Email và SĐT không được để trống!",
                     "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -125,6 +130,8 @@ namespace UserApp
 
             if (newPhone.Length != 10 || !newPhone.All(char.IsDigit))
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Số điện thoại phải đúng 10 chữ số!",
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -188,11 +195,15 @@ namespace UserApp
                 currentUser.date_of_birth = newDob;
                 currentUser.address = newAddress;
 
-                MessageBox.Show("✅ Cập nhật thông tin thành công!",
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
+                MessageBox.Show("Cập nhật thông tin thành công!",
                     "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi khi cập nhật dữ liệu:\n" + ex.Message,
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -263,6 +274,8 @@ namespace UserApp
                         }
                         else
                         {
+                            SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                            player.Play();
                             MessageBox.Show("Lưu vào CSDL thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
@@ -270,6 +283,8 @@ namespace UserApp
             }
             catch (Exception ex)
             {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
