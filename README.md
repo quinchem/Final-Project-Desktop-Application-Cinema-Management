@@ -19,6 +19,8 @@ Lưu ý: Bỏ dấu "/" và bỏ từ "test" ở cuối API Key khi nhập vào 
 
 <img width="1919" height="151" alt="image" src="https://github.com/user-attachments/assets/50747b93-68a9-46d3-84f6-44ed25cac9f2" />
 
+Sau đó nhấn F5 để chạy được ứng dụng
+
 Nếu chọn UserApp, khi đăng nhập điền thông tin như sau:
 
     Email: quynhtram18@gmail.com
@@ -31,8 +33,6 @@ Nếu chọn AdminApp, khi đăng nhập điền thông tin như sau:
 
     Password: admin12345
     
-Sau đó nhấn F5 để chạy được ứng dụng
-
 
 **4. Tích hợp thanh toán Momo và ứng dụng**
 
