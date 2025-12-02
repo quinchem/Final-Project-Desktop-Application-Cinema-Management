@@ -173,7 +173,7 @@
             guna2HtmlLabel16.BackColor = Color.Transparent;
             guna2HtmlLabel16.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2HtmlLabel16.ForeColor = Color.FromArgb(219, 64, 120);
-            guna2HtmlLabel16.Location = new Point(136, 15);
+            guna2HtmlLabel16.Location = new Point(137, 15);
             guna2HtmlLabel16.Name = "guna2HtmlLabel16";
             guna2HtmlLabel16.Size = new Size(139, 30);
             guna2HtmlLabel16.TabIndex = 16;
