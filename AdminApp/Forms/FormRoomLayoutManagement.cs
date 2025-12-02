@@ -19,12 +19,13 @@ namespace AdminApp
         // Folder RoomDesign đặt trong solution:  <SolutionRoot>\SharedData\RoomDesign
         private readonly string roomDesignFolder;
 
-        private Dictionary<string, int> initialSeatMap;    
+        private Dictionary<string, int> initialSeatMap;
 
         // GHẾ ĐANG DRAG
         private Guna2Button draggingSeat = null;
         private bool dragging = false;
         private Point dragCursorPoint, dragStartPoint;
+        private int currentRoom = 1;
 
         // DRAG MÀN HÌNH
         private bool draggingScreen = false;

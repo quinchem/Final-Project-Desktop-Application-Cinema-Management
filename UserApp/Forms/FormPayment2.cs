@@ -14,13 +14,9 @@ namespace UserApp
 {
     public partial class FormPayment2 : Form
     {
-        // =================================================================================
-        // KEY ĐÃ ĐÚNG (GIỮ NGUYÊN)
-        // =================================================================================
         private const string PARTNER_CODE = "MOMOFZTI20251130_TEST";
         private const string ACCESS_KEY = "HTYX5Dl2Hao3j7Zk";
         private const string SECRET_KEY = "7qHvdJbaJVbDlj5rGDXMecdpmzyEwYKg";
-        // =================================================================================
 
         private ShowtimeInfo _showtime;
         private List<SeatUser> _seats;
@@ -36,8 +32,6 @@ namespace UserApp
         // Timer đếm ngược 10 phút cho QR
         private int _qrCountdown = 600; // 10 phút = 600 giây
 
-        // Vẫn giữ callback server nếu muốn (nhưng logic chính sẽ dùng Timer)
-        private readonly MomoCallbackServer _callbackServer = new MomoCallbackServer();
         public UserMainForm parentForm;
         public FormPayment2(ShowtimeInfo showtime, List<SeatUser> seats, Customer customer, double total)
         {
@@ -106,7 +100,6 @@ namespace UserApp
             }
             catch (Exception)
             {
-                // Lỗi mạng hoặc lỗi API thì bỏ qua, chờ lần tick tiếp theo
             }
         }
 
@@ -167,32 +160,6 @@ namespace UserApp
             }
         }
 
-        // Tạm thời không cần CallbackServer vì đã dùng Timer
-        private void StartCallbackServer()
-        {
-            try
-            {
-                _callbackServer.Start();
-                _callbackServer.OnPaymentSuccess += CallbackSuccess;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi khởi động Callback Server: " + ex.Message);
-            }
-        }
-
-        private void CallbackSuccess(MomoCallbackData data)
-        {
-            // Logic cũ (giữ lại để tham khảo)
-            if (!string.Equals(data.orderId, _orderId, StringComparison.OrdinalIgnoreCase))
-                return;
-
-            if (data.resultCode == 0)
-            {
-                _checkStatusTimer.Stop();
-                HandlePaymentSuccess();
-            }
-        }
 
         private void CreateMomoPayment()
         {
@@ -286,7 +253,7 @@ namespace UserApp
                 string qrUrl = json["qrCodeUrl"]?.ToString();
                 string payUrl = json["payUrl"]?.ToString();
 
-                // NẾU MOMO KHÔNG TRẢ VỀ QR -> TỰ TẠO TỪ PAYURL
+               
                 if (string.IsNullOrEmpty(qrUrl) && !string.IsNullOrEmpty(payUrl))
                 {
                     string encodedPayUrl = System.Net.WebUtility.UrlEncode(payUrl);

@@ -16,13 +16,11 @@ namespace UserApp
     {
         private UserMainForm parentForm;
 
-        // ====== THÔNG TIN SUẤT CHIẾU ======
+        // Khai báo thông tin suất chiếu và sơ đồ ghế
         private ShowtimeInfo _showtime;
-        private string _auditoriumId;     // R01, R02...
-        private string _showtimeId;       // T001, T002...
+        private string _auditoriumId;
+        private string _showtimeId;
         private ImageRepo _imageRepo = new ImageRepo();
-
-        // ====== THƯ MỤC JSON SƠ ĐỒ PHÒNG ======
         private string _roomJsonFolder;
 
         // ====== DANH SÁCH GHẾ ======
@@ -33,9 +31,7 @@ namespace UserApp
         private int countdown = 600;
         private bool isCounting = false;
 
-        // ============================
-        // CONSTRUCTOR
-        // ============================
+
 
         // 1. Constructor mặc định – cho Designer
         public FormSeatSelection()
@@ -85,9 +81,6 @@ namespace UserApp
             lblTime.Text = "05:00";
         }
 
-        // ===================================================
-        // LOAD POSTER PHIM
-        // ===================================================
         private void LoadPoster()
         {
             try
@@ -125,7 +118,7 @@ namespace UserApp
             UpdateTotal();
             UpdateSelectedSeatLabel();
 
-            // ----- 1) Load JSON -----
+            //  1) Load file JSON
             string digits = new string(auditoriumId.Where(char.IsDigit).ToArray());
             int roomNumber = int.Parse(digits);
             string jsonPath = Path.Combine(_roomJsonFolder, $"Room_{roomNumber}.json");
@@ -138,7 +131,7 @@ namespace UserApp
 
             var jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonPath));
 
-            // ----- 2) Load ghế từ bảng seat -----
+            // 2) Load ghế từ bảng seat
             var dbSeats = new Dictionary<string, (string type, string status, double price)>();
 
             using (var conn = DatabaseHelper.GetConnection())
@@ -164,11 +157,11 @@ namespace UserApp
                 }
             }
 
-            // ----- 3) Load ghế FULL theo suất chiếu -----
+            // 3) Load ghế FULL theo suất chiếu 
             var fullSeats = SeatForShowtimeRepo.GetSeatStatus(showtimeId);
             // chỉ chứa FULL
 
-            // ----- 4) Merge -----
+            // 4) Merge
             foreach (var s in jsonSeats)
             {
                 string logical = $"{s.Row}{s.Col:00}";
@@ -179,15 +172,15 @@ namespace UserApp
                 var db = dbSeats[fullId];
                 string finalStatus;
 
-                // Ưu tiên 1: ghế Bảo trì từ bảng seat
+                // Ghế Bảo trì từ bảng seat
                 if (db.status == "Bảo trì")
                     finalStatus = "Bảo trì";
 
-                // Ưu tiên 2: ghế đã FULL ở suất chiếu
+                // Ghế đã FULL ở suất chiếu
                 else if (fullSeats.ContainsKey(fullId))
                     finalStatus = "Full";
 
-                // Còn lại → TRỐNG
+                // Còn lại là TRỐNG
                 else
                     finalStatus = "Trống";
 
@@ -332,9 +325,6 @@ namespace UserApp
             panelRoom.Controls.Add(p);
         }
 
-        // ===================================================
-        // NÚT THANH TOÁN → CHUYỂN PAYMENT1
-        // ===================================================
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
             if (_selectedSeats.Count == 0)
@@ -344,7 +334,7 @@ namespace UserApp
                 return;
             }
 
-            // Dừng timer giữ ghế (phần lock ghế / cập nhật DB để Payment2 xử lý)
+            // Dừng timer giữ ghế 
             isCounting = false;
             timer1.Stop();
 
