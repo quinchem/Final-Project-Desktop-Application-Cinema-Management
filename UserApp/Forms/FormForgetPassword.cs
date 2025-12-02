@@ -22,7 +22,7 @@ namespace UserApp
             parentForm = parent;
         }
 
-        // Nút Gửi → mở FormResetPassword trong FormLogin (cha)
+        // Hàm xử lý sự kiện mở FormResetPassword khi chọn nút Gửi
         private void btnGui_Click(object sender, EventArgs e)
         {
             // 1. Lấy email từ TextBox (Giả sử tên control là txtEmail)
