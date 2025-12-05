@@ -7,7 +7,7 @@ namespace SharedData.Repositories
 {
     public class AuditoriumRepo
     {
-        // Lấy tất cả phòng + loại phòng
+        // Lấy tất cả phòng và loại phòng
         public List<Auditorium> GetAll()
         {
             var list = new List<Auditorium>();
@@ -47,6 +47,7 @@ namespace SharedData.Repositories
             return list;
         }
 
+        // Lấy phòng theo ID
         public Auditorium GetById(string id)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -88,6 +89,7 @@ namespace SharedData.Repositories
             return null;
         }
 
+        // Thêm phòng
         public void Insert(Auditorium a)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -110,6 +112,7 @@ namespace SharedData.Repositories
             }
         }
 
+        // Cập nhật phòng
         public void Update(Auditorium a)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -135,6 +138,7 @@ namespace SharedData.Repositories
             }
         }
 
+        // Xóa 
         public void Delete(string id)
         {
             using (var conn = DatabaseHelper.GetConnection())
