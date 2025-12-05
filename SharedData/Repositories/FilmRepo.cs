@@ -12,7 +12,7 @@ namespace SharedData.Repositories
     public class FilmRepo
     {
         
-        // ---- Lấy toàn bộ phim ----
+        // Lấy toàn bộ phim
         public List<Film> GetAllFilms()
         {
             List<Film> films = new List<Film>();
@@ -33,7 +33,7 @@ namespace SharedData.Repositories
             return films;
         }
 
-        // ---- Lấy phim theo thể loại ----
+        // Lấy phim theo thể loại
         public List<Film> GetFilmByType(string genre)
         {
             List<Film> films = new List<Film>();
@@ -59,7 +59,7 @@ namespace SharedData.Repositories
             return films;
         }
 
-        // ---- Tìm kiếm phim theo tên (C# LINQ) ----
+        // Tìm kiếm phim theo tên
         public List<Film> SearchFilmByName1(string keyword)
         {
             // Lấy toàn bộ phim
@@ -77,7 +77,7 @@ namespace SharedData.Repositories
         }
 
 
-        // ---- Tìm kiếm phim theo tên ----
+        // Tìm kiếm phim theo tên
         public List<Film> SearchFilmByName(string keyword)
         {
             List<Film> films = new List<Film>();
@@ -103,7 +103,7 @@ namespace SharedData.Repositories
             return films;
         }
 
-        // ---- Lấy suất chiếu theo phim ----
+        // Lấy suất chiếu theo phim
         public List<Film> GetCurrentlyShowingFilms()
         {
             var allFilms = GetAllFilms();
@@ -134,6 +134,7 @@ namespace SharedData.Repositories
             return showingFilms;
         }
 
+        // Lấy phim theo ID
         public Film GetById(string id)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -191,8 +192,6 @@ namespace SharedData.Repositories
             return null;
         }
 
-
-
         // Hàm lấy tất cả phim đã chiếu
         public List<Film> GetCurrentlyShowingFilms1()
         {
@@ -229,7 +228,7 @@ namespace SharedData.Repositories
             return showingFilms;
         }
 
-
+        // Cập nhật phim
         public void UpdateFilm(Film film)
         {
             using var conn = DatabaseHelper.GetConnection();
@@ -259,10 +258,7 @@ namespace SharedData.Repositories
             cmd.ExecuteNonQuery();
         }
 
-
-
-        // ----------- HÀM MAP DỮ LIỆU -----------
-
+        // Hàm Map dữ liệu
         private Film MapFilm(SqliteDataReader r)
         {
             return new Film
@@ -282,5 +278,4 @@ namespace SharedData.Repositories
             };
         }
     }
-
 }
