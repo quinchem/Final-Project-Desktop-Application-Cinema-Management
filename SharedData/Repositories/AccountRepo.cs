@@ -11,7 +11,7 @@ namespace SharedData.Repositories
     {
         private string ConnStr => DatabaseHelper.GetConnectionString();
 
-        // Generate Customer ID
+        // Tạo Customer ID mới
         private string GenerateCustomerId(SqliteConnection conn, SqliteTransaction tran)
         {
             string sql = @"SELECT customer_id FROM customer ORDER BY customer_id DESC LIMIT 1";
@@ -25,7 +25,7 @@ namespace SharedData.Repositories
             return "C" + (num + 1).ToString("D3");
         }
 
-        // Generate Account ID
+        // Tạo Account ID mới
         private string GenerateAccountId(SqliteConnection conn, SqliteTransaction tran)
         {
             string sql = @"SELECT account_id FROM account ORDER BY account_id DESC LIMIT 1";
@@ -39,11 +39,7 @@ namespace SharedData.Repositories
             return "A" + (num + 1).ToString("D3");
         }
 
-
-
-        // =========================
-        // REGISTER
-        // =========================
+        // Đăng ký
         public bool Register(Customer customer, Account account, out string message)
         {
             message = "";
@@ -150,9 +146,7 @@ namespace SharedData.Repositories
             }
         }
 
-        // =========================
-        // LOGIN
-        // =========================
+        // Đăng nhập
         public bool Login(string email , string password, out Customer customer, out string msg)
         {
             msg = "";
@@ -201,9 +195,8 @@ namespace SharedData.Repositories
             return true;
         }
 
-        // =========================
-        // CHANGE PASSWORD
-        // =========================
+        // Đổi mật khẩu
+        //Kiểm tra mật khẩu cũ
         public bool CheckOldPassword(string accountId, string oldPassword)
         {
             using var conn = new SqliteConnection(ConnStr);
@@ -217,6 +210,7 @@ namespace SharedData.Repositories
             return hash != null && VerifyPassword(oldPassword, hash);
         }
 
+        // Mật khẩu mới
         public bool UpdatePassword(string accountId, string newPassword)
         {
             string newHash = HashPassword(newPassword);
@@ -269,9 +263,7 @@ namespace SharedData.Repositories
             }
         }
 
-        // =========================
-        // HASH & VERIFY
-        // =========================
+        // Mật khẩu HASH và xác nhận
         private static string HashPassword(string password)
         {
             const int iter = 100_000;
@@ -299,5 +291,3 @@ namespace SharedData.Repositories
         }
     }
 }
-
-
