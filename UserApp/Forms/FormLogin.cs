@@ -15,7 +15,6 @@ namespace UserApp
         // Lưu tham chiếu đến nút đang được kích hoạt để đổi giao diện
         private Guna.UI2.WinForms.Guna2Button currentButton;
 
-        // Hàm tạo của form
         public FormLogin()
         {
             InitializeComponent();
