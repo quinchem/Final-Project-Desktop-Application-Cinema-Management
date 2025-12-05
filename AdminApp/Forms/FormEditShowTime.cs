@@ -1,4 +1,4 @@
-﻿using SharedData.Models;
+using SharedData.Models;
 using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
@@ -16,29 +16,38 @@ namespace AdminApp.Forms
 {
     public partial class FrmEditShowTime : Form
     {
+        // Repo để lấy dữ liệu phim, phòng, loại phòng và ghế
         private readonly FilmRepo _filmRepo = new FilmRepo();
         private readonly AuditoriumRepo _audRepo = new AuditoriumRepo();
         private readonly AuditoriumTypeRepo _audTypeRepo = new AuditoriumTypeRepo();
         private readonly SeatRepo _seatRepo = new SeatRepo();
 
+        // id suất chiếu cần chỉnh
         private string _showtimeId;
-        private Showtime _currentShowtime;
+        // đối tượng suất chiếu đang chỉnh sửa
+        private Showtime _currentShowtime;  
 
+        // Nhận id suất chiếu cần chỉnh
         public FrmEditShowTime(string showtimeId)
         {
             InitializeComponent();
             _showtimeId = showtimeId;
         }
+
         private void FrmEditShowTime_Load(object sender, EventArgs e)
         {
             LoadFilms();
             LoadRooms();
             LoadAuditoriumTypes();
+
+            // cấu hình DateTimePicker cho giờ bắt đầu
             dtpGioBD.Format = DateTimePickerFormat.Time;
             dtpGioBD.ShowUpDown = true;
+
             LoadShowtimeData();
         }
 
+        // Nạp danh sách phim lên combobox phim
         private void LoadFilms()
         {
             try
@@ -50,12 +59,12 @@ namespace AdminApp.Forms
             }
             catch (Exception ex)
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                new SoundPlayer(Properties.Resources.fail_sound).Play();
                 MessageBox.Show($"Lỗi khi tải danh sách phim: {ex.Message}", "Lỗi");
             }
         }
 
+        // Nạp danh sách phòng chiếu lên combobox phòng
         private void LoadRooms()
         {
             try
@@ -67,12 +76,12 @@ namespace AdminApp.Forms
             }
             catch (Exception ex)
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                new SoundPlayer(Properties.Resources.fail_sound).Play();
                 MessageBox.Show($"Lỗi khi tải danh sách phòng: {ex.Message}", "Lỗi");
             }
         }
 
+        // Nạp danh sách loại phòng lên combobox định dạng
         private void LoadAuditoriumTypes()
         {
             try
@@ -84,12 +93,12 @@ namespace AdminApp.Forms
             }
             catch (Exception ex)
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                new SoundPlayer(Properties.Resources.fail_sound).Play();
                 MessageBox.Show($"Lỗi khi tải định dạng: {ex.Message}", "Lỗi");
             }
         }
 
+        // Tải dữ liệu suất chiếu từ repo theo id, gán giá trị lên các control trên form
         private void LoadShowtimeData()
         {
             try
@@ -99,40 +108,47 @@ namespace AdminApp.Forms
 
                 if (_currentShowtime == null)
                 {
-                    SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                    player.Play();
+                    new SoundPlayer(Properties.Resources.fail_sound).Play();
                     MessageBox.Show("Không tìm thấy suất chiếu!", "Lỗi");
                     this.Close();
                     return;
                 }
+
+                // gán combobox phim và phòng theo id lưu trong suất chiếu
                 cboChonPhim.SelectedValue = _currentShowtime.movie_id;
                 cboChonPhong.SelectedValue = _currentShowtime.auditorium_id;
 
+                // parse và gán ngày chiếu 
                 if (DateTime.TryParseExact(_currentShowtime.show_date, "dd/MM/yyyy",
                     CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime showDate))
                 {
                     dtpNgayChieu.Value = showDate;
                 }
 
+                // parse và gán giờ bắt đầu theo định dạng HH:mm:ss
                 if (DateTime.TryParseExact(_currentShowtime.start_time, "HH:mm:ss",
                     CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startTime))
                 {
                     dtpGioBD.Value = startTime;
                 }
+
+                // cập nhật nhãn giá vé dựa theo định dạng phòng hiện tại
                 UpdateTicketPrice();
             }
             catch (Exception ex)
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                new SoundPlayer(Properties.Resources.fail_sound).Play();
                 MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi");
             }
         }
 
+        // Xử lý sự kiện khi chọn định dạng phòng, gọi cập nhật giá vé
         private void cboDinhDang_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTicketPrice();
         }
+
+        // Lấy giá vé từ repo theo loại phòng và hiển thị lên nhãn
         private void UpdateTicketPrice()
         {
             if (cboDinhDang.SelectedValue == null)
@@ -144,7 +160,7 @@ namespace AdminApp.Forms
             {
                 string typeId = cboDinhDang.SelectedValue.ToString();
                 double price = _seatRepo.GetTicketPriceByAuditoriumType(typeId);
-                lblGiaVe.Text = price.ToString("N0");
+                lblGiaVe.Text = price.ToString("N0"); // format có phân tách hàng nghìn
             }
             catch
             {
@@ -152,42 +168,43 @@ namespace AdminApp.Forms
             }
         }
 
+        // Xử lý sự kiện khi user nhấn nút chỉnh sửa để lưu thay đổi suất chiếu
         private void btnChinh_Click(object sender, EventArgs e)
         {
             if (cboChonPhim.SelectedIndex == -1)
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                new SoundPlayer(Properties.Resources.fail_sound).Play();
                 MessageBox.Show("Vui lòng chọn phim!", "Thông báo");
                 return;
             }
 
             if (cboChonPhong.SelectedIndex == -1)
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                new SoundPlayer(Properties.Resources.fail_sound).Play();
                 MessageBox.Show("Vui lòng chọn phòng!", "Thông báo");
                 return;
             }
+
             if (string.IsNullOrWhiteSpace(lblGiaVe.Text) || lblGiaVe.Text == "0")
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                new SoundPlayer(Properties.Resources.fail_sound).Play();
                 MessageBox.Show("Giá vé chưa hợp lệ (bằng 0 hoặc rỗng)!", "Thông báo");
                 return;
             }
 
             try
             {
+                // cập nhật thuộc tính suất chiếu từ dữ liệu trên form
                 _currentShowtime.movie_id = cboChonPhim.SelectedValue.ToString();
                 _currentShowtime.auditorium_id = cboChonPhong.SelectedValue.ToString();
                 _currentShowtime.show_date = dtpNgayChieu.Value.ToString("dd/MM/yyyy");
                 _currentShowtime.start_time = dtpGioBD.Value.ToString("HH:mm:ss");
                 _currentShowtime.end_time = CalculateEndTime(dtpGioBD.Value).ToString("HH:mm:ss");
 
+                // gọi repo cập nhật vào database
                 ShowtimeRepo.Update(_currentShowtime);
-                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
-                player.Play();
+
+                new SoundPlayer(Properties.Resources.success_sound).Play();
                 MessageBox.Show("Cập nhật suất chiếu thành công!", "Thành công",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -196,19 +213,20 @@ namespace AdminApp.Forms
             }
             catch (Exception ex)
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                new SoundPlayer(Properties.Resources.fail_sound).Play();
                 MessageBox.Show($"Lỗi khi cập nhật: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // Nút đóng form
         private void btnDong_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
+        // Tính thời điểm kết thúc suất chiếu dựa trên thời lượng phim; nếu không có dữ liệu thì mặc định 120 phút
         private DateTime CalculateEndTime(DateTime startTime)
         {
             if (cboChonPhim.SelectedValue != null)
@@ -224,7 +242,6 @@ namespace AdminApp.Forms
 
         private void cboChonPhong_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
     }
 }
