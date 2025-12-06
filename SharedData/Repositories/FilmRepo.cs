@@ -59,7 +59,7 @@ namespace SharedData.Repositories
             return films;
         }
 
-        // Tìm kiếm phim theo tên
+        // Tìm kiếm phim theo tên, không phân biệt chữ hoa, chữ thường
         public List<Film> SearchFilmByName1(string keyword)
         {
             // Lấy toàn bộ phim
@@ -67,8 +67,6 @@ namespace SharedData.Repositories
 
             if (string.IsNullOrEmpty(keyword))
                 return allFilms;
-
-            // Lọc trong C#, không phân biệt chữ hoa/chữ thường
             var results = allFilms
                 .Where(f => f.title.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
                 .ToList();
@@ -152,6 +150,7 @@ namespace SharedData.Repositories
             return null;
         }
 
+        // Lấy toàn bộ thông tin phim theo ID
         public Film GetById2(string id)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -202,8 +201,6 @@ namespace SharedData.Repositories
             foreach (var film in allFilms)
             {
                 DateTime release;
-
-                // thử parse với nhiều format phổ biến
                 bool parsed = DateTime.TryParseExact(
                     film.release_date,
                     new string[] { "yyyy-MM-dd", "dd/MM/yyyy", "MM/dd/yyyy" },
@@ -214,15 +211,14 @@ namespace SharedData.Repositories
 
                 if (!parsed)
                 {
-                    // Nếu parse fail, thử DateTime.TryParse bình thường
                     parsed = DateTime.TryParse(film.release_date, out release);
                 }
 
                 if (!parsed)
-                    continue; // bỏ phim không parse được
+                    continue; 
 
                 if (release <= today)
-                    showingFilms.Add(film); // chỉ lấy phim đã chiếu
+                    showingFilms.Add(film);
             }
 
             return showingFilms;
