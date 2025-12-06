@@ -15,61 +15,69 @@ namespace UserApp
 {
     public partial class FormPayment2 : Form
     {
+        // Thông tin cấu hình tài khoản test MoMo (partnerCode, accessKey, secretKey)
+        // Các giá trị này dùng để tạo chữ ký và thực hiện giao dịch
         private const string PARTNER_CODE = "MOMOFZTI20251130_TEST";
         private const string ACCESS_KEY = "HTYX5Dl2Hao3j7Zk";
         private const string SECRET_KEY = "7qHvdJbaJVbDlj5rGDXMecdpmzyEwYKg";
 
+        // Dữ liệu truyền từ FormPayment1
         private ShowtimeInfo _showtime;
         private List<SeatUser> _seats;
         private Customer _customer;
         private double _total;
 
+        // orderId và requestId là 2 giá trị MoMo yêu cầu để định danh giao dịch
         private string _orderId; 
         private string _requestId;
 
-        // Timer để tự động kiểm tra trạng thái giao dịch
+        // Timer dùng để tự động hỏi MoMo mỗi 3 giây xem giao dịch đã thanh toán xong chưa
         private System.Windows.Forms.Timer _checkStatusTimer;
 
-        // Timer đếm ngược 10 phút cho QR
+        // Timer đếm ngược 10 phút trước khi QR hết hạn
         private int _qrCountdown = 600; // 10 phút = 600 giây
 
         public UserMainForm parentForm;
         public FormPayment2(ShowtimeInfo showtime, List<SeatUser> seats, Customer customer, double total)
         {
             InitializeComponent();
-
+            
+            // Gán dữ liệu từ form trước (FormPayment1)
             _showtime = showtime;
             _seats = seats;
             _customer = customer;
             _total = total;
 
-            // Khởi tạo Timer kiểm tra trạng thái (3 giây check 1 lần)
+            // Khởi tạo Timer kiểm tra giao dịch MoMo (3 giây chạy 1 lần)
             _checkStatusTimer = new System.Windows.Forms.Timer();
             _checkStatusTimer.Interval = 3000;
             _checkStatusTimer.Tick += CheckStatusTimer_Tick;
 
+            // Hiển thị thông tin thanh toán
             LoadPaymentInfo();
+            // Gửi yêu cầu tạo QR thanh toán MoMo
             CreateMomoPayment();
         }
 
-        // Sự kiện Timer chạy mỗi 3 giây
+         // Timer gọi hàm kiểm tra giao dịch liên tục
         private void CheckStatusTimer_Tick(object sender, EventArgs e)
         {
             // Gọi hàm kiểm tra trạng thái
             CheckTransactionStatus();
         }
 
-        // Hàm chủ động hỏi MoMo xem đơn hàng xong chưa
+        // Hàm kiểm tra trạng thái thanh toán qua API Query của MoMo
         private void CheckTransactionStatus()
         {
             try
             {
                 string endpoint = "https://test-payment.momo.vn/v2/gateway/api/query";
 
-                // Tạo requestId mới cho mỗi lần query
+                // MoMo yêu cầu mỗi lần query phải tạo 1 requestId mới
                 string queryRequestId = Guid.NewGuid().ToString();
-
-                // Tạo chữ ký cho Query Request
+                
+                // rawHash là chuỗi MoMo bắt buộc phải tạo để ký SHA256
+                // Ký dữ liệu bằng secretKey cho Query Request
                 string rawHash = "accessKey=" + ACCESS_KEY +
                                  "&orderId=" + _orderId +
                                  "&partnerCode=" + PARTNER_CODE +
@@ -77,7 +85,8 @@ namespace UserApp
 
                 MoMoSecurity crypto = new MoMoSecurity();
                 string signature = crypto.signSHA256(rawHash, SECRET_KEY);
-
+                
+                // Tạo JSON gửi đến MoMo
                 JObject message = new JObject
                 {
                     { "partnerCode", PARTNER_CODE },
@@ -87,10 +96,11 @@ namespace UserApp
                     { "lang", "vi" }
                 };
 
+                // Gửi API Query
                 string response = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
                 JObject json = JObject.Parse(response);
 
-                // Nếu MoMo trả về resultCode = 0 nghĩa là Đã Thanh Toán Thành Công
+                // Nếu MoMo trả về resultCode = 0 nghĩa là thanh toán thành công
                 if (json["resultCode"] != null && json["resultCode"].ToString() == "0")
                 {
                     _checkStatusTimer.Stop(); // Dừng kiểm tra
@@ -99,15 +109,18 @@ namespace UserApp
             }
             catch (Exception)
             {
+                // Có lỗi mạng nhưng không ảnh hưởng → tiếp tục đợi
             }
         }
 
+        // Hàm xử lý sau khi MoMo báo thanh toán thành công
         private void HandlePaymentSuccess()
         {
             this.Invoke(new Action(() =>
             {
                 try
                 {
+                    // Lưu hóa đơn vào database
                     SaveBillToDatabase();
 
                     lblTrangThai.Text = "Thanh toán thành công!";
@@ -116,6 +129,7 @@ namespace UserApp
                     MessageBox.Show("Thanh toán MOMO thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    // Điều hướng về danh sách suất chiếu
                     var parent = this.ParentForm as UserMainForm;
                     if (parent != null)
                     {
@@ -134,7 +148,8 @@ namespace UserApp
                 }
             }));
         }
-
+        
+        // Hiển thị thông tin vé và khách hàng lên giao diện
         private void LoadPaymentInfo()
         {
             try
@@ -147,7 +162,8 @@ namespace UserApp
                 lblLoaiRap.Text = $"{_showtime.auditorium_type} - {_showtime.name}";
                 lblNgay.Text = _showtime.show_date;
                 lblGio.Text = $"{_showtime.start_time} - {_showtime.end_time}";
-
+                
+                // Ghế hiển thị theo đúng thứ tự
                 lblGhe.Text = string.Join(", ", _seats.OrderBy(s => s.Row)
                                                      .ThenBy(s => s.Col)
                                                      .Select(s => $"{s.Row}{s.Col:00}"));
@@ -165,14 +181,15 @@ namespace UserApp
             }
         }
 
-
+        // Gửi yêu cầu tạo QR MoMo
         private void CreateMomoPayment()
         {
             picQR.SizeMode = PictureBoxSizeMode.Zoom;
             picQR.Cursor = Cursors.Hand;
             picQR.Click -= PicQR_Click;
             picQR.Click += PicQR_Click;
-
+            
+            // Yêu cầu giao thức bảo mật TLS
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
             try
@@ -185,7 +202,9 @@ namespace UserApp
 
                 string orderInfo = "Thanh toan ve xem phim";
                 string amount = Convert.ToInt64(_total).ToString();
-
+                
+                // orderId: ID của đơn hàng dùng để truy xuất
+                // requestId: ID của request tạo QR
                 _orderId = Guid.NewGuid().ToString("N");
                 _requestId = Guid.NewGuid().ToString("N"); // Lưu lại requestId
 
@@ -195,7 +214,7 @@ namespace UserApp
                 string extraData = "";
                 string requestType = "captureWallet";
 
-                // Tạo chuỗi Hash
+                // rawHash là chuỗi dùng để ký SHA256 để tránh bị giả mạo
                 string rawHash =
                     "accessKey=" + accessKey +
                     "&amount=" + amount +
@@ -227,7 +246,8 @@ namespace UserApp
                     { "requestType", requestType },
                     { "signature", signature }
                 };
-
+                
+                // Gửi request tạo QR đến MoMo
                 string response = PaymentRequest.sendPaymentRequest(endpoint, message.ToString(Newtonsoft.Json.Formatting.None));
 
                 if (string.IsNullOrEmpty(response) || !response.TrimStart().StartsWith("{"))
@@ -240,7 +260,8 @@ namespace UserApp
                 }
 
                 JObject json = JObject.Parse(response);
-
+                
+                // Nếu MoMo trả về resultCode khác 0 thì lỗi tạo QR
                 if (json["resultCode"]?.ToString() != "0")
                 {
                     string errorCode = json["resultCode"]?.ToString();
@@ -260,17 +281,19 @@ namespace UserApp
                     lblTrangThai.Text = "Tạo QR thất bại";
                     return;
                 }
-
+                
+                // URL chứa mã QR
                 string qrUrl = json["qrCodeUrl"]?.ToString();
                 string payUrl = json["payUrl"]?.ToString();
 
-               
+               // Nếu MoMo không trả về qrCodeUrl thì tự tạo QR bằng payUrl
                 if (string.IsNullOrEmpty(qrUrl) && !string.IsNullOrEmpty(payUrl))
                 {
                     string encodedPayUrl = System.Net.WebUtility.UrlEncode(payUrl);
                     qrUrl = $"https://api.qrserver.com/v1/create-qr-code/?size=250x250&data={encodedPayUrl}";
                 }
 
+                // Tải ảnh QR về và hiển thị
                 if (string.IsNullOrEmpty(qrUrl))
                 {
                     SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -291,12 +314,14 @@ namespace UserApp
                 }
 
                 lblTrangThai.Text = "Đang chờ thanh toán (Tự động kiểm tra)...";
-                picQR.Tag = payUrl;
+                
+               // Lưu payUrl để mở trình duyệt khi user click QR
+               picQR.Tag = payUrl;
 
-                // BẮT ĐẦU TIMER KIỂM TRA TRẠNG THÁI
+                // Bắt đầu kiểm tra trạng thái giao dịch
                 _checkStatusTimer.Start();
 
-                // BẮT ĐẦU TIMER ĐẾM NGƯỢC QR
+                // Bắt đầu đếm ngược hạn QR
                 timer1.Start();
             }
             catch (Exception ex)
@@ -306,7 +331,8 @@ namespace UserApp
                 MessageBox.Show("Lỗi hệ thống: " + ex.Message);
             }
         }
-
+        
+        // Người dùng click vào QR thì mở MoMo theo payUrl
         private void PicQR_Click(object sender, EventArgs e)
         {
             if (picQR.Tag != null)
