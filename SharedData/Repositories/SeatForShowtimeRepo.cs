@@ -29,7 +29,10 @@ namespace SharedData.Repositories
             using var rd = cmd.ExecuteReader();
             while (rd.Read())
             {
-                dict[rd.GetString(0)] = rd.GetString(1);
+                string seatId = rd.GetString(0);
+                string status = rd.IsDBNull(1) ? "" : rd.GetString(1);
+
+                dict[seatId] = status;
             }
 
             return dict;

@@ -219,14 +219,23 @@ namespace UserApp
 
         private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
         {
-            if (seat.Status == "Bảo trì" || seat.Status == "Full")
+            if (seat.Status == "Bảo trì" )
             {
                 btn.FillColor = Color.Gray;
+                btn.DisabledState.FillColor = Color.Gray;
+                btn.DisabledState.ForeColor = Color.Black;
+                btn.Enabled = false;
+                return;
+            }
+            if (seat.Status == "Full")
+            {
+                btn.FillColor = Color.LightCoral;
+                btn.DisabledState.FillColor = Color.LightCoral;
+                btn.DisabledState.ForeColor = Color.Black;
                 btn.Enabled = false;
                 return;
             }
 
-            // TRỐNG
             btn.FillColor = Color.White;
             btn.ForeColor = Color.Black;
             btn.BorderColor = seat.Type == "VIP" ? Color.Gold : Color.DimGray;
