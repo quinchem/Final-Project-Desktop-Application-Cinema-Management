@@ -227,7 +227,7 @@ namespace UserApp
             guna2Button93.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button93.FillColor = Color.Gray;
             guna2Button93.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button93.ForeColor = Color.Gray;
+            guna2Button93.ForeColor = Color.LightCoral;
             guna2Button93.Location = new Point(394, 16);
             guna2Button93.Name = "guna2Button93";
             guna2Button93.ShadowDecoration.CustomizableEdges = customizableEdges8;
