@@ -27,6 +27,7 @@ namespace UserApp
             LoadMovies();
         }
 
+        // Hàm để lấy tất cả các phim đang chiếu lên FlowLayoutPannel, sử dụng film repo và image repo
         private void LoadMovies()
         {
             FilmRepo repo = new FilmRepo();
@@ -42,6 +43,7 @@ namespace UserApp
             }
         }
 
+        //Hàm để tạo giao diện của một card phim và xử lý sự kiện nhấn vào nút Đặt vé
         private Panel CreateFilmCard(Film film, byte[] posterBytes)
         {
             Panel panel = new Panel();
@@ -63,7 +65,7 @@ namespace UserApp
             }
             else poster.BackColor = Color.Gray;
 
-            // Thêm sự kiện click mở FormMovieDetail theo movie_id
+            // Sự kiện click mở FormMovieDetail theo movie_id
             poster.Click += (s, e) =>
             {
                 if (_parentForm != null)
@@ -85,8 +87,6 @@ namespace UserApp
             lblTitle.ForeColor = Color.White;
             lblTitle.BackColor = Color.Transparent;
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
-
-            // Hiển thị tên phim 1 dòng, có dấu "..." nếu quá dài
             lblTitle.Text = film.title;
             lblTitle.AutoEllipsis = true;
 
