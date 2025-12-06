@@ -10,9 +10,13 @@ namespace AdminApp
 {
     public partial class FormAccountManagement : Form
     {
+        // ID nhân viên đang đăng nhập
         private readonly string _staff_id;
+         // Repository xử lý dữ liệu nhân viên
         private readonly StaffRepo _staffRepo = new StaffRepo();
+        // Kiểm soát trạng thái chỉnh sửa
         private bool _isEditing = false;
+        // Repository xử lý ảnh đại diện
         private readonly ImageRepo _imageRepo = new ImageRepo();
 
         public FormAccountManagement(string staff_id)
@@ -22,7 +26,7 @@ namespace AdminApp
             SetLockControls(true);
             LoadStaffInfo();
         }
-
+        // Load thông tin nhân viên từ CSDL
         private void LoadStaffInfo()
         {
             Staff staff = _staffRepo.GetStaffById(_staff_id);
@@ -35,7 +39,7 @@ namespace AdminApp
                 Close();
                 return;
             }
-
+            // Gán thông tin cá nhân lên giao diện
             txtHoTen.Text = staff.full_name;
             txtNgaySinh.Text = staff.date_of_birth;
             txtGioiTinh.Text = staff.gender;
@@ -43,6 +47,7 @@ namespace AdminApp
             txtSDT.Text = staff.phone_number;
             txtChucVu.Text = staff.role;
 
+            // Load ảnh đại diện nhân viên
             byte[] img = _imageRepo.GetStaffImage(_staff_id);
             if (img != null)
             {
@@ -57,7 +62,7 @@ namespace AdminApp
             }
         }
 
-
+        // Khóa / mở các ô nhập liệu
         private void SetLockControls(bool isLocked)
         {
             // Thông tin cá nhân
