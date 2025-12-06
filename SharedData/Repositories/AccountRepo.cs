@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+using Microsoft.Data.Sqlite;
 using SharedData.Models;
 using System;
 using System.Linq;
@@ -194,7 +194,60 @@ namespace SharedData.Repositories
 
             return true;
         }
+        // THÊM HÀM NÀY VÀO AccountRepo.cs (sau hàm Login)
 
+        // Đăng nhập Staff/Admin
+        public bool LoginStaff(string username, string password, out string staffId, out string role, out string msg)
+        {
+            msg = "";
+            staffId = null;
+            role = null;
+
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = @"
+        SELECT account_id, password, staff_id, role_account
+        FROM account
+        WHERE username = @user 
+          AND role_account = 'Nhân viên (Admin)'";
+
+            cmd.Parameters.AddWithValue("@user", username);
+
+            using var reader = cmd.ExecuteReader();
+            if (!reader.Read())
+            {
+                msg = "Tài khoản không tồn tại hoặc không có quyền Admin.";
+                return false;
+            }
+
+            string storedPassword = reader["password"].ToString();
+
+            // Kiểm tra mật khẩu (hỗ trợ cả plain text và hash)
+            bool isPasswordCorrect = false;
+
+            if (storedPassword.Contains('.') && storedPassword.Split('.').Length == 3)
+            {
+                // Mật khẩu đã hash
+                isPasswordCorrect = VerifyPassword(password, storedPassword);
+            }
+            else
+            {
+                // Mật khẩu plain text (tạm thời)
+                isPasswordCorrect = (password == storedPassword);
+            }
+
+            if (!isPasswordCorrect)
+            {
+                msg = "Sai mật khẩu.";
+                return false;
+            }
+
+            staffId = reader["staff_id"].ToString();
+            role = reader["role_account"].ToString();
+            return true;
+        }
         // Đổi mật khẩu
         //Kiểm tra mật khẩu cũ
         public bool CheckOldPassword(string accountId, string oldPassword)
@@ -206,11 +259,26 @@ namespace SharedData.Repositories
             cmd.CommandText = @"SELECT password FROM account WHERE account_id=@id";
             cmd.Parameters.AddWithValue("@id", accountId);
 
-            var hash = cmd.ExecuteScalar()?.ToString();
-            return hash != null && VerifyPassword(oldPassword, hash);
+            var storedPassword = cmd.ExecuteScalar()?.ToString();
+
+            if (string.IsNullOrEmpty(storedPassword))
+                return false;
+
+            // Kiểm tra xem password có phải là hash không (format: iteration.salt.hash)
+            if (storedPassword.Contains('.') && storedPassword.Split('.').Length == 3)
+            {
+                // Mật khẩu đã được hash, dùng VerifyPassword
+                return VerifyPassword(oldPassword, storedPassword);
+            }
+            else
+            {
+                // Mật khẩu chưa hash (plain text), so sánh trực tiếp
+                // ⚠️ CHỈ DÙNG TẠM THỜI - NÊN HASH LẠI TẤT CẢ MẬT KHẨU
+                return oldPassword == storedPassword;
+            }
         }
 
-        // Mật khẩu mới
+        // CẬP NHẬT MẬT KHẨU MỚI - LUÔN HASH
         public bool UpdatePassword(string accountId, string newPassword)
         {
             string newHash = HashPassword(newPassword);
@@ -219,15 +287,13 @@ namespace SharedData.Repositories
             conn.Open();
 
             using var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
-                UPDATE account SET password=@p WHERE account_id=@id";
+            cmd.CommandText = @"UPDATE account SET password=@p WHERE account_id=@id";
             cmd.Parameters.AddWithValue("@p", newHash);
             cmd.Parameters.AddWithValue("@id", accountId);
 
             return cmd.ExecuteNonQuery() > 0;
         }
 
-        // Thêm hàm này vào AccountRepo.cs
         public bool ResetPassword(string email, string newPassword, out string msg)
         {
             msg = "";
