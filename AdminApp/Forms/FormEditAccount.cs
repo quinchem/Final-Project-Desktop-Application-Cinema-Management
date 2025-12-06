@@ -1,4 +1,4 @@
-﻿using SharedData.Models;
+using SharedData.Models;
 using SharedData.Repositories;
 using SharedData.Repositories;
 using System;
@@ -12,12 +12,14 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Data.Sqlite;
 
 namespace AdminApp
 {
     public partial class FormEditAccount : Form
     {
         private readonly string _staff_id;
+        private string _account_id; // THÊM BIẾN NÀY
         private readonly StaffRepo _staffRepo = new StaffRepo();
         private byte[] _selectedImageBytes;
         private ImageRepo _imageRepo = new ImageRepo();
@@ -36,6 +38,23 @@ namespace AdminApp
             txtMKmoi.UseSystemPasswordChar = true;
             txtNhapLaiMK.UseSystemPasswordChar = true;
 
+            // LẤY ACCOUNT_ID TỪ DATABASE
+            using var conn = new SqliteConnection(DatabaseHelper.GetConnectionString());
+            conn.Open();
+            using var cmd = new SqliteCommand(
+                "SELECT account_id FROM account WHERE staff_id=@sid", conn);
+            cmd.Parameters.AddWithValue("@sid", _staff_id);
+            _account_id = cmd.ExecuteScalar()?.ToString();
+
+            if (string.IsNullOrEmpty(_account_id))
+            {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
+                MessageBox.Show("Không tìm thấy thông tin tài khoản!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+
             Staff staff = _staffRepo.GetStaffById(_staff_id);
             if (staff == null)
             {
@@ -52,7 +71,7 @@ namespace AdminApp
             txtEmail.Text = staff.email;
             txtSDT.Text = staff.phone_number;
             txtChucVu.Text = staff.role;
-            txtChucVu.ReadOnly = true; 
+            txtChucVu.ReadOnly = true;
             byte[] img = _imageRepo.GetStaffImage(_staff_id);
             if (img != null)
             {
@@ -98,9 +117,8 @@ namespace AdminApp
                     return;
                 }
 
-                // Phần kiểm tra mật khẩu cũ
-                bool correctOldPass =
-                    _accountRepo.CheckOldPassword(_staff_id, txtMKcu.Text);
+                // THAY ĐỔI: DÙNG _account_id THAY VÌ _staff_id
+                bool correctOldPass = _accountRepo.CheckOldPassword(_account_id, txtMKcu.Text);
 
                 if (!correctOldPass)
                 {
@@ -119,7 +137,8 @@ namespace AdminApp
                     return;
                 }
 
-                _accountRepo.UpdatePassword(_staff_id, txtMKmoi.Text);
+                // THAY ĐỔI: DÙNG _account_id THAY VÌ _staff_id
+                _accountRepo.UpdatePassword(_account_id, txtMKmoi.Text);
             }
 
             Staff staff = new Staff
@@ -175,4 +194,3 @@ namespace AdminApp
         }
     }
 }
-
