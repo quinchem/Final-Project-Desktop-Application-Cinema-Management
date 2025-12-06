@@ -89,23 +89,18 @@ namespace AdminApp
 
         private void dgvMovies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Bỏ qua header
             if (e.RowIndex < 0) return;
-
-            // Lấy ID của dòng được click
            Film film = (Film)dgvMovies.Rows[e.RowIndex].DataBoundItem;
             string movie_id = film.movie_id;
 
-            // 1) Click icon chỉnh sửa
             if (dgvMovies.Columns[e.ColumnIndex].Name == "colEdit")
             {
                 FormEditMovie f = new FormEditMovie(movie_id);
                 f.ShowDialog();
-                LoadFilmData();   // Reload lại bảng sau khi sửa
+                LoadFilmData();   
                 return;
             }
 
-            // 2) Click icon xóa
             if (dgvMovies.Columns[e.ColumnIndex].Name == "colDelete")
             {
                 DialogResult result = MessageBox.Show(
@@ -154,7 +149,7 @@ namespace AdminApp
             try
             {
                 var repo = new FilmRepo();
-                var movies = repo.GetAllFilms(); // Lấy tất cả phim từ DB
+                var movies = repo.GetAllFilms(); 
 
                 if (movies == null || movies.Count == 0)
                 {
@@ -174,7 +169,6 @@ namespace AdminApp
                         {
                             var worksheet = workbook.Worksheets.Add("Movies");
 
-                            // Header
                             worksheet.Cell(1, 1).Value = "STT";
                             worksheet.Cell(1, 2).Value = "Title";
                             worksheet.Cell(1, 3).Value = "Genre";
@@ -189,7 +183,6 @@ namespace AdminApp
                             worksheet.Cell(1, 12).Value = "Release Date";
                             worksheet.Cell(1, 13).Value = "id";
 
-                            // Dữ liệu
                             int row = 2;
                             int stt = 1;
                             foreach (var film in movies)

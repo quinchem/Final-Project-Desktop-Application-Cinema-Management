@@ -25,9 +25,6 @@ namespace AdminApp
             DataGridViewCustomerManagement.EditMode = DataGridViewEditMode.EditOnEnter;
             DataGridViewCustomerManagement.AllowUserToAddRows = false;
 
-            // =============================
-            //  TẠO CỘT CUSTOMER_ID ẨN
-            // =============================
             if (DataGridViewCustomerManagement.Columns["customer_id"] == null)
             {
                 DataGridViewCustomerManagement.Columns.Add(new DataGridViewTextBoxColumn()
@@ -38,24 +35,18 @@ namespace AdminApp
                     Visible = false
                 });
             }
-
-            // ✅ FORMAT DATE COLUMNS NGAY KHI KHỞI TẠO
             SetupDateColumns();
-
             LoadCustomers();
         }
 
-        // ✅ HÀM MỚI: Setup format cho các cột date
+        // Giúp nhóm setup format cho các cột date
         private void SetupDateColumns()
         {
-            // Format cho cột ngày sinh
             if (DataGridViewCustomerManagement.Columns["date_of_birth"] != null)
             {
                 DataGridViewCustomerManagement.Columns["date_of_birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
                 DataGridViewCustomerManagement.Columns["date_of_birth"].DefaultCellStyle.NullValue = "";
             }
-
-            // ✅ Format cho cột ngày tạo
             if (DataGridViewCustomerManagement.Columns["create_date"] != null)
             {
                 DataGridViewCustomerManagement.Columns["create_date"].DefaultCellStyle.Format = "dd/MM/yyyy";
@@ -72,11 +63,8 @@ namespace AdminApp
         private void LoadCustomers()
         {
             customerList = repo.GetAll();
-
-            // ✅ Convert date format nếu cần
             foreach (var customer in customerList)
             {
-                // Nếu date_of_birth là string, convert sang DateTime
                 if (!string.IsNullOrEmpty(customer.date_of_birth))
                 {
                     if (DateTime.TryParse(customer.date_of_birth, out DateTime dob))
@@ -84,8 +72,6 @@ namespace AdminApp
                         customer.date_of_birth = dob.ToString("dd/MM/yyyy");
                     }
                 }
-
-                // ✅ Nếu create_date là string, convert sang DateTime
                 if (!string.IsNullOrEmpty(customer.create_date))
                 {
                     if (DateTime.TryParse(customer.create_date, out DateTime cd))
@@ -97,8 +83,6 @@ namespace AdminApp
 
             DataGridViewCustomerManagement.DataSource = null;
             DataGridViewCustomerManagement.DataSource = customerList;
-
-            // ✅ Đảm bảo format được apply
             SetupDateColumns();
         }
 
@@ -110,8 +94,6 @@ namespace AdminApp
         private void SearchCustomers()
         {
             string keyword = txtTimKiem.Text.Trim().ToLower();
-
-            // ✅ Nếu keyword rỗng → hiện toàn bộ
             if (string.IsNullOrEmpty(keyword))
             {
                 DataGridViewCustomerManagement.DataSource = null;
@@ -119,8 +101,6 @@ namespace AdminApp
                 SetupDateColumns();
                 return;
             }
-
-            // ✅ Tìm kiếm theo nhiều trường
             var filtered = customerList.FindAll(c =>
                 (c.full_name != null && c.full_name.ToLower().Contains(keyword)) ||
                 (c.email != null && c.email.ToLower().Contains(keyword)) ||
@@ -131,8 +111,6 @@ namespace AdminApp
             DataGridViewCustomerManagement.DataSource = null;
             DataGridViewCustomerManagement.DataSource = filtered;
             SetupDateColumns();
-
-            // ✅ Thông báo nếu không tìm thấy
             if (filtered.Count == 0)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -199,8 +177,6 @@ namespace AdminApp
                         sheet.Cell(row, 3).Value = c.email;
                         sheet.Cell(row, 4).Value = c.phone_number;
                         sheet.Cell(row, 5).Value = c.gender;
-
-                        // ✅ Format date cho Excel
                         sheet.Cell(row, 6).Value = FormatDateForExcel(c.date_of_birth);
                         sheet.Cell(row, 7).Value = c.address;
                         sheet.Cell(row, 8).Value = FormatDateForExcel(c.create_date);
@@ -218,7 +194,6 @@ namespace AdminApp
             }
         }
 
-        // ✅ HÀM MỚI: Format date cho Excel
         private string FormatDateForExcel(string dateStr)
         {
             if (string.IsNullOrEmpty(dateStr))
@@ -278,15 +253,11 @@ namespace AdminApp
 
                 string id = Convert.ToString(row.Cells["customer_id"].Value);
                 if (string.IsNullOrWhiteSpace(id)) return;
-
-                // ✅ lấy dữ liệu
                 string fullName = row.Cells["full_name"].Value?.ToString() ?? "";
                 string gender = row.Cells["gender"].Value?.ToString() ?? "";
                 string phone = row.Cells["phone_number"].Value?.ToString() ?? "";
                 string email = row.Cells["email"].Value?.ToString() ?? "";
                 string address = row.Cells["address"].Value?.ToString() ?? "";
-
-                // ✅ date_of_birth
                 string birth = row.Cells["date_of_birth"].Value?.ToString() ?? "";
                 if (!TryNormalizeDate(birth, out string birthFormatted))
                 {
@@ -295,7 +266,6 @@ namespace AdminApp
                     return;
                 }
 
-                // ✅ create_date
                 string createDate = row.Cells["create_date"].Value?.ToString() ?? "";
                 if (!TryNormalizeDate(createDate, out string createFormatted))
                 {
@@ -305,8 +275,6 @@ namespace AdminApp
                     LoadCustomers();
                     return;
                 }
-
-                // ✅ BUILD MODEL
                 Customer c = new Customer
                 {
                     customer_id = id,
@@ -325,7 +293,7 @@ namespace AdminApp
 
                     MessageBox.Show("Cập nhật thất bại!");
                 else
-                    LoadCustomers(); // ✅ Reload để hiện format mới
+                    LoadCustomers(); 
             }
             catch (Exception ex)
             {
@@ -358,7 +326,6 @@ namespace AdminApp
                 return true;
             }
 
-            // fallback: try general parse
             if (DateTime.TryParse(input, out d))
             {
                 output = d.ToString("dd/MM/yyyy");

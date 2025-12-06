@@ -4,12 +4,12 @@ using SharedData.MoMo;
 using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics; // Dùng cho Process
-using System.Drawing; // Dùng cho Image và PictureBox
+using System.Diagnostics;
+using System.Drawing; 
 using System.Linq;
-using System.Net; // Dùng cho WebClient và SecurityProtocol
+using System.Net; 
 using System.Windows.Forms;
-using System.Media; // Dùng cho SoundPlayer
+using System.Media; 
 
 namespace UserApp
 {
@@ -24,8 +24,8 @@ namespace UserApp
         private Customer _customer;
         private double _total;
 
-        private string _orderId; // Lưu lại OrderId để kiểm tra trạng thái
-        private string _requestId; // Lưu RequestId ban đầu
+        private string _orderId; 
+        private string _requestId;
 
         // Timer để tự động kiểm tra trạng thái giao dịch
         private System.Windows.Forms.Timer _checkStatusTimer;
@@ -49,7 +49,6 @@ namespace UserApp
             _checkStatusTimer.Tick += CheckStatusTimer_Tick;
 
             LoadPaymentInfo();
-            // StartCallbackServer(); // Có thể tạm tắt callback server local nếu dùng Timer
             CreateMomoPayment();
         }
 
@@ -71,7 +70,6 @@ namespace UserApp
                 string queryRequestId = Guid.NewGuid().ToString();
 
                 // Tạo chữ ký cho Query Request
-                // Chuẩn chữ ký Query: 
                 string rawHash = "accessKey=" + ACCESS_KEY +
                                  "&orderId=" + _orderId +
                                  "&partnerCode=" + PARTNER_CODE +

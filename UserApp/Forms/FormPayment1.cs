@@ -39,7 +39,7 @@ namespace UserApp
                 var filmRepo = new FilmRepo();
                 var film = filmRepo.GetById(_showtime.movie_id);
 
-                //Hiển thị thông tin đơn đặt vé
+                // Hiển thị thông tin đơn đặt vé
                 if (film != null)
                     lblTenPhim.Text = $"{film.title}";
                 else

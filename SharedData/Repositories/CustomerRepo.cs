@@ -8,6 +8,7 @@ namespace SharedData.Repositories
     public class CustomerRepo
     {
         private string ConnStr => DatabaseHelper.GetConnectionString();
+        // Lấy khách hàng theo ID
         public Customer GetById(string id)
         {
             using var conn = new SqliteConnection(ConnStr);
@@ -34,6 +35,8 @@ namespace SharedData.Repositories
                 create_date = reader["create_date"].ToString()
             };
         }
+
+        // Lấy tất cả khách hàng
         public List<Customer> GetAll()
         {
             List<Customer> list = new();
@@ -62,7 +65,7 @@ namespace SharedData.Repositories
             return list;
         }
 
-       
+       // Kiểm tra Email có tồn tại không
         public bool CheckEmailExist(string email)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -79,6 +82,7 @@ namespace SharedData.Repositories
             }
         }
 
+        // Cập nhật Avata
         public void UpdateAvatarPath(string customerId, string avatarPath)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -94,6 +98,7 @@ namespace SharedData.Repositories
             }
         }
 
+        // Cập nhật khách hàng
         public bool Update(Customer c)
         {
             using var conn = new SqliteConnection(ConnStr);
@@ -124,6 +129,7 @@ namespace SharedData.Repositories
             return cmd.ExecuteNonQuery() > 0;
         }
 
+        // Xóa
         public bool Delete(string id)
         {
             using var conn = new SqliteConnection(ConnStr);

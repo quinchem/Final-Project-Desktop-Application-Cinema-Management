@@ -87,16 +87,9 @@ namespace UserApp
             if (result == DialogResult.Yes)
             {
                 CurrentUser = null;
-
-                // Quay về FormLogin
-                // Mở lại FormLogin
                 FormLogin login = new FormLogin();
                 login.Show();
-
-                // Ẩn UserMainForm (không đóng ngay để tránh tắt app)
                 this.Hide();
-
-                // Khi FormLogin đóng → đóng luôn UserMainForm
                 login.FormClosed += (s2, e2) => this.Close();
             }
         }
@@ -112,26 +105,14 @@ namespace UserApp
 
             this.AutoScroll = true;
         }
-
+        
+        // Hàm xử lý các sự kiện click
         private void logo_Click(object sender, EventArgs e)
         {
             GoHome();
         }
 
-        // Mở form tìm kiếm
-
-
-        // Mở chi tiết phim
-        //private void guna2PictureBox1_Click(object sender, EventArgs e)
-        //{
-        //    OpenChildForm(new FormMovieDetail());
-        //}
-
-        //private void Poster_Click(object sender, EventArgs e)
-        //{
-        //    OpenChildForm(new FormMovieDetail());
-        //}
-
+       
         private void btnLichChieu_Click(object sender, EventArgs e)
         {
             Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
@@ -153,7 +134,8 @@ namespace UserApp
             OpenChildForm(new FormMovieList(this));
 
         }
-
+        
+    // Tạo hiệu ứng Hover cho các nút
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
             if (btn == null) return;
@@ -176,56 +158,38 @@ namespace UserApp
             currentButton.ForeColor = Color.FromArgb(255, 128, 0);
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
         }
-
+        
+    // Hàm xử lý sự kiện chọn Chatbot
         private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
             FormChatbot f = new FormChatbot(this);
             f.Show();
         }
 
-        private void LoadDanhSachPhim(List<Film> listPhim)
-        {
-            flowPanelList.Controls.Clear();
-            foreach (var phim in listPhim)
-            {
-                Guna2PictureBox picSmall = new Guna2PictureBox();
-
-                picSmall.Size = new Size(200, 110);
-                picSmall.SizeMode = PictureBoxSizeMode.Zoom;
-                picSmall.BorderRadius = 15;
-                picSmall.Cursor = Cursors.Hand;
-                picSmall.Click += picSmall_Click;
-
-                // --- 4. THÊM VÀO DANH SÁCH ---
-                flowPanelList.Controls.Add(picSmall);
-            }
-        }
 
         private void picSmall_Click(object sender, EventArgs e)
         {
             var clickedPic = (Guna2PictureBox)sender;
 
-            // A. Tắt hiệu ứng của cái cũ (nếu có)
+            // Tắt hiệu ứng của cái cũ (nếu có)
             if (currentSelected != null)
             {
                 currentSelected.ShadowDecoration.Enabled = false;
             }
 
-            // B. Bật hiệu ứng cho cái mới vừa click
+            // Bật hiệu ứng cho cái mới vừa click
             clickedPic.ShadowDecoration.Enabled = true;
             clickedPic.ShadowDecoration.Color = Color.FromArgb(245, 131, 35);
             clickedPic.ShadowDecoration.Depth = 15;
 
-            // C. LẤY ẢNH TỪ NHỎ -> GÁN LÊN TO
-            // Logic: Cái nhỏ đang hiện hình gì thì gán y chang lên trên
+            // Lấy ảnh nhỏ gắn lên khung lớn
             if (clickedPic.Image != null)
             {
                 gunaPicBig.Image = clickedPic.Image;
                 gunaPicBig.SizeMode = PictureBoxSizeMode.Zoom;
             }
-
-            // D. Lưu lại cái này để lần sau click cái khác thì biết đường tắt
             currentSelected = clickedPic;
         }
     }
 }
+
