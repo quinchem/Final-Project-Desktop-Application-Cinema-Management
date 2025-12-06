@@ -42,6 +42,8 @@ namespace UserApp
             }
 
         }
+        
+        // Vẽ border bo góc cho UserControl
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -65,10 +67,13 @@ namespace UserApp
                 e.Graphics.DrawPath(pen, path);
             }
         }
+        // Refresh giao diện khi load
         private void MyUserControl_Load(object sender, EventArgs e)
         {
             this.Invalidate(); 
         }
+        
+         // Sự kiện nhấn nút "Lưu mật khẩu"
 
         private void btnSavePassword_Click(object sender, EventArgs e)
         {
