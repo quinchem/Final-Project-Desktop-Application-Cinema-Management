@@ -137,8 +137,7 @@ namespace AdminApp
                 FROM auditorium a
                 LEFT JOIN auditorium_type atype
                     ON a.auditorium_type_id = atype.auditorium_type_id
-                WHERE a.auditorium_id = $id;
-";
+                WHERE a.auditorium_id = $id;";
                 cmdInfo.Parameters.AddWithValue("$id", auditoriumId);
 
                 // Đọc kết quả từ database.
