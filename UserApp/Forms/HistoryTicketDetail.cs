@@ -24,6 +24,7 @@ namespace UserApp
             _billId = billId;
             LoadDetail();
         }
+        // Sinh mã Ticket Code
 
         private string GenerateTicketCode(string billId)
         {
@@ -34,6 +35,7 @@ namespace UserApp
                 return $"TK-{billId}-{hash.Substring(0, 4)}";
             }
         }
+        // Tải chi tiết vé từ database
 
         private void LoadDetail()
         {
@@ -75,6 +77,8 @@ namespace UserApp
                                 string startTime = reader["start_time"].ToString();
                                 string endTime = reader["end_time"].ToString();
                                 string auditoriumName = reader["auditorium_name"].ToString();
+                                
+                                // Lấy danh sách ghế
 
                                 string seatQuery = @"
                                     SELECT 
@@ -107,6 +111,8 @@ namespace UserApp
 
                                 int seatCount = seatLocations.Count;
                                 string seatList = string.Join(", ", seatLocations);
+                                
+                                // Lưu dữ liệu để in
 
                                 _printData = new TicketPrintData
                                 {
@@ -155,6 +161,8 @@ namespace UserApp
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
+         // Quay về lịch sử vé
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -187,6 +195,8 @@ namespace UserApp
                 printDoc.Print();
             }
         }
+        
+         // Hàm in trang
 
         private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
         {
