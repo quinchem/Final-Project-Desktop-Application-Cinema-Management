@@ -15,8 +15,9 @@ using System.Windows.Forms;
 namespace AdminApp
 {
     public partial class FormEditCustomer : Form
-    {
+    {   // Repository thao tác dữ liệu khách hàng
         private readonly CustomerRepo repo = new CustomerRepo();
+        // Đối tượng khách hàng được truyền từ form cha
         private readonly Customer customer;
         public FormEditCustomer(Customer c)
         {
@@ -79,7 +80,7 @@ namespace AdminApp
                 MessageBox.Show("Vui lòng chọn giới tính");
                 return;
             }
-
+            // Tạo đối tượng khách hàng đã cập nhật
             Customer updatedCustomer = new Customer
             {
                 customer_id = customer.customer_id,          
@@ -91,6 +92,7 @@ namespace AdminApp
                 address = txtDiaChi.Text.Trim(),
                 create_date = customer.create_date            
             };
+            // Gọi repository để cập nhật dữ liệu
             bool ok = repo.Update(updatedCustomer);         
             if (ok)
             {
