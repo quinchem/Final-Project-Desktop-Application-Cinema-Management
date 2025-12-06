@@ -30,6 +30,7 @@ namespace AdminApp
             LoadMoviePoster();
         }
 
+        // Hàm load dữ liệu vào ComboBox
         private void LoadComboBoxData()
         {
             try
@@ -47,6 +48,7 @@ namespace AdminApp
             }
         }
 
+        // Hàm load thông tin phim từ CSDL vào các TextBox, ComboBox và DatePicker, sử dụng repo Film
         private void LoadMovieInfo()
         {
             try
@@ -108,6 +110,7 @@ namespace AdminApp
             }
         }
 
+        // Hàm load poster từ CSDL vào PictureBox, sử dụng Image Repo
         private void LoadMoviePoster()
         {
             try
@@ -118,7 +121,6 @@ namespace AdminApp
                     _posterImageBytes = imgData;
                     using (MemoryStream ms = new MemoryStream(imgData))
                     {
-                        // Phần này đảm bảo PictureBox hiển thị hình gốc
                         picPoster.Image = Image.FromStream(ms);
                         picPoster.SizeMode = PictureBoxSizeMode.Zoom;
                     }
@@ -132,7 +134,7 @@ namespace AdminApp
             }
         }
 
-
+        //Hàm xử lý sự kiện Click vào nút Upload Poster để chọn ảnh mới từ máy, sau đó lưu ảnh dưới dạng byte
         private void btnUploadPoster_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -160,6 +162,7 @@ namespace AdminApp
             }
         }
 
+        // Hàm xử lý sự kiện nhấn vào nút Save để lưu thông tin phim và poster vào CSDL sau khi chỉnh sửa
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
