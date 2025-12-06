@@ -17,22 +17,28 @@ namespace UserApp
     {
         private UserMainForm parentForm;
 
-        // Khai báo thông tin suất chiếu và sơ đồ ghế
+        // Lưu thông tin suất chiếu và phòng chiếu được truyền từ màn hình trước
         private ShowtimeInfo _showtime;
         private string _auditoriumId;
         private string _showtimeId;
+
+        // Repository dùng để lấy hình ảnh poster phim từ database
         private ImageRepo _imageRepo = new ImageRepo();
+
+        // Folder chứa file JSON layout phòng được tạo bởi bên ứng dụng của Admin
         private string _roomJsonFolder;
 
-        // Khai báo danh sách ghế
+        // Danh sách tất cả ghế sau khi load layout và dữ liệu database
         private List<SeatUser> _allSeats = new();
+
+        // Danh sách ghế mà người dùng đang chọn
         private List<SeatUser> _selectedSeats = new();
 
-        // Hẹn giờ 5 phút
+        // Bộ đếm giữ ghế 10 phút
         private int countdown = 600;
+
+        // Cờ để xác định timer có đang chạy hay không
         private bool isCounting = false;
-
-
 
         // Các constructor
         public FormSeatSelection()
@@ -49,6 +55,8 @@ namespace UserApp
             _auditoriumId = showtime.auditorium_id;
             _showtimeId = showtime.showtime_id;
         }
+
+        // Khi tạo form, hệ thống tự xác định đường dẫn folder lưu layout phòng
         private string GetRoomFolder()
         {
             var csb = new SqliteConnectionStringBuilder(DatabaseHelper.GetConnectionString());
@@ -57,6 +65,8 @@ namespace UserApp
             return Path.Combine(root, "SharedData", "RoomDesign");
         }
 
+        
+        // Khi load form: hiển thị thông tin suất chiếu và load sơ đồ ghế
         private void FormSeatSelection_Load(object sender, EventArgs e)
         {
             if (_showtime == null ||
@@ -77,7 +87,8 @@ namespace UserApp
             countdown = 600;
             lblTime.Text = "10:00";
         }
-        // Load poster phim đã chọn
+        
+        // Load hình poster phim từ database
         private void LoadPoster()
         {
             try
@@ -114,7 +125,7 @@ namespace UserApp
             UpdateTotal();
             UpdateSelectedSeatLabel();
 
-            //Load file JSON
+            // Tìm file JSON layout phòng theo số phòng
             string digits = new string(auditoriumId.Where(char.IsDigit).ToArray());
             int roomNumber = int.Parse(digits);
             string jsonPath = Path.Combine(_roomJsonFolder, $"Room_{roomNumber}.json");
@@ -127,9 +138,10 @@ namespace UserApp
                 return;
             }
 
+            // Đọc tọa độ ghế (X,Y) từ file JSON 
             var jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonPath));
 
-            //Load ghế từ bảng seat
+             // Lấy loại ghế, trạng thái, giá từ database
             var dbSeats = new Dictionary<string, (string type, string status, double price)>();
 
             using (var conn = DatabaseHelper.GetConnection())
@@ -155,9 +167,8 @@ namespace UserApp
                 }
             }
 
-            // Load ghế FULL theo suất chiếu 
+            // Lấy danh sách ghế FULL (đã có người đặt)
             var fullSeats = SeatForShowtimeRepo.GetSeatStatus(showtimeId);
-            // chỉ chứa FULL
 
             foreach (var s in jsonSeats)
             {
@@ -213,16 +224,27 @@ namespace UserApp
 
             return btn;
         }
+        
         // Áp dụng định dạng cho các nút Button
-        private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
+       private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
         {
-            if (seat.Status == "Bảo trì" || seat.Status == "Full")
+            if (seat.Status == "Bảo trì" )
             {
                 btn.FillColor = Color.Gray;
+                btn.DisabledState.FillColor = Color.Gray;
+                btn.DisabledState.ForeColor = Color.Black;
                 btn.Enabled = false;
                 return;
             }
-
+            if (seat.Status == "Full")
+            {
+                btn.FillColor = Color.LightCoral;
+                btn.DisabledState.FillColor = Color.LightCoral;
+                btn.DisabledState.ForeColor = Color.Black;
+                btn.Enabled = false;
+                return;
+            }
+        
             btn.FillColor = Color.White;
             btn.ForeColor = Color.Black;
             btn.BorderColor = seat.Type == "VIP" ? Color.Gold : Color.DimGray;
