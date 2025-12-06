@@ -13,6 +13,7 @@ namespace AdminApp
     {
         private string _staffId;
         private bool _isLoggedIn = false;
+        // Repository xử lý đăng nhập tài khoản
         private readonly AccountRepo _accountRepo = new AccountRepo(); // THÊM DÒNG NÀY
 
         public AdminMainForm(string staffId)
@@ -26,7 +27,7 @@ namespace AdminApp
             this.KeyPreview = true;
             this.AcceptButton = btnDN;
         }
-
+        // Load form: mặc định chưa đăng nhập
         private void AdminMainForm_Load(object sender, EventArgs e)
         {
             panelDangNhap.Visible = true;
@@ -35,16 +36,17 @@ namespace AdminApp
             lblChucVu.Visible = false;
             SetMenuEnabled(false);
         }
-
+        // Lưu form con đang mở
         private Form currentFormChild;
         private Guna.UI2.WinForms.Guna2Button currentButton;
-
+        
+        // Bật / tắt menu theo trạng thái đăng nhập
         private void SetMenuEnabled(bool enabled)
         {
             _isLoggedIn = enabled;
             picAvatar.Visible = enabled;
         }
-
+         // Mở form con trong panel chính
         public void OpenChildForm(Form childForm)
         {
             if (currentFormChild != null)
@@ -63,7 +65,7 @@ namespace AdminApp
             childForm.BringToFront();
             childForm.Show();
         }
-
+        // Đổi trạng thái nút menu đang active
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
             if (btn == null) return;
@@ -184,7 +186,7 @@ namespace AdminApp
             panelDangNhap.Visible = true;
             panelDangNhap.Enabled = true;
             panelDangNhap.BringToFront();
-            SetMenuEnabled(false);
+            SetMenuEnabled(false); 
 
             if (currentFormChild != null)
             {
@@ -193,7 +195,7 @@ namespace AdminApp
             }
         }
 
-        // ===== SỬA LẠI PHẦN ĐĂNG NHẬP =====
+        // Xử lý đăng nhập
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             string user = txtUsername.Text.Trim();
@@ -209,7 +211,7 @@ namespace AdminApp
                 return;
             }
 
-            // SỬ DỤNG AccountRepo.LoginStaff THAY VÌ QUERY TRỰC TIẾP
+            // Gọi AccountRepo để xác thực tài khoản
             string staffId, role, msg;
             if (_accountRepo.LoginStaff(user, pass, out staffId, out role, out msg))
             {
@@ -243,7 +245,7 @@ namespace AdminApp
             panelDangNhap.Enabled = false;
             panelDangNhap.SendToBack();
         }
-
+        // Nhấn Enter để đăng nhập
         private void btnDN_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -258,7 +260,7 @@ namespace AdminApp
             panelDangNhap.Enabled = false;
             OpenChildForm(new FormForgetPassword(this));
         }
-
+        // Hiện lại panel đăng nhập
         public void ShowLoginPanel()
         {
             if (currentFormChild != null)
@@ -270,7 +272,7 @@ namespace AdminApp
             panelDangNhap.Enabled = true;
             panelDangNhap.BringToFront();
         }
-
+         // Ẩn / hiện mật khẩu
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
             if (txtPassword.UseSystemPasswordChar == true)
