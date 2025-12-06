@@ -1,4 +1,4 @@
-﻿using Guna.UI2.WinForms;
+using Guna.UI2.WinForms;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
 using SharedData.Models;
@@ -15,27 +15,42 @@ namespace AdminApp
 {
     public partial class FormRoomLayoutManagement : Form
     {
-        // ============= CẤU HÌNH =============
-
-        // Folder RoomDesign đặt trong solution:  <SolutionRoot>\SharedData\RoomDesign
+        // Biến chứa đường dẫn thư mục lưu layout phòng (file JSON).
+        // Thư mục đặt trong solution tại SharedData/RoomDesign.
+        // Mục đích: mỗi phòng chiếu sẽ có 1 file JSON ghi lại tọa độ + thông tin ghế.
         private readonly string roomDesignFolder;
 
+        // Lưu bản sao ban đầu của seatMap để so sánh hoặc khôi phục khi cần.
         private Dictionary<string, int> initialSeatMap;
 
-        // GHẾ ĐANG DRAG
+        // Lưu ghế đang được kéo bằng chuột. Null nghĩa là không có ghế nào đang kéo.
         private Guna2Button draggingSeat = null;
+
+        // Đánh dấu trạng thái đang kéo ghế. Dùng trong MouseMove để xác định có di chuyển ghế hay không.
         private bool dragging = false;
-        private Point dragCursorPoint, dragStartPoint;
+
+        // Lưu vị trí chuột ban đầu (khi bắt đầu kéo ghế).
+        private Point dragCursorPoint;
+
+        // Lưu vị trí ghế ban đầu trước khi kéo.
+        private Point dragStartPoint;
+
+        // Lưu số phòng hiện tại đang mở (phòng 1 → phòng 5).
         private int currentRoom = 1;
 
-        // DRAG MÀN HÌNH
+        // Đánh dấu trạng thái đang kéo thanh MÀN HÌNH (screen bar).
         private bool draggingScreen = false;
+
+        // Lưu vị trí ban đầu của thanh MÀN HÌNH trước khi kéo.
         private Point screenDragStartPoint;
 
-        // Chế độ chỉnh sửa
+        // Cho biết hệ thống có đang ở chế độ chỉnh sửa ghế (edit mode) hay không.
+        // Khi bật edit mode → người dùng có thể thay đổi mã ghế, loại ghế, trạng thái ghế.
         private bool editMode = false;
 
-        // DANH SÁCH GHẾ THEO HÀNG (logic)
+        // Cấu trúc lượng ghế theo từng hàng (logic).
+        // Key = tên hàng (A–F), Value = số lượng ghế trong hàng.
+        // Dùng để vẽ layout tự động và định dạng lại vị trí ghế.
         private Dictionary<string, int> seatMap = new Dictionary<string, int>
         {
             { "A", 15 },
@@ -46,105 +61,136 @@ namespace AdminApp
             { "F", 15 }
         };
 
-        // Danh sách ghế được chọn
+        // Danh sách các ghế đang được chọn ở UI để thao tác (đổi loại, đổi trạng thái, xóa, thêm).
         private readonly List<Guna2Button> selectedSeats = new List<Guna2Button>();
 
-        // ==========================================
-        //  CTOR
-        // ==========================================
+        // Constructor chính của form.
+        // Khởi tạo layout ban đầu, sao chép seatMap để lưu cấu hình gốc
+        // và xác định thư mục lưu file RoomDesign.
         public FormRoomLayoutManagement()
         {
             InitializeComponent();
 
+            // Sao chép map ghế ban đầu để phục hồi khi cần.
             initialSeatMap = seatMap.ToDictionary(x => x.Key, x => x.Value);
 
+            // Lấy đường dẫn đến thư mục RoomDesign (nằm trong solution).
             roomDesignFolder = GetRoomDesignFolder();
         }
 
         private string GetRoomDesignFolder()
         {
-            // Lấy đường dẫn DB từ DatabaseHelper
+            // Lấy connection string từ DatabaseHelper.
+            // Mục đích: dùng DataSource để suy ra thư mục gốc solution.
             var csb = new SqliteConnectionStringBuilder(DatabaseHelper.GetConnectionString());
-            string dbPath = csb.DataSource;                           // ...\SharedDatabase\Cinema.db
-            string dbDir = Path.GetDirectoryName(dbPath);             // ...\SharedDatabase
+
+            // dbPath là đường dẫn đến file CSDL, ví dụ: ...\SharedDatabase\Cinema.db
+            string dbPath = csb.DataSource;
+
+            // Lấy thư mục chứa database, ví dụ: ...\SharedDatabase
+            string dbDir = Path.GetDirectoryName(dbPath);
+
+            // solutionRoot là thư mục cha của SharedDatabase → thư mục gốc solution.
             string solutionRoot = Directory.GetParent(dbDir)?.FullName ?? dbDir;
 
+            // Tạo đường dẫn đến thư mục RoomDesign trong solution.
             string folder = Path.Combine(solutionRoot, "SharedData", "RoomDesign");
+
+            // Nếu thư mục chưa tồn tại → tự tạo.
             Directory.CreateDirectory(folder);
+
             return folder;
         }
 
-        // Form load
+        // Sự kiện load form — mặc định mở phòng 1 và set trạng thái nút Phòng 1.
         private void FormRoomLayoutManagement_Load(object sender, EventArgs e)
         {
+            // Tải layout phòng 1 ngay khi mở form.
             LoadRoom(1);
+
+            // Nếu nút phòng 1 tồn tại (để tránh null) thì set Checked = true.
             if (btnPhong1 != null) btnPhong1.Checked = true;
         }
-
-        // Load room
+                // Load thông tin một phòng chiếu dựa trên roomIndex (1 → 5).
+        // Hàm này sẽ:
+        // 1. Đọc thông tin phòng từ database (loại phòng + số ghế).
+        // 2. Tải file JSON layout ghế (nếu có).
+        // 3. Nếu chưa có file → tự sinh layout mặc định.
+        // 4. Cập nhật UI và reset trạng thái chọn ghế.
         private void LoadRoom(int roomIndex)
         {
             currentRoom = roomIndex;
-            string auditoriumId = $"R0{roomIndex}";
+            string auditoriumId = $"R0{roomIndex}";  // Định danh phòng theo format R01, R02,...
 
-            int seatCount = 0;
-            string auditoriumTypeName = "";
+            int seatCount = 0;               // Biến tạm để lưu số ghế đọc từ DB
+            string auditoriumTypeName = "";  // Lưu kiểu phòng (2D, 3D, Deluxe,...)
 
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
 
-                // 1. Đọc thông tin phòng từ bảng auditorium và auditorium_type 
+                // Lệnh đọc thông tin phòng từ bảng auditorium + auditorium_type.
+                // Mục đích: lấy số ghế + tên định dạng phòng.
                 var cmdInfo = conn.CreateCommand();
                 cmdInfo.CommandText = @"
                 SELECT atype.auditorium_type, a.number_of_seats
                 FROM auditorium a
                 LEFT JOIN auditorium_type atype
                     ON a.auditorium_type_id = atype.auditorium_type_id
-                WHERE a.auditorium_id = $id;
-";
+                WHERE a.auditorium_id = $id;";
                 cmdInfo.Parameters.AddWithValue("$id", auditoriumId);
 
+                // Đọc kết quả từ database.
                 using (var reader = cmdInfo.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        auditoriumTypeName = reader.IsDBNull(0) ? "" : reader.GetString(0); 
-                        seatCount = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);           
+                        // Nếu dữ liệu không null → lấy giá trị.
+                        auditoriumTypeName = reader.IsDBNull(0) ? "" : reader.GetString(0);
+                        seatCount = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);
                     }
                 }
 
+                // Đẩy dữ liệu lên UI (loại phòng + số ghế).
                 txtSoGhe.Text = seatCount.ToString();
                 txtDinhDang.Text = auditoriumTypeName;
 
-                // 2. Load JSON layout ghế
+                // Chuẩn bị đường dẫn file JSON layout của phòng.
                 Directory.CreateDirectory(roomDesignFolder);
                 string jsonFile = Path.Combine(roomDesignFolder, $"Room_{roomIndex}.json");
 
-                panelRoomLayout.Controls.Clear();
-                CreateScreenBar();
-                selectedSeats.Clear();
-                SetEditMode(false);
-                txtMaGhe.Text = "";
+                // Reset giao diện layout.
+                panelRoomLayout.Controls.Clear();   // Xóa hết ghế cũ đang hiển thị
+                CreateScreenBar();                  // Vẽ lại thanh “MÀN HÌNH”
+                selectedSeats.Clear();              // Reset ghế đang chọn
+                SetEditMode(false);                 // Tắt chế độ chỉnh sửa
+                txtMaGhe.Text = "";                 // Xóa ô mã ghế
 
+                // Nếu file JSON tồn tại → đọc layout từ file.
                 if (File.Exists(jsonFile))
                 {
-                    var list = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonFile)) ?? new List<SeatData>();
+                    // Đọc danh sách SeatData từ JSON.
+                    var list = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonFile)) 
+                               ?? new List<SeatData>();
 
+                    // Chuẩn hóa dữ liệu trước khi hiển thị.
                     foreach (var seat in list)
                     {
+                        // Chuẩn hóa loại ghế (Type)
                         string t = (seat.Type ?? "").Trim().ToLower();
                         if (t == "vip" || t == "st02")
                             seat.Type = "VIP";
                         else
                             seat.Type = "Thường";
 
+                        // Chuẩn hóa trạng thái ghế
                         string st = (seat.Status ?? "").Trim().ToLower();
                         if (st == "bảo trì" || st == "bao tri")
                             seat.Status = "Bảo trì";
                         else
                             seat.Status = "Bình thường";
 
+                        // Tạo button ghế và gán vào panel.
                         var btn = CreateSeat(seat);
                         btn.Width = 60;
                         btn.Height = 60;
@@ -152,31 +198,36 @@ namespace AdminApp
                 }
                 else
                 {
+                    // Nếu không có file JSON → tạo layout mặc định bằng code.
                     GenerateSeatLayout();
                 }
 
+                // Sau khi load ghế → cập nhật số ghế.
                 UpdateSeatCountUI();
             }
         }
 
-        // 
-        //  MÀN HÌNH
-        // 
+        // Tạo và hiển thị thanh "MÀN HÌNH" phía trên layout ghế.
+        // Đây chỉ là một panel trang trí, nhưng có thể kéo thả để chỉnh vị trí.
         private void CreateScreenBar()
         {
             var screen = new Guna2Panel
             {
                 Name = "screenBar",
-                FillColor = Color.WhiteSmoke,
+                FillColor = Color.WhiteSmoke,   // Nền xám nhạt
                 BorderRadius = 0,
-                Height = 50
+                Height = 50                     // Chiều cao thanh màn hình
             };
 
+            // Tính toán chiều rộng panel màn hình cho cân đối với layout ghế.
             int width = panelRoomLayout.Width - 150;
             screen.Width = width;
+
+            // Căn giữa panel màn hình.
             screen.Left = (panelRoomLayout.Width - width) / 2;
             screen.Top = 20;
 
+            // Label chữ “MÀN HÌNH”.
             var lbl = new Label
             {
                 Text = "MÀN HÌNH",
@@ -186,61 +237,48 @@ namespace AdminApp
                 AutoSize = true
             };
 
+            // Đưa label vào panel screen.
             screen.Controls.Add(lbl);
+
+            // Căn giữa label trong panel screen.
             lbl.Left = (screen.Width - lbl.Width) / 2;
             lbl.Top = (screen.Height - lbl.Height) / 2;
 
+            // Các event để cho phép kéo thả thanh màn hình.
             screen.MouseDown += Screen_MouseDown;
             screen.MouseMove += Screen_MouseMove;
             screen.MouseUp += Screen_MouseUp;
 
+            // Thêm panel screen vào layout và đưa lên trước cùng.
             panelRoomLayout.Controls.Add(screen);
             screen.BringToFront();
         }
 
-        private void Screen_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left) return;
-
-            draggingScreen = true;
-            dragCursorPoint = Cursor.Position;
-
-            var screen = (Guna2Panel)sender;
-            screenDragStartPoint = screen.Location;
-            screen.FillColor = Color.LightGray;
-        }
-
-        private void Screen_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!draggingScreen) return;
-
-            var diff = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
-            var screen = (Guna2Panel)sender;
-
-            screen.Location = Point.Add(screenDragStartPoint, new Size(diff));
-        }
-
-        private void Screen_MouseUp(object sender, MouseEventArgs e)
-        {
-            draggingScreen = false;
-            var screen = (Guna2Panel)sender;
-            screen.FillColor = Color.WhiteSmoke;
-        }
-
+        // Tạo một ghế (Guna2Button) từ dữ liệu SeatData.
+        // Hàm sẽ:
+        // - Tạo button
+        // - Gán text (A01, A02,...)
+        // - Gán style theo loại ghế
+        // - Gán event (hover, click, drag)
+        // - Thêm lên giao diện
         private Guna2Button CreateSeat(SeatData seat)
         {
             var btn = new Guna2Button
             {
-                Size = new Size(60, 60),
-                Location = new Point(seat.X, seat.Y),
-                Text = $"{seat.Row}{seat.Col:00}",
-                // A01, A02,...
+                Size = new Size(60, 60),             // Kích thước ghế
+                Location = new Point(seat.X, seat.Y), // Tọa độ ghế trong panel
+                Text = $"{seat.Row}{seat.Col:00}",    // Tên ghế như A01, A02
                 Font = new Font("Segoe UI", 8, FontStyle.Bold),
-                Tag = seat
+                Tag = seat                            // Gán SeatData vào Tag để xử lý sau này
             };
 
+            // Áp dụng style đúng theo loại ghế (VIP/Thường) và trạng thái (Bình thường/Bảo trì).
             ApplySeatStyle(btn, seat);
 
+            // Gán sự kiện chuột cho ghế:
+            // Hover → đổi màu
+            // MouseDown / Move / Up → hỗ trợ kéo ghế
+            // Click → chọn ghế
             btn.MouseEnter += Seat_Hover;
             btn.MouseLeave += Seat_Unhover;
             btn.MouseDown += Seat_MouseDown;
@@ -248,56 +286,21 @@ namespace AdminApp
             btn.MouseUp += Seat_MouseUp;
             btn.Click += Seat_Select;
 
+            // Thêm ghế vào panel layout.
             panelRoomLayout.Controls.Add(btn);
             return btn;
         }
-
-        private void Seat_Select(object sender, EventArgs e)
-        {
-            var btn = (Guna2Button)sender;
-            var seat = (SeatData)btn.Tag;
-
-            // Nếu ghế đang được chọn → bỏ chọn
-            if (selectedSeats.Contains(btn))
-            {
-                selectedSeats.Remove(btn);
-                ApplySeatStyle(btn, seat); // trả về style gốc
-                return;
-            }
-
-            // Chưa chọn → Chọn mới
-            selectedSeats.Add(btn);
-
-            // HIGHLIGHT: xanh lá
-            btn.FillColor = Color.FromArgb(35, 150, 62);
-            btn.ForeColor = Color.White;
-            btn.BorderColor = seat.Type == "VIP"
-                                ? Color.FromArgb(255, 193, 7)
-                                : Color.DimGray;
-            btn.BorderThickness = 4;
-        }
-
-        private void SetEditMode(bool enable)
-        {
-            editMode = enable;
-
-            txtMaGhe.ReadOnly = !enable;
-            rdoVip.Enabled = enable;
-            rdoThuong.Enabled = enable;
-            rdoBaoTri.Enabled = enable;
-            rdoBinhThuong.Enabled = enable;
-        }
-
-        // ==========================================
-        //  STYLE GHẾ + HOVER
-        // ==========================================
+                // Áp dụng style cho một ghế dựa theo SeatData:
+        // - Nếu ghế Bảo trì: chuyển màu xám, khóa border.
+        // - Nếu ghế VIP: có viền vàng.
+        // - Nếu ghế Thường: viền xám.
         private void ApplySeatStyle(Guna2Button btn, SeatData seat)
         {
             btn.AutoRoundedCorners = false;
             btn.BorderRadius = 0;
             btn.ForeColor = Color.Black;
 
-            // Status
+            // Nếu ghế đang ở trạng thái Bảo trì → luôn xám và không có viền.
             if (seat.Status == "Bảo trì")
             {
                 btn.FillColor = Color.DimGray;
@@ -306,7 +309,7 @@ namespace AdminApp
                 return;
             }
 
-            // Type
+            // Nếu ghế VIP → border vàng.
             if (seat.Type == "VIP")
             {
                 btn.FillColor = Color.White;
@@ -315,21 +318,25 @@ namespace AdminApp
             }
             else
             {
+                // Ghế thường → border xám.
                 btn.FillColor = Color.White;
                 btn.BorderColor = Color.DimGray;
                 btn.BorderThickness = 4;
             }
-
         }
 
+        // Khi rê chuột vào một ghế chưa được chọn → đổi màu xanh nhạt để tạo hiệu ứng hover.
         private void Seat_Hover(object sender, EventArgs e)
         {
             var btn = (Guna2Button)sender;
+
+            // Không đổi màu nếu đang được chọn.
             if (selectedSeats.Contains(btn)) return;
 
             btn.FillColor = Color.FromArgb(167, 238, 250);
         }
 
+        // Khi rời chuột → trả ghế về đúng màu theo loại/ trạng thái.
         private void Seat_Unhover(object sender, EventArgs e)
         {
             var btn = (Guna2Button)sender;
@@ -339,15 +346,19 @@ namespace AdminApp
             ApplySeatStyle(btn, seat);
         }
 
+        // Căn chỉnh lại toàn bộ vị trí ghế dựa theo seatMap.
+        // Hàm này đảm bảo rằng:
+        // - Các ghế thẳng hàng
+        // - Căn giữa theo chiều ngang
+        // - Ghế giãn tỷ lệ nếu panel thay đổi kích thước
         private void FormatSeatPositions()
         {
             if (panelRoomLayout.Controls.Count == 0)
                 return;
 
-            // PANEL SIZE
             int panelW = panelRoomLayout.Width;
 
-            // Request GHẾ SIZE CƠ BẢN
+            // Kích thước ghế cơ bản.
             int baseSeatW = 60;
             int baseSeatH = 60;
             int baseSpaceX = 10;
@@ -355,31 +366,38 @@ namespace AdminApp
 
             int maxSeats = seatMap.Max(r => r.Value);
 
+            // Tính tổng chiều rộng cần thiết cho hàng ghế trước khi scale.
             int wantedWidth = (maxSeats * baseSeatW) + ((maxSeats - 1) * baseSpaceX);
+
+            // Tính hệ số scale để vừa panel.
             float scale = (float)(panelW - 40) / wantedWidth;
             if (scale > 1) scale = 1;
 
+            // Tính kích thước ghế sau khi scale.
             int seatW = (int)(baseSeatW * scale);
             int seatH = (int)(baseSeatH * scale);
             int spaceX = (int)(baseSpaceX * scale);
             int spaceY = baseSpaceY;
 
-            int startY = 90;
+            int startY = 90; // Khoảng cách từ màn hình đến hàng đầu tiên.
 
+            // Duyệt từng hàng ghế (A, B, C, ...)
             foreach (var row in seatMap)
             {
                 string rowName = row.Key;
                 int count = row.Value;
 
                 int rowWidth = (count * seatW) + ((count - 1) * spaceX);
-                int startX = (panelW - rowWidth) / 2;
+                int startX = (panelW - rowWidth) / 2; // Căn giữa hàng
 
+                // Lấy danh sách ghế thuộc hàng này, sắp theo cột.
                 var rowSeats = panelRoomLayout.Controls
                                 .OfType<Guna2Button>()
                                 .Where(b => b.Tag is SeatData sd && sd.Row == rowName)
                                 .OrderBy(b => ((SeatData)b.Tag).Col)
                                 .ToList();
 
+                // Đặt lại vị trí cho từng ghế
                 foreach (var btn in rowSeats)
                 {
                     var seat = (SeatData)btn.Tag;
@@ -390,6 +408,7 @@ namespace AdminApp
                     btn.Left = startX;
                     btn.Top = startY;
 
+                    // Lưu lại vào SeatData để đảm bảo lưu JSON đúng.
                     seat.X = btn.Left;
                     seat.Y = btn.Top;
 
@@ -400,19 +419,20 @@ namespace AdminApp
             }
         }
 
-        // ==========================================
-        //  DRAG GHẾ
-        // ==========================================
+        // Sự kiện bắt đầu kéo ghế bằng chuột.
+        // Lưu vị trí chuột và vị trí ghế để tính toán khi di chuyển.
         private void Seat_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
 
             draggingSeat = (Guna2Button)sender;
             dragging = true;
-            dragCursorPoint = Cursor.Position;
-            dragStartPoint = draggingSeat.Location;
+
+            dragCursorPoint = Cursor.Position;       // Vị trí chuột
+            dragStartPoint = draggingSeat.Location;  // Vị trí hiện tại của ghế
         }
 
+        // Sự kiện kéo ghế: tính toán vị trí mới dựa trên độ lệch của chuột.
         private void Seat_MouseMove(object sender, MouseEventArgs e)
         {
             if (!dragging) return;
@@ -421,59 +441,77 @@ namespace AdminApp
             draggingSeat.Location = Point.Add(dragStartPoint, new Size(diff));
         }
 
+        // Khi thả chuột sau khi kéo → cập nhật lại X/Y vào SeatData.
         private void Seat_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
             if (draggingSeat == null) return;
 
             var seat = (SeatData)draggingSeat.Tag;
+
             seat.X = draggingSeat.Location.X;
             seat.Y = draggingSeat.Location.Y;
         }
 
-        // 
-        //  TẠO LAYOUT TỰ ĐỘNG
-        // 
+        // Tạo layout ghế tự động khi:
+        // - Phòng chưa có file JSON
+        // - Hoặc người dùng thêm hàng mới
+        // - Hoặc thay đổi seatMap
+        //
+        // Hệ thống sẽ:
+        // - Tính toán vị trí từng ghế theo hàng
+        // - Tự phân loại ghế VIP/thường theo quy ước (A–C là Thường, D–F là VIP)
         private void GenerateSeatLayout()
         {
             panelRoomLayout.Controls.Clear();
             CreateScreenBar();
+
             int panelW = panelRoomLayout.Width;
             int baseSeatW = 60;
             int baseSeatH = 60;
             int baseSpaceX = 12;
             int baseSpaceY = 12;
+
             int maxSeats = seatMap.Max(r => r.Value);
             int wantedWidth = (maxSeats * baseSeatW) + ((maxSeats - 1) * baseSpaceX);
+
             float scale = (float)(panelW - 40) / wantedWidth;
             if (scale > 1) scale = 1;
+
             int seatW = (int)(baseSeatW * scale);
             int seatH = (int)(baseSeatH * scale);
             int spaceX = (int)(baseSpaceX * scale);
             int spaceY = baseSpaceY;
+
             int startY = 90;
+
             foreach (var row in seatMap)
             {
                 string rowName = row.Key;
                 int count = row.Value;
+
                 int rowWidth = (count * seatW) + ((count - 1) * spaceX);
                 int startX = (panelW - rowWidth) / 2;
 
                 for (int col = 1; col <= count; col++)
                 {
                     string displayId = $"{rowName}{col:00}";
+
                     var seat = new SeatData
                     {
                         SeatId = displayId,
                         Row = rowName,
                         Col = col,
-                        Type = (rowName == "A" || rowName == "B" || rowName == "C") ? "Thường" : "VIP",
+                        Type = (rowName == "A" || rowName == "B" || rowName == "C")
+                                ? "Thường"
+                                : "VIP",
                         Status = "Bình thường",
                         X = startX,
                         Y = startY
                     };
 
                     var btn = CreateSeat(seat);
+
                     btn.Width = seatW;
                     btn.Height = seatH;
 
@@ -482,12 +520,9 @@ namespace AdminApp
 
                 startY += seatH + spaceY;
             }
-
         }
-
-        // ==========================================
-        //  HỖ TRỢ: CẬP NHẬT SỐ GHẾ UI
-        // ==========================================
+                // Hàm này đếm số ghế hiện có trong panel và cập nhật lên textbox.
+        // Việc đếm dựa trên số lượng nút Guna2Button có gắn Tag là SeatData.
         private void UpdateSeatCountUI()
         {
             int count = panelRoomLayout.Controls
@@ -496,19 +531,24 @@ namespace AdminApp
             txtSoGhe.Text = count.ToString();
         }
 
-        // ==========================================
-        //  THÊM / XOÁ HÀNG / GHẾ
-        // ==========================================
+
+        // Khi người dùng bấm thêm hàng, hệ thống sẽ tự sinh thêm một hàng mới.
+        // Hàng mới dựa trên chữ cái cuối cùng trong seatMap. Ví dụ F → G.
+        // Số ghế mặc định của hàng mới là 15.
         private void btnThemHang_Click(object sender, EventArgs e)
         {
             char last = seatMap.Keys.Last()[0];
             char next = (char)(last + 1);
+
             seatMap.Add(next.ToString(), 15);
 
             GenerateSeatLayout();
             UpdateSeatCountUI();
         }
 
+
+        // Khi thêm ghế trong một hàng, hệ thống yêu cầu phải chọn một ghế làm mốc.
+        // Ghế mới sẽ được thêm vào cuối hàng dựa trên tọa độ ghế cuối cùng hiện tại.
         private void btnThemGhe_Click(object sender, EventArgs e)
         {
             if (selectedSeats.Count == 0)
@@ -524,10 +564,12 @@ namespace AdminApp
             var seat = (SeatData)firstBtn.Tag;
             string rowName = seat.Row;
 
+            // Lấy số ghế hiện tại của hàng
             int currentCount = seatMap[rowName];
             int newCol = currentCount + 1;
             seatMap[rowName] = newCol;
 
+            // Xác định vị trí ghế cuối cùng trong hàng để đặt ghế mới bên cạnh
             int lastX = 0;
             int lastY = seat.Y;
 
@@ -551,12 +593,13 @@ namespace AdminApp
 
             string displayId = $"{rowName}{newCol:00}";
 
+            // Tạo ghế mới theo mốc vừa tìm được
             var newSeat = new SeatData
             {
                 SeatId = displayId,
                 Row = rowName,
                 Col = newCol,
-                Type = seat.Type,          // Thường / VIP
+                Type = seat.Type,
                 Status = "Bình thường",
                 X = lastX + seatW + spaceX,
                 Y = lastY
@@ -566,6 +609,9 @@ namespace AdminApp
             UpdateSeatCountUI();
         }
 
+
+        // Khi xóa ghế, hệ thống sẽ xóa toàn bộ ghế đang nằm trong danh sách selectedSeats.
+        // Người dùng phải xác nhận trước khi xóa.
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (selectedSeats.Count == 0)
@@ -593,6 +639,9 @@ namespace AdminApp
             UpdateSeatCountUI();
         }
 
+
+        // Xóa toàn bộ ghế trong một hàng dựa trên ghế được chọn làm mốc.
+        // seatMap cũng phải xóa hàng đó để tránh chênh lệch dữ liệu.
         private void btnXoaHang_Click(object sender, EventArgs e)
         {
             if (selectedSeats.Count == 0)
@@ -632,34 +681,40 @@ namespace AdminApp
             UpdateSeatCountUI();
         }
 
+
+        // Quy trình lưu sơ đồ ghế gồm:
+        // 1. Thu thập toàn bộ dữ liệu ghế đang hiển thị trong panelRoomLayout.
+        // 2. Ghi lại dưới dạng JSON để khi mở lại form có thể tái tạo layout tương tự.
+        // 3. Xóa dữ liệu ghế cũ trong database và chèn dữ liệu mới hoàn toàn.
+        // 4. Cập nhật lại tổng số ghế của phòng trong bảng auditorium.
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string auditoriumId = $"R0{currentRoom}";
 
-            // 1) Thu ghế từ UI
+            // Lấy dữ liệu ghế từ giao 
             var seats = new List<SeatData>();
 
             foreach (Control c in panelRoomLayout.Controls)
             {
                 if (c is Guna2Button btn && btn.Tag is SeatData seat)
                 {
+                    // Lưu lại tọa độ hiện tại
                     seat.X = btn.Left;
                     seat.Y = btn.Top;
 
-                    // Chuẩn hoá type
+                    // Đồng bộ kiểu ghế
                     seat.Type = seat.Type.Trim().ToLower() == "vip" ? "VIP" : "Thường";
 
-                    // Chuẩn hoá status (bảo trì / bình thường)
+                    // Đồng bộ trạng thái ghế
                     seat.Status = seat.Status.Trim().ToLower() == "bảo trì" ? "Bảo trì" : "Bình thường";
 
-                    // Chuẩn SeatId A01
                     seat.SeatId = $"{seat.Row}{seat.Col:00}";
 
                     seats.Add(seat);
                 }
             }
 
-            // 2) Lưu JSON
+            // Lưu JSON để phục vụ việc load lại UI
             Directory.CreateDirectory(roomDesignFolder);
             string jsonPath = Path.Combine(roomDesignFolder, $"Room_{currentRoom}.json");
             File.WriteAllText(jsonPath, JsonConvert.SerializeObject(seats, Formatting.Indented));
@@ -669,14 +724,14 @@ namespace AdminApp
                 conn.Open();
                 using (var tran = conn.BeginTransaction())
                 {
-                    // 3) XÓA GHẾ CŨ TRONG DB (để insert mới)
+                    // Xóa ghế cũ trong database
                     var delSeat = conn.CreateCommand();
                     delSeat.Transaction = tran;
                     delSeat.CommandText = "DELETE FROM seat WHERE auditorium_id = $aud";
                     delSeat.Parameters.AddWithValue("$aud", auditoriumId);
                     delSeat.ExecuteNonQuery();
 
-                    // 4) XÓA seat_for_showtime của ghế bị xoá 
+                    // Đồng thời xóa liên kết ghế - suất chiếu
                     var delSfs = conn.CreateCommand();
                     delSfs.Transaction = tran;
                     delSfs.CommandText =
@@ -684,11 +739,11 @@ namespace AdminApp
                     delSfs.Parameters.AddWithValue("$aud", auditoriumId);
                     delSfs.ExecuteNonQuery();
 
-                    // 5) Insert GHẾ MỚI
+                    // Chèn lại toàn bộ ghế mới
                     foreach (var s in seats)
                     {
-                        string logicalId = $"{s.Row}{s.Col:00}";       // A01
-                        string dbSeatId = $"{logicalId}{auditoriumId}"; // A01R01
+                        string logicalId = $"{s.Row}{s.Col:00}";
+                        string dbSeatId = $"{logicalId}{auditoriumId}";
 
                         string typeId = s.Type == "VIP" ? "ST02" : "ST01";
                         int price = s.Type == "VIP" ? 90000 : 70000;
@@ -696,28 +751,28 @@ namespace AdminApp
                         var cmd = conn.CreateCommand();
                         cmd.Transaction = tran;
                         cmd.CommandText = @"
-                    INSERT INTO seat(seat_id, seat_type_id, auditorium_id, location, status, per_seat_ticket_price)
-                    VALUES ($id, $type, $aud, $loc, $status, $price)
-                ";
+                            INSERT INTO seat(seat_id, seat_type_id, auditorium_id, location, status, per_seat_ticket_price)
+                            VALUES ($id, $type, $aud, $loc, $status, $price)
+                        ";
 
                         cmd.Parameters.AddWithValue("$id", dbSeatId);
                         cmd.Parameters.AddWithValue("$type", typeId);
                         cmd.Parameters.AddWithValue("$aud", auditoriumId);
                         cmd.Parameters.AddWithValue("$loc", logicalId);
-                        cmd.Parameters.AddWithValue("$status", s.Status); // Bình thường / Bảo trì
+                        cmd.Parameters.AddWithValue("$status", s.Status);
                         cmd.Parameters.AddWithValue("$price", price);
 
                         cmd.ExecuteNonQuery();
                     }
 
-                    // 6) Update số ghế của phòng
+                    // Cập nhật lại số ghế trong bảng auditorium
                     var updateAud = conn.CreateCommand();
                     updateAud.Transaction = tran;
                     updateAud.CommandText = @"
-                UPDATE auditorium 
-                SET number_of_seats = $count 
-                WHERE auditorium_id = $aud
-            ";
+                        UPDATE auditorium 
+                        SET number_of_seats = $count 
+                        WHERE auditorium_id = $aud
+                    ";
                     updateAud.Parameters.AddWithValue("$count", seats.Count);
                     updateAud.Parameters.AddWithValue("$aud", auditoriumId);
                     updateAud.ExecuteNonQuery();
@@ -731,15 +786,17 @@ namespace AdminApp
             MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        // ==========================================
-        //  NÚT KHÁC
-        // ==========================================
+                // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
+        // Thường dùng khi thay đổi kích thước form hoặc muốn căn lại layout cho đều.
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             FormatSeatPositions();
         }
 
+
+        // Mở chế độ chỉnh sửa thông tin ghế.
+        // Khi enable, các radio button và textbox sẽ được bật để cho phép thay đổi.
+        // Nếu chỉ chọn một ghế thì điền thông tin ghế đó vào giao diện chỉnh sửa.
         private void guna2Button2_Click(object sender, EventArgs e)
         {
             if (selectedSeats.Count == 0)
@@ -767,6 +824,10 @@ namespace AdminApp
             }
         }
 
+
+        // Cập nhật mã ghế khi chỉnh sửa bằng tay tại ô txtMaGhe.
+        // Chỉ cho phép chỉnh khi đang ở chế độ edit và chỉ chọn đúng 1 ghế.
+        // Hệ thống sẽ tự định dạng lại thành dạng chuẩn A01, B05,...
         private void txtMaGhe_TextChanged(object sender, EventArgs e)
         {
             if (!editMode || selectedSeats.Count != 1)
@@ -777,7 +838,7 @@ namespace AdminApp
 
             string input = txtMaGhe.Text.Trim().ToUpper();
 
-            // Tách Row (A,B,C...) và số ghế
+            // Tách chữ cái (hàng) và số ghế
             if (input.Length >= 2)
             {
                 string row = new string(input.TakeWhile(char.IsLetter).ToArray());
@@ -785,7 +846,7 @@ namespace AdminApp
 
                 if (int.TryParse(numStr, out int num))
                 {
-                    input = $"{row}{num:00}";   // Format thành A01
+                    input = $"{row}{num:00}";
                 }
             }
 
@@ -793,6 +854,9 @@ namespace AdminApp
             btn.Text = input;
         }
 
+
+        // Khi đổi loại ghế sang VIP, áp dụng trực tiếp cho tất cả ghế được chọn.
+        // Chỉ có tác dụng khi đang bật chế độ edit. Dữ liệu Tag của ghế sẽ được cập nhật ngay.
         private void rdoVip_CheckedChanged(object sender, EventArgs e)
         {
             if (!editMode || !rdoVip.Checked || selectedSeats.Count == 0)
@@ -806,6 +870,8 @@ namespace AdminApp
             }
         }
 
+
+        // Tương tự phần VIP, nhưng đổi sang loại Thường.
         private void rdoThuong_CheckedChanged(object sender, EventArgs e)
         {
             if (!editMode || !rdoThuong.Checked || selectedSeats.Count == 0)
@@ -819,6 +885,11 @@ namespace AdminApp
             }
         }
 
+
+        // Khi đổi trạng thái ghế về "Bình thường"
+        // Hệ thống cần cập nhật cả dữ liệu trong DB:
+        // - Update bảng seat
+        // - Update bảng seat_for_showtime về trạng thái "Trống" cho tất cả suất chiếu của phòng
         private void rdoBinhThuong_CheckedChanged(object sender, EventArgs e)
         {
             if (!editMode || !rdoBinhThuong.Checked || selectedSeats.Count == 0)
@@ -831,7 +902,7 @@ namespace AdminApp
                 conn.Open();
                 using (var tran = conn.BeginTransaction())
                 {
-                    // Lấy danh sách showtime thuộc phòng
+                    // Lấy danh sách showtime của phòng để đồng bộ trạng thái ghế
                     var stCmd = conn.CreateCommand();
                     stCmd.Transaction = tran;
                     stCmd.CommandText = "SELECT showtime_id FROM showtime WHERE auditorium_id = $room";
@@ -849,7 +920,7 @@ namespace AdminApp
 
                         string seatId = $"{seat.SeatId}{auditoriumId}";
 
-                        // Update bảng Seat
+                        // Cập nhật trạng thái ghế trong bảng seat
                         var upSeat = conn.CreateCommand();
                         upSeat.Transaction = tran;
                         upSeat.CommandText =
@@ -857,22 +928,6 @@ namespace AdminApp
                         upSeat.Parameters.AddWithValue("$id", seatId);
                         upSeat.ExecuteNonQuery();
 
-                        // GHẾ thường → seat_for_showtime = Trống
-                        foreach (var show in showtimes)
-                        {
-                            var upSfs = conn.CreateCommand();
-                            upSfs.Transaction = tran;
-                            upSfs.CommandText =
-                            @"
-                            INSERT INTO seat_for_showtime(seat_id, showtime_id, status)
-                            VALUES ($sid, $stid, 'Trống')
-                            ON CONFLICT(seat_id, showtime_id)
-                            DO UPDATE SET status = 'Trống';
-                            ";
-                            upSfs.Parameters.AddWithValue("$sid", seatId);
-                            upSfs.Parameters.AddWithValue("$stid", show);
-                            upSfs.ExecuteNonQuery();
-                        }
                     }
 
                     tran.Commit();
@@ -880,6 +935,11 @@ namespace AdminApp
             }
         }
 
+
+        // Khi đổi trạng thái ghế sang "Bảo trì"
+        // Hệ thống thực hiện quy trình tương tự Bình thường:
+        // - Cập nhật bảng seat
+        // - Cập nhật bảng seat_for_showtime sang "Bảo trì" cho mọi suất chiếu
         private void rdoBaoTri_CheckedChanged(object sender, EventArgs e)
         {
             if (!editMode || !rdoBaoTri.Checked || selectedSeats.Count == 0)
@@ -892,7 +952,6 @@ namespace AdminApp
                 conn.Open();
                 using (var tran = conn.BeginTransaction())
                 {
-                    // Lấy danh sách showtime thuộc phòng
                     var stCmd = conn.CreateCommand();
                     stCmd.Transaction = tran;
                     stCmd.CommandText = "SELECT showtime_id FROM showtime WHERE auditorium_id = $room";
@@ -910,7 +969,7 @@ namespace AdminApp
 
                         string seatId = $"{seat.SeatId}{auditoriumId}";
 
-                        // Update bảng Seat
+                        // Update bảng seat
                         var upSeat = conn.CreateCommand();
                         upSeat.Transaction = tran;
                         upSeat.CommandText =
@@ -918,7 +977,7 @@ namespace AdminApp
                         upSeat.Parameters.AddWithValue("$id", seatId);
                         upSeat.ExecuteNonQuery();
 
-                        // Update seat_for_showtime = Bảo trì (overwrite)
+                        // Đồng bộ tất cả seat_for_showtime
                         foreach (var show in showtimes)
                         {
                             var upSfs = conn.CreateCommand();
@@ -941,6 +1000,8 @@ namespace AdminApp
             }
         }
 
+
+        // Khôi phục dữ liệu phòng về trạng thái ban đầu bằng cách load lại JSON cũ.
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
             LoadRoom(currentRoom);
@@ -950,9 +1011,8 @@ namespace AdminApp
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // ==========================================
-        //  CHỌN PHÒNG
-        // ==========================================
+
+        // Chuyển đổi giữa các phòng chiếu bằng cách gọi LoadRoom.
         private void btnPhong1_CheckedChanged(object sender, EventArgs e)
         {
             if (btnPhong1.Checked) LoadRoom(1);
@@ -979,3 +1039,6 @@ namespace AdminApp
         }
     }
 }
+
+
+

@@ -416,12 +416,12 @@
             btnDichVu.FillColor = Color.Silver;
             btnDichVu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDichVu.ForeColor = Color.White;
-            btnDichVu.Location = new Point(1201, 44);
+            btnDichVu.Location = new Point(1193, 44);
             btnDichVu.Name = "btnDichVu";
             btnDichVu.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnDichVu.Size = new Size(146, 44);
+            btnDichVu.Size = new Size(161, 44);
             btnDichVu.TabIndex = 56;
-            btnDichVu.Text = "DỊCH VỤ";
+            btnDichVu.Text = "PHÒNG CHIẾU";
             btnDichVu.Click += btnPhongChieu_Click;
             // 
             // btnPhim

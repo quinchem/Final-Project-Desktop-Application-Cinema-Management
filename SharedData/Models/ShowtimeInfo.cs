@@ -20,7 +20,7 @@ namespace SharedData.Models
         public string end_time { get; set; }
         public int duration { get; set; }
 
-        // ⭐ Chuẩn hóa ngày – giờ
+        // Chuẩn hóa ngày – giờ
         public DateTime ParsedDate
         {
             get
@@ -87,5 +87,4 @@ namespace SharedData.Models
                 _ => ""
             };
     }
-
 }

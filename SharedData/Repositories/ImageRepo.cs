@@ -9,16 +9,12 @@ namespace SharedData.Repositories
 {
     public class ImageRepo
     {
-        /// <summary>
-        /// Lưu ảnh cho staff (ghi đè nếu đã tồn tại)
-        /// </summary>
+        //Lưu ảnh cho staff (ghi đè nếu đã tồn tại)
         public bool SaveStaffImage(string staffId, byte[] imageBytes)
         {
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
-
-                // 1️⃣ Xóa ảnh cũ
                 string deleteSql = @"
                     DELETE FROM ImageStore
                     WHERE related_id = @id AND image_type = 'staff';
@@ -30,7 +26,6 @@ namespace SharedData.Repositories
                     deleteCmd.ExecuteNonQuery();
                 }
 
-                // 2️⃣ Insert ảnh mới
                 string insertSql = @"
                     INSERT INTO ImageStore (related_id, image_type, image_data)
                     VALUES (@id, 'staff', @img);
@@ -46,9 +41,7 @@ namespace SharedData.Repositories
             }
         }
 
-        /// <summary>
-        /// Lấy ảnh staff
-        /// </summary>
+        //Lấy ảnh staff theo staff_id
         public byte[] GetStaffImage(string staffId)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -76,8 +69,7 @@ namespace SharedData.Repositories
             }
         }
 
-        /// Lưu Avatar Customer
-        /// </summary>
+        //Lưu Avatar Customer
         public bool SaveCustomerAvatar(string customerId, byte[] imageBytes)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -103,9 +95,7 @@ namespace SharedData.Repositories
             }
         }
 
-        /// <summary>
-        /// Lấy Avatar Customer
-        /// </summary>
+        // Lấy Avatar Customer
         public byte[] GetCustomerAvatar(string customerId)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -124,9 +114,7 @@ namespace SharedData.Repositories
             }
         }
 
-        /// <summary>
-        /// Xóa ảnh staff
-        /// </summary>
+        // Xóa ảnh staff
         public bool DeleteStaffImage(string staffId)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -146,9 +134,7 @@ namespace SharedData.Repositories
             }
         }
 
-        /// <summary>
-        /// Lưu poster phim (ghi đè nếu đã tồn tại)
-        /// </summary>
+        // Lưu poster phim (ghi đè nếu đã tồn tại)
         public bool SaveMoviePoster(string movieId, byte[] imageBytes)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -180,9 +166,7 @@ namespace SharedData.Repositories
             }
         }
 
-        /// <summary>
         /// Lấy poster phim
-        /// </summary>
         public byte[] GetMoviePoster(string movieId)
         {
             using (var conn = DatabaseHelper.GetConnection())

@@ -32,10 +32,10 @@ namespace AdminApp
 
         private void btnGui_Click(object sender, EventArgs e)
         {
-            // 1. Lấy email từ TextBox (Giả sử tên control là txtEmail)
+            // Lấy email từ TextBox 
             string emailInput = txtEmail.Text.Trim();
 
-            // 2. Kiểm tra rỗng
+            // Kiểm tra rỗng
             if (string.IsNullOrEmpty(emailInput))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -47,8 +47,7 @@ namespace AdminApp
 
             try
             {
-                // 3. Kiểm tra email có tồn tại trong Database không
-                // Hàm CheckEmailExist cần trả về true nếu tìm thấy, false nếu không
+                // Kiểm tra email có tồn tại trong Database không
                 bool isExist = _staffRepo.CheckEmailExist(emailInput);
 
                 if (!isExist)
@@ -64,8 +63,6 @@ namespace AdminApp
                     SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
                     player.Play();
                     MessageBox.Show("Email hợp lệ! Vui lòng đặt lại mật khẩu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // 4. Mở form Reset Password
                     FormResetPassword resetForm = new FormResetPassword(parentForm, emailInput);
                     parentForm.OpenChildForm(resetForm);
                 }
@@ -79,12 +76,10 @@ namespace AdminApp
         }
         
 
-        // QUAY LẠI LOGIN
+        // Giúp quay lại login
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
             this.Close();
-
-            // Hiện lại panel đăng nhập
             parentForm.ShowLoginPanel();
         }
     }

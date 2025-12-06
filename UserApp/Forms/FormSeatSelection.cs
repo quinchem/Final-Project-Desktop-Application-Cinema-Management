@@ -17,22 +17,28 @@ namespace UserApp
     {
         private UserMainForm parentForm;
 
-        // Khai báo thông tin suất chiếu và sơ đồ ghế
+        // Lưu thông tin suất chiếu và phòng chiếu được truyền từ màn hình trước
         private ShowtimeInfo _showtime;
         private string _auditoriumId;
         private string _showtimeId;
+
+        // Repository dùng để lấy hình ảnh poster phim từ database
         private ImageRepo _imageRepo = new ImageRepo();
+
+        // Folder chứa file JSON layout phòng được tạo bởi bên ứng dụng của Admin
         private string _roomJsonFolder;
 
-        // ====== DANH SÁCH GHẾ ======
+        // Danh sách tất cả ghế sau khi load layout và dữ liệu database
         private List<SeatUser> _allSeats = new();
+
+        // Danh sách ghế mà người dùng đang chọn
         private List<SeatUser> _selectedSeats = new();
 
-        // ====== HẸN GIỜ CHỌN GHẾ (5 phút) ======
+        // Bộ đếm giữ ghế 10 phút
         private int countdown = 600;
+
+        // Cờ để xác định timer có đang chạy hay không
         private bool isCounting = false;
-
-
 
         // Các constructor
         public FormSeatSelection()
@@ -49,6 +55,8 @@ namespace UserApp
             _auditoriumId = showtime.auditorium_id;
             _showtimeId = showtime.showtime_id;
         }
+
+        // Khi tạo form, hệ thống tự xác định đường dẫn folder lưu layout phòng
         private string GetRoomFolder()
         {
             var csb = new SqliteConnectionStringBuilder(DatabaseHelper.GetConnectionString());
@@ -57,6 +65,8 @@ namespace UserApp
             return Path.Combine(root, "SharedData", "RoomDesign");
         }
 
+        
+        // Khi load form: hiển thị thông tin suất chiếu và load sơ đồ ghế
         private void FormSeatSelection_Load(object sender, EventArgs e)
         {
             if (_showtime == null ||
@@ -77,7 +87,8 @@ namespace UserApp
             countdown = 600;
             lblTime.Text = "10:00";
         }
-
+        
+        // Load hình poster phim từ database
         private void LoadPoster()
         {
             try
@@ -104,7 +115,7 @@ namespace UserApp
                 MessageBox.Show("Lỗi khi load poster: " + ex.Message);
             }
         }
-
+        // Load sơ đồ phòng
         private void LoadRoom(string auditoriumId, string showtimeId)
         {
             _allSeats.Clear();
@@ -114,7 +125,7 @@ namespace UserApp
             UpdateTotal();
             UpdateSelectedSeatLabel();
 
-            //  1) Load file JSON
+            // Tìm file JSON layout phòng theo số phòng
             string digits = new string(auditoriumId.Where(char.IsDigit).ToArray());
             int roomNumber = int.Parse(digits);
             string jsonPath = Path.Combine(_roomJsonFolder, $"Room_{roomNumber}.json");
@@ -127,9 +138,10 @@ namespace UserApp
                 return;
             }
 
+            // Đọc tọa độ ghế (X,Y) từ file JSON 
             var jsonSeats = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonPath));
 
-            // 2) Load ghế từ bảng seat
+             // Lấy loại ghế, trạng thái, giá từ database
             var dbSeats = new Dictionary<string, (string type, string status, double price)>();
 
             using (var conn = DatabaseHelper.GetConnection())
@@ -155,11 +167,9 @@ namespace UserApp
                 }
             }
 
-            // 3) Load ghế FULL theo suất chiếu 
+            // Lấy danh sách ghế FULL (đã có người đặt)
             var fullSeats = SeatForShowtimeRepo.GetSeatStatus(showtimeId);
-            // chỉ chứa FULL
 
-            // 4) Merge
             foreach (var s in jsonSeats)
             {
                 string logical = $"{s.Row}{s.Col:00}";
@@ -178,7 +188,7 @@ namespace UserApp
                 else if (fullSeats.ContainsKey(fullId))
                     finalStatus = "Full";
 
-                // Còn lại là TRỐNG
+                // Còn lại là trống
                 else
                     finalStatus = "Trống";
 
@@ -199,9 +209,7 @@ namespace UserApp
             }
         }
 
-        // ===================================================
-        // GHẾ BUTTON
-        // ===================================================
+       // Tạo nút ghế hiển thị trên giao diện
         private Guna2Button CreateSeatButton(SeatUser seat)
         {
             var btn = new Guna2Button();
@@ -216,8 +224,9 @@ namespace UserApp
 
             return btn;
         }
-
-        private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
+        
+        // Định dạng màu ghế theo loại và trạng thái
+       private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
         {
             if (seat.Status == "Bảo trì" )
             {
@@ -235,16 +244,14 @@ namespace UserApp
                 btn.Enabled = false;
                 return;
             }
-
+        
             btn.FillColor = Color.White;
             btn.ForeColor = Color.Black;
             btn.BorderColor = seat.Type == "VIP" ? Color.Gold : Color.DimGray;
             btn.BorderThickness = 3;
         }
 
-        // ===================================================
-        // CHỌN GHẾ
-        // ===================================================
+        // Hàm xử lý sự kiện khi user click chọn ghế
         private void Seat_Click(object sender, EventArgs e)
         {
             var btn = (Guna2Button)sender;
@@ -267,7 +274,7 @@ namespace UserApp
             UpdateTotal();
             UpdateSelectedSeatLabel();
 
-            // Bắt đầu đếm ngược 5 phút lần đầu chọn
+            // Bắt đầu đếm thời gian giữ ghế khi chọn ghế đầu tiên
             if (!isCounting && _selectedSeats.Count > 0)
             {
                 countdown = 600;
@@ -284,6 +291,7 @@ namespace UserApp
             }
         }
 
+        // Cập nhật nhãn ghế đang chọn
         private void UpdateSelectedSeatLabel()
         {
             if (_selectedSeats.Count == 0)
@@ -300,18 +308,14 @@ namespace UserApp
             lblGheDaChon.Text = string.Join(", ", list);
         }
 
-        // ===================================================
-        // TÍNH TIỀN
-        // ===================================================
+        // Tính tổng tiền ghế đang chọn
         private void UpdateTotal()
         {
             double total = _selectedSeats.Sum(s => s.Price);
             lblSotien.Text = total.ToString("N0") + " VND";
         }
 
-        // ===================================================
-        // MÀN HÌNH
-        // ===================================================
+        // Tạo thanh “MÀN HÌNH” để định hướng người xem
         private void CreateScreenBar()
         {
             var p = new Guna2Panel();
@@ -332,6 +336,7 @@ namespace UserApp
             panelRoom.Controls.Add(p);
         }
 
+        // Chuyển sang form thanh toán
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
             if (_selectedSeats.Count == 0)
@@ -353,7 +358,8 @@ namespace UserApp
                 parent.OpenChildForm(new FormPayment1(_showtime, _selectedSeats, parent.CurrentUser));
             }
         }
-
+        
+        // Timer giữ ghế
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (countdown <= 0)

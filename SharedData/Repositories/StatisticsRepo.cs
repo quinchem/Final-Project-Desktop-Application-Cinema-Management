@@ -13,6 +13,8 @@ namespace SharedData.Repositories
 
     public class StatisticRepo
     {
+        // Các hàm sử dụng cho Form Statistic3: Thống kê về phim
+        // Hàm truy vấn KPI doanh thu bao gồm: tổng doanh thu, tổng số vé doanh thu trung bình theo phim (movie_id), sử dụng bảng bill và bảng movie
         public (decimal totalRevenue, int totalTickets, decimal avgRevenuePerMovie) GetRevenueKPI(DateTime from, DateTime to, string movieTitle = null)
         {
             using var conn = DatabaseHelper.GetConnection();
@@ -49,6 +51,8 @@ namespace SharedData.Repositories
             }
             return (0, 0, 0);
         }
+
+        // Hàm truy vấn doanh thu theo từng ngày, sử dụng bảng bill và movie, showtime
         public List<(string date, decimal revenue)> GetRevenueByDay(DateTime fromDate, DateTime toDate, string filterMovie = null)
         {
             var result = new List<(string date, decimal revenue)>();
@@ -65,7 +69,6 @@ namespace SharedData.Repositories
         JOIN movie m ON s.movie_id = m.movie_id
         WHERE substr(b.bill_date,7,4)||'-'||substr(b.bill_date,4,2)||'-'||substr(b.bill_date,1,2) BETWEEN @from AND @to
     ";
-
             if (!string.IsNullOrEmpty(filterMovie))
                 sql += " AND m.title = @filterMovie";
 
@@ -76,7 +79,6 @@ namespace SharedData.Repositories
             cmd.Parameters.AddWithValue("@to", toDate.ToString("yyyy-MM-dd"));
             if (!string.IsNullOrEmpty(filterMovie))
                 cmd.Parameters.AddWithValue("@filterMovie", filterMovie);
-
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -84,10 +86,10 @@ namespace SharedData.Repositories
                 decimal revenue = reader.GetDecimal(1);
                 result.Add((date, revenue));
             }
-
             return result;
         }
 
+        // Hàm truy vấn phim có doanh thu cao nhất trong khoản thời gian, sử dụng bảng bill, showtime, movie
         public (string movieTitle, decimal totalRevenue, int totalTickets) GetTopMovie(DateTime fromDate, DateTime toDate, string filterMovie = null)
         {
             using var conn = DatabaseHelper.GetConnection();
@@ -119,6 +121,7 @@ namespace SharedData.Repositories
             return ("N/A", 0, 0);
         }
 
+        //Hàm lấy danh sách tên những phim đang có trạng thái "Đang chiếu" (để đưa vào ComboBox), sử dụng bảng movie.
         public List<string> GetMoviesCurrentlyShowing()
         {
             var list = new List<string>();
@@ -132,6 +135,7 @@ namespace SharedData.Repositories
             return list;
         }
 
+        // Lấy doanh thu theo từng phim để vẽ biểu đồ Pie Chart, sử dụng bảng bill, showtime, movie
         public List<(string movieTitle, decimal total)> GetRevenueForPie(DateTime from, DateTime to, string selectedMovie = null)
         {
             var list = new List<(string, decimal)>();
@@ -163,6 +167,7 @@ namespace SharedData.Repositories
             return list;
         }
 
+        // Hàm lấy dữ liệu doanh thu theo từng phim để vẽ Bar Chart, sử dụng bảng bill. showtime, movie
         public List<(string movieTitle, decimal total)> GetRevenueBar(DateTime from, DateTime to, string movieTitle = null)
         {
             var list = new List<(string, decimal)>();
@@ -194,18 +199,11 @@ namespace SharedData.Repositories
             return list;
         }
 
-
-
-        // ============================================================
-        // PHẦN CHO FORM STATISTICS 4 - THỐNG KÊ PHÒNG CHIẾU
-        // ============================================================
-
-        // 1. Lấy danh sách tên phòng (để hiển thị vào ComboBox)
-        // Helper: Format ngày để so sánh trong SQLite
-        // Chuyển tham số DateTime từ C# sang string yyyy-MM-dd
+        // Các hàm sử dụng cho form statistics4: Thống kê phòng chiếu
+        
         private string ToSqlDate(DateTime dt) => dt.ToString("yyyy-MM-dd");
 
-        // 1. Lấy danh sách tên phòng
+        // Hàm lấy danh sách tên phòng (để hiển thị vào ComboBox)
         public List<string> GetRooms()
         {
             var list = new List<string>();
@@ -219,12 +217,7 @@ namespace SharedData.Repositories
             return list;
         }
 
-        // ================= KPI OPERATIONAL (Dựa trên Show Date) =================
-
-        // KPI 1: TỔNG SỐ PHÒNG HOẠT ĐỘNG
-        // Logic: Chỉ lọc theo khoảng thời gian (FROM - TO), KHÔNG bị ảnh hưởng bởi ComboBox chọn phòng.
-        // Mục đích: Để xem tổng quan rạp có bao nhiêu phòng đang chạy phim trong ngày đó.
-        // ============================================================
+        // Hàm lấy KPI 1: truy xuất tổng quan rạp có bao nhiêu phòng đang có suất chiếu, sử dụng bảng showtime
         public int GetActiveRoomCount(DateTime from, DateTime to)
         {
             var rooms = new HashSet<string>();
@@ -237,7 +230,6 @@ namespace SharedData.Repositories
         SELECT show_date, auditorium_id
         FROM showtime
     ";
-
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -249,15 +241,10 @@ namespace SharedData.Repositories
                 if (IsValidDate(dateStr, from, to) && !string.IsNullOrEmpty(roomId))
                     rooms.Add(roomId);
             }
-
             return rooms.Count;
         }
 
-
-        // ============================================================
-        // KPI 2: TỔNG SỐ SUẤT CHIẾU
-        // Logic: Lọc theo khoảng thời gian VÀ lọc theo Phòng (nếu người dùng chọn cụ thể).
-        // ============================================================
+        // Hàm lấy KPI 2: truy xuất tổng số suất chiếu, sử dụng bảng showtime và auditorium
         public int GetTotalShowtimes(DateTime from, DateTime to, string roomFilter = null)
         {
             int count = 0;
@@ -288,11 +275,10 @@ namespace SharedData.Repositories
                         count++;
                 }
             }
-
             return count;
         }
 
-        // --- Helper: Hàm kiểm tra ngày tháng dùng chung ---
+        //Hàm để huẩn hóa chuỗi ngày trong CSDL rồi so sánh với khoảng thời gian.
         private bool IsValidDate(string dateStr, DateTime from, DateTime to)
         {
             // Định dạng ngày tháng khớp với dữ liệu bạn cung cấp (dd/MM/yyyy)
@@ -306,24 +292,15 @@ namespace SharedData.Repositories
             return false;
         }
 
-        // ... (Giữ nguyên các hàm Chart và GetTopRevenueRoom khác)
-    
-
-
-        // ================= KPI REVENUE (Dựa trên Bill Date) =================
-
-        // 5. KPI: Phòng doanh thu cao nhất
+        // // Hàm lấy KPI 3: truy xuất phòng có doanh thu cao nhất với % doanh thu, sử dụng bảng bill, showtime,auditorium 
         // 4. KPI: Phòng có doanh thu cao nhất (với %)
         public (string RoomName, double Revenue, double Percentage) GetTopRevenueRoom(DateTime from, DateTime to)
         {
             using var conn = DatabaseHelper.GetConnection();
             conn.Open();
-            using var cmd = conn.CreateCommand();
 
-            // ---------------------------------------------------------
-            // BƯỚC 1: Tính tổng doanh thu toàn rạp trong khoảng thời gian
-            // Sử dụng kỹ thuật thêm số '0' vào trước ngày để chuẩn hóa định dạng
-            // ---------------------------------------------------------
+            // Truy xuất tổng doanh thu toàn rạp
+            using var cmd = conn.CreateCommand();
             cmd.CommandText = @"
         SELECT COALESCE(SUM(b.total), 0) 
         FROM bill b
@@ -337,12 +314,9 @@ namespace SharedData.Repositories
 
             double totalRevenue = Convert.ToDouble(cmd.ExecuteScalar() ?? 0);
 
-            // Nếu không có doanh thu nào thì trả về N/A ngay
             if (totalRevenue == 0) return ("N/A", 0, 0);
 
-            // ---------------------------------------------------------
-            // BƯỚC 2: Tìm phòng có doanh thu cao nhất
-            // ---------------------------------------------------------
+            // Truy xuất doanh thu theo từng phòng
             cmd.CommandText = @"
         SELECT a.name, COALESCE(SUM(b.total), 0) AS revenue
         FROM bill b
@@ -357,7 +331,6 @@ namespace SharedData.Repositories
         LIMIT 1
     ";
 
-            // Clear params cũ để gán lại (an toàn cho một số driver SQLite)
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@from", ToSqlDate(from));
             cmd.Parameters.AddWithValue("@to", ToSqlDate(to));
@@ -375,7 +348,7 @@ namespace SharedData.Repositories
         }
 
 
-        // 6. Line Chart: Doanh thu theo giờ (Khi chọn 1 ngày)
+        // Hàm lấy doanh thu theo giờ chiếu khi chọn trong 1 ngày, để vẽ Line Chart, sử dụng bảng bill, showtime, auditorium
         public List<(int hour, decimal revenue)> GetRevenueByHour(DateTime from, DateTime to, string roomName = null)
         {
             var list = new List<(int, decimal)>();
@@ -383,8 +356,6 @@ namespace SharedData.Repositories
             conn.Open();
             using var cmd = conn.CreateCommand();
 
-            // Group theo giờ lấy từ start_time của showtime
-            // Filter theo bill_date
             string sql = @"
                 SELECT 
                     CAST(substr(s.start_time, 1, 2) AS INTEGER) AS Hour,
@@ -413,7 +384,7 @@ namespace SharedData.Repositories
             return list;
         }
 
-        // 7. Line Chart: Doanh thu theo ngày (Khi chọn nhiều ngày)
+       // Hàm lấy doanh thu theo ngày chiếu khi chọn trong nhiều ngày, để vẽ Line Chart, sử dụng bảng bill, showtime, auditorium
         public List<(string date, decimal revenue)> GetRevenueShowTimeByDay(DateTime from, DateTime to, string roomName = null)
         {
             var list = new List<(string, decimal)>();
@@ -450,7 +421,7 @@ namespace SharedData.Repositories
             return list;
         }
 
-        // 8. Column Chart: Doanh thu theo phòng
+        // Hàm lấy doanh thu theo phòng chiếu, sử dụng bảng bill, showtime, auditorium
         public List<(string RoomName, decimal Revenue)> GetRevenueByRoom(DateTime from, DateTime to, string roomName = null)
         {
             var list = new List<(string, decimal)>();
