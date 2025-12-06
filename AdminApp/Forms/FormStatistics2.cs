@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace AdminApp
 {
     public partial class FormStatistics2 : Form
-    {
+    {   // Tham chiếu tới form cha để điều hướng giữa các trang thống kê
         private AdminMainForm _parent;
 
         public FormStatistics2(AdminMainForm mainForm)
@@ -28,7 +28,7 @@ namespace AdminApp
             LoadYearCombo();
             ReloadAll();
         }
-
+        // Gán DataPropertyName cho DataGridView
         private void SetupCustomerTableColumns()
         {
             HoTen.DataPropertyName = "HoTen";
@@ -38,7 +38,7 @@ namespace AdminApp
             address.DataPropertyName = "Address";
         }
 
-
+          // Load lại toàn bộ dữ liệu thống kê khi có filter thay đổi
         private void ReloadAll()
         {
             LoadTotalCustomer();
@@ -46,7 +46,7 @@ namespace AdminApp
             LoadGenderPie();
             LoadCustomerRanking();
         }
-
+         // Load danh sách năm từ create_date trong bảng customer
         private void LoadYearCombo()
         {
             YearSort.BeginUpdate();
@@ -58,7 +58,7 @@ namespace AdminApp
                 conn.Open();
                 using var cmd = conn.CreateCommand();
 
-                // ✅ Query các năm từ create_date (DATETIME)
+                // Lấy danh sách các năm phát sinh khách hàng
                 cmd.CommandText = @"
                     SELECT DISTINCT strftime('%Y', create_date) AS Y
                     FROM customer
@@ -97,9 +97,7 @@ namespace AdminApp
 
 
 
-        // =======================
-        // 1. Khách mới theo tháng (Biểu đồ cột)
-        // =======================
+       //  BIỂU ĐỒ KHÁCH HÀNG ĐĂNG KÝ THEO THÁNG (BAR CHART)
         private void LoadCustomerByDayChart()
         {
             gunaChartCustomer.Datasets.Clear();
@@ -143,7 +141,7 @@ namespace AdminApp
                 cmd.Parameters.AddWithValue("@to", to.Value.ToString("yyyy-MM-dd"));
             }
 
-            // ✅ Đọc dữ liệu từ database
+            // Đọc dữ liệu từ database
             var monthData = new System.Collections.Generic.Dictionary<string, int>();
             using (var rd = cmd.ExecuteReader())
             {
@@ -154,13 +152,12 @@ namespace AdminApp
                 }
             }
 
-            // ✅ Hiển thị dữ liệu lên chart
+            // Hiển thị dữ liệu lên chart
             if (from == null)
             {
                 // Hiển thị theo format "MM/yyyy"
                 foreach (var item in monthData)
                 {
-                    // Convert "2024-01" thành "T1/2024"
                     string[] parts = item.Key.Split('-');
                     string label = $"T{int.Parse(parts[1])}/{parts[0]}";
                     bar.DataPoints.Add(label, item.Value);
@@ -174,26 +171,22 @@ namespace AdminApp
 
                 for (int i = 1; i <= 12; i++)
                 {
-                    string monthKey = i.ToString("00"); // 01, 02, ..., 12
+                    string monthKey = i.ToString("00"); 
                     int count = monthData.ContainsKey(monthKey) ? monthData[monthKey] : 0;
                     bar.DataPoints.Add(monthNames[i - 1], count);
                 }
             }
 
-            // ✅ ĐẶT MÀU SAU KHI THÊM DATAPOINTS
             bar.FillColors.Clear();
-            bar.FillColors.Add(Color.FromArgb(94, 114, 228)); // Xanh primary
+            bar.FillColors.Add(Color.FromArgb(94, 114, 228)); 
 
             gunaChartCustomer.Datasets.Add(bar);
             gunaChartCustomer.Update();
         }
 
 
+        // Biểu đồ giới tính
 
-
-        // =======================
-        // 2. Biểu đồ giới tính
-        // =======================
         private void LoadGenderPie()
         {
             gunaChartGender.Datasets.Clear();
@@ -244,21 +237,17 @@ namespace AdminApp
                 if (rd.IsDBNull(0) || rd.IsDBNull(1)) continue;
                 pie.DataPoints.Add(rd.GetString(0), rd.GetInt32(1));
             }
-
-            //ĐẶT MÀU SAU KHI THÊM DATAPOINTS
+APOINTS
             pie.FillColors.Clear();
-            pie.FillColors.Add(Color.FromArgb(94, 114, 228));   // Nam - Xanh primary
-            pie.FillColors.Add(Color.FromArgb(255, 107, 129));  // Nữ - Hồng
-            pie.FillColors.Add(Color.FromArgb(189, 195, 199));  // Không rõ - Xám
+            pie.FillColors.Add(Color.FromArgb(94, 114, 228));  
+            pie.FillColors.Add(Color.FromArgb(255, 107, 129));  
+            pie.FillColors.Add(Color.FromArgb(189, 195, 199));  
 
             gunaChartGender.Datasets.Add(pie);
             gunaChartGender.Update();
         }
 
-
-        // =======================
-        // 3. Xếp hạng chi tiêu
-        // =======================
+        //  Xếp hạng chi tiêu
         private void LoadCustomerRanking()
         {
             var dt = new DataTable();
@@ -310,10 +299,8 @@ namespace AdminApp
             gunaTable.DataSource = dt;
         }
 
+        // Tổng số khách hàng
 
-        // =======================
-        // 0. Tổng số khách hàng
-        // =======================
         private void LoadTotalCustomer()
         {
             GetCreateDateRange(out DateTime? from, out DateTime? to);
@@ -354,7 +341,7 @@ namespace AdminApp
         {
             ReloadAll();
         }
-
+        // Xử lý filter
         private void YearSort_SelectedIndexChanged(object sender, EventArgs e)
         {
             ReloadAll();
@@ -390,19 +377,16 @@ namespace AdminApp
             _parent.OpenChildForm(new FormStatistics1(_parent));
         }
 
-        // 2. Nút Khách hàng (Đang ở đây rồi thì không làm gì hoặc reload)
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
-            // Đang ở trang này, không cần chuyển
+            
         }
 
-        // 3. Nút Phim (Chuyển sang FormStatistics3)
         private void btnPhim_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics3(_parent));
         }
 
-        // 4. Nút Phòng chiếu (Chuyển sang FormStatistics4)
         private void btnPhongChieu_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics4(_parent));
