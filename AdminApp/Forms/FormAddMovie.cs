@@ -27,6 +27,7 @@ namespace AdminApp
             LoadComboBoxData(); 
         }
 
+        // Hàm load dữ liệu vào Combo Box của độ tuổi
         private void LoadComboBoxData()
         {
             try
@@ -43,6 +44,7 @@ namespace AdminApp
             }
         }
 
+        // Hàm tự sinh ID mới cho phim với định dạng M00x bằng cách lấy ID cuối cùng trong database +1
         public string GenerateNextMovieId()
         {
             var movies = _filmRepo.GetAllFilms();
@@ -59,6 +61,7 @@ namespace AdminApp
         }
         public event EventHandler FilmAdded;
 
+        // Hàm xử lý sự kiện thêm Poster phim, sau đó chuyển ảnh thành dạng byte để lưu vào CSDL
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog();
@@ -93,14 +96,14 @@ namespace AdminApp
             }
         }
 
+        // Hàm lưu thông tin phim, poster vào CSDL khi nhấn nút Thêm cùng với hiệu ứng âm thanh
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
             {
-                //  Giúp kiểm tra dữ liệu hợp lệ
                 if (!ValidateInput())
                     return;
-                // Giúp lấy dữ liệu từ form
+                    
                 string movieId = GenerateNextMovieId();
                 string title = txtTenPhim.Text;
                 string genre = txtTheLoai.Text;
@@ -113,7 +116,8 @@ namespace AdminApp
                 int duration = int.Parse(txtThoiLuong.Text);
                 string age = cboDoTuoi.Text;
                 string releaseDate = dtNgayChieu.Value.ToString("dd/MM/yyyy");
-                // Giúp lưu vào SQLite
+                
+                // Lưu vào SQLite
                 using (var conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
@@ -139,6 +143,7 @@ VALUES
                         cmd.Parameters.AddWithValue("@status", status);
                         cmd.ExecuteNonQuery();
                     }
+                    
                     if (_posterImageData != null)
                     {
                         string sqlImg = @"
@@ -163,17 +168,21 @@ VALUES
                 FilmAdded?.Invoke(this, EventArgs.Empty); 
                 ClearForm();
             }
+            
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi: " + ex.Message, "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+         // Hàm chỉ cho phép chữ (kể cả tiếng Việt) và khoảng trắng
         private bool IsAlphabetic(string input)
         {
-            // Chỉ cho phép chữ (kể cả tiếng Việt) và khoảng trắng
             return System.Text.RegularExpressions.Regex.IsMatch(input, @"^[\p{L}\s]+$");
         }
+
+        // Hàm validate các thông tin phim được nhập vào textbox và combobox
         private bool ValidateInput()
         {
             // Tên phim
@@ -229,7 +238,7 @@ VALUES
                 return false;
             }
 
-            // Ngôn ngữ
+            // Đạo diễn
             if (string.IsNullOrWhiteSpace(txtDaoDien.Text))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -270,8 +279,7 @@ VALUES
                 txtDienVien.Focus();
                 return false;
             }
-
-
+            
             // Giá nhập
             if (string.IsNullOrWhiteSpace(txtGiaNhap.Text))
             {
@@ -315,7 +323,7 @@ VALUES
             return true;
         }
 
-        // Giúp xóa form sau khi thêm phim thành công để nhập phim mới
+        // Hàm xóa các thông tin được nhập trong textboxsau khi thêm phim thành công để nhập phim mới
         private void ClearForm()
         {
             txtTenPhim.Clear();
@@ -335,6 +343,7 @@ VALUES
             _posterImageData = null;
             dtNgayChieu.Value = DateTime.Now;
         }
+        
         // Giúp hạn chế chỉ cho nhập số và dấu chấm cho giá nhập
         private void txtGiaNhap_KeyPress(object sender, KeyPressEventArgs e)
         {
