@@ -1,6 +1,7 @@
 using ClosedXML.Excel;
 using Microsoft.Data.Sqlite;
 using SharedData.Models;
+using SharedData.Repositories; // THÊM DÒNG NÀY
 using System;
 using System.Drawing;
 using System.Media;
@@ -12,18 +13,18 @@ namespace AdminApp
     {
         private string _staffId;
         private bool _isLoggedIn = false;
+        private readonly AccountRepo _accountRepo = new AccountRepo(); // THÊM DÒNG NÀY
 
         public AdminMainForm(string staffId)
         {
             InitializeComponent();
             _staffId = staffId;
-            panelDangNhap.Visible = true; 
+            panelDangNhap.Visible = true;
             btnDangXuat.Visible = false;
             picAvatar.Visible = false;
             lblChucVu.Visible = false;
             this.KeyPreview = true;
             this.AcceptButton = btnDN;
-
         }
 
         private void AdminMainForm_Load(object sender, EventArgs e)
@@ -37,7 +38,7 @@ namespace AdminApp
 
         private Form currentFormChild;
         private Guna.UI2.WinForms.Guna2Button currentButton;
-        
+
         private void SetMenuEnabled(bool enabled)
         {
             _isLoggedIn = enabled;
@@ -61,7 +62,6 @@ namespace AdminApp
             panelMain.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-        
         }
 
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
@@ -71,12 +71,12 @@ namespace AdminApp
             {
                 currentButton.FillColor = currentButton.Tag != null
                     ? (Color)currentButton.Tag
-                    : Color.FromArgb(44, 84, 115); 
+                    : Color.FromArgb(44, 84, 115);
                 currentButton.ForeColor = Color.White;
                 currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
             }
             if (btn.Tag == null)
-                btn.Tag = btn.FillColor; 
+                btn.Tag = btn.FillColor;
             currentButton = btn;
             currentButton.FillColor = Color.FromArgb(44, 84, 115);
             currentButton.ForeColor = Color.FromArgb(255, 128, 0);
@@ -136,14 +136,13 @@ namespace AdminApp
             OpenChildForm(new FormRoomLayoutManagement());
         }
 
-
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
             if (!CheckLogin()) return;
 
             var btn = sender as Guna.UI2.WinForms.Guna2Button;
             ActivateButton(btn);
-            OpenChildForm(new FormCustomerManagement()); 
+            OpenChildForm(new FormCustomerManagement());
         }
 
         private void picUserIcon_Click(object sender, EventArgs e)
@@ -156,7 +155,7 @@ namespace AdminApp
         {
             if (currentFormChild != null)
             {
-                panelMain.Controls.Remove(currentFormChild);  
+                panelMain.Controls.Remove(currentFormChild);
                 currentFormChild.Close();
                 currentFormChild = null;
             }
@@ -194,6 +193,7 @@ namespace AdminApp
             }
         }
 
+        // ===== SỬA LẠI PHẦN ĐĂNG NHẬP =====
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             string user = txtUsername.Text.Trim();
@@ -209,48 +209,32 @@ namespace AdminApp
                 return;
             }
 
-            using (var conn = DatabaseHelper.GetConnection())
+            // SỬ DỤNG AccountRepo.LoginStaff THAY VÌ QUERY TRỰC TIẾP
+            string staffId, role, msg;
+            if (_accountRepo.LoginStaff(user, pass, out staffId, out role, out msg))
             {
-                conn.Open();
+                _staffId = staffId;
+                lblChucVu.Text = role;
+                picAvatar.Visible = true;
+                lblChucVu.Visible = true;
+                btnDangXuat.Visible = true;
 
-                string query = @"
-            SELECT account_id, role_account, staff_id
-            FROM Account
-            WHERE username = @user
-              AND password = @pass
-              AND role_account = 'Nhân viên (Admin)'";
+                HideLoginPanel();
+                SetMenuEnabled(true);
 
-                using (var cmd = new SqliteCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@user", user);
-                    cmd.Parameters.AddWithValue("@pass", pass);
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
 
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            _staffId = reader["staff_id"].ToString();
-                            lblChucVu.Text = reader["role_account"].ToString();
-                            picAvatar.Visible = true;
-                            lblChucVu.Visible = true;
-                            btnDangXuat.Visible = true;
-                            // Giúp ẩn và đẩy panel xuống
-                            HideLoginPanel();
-                            // Giúp mở Menu
-                            SetMenuEnabled(true);
-                            // Giúp mở form mặc định
-                            ActivateButton(btnThongKe);
-                            OpenChildForm(new FormStatistics1(this));
-                        }
-                        else
-                        {
-                            lblError.Text = "Sai tài khoản / mật khẩu hoặc không có quyền Admin";
-                            lblError.Visible = true;
-                        }
-                    }
-                }
+                ActivateButton(btnThongKe);
+                OpenChildForm(new FormStatistics1(this));
             }
-            btnDangXuat.Visible = true;
+            else
+            {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
+                lblError.Text = msg;
+                lblError.Visible = true;
+            }
         }
 
         private void HideLoginPanel()
@@ -272,12 +256,11 @@ namespace AdminApp
         {
             panelDangNhap.Visible = false;
             panelDangNhap.Enabled = false;
-            // Mở form Quên mật khẩu vào panelMain
             OpenChildForm(new FormForgetPassword(this));
         }
+
         public void ShowLoginPanel()
         {
-            // Đóng form con nếu còn
             if (currentFormChild != null)
             {
                 currentFormChild.Close();
@@ -299,10 +282,8 @@ namespace AdminApp
             else
             {
                 txtPassword.UseSystemPasswordChar = true;
-                picEye.Image = Properties.Resources.hide; 
+                picEye.Image = Properties.Resources.hide;
             }
         }
     }
 }
-
-
