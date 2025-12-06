@@ -188,7 +188,7 @@ namespace UserApp
                 else if (fullSeats.ContainsKey(fullId))
                     finalStatus = "Full";
 
-                // Còn lại là TRỐNG
+                // Còn lại là trống
                 else
                     finalStatus = "Trống";
 
@@ -209,7 +209,7 @@ namespace UserApp
             }
         }
 
-       //Tạo các ghế bằng nút Button
+       // Tạo nút ghế hiển thị trên giao diện
         private Guna2Button CreateSeatButton(SeatUser seat)
         {
             var btn = new Guna2Button();
@@ -225,7 +225,7 @@ namespace UserApp
             return btn;
         }
         
-        // Áp dụng định dạng cho các nút Button
+        // Định dạng màu ghế theo loại và trạng thái
        private void ApplySeatStyle(Guna2Button btn, SeatUser seat)
         {
             if (seat.Status == "Bảo trì" )
@@ -251,7 +251,7 @@ namespace UserApp
             btn.BorderThickness = 3;
         }
 
-        // Hàm xử lý sự kiện chọn ghế
+        // Hàm xử lý sự kiện khi user click chọn ghế
         private void Seat_Click(object sender, EventArgs e)
         {
             var btn = (Guna2Button)sender;
@@ -274,7 +274,7 @@ namespace UserApp
             UpdateTotal();
             UpdateSelectedSeatLabel();
 
-            // Bắt đầu đếm ngược 5 phút lần đầu chọn
+            // Bắt đầu đếm thời gian giữ ghế khi chọn ghế đầu tiên
             if (!isCounting && _selectedSeats.Count > 0)
             {
                 countdown = 600;
@@ -291,6 +291,7 @@ namespace UserApp
             }
         }
 
+        // Cập nhật nhãn ghế đang chọn
         private void UpdateSelectedSeatLabel()
         {
             if (_selectedSeats.Count == 0)
@@ -307,14 +308,14 @@ namespace UserApp
             lblGheDaChon.Text = string.Join(", ", list);
         }
 
-        // Tính toán tổng tiền
+        // Tính tổng tiền ghế đang chọn
         private void UpdateTotal()
         {
             double total = _selectedSeats.Sum(s => s.Price);
             lblSotien.Text = total.ToString("N0") + " VND";
         }
 
-        // Tạo thanh màn hình
+        // Tạo thanh “MÀN HÌNH” để định hướng người xem
         private void CreateScreenBar()
         {
             var p = new Guna2Panel();
@@ -335,6 +336,7 @@ namespace UserApp
             panelRoom.Controls.Add(p);
         }
 
+        // Chuyển sang form thanh toán
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
             if (_selectedSeats.Count == 0)
@@ -356,7 +358,8 @@ namespace UserApp
                 parent.OpenChildForm(new FormPayment1(_showtime, _selectedSeats, parent.CurrentUser));
             }
         }
-
+        
+        // Timer giữ ghế
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (countdown <= 0)
