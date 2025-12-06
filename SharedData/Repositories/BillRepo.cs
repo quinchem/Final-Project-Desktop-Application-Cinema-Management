@@ -90,7 +90,53 @@ namespace SharedData.Repositories
                         foreach (var seatId in seatIds)
                         {
                             var cmdSeatShow = conn.CreateCommand();
-                            cdiện hiển thị thông báo cho người dùng
+                            cmdSeatShow.Transaction = tran;
+
+                            // ON CONFLICT đảm bảo nếu đã tồn tại seat_id + showtime_id,
+                            // hệ thống sẽ update thay vì gây lỗi duplicate key.
+                            cmdSeatShow.CommandText = @"
+                                INSERT INTO seat_for_showtime (seat_id, showtime_id, status)
+                                VALUES ($sid, $stid, 'Full')
+                                ON CONFLICT(seat_id, showtime_id)
+                                DO UPDATE SET status = 'Full';";
+                           
+                            cmdSeatShow.Parameters.AddWithValue("$sid", seatId);
+                            cmdSeatShow.Parameters.AddWithValue("$stid", showtimeId);
+                            cmdSeatShow.ExecuteNonQuery();
+                        }
+
+                        // 3) Tạo bảng chi tiết hóa đơn (bill_seat)
+                        // Bảng này dùng để show lịch sử mua vé: hóa đơn gồm những ghế nào.
+                        foreach (var seatId in seatIds)
+                        {
+                            var cmdDetail = conn.CreateCommand();
+                            cmdDetail.Transaction = tran;
+
+                            // Mỗi ghế tương ứng 1 dòng chi tiết trong bill_seat
+                            cmdDetail.CommandText = @"
+                                INSERT INTO bill_seat (bill_id, seat_id)
+                                VALUES ($bill, $seat)";
+                            
+
+                            cmdDetail.Parameters.AddWithValue("$bill", billId);
+                            cmdDetail.Parameters.AddWithValue("$seat", seatId);
+                            cmdDetail.ExecuteNonQuery();
+                        }
+
+                        // Hoàn tất tất cả thao tác → transaction commit → dữ liệu được lưu vĩnh viễn
+                        tran.Commit();
+                        
+                        // Trả mã hóa đơn về để giao diện hiển thị cho người dùng
+                        return billId;
+                        
+                    }
+                    catch
+                    {
+                        // Nếu bất kỳ bước nào gây lỗi (mất mạng, khóa ghi, sai dữ liệu…), 
+                        // toàn bộ Insert sẽ hoàn tác → đảm bảo DB không rơi vào trạng thái lỗi
+                        tran.Rollback();
+                        
+                        // Ném lỗi trở lại để giao diện hiển thị thông báo cho người dùng
                         throw;
                         
                     }
