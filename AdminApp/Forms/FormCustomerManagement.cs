@@ -13,7 +13,9 @@ namespace AdminApp
 {
     public partial class FormCustomerManagement : Form
     {
+        // Repository xử lý dữ liệu khách hàng
         private CustomerRepo repo = new CustomerRepo();
+        // Danh sách khách hàng đang load
         private List<Customer> customerList = new List<Customer>();
 
         public FormCustomerManagement()
@@ -24,7 +26,8 @@ namespace AdminApp
             DataGridViewCustomerManagement.ReadOnly = true;
             DataGridViewCustomerManagement.EditMode = DataGridViewEditMode.EditOnEnter;
             DataGridViewCustomerManagement.AllowUserToAddRows = false;
-
+            
+            // Thêm cột ID (ẩn) nếu chưa tồn tại
             if (DataGridViewCustomerManagement.Columns["customer_id"] == null)
             {
                 DataGridViewCustomerManagement.Columns.Add(new DataGridViewTextBoxColumn()
@@ -39,7 +42,7 @@ namespace AdminApp
             LoadCustomers();
         }
 
-        // Giúp nhóm setup format cho các cột date
+        // Thiết lập format hiển thị cho các cột ngày tháng
         private void SetupDateColumns()
         {
             if (DataGridViewCustomerManagement.Columns["date_of_birth"] != null)
@@ -53,16 +56,17 @@ namespace AdminApp
                 DataGridViewCustomerManagement.Columns["create_date"].DefaultCellStyle.NullValue = "";
             }
         }
-
+        // Reload dữ liệu khi form được focus lại
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
             LoadCustomers();
         }
-
+        // Load danh sách khách hàng từ CSDL
         private void LoadCustomers()
         {
             customerList = repo.GetAll();
+            // Chuẩn hóa định dạng ngày sinh – ngày tạo
             foreach (var customer in customerList)
             {
                 if (!string.IsNullOrEmpty(customer.date_of_birth))
@@ -90,10 +94,11 @@ namespace AdminApp
         {
             SearchCustomers();
         }
-
+        // Tìm kiếm khách hàng theo từ khóa
         private void SearchCustomers()
         {
             string keyword = txtTimKiem.Text.Trim().ToLower();
+            // Nếu không nhập từ khóa -> hiển thị toàn bộ
             if (string.IsNullOrEmpty(keyword))
             {
                 DataGridViewCustomerManagement.DataSource = null;
@@ -101,6 +106,7 @@ namespace AdminApp
                 SetupDateColumns();
                 return;
             }
+            // Lọc theo tên, email, số điện thoại, địa chỉ
             var filtered = customerList.FindAll(c =>
                 (c.full_name != null && c.full_name.ToLower().Contains(keyword)) ||
                 (c.email != null && c.email.ToLower().Contains(keyword)) ||
@@ -129,7 +135,7 @@ namespace AdminApp
                 e.Handled = true;          
             }
         }
-
+        // Reset danh sách khi xóa ô tìm kiếm
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtTimKiem.Text))
@@ -193,7 +199,7 @@ namespace AdminApp
                 MessageBox.Show("Xuất file thành công!");
             }
         }
-
+         // Chuẩn hóa ngày tháng khi ghi Excel
         private string FormatDateForExcel(string dateStr)
         {
             if (string.IsNullOrEmpty(dateStr))
@@ -206,7 +212,7 @@ namespace AdminApp
 
             return dateStr;
         }
-
+        // Mở form chỉnh sửa khách hàng
         private void btnChinhSua_Click(object sender, EventArgs e)
         {
             if (DataGridViewCustomerManagement.SelectedRows.Count == 0)
@@ -300,7 +306,7 @@ namespace AdminApp
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
-
+        // Kiểm tra và chuẩn hóa định dạng ngày tháng
         private bool TryNormalizeDate(string input, out string output)
         {
             output = "";
