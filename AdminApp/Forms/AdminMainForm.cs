@@ -1,7 +1,7 @@
 using ClosedXML.Excel;
 using Microsoft.Data.Sqlite;
 using SharedData.Models;
-using SharedData.Repositories; // THÊM DÒNG NÀY
+using SharedData.Repositories;
 using System;
 using System.Drawing;
 using System.Media;
@@ -14,9 +14,9 @@ namespace AdminApp
         private string _staffId;
         private bool _isLoggedIn = false;
         // Repository xử lý đăng nhập tài khoản
-        private readonly AccountRepo _accountRepo = new AccountRepo(); 
-        
-        
+        private readonly AccountRepo _accountRepo = new AccountRepo();
+
+
         public AdminMainForm(string staffId)
         {
             InitializeComponent();
@@ -26,8 +26,23 @@ namespace AdminApp
             picAvatar.Visible = false;
             lblChucVu.Visible = false;
             this.KeyPreview = true;
-            this.AcceptButton = btnDN;
+            //this.AcceptButton = btnDN;
         }
+
+        // Bắt sự kiện nhấn phím
+        private void AdminMainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Nếu đang ở màn đăng nhập thì Enter = Đăng nhập
+                if (panelDangNhap.Visible)
+                {
+                    btnDN.PerformClick();
+                    e.SuppressKeyPress = true;
+                }
+            }
+        }
+
         // Load form: mặc định chưa đăng nhập
         private void AdminMainForm_Load(object sender, EventArgs e)
         {
@@ -40,14 +55,14 @@ namespace AdminApp
         // Lưu form con đang mở
         private Form currentFormChild;
         private Guna.UI2.WinForms.Guna2Button currentButton;
-        
+
         // Bật / tắt menu theo trạng thái đăng nhập
         private void SetMenuEnabled(bool enabled)
         {
             _isLoggedIn = enabled;
             picAvatar.Visible = enabled;
         }
-         // Mở form con trong panel chính
+        // Mở form con trong panel chính
         public void OpenChildForm(Form childForm)
         {
             if (currentFormChild != null)
@@ -159,7 +174,7 @@ namespace AdminApp
             OpenChildForm(new FormAccountManagement(_staffId));
         }
 
-        
+
         public void GoHome()
         {
             if (currentFormChild != null)
@@ -194,7 +209,7 @@ namespace AdminApp
             panelDangNhap.Visible = true;
             panelDangNhap.Enabled = true;
             panelDangNhap.BringToFront();
-            SetMenuEnabled(false); 
+            SetMenuEnabled(false);
 
             if (currentFormChild != null)
             {
@@ -253,7 +268,7 @@ namespace AdminApp
             panelDangNhap.Enabled = false;
             panelDangNhap.SendToBack();
         }
-        
+
         // Nhấn Enter để đăng nhập
         private void btnDN_KeyDown(object sender, KeyEventArgs e)
         {
@@ -281,7 +296,7 @@ namespace AdminApp
             panelDangNhap.Enabled = true;
             panelDangNhap.BringToFront();
         }
-         // Ẩn / hiện mật khẩu
+        // Ẩn / hiện mật khẩu
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
             if (txtPassword.UseSystemPasswordChar == true)
@@ -296,5 +311,7 @@ namespace AdminApp
                 picEye.Image = Properties.Resources.hide;
             }
         }
+
+       
     }
 }

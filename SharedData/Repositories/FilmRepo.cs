@@ -162,6 +162,32 @@ namespace SharedData.Repositories
             return showingFilms;
         }
 
+        // Lấy phim theo trạng thái (sử dụng để lọc trong quản lý phim)
+        public List<Film> GetFilmsByStatus(string status)
+        {
+            List<Film> films = new List<Film>();
+
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                string sql = "SELECT * FROM movie WHERE status = @status";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@status", status);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            films.Add(MapFilm(reader)); // dùng MapFilm
+                        }
+                    }
+                }
+            }
+            return films;
+        }
+
         // Lấy phim theo ID
         public Film GetById(string id)
         {
