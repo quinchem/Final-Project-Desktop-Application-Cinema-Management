@@ -22,6 +22,7 @@ namespace UserApp
             dgvHistoryTicket.AutoGenerateColumns = false;
             LoadHistoryData();
         }
+        // Tải lịch sử vé từ Database
 
         private void LoadHistoryData()
         {
@@ -131,6 +132,7 @@ namespace UserApp
                 return $"TK-{billId}-{hashPart}";
             }
         }
+        // Vẽ lại nút "Xem" cho đẹp
 
         private void dgvHistoryTicket_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -154,6 +156,7 @@ namespace UserApp
                 e.Graphics.DrawRectangle(Pens.Black, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width - 1, e.CellBounds.Height - 1);
             }
         }
+        // Sự kiện bấm nút "Xem chi tiết"
 
         public event Action<string> OnViewBillDetail; 
 

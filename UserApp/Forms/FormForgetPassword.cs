@@ -45,7 +45,7 @@ namespace UserApp
                 // Kiểm tra xem email có tồn tại trong cơ sở dữ liệu không
                 bool isExist = _customerRepo.CheckEmailExist(emailInput);
 
-                // Nếu email không tồn tại thì báo lỗi cho người dùng
+                // Khi email không tồn tại
                 if (!isExist)
                 {
                     SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -56,7 +56,7 @@ namespace UserApp
                 }
                 else
                 {
-                    // Nếu email tồn tại thì báo thành công
+                    // Nếu email tồn tại 
                     SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
                     player.Play();
                     MessageBox.Show("Email hợp lệ! Vui lòng đặt lại mật khẩu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -67,7 +67,7 @@ namespace UserApp
             }
             catch (Exception ex)
             {
-                // Nếu xảy ra lỗi hệ thống hoặc lỗi kết nối thì báo cho người dùng
+                // Nếu xảy ra lỗi hệ thống hoặc lỗi kết nối 
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
                 player.Play();
                 MessageBox.Show("Đã xảy ra lỗi kết nối: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);

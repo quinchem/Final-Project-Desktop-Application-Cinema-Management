@@ -33,6 +33,7 @@ namespace AdminApp
             LoadFilmData();
         }
 
+        // Hàm lấy toàn bộ phim từ CSDL qua FilmRepo, sau đó sắp xếp theo ngày chiếu
         private void LoadFilmData()
         {
             try
@@ -48,6 +49,8 @@ namespace AdminApp
                 MessageBox.Show("Error loading films: " + ex.Message);
             }
         }
+
+        //Hàm để gán danh sách phim vào DataGridView và sắp xếp thứ tự cột
         private void BindDataToGrid(List<Film> films)
         {
             dgvMovies.DataSource = films;
@@ -59,6 +62,9 @@ namespace AdminApp
             dgvMovies.Columns["colEdit"].DisplayIndex = 4;
             dgvMovies.Columns["colDelete"].DisplayIndex = 5;
         }
+
+        // Hàm xử lý sự kiện tìm tên phim, nếu textbox rỗng thì sẽ lấy toàn bộ phim,
+        // nếu có nhập keyword thì sẽ tìm phim theo keyword, sử dụng Film Repo
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             string keyword = txtSearch.Text.Trim();
@@ -66,7 +72,6 @@ namespace AdminApp
 
             if (string.IsNullOrEmpty(keyword))
             {
-                // Nếu textbox rỗng -> load tất cả phim
                 results = _filmRepo.GetAllFilms();
             }
             else
@@ -77,6 +82,7 @@ namespace AdminApp
             BindDataToGrid(results);
         }
 
+        // Hàm xử lý sự kiệm mở form Thêm Phim khi nhấn vào nút Thêm
         private void btnThem_Click(object sender, EventArgs e)
         {
 
@@ -85,8 +91,9 @@ namespace AdminApp
             f.Show();
         }
 
-        
-
+        // Hàm xử lý sự kiện khi bấm vào cell trong datagridview:
+        // - Nếu nhấn nút Edit thì mở form Chỉnh sửa Film
+        // - Nếu nhấn nút Delete thì sẽ xác nhận và xóa phim khỏi CSDL
         private void dgvMovies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -132,6 +139,8 @@ namespace AdminApp
                 }
             }
         }
+
+        // Hàm xử lý sự kiện mở form Chi tiết phim dựa vào movie_id khi double-click vào một dòng
         private void dgvMovie_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -143,7 +152,7 @@ namespace AdminApp
             f.Show();
         }
            
-
+        // Hàm xử lý sự kiện xuất file Excel
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
             try
@@ -181,7 +190,6 @@ namespace AdminApp
                             worksheet.Cell(1, 10).Value = "Duration";
                             worksheet.Cell(1, 11).Value = "Purchase Price";
                             worksheet.Cell(1, 12).Value = "Release Date";
-                            worksheet.Cell(1, 13).Value = "id";
 
                             int row = 2;
                             int stt = 1;
@@ -200,7 +208,6 @@ namespace AdminApp
                                 worksheet.Cell(row, 10).Value = film.duration;
                                 worksheet.Cell(row, 11).Value = film.film_purchase_price;
                                 worksheet.Cell(row, 12).Value = film.release_date;
-                                worksheet.Cell(row, 13).Value = film.movie_id;
                                 row++;
                             }
 

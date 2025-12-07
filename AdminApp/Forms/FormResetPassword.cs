@@ -16,7 +16,9 @@ namespace AdminApp.Forms
 {
     public partial class FormResetPassword : Form
     {
+        // Form cha (AdminMainForm) để quay về màn hình đăng nhập sau khi reset
         private AdminMainForm parentForm;
+        // Email người dùng (được truyền từ bước trước – hiện chưa dùng)
         private string _userEmail;
         public FormResetPassword(AdminMainForm parent, string email)
         {
@@ -30,7 +32,7 @@ namespace AdminApp.Forms
             string username = "admin"; 
             string newPass = txtMKmoi.Text.Trim();
             string confirmPass = txtXacNhanMK.Text.Trim();
-
+            // Kiểm tra nhập thiếu dữ liệu
             if (string.IsNullOrEmpty(newPass) || string.IsNullOrEmpty(confirmPass))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -38,7 +40,7 @@ namespace AdminApp.Forms
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
                 return;
             }
-
+            // Kiểm tra mật khẩu xác nhận
             if (newPass != confirmPass)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -46,7 +48,7 @@ namespace AdminApp.Forms
                 MessageBox.Show("Mật khẩu xác nhận không khớp");
                 return;
             }
-
+            // Kết nối CSDL và cập nhật mật khẩu
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
@@ -79,7 +81,7 @@ namespace AdminApp.Forms
                 }
             }
         }
-
+         // Hiện / Ẩn mật khẩu mới
         private void picEye1_Click(object sender, EventArgs e)
         {
             if (txtMKmoi.UseSystemPasswordChar == true)
@@ -94,7 +96,7 @@ namespace AdminApp.Forms
                 picEye1.Image = Properties.Resources.hide; 
             }
         }
-
+        // Hiện / Ẩn mật khẩu xác nhận
         private void picEye2_Click(object sender, EventArgs e)
         {
             if (txtXacNhanMK.UseSystemPasswordChar == true)

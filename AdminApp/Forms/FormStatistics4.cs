@@ -34,13 +34,12 @@ namespace AdminApp
         {
             dptdateFrom.Value = DateTime.Today.AddDays(-30);
             dptdateTo.Value = DateTime.Today;
-
             dptdateFrom.MouseDown += DateTimePicker_MouseDown;
             dptdateTo.MouseDown += DateTimePicker_MouseDown;
-
             ReloadAll();
         }
 
+        // Hàm thêm các giá trị năm vào combobox lọc.
         private void LoadYearCombo()
         {
             comboYear.Items.Clear();
@@ -48,10 +47,10 @@ namespace AdminApp
             int currentYear = DateTime.Today.Year;
             for (int y = currentYear - 2; y <= currentYear + 1; y++)
                 comboYear.Items.Add(y.ToString());
-
             comboYear.SelectedIndex = 0;
         }
 
+        // Hàm lấy danh sách phòng chiếu từ database, sử dụng _repo.GetRooms
         private void LoadRoomFilter()
         {
             try
@@ -70,9 +69,9 @@ namespace AdminApp
             }
         }
 
+        // Hàm để gọi lại tất cả hàm load KPI và chart.
         private void ReloadAll()
         {
-            // Kiểm tra lần cuối, nếu sai thì thoát luôn không tải dữ liệu
             if (!ValidateDateRange()) return;
 
             try
@@ -89,6 +88,7 @@ namespace AdminApp
             }
         }
 
+        //Hàm để trả về phòng được chọn trong combobox.
         private string GetSelectedRoom()
         {
             if (comboRoomFilter.SelectedItem == null || comboRoomFilter.SelectedItem.ToString() == "Tất cả")
@@ -96,6 +96,7 @@ namespace AdminApp
             return comboRoomFilter.SelectedItem.ToString();
         }
 
+        // Hàm chặn người dùng thay đổi ngày khi đang lọc theo năm.
         private void DateTimePicker_MouseDown(object sender, MouseEventArgs e)
         {
             if (isFilteringByYear)
@@ -106,7 +107,8 @@ namespace AdminApp
                                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        // 1. Hàm kiểm tra logic (So sánh .Date để bỏ qua giờ phút)
+        
+        //Hàm kiểm tra logic ngày bắt đầu và ngày kết thúc
         private bool ValidateDateRange()
         {
             if (dptdateFrom.Value.Date > dptdateTo.Value.Date)
@@ -116,12 +118,11 @@ namespace AdminApp
             return true;
         }
 
-        // 2. Sự kiện thay đổi Ngày Bắt Đầu
+        // Hàm xử lý sự kiện thay đổi Ngày Bắt đầu
         private void dptdateFrom_ValueChanged(object sender, EventArgs e)
         {
             if (isFilteringByYear) return;
-
-            // Nếu Ngày Bắt Đầu lớn hơn Ngày Kết Thúc -> Báo lỗi và Reset ngay
+            
             if (dptdateFrom.Value.Date > dptdateTo.Value.Date)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -129,15 +130,13 @@ namespace AdminApp
                 MessageBox.Show("Ngày bắt đầu không được lớn hơn ngày kết thúc!",
                                 "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                // Đặt lại ngày bắt đầu bằng ngày kết thúc (để hợp lệ)
-                // Gán cờ hoặc unsubscribe event nếu cần, nhưng gán bằng nhau là an toàn nhất
                 dptdateFrom.Value = dptdateTo.Value;
                 return; // Dừng lại, không ReloadAll
             }
-
             ReloadAll();
         }
 
+         // Hàm xử lý sự kiện thay đổi Ngày Kết thúc
         private void dptdateTo_ValueChanged(object sender, EventArgs e)
         {
             if (isFilteringByYear) return;
@@ -156,6 +155,7 @@ namespace AdminApp
             ReloadAll();
         }
 
+        // Hàm để chuyển đổi chế độ lọc theo năm / lọc theo ngày.
         private void comboYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedYear = comboYear.SelectedItem?.ToString();
@@ -179,12 +179,13 @@ namespace AdminApp
             ReloadAll();
         }
 
+        // Hàm để cập nhập toàn bộ thống kê khi chọn phòng khác
         private void comboRoomFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             ReloadAll();
         }
 
-        // ===================== KPIs =====================
+       // Hàm để lấy các chỉ số KPI từ Statistic Repo và hiển thị lên các label tương ứng
         private void LoadKPIs()
         {
             DateTime from = dptdateFrom.Value;
@@ -208,7 +209,7 @@ namespace AdminApp
             }
         }
 
-        // =====================  Line Chart - Doanh thu (theo giờ hoặc theo ngày) =====================
+        // Hàm để vẽ biểu đồ đường doanh thu theo ngày hoặc theo giờ.
         private void LoadShowtimeLineChart()
         {
             lineChartShowtime.Datasets.Clear();
@@ -220,7 +221,7 @@ namespace AdminApp
             DateTime to = dptdateTo.Value;
             string roomFilter = GetSelectedRoom();
 
-            // Kiểm tra xem có phải đang chọn cùng 1 ngày không
+            // Kiểm tra xem có phải đang chọn cùng 1 ngày không, nếu là 1 ngày thì sẽ hiện doanh thu theo giờ
             bool isSingleDay = from.ToString("yyyyMMdd") == to.ToString("yyyyMMdd");
 
             var datasetRevenue = new GunaLineDataset
@@ -235,8 +236,6 @@ namespace AdminApp
             {
                 datasetRevenue.Label = $"Doanh thu theo giờ ({from:dd/MM/yyyy})";
                 var revenueData = _repo.GetRevenueByHour(from, to, roomFilter);
-
-                // Mẹo: Nếu dữ liệu trống, thêm điểm 0 tại giờ mở cửa để biểu đồ không bị trắng trơn
                 if (revenueData.Count == 0)
                 {
                     datasetRevenue.DataPoints.Add("08:00", 0);
@@ -266,7 +265,7 @@ namespace AdminApp
             lineChartShowtime.Update();
         }
 
-        // ===================== Column Chart - Doanh thu theo phòng =====================
+        // Hàm để vẽ biểu đồ cột doanh thu theo phòng (có lọc theo phòng)
         private void LoadRevenueByRoomColumnChart()
         {
             columnChartRevenue.Datasets.Clear();
@@ -274,9 +273,7 @@ namespace AdminApp
             DateTime from = dptdateFrom.Value;
             DateTime to = dptdateTo.Value;
             string roomFilter = GetSelectedRoom();
-
             var data = _repo.GetRevenueByRoom(from, to, roomFilter);
-
             if (data.Count == 0)
             {
                 columnChartRevenue.Update();
@@ -293,7 +290,6 @@ namespace AdminApp
                
                 dataset.DataPoints.Add(item.RoomName, (double)item.Revenue);
             }
-
             columnChartRevenue.Datasets.Add(dataset);
             columnChartRevenue.Legend.Position = LegendPosition.Top;
             columnChartRevenue.XAxes.Display = true;
@@ -301,6 +297,7 @@ namespace AdminApp
             columnChartRevenue.Update();
         }
 
+        // Các hàm xử lý sự kiện chuyển form thống kê khi nhấn vào các button tương ứng
         private void btnTongQuan_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics1(_parent));
@@ -320,7 +317,5 @@ namespace AdminApp
         {
 
         }
-
-
     }
 }

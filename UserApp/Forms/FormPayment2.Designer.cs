@@ -109,6 +109,7 @@
             picQR.Size = new Size(350, 350);
             picQR.TabIndex = 17;
             picQR.TabStop = false;
+            picQR.Click += PicQR_Click;
             // 
             // guna2HtmlLabel18
             // 

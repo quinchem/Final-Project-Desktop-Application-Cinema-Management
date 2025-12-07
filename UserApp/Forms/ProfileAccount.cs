@@ -89,7 +89,7 @@ namespace UserApp
                     }
                 }
             }
-            catch { /* Bỏ qua lỗi load ảnh nếu muốn */ }
+            catch 
         }
 
         // Lưu avatar

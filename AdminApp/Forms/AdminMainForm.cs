@@ -14,8 +14,9 @@ namespace AdminApp
         private string _staffId;
         private bool _isLoggedIn = false;
         // Repository xử lý đăng nhập tài khoản
-        private readonly AccountRepo _accountRepo = new AccountRepo(); // THÊM DÒNG NÀY
-
+        private readonly AccountRepo _accountRepo = new AccountRepo(); 
+        
+        
         public AdminMainForm(string staffId)
         {
             InitializeComponent();
@@ -65,10 +66,12 @@ namespace AdminApp
             childForm.BringToFront();
             childForm.Show();
         }
-        // Đổi trạng thái nút menu đang active
+        // Hàm dùng để đổi trạng thái nút menu đang active thành màu cam
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
             if (btn == null) return;
+
+            //Thực hiện reset nút trước đó thành màu trắng
             if (currentButton != null)
             {
                 currentButton.FillColor = currentButton.Tag != null
@@ -85,6 +88,7 @@ namespace AdminApp
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
         }
 
+        // Hàm dùng để kiểm tra người dùng đã đăng nhập hay chưa, nếu chưa thì sẽ hiện thông báo
         private bool CheckLogin()
         {
             if (!_isLoggedIn)
@@ -102,6 +106,7 @@ namespace AdminApp
             return true;
         }
 
+        // Các hàm xử lý sự kiện khi bấm vào các chức năng trên menu thì sẽ hiện form con
         private void btnSuatChieu_Click(object sender, EventArgs e)
         {
             if (!CheckLogin()) return;
@@ -147,12 +152,14 @@ namespace AdminApp
             OpenChildForm(new FormCustomerManagement());
         }
 
+        // Hàm xử lý sự kiện, nếu nhấn vào Avatar thì sẽ hiện form quản lý tài khoản với đúng staff_id
         private void picUserIcon_Click(object sender, EventArgs e)
         {
             if (!CheckLogin()) return;
             OpenChildForm(new FormAccountManagement(_staffId));
         }
 
+        
         public void GoHome()
         {
             if (currentFormChild != null)
@@ -175,6 +182,7 @@ namespace AdminApp
             GoHome();
         }
 
+        // Hàm xử lý sự kiện khi nhấn đăng xuất, lúc này sẽ quay lại form đăng nhập 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
             _staffId = null;
@@ -245,6 +253,7 @@ namespace AdminApp
             panelDangNhap.Enabled = false;
             panelDangNhap.SendToBack();
         }
+        
         // Nhấn Enter để đăng nhập
         private void btnDN_KeyDown(object sender, KeyEventArgs e)
         {

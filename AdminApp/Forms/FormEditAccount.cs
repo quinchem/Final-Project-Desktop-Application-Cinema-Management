@@ -18,11 +18,17 @@ namespace AdminApp
 {
     public partial class FormEditAccount : Form
     {
+        // Lưu staff_id của nhân viên đang đăng nhập
         private readonly string _staff_id;
-        private string _account_id; // THÊM BIẾN NÀY
+        // Lưu account_id tương ứng với staff_id (phục vụ đổi mật khẩu)
+        private string _account_id; 
+        // Repository thao tác dữ liệu nhân viên
         private readonly StaffRepo _staffRepo = new StaffRepo();
+        // Lưu ảnh đại diện mới được chọn
         private byte[] _selectedImageBytes;
+        // Repository thao tác hình ảnh nhân viên
         private ImageRepo _imageRepo = new ImageRepo();
+        // Repository thao tác dữ liệu tài khoản (mật khẩu)
         private readonly AccountRepo _accountRepo = new AccountRepo();
 
         public FormEditAccount(string staff_id)
@@ -33,19 +39,19 @@ namespace AdminApp
         }
 
         private void LoadStaffInfo()
-        {
+        {    // Ẩn ký tự nhập mật khẩu
             txtMKcu.UseSystemPasswordChar = true;
             txtMKmoi.UseSystemPasswordChar = true;
             txtNhapLaiMK.UseSystemPasswordChar = true;
 
-            // LẤY ACCOUNT_ID TỪ DATABASE
+            // Lấy account_id tương ứng với staff_id
             using var conn = new SqliteConnection(DatabaseHelper.GetConnectionString());
             conn.Open();
             using var cmd = new SqliteCommand(
                 "SELECT account_id FROM account WHERE staff_id=@sid", conn);
             cmd.Parameters.AddWithValue("@sid", _staff_id);
             _account_id = cmd.ExecuteScalar()?.ToString();
-
+            // Nếu không tìm thấy tài khoản
             if (string.IsNullOrEmpty(_account_id))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -54,7 +60,7 @@ namespace AdminApp
                 this.Close();
                 return;
             }
-
+             // Lấy thông tin nhân viên
             Staff staff = _staffRepo.GetStaffById(_staff_id);
             if (staff == null)
             {
@@ -64,7 +70,7 @@ namespace AdminApp
                 Close();
                 return;
             }
-
+            // Hiển thị thông tin lên giao diện
             txtHoTen.Text = staff.full_name;
             txtNgaySinh.Text = staff.date_of_birth;
             cbGioiTinh.Text = staff.gender;
@@ -72,6 +78,7 @@ namespace AdminApp
             txtSDT.Text = staff.phone_number;
             txtChucVu.Text = staff.role;
             txtChucVu.ReadOnly = true;
+            // Load ảnh đại diện (nếu có)
             byte[] img = _imageRepo.GetStaffImage(_staff_id);
             if (img != null)
             {
@@ -91,7 +98,7 @@ namespace AdminApp
                 MessageBox.Show("Họ tên không được để trống");
                 return;
             }
-
+            // Kiểm tra người dùng có muốn đổi mật khẩu hay không
             bool wantChangePassword =
                 !string.IsNullOrWhiteSpace(txtMKcu.Text) ||
                 !string.IsNullOrWhiteSpace(txtMKmoi.Text) ||
@@ -99,7 +106,7 @@ namespace AdminApp
 
             //Phần xử lý đổi mật khẩu
             if (wantChangePassword)
-            {
+            {   // Kiểm tra mật khẩu cũ
                 if (string.IsNullOrWhiteSpace(txtMKcu.Text))
                 {
                     SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -107,7 +114,7 @@ namespace AdminApp
                     MessageBox.Show("Vui lòng nhập mật khẩu cũ");
                     return;
                 }
-
+                 // Kiểm tra mật khẩu mới
                 if (string.IsNullOrWhiteSpace(txtMKmoi.Text) ||
                     string.IsNullOrWhiteSpace(txtNhapLaiMK.Text))
                 {
@@ -117,7 +124,7 @@ namespace AdminApp
                     return;
                 }
 
-                // THAY ĐỔI: DÙNG _account_id THAY VÌ _staff_id
+                // Kiểm tra tính đúng đắn của mật khẩu cũ
                 bool correctOldPass = _accountRepo.CheckOldPassword(_account_id, txtMKcu.Text);
 
                 if (!correctOldPass)
@@ -128,7 +135,7 @@ namespace AdminApp
                     return;
                 }
 
-                // Phần kiểm tra nhập lại
+                // Kiểm tra nhập lại mật khẩu
                 if (txtMKmoi.Text != txtNhapLaiMK.Text)
                 {
                     SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -137,7 +144,7 @@ namespace AdminApp
                     return;
                 }
 
-                // THAY ĐỔI: DÙNG _account_id THAY VÌ _staff_id
+                // Cập nhật mật khẩu mới
                 _accountRepo.UpdatePassword(_account_id, txtMKmoi.Text);
             }
 
@@ -151,7 +158,7 @@ namespace AdminApp
                 phone_number = txtSDT.Text.Trim(),
                 role = txtChucVu.Text.Trim()
             };
-
+             // Thực hiện cập nhật
             if (_staffRepo.UpdateStaff(staff))
             {
                 if (_selectedImageBytes != null)
@@ -182,9 +189,9 @@ namespace AdminApp
                 ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
 
                 if (ofd.ShowDialog() == DialogResult.OK)
-                {
+                {   // Đọc ảnh thành mảng byte
                     _selectedImageBytes = File.ReadAllBytes(ofd.FileName);
-
+                    // Hiển thị ảnh lên giao diện
                     using (MemoryStream ms = new MemoryStream(_selectedImageBytes))
                     {
                         picAvatar.Image = Image.FromStream(ms);
