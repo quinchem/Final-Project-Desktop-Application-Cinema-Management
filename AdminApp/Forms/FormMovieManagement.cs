@@ -31,6 +31,19 @@ namespace AdminApp
         private void FormMovieManagement_Load(object sender, EventArgs e)
         {
             LoadFilmData();
+            LoadStatusCombo();
+        }
+
+        // Hàm đổ dữ liệu trạng thái phim vào ComboBox
+        private void LoadStatusCombo()
+        {
+            cboStatusFilter.Items.Clear();
+            cboStatusFilter.Items.Add("Tất cả");
+            cboStatusFilter.Items.Add("Đang chiếu");
+            cboStatusFilter.Items.Add("Sắp chiếu");
+            cboStatusFilter.Items.Add("Ngừng chiếu");
+
+            cboStatusFilter.SelectedIndex = 0; 
         }
 
         // Hàm lấy toàn bộ phim từ CSDL qua FilmRepo, sau đó sắp xếp theo ngày chiếu
@@ -63,20 +76,52 @@ namespace AdminApp
             dgvMovies.Columns["colDelete"].DisplayIndex = 5;
         }
 
+        // Hàm xử lý sự kiện lọc trạng thái phim từ ComboBox
+        private void cboStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedStatus = cboStatusFilter.SelectedItem.ToString();
+
+            List<Film> films;
+
+            if (selectedStatus == "Tất cả")
+            {
+                films = _filmRepo.GetAllFilms();
+            }
+            else
+            {
+                films = _filmRepo.GetFilmsByStatus(selectedStatus);
+            }
+
+            BindDataToGrid(films);
+        }
+
+
         // Hàm xử lý sự kiện tìm tên phim, nếu textbox rỗng thì sẽ lấy toàn bộ phim,
         // nếu có nhập keyword thì sẽ tìm phim theo keyword, sử dụng Film Repo
+        // Nếu có chọn lọc trạng thái thì sẽ lọc theo trạng thái trước, sau đó mới lọc theo từ khóa
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             string keyword = txtSearch.Text.Trim();
+            string status = cboStatusFilter.SelectedItem.ToString();
+
             List<Film> results;
 
-            if (string.IsNullOrEmpty(keyword))
+            // Trường hợp lọc theo status
+            if (status == "Tất cả")
             {
                 results = _filmRepo.GetAllFilms();
             }
             else
             {
-                results = _filmRepo.SearchFilmByName1(keyword);
+                results = _filmRepo.GetFilmsByStatus(status);
+            }
+
+            // Sau đó lọc theo keyword
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                results = results
+                    .Where(f => f.title.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .ToList();
             }
 
             BindDataToGrid(results);
@@ -125,6 +170,8 @@ namespace AdminApp
                 return;
             }
         }
+
+        // Hàm xóa phim khỏi CSDL dựa vào movie_id
         private void DeleteMovie(string id)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -151,7 +198,17 @@ namespace AdminApp
             var f = new FormViewDetailMovie(movieId);
             f.Show();
         }
-           
+
+        // Hàm xử lý sự kiện nhấn Enter trong textbox thì sẽ chuyển qua nút tìm kiếm
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnTimPhim.PerformClick();
+                e.SuppressKeyPress = true; // chặn tiếng "bíp"
+            }
+        }
+
         // Hàm xử lý sự kiện xuất file Excel
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
