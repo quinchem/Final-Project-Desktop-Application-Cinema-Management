@@ -56,7 +56,7 @@ namespace UserApp
             btnUserName = new Button();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             label2 = new Label();
-            guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
+            btnPhimSapChieu = new Guna.UI2.WinForms.Guna2Button();
             btnPhim = new Guna.UI2.WinForms.Guna2Button();
             btnLichChieu = new Guna.UI2.WinForms.Guna2Button();
             logo = new PictureBox();
@@ -90,7 +90,7 @@ namespace UserApp
             guna2Panel2.Controls.Add(btnUserName);
             guna2Panel2.Controls.Add(guna2Button4);
             guna2Panel2.Controls.Add(label2);
-            guna2Panel2.Controls.Add(guna2Button3);
+            guna2Panel2.Controls.Add(btnPhimSapChieu);
             guna2Panel2.Controls.Add(btnPhim);
             guna2Panel2.Controls.Add(btnLichChieu);
             guna2Panel2.Controls.Add(logo);
@@ -165,24 +165,25 @@ namespace UserApp
             label2.TabIndex = 24;
             label2.Text = "|";
             // 
-            // guna2Button3
+            // btnPhimSapChieu
             // 
-            guna2Button3.CustomizableEdges = customizableEdges3;
-            guna2Button3.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button3.FillColor = Color.FromArgb(44, 84, 115);
-            guna2Button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button3.ForeColor = Color.White;
-            guna2Button3.Image = Properties.Resources.KhuyenMai;
-            guna2Button3.ImageSize = new Size(30, 30);
-            guna2Button3.Location = new Point(713, 65);
-            guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button3.Size = new Size(160, 45);
-            guna2Button3.TabIndex = 30;
-            guna2Button3.Text = "KHUYẾN MÃI";
+            btnPhimSapChieu.CustomizableEdges = customizableEdges3;
+            btnPhimSapChieu.DisabledState.BorderColor = Color.DarkGray;
+            btnPhimSapChieu.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnPhimSapChieu.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnPhimSapChieu.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnPhimSapChieu.FillColor = Color.FromArgb(44, 84, 115);
+            btnPhimSapChieu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPhimSapChieu.ForeColor = Color.White;
+            btnPhimSapChieu.Image = Properties.Resources.KhuyenMai;
+            btnPhimSapChieu.ImageSize = new Size(30, 30);
+            btnPhimSapChieu.Location = new Point(713, 65);
+            btnPhimSapChieu.Name = "btnPhimSapChieu";
+            btnPhimSapChieu.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnPhimSapChieu.Size = new Size(220, 45);
+            btnPhimSapChieu.TabIndex = 30;
+            btnPhimSapChieu.Text = "PHIM SẮP CHIẾU";
+            btnPhimSapChieu.Click += btnPhimSapChieu_Click;
             // 
             // btnPhim
             // 
@@ -396,7 +397,7 @@ namespace UserApp
         private PictureBox logo;
         private Panel mainpanel;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
+        private Guna.UI2.WinForms.Guna2Button btnPhimSapChieu;
         private Guna.UI2.WinForms.Guna2Button btnPhim;
         private Guna.UI2.WinForms.Guna2Button btnLichChieu;
         private Button btnUserName;
