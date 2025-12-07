@@ -863,12 +863,11 @@ namespace AdminApp
                 }
             }
 
-            SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
-            player.Play();
-            MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-                // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
+    SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+    player.Play();
+    MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+}
+        // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
         // Thường dùng khi thay đổi kích thước form hoặc muốn căn lại layout cho đều.
         private void btnRefresh_Click(object sender, EventArgs e)
         {
