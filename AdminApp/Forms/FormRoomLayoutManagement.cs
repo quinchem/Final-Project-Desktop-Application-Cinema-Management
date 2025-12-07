@@ -1,4 +1,4 @@
-﻿using Guna.UI2.WinForms;
+using Guna.UI2.WinForms;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
 using SharedData.Models;
@@ -604,6 +604,8 @@ namespace AdminApp
         }
         // Hàm này đếm số ghế hiện có trong panel và cập nhật lên textbox.
         // Việc đếm dựa trên số lượng nút Guna2Button có gắn Tag là SeatData.
+        //  HỖ TRỢ: CẬP NHẬT SỐ GHẾ UI
+        // ==========================================
         private void UpdateSeatCountUI()
         {
             int count = panelRoomLayout.Controls
@@ -865,10 +867,12 @@ namespace AdminApp
             SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
             player.Play();
             MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
         // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
         // Thường dùng khi thay đổi kích thước form hoặc muốn căn lại layout cho đều.
+
+        // ==========================================
+        //  NÚT KHÁC
+        // ==========================================
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             FormatSeatPositions();
