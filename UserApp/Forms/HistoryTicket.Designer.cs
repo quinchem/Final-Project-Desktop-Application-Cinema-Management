@@ -113,7 +113,7 @@
             // TongTien
             // 
             TongTien.FillWeight = 104.199074F;
-            TongTien.HeaderText = "Tổng Tiền";
+            TongTien.HeaderText = "Tổng tiền";
             TongTien.MinimumWidth = 8;
             TongTien.Name = "TongTien";
             // 
