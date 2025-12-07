@@ -155,6 +155,7 @@ namespace AdminApp
                 {
                     lblNewCustomer.Text = reader.Read() ? reader.GetInt32(0).ToString() : "0";
                 }
+            }
         }
 
 
