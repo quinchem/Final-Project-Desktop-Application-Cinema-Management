@@ -1,4 +1,4 @@
-using Guna.UI2.WinForms;
+﻿using Guna.UI2.WinForms;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
 using SharedData.Models;
@@ -111,7 +111,7 @@ namespace AdminApp
             // Nếu nút phòng 1 tồn tại (để tránh null) thì set Checked = true.
             if (btnPhong1 != null) btnPhong1.Checked = true;
         }
-                // Load thông tin một phòng chiếu dựa trên roomIndex (1 → 5).
+        // Load thông tin một phòng chiếu dựa trên roomIndex (1 → 5).
         // Hàm này sẽ:
         // 1. Đọc thông tin phòng từ database (loại phòng + số ghế).
         // 2. Tải file JSON layout ghế (nếu có).
@@ -170,7 +170,7 @@ namespace AdminApp
                 if (File.Exists(jsonFile))
                 {
                     // Đọc danh sách SeatData từ JSON.
-                    var list = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonFile)) 
+                    var list = JsonConvert.DeserializeObject<List<SeatData>>(File.ReadAllText(jsonFile))
                                ?? new List<SeatData>();
 
                     // Chuẩn hóa dữ liệu trước khi hiển thị.
@@ -259,10 +259,10 @@ namespace AdminApp
         private void Screen_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-        
+
             draggingScreen = true;                       // bật trạng thái kéo
             dragCursorPoint = Cursor.Position;           // lưu vị trí chuột ban đầu
-        
+
             var screen = (Guna.UI2.WinForms.Guna2Panel)sender;
             screenDragStartPoint = screen.Location;      // vị trí panel trước khi kéo
             screen.FillColor = Color.LightGray;          // hiệu ứng khi đang kéo
@@ -273,19 +273,19 @@ namespace AdminApp
         private void Screen_MouseMove(object sender, MouseEventArgs e)
         {
             if (!draggingScreen) return;
-        
+
             var diff = Point.Subtract(Cursor.Position, new Size(dragCursorPoint)); // tính độ lệch
             var screen = (Guna.UI2.WinForms.Guna2Panel)sender;
-        
+
             screen.Location = Point.Add(screenDragStartPoint, new Size(diff));     // cập nhật vị trí panel
         }
-        
+
         // Khi người dùng thả chuột ra, dừng quá trình kéo panel màn hình
         // Khôi phục lại màu nền panel về trạng thái bình thường
         private void Screen_MouseUp(object sender, MouseEventArgs e)
         {
             draggingScreen = false;                        // tắt chế độ kéo
-        
+
             var screen = (Guna.UI2.WinForms.Guna2Panel)sender;
             screen.FillColor = Color.WhiteSmoke;           // trả lại màu gốc
         }
@@ -328,7 +328,7 @@ namespace AdminApp
             panelRoomLayout.Controls.Add(btn);
             return btn;
         }
-        
+
         // Xử lý chọn hoặc bỏ chọn ghế
         // Nếu ghế đã chọn → bỏ chọn và trả style về mặc định
         // Nếu ghế chưa chọn → thêm vào danh sách ghế chọn và highlight ghế
@@ -336,7 +336,7 @@ namespace AdminApp
         {
             var btn = (Guna2Button)sender;
             var seat = (SeatData)btn.Tag;
-        
+
             // Nếu ghế đã được chọn trước đó → bỏ chọn
             if (selectedSeats.Contains(btn))
             {
@@ -344,12 +344,12 @@ namespace AdminApp
                 ApplySeatStyle(btn, seat);   // trả về style ban đầu của ghế
                 return;
             }
-        
+
             // Nếu ghế chưa được chọn → thêm vào danh sách chọn
             selectedSeats.Add(btn);
-        
+
             // Highlight ghế đang chọn
-            btn.FillColor = Color.FromArgb(35, 150, 62);  
+            btn.FillColor = Color.FromArgb(35, 150, 62);
             btn.ForeColor = Color.White;
             btn.BorderColor = seat.Type == "VIP"
                                 ? Color.FromArgb(255, 193, 7)     // nếu VIP thì viền vàng
@@ -363,7 +363,7 @@ namespace AdminApp
         private void SetEditMode(bool enable)
         {
             editMode = enable;                     // lưu trạng thái hiện tại
-        
+
             txtMaGhe.ReadOnly = !enable;           // cho phép sửa mã ghế
             rdoVip.Enabled = enable;               // bật/tắt radio loại ghế VIP
             rdoThuong.Enabled = enable;            // bật/tắt radio loại ghế Thường
@@ -602,7 +602,7 @@ namespace AdminApp
                 startY += seatH + spaceY;
             }
         }
-                // Hàm này đếm số ghế hiện có trong panel và cập nhật lên textbox.
+        // Hàm này đếm số ghế hiện có trong panel và cập nhật lên textbox.
         // Việc đếm dựa trên số lượng nút Guna2Button có gắn Tag là SeatData.
         private void UpdateSeatCountUI()
         {
@@ -867,7 +867,7 @@ namespace AdminApp
             MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-                // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
+        // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
         // Thường dùng khi thay đổi kích thước form hoặc muốn căn lại layout cho đều.
         private void btnRefresh_Click(object sender, EventArgs e)
         {
