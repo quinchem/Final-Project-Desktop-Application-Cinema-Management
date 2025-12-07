@@ -45,7 +45,10 @@ namespace SharedData.Repositories
             // rd.GetString(1) là status
             while (rd.Read())
             {
-                dict[rd.GetString(0)] = rd.GetString(1);
+                string seatId = rd.GetString(0);
+                string status = rd.IsDBNull(1) ? "" : rd.GetString(1);
+
+                dict[seatId] = status;
             }
 
             // Trả về dictionary đã chứa đầy đủ trạng thái của từng ghế trong suất chiếu

@@ -85,35 +85,35 @@
             // 
             MaDatVe.DataPropertyName = "MaDatVe";
             MaDatVe.FillWeight = 114.957649F;
-            MaDatVe.HeaderText = "Mã Đặt Vé";
+            MaDatVe.HeaderText = "Mã đơn đặt vé";
             MaDatVe.MinimumWidth = 8;
             MaDatVe.Name = "MaDatVe";
             // 
             // TenPhim
             // 
             TenPhim.FillWeight = 139.6315F;
-            TenPhim.HeaderText = "Tên Phim";
+            TenPhim.HeaderText = "Tên phim";
             TenPhim.MinimumWidth = 8;
             TenPhim.Name = "TenPhim";
             // 
             // SuatChieu
             // 
             SuatChieu.FillWeight = 111.794319F;
-            SuatChieu.HeaderText = "Suất Chiếu";
+            SuatChieu.HeaderText = "Suất chiếu";
             SuatChieu.MinimumWidth = 8;
             SuatChieu.Name = "SuatChieu";
             // 
             // NgayDatVe
             // 
             NgayDatVe.FillWeight = 108.225479F;
-            NgayDatVe.HeaderText = "Ngày Đặt Vé";
+            NgayDatVe.HeaderText = "Ngày đặt vé";
             NgayDatVe.MinimumWidth = 8;
             NgayDatVe.Name = "NgayDatVe";
             // 
             // TongTien
             // 
             TongTien.FillWeight = 104.199074F;
-            TongTien.HeaderText = "Tổng Tiền";
+            TongTien.HeaderText = "Tổng tiền";
             TongTien.MinimumWidth = 8;
             TongTien.Name = "TongTien";
             // 
@@ -127,7 +127,7 @@
             // XemChiTiet
             // 
             XemChiTiet.FillWeight = 71.4022446F;
-            XemChiTiet.HeaderText = "Xem Chi Tiết";
+            XemChiTiet.HeaderText = "Xem chi tiết";
             XemChiTiet.MinimumWidth = 8;
             XemChiTiet.Name = "XemChiTiet";
             XemChiTiet.Text = "Xem";
