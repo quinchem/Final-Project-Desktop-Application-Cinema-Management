@@ -111,7 +111,8 @@ namespace AdminApp
             // Nếu nút phòng 1 tồn tại (để tránh null) thì set Checked = true.
             if (btnPhong1 != null) btnPhong1.Checked = true;
         }
-                // Load thông tin một phòng chiếu dựa trên roomIndex (1 → 5).
+        
+        // Load thông tin một phòng chiếu dựa trên roomIndex (1 → 5).
         // Hàm này sẽ:
         // 1. Đọc thông tin phòng từ database (loại phòng + số ghế).
         // 2. Tải file JSON layout ghế (nếu có).
