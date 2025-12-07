@@ -61,7 +61,7 @@ namespace AdminApp
             { "F", 15 }
         };
 
-        // Danh sách các ghế đang được chọn ở UI để thao tác (đổi loại, đổi trạng thái, xóa, thêm).
+        // Danh sách các ghế đang được chọn ở giao diện để thao tác (đổi loại, đổi trạng thái, xóa, thêm).
         private readonly List<Guna2Button> selectedSeats = new List<Guna2Button>();
 
         // Constructor chính của form.
@@ -84,10 +84,10 @@ namespace AdminApp
             // Mục đích: dùng DataSource để suy ra thư mục gốc solution.
             var csb = new SqliteConnectionStringBuilder(DatabaseHelper.GetConnectionString());
 
-            // dbPath là đường dẫn đến file CSDL, ví dụ: ...\SharedDatabase\Cinema.db
+            // dbPath là đường dẫn đến file database
             string dbPath = csb.DataSource;
 
-            // Lấy thư mục chứa database, ví dụ: ...\SharedDatabase
+            // Lấy thư mục chứa database
             string dbDir = Path.GetDirectoryName(dbPath);
 
             // solutionRoot là thư mục cha của SharedDatabase → thư mục gốc solution.
@@ -111,7 +111,8 @@ namespace AdminApp
             // Nếu nút phòng 1 tồn tại (để tránh null) thì set Checked = true.
             if (btnPhong1 != null) btnPhong1.Checked = true;
         }
-                // Load thông tin một phòng chiếu dựa trên roomIndex (1 → 5).
+        
+        // Load thông tin một phòng chiếu dựa trên roomIndex (1 → 5).
         // Hàm này sẽ:
         // 1. Đọc thông tin phòng từ database (loại phòng + số ghế).
         // 2. Tải file JSON layout ghế (nếu có).
@@ -253,6 +254,44 @@ namespace AdminApp
             panelRoomLayout.Controls.Add(screen);
             screen.BringToFront();
         }
+        // Sự kiện khi người dùng nhấn chuột xuống panel màn hình
+        // Lưu lại vị trí chuột ban đầu và vị trí panel trước khi kéo
+        // Bật trạng thái draggingScreen để cho phép kéo panel
+        private void Screen_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+        
+            draggingScreen = true;                       // bật trạng thái kéo
+            dragCursorPoint = Cursor.Position;           // lưu vị trí chuột ban đầu
+        
+            var screen = (Guna.UI2.WinForms.Guna2Panel)sender;
+            screenDragStartPoint = screen.Location;      // vị trí panel trước khi kéo
+            screen.FillColor = Color.LightGray;          // hiệu ứng khi đang kéo
+        }
+
+        // Khi người dùng di chuyển chuột trong lúc đang kéo panel màn hình
+        // Tính độ lệch giữa vị trí chuột hiện tại và ban đầu để cập nhật vị trí panel
+        private void Screen_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!draggingScreen) return;
+        
+            var diff = Point.Subtract(Cursor.Position, new Size(dragCursorPoint)); // tính độ lệch
+            var screen = (Guna.UI2.WinForms.Guna2Panel)sender;
+        
+            screen.Location = Point.Add(screenDragStartPoint, new Size(diff));     // cập nhật vị trí panel
+        }
+        
+        // Khi người dùng thả chuột ra, dừng quá trình kéo panel màn hình
+        // Khôi phục lại màu nền panel về trạng thái bình thường
+        private void Screen_MouseUp(object sender, MouseEventArgs e)
+        {
+            draggingScreen = false;                        // tắt chế độ kéo
+        
+            var screen = (Guna.UI2.WinForms.Guna2Panel)sender;
+            screen.FillColor = Color.WhiteSmoke;           // trả lại màu gốc
+        }
+
+
 
         // Tạo một ghế (Guna2Button) từ dữ liệu SeatData.
         // Hàm sẽ:
@@ -290,7 +329,50 @@ namespace AdminApp
             panelRoomLayout.Controls.Add(btn);
             return btn;
         }
-                // Áp dụng style cho một ghế dựa theo SeatData:
+        
+        // Xử lý chọn hoặc bỏ chọn ghế
+        // Nếu ghế đã chọn → bỏ chọn và trả style về mặc định
+        // Nếu ghế chưa chọn → thêm vào danh sách ghế chọn và highlight ghế
+        private void Seat_Select(object sender, EventArgs e)
+        {
+            var btn = (Guna2Button)sender;
+            var seat = (SeatData)btn.Tag;
+        
+            // Nếu ghế đã được chọn trước đó → bỏ chọn
+            if (selectedSeats.Contains(btn))
+            {
+                selectedSeats.Remove(btn);
+                ApplySeatStyle(btn, seat);   // trả về style ban đầu của ghế
+                return;
+            }
+        
+            // Nếu ghế chưa được chọn → thêm vào danh sách chọn
+            selectedSeats.Add(btn);
+        
+            // Highlight ghế đang chọn
+            btn.FillColor = Color.FromArgb(35, 150, 62);  
+            btn.ForeColor = Color.White;
+            btn.BorderColor = seat.Type == "VIP"
+                                ? Color.FromArgb(255, 193, 7)     // nếu VIP thì viền vàng
+                                : Color.DimGray;
+            btn.BorderThickness = 4;
+        }
+
+        // Bật / tắt chế độ chỉnh sửa ghế
+        // Khi bật → cho phép thay đổi mã ghế, loại ghế, trạng thái ghế
+        // Khi tắt → khóa toàn bộ các control chỉnh sửa
+        private void SetEditMode(bool enable)
+        {
+            editMode = enable;                     // lưu trạng thái hiện tại
+        
+            txtMaGhe.ReadOnly = !enable;           // cho phép sửa mã ghế
+            rdoVip.Enabled = enable;               // bật/tắt radio loại ghế VIP
+            rdoThuong.Enabled = enable;            // bật/tắt radio loại ghế Thường
+            rdoBaoTri.Enabled = enable;            // bật/tắt radio trạng thái bảo trì
+            rdoBinhThuong.Enabled = enable;        // bật/tắt radio trạng thái bình thường
+        }
+
+        // Áp dụng style cho một ghế dựa theo SeatData:
         // - Nếu ghế Bảo trì: chuyển màu xám, khóa border.
         // - Nếu ghế VIP: có viền vàng.
         // - Nếu ghế Thường: viền xám.
@@ -781,12 +863,11 @@ namespace AdminApp
                 }
             }
 
-            SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
-            player.Play();
-            MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-                // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
+    SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+    player.Play();
+    MessageBox.Show($"Đã lưu sơ đồ phòng {currentRoom}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+}
+        // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
         // Thường dùng khi thay đổi kích thước form hoặc muốn căn lại layout cho đều.
         private void btnRefresh_Click(object sender, EventArgs e)
         {
