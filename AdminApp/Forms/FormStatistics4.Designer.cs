@@ -254,7 +254,7 @@
             guna2CustomGradientPanel4.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel4.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel4.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel4.Location = new Point(255, 847);
+            guna2CustomGradientPanel4.Location = new Point(255, 833);
             guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
             guna2CustomGradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2CustomGradientPanel4.Size = new Size(1313, 397);
@@ -385,7 +385,7 @@
             guna2CustomGradientPanel5.FillColor2 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel5.FillColor3 = Color.FromArgb(125, 167, 199);
             guna2CustomGradientPanel5.FillColor4 = Color.FromArgb(125, 167, 199);
-            guna2CustomGradientPanel5.Location = new Point(254, 400);
+            guna2CustomGradientPanel5.Location = new Point(254, 390);
             guna2CustomGradientPanel5.Name = "guna2CustomGradientPanel5";
             guna2CustomGradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2CustomGradientPanel5.Size = new Size(1314, 414);
@@ -625,8 +625,10 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            AutoScrollMinSize = new Size(1, 1);
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1902, 1280);
+            ClientSize = new Size(1902, 1255);
             Controls.Add(groupBox4);
             Controls.Add(guna2CustomGradientPanel4);
             Controls.Add(guna2CustomGradientPanel2);

@@ -435,6 +435,5 @@ namespace UserApp
                 // 3. Quay người dùng về màn hình chọn ghế để đặt lại
             }
         }
-        }
     }
 }

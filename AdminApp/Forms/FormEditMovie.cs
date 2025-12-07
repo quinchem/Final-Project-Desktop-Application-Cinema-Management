@@ -37,8 +37,6 @@ namespace AdminApp
             {
 
                 cboDoTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18" });
-                cboTrangThai.Items.AddRange(new object[] { "Đang chiếu", "Sắp chiếu" });
-                cboTrangThai.SelectedIndex = 0; 
             }
             catch (Exception ex)
             {
@@ -66,13 +64,21 @@ namespace AdminApp
                     txtGiaNhap.Text = film.film_purchase_price?.ToString() ?? "";
                     txtThoiLuong.Text = film.duration.ToString();
 
+
                     if (!string.IsNullOrEmpty(film.status))
                     {
-                        if (cboTrangThai.Items.Contains(film.status))
-                            cboTrangThai.SelectedItem = film.status;
-                        else
-                            cboTrangThai.Text = film.status; 
+                        string status = film.status.Trim();
+
+                        if (status.Equals("Đang chiếu", StringComparison.OrdinalIgnoreCase))
+                            rbActive.Checked = true;
+
+                        else if (status.Equals("Sắp chiếu", StringComparison.OrdinalIgnoreCase))
+                            rbActive.Checked = true;
+
+                        else if (status.Equals("Ngừng chiếu", StringComparison.OrdinalIgnoreCase))
+                            rbStopped.Checked = true;
                     }
+
 
                     if (!string.IsNullOrEmpty(film.age_restriction))
                     {
@@ -134,6 +140,42 @@ namespace AdminApp
             }
         }
 
+        // Hàm cập nhật trạng thái phim dựa trên ngày chiếu và trạng thái radio button:
+        // Nếu tick ngừng chiếu → luôn là ngừng chiếu
+        // Nếu tick đang hoạt động → tự động xét ngày để ra đang chiếu / sắp chiếu
+        private void UpdateStatus()
+        {
+            if (rbStopped.Checked)
+            {
+                lblTrangThai.Text = "Ngừng chiếu";
+                return;
+            }
+
+            DateTime release = dtNgayChieu.Value;
+            DateTime today = DateTime.Today;
+
+            if (release > today)
+                lblTrangThai.Text = "Sắp chiếu";
+            else
+                lblTrangThai.Text = "Đang chiếu";
+        }
+
+        // Các hàm xử lý sự kiện CheckedChanged của RadioButton và ValueChanged của DateTimePicker để cập nhật trạng thái phim
+        private void rbActive_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+
+        private void rbStopped_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+
+        private void dtNgayChieu_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+
         //Hàm xử lý sự kiện Click vào nút Upload Poster để chọn ảnh mới từ máy, sau đó lưu ảnh dưới dạng byte
         private void btnUploadPoster_Click(object sender, EventArgs e)
         {
@@ -161,6 +203,43 @@ namespace AdminApp
                 }
             }
         }
+        private void DeletePoster()
+        {
+            try
+            {
+                // Xóa trong database (repo)
+                _imageRepo.DeleteMoviePoster(movieId);
+
+                // Xóa khỏi PictureBox
+                picPoster.Image = null;
+
+                // Reset dữ liệu ảnh trong RAM
+                _posterImageBytes = null;
+
+                MessageBox.Show("Đã xoá poster thành công!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xoá poster: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDeletePoster_Click(object sender, EventArgs e)
+        {
+            var confirm = MessageBox.Show(
+                "Bạn có chắc muốn xoá poster này?",
+                "Xác nhận",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                DeletePoster();
+            }
+        }
+
 
         // Hàm xử lý sự kiện nhấn vào nút Save để lưu thông tin phim và poster vào CSDL sau khi chỉnh sửa
         private void btnSave_Click(object sender, EventArgs e)
@@ -176,7 +255,7 @@ namespace AdminApp
                     director = txtDaoDien.Text,
                     actor = txtDienVien.Text,
                     description = txtMoTa.Text,
-                    status = cboTrangThai.Text,
+                    status = lblTrangThai.Text,
                     film_purchase_price = string.IsNullOrEmpty(txtGiaNhap.Text) ? null : int.Parse(txtGiaNhap.Text),
                     duration = int.Parse(txtThoiLuong.Text),
                     age_restriction = cboDoTuoi.Text,

@@ -38,21 +38,27 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMovieManagement));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             btnTimPhim = new Guna.UI2.WinForms.Guna2Button();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             dgvMovies = new Guna.UI2.WinForms.Guna2DataGridView();
+            btnXuatFile = new Guna.UI2.WinForms.Guna2Button();
+            cboStatusFilter = new Guna.UI2.WinForms.Guna2ComboBox();
             title = new DataGridViewTextBoxColumn();
             release_date = new DataGridViewTextBoxColumn();
             status = new DataGridViewTextBoxColumn();
             duration = new DataGridViewTextBoxColumn();
             colEdit = new DataGridViewImageColumn();
             colDelete = new DataGridViewImageColumn();
-            btnXuatFile = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)dgvMovies).BeginInit();
             SuspendLayout();
             // 
@@ -85,10 +91,11 @@
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges2;
             txtSearch.Size = new Size(549, 54);
             txtSearch.TabIndex = 1;
+            txtSearch.KeyDown += txtSearch_KeyDown;
             // 
             // btnTimPhim
             // 
-            btnTimPhim.BorderRadius = 5;
+            btnTimPhim.BorderRadius = 10;
             btnTimPhim.CustomizableEdges = customizableEdges3;
             btnTimPhim.DisabledState.BorderColor = Color.DarkGray;
             btnTimPhim.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -98,17 +105,17 @@
             btnTimPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTimPhim.ForeColor = Color.White;
             btnTimPhim.Image = Properties.Resources.search;
-            btnTimPhim.Location = new Point(703, 60);
+            btnTimPhim.Location = new Point(671, 70);
             btnTimPhim.Name = "btnTimPhim";
             btnTimPhim.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnTimPhim.Size = new Size(116, 46);
+            btnTimPhim.Size = new Size(98, 36);
             btnTimPhim.TabIndex = 28;
             btnTimPhim.Text = "TÌM";
             btnTimPhim.Click += BtnSearch_Click;
             // 
             // guna2Button1
             // 
-            guna2Button1.BorderRadius = 5;
+            guna2Button1.BorderRadius = 10;
             guna2Button1.CustomizableEdges = customizableEdges5;
             guna2Button1.DisabledState.BorderColor = Color.DarkGray;
             guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -118,7 +125,7 @@
             guna2Button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button1.ForeColor = Color.White;
             guna2Button1.Image = Properties.Resources.add;
-            guna2Button1.Location = new Point(1263, 60);
+            guna2Button1.Location = new Point(1284, 61);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2Button1.Size = new Size(115, 45);
@@ -143,21 +150,21 @@
             dgvMovies.ColumnHeadersHeight = 27;
             dgvMovies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dgvMovies.Columns.AddRange(new DataGridViewColumn[] { title, release_date, status, duration, colEdit, colDelete });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 192, 128);
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvMovies.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(255, 192, 128);
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgvMovies.DefaultCellStyle = dataGridViewCellStyle6;
             dgvMovies.GridColor = Color.WhiteSmoke;
-            dgvMovies.Location = new Point(243, 180);
+            dgvMovies.Location = new Point(116, 180);
             dgvMovies.Name = "dgvMovies";
             dgvMovies.ReadOnly = true;
             dgvMovies.RowHeadersVisible = false;
             dgvMovies.RowHeadersWidth = 51;
-            dgvMovies.Size = new Size(1383, 577);
+            dgvMovies.Size = new Size(1510, 577);
             dgvMovies.TabIndex = 30;
             dgvMovies.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgvMovies.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -183,76 +190,9 @@
             dgvMovies.CellClick += dgvMovies_CellClick;
             dgvMovies.CellDoubleClick += dgvMovie_CellDoubleClick;
             // 
-            // title
-            // 
-            title.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            title.DataPropertyName = "title";
-            title.HeaderText = "Tên Phim";
-            title.MinimumWidth = 6;
-            title.Name = "title";
-            title.ReadOnly = true;
-            title.Width = 450;
-            // 
-            // release_date
-            // 
-            release_date.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            release_date.DataPropertyName = "release_date";
-            release_date.FillWeight = 65.33226F;
-            release_date.HeaderText = "Ngày Chiếu";
-            release_date.MinimumWidth = 6;
-            release_date.Name = "release_date";
-            release_date.ReadOnly = true;
-            release_date.Width = 220;
-            // 
-            // status
-            // 
-            status.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            status.DataPropertyName = "status";
-            status.FillWeight = 65.33226F;
-            status.HeaderText = "Trạng Thái";
-            status.MinimumWidth = 6;
-            status.Name = "status";
-            status.ReadOnly = true;
-            status.Width = 220;
-            // 
-            // duration
-            // 
-            duration.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            duration.DataPropertyName = "duration";
-            duration.FillWeight = 65.33226F;
-            duration.HeaderText = "Thời Lượng";
-            duration.MinimumWidth = 6;
-            duration.Name = "duration";
-            duration.ReadOnly = true;
-            duration.Width = 220;
-            // 
-            // colEdit
-            // 
-            colEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            colEdit.FillWeight = 223.358109F;
-            colEdit.HeaderText = "Chỉnh";
-            colEdit.Image = Properties.Resources.pen;
-            colEdit.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            colEdit.MinimumWidth = 6;
-            colEdit.Name = "colEdit";
-            colEdit.ReadOnly = true;
-            colEdit.Width = 70;
-            // 
-            // colDelete
-            // 
-            colDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            colDelete.FillWeight = 80.6451645F;
-            colDelete.HeaderText = "Xóa";
-            colDelete.Image = Properties.Resources.trash;
-            colDelete.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            colDelete.MinimumWidth = 6;
-            colDelete.Name = "colDelete";
-            colDelete.ReadOnly = true;
-            colDelete.Width = 70;
-            // 
             // btnXuatFile
             // 
-            btnXuatFile.BorderRadius = 8;
+            btnXuatFile.BorderRadius = 10;
             btnXuatFile.CustomizableEdges = customizableEdges7;
             btnXuatFile.DisabledState.BorderColor = Color.DarkGray;
             btnXuatFile.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -270,6 +210,100 @@
             btnXuatFile.Text = "XUẤT FILE EXCEL";
             btnXuatFile.Click += btnExportExcel_Click;
             // 
+            // cboStatusFilter
+            // 
+            cboStatusFilter.BackColor = Color.Transparent;
+            cboStatusFilter.BorderColor = Color.FromArgb(64, 64, 64);
+            cboStatusFilter.BorderRadius = 10;
+            cboStatusFilter.CustomizableEdges = customizableEdges9;
+            cboStatusFilter.DrawMode = DrawMode.OwnerDrawFixed;
+            cboStatusFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboStatusFilter.FillColor = Color.LightSteelBlue;
+            cboStatusFilter.FocusedColor = Color.FromArgb(94, 148, 255);
+            cboStatusFilter.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cboStatusFilter.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cboStatusFilter.ForeColor = Color.FromArgb(68, 88, 112);
+            cboStatusFilter.ItemHeight = 40;
+            cboStatusFilter.Location = new Point(1088, 60);
+            cboStatusFilter.Name = "cboStatusFilter";
+            cboStatusFilter.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            cboStatusFilter.Size = new Size(178, 46);
+            cboStatusFilter.TabIndex = 33;
+            cboStatusFilter.SelectedIndexChanged += cboStatusFilter_SelectedIndexChanged;
+            // 
+            // title
+            // 
+            title.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            title.DataPropertyName = "title";
+            title.HeaderText = "Tên Phim";
+            title.MinimumWidth = 6;
+            title.Name = "title";
+            title.ReadOnly = true;
+            title.Width = 500;
+            // 
+            // release_date
+            // 
+            release_date.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            release_date.DataPropertyName = "release_date";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            release_date.DefaultCellStyle = dataGridViewCellStyle3;
+            release_date.FillWeight = 65.33226F;
+            release_date.HeaderText = "Ngày Chiếu";
+            release_date.MinimumWidth = 6;
+            release_date.Name = "release_date";
+            release_date.ReadOnly = true;
+            release_date.Width = 200;
+            // 
+            // status
+            // 
+            status.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            status.DataPropertyName = "status";
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            status.DefaultCellStyle = dataGridViewCellStyle4;
+            status.FillWeight = 65.33226F;
+            status.HeaderText = "Trạng Thái";
+            status.MinimumWidth = 6;
+            status.Name = "status";
+            status.ReadOnly = true;
+            status.Width = 280;
+            // 
+            // duration
+            // 
+            duration.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            duration.DataPropertyName = "duration";
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            duration.DefaultCellStyle = dataGridViewCellStyle5;
+            duration.FillWeight = 65.33226F;
+            duration.HeaderText = "Thời Lượng";
+            duration.MinimumWidth = 6;
+            duration.Name = "duration";
+            duration.ReadOnly = true;
+            duration.Width = 280;
+            // 
+            // colEdit
+            // 
+            colEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colEdit.FillWeight = 223.358109F;
+            colEdit.HeaderText = "Chỉnh";
+            colEdit.Image = Properties.Resources.pen;
+            colEdit.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            colEdit.MinimumWidth = 6;
+            colEdit.Name = "colEdit";
+            colEdit.ReadOnly = true;
+            colEdit.Width = 125;
+            // 
+            // colDelete
+            // 
+            colDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colDelete.FillWeight = 80.6451645F;
+            colDelete.HeaderText = "Xóa";
+            colDelete.Image = Properties.Resources.trash;
+            colDelete.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            colDelete.MinimumWidth = 6;
+            colDelete.Name = "colDelete";
+            colDelete.ReadOnly = true;
+            colDelete.Width = 125;
+            // 
             // FormMovieManagement
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -278,6 +312,7 @@
             AutoScrollMinSize = new Size(800, 800);
             BackColor = Color.FromArgb(92, 124, 150);
             ClientSize = new Size(1902, 815);
+            Controls.Add(cboStatusFilter);
             Controls.Add(btnXuatFile);
             Controls.Add(dgvMovies);
             Controls.Add(guna2Button1);
@@ -296,12 +331,13 @@
         private Guna.UI2.WinForms.Guna2Button btnTimPhim;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2DataGridView dgvMovies;
+        private Guna.UI2.WinForms.Guna2Button btnXuatFile;
+        private Guna.UI2.WinForms.Guna2ComboBox cboStatusFilter;
         private DataGridViewTextBoxColumn title;
         private DataGridViewTextBoxColumn release_date;
         private DataGridViewTextBoxColumn status;
         private DataGridViewTextBoxColumn duration;
         private DataGridViewImageColumn colEdit;
         private DataGridViewImageColumn colDelete;
-        private Guna.UI2.WinForms.Guna2Button btnXuatFile;
     }
 }

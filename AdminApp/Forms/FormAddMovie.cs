@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Microsoft.VisualBasic.Devices;
 using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,23 +20,23 @@ namespace AdminApp
 {
     public partial class FormAddMovie : Form
     {
-       
+
         private FilmRepo _filmRepo = new FilmRepo();
         private byte[] _posterImageData = null;
         public FormAddMovie()
         {
-            InitializeComponent(); 
-            LoadComboBoxData(); 
+            InitializeComponent();
+            LoadComboBoxData();
+            rbActive.Checked = true;
         }
 
         // Hàm load dữ liệu vào Combo Box của độ tuổi
         private void LoadComboBoxData()
         {
             try
-            { 
+            {
                 cboDoTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18" });
-                cboTrangThai.Items.AddRange(new object[] { "Đang chiếu", "Sắp chiếu" });
-                cboTrangThai.SelectedIndex = 0; 
+                
             }
             catch (Exception ex)
             {
@@ -52,14 +54,35 @@ namespace AdminApp
 
             if (movies.Count > 0)
             {
-                var lastId = movies.OrderByDescending(m => m.movie_id).First().movie_id; 
+                var lastId = movies.OrderByDescending(m => m.movie_id).First().movie_id;
                 int lastNum = int.Parse(lastId.Substring(1));
                 nextNumber = lastNum + 1;
             }
 
-            return "M" + nextNumber.ToString("D3"); 
+            return "M" + nextNumber.ToString("D3");
         }
         public event EventHandler FilmAdded;
+
+        // Hàm cập nhật trạng thái phim dựa trên ngày chiếu và trạng thái radio button:
+        // Nếu tick ngừng chiếu → luôn là ngừng chiếu
+        // Nếu tick đang hoạt động → tự động xét ngày để ra đang chiếu / sắp chiếu
+        private void UpdateStatus()
+        {
+            if (rbStopped.Checked)
+            {
+                lblTrangThai.Text = "Ngừng chiếu";
+                return;
+            }
+
+            DateTime release = dtNgayChieu.Value;
+            DateTime today = DateTime.Today;
+
+            if (release > today)
+                lblTrangThai.Text = "Sắp chiếu";
+            else
+                lblTrangThai.Text = "Đang chiếu";
+        }
+
 
         // Hàm xử lý sự kiện thêm Poster phim, sau đó chuyển ảnh thành dạng byte để lưu vào CSDL
         private void btnUploadImage_Click(object sender, EventArgs e)
@@ -111,7 +134,7 @@ namespace AdminApp
                 string director = txtDaoDien.Text;
                 string actor = txtDienVien.Text;
                 string description = txtMoTa.Text;
-                string status = cboTrangThai.Text;
+                string status = lblTrangThai.Text;
                 int film_purchase_price = int.Parse(txtGiaNhap.Text);
                 int duration = int.Parse(txtThoiLuong.Text);
                 string age = cboDoTuoi.Text;
@@ -165,7 +188,7 @@ VALUES
                 player.Play();
                 MessageBox.Show("Thêm phim thành công!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FilmAdded?.Invoke(this, EventArgs.Empty); 
+                FilmAdded?.Invoke(this, EventArgs.Empty);
                 ClearForm();
             }
             
@@ -176,113 +199,125 @@ VALUES
             }
         }
 
-         // Hàm chỉ cho phép chữ (kể cả tiếng Việt) và khoảng trắng
-        private bool IsAlphabetic(string input)
-        {
-            return System.Text.RegularExpressions.Regex.IsMatch(input, @"^[\p{L}\s]+$");
-        }
-
+     
         // Hàm validate các thông tin phim được nhập vào textbox và combobox
         private bool ValidateInput()
         {
-            // Tên phim
-            if (string.IsNullOrWhiteSpace(txtTenPhim.Text))
+           
+            // Hàm check mềm cho các field text
+            bool IsNameValid(string text)
+            {
+                // Cho phép chữ, khoảng trắng, dấu ', -, .
+                return Regex.IsMatch(text, @"^[\p{L} .'-]+$");
+            }
+
+            bool IsGenreValid(string text)
+            {
+                // Cho phép chữ, số, dấu phẩy, gạch ngang
+                return Regex.IsMatch(text, @"^[\p{L}0-9 ,'-]+$");
+            }
+
+            // Shortcut phát âm
+            void PlayFail()
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
                 player.Play();
+            }
+
+            // TÊN PHIM
+            if (string.IsNullOrWhiteSpace(txtTenPhim.Text))
+            {
+                PlayFail();
                 MessageBox.Show("Vui lòng nhập tên phim!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTenPhim.Focus();
                 return false;
             }
 
-            // Thể loại
+            // THỂ LOẠI
             if (string.IsNullOrWhiteSpace(txtTheLoai.Text))
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                PlayFail();
                 MessageBox.Show("Vui lòng nhập thể loại!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTheLoai.Focus();
                 return false;
             }
 
-            if (!IsAlphabetic(txtTheLoai.Text))
+            if (!IsGenreValid(txtTheLoai.Text))
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
-                MessageBox.Show("Thể loại chỉ được chứa chữ!", "Thông báo",
+                PlayFail();
+                MessageBox.Show("Thể loại chỉ được chứa chữ, số hoặc dấu phẩy/gạch!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTheLoai.Focus();
                 return false;
             }
 
-            // Ngôn ngữ
+            // NGÔN NGỮ
             if (string.IsNullOrWhiteSpace(txtNgonNgu.Text))
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                PlayFail();
                 MessageBox.Show("Vui lòng nhập ngôn ngữ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNgonNgu.Focus();
                 return false;
             }
 
-            if (!IsAlphabetic(txtNgonNgu.Text))
+            if (!IsNameValid(txtNgonNgu.Text))
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
-                MessageBox.Show("Ngôn ngữ chỉ được chứa chữ!", "Thông báo",
+                PlayFail();
+                MessageBox.Show("Ngôn ngữ không hợp lệ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNgonNgu.Focus();
                 return false;
             }
 
-            // Đạo diễn
+            // ĐẠO DIỄN
             if (string.IsNullOrWhiteSpace(txtDaoDien.Text))
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                PlayFail();
                 MessageBox.Show("Vui lòng nhập tên đạo diễn!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDaoDien.Focus();
                 return false;
             }
 
-            if (!IsAlphabetic(txtDaoDien.Text))
+            if (!IsNameValid(txtDaoDien.Text))
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
-                MessageBox.Show("Tên đạo diễn chỉ được chứa chữ!", "Thông báo",
+                PlayFail();
+                MessageBox.Show("Tên đạo diễn không hợp lệ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDaoDien.Focus();
                 return false;
             }
 
-            // Diễn viên
+            // DIỄN VIÊN
             if (string.IsNullOrWhiteSpace(txtDienVien.Text))
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                PlayFail();
                 MessageBox.Show("Vui lòng nhập diễn viên!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDienVien.Focus();
                 return false;
             }
 
-            if (!IsAlphabetic(txtDienVien.Text))
+            // Cho phép nhiều tên cách nhau bằng dấu phẩy
+            foreach (var name in txtDienVien.Text.Split(','))
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
-                MessageBox.Show("Tên diễn viên chỉ được chứa chữ!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtDienVien.Focus();
-                return false;
+                if (!IsNameValid(name.Trim()))
+                {
+                    PlayFail();
+                    MessageBox.Show("Danh sách diễn viên chứa tên không hợp lệ!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDienVien.Focus();
+                    return false;
+                }
             }
-            
-            // Giá nhập
+
+            // GIÁ NHẬP
             if (string.IsNullOrWhiteSpace(txtGiaNhap.Text))
             {
+                PlayFail();
                 MessageBox.Show("Vui lòng nhập giá nhập phim!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtGiaNhap.Focus();
@@ -292,36 +327,63 @@ VALUES
             decimal giaNhap;
             if (!decimal.TryParse(txtGiaNhap.Text, out giaNhap) || giaNhap < 0)
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                PlayFail();
                 MessageBox.Show("Giá nhập phim không hợp lệ!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtGiaNhap.Focus();
                 return false;
             }
 
-            // Độ tuổi
+            // ĐỘ TUỔI
             if (cboDoTuoi.SelectedIndex == -1)
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                PlayFail();
                 MessageBox.Show("Vui lòng chọn độ tuổi!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
-            // Thời lượng
+            // THỜI LƯỢNG (phải là số)
             if (string.IsNullOrWhiteSpace(txtThoiLuong.Text))
             {
-                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
-                player.Play();
+                PlayFail();
                 MessageBox.Show("Vui lòng nhập thời lượng!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtThoiLuong.Focus();
                 return false;
             }
+
+            int thoiLuong;
+            if (!int.TryParse(txtThoiLuong.Text, out thoiLuong) || thoiLuong <= 0)
+            {
+                PlayFail();
+                MessageBox.Show("Thời lượng phải là số phút hợp lệ!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtThoiLuong.Focus();
+                return false;
+            }
+
+            // TRẠNG THÁI PHIM (Radio)
+            if (!rbActive.Checked && !rbStopped.Checked)
+            {
+                PlayFail();
+                MessageBox.Show("Vui lòng chọn trạng thái phim!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            //NGÀY CHIẾU
+            if (dtNgayChieu.Value.Year < 1900)
+            {
+                PlayFail();
+                MessageBox.Show("Ngày chiếu không hợp lệ!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
             return true;
         }
+
 
         // Hàm xóa các thông tin được nhập trong textboxsau khi thêm phim thành công để nhập phim mới
         private void ClearForm()
@@ -339,7 +401,7 @@ VALUES
                 picPoster.Image.Dispose();
                 picPoster.Image = null;
             }
-            
+
             _posterImageData = null;
             dtNgayChieu.Value = DateTime.Now;
         }
@@ -348,7 +410,7 @@ VALUES
         private void txtGiaNhap_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-                e.Handled = true; 
+                e.Handled = true;
             // Giúp chặn nhập nhiều dấu chấm
             if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
                 e.Handled = true;
@@ -360,10 +422,75 @@ VALUES
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
         }
+        // Hàm xử lý sự kiện xóa Poster
+        private void btnXoaPoster_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Kiểm tra xem hiện tại có ảnh hay không:
+                // Nếu có thì giải phóng dung lượng ảnh cũ, để trống Picturebox, xóa dữ liệu byte của ảnh
+                if (picPoster.Image != null)
+                {
+                    picPoster.Image.Dispose();
+
+                    picPoster.Image = null;
+
+                    _posterImageData = null;
+
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                    player.Play();
+
+                    MessageBox.Show("Đã xóa poster hiện tại.", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Chưa có poster nào để xóa!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xóa poster: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Hàm xử lý khi nhấn phím xuống (Dùng chung cho các TextBox 1 dòng)
+        private void MoveFocusOnEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        // Hàm xử lý sự kiện khi thay đổi trạng thái radio button hoặc ngày chiếu để cập nhật trạng thái phim
+        private void rbActive_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+
+        private void rbStopped_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
+
+        private void dtNgayChieu_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateStatus();
+        }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void guna2CustomRadioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
