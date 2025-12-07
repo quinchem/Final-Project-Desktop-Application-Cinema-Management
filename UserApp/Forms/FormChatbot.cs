@@ -14,7 +14,7 @@ namespace UserApp.Forms
     public partial class FormChatbot : Form
     {
         private UserMainForm _parentForm;
-        private const string API_KEY = "Your_Key";
+        private const string API_KEY = "Your_key";
 
         private readonly List<string> _userHistoryGenres = new();
 
@@ -48,19 +48,19 @@ namespace UserApp.Forms
             rctChat.ScrollToCaret();
         }
 
-        // Hàm này xác định người dùng hỏi gì để lấy đúng dữ liệu DB
+        // Hàm xác định câu hỏi để truy xuất dữ liệu
         private string ProcessUserQuestion(string msg)
         {
             msg = msg.ToLower();
             string movieName = MovieHelper.ExtractMovieTitle(msg);
 
-            // 1. Hỏi về nội dung/mô tả phim (Ưu tiên cao)
+            //  Hỏi về nội dung/mô tả phim 
             if ((msg.Contains("lịch chiếu") || msg.Contains("suất chiếu") || msg.Contains("đặt vé")) && !string.IsNullOrEmpty(movieName))
             {
                 return DatabaseHelper.GetShowtimesByMovie(movieName);
             }
 
-            // 2. Nhóm hỏi CHI TIẾT CỤ THỂ (Phân loại ý định)
+           
             if (!string.IsNullOrEmpty(movieName))
             {
                 // Hỏi Đạo diễn
@@ -87,49 +87,45 @@ namespace UserApp.Forms
                 if (msg.Contains("nước nào") || msg.Contains("xuất xứ") || msg.Contains("tiếng gì") || msg.Contains("phụ đề"))
                     return DatabaseHelper.GetMovieDetails(movieName, "language");
 
-                // Hỏi Nội dung/Mặc định (Lấy hết)
+                // Hỏi Nội dung
                 if (msg.Contains("thông tin") || msg.Contains("nội dung") || msg.Contains("mô tả") || msg.Contains("chi tiết"))
                     return DatabaseHelper.GetMovieDetails(movieName, "all");
             }
+            //Hỏi ngôn ngữ
             if (msg.Contains("tiếng") || msg.Contains("phim") || msg.Contains("nước"))
             {
-                // --- Tiếng Anh / Mỹ ---
+                // Tiếng Anh / Mỹ 
                 if (msg.Contains("tiếng anh") || msg.Contains("phim mỹ") || msg.Contains("âu mỹ") || msg.Contains("nước ngoài"))
                     return DatabaseHelper.GetMoviesByLanguage("anh"); // Tìm chữ "anh" trong DB
 
-                // --- Tiếng Việt ---
+                // Tiếng Việt 
                 if (msg.Contains("tiếng việt") || msg.Contains("phim việt") || msg.Contains("việt nam"))
                     return DatabaseHelper.GetMoviesByLanguage("việt");
 
-                // --- Tiếng Hàn ---
+                // Tiếng Hàn 
                 if (msg.Contains("tiếng hàn") || msg.Contains("phim hàn") || msg.Contains("korea"))
                     return DatabaseHelper.GetMoviesByLanguage("hàn");
 
-                // --- Tiếng Thái ---
+                // Tiếng Thái 
                 if (msg.Contains("tiếng thái") || msg.Contains("phim thái"))
                     return DatabaseHelper.GetMoviesByLanguage("thái");
 
-                // --- Tiếng Nhật / Anime ---
+                //  Tiếng Nhật
                 if (msg.Contains("tiếng nhật") || msg.Contains("phim nhật") || msg.Contains("anime") || msg.Contains("hoạt hình nhật"))
                     return DatabaseHelper.GetMoviesByLanguage("nhật");
 
-                // --- Tiếng Trung / Quan Thoại ---
+                //  Tiếng Trung / Quan Thoại 
                 if (msg.Contains("tiếng trung") || msg.Contains("quan thoại") || msg.Contains("đài loan"))
                     return DatabaseHelper.GetMoviesByLanguage("quan thoại");
             }
             //string movieName = MovieHelper.ExtractMovieTitle(msg);
-            // 2. Hỏi lịch chiếu
+            // Hỏi lịch chiếu
             if ((msg.Contains("lịch chiếu") || msg.Contains("suất chiếu") || msg.Contains("mấy giờ") ||
          msg.Contains("đặt vé") || msg.Contains("mua vé")) && !string.IsNullOrEmpty(movieName))
             {
                 // Gọi hàm lấy lịch chiếu (Đã sửa ở DatabaseHelper2)
                 string data = DatabaseHelper.GetShowtimesByMovie(movieName);
-
-                // Nếu tìm thấy lịch chiếu, trả về ngay
-                if (!string.IsNullOrEmpty(data)) return data;
-
-                // Nếu không thấy lịch, có thể phim đó chưa có lịch hoặc user gõ sai tên
-                // Code sẽ chạy tiếp xuống dưới hoặc trả về rỗng
+                if (!string.IsNullOrEmpty(data)) return data;               
             }
             string genre = ExtractGenre(msg);
             if (!string.IsNullOrEmpty(genre))
@@ -137,13 +133,13 @@ namespace UserApp.Forms
                 _userHistoryGenres.Add(genre);
                 return DatabaseHelper.SuggestNowOrSoonByGenre(genre);
             }
+            //Gợi ý phim 
             if (msg.Contains("gợi ý") || msg.Contains("phim hay") || msg.Contains("xem gì") ||
         msg == "gợi ý phim" || msg == "gợi ý phim cho mình")
             {
-                // B1: Thử lấy thể loại từ câu nói (VD: "Gợi ý phim tình cảm")
                 //string genre = ExtractGenre(msg);
 
-                // B2: Nếu khách không nói thể loại -> Lấy từ lịch sử cũ (nếu có)
+                //  Nếu khách không nói thể loại lấy gợi ý từ lịch sử cũ (nếu có)
                 if (string.IsNullOrEmpty(genre) && _userHistoryGenres.Count > 0)
                 {
                     genre = _userHistoryGenres[_userHistoryGenres.Count - 1]; // Lấy cái mới nhất
@@ -152,14 +148,13 @@ namespace UserApp.Forms
                 string result;
                 if (string.IsNullOrEmpty(genre))
                 {
-                    // B3.1: Không có thể loại + Không có lịch sử -> Gợi ý phim ĐANG CHIẾU (Hot nhất)
+                    // Không có thể loại và không có lịch sử thì gợi ý phim đang chiếu
                     result = DatabaseHelper.GetMoviesInTheaters();
                 }
                 else
                 {
-                    // B3.2: Có thể loại -> Tìm phim theo thể loại
+                    // Tìm theo thể loại phim
                     result = DatabaseHelper.SuggestNowOrSoonByGenre(genre);
-
                     // Lưu lại thể loại này vào lịch sử để lần sau dùng tiếp
                     if (!string.IsNullOrEmpty(result) && !result.Contains("chưa có phim"))
                     {
@@ -173,33 +168,29 @@ namespace UserApp.Forms
                 return result;
             }
 
-            // 3. Hỏi giá vé
+            // Hỏi giá vé
             if (msg.Contains("giá vé") || msg.Contains("bao nhiêu tiền"))
             {
                 return DatabaseHelper.GetSeatPricesSummary();
             }
 
-            // 4. Hỏi phim đang chiếu
+            // Hỏi phim đang chiếu
             if (msg.Contains("đang chiếu") || msg.Contains("phim mới"))
             {
                 return DatabaseHelper.GetMoviesInTheaters();
             }
 
-            // 5. Hỏi phim sắp chiếu
+            // Hỏi phim sắp chiếu
             if (msg.Contains("sắp chiếu"))
             {
                 return DatabaseHelper.GetComingSoonMovies();
             }
 
-            // 6. Gợi ý phim theo thể loại
-            //string genre = ExtractGenre(msg);
             if (!string.IsNullOrEmpty(genre))
             {
                 _userHistoryGenres.Add(genre);
                 return DatabaseHelper.SuggestNowOrSoonByGenre(genre);
             }
-
-            // Mặc định: Trả về rỗng (để AI tự xử lý câu chào hỏi xã giao)
             return "";
         }
 
@@ -207,13 +198,11 @@ namespace UserApp.Forms
         {
             string apiUrl = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}";
 
-            // 🔥 TẠO PROMPT (KỊCH BẢN) NGHIÊM NGẶT 🔥
-            // Đây là phần quan trọng nhất để chặn kiến thức ngoài
             string prompt;
 
             if (string.IsNullOrEmpty(dbData))
             {
-                // Trường hợp 1: Không có dữ liệu từ DB (Hoặc câu hỏi xã giao)
+                // Trường hợp 1: Không có dữ liệu từ DB
                 prompt = $@"
                 Bạn là trợ lý ảo của rạp chiếu phim.
                 Người dùng nói: ""{userMessage}""
@@ -292,7 +281,7 @@ namespace UserApp.Forms
         // Các hàm phụ trợ
         private string ExtractGenre(string msg)
         {
-            // Danh sách thể loại khớp với Database của bạn
+            // Danh sách thể loại khớp với Database
             string[] genres = {
         "hành động", "tình cảm", "hài", "kinh dị", "tâm lý",
         "hoạt hình", "phiêu lưu", "khoa học viễn tưởng",
@@ -312,8 +301,6 @@ namespace UserApp.Forms
             {
                 string lowerMsg = msg.ToLower();
 
-                // 🔥 Danh sách các từ thừa cần loại bỏ để lòi ra tên phim
-                // Càng liệt kê nhiều, khả năng bắt trúng tên phim càng cao
                 string[] prefixes = {
                     "thông tin phim", "chi tiết phim", "nội dung phim", "mô tả phim", "review phim",
                     "đạo diễn phim", "diễn viên phim", "thể loại phim", "lịch chiếu phim", "suất chiếu phim",

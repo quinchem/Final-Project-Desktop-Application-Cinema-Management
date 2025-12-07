@@ -11,11 +11,11 @@ namespace SharedData.Repositories
     public class SeatRepo
     {
             private static string ConnStr => DatabaseHelper.GetConnectionString();
+            // Lấy giá vé theo định dạng phòng
             public double GetTicketPriceByAuditoriumType(string auditoriumTypeId)
             {
                 using var conn = new SqliteConnection(ConnStr);
                 conn.Open();
-
                 string sql = @"
                 SELECT s.per_seat_ticket_price
                 FROM seat s
@@ -24,7 +24,6 @@ namespace SharedData.Repositories
                 AND s.per_seat_ticket_price > 0
                 LIMIT 1
             ";
-
                 using var cmd = new SqliteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@typeId", auditoriumTypeId);
 
@@ -33,6 +32,5 @@ namespace SharedData.Repositories
                     ? Convert.ToDouble(result)
                     : 0;
             }
-        
     }
 }

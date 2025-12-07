@@ -131,7 +131,7 @@
             gunaStatistics1.Name = "gunaStatistics1";
             gunaStatistics1.Padding = new Padding(20);
             gunaStatistics1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            gunaStatistics1.Size = new Size(1398, 490);
+            gunaStatistics1.Size = new Size(1398, 555);
             gunaStatistics1.TabIndex = 50;
             // 
             // guna2GradientPanel1
@@ -227,7 +227,7 @@
             gunaTable.Name = "gunaTable";
             gunaTable.RowHeadersVisible = false;
             gunaTable.RowHeadersWidth = 51;
-            gunaTable.Size = new Size(769, 362);
+            gunaTable.Size = new Size(769, 413);
             gunaTable.TabIndex = 4;
             gunaTable.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             gunaTable.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -292,7 +292,7 @@
             gunaChartGender.Legend.LabelFont = chartFont1;
             gunaChartGender.Location = new Point(820, 13);
             gunaChartGender.Name = "gunaChartGender";
-            gunaChartGender.Size = new Size(508, 189);
+            gunaChartGender.Size = new Size(508, 227);
             gunaChartGender.TabIndex = 3;
             chartFont2.FontName = "Arial";
             chartFont2.Size = 12;
@@ -324,7 +324,7 @@
             // 
             chartFont9.FontName = "Arial";
             gunaChartCustomer.Legend.LabelFont = chartFont9;
-            gunaChartCustomer.Location = new Point(820, 230);
+            gunaChartCustomer.Location = new Point(820, 267);
             gunaChartCustomer.Name = "gunaChartCustomer";
             gunaChartCustomer.Size = new Size(508, 241);
             gunaChartCustomer.TabIndex = 2;
@@ -416,12 +416,12 @@
             btnDichVu.FillColor = Color.Silver;
             btnDichVu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDichVu.ForeColor = Color.White;
-            btnDichVu.Location = new Point(1201, 44);
+            btnDichVu.Location = new Point(1193, 44);
             btnDichVu.Name = "btnDichVu";
             btnDichVu.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnDichVu.Size = new Size(146, 44);
+            btnDichVu.Size = new Size(161, 44);
             btnDichVu.TabIndex = 56;
-            btnDichVu.Text = "DỊCH VỤ";
+            btnDichVu.Text = "PHÒNG CHIẾU";
             btnDichVu.Click += btnPhongChieu_Click;
             // 
             // btnPhim
@@ -554,7 +554,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1920, 782);
+            ClientSize = new Size(1920, 890);
             Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(gunaStatistics1);
             Controls.Add(groupBox3);

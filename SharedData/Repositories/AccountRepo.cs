@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+using Microsoft.Data.Sqlite;
 using SharedData.Models;
 using System;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace SharedData.Repositories
     {
         private string ConnStr => DatabaseHelper.GetConnectionString();
 
-        // Generate Customer ID
+        // Tạo Customer ID mới
         private string GenerateCustomerId(SqliteConnection conn, SqliteTransaction tran)
         {
             string sql = @"SELECT customer_id FROM customer ORDER BY customer_id DESC LIMIT 1";
@@ -25,7 +25,7 @@ namespace SharedData.Repositories
             return "C" + (num + 1).ToString("D3");
         }
 
-        // Generate Account ID
+        // Tạo Account ID mới
         private string GenerateAccountId(SqliteConnection conn, SqliteTransaction tran)
         {
             string sql = @"SELECT account_id FROM account ORDER BY account_id DESC LIMIT 1";
@@ -39,11 +39,7 @@ namespace SharedData.Repositories
             return "A" + (num + 1).ToString("D3");
         }
 
-
-
-        // =========================
-        // REGISTER
-        // =========================
+        // Đăng ký
         public bool Register(Customer customer, Account account, out string message)
         {
             message = "";
@@ -150,9 +146,7 @@ namespace SharedData.Repositories
             }
         }
 
-        // =========================
-        // LOGIN
-        // =========================
+        // Đăng nhập
         public bool Login(string email , string password, out Customer customer, out string msg)
         {
             msg = "";
@@ -200,10 +194,62 @@ namespace SharedData.Repositories
 
             return true;
         }
+        // THÊM HÀM NÀY VÀO AccountRepo.cs (sau hàm Login)
 
-        // =========================
-        // CHANGE PASSWORD
-        // =========================
+        // Đăng nhập Staff/Admin
+        public bool LoginStaff(string username, string password, out string staffId, out string role, out string msg)
+        {
+            msg = "";
+            staffId = null;
+            role = null;
+
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = @"
+        SELECT account_id, password, staff_id, role_account
+        FROM account
+        WHERE username = @user 
+          AND role_account = 'Nhân viên (Admin)'";
+
+            cmd.Parameters.AddWithValue("@user", username);
+
+            using var reader = cmd.ExecuteReader();
+            if (!reader.Read())
+            {
+                msg = "Tài khoản không tồn tại hoặc không có quyền Admin.";
+                return false;
+            }
+
+            string storedPassword = reader["password"].ToString();
+
+            // Kiểm tra mật khẩu (hỗ trợ cả plain text và hash)
+            bool isPasswordCorrect = false;
+
+            if (storedPassword.Contains('.') && storedPassword.Split('.').Length == 3)
+            {
+                // Mật khẩu đã hash
+                isPasswordCorrect = VerifyPassword(password, storedPassword);
+            }
+            else
+            {
+                // Mật khẩu plain text (tạm thời)
+                isPasswordCorrect = (password == storedPassword);
+            }
+
+            if (!isPasswordCorrect)
+            {
+                msg = "Sai mật khẩu.";
+                return false;
+            }
+
+            staffId = reader["staff_id"].ToString();
+            role = reader["role_account"].ToString();
+            return true;
+        }
+        // Đổi mật khẩu
+        //Kiểm tra mật khẩu cũ
         public bool CheckOldPassword(string accountId, string oldPassword)
         {
             using var conn = new SqliteConnection(ConnStr);
@@ -213,10 +259,26 @@ namespace SharedData.Repositories
             cmd.CommandText = @"SELECT password FROM account WHERE account_id=@id";
             cmd.Parameters.AddWithValue("@id", accountId);
 
-            var hash = cmd.ExecuteScalar()?.ToString();
-            return hash != null && VerifyPassword(oldPassword, hash);
+            var storedPassword = cmd.ExecuteScalar()?.ToString();
+
+            if (string.IsNullOrEmpty(storedPassword))
+                return false;
+
+            // Kiểm tra xem password có phải là hash không (format: iteration.salt.hash)
+            if (storedPassword.Contains('.') && storedPassword.Split('.').Length == 3)
+            {
+                // Mật khẩu đã được hash, dùng VerifyPassword
+                return VerifyPassword(oldPassword, storedPassword);
+            }
+            else
+            {
+                // Mật khẩu chưa hash (plain text), so sánh trực tiếp
+                // ⚠️ CHỈ DÙNG TẠM THỜI - NÊN HASH LẠI TẤT CẢ MẬT KHẨU
+                return oldPassword == storedPassword;
+            }
         }
 
+        // CẬP NHẬT MẬT KHẨU MỚI - LUÔN HASH
         public bool UpdatePassword(string accountId, string newPassword)
         {
             string newHash = HashPassword(newPassword);
@@ -225,15 +287,13 @@ namespace SharedData.Repositories
             conn.Open();
 
             using var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
-                UPDATE account SET password=@p WHERE account_id=@id";
+            cmd.CommandText = @"UPDATE account SET password=@p WHERE account_id=@id";
             cmd.Parameters.AddWithValue("@p", newHash);
             cmd.Parameters.AddWithValue("@id", accountId);
 
             return cmd.ExecuteNonQuery() > 0;
         }
 
-        // Thêm hàm này vào AccountRepo.cs
         public bool ResetPassword(string email, string newPassword, out string msg)
         {
             msg = "";
@@ -269,9 +329,7 @@ namespace SharedData.Repositories
             }
         }
 
-        // =========================
-        // HASH & VERIFY
-        // =========================
+        // Mật khẩu HASH và xác nhận
         private static string HashPassword(string password)
         {
             const int iter = 100_000;
@@ -299,5 +357,3 @@ namespace SharedData.Repositories
         }
     }
 }
-
-

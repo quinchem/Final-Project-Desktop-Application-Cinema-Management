@@ -18,7 +18,7 @@ namespace AdminApp
     public partial class FormEditMovie : Form
     {
         private string movieId;
-        private byte[] _posterImageBytes; // lưu ảnh được chọn
+        private byte[] _posterImageBytes; 
         private ImageRepo _imageRepo = new ImageRepo();
 
         public FormEditMovie(string id)
@@ -30,37 +30,33 @@ namespace AdminApp
             LoadMoviePoster();
         }
 
+        // Hàm load dữ liệu vào ComboBox
         private void LoadComboBoxData()
         {
             try
             {
-                // 3.2: Load độ tuổi (dữ liệu cố định, không cần lấy từ DB)
-                // ------------------------------------
-                // P: Phổ thông, K: Trẻ em, T13: Trên 13 tuổi, T16: Trên 16, T18: Trên 18
-                cboDoTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18" });
 
-                // 3.3: Load trạng thái (dữ liệu cố định)
-                // ------------------------------------
+                cboDoTuoi.Items.AddRange(new object[] { "P", "K", "T13", "T16", "T18" });
                 cboTrangThai.Items.AddRange(new object[] { "Đang chiếu", "Sắp chiếu" });
-                cboTrangThai.SelectedIndex = 0; // Mặc định chọn item đầu tiên
+                cboTrangThai.SelectedIndex = 0; 
             }
             catch (Exception ex)
             {
-                // Bắt lỗi và hiển thị thông báo nếu có lỗi xảy ra
+            
                 MessageBox.Show("Lỗi khi load dữ liệu: " + ex.Message, "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // Hàm load thông tin phim từ CSDL vào các TextBox, ComboBox và DatePicker, sử dụng repo Film
         private void LoadMovieInfo()
         {
             try
             {
                 var filmRepo = new FilmRepo();
-                var film = filmRepo.GetById2(movieId); // Lấy film theo ID
+                var film = filmRepo.GetById2(movieId); 
                 if (film != null)
                 {
-                    // TextBox
                     txtTenPhim.Text = film.title;
                     txtTheLoai.Text = film.genre;
                     txtNgonNgu.Text = film.language;
@@ -70,16 +66,14 @@ namespace AdminApp
                     txtGiaNhap.Text = film.film_purchase_price?.ToString() ?? "";
                     txtThoiLuong.Text = film.duration.ToString();
 
-                    // ComboBox: trạng thái
                     if (!string.IsNullOrEmpty(film.status))
                     {
                         if (cboTrangThai.Items.Contains(film.status))
                             cboTrangThai.SelectedItem = film.status;
                         else
-                            cboTrangThai.Text = film.status; // fallback
+                            cboTrangThai.Text = film.status; 
                     }
 
-                    // ComboBox: độ tuổi
                     if (!string.IsNullOrEmpty(film.age_restriction))
                     {
                         if (cboDoTuoi.Items.Contains(film.age_restriction))
@@ -88,7 +82,6 @@ namespace AdminApp
                             cboDoTuoi.Text = film.age_restriction;
                     }
 
-                    // DateTimePicker: release_date
                     DateTime parsedDate;
                     if (!string.IsNullOrEmpty(film.release_date) &&
                         DateTime.TryParseExact(film.release_date, "dd/MM/yyyy", null,
@@ -117,6 +110,7 @@ namespace AdminApp
             }
         }
 
+        // Hàm load poster từ CSDL vào PictureBox, sử dụng Image Repo
         private void LoadMoviePoster()
         {
             try
@@ -127,9 +121,8 @@ namespace AdminApp
                     _posterImageBytes = imgData;
                     using (MemoryStream ms = new MemoryStream(imgData))
                     {
-                        // Đảm bảo PictureBox hiển thị hình gốc
                         picPoster.Image = Image.FromStream(ms);
-                        picPoster.SizeMode = PictureBoxSizeMode.Zoom; // hiển thị vừa khung
+                        picPoster.SizeMode = PictureBoxSizeMode.Zoom;
                     }
                 }
             }
@@ -141,7 +134,7 @@ namespace AdminApp
             }
         }
 
-
+        //Hàm xử lý sự kiện Click vào nút Upload Poster để chọn ảnh mới từ máy, sau đó lưu ảnh dưới dạng byte
         private void btnUploadPoster_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -169,6 +162,7 @@ namespace AdminApp
             }
         }
 
+        // Hàm xử lý sự kiện nhấn vào nút Save để lưu thông tin phim và poster vào CSDL sau khi chỉnh sửa
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -191,8 +185,6 @@ namespace AdminApp
 
                 var filmRepo = new FilmRepo();
                 filmRepo.UpdateFilm(updatedFilm);
-
-                // ✅ Lưu poster nếu đã chọn
                 if (_posterImageBytes != null)
                 {
                     _imageRepo.SaveMoviePoster(movieId, _posterImageBytes);

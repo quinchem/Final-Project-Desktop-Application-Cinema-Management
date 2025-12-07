@@ -12,13 +12,13 @@ namespace SharedData.Repositories
     {
         private static string connStr = DatabaseHelper.GetConnectionString();
 
-        // Convert DateTime -> string dd/MM/yyyy
+        // Đổi DateTime sang string dd/MM/yyyy
         private static string ConvertDate(DateTime dt)
         {
             return dt.ToString("dd/MM/yyyy");
         }
 
-        // ===================== GET ALL =====================
+        // Lấy tất cả suất chiếu
         public static List<Showtime> GetAll()
         {
             List<Showtime> list = new List<Showtime>();
@@ -40,7 +40,7 @@ namespace SharedData.Repositories
             return list;
         }
 
-        // ===================== GET BY FILM =====================
+        // Lấy suất chiếu theo phim
         public static List<Showtime> GetByFilm(string movieId)
         {
             List<Showtime> list = new List<Showtime>();
@@ -66,7 +66,7 @@ namespace SharedData.Repositories
             return list;
         }
 
-        // ===================== GET BY DATE =====================
+        // Lấy suất chiếu theo ngày
         public static List<Showtime> GetByDate(DateTime date)
         {
             List<Showtime> list = new List<Showtime>();
@@ -93,7 +93,7 @@ namespace SharedData.Repositories
             return list;
         }
 
-        // ===================== GET BY FILM + DATE =====================
+        // Lấy suất chiếu theo ngày và phim
         public static List<Showtime> GetByFilmAndDate(string movieId, DateTime date)
         {
             List<Showtime> list = new List<Showtime>();
@@ -122,8 +122,7 @@ namespace SharedData.Repositories
             return list;
         }
 
-        // Lấy suất chiếu theo khoảng ngày (JOIN với Auditorium và AuditoriumType)
-        // ✅ SỬA: Lấy suất chiếu theo khoảng ngày
+        // Lấy suất chiếu theo khoảng ngày
         public List<ShowtimeInfo> GetShowtimesByDateRange(DateTime startDate, int days)
         {
             List<ShowtimeInfo> list = new List<ShowtimeInfo>();
@@ -184,10 +183,10 @@ namespace SharedData.Repositories
             {
                 throw new Exception("Lỗi tại GetShowtimesByDateRange: " + ex.Message);
             }
-
             return list;
         }
 
+        // Lấy suất chiếu theo khoảng ngày và phim
         public List<ShowtimeInfo> GetShowtimesByDateRangeAndMovie(DateTime startDate, int days, string movieId)
         {
             List<ShowtimeInfo> list = new List<ShowtimeInfo>();
@@ -200,9 +199,6 @@ namespace SharedData.Repositories
                 using (var conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
-
-                    // 🔥 CHỐT HẠ: CHỈ WHERE movie_id, BỎ HẾT ĐIỀU KIỆN NGÀY THÁNG
-                    // Vì SQLite so sánh chuỗi ngày '29/11' > '28/11' bị sai logic nếu định dạng không chuẩn ISO
                     string query = @"
                    SELECT 
                     s.showtime_id,
@@ -253,15 +249,13 @@ namespace SharedData.Repositories
             }
             catch (Exception ex)
             {
-                // Ném lỗi ra console hoặc bỏ qua
                 Console.WriteLine("Repo Error: " + ex.Message);
             }
 
             return list;
         }
 
-
-        // ===================== DELETE =====================
+        // Xóa
         public static void Delete(string id)
         {
             using (var conn = new SqliteConnection(connStr))
@@ -276,6 +270,7 @@ namespace SharedData.Repositories
                 }
             }
         }
+        
         // Thêm vào ShowtimeRepo.cs
         private static string GenerateNextShowtimeId()
         {
@@ -306,7 +301,8 @@ namespace SharedData.Repositories
             int next = maxNum + 1;
             return "T" + next.ToString("D3");
         }
-        // INSERT 
+        
+        // Thêm suất chiếu
         public static void Insert(Showtime showtime)
         {
             if (!string.IsNullOrWhiteSpace(showtime.showtime_id))
@@ -367,7 +363,7 @@ namespace SharedData.Repositories
             }
         }
 
-        // UPDATE
+        // Cập nhật suất chiếu
         public static void Update(Showtime showtime)
         {
             using (var conn = new SqliteConnection(connStr))
@@ -392,7 +388,7 @@ namespace SharedData.Repositories
             }
         }
 
-        // ===================== MAPPING =====================
+        // Hàm Map dữ liệu
         private static Showtime ReadShowtime(SqliteDataReader rd)
         {
             return new Showtime

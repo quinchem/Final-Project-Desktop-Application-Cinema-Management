@@ -22,6 +22,7 @@ namespace UserApp
             dgvHistoryTicket.AutoGenerateColumns = false;
             LoadHistoryData();
         }
+        // Tải lịch sử vé từ Database
 
         private void LoadHistoryData()
         {
@@ -32,8 +33,6 @@ namespace UserApp
                 using (var conn = new SqliteConnection(DatabaseHelper.GetConnectionString()))
                 {
                     conn.Open();
-
-                    // Debug: Kiểm tra xem có bill nào của customer không
                     /*string checkQuery = "SELECT COUNT(*) FROM bill WHERE customer_id = @customer_id";
                     using (var checkCmd = new SqliteCommand(checkQuery, conn))
                     {
@@ -77,27 +76,25 @@ namespace UserApp
                                 string startTime = reader["start_time"].ToString();
 
                                 // Kết hợp ngày và giờ để hiển thị suất chiếu
-                                string showDateTime = $"{startTime}"; // Chỉ giờ chiếu
+                                string showDateTime = $"{startTime}"; 
 
-                                // Ngày đặt vé (dùng show_date vì database không có bill_date)
                                 string bookingDate = showDate;
 
-                                // Format tiền tệ VND
                                 decimal total = Convert.ToDecimal(reader["total"]);
                                 string formattedTotal = total.ToString("N0") + " VNĐ";
 
-                                // Tự sinh Ticket Code
+                                // Gọi hàm để sinh ticket code tự động
                                 string ticketCode = GenerateTicketCode(billId);
 
                                 dgvHistoryTicket.Rows.Add(
-                                    stt++,              // Cột 0: STT
-                                    billId,             // Cột 1: Mã đặt vé
-                                    movieName,          // Cột 2: Tên phim
-                                    showDateTime,       // Cột 3: Suất chiếu (giờ)
-                                    bookingDate,        // Cột 4: Ngày đặt vé
-                                    formattedTotal,     // Cột 5: Tổng tiền
-                                    ticketCode,         // Cột 6: Ticket Code
-                                    "Xem"               // Cột 7: Xem chi tiết
+                                    stt++,              
+                                    billId,             
+                                    movieName,          
+                                    showDateTime,       
+                                    bookingDate,        
+                                    formattedTotal,     
+                                    ticketCode,         
+                                    "Xem"               
                                 );
                             }
 
@@ -121,7 +118,7 @@ namespace UserApp
             }
         }
 
-        // Hàm tự sinh Ticket Code
+        // Hàm sinh Ticket Code tự động
         private string GenerateTicketCode(string billId)
         {
             // Tạo SHA256 hash cố định từ billId
@@ -135,10 +132,11 @@ namespace UserApp
                 return $"TK-{billId}-{hashPart}";
             }
         }
+        // Vẽ lại nút "Xem" cho đẹp
 
         private void dgvHistoryTicket_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // Kiểm tra cột "Xem" - cột cuối cùng
+            // Định dạng lại nút "Xem" ở cuối bảng Data grid view
             if (e.ColumnIndex == dgvHistoryTicket.Columns["XemChiTiet"]?.Index && e.RowIndex >= 0)
             {
                 e.Handled = true;
@@ -158,14 +156,15 @@ namespace UserApp
                 e.Graphics.DrawRectangle(Pens.Black, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width - 1, e.CellBounds.Height - 1);
             }
         }
+        // Sự kiện bấm nút "Xem chi tiết"
 
-        public event Action<string> OnViewBillDetail; // string là bill_id
+        public event Action<string> OnViewBillDetail; 
 
         private void dgvHistoryTicket_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
-            if (dgvHistoryTicket.Columns[e.ColumnIndex].Name == "XemChiTiet") // tên cột nút "Xem"
+            if (dgvHistoryTicket.Columns[e.ColumnIndex].Name == "XemChiTiet") 
             {
                 string billId = dgvHistoryTicket.Rows[e.RowIndex].Cells["MaDatVe"].Value.ToString();
                 OnViewBillDetail?.Invoke(billId);

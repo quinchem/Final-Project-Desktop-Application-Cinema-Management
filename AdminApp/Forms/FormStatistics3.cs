@@ -19,11 +19,15 @@ namespace AdminApp
         private AdminMainForm _parent;
         private StatisticRepo _statisticsRepo = new StatisticRepo();
         private bool isFilteringByYear = false;
+        
         public FormStatistics3(AdminMainForm parent)
         {
             InitializeComponent();
             LoadYearCombo();
             LoadMovieCombo();
+            this.AutoScaleMode = AutoScaleMode.None;   
+            this.AutoScroll = true;                  
+            this.Dock = DockStyle.Top;            
 
             // Thêm event handler cho MouseDown để catch khi user click vào DateTimePicker bị disabled
             dtpFrom.MouseDown += DateTimePicker_MouseDown;
@@ -39,6 +43,7 @@ namespace AdminApp
             ReloadAll();
         }
 
+        // Hàm để chỉnh sửa trục của biểu đồ tròn
         private void ConfigurePieChartLegend()
         {
             gunaChartPieTopMovies.Legend.Position = LegendPosition.Right;
@@ -47,6 +52,7 @@ namespace AdminApp
             gunaChartPieTopMovies.YAxes.Display = false;
         }
 
+        // Hàm load các giá trị năm cho Combo Box năm
         private void LoadYearCombo()
         {
             comboYear.Items.Clear();
@@ -57,6 +63,7 @@ namespace AdminApp
             comboYear.SelectedIndex = 0;
         }
 
+        // Hàm load các danh sách phim đang có vào Combo Box phim, sử dụng Statistics Repo
         private void LoadMovieCombo()
         {
             MovieCombo.Items.Clear();
@@ -77,6 +84,7 @@ namespace AdminApp
             LoadRevenueBarChart();
         }
 
+        // Hàm chọn phim 
         private string GetSelectedMovie()
         {
             if (MovieCombo.SelectedItem == null || MovieCombo.SelectedItem.ToString() == "Tất cả")
@@ -85,6 +93,7 @@ namespace AdminApp
             return MovieCombo.SelectedItem.ToString();
         }
 
+        // Hàm lấy thông tin KPI doanh thu, sau đó đưa vào label tương ứng, sử dụng Statistic Repo
         private void LoadRevenueKPI()
         {
             string selectedMovie = GetSelectedMovie();
@@ -98,6 +107,7 @@ namespace AdminApp
             lblAvgRevenue.Text = avgRevenue.ToString("N0") + " VND";
         }
 
+        // Hàm để lấy thông tin phim có doanh thu cao nhất, sử dụng Statistic Repo
         private void LoadTopMovieInfo()
         {
             string selectedMovie = GetSelectedMovie();
@@ -109,6 +119,8 @@ namespace AdminApp
             lblTopMovieName.Text = movieTitle;
         }
 
+        //Hàm lấy thông tin doanh thu theo ngày của tất cả phim
+        // hoặc doanh thu theo ngày của phim được chọn vào biểu đồ đường,  sử dụng Statistic Repo
         private void LoadRevenueLineChart()
         {
             gunaChartRevenue.Datasets.Clear();
@@ -133,6 +145,7 @@ namespace AdminApp
             gunaChartRevenue.Update();
         }
 
+        //Hàm lấy top 5 phim có doanh thu cao nhất cùng doanh thu tương ứng vào biểu đồ tròn,  sử dụng Statistic Repo
         private void LoadTopMoviesPieChart()
         {
             gunaChartPieTopMovies.Datasets.Clear();
@@ -163,6 +176,7 @@ namespace AdminApp
             gunaChartPieTopMovies.Update();
         }
 
+        // Hàm lấy doanh thu từng phim đang có vào biểu đồ cột,  sử dụng Statistic Repo
         private void LoadRevenueBarChart()
         {
             gunaChartBar.Datasets.Clear();
@@ -178,7 +192,7 @@ namespace AdminApp
             gunaChartBar.Update();
         }
 
-        // Event handler khi user click vào DateTimePicker
+        // Hàm xử lý sự kiện chặn click vào DateTimePicker khi đang lọc theo năm
         private void DateTimePicker_MouseDown(object sender, MouseEventArgs e)
         {
             if (isFilteringByYear)
@@ -192,7 +206,7 @@ namespace AdminApp
             }
         }
 
-        // VALIDATE DATE: Ngày bắt đầu không được sau ngày kết thúc
+        // Hàm validate ngày: Ngày bắt đầu không được sau ngày kết thúc
         private bool ValidateDateRange()
         {
             if (dtpFrom.Value > dtpTo.Value)
@@ -208,9 +222,9 @@ namespace AdminApp
             return true;
         }
 
+        // Hàm để cho phép validate và reload nếu đang không lọc theo năm
         private void dtpFrom_ValueChanged(object sender, EventArgs e)
         {
-            // Chỉ validate và reload nếu đang không lọc theo năm
             if (!isFilteringByYear)
             {
                 if (ValidateDateRange())
@@ -224,9 +238,9 @@ namespace AdminApp
             }
         }
 
+        // Hàm để cho phép validate và reload nếu đang không lọc theo năm
         private void dtpTo_ValueChanged(object sender, EventArgs e)
         {
-            // Chỉ validate và reload nếu đang không lọc theo năm
             if (!isFilteringByYear)
             {
                 if (ValidateDateRange())
@@ -240,10 +254,10 @@ namespace AdminApp
             }
         }
 
+        // Hàm để cho phép người dùng chọn theo năm hoặc theo ngày 
         private void comboYear_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedYear = comboYear.SelectedItem?.ToString();
-
             if (selectedYear == "Không")
             {
                 // Cho phép chọn ngày
@@ -255,7 +269,6 @@ namespace AdminApp
             }
             else
             {
-                // Lọc theo năm - DISABLE DateTimePicker
                 isFilteringByYear = true;
                 dtpFrom.Enabled = false;
                 dtpTo.Enabled = false;
@@ -269,30 +282,22 @@ namespace AdminApp
 
         private void MovieCombo_SelectedIndexChanged(object sender, EventArgs e) => ReloadAll();
 
-
-        // 1. Nút Tổng quan (Quay lại FormStatistics1)
+        // Hàm xử lý sự kiện để chuyển form thống kê tương ứng với nút chọn
         private void btnTongQuan_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics1(_parent));
         }
-
-        // 2. Nút Khách hàng (Đang ở đây rồi thì không làm gì hoặc reload)
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics2(_parent));
         }
-
-        // 3. Nút Phim (Chuyển sang FormStatistics3)
         private void btnPhim_Click(object sender, EventArgs e)
         {
 
         }
-
-        // 4. Nút Phòng chiếu (Chuyển sang FormStatistics4)
         private void btnPhongChieu_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics4(_parent));
         }
-
     }
 }

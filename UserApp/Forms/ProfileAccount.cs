@@ -18,7 +18,7 @@ namespace UserApp
         private Customer currentUser;
         private readonly CustomerRepo _customerRepo;
         private readonly ImageRepo _imageRepo;
-        private readonly string _customerId; // gán khi tạo Form
+        private readonly string _customerId; 
         private readonly int _avatarSize = 200;
 
         public ProfileAccount(Customer user)
@@ -33,7 +33,7 @@ namespace UserApp
             LoadUserInfo();
         }
 
-        // ===================== INIT =====================
+       
         private void InitGenderComboBox()
         {
             CbGioiTinh.Items.Clear();
@@ -41,7 +41,7 @@ namespace UserApp
             CbGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        // ===================== LOAD DATA =====================
+        // Load dữ liệu
         private void LoadUserInfo()
         {
             if (currentUser == null) return;
@@ -51,7 +51,7 @@ namespace UserApp
             txtSDT.Text = currentUser.phone_number ?? "";
             txtDiachi.Text = currentUser.address ?? "";
 
-            // Ngày sinh – chấp nhận nhiều format
+            // Định dạng lại format ngày sinh
             if (!string.IsNullOrWhiteSpace(currentUser.date_of_birth))
             {
                 string[] formats =
@@ -73,7 +73,7 @@ namespace UserApp
                 }
             }
 
-            // Giới tính
+            
             if (!string.IsNullOrWhiteSpace(currentUser.gender))
             {
                 CbGioiTinh.SelectedItem = currentUser.gender;
@@ -89,10 +89,10 @@ namespace UserApp
                     }
                 }
             }
-            catch { /* Bỏ qua lỗi load ảnh nếu muốn */ }
+            catch 
         }
 
-        // ===================== SAVE =====================
+        // Lưu avatar
         private void btnSave_Click(object sender, EventArgs e)
         {
             UpdateProfile();
@@ -116,7 +116,7 @@ namespace UserApp
             string newDob = dtpNgaySinh.Value.ToString("yyyy-MM-dd");
             string newGender = CbGioiTinh.SelectedItem?.ToString() ?? "";
 
-            // ===================== VALIDATE =====================
+            // Kiểm tra tính hợp lệ
             if (string.IsNullOrWhiteSpace(newName) ||
                 string.IsNullOrWhiteSpace(newEmail) ||
                 string.IsNullOrWhiteSpace(newPhone))
@@ -143,7 +143,7 @@ namespace UserApp
                 {
                     conn.Open();
 
-                    // ✅ Bật foreign key
+                   
                     using (var pragma = conn.CreateCommand())
                     {
                         pragma.CommandText = "PRAGMA foreign_keys = ON;";
@@ -187,7 +187,7 @@ namespace UserApp
                     }
                 }
 
-                // ✅ Update object trong RAM
+                // Update object trong RAM
                 currentUser.full_name = newName;
                 currentUser.email = newEmail;
                 currentUser.phone_number = newPhone;
@@ -210,7 +210,7 @@ namespace UserApp
         }
 
 
-        // ===================== UI BO GÓC =====================
+        
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -236,7 +236,7 @@ namespace UserApp
 
         private void ProfileAccount_Load(object sender, EventArgs e)
         {
-            Invalidate(); // vẽ lại UI
+            Invalidate(); 
         }
 
         private void pctAvatar_Click(object sender, EventArgs e)
@@ -250,7 +250,7 @@ namespace UserApp
 
                     if (ofd.ShowDialog() != DialogResult.OK) return;
 
-                    // Resize ảnh
+                    // Resize ảnh avatar
                     using (var src = Image.FromFile(ofd.FileName))
                     using (var resized = ResizeImageToSquare(src, _avatarSize))
                     {
@@ -258,7 +258,7 @@ namespace UserApp
                         // (Clone ra bitmap mới để tránh lỗi stream đóng)
                         pctAvatar.Image = new Bitmap(resized);
 
-                        // --- 4. LƯU VÀO DB (BLOB) ---
+                        // Lưu ảnh avatar vào database
                         byte[] imageBytes;
                         using (var ms = new MemoryStream())
                         {
@@ -289,7 +289,7 @@ namespace UserApp
             }
         }
 
-        // Resize giữ tỉ lệ và crop trung tâm để thành hình vuông
+       
         private Image ResizeImageToSquare(Image src, int size)
         {
             // tính crop trung tâm vuông

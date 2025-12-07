@@ -1,6 +1,7 @@
 using ClosedXML.Excel;
 using Microsoft.Data.Sqlite;
 using SharedData.Models;
+using SharedData.Repositories; // THÊM DÒNG NÀY
 using System;
 using System.Drawing;
 using System.Media;
@@ -12,59 +13,49 @@ namespace AdminApp
     {
         private string _staffId;
         private bool _isLoggedIn = false;
-
+        // Repository xử lý đăng nhập tài khoản
+        private readonly AccountRepo _accountRepo = new AccountRepo(); 
+        
+        
         public AdminMainForm(string staffId)
         {
             InitializeComponent();
             _staffId = staffId;
-
-            panelDangNhap.Visible = true; 
-            //btnDangNhap.Visible = true;
+            panelDangNhap.Visible = true;
             btnDangXuat.Visible = false;
-
-            // Ẩn thông tin nhân viên
             picAvatar.Visible = false;
             lblChucVu.Visible = false;
-            //lblTen.Visible = false;
             this.KeyPreview = true;
             this.AcceptButton = btnDN;
-
-
         }
-
+        // Load form: mặc định chưa đăng nhập
         private void AdminMainForm_Load(object sender, EventArgs e)
         {
             panelDangNhap.Visible = true;
-
-            //btnDangNhap.Visible = true;
             btnDangXuat.Visible = false;
-
             picAvatar.Visible = false;
-            //lblTen.Visible = false;
             lblChucVu.Visible = false;
-
             SetMenuEnabled(false);
         }
-
+        // Lưu form con đang mở
         private Form currentFormChild;
         private Guna.UI2.WinForms.Guna2Button currentButton;
-
-        // Chỉ cập nhật trạng thái đăng nhập và hiển thị avatar.
-        // KHÔNG set Enabled cho các nút để tránh "xám".
+        
+        // Bật / tắt menu theo trạng thái đăng nhập
         private void SetMenuEnabled(bool enabled)
         {
             _isLoggedIn = enabled;
             picAvatar.Visible = enabled;
-            // Nếu muốn hiển thị tên/role khi đăng nhập thì gán ở chỗ login thành công
         }
-
+         // Mở form con trong panel chính
         public void OpenChildForm(Form childForm)
         {
-            // Nếu có form con đang mở thì đóng
             if (currentFormChild != null)
                 currentFormChild.Close();
 
             panelMain.AutoScroll = false;
+            panelMain.HorizontalScroll.Enabled = false;
+            panelMain.HorizontalScroll.Visible = false;
 
             currentFormChild = childForm;
             childForm.TopLevel = false;
@@ -74,40 +65,30 @@ namespace AdminApp
             panelMain.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-
-            // Khi form con đóng, bật lại AutoScroll
-            childForm.FormClosed += (s, e) =>
-            {
-                panelMain.AutoScroll = true;
-            };
         }
-
+        // Hàm dùng để đổi trạng thái nút menu đang active thành màu cam
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
             if (btn == null) return;
 
-            // Reset nút cũ về trạng thái Design
+            //Thực hiện reset nút trước đó thành màu trắng
             if (currentButton != null)
             {
-                // Reset về trạng thái mặc định trong Designer
                 currentButton.FillColor = currentButton.Tag != null
                     ? (Color)currentButton.Tag
-                    : Color.FromArgb(44, 84, 115); // fallback
+                    : Color.FromArgb(44, 84, 115);
                 currentButton.ForeColor = Color.White;
                 currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
             }
-
-            // Lưu màu gốc của nút mới (nếu chưa lưu)
             if (btn.Tag == null)
-                btn.Tag = btn.FillColor; // lưu FillColor gốc vào Tag
-
-            // Set nút hiện tại active
+                btn.Tag = btn.FillColor;
             currentButton = btn;
             currentButton.FillColor = Color.FromArgb(44, 84, 115);
             currentButton.ForeColor = Color.FromArgb(255, 128, 0);
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
         }
 
+        // Hàm dùng để kiểm tra người dùng đã đăng nhập hay chưa, nếu chưa thì sẽ hiện thông báo
         private bool CheckLogin()
         {
             if (!_isLoggedIn)
@@ -125,6 +106,7 @@ namespace AdminApp
             return true;
         }
 
+        // Các hàm xử lý sự kiện khi bấm vào các chức năng trên menu thì sẽ hiện form con
         private void btnSuatChieu_Click(object sender, EventArgs e)
         {
             if (!CheckLogin()) return;
@@ -161,35 +143,33 @@ namespace AdminApp
             OpenChildForm(new FormRoomLayoutManagement());
         }
 
-
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
             if (!CheckLogin()) return;
 
             var btn = sender as Guna.UI2.WinForms.Guna2Button;
             ActivateButton(btn);
-            OpenChildForm(new FormCustomerManagement()); // sửa đúng form
+            OpenChildForm(new FormCustomerManagement());
         }
 
+        // Hàm xử lý sự kiện, nếu nhấn vào Avatar thì sẽ hiện form quản lý tài khoản với đúng staff_id
         private void picUserIcon_Click(object sender, EventArgs e)
         {
             if (!CheckLogin()) return;
-
-            // picUserIcon là PictureBox (hoặc control khác) — không ActivateButton trên nó
             OpenChildForm(new FormAccountManagement(_staffId));
         }
 
+        
         public void GoHome()
         {
             if (currentFormChild != null)
             {
+                panelMain.Controls.Remove(currentFormChild);
                 currentFormChild.Close();
                 currentFormChild = null;
             }
 
             panelMain.AutoScroll = true;
-
-            // Reset nút active
             if (currentButton != null)
             {
                 currentButton.BackColor = Color.FromArgb(51, 51, 76);
@@ -202,24 +182,19 @@ namespace AdminApp
             GoHome();
         }
 
+        // Hàm xử lý sự kiện khi nhấn đăng xuất, lúc này sẽ quay lại form đăng nhập 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
             _staffId = null;
             _isLoggedIn = false;
 
             picAvatar.Visible = false;
-            //lblTen.Visible = false;
             lblChucVu.Visible = false;
-
-            //btnDangNhap.Visible = true;
             btnDangXuat.Visible = false;
-
             panelDangNhap.Visible = true;
             panelDangNhap.Enabled = true;
             panelDangNhap.BringToFront();
-
-            // set menu state (logic)
-            SetMenuEnabled(false);
+            SetMenuEnabled(false); 
 
             if (currentFormChild != null)
             {
@@ -228,6 +203,7 @@ namespace AdminApp
             }
         }
 
+        // Xử lý đăng nhập
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             string user = txtUsername.Text.Trim();
@@ -243,57 +219,32 @@ namespace AdminApp
                 return;
             }
 
-            using (var conn = DatabaseHelper.GetConnection())
+            // Gọi AccountRepo để xác thực tài khoản
+            string staffId, role, msg;
+            if (_accountRepo.LoginStaff(user, pass, out staffId, out role, out msg))
             {
-                conn.Open();
+                _staffId = staffId;
+                lblChucVu.Text = role;
+                picAvatar.Visible = true;
+                lblChucVu.Visible = true;
+                btnDangXuat.Visible = true;
 
-                string query = @"
-            SELECT account_id, role_account, staff_id
-            FROM Account
-            WHERE username = @user
-              AND password = @pass
-              AND role_account = 'Nhân viên (Admin)'";
+                HideLoginPanel();
+                SetMenuEnabled(true);
 
-                using (var cmd = new SqliteCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@user", user);
-                    cmd.Parameters.AddWithValue("@pass", pass);
+                SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);
+                player.Play();
 
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            _staffId = reader["staff_id"].ToString();
-
-                            //lblTen.Text = "Admin";
-                            lblChucVu.Text = reader["role_account"].ToString();
-
-                            picAvatar.Visible = true;
-                            //lblTen.Visible = true;
-                            lblChucVu.Visible = true;
-
-                            //btnDangNhap.Visible = false;
-                            btnDangXuat.Visible = true;
-
-                            // ẨN & ĐẨY PANEL LOGIN XUỐNG
-                            HideLoginPanel();
-
-                            // MỞ MENU (logic) — không đổi màu nút
-                            SetMenuEnabled(true);
-
-                            // MỞ FORM MẶC ĐỊNH
-                            ActivateButton(btnThongKe);
-                            OpenChildForm(new FormStatistics1(this));
-                        }
-                        else
-                        {
-                            lblError.Text = "Sai tài khoản / mật khẩu hoặc không có quyền Admin";
-                            lblError.Visible = true;
-                        }
-                    }
-                }
+                ActivateButton(btnThongKe);
+                OpenChildForm(new FormStatistics1(this));
             }
-            btnDangXuat.Visible = true;
+            else
+            {
+                SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
+                player.Play();
+                lblError.Text = msg;
+                lblError.Visible = true;
+            }
         }
 
         private void HideLoginPanel()
@@ -302,7 +253,8 @@ namespace AdminApp
             panelDangNhap.Enabled = false;
             panelDangNhap.SendToBack();
         }
-
+        
+        // Nhấn Enter để đăng nhập
         private void btnDN_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -315,43 +267,34 @@ namespace AdminApp
         {
             panelDangNhap.Visible = false;
             panelDangNhap.Enabled = false;
-
-            // Mở form Quên mật khẩu vào panelMain
             OpenChildForm(new FormForgetPassword(this));
         }
+        // Hiện lại panel đăng nhập
         public void ShowLoginPanel()
         {
-            // đóng form con nếu còn
             if (currentFormChild != null)
             {
                 currentFormChild.Close();
                 currentFormChild = null;
             }
-
             panelDangNhap.Visible = true;
             panelDangNhap.Enabled = true;
             panelDangNhap.BringToFront();
         }
-
+         // Ẩn / hiện mật khẩu
         private void guna2PictureBox1_Click(object sender, EventArgs e)
         {
             if (txtPassword.UseSystemPasswordChar == true)
             {
-                // Hiện lên + Đổi ảnh mở
                 txtPassword.UseSystemPasswordChar = false;
                 txtPassword.PasswordChar = '\0';
                 picEye.Image = Properties.Resources.view;
             }
             else
             {
-                // Ẩn đi + Đổi ảnh đóng
                 txtPassword.UseSystemPasswordChar = true;
-
-                // Đổi ảnh đóng ở đây
-                picEye.Image = Properties.Resources.hide; 
+                picEye.Image = Properties.Resources.hide;
             }
         }
     }
 }
-
-

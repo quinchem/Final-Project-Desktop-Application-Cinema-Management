@@ -19,6 +19,9 @@ namespace UserApp
         private FilmRepo _filmRepo = new FilmRepo();
         private ImageRepo _imageRepo = new ImageRepo();
         private UserMainForm _parentForm;
+
+        //Hàm Khởi tạo form chi tiết phim, lưu lại ID phim được chọn ở danh sách phim,
+        // sau đó load thông tin phim và poster
         public FormMovieDetail(string id, UserMainForm parentForm)
         {
             InitializeComponent();
@@ -28,6 +31,7 @@ namespace UserApp
             LoadMoviePoster();
         }
 
+        // Hàm lấy thông tin chi tiết phim từ CSDL và gán vào các label tương ứng, sử dụng Film Repo
         private void LoadMovieDetails()
         {
             try
@@ -54,8 +58,7 @@ namespace UserApp
                     lblActor.Text = film.actor;
 
                     // --- Giới hạn xuống dòng cho mô tả ---
-                    lblDescription.AutoSize = true;
-                    lblDescription.MaximumSize = new Size(800, 0); // 400 là bề rộng label, có thể chỉnh
+                    
                     lblDescription.Text = film.description;
                 }
                 else
@@ -74,6 +77,7 @@ namespace UserApp
             }
         }
 
+        // Hàm lấy poster phim từ CSDL dưới dạng bype và hiển thị vào pictureBox, sử dụng image Repo
         private void LoadMoviePoster()
         {
             try
@@ -97,9 +101,9 @@ namespace UserApp
         }
 
 
+        // Hàm xử lý sự kiện khi nhấn nút Đặt vé, sẽ chuyển sang form suất chiếu của phim đó dựa vào movie id
         private void btnDatVe_Click(object sender, EventArgs e)
         {
-            // Tìm MainForm để gọi OpenChildForm()
             UserMainForm parent = this.ParentForm as UserMainForm;
 
             if (parent != null)
@@ -108,6 +112,7 @@ namespace UserApp
             }
         }
 
+        // Hàm xử lý sự kiện nhi nhấn nút quay lại, sẽ quay về danh sách phim
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
             if (_parentForm != null)

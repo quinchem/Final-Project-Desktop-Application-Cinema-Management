@@ -27,6 +27,7 @@ namespace UserApp
             LoadMovies();
         }
 
+        // Hàm để lấy tất cả các phim đang chiếu lên FlowLayoutPannel, sử dụng film repo và image repo
         private void LoadMovies()
         {
             FilmRepo repo = new FilmRepo();
@@ -42,6 +43,7 @@ namespace UserApp
             }
         }
 
+        //Hàm để tạo giao diện của một card phim và xử lý sự kiện nhấn vào nút Đặt vé
         private Panel CreateFilmCard(Film film, byte[] posterBytes)
         {
             Panel panel = new Panel();
@@ -49,7 +51,7 @@ namespace UserApp
             panel.BackColor = Color.FromArgb(92, 124, 150);
             panel.Margin = new Padding(20);
 
-            // ---------------- POSTER ----------------
+            //POSTER
             PictureBox poster = new PictureBox();
             poster.Size = new Size(180, 230);
             poster.SizeMode = PictureBoxSizeMode.Zoom;
@@ -63,7 +65,7 @@ namespace UserApp
             }
             else poster.BackColor = Color.Gray;
 
-            // Thêm sự kiện click mở FormMovieDetail theo movie_id
+            // Sự kiện click mở FormMovieDetail theo movie_id
             poster.Click += (s, e) =>
             {
                 if (_parentForm != null)
@@ -75,7 +77,7 @@ namespace UserApp
 
             panel.Controls.Add(poster);
 
-            // ---------------- TÊN PHIM ----------------
+            //TÊN PHIM
             Label lblTitle = new Label();
             lblTitle.AutoSize = false;
             lblTitle.Width = panel.Width - 20;
@@ -85,8 +87,6 @@ namespace UserApp
             lblTitle.ForeColor = Color.White;
             lblTitle.BackColor = Color.Transparent;
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
-
-            // Hiển thị tên phim 1 dòng, có dấu "..." nếu quá dài
             lblTitle.Text = film.title;
             lblTitle.AutoEllipsis = true;
 
@@ -98,7 +98,7 @@ namespace UserApp
 
             panel.Controls.Add(lblTitle);
 
-            // ---------------- THỜI LƯỢNG | TUỔI ----------------
+            //THỜI LƯỢNG/TUỔI
             FlowLayoutPanel infoPanel = new FlowLayoutPanel();
             infoPanel.AutoSize = true;
             infoPanel.FlowDirection = FlowDirection.LeftToRight;
@@ -114,7 +114,7 @@ namespace UserApp
             lblDuration.BackColor = Color.Transparent;
             lblDuration.Text = $"{film.duration} PHÚT";
 
-            // Label dấu |
+            // Label dấu
             Label lblSeparator = new Label();
             lblSeparator.AutoSize = true;
             lblSeparator.Font = new Font("Segoe UI ", 10F, FontStyle.Regular);
@@ -149,7 +149,7 @@ namespace UserApp
 
             panel.Controls.Add(infoPanel);
 
-            // ---------------- KHỞI CHIẾU ----------------
+            //KHỞI CHIẾU
             Label lblDate = new Label();
             lblDate.AutoSize = false;
             lblDate.Width = panel.Width - 20;
@@ -162,7 +162,7 @@ namespace UserApp
             lblDate.Text = $"KHỞI CHIẾU: {film.release_date}";
             panel.Controls.Add(lblDate);
 
-            // ---------------- BUTTON ĐẶT VÉ ----------------
+            //BUTTON ĐẶT VÉ
             Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button();
             btn.Text = "ĐẶT VÉ";
             btn.FillColor = Color.FromArgb(245, 131, 35);
@@ -191,9 +191,6 @@ namespace UserApp
 
             return panel;
         }
-
-
-
     }
 }
 

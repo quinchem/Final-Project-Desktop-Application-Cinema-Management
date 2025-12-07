@@ -42,7 +42,7 @@ namespace UserApp
         }
         private void FormProfile_Load(object sender, EventArgs e)
         {
-            LoadUserControl(new ProfileAccount(currentUser));   // Load mặc định khi mở form
+            LoadUserControl(new ProfileAccount(currentUser));   
         }
 
         // Nút Thông tin
@@ -51,14 +51,14 @@ namespace UserApp
             LoadUserControl(new ProfileAccount(currentUser));
         }
 
-        // Nút Đổi mật khẩu
+        //  Hành động khi nhấn nút đổi mật khẩu
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             LoadUserControl(new ProfileChangePassword(currentUser));
 
         }
 
-        // Nút Lịch sử
+        //Hành động khi nhấn nút lịch sử
         private void btnHistory_Click(object sender, EventArgs e)
         {
             if (currentUser == null)
@@ -76,13 +76,13 @@ namespace UserApp
 
             HistoryTicket.OnViewBillDetail += (billId) =>
             {
-                // Khi bấm "Xem" → Hiển thị UserControl Chi Tiết
+                // Khi bấm xem thì hiển thị UserControl Chi Tiết
                 HistoryTicketDetail detailUC = new HistoryTicketDetail(billId);
 
                 // Đăng ký event "Quay lại"
                 detailUC.BackToHistory += (s, e) =>
                 {
-                    // Khi bấm "Quay lại" → Quay về UserControl Lịch Sử Vé
+                    // Khi bấm "Quay lại" thì quay về UserControl Lịch Sử Vé
                     LoadUserControl(HistoryTicket);
                 };
 

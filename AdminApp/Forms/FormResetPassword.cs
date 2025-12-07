@@ -16,21 +16,23 @@ namespace AdminApp.Forms
 {
     public partial class FormResetPassword : Form
     {
+        // Form cha (AdminMainForm) để quay về màn hình đăng nhập sau khi reset
         private AdminMainForm parentForm;
+        // Email người dùng (được truyền từ bước trước – hiện chưa dùng)
         private string _userEmail;
         public FormResetPassword(AdminMainForm parent, string email)
         {
             InitializeComponent();
             parentForm = parent;
-            this._userEmail = email; // Lưu lại email
+            this._userEmail = email;
         }
 
         private void btnDatLaiMK_Click(object sender, EventArgs e)
         {
-            string username = "admin"; // hoặc truyền từ form Quên MK qua
+            string username = "admin"; 
             string newPass = txtMKmoi.Text.Trim();
             string confirmPass = txtXacNhanMK.Text.Trim();
-
+            // Kiểm tra nhập thiếu dữ liệu
             if (string.IsNullOrEmpty(newPass) || string.IsNullOrEmpty(confirmPass))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -38,7 +40,7 @@ namespace AdminApp.Forms
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
                 return;
             }
-
+            // Kiểm tra mật khẩu xác nhận
             if (newPass != confirmPass)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -46,7 +48,7 @@ namespace AdminApp.Forms
                 MessageBox.Show("Mật khẩu xác nhận không khớp");
                 return;
             }
-
+            // Kết nối CSDL và cập nhật mật khẩu
             using (var conn = DatabaseHelper.GetConnection())
             {
                 conn.Open();
@@ -79,41 +81,33 @@ namespace AdminApp.Forms
                 }
             }
         }
-
+         // Hiện / Ẩn mật khẩu mới
         private void picEye1_Click(object sender, EventArgs e)
         {
             if (txtMKmoi.UseSystemPasswordChar == true)
             {
-                // Hiện lên + Đổi ảnh mở
                 txtMKmoi.UseSystemPasswordChar = false;
                 txtMKmoi.PasswordChar = '\0';
                 picEye1.Image = Properties.Resources.view;
             }
             else
             {
-                // Ẩn đi + Đổi ảnh đóng
                 txtMKmoi.UseSystemPasswordChar = true;
-
-                // Đổi ảnh đóng ở đây
                 picEye1.Image = Properties.Resources.hide; 
             }
         }
-
+        // Hiện / Ẩn mật khẩu xác nhận
         private void picEye2_Click(object sender, EventArgs e)
         {
             if (txtXacNhanMK.UseSystemPasswordChar == true)
             {
-                // Hiện lên + Đổi ảnh mở
                 txtXacNhanMK.UseSystemPasswordChar = false;
                 txtXacNhanMK.PasswordChar = '\0';
                 picEye2.Image = Properties.Resources.view;
             }
             else
             {
-                // Ẩn đi + Đổi ảnh đóng
                 txtXacNhanMK.UseSystemPasswordChar = true;
-
-                // Đổi ảnh đóng ở đây
                 picEye2.Image = Properties.Resources.hide; 
             }
         }
