@@ -870,6 +870,7 @@ namespace AdminApp
         }
 
         // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
+                // Làm mới vị trí các ghế theo đúng bố cục tính toán trong FormatSeatPositions.
         // Thường dùng khi thay đổi kích thước form hoặc muốn căn lại layout cho đều.
         private void btnRefresh_Click(object sender, EventArgs e)
         {
