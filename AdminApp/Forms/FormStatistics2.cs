@@ -1,4 +1,4 @@
-﻿using Guna.Charts.WinForms;
+using Guna.Charts.WinForms;
 using Guna.UI2.WinForms;
 using Microsoft.Data.Sqlite;
 using System;
@@ -237,7 +237,6 @@ namespace AdminApp
                 if (rd.IsDBNull(0) || rd.IsDBNull(1)) continue;
                 pie.DataPoints.Add(rd.GetString(0), rd.GetInt32(1));
             }
-APOINTS
             pie.FillColors.Clear();
             pie.FillColors.Add(Color.FromArgb(94, 114, 228));  
             pie.FillColors.Add(Color.FromArgb(255, 107, 129));  
