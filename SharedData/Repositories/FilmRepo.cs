@@ -110,13 +110,13 @@ namespace SharedData.Repositories
             var showingFilms = allFilms
                 .Where(film =>
                 {
-                    // Chỉ lấy phim active (nếu muốn)
-                    if (!string.Equals(film.status, "active", StringComparison.OrdinalIgnoreCase))
+                    // Chỉ lấy phim đang chiếu
+                    if (!string.Equals(film.status?.Trim(), "Đang chiếu", StringComparison.OrdinalIgnoreCase))
                         return false;
 
                     // Parse release_date
                     DateTime release;
-                    string[] formats = { "yyyy-MM-dd", "dd/MM/yyyy" }; // hỗ trợ 2 format phổ biến
+                    string[] formats = { "yyyy-MM-dd", "dd/MM/yyyy" }; 
                     bool parsed = DateTime.TryParseExact(
                         film.release_date,
                         formats,
@@ -130,6 +130,62 @@ namespace SharedData.Repositories
                 .ToList();
 
             return showingFilms;
+        }
+
+        public List<Film> GetComingSoonFilms()
+        {
+            var allFilms = GetAllFilms();
+            DateTime today = DateTime.Today;
+
+            var showingFilms = allFilms
+                .Where(film =>
+                {
+                    // Chỉ lấy phim chưa chiếu
+                    if (!string.Equals(film.status?.Trim(), "Sắp chiếu", StringComparison.OrdinalIgnoreCase))
+                        return false;
+
+                    // Parse release_date
+                    DateTime release;
+                    string[] formats = { "yyyy-MM-dd", "dd/MM/yyyy" };
+                    bool parsed = DateTime.TryParseExact(
+                        film.release_date,
+                        formats,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out release
+                    );
+
+                    return parsed && release > today; // chỉ lấy phim chưa chiếu
+                })
+                .ToList();
+
+            return showingFilms;
+        }
+
+        // Lấy phim theo trạng thái (sử dụng để lọc trong quản lý phim)
+        public List<Film> GetFilmsByStatus(string status)
+        {
+            List<Film> films = new List<Film>();
+
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                string sql = "SELECT * FROM movie WHERE status = @status";
+
+                using (var cmd = new SqliteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@status", status);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            films.Add(MapFilm(reader)); // dùng MapFilm
+                        }
+                    }
+                }
+            }
+            return films;
         }
 
         // Lấy phim theo ID

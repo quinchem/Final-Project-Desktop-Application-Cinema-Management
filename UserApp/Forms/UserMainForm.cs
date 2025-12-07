@@ -144,6 +144,18 @@ namespace UserApp
             OpenChildForm(new FormShowtimeList(this));
         }
 
+        private void btnPhimSapChieu_Click(object sender, EventArgs e)
+        {
+            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
+            if (btn == null) return;
+
+            // Tạo hiệu ứng nút được chọn
+            ActivateButton(btn);
+
+            // Mở form danh sách suất chiếu
+            OpenChildForm(new FormComingMovieList(this));
+        }
+
         // Nút mở danh sách phim
         private void btnPhim_Click(object sender, EventArgs e)
         {
