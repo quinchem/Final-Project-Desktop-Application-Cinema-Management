@@ -50,6 +50,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             lblMaDatVe = new Guna.UI2.WinForms.Guna2HtmlLabel();
             lblTenPhim = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -69,6 +71,8 @@
             txtTongTien = new Guna.UI2.WinForms.Guna2TextBox();
             btnPrint = new Guna.UI2.WinForms.Guna2Button();
             btnReturn = new Guna.UI2.WinForms.Guna2Button();
+            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            txtTicketCode = new Guna.UI2.WinForms.Guna2TextBox();
             SuspendLayout();
             // 
             // guna2TextBox1
@@ -85,7 +89,7 @@
             guna2TextBox1.Font = new Font("Segoe UI Black", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2TextBox1.ForeColor = Color.DarkSlateGray;
             guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(97, 15);
+            guna2TextBox1.Location = new Point(97, 9);
             guna2TextBox1.Margin = new Padding(11, 15, 11, 15);
             guna2TextBox1.Name = "guna2TextBox1";
             guna2TextBox1.PlaceholderForeColor = Color.Black;
@@ -99,18 +103,18 @@
             // 
             lblMaDatVe.BackColor = Color.Transparent;
             lblMaDatVe.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lblMaDatVe.Location = new Point(97, 123);
+            lblMaDatVe.Location = new Point(75, 90);
             lblMaDatVe.Margin = new Padding(2);
             lblMaDatVe.Name = "lblMaDatVe";
-            lblMaDatVe.Size = new Size(98, 30);
+            lblMaDatVe.Size = new Size(140, 30);
             lblMaDatVe.TabIndex = 2;
-            lblMaDatVe.Text = "Mã đặt vé:";
+            lblMaDatVe.Text = "Mã đơn đặt vé:";
             // 
             // lblTenPhim
             // 
             lblTenPhim.BackColor = Color.Transparent;
             lblTenPhim.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lblTenPhim.Location = new Point(97, 203);
+            lblTenPhim.Location = new Point(75, 258);
             lblTenPhim.Margin = new Padding(2);
             lblTenPhim.Name = "lblTenPhim";
             lblTenPhim.Size = new Size(95, 30);
@@ -121,7 +125,7 @@
             // 
             lblSuatChieu.BackColor = Color.Transparent;
             lblSuatChieu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lblSuatChieu.Location = new Point(97, 295);
+            lblSuatChieu.Location = new Point(75, 346);
             lblSuatChieu.Margin = new Padding(2);
             lblSuatChieu.Name = "lblSuatChieu";
             lblSuatChieu.Size = new Size(103, 30);
@@ -132,7 +136,7 @@
             // 
             lblGhe.BackColor = Color.Transparent;
             lblGhe.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lblGhe.Location = new Point(97, 389);
+            lblGhe.Location = new Point(75, 438);
             lblGhe.Margin = new Padding(2);
             lblGhe.Name = "lblGhe";
             lblGhe.Size = new Size(45, 30);
@@ -143,7 +147,7 @@
             // 
             lblTinhTrang.BackColor = Color.Transparent;
             lblTinhTrang.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lblTinhTrang.Location = new Point(730, 389);
+            lblTinhTrang.Location = new Point(730, 345);
             lblTinhTrang.Margin = new Padding(2);
             lblTinhTrang.Name = "lblTinhTrang";
             lblTinhTrang.Size = new Size(208, 30);
@@ -154,7 +158,7 @@
             // 
             lblPhongChieu.BackColor = Color.Transparent;
             lblPhongChieu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lblPhongChieu.Location = new Point(730, 123);
+            lblPhongChieu.Location = new Point(730, 90);
             lblPhongChieu.Margin = new Padding(2);
             lblPhongChieu.Name = "lblPhongChieu";
             lblPhongChieu.Size = new Size(123, 30);
@@ -165,7 +169,7 @@
             // 
             lblNgayDatVe.BackColor = Color.Transparent;
             lblNgayDatVe.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lblNgayDatVe.Location = new Point(730, 203);
+            lblNgayDatVe.Location = new Point(730, 174);
             lblNgayDatVe.Margin = new Padding(2);
             lblNgayDatVe.Name = "lblNgayDatVe";
             lblNgayDatVe.Size = new Size(117, 30);
@@ -176,7 +180,7 @@
             // 
             lblTongTien.BackColor = Color.Transparent;
             lblTongTien.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lblTongTien.Location = new Point(730, 295);
+            lblTongTien.Location = new Point(730, 257);
             lblTongTien.Margin = new Padding(2);
             lblTongTien.Name = "lblTongTien";
             lblTongTien.Size = new Size(96, 30);
@@ -196,7 +200,7 @@
             txtTinhTrang.Font = new Font("Segoe UI", 10.8F);
             txtTinhTrang.ForeColor = Color.FromArgb(64, 64, 64);
             txtTinhTrang.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtTinhTrang.Location = new Point(972, 381);
+            txtTinhTrang.Location = new Point(972, 344);
             txtTinhTrang.Margin = new Padding(4, 5, 4, 5);
             txtTinhTrang.Name = "txtTinhTrang";
             txtTinhTrang.PlaceholderText = "";
@@ -218,7 +222,7 @@
             txtGhe.Font = new Font("Segoe UI", 10.8F);
             txtGhe.ForeColor = Color.FromArgb(64, 64, 64);
             txtGhe.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtGhe.Location = new Point(230, 381);
+            txtGhe.Location = new Point(230, 438);
             txtGhe.Margin = new Padding(4, 5, 4, 5);
             txtGhe.Name = "txtGhe";
             txtGhe.PlaceholderText = "";
@@ -240,7 +244,7 @@
             txtSuatChieu.Font = new Font("Segoe UI", 10.8F);
             txtSuatChieu.ForeColor = Color.FromArgb(64, 64, 64);
             txtSuatChieu.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSuatChieu.Location = new Point(230, 287);
+            txtSuatChieu.Location = new Point(230, 344);
             txtSuatChieu.Margin = new Padding(4, 5, 4, 5);
             txtSuatChieu.Name = "txtSuatChieu";
             txtSuatChieu.PlaceholderText = "";
@@ -262,7 +266,7 @@
             txtTenPhim.Font = new Font("Segoe UI", 10.8F);
             txtTenPhim.ForeColor = Color.FromArgb(64, 64, 64);
             txtTenPhim.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtTenPhim.Location = new Point(230, 199);
+            txtTenPhim.Location = new Point(230, 256);
             txtTenPhim.Margin = new Padding(4, 5, 4, 5);
             txtTenPhim.Name = "txtTenPhim";
             txtTenPhim.PlaceholderText = "";
@@ -284,7 +288,7 @@
             txtMaDatVe.Font = new Font("Segoe UI", 10.8F);
             txtMaDatVe.ForeColor = Color.FromArgb(64, 64, 64);
             txtMaDatVe.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMaDatVe.Location = new Point(230, 115);
+            txtMaDatVe.Location = new Point(230, 89);
             txtMaDatVe.Margin = new Padding(4, 5, 4, 5);
             txtMaDatVe.Name = "txtMaDatVe";
             txtMaDatVe.PlaceholderText = "";
@@ -306,7 +310,7 @@
             txtNgayDatVe.Font = new Font("Segoe UI", 10.8F);
             txtNgayDatVe.ForeColor = Color.FromArgb(64, 64, 64);
             txtNgayDatVe.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtNgayDatVe.Location = new Point(972, 199);
+            txtNgayDatVe.Location = new Point(972, 162);
             txtNgayDatVe.Margin = new Padding(4, 5, 4, 5);
             txtNgayDatVe.Name = "txtNgayDatVe";
             txtNgayDatVe.PlaceholderText = "";
@@ -328,7 +332,7 @@
             txtPhongChieu.Font = new Font("Segoe UI", 10.8F);
             txtPhongChieu.ForeColor = Color.FromArgb(64, 64, 64);
             txtPhongChieu.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPhongChieu.Location = new Point(972, 115);
+            txtPhongChieu.Location = new Point(972, 78);
             txtPhongChieu.Margin = new Padding(4, 5, 4, 5);
             txtPhongChieu.Name = "txtPhongChieu";
             txtPhongChieu.PlaceholderText = "";
@@ -350,7 +354,7 @@
             txtTongTien.Font = new Font("Segoe UI", 10.8F);
             txtTongTien.ForeColor = Color.FromArgb(64, 64, 64);
             txtTongTien.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtTongTien.Location = new Point(972, 287);
+            txtTongTien.Location = new Point(972, 250);
             txtTongTien.Margin = new Padding(4, 5, 4, 5);
             txtTongTien.Name = "txtTongTien";
             txtTongTien.PlaceholderText = "";
@@ -392,7 +396,7 @@
             btnReturn.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnReturn.ForeColor = Color.FromArgb(245, 131, 35);
             btnReturn.Image = Properties.Resources.back_arrow;
-            btnReturn.Location = new Point(51, 492);
+            btnReturn.Location = new Point(43, 508);
             btnReturn.Margin = new Padding(2);
             btnReturn.Name = "btnReturn";
             btnReturn.ShadowDecoration.CustomizableEdges = customizableEdges22;
@@ -401,11 +405,46 @@
             btnReturn.Text = "Quay lại trang Lịch sử đặt vé";
             btnReturn.Click += btnReturn_Click;
             // 
+            // guna2HtmlLabel1
+            // 
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            guna2HtmlLabel1.Location = new Point(75, 175);
+            guna2HtmlLabel1.Margin = new Padding(2);
+            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            guna2HtmlLabel1.Size = new Size(115, 30);
+            guna2HtmlLabel1.TabIndex = 25;
+            guna2HtmlLabel1.Text = "Ticket Code:\r\n";
+            // 
+            // txtTicketCode
+            // 
+            txtTicketCode.BorderRadius = 5;
+            txtTicketCode.CustomizableEdges = customizableEdges23;
+            txtTicketCode.DefaultText = "";
+            txtTicketCode.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtTicketCode.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtTicketCode.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtTicketCode.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtTicketCode.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtTicketCode.Font = new Font("Segoe UI", 10.8F);
+            txtTicketCode.ForeColor = Color.FromArgb(64, 64, 64);
+            txtTicketCode.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtTicketCode.Location = new Point(230, 169);
+            txtTicketCode.Margin = new Padding(4, 5, 4, 5);
+            txtTicketCode.Name = "txtTicketCode";
+            txtTicketCode.PlaceholderText = "";
+            txtTicketCode.SelectedText = "";
+            txtTicketCode.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            txtTicketCode.Size = new Size(370, 38);
+            txtTicketCode.TabIndex = 24;
+            // 
             // HistoryTicketDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(236, 230, 224);
+            Controls.Add(guna2HtmlLabel1);
+            Controls.Add(txtTicketCode);
             Controls.Add(btnReturn);
             Controls.Add(btnPrint);
             Controls.Add(txtTongTien);
@@ -453,5 +492,7 @@
         private Guna.UI2.WinForms.Guna2TextBox txtTongTien;
         private Guna.UI2.WinForms.Guna2Button btnPrint;
         private Guna.UI2.WinForms.Guna2Button btnReturn;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2TextBox txtTicketCode;
     }
 }

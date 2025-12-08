@@ -109,6 +109,7 @@
             picQR.Size = new Size(350, 350);
             picQR.TabIndex = 17;
             picQR.TabStop = false;
+            picQR.Click += PicQR_Click;
             // 
             // guna2HtmlLabel18
             // 
@@ -147,14 +148,14 @@
             guna2CustomGradientPanel2.FillColor2 = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel2.FillColor3 = Color.FromArgb(246, 233, 238);
             guna2CustomGradientPanel2.FillColor4 = Color.FromArgb(246, 233, 238);
-            guna2CustomGradientPanel2.Location = new Point(420, 555);
+            guna2CustomGradientPanel2.Location = new Point(420, 561);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges4;
             guna2CustomGradientPanel2.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel2.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel2.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel2.Size = new Size(406, 149);
+            guna2CustomGradientPanel2.Size = new Size(406, 143);
             guna2CustomGradientPanel2.TabIndex = 16;
             // 
             // lblTimer
@@ -162,7 +163,7 @@
             lblTimer.BackColor = Color.Transparent;
             lblTimer.Font = new Font("Segoe UI Black", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTimer.ForeColor = Color.FromArgb(231, 30, 140);
-            lblTimer.Location = new Point(130, 52);
+            lblTimer.Location = new Point(126, 48);
             lblTimer.Name = "lblTimer";
             lblTimer.Size = new Size(159, 83);
             lblTimer.TabIndex = 17;
@@ -173,7 +174,7 @@
             guna2HtmlLabel16.BackColor = Color.Transparent;
             guna2HtmlLabel16.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             guna2HtmlLabel16.ForeColor = Color.FromArgb(219, 64, 120);
-            guna2HtmlLabel16.Location = new Point(140, 16);
+            guna2HtmlLabel16.Location = new Point(137, 15);
             guna2HtmlLabel16.Name = "guna2HtmlLabel16";
             guna2HtmlLabel16.Size = new Size(139, 30);
             guna2HtmlLabel16.TabIndex = 16;
@@ -210,14 +211,14 @@
             guna2CustomGradientPanel1.ShadowDecoration.Depth = 20;
             guna2CustomGradientPanel1.ShadowDecoration.Enabled = true;
             guna2CustomGradientPanel1.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            guna2CustomGradientPanel1.Size = new Size(406, 474);
+            guna2CustomGradientPanel1.Size = new Size(406, 476);
             guna2CustomGradientPanel1.TabIndex = 7;
             // 
             // guna2HtmlLabel1
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.Location = new Point(33, 355);
+            guna2HtmlLabel1.Location = new Point(33, 356);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(101, 25);
             guna2HtmlLabel1.TabIndex = 17;
@@ -228,7 +229,7 @@
             lblKhachHang.BackColor = Color.Transparent;
             lblKhachHang.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblKhachHang.ForeColor = Color.Black;
-            lblKhachHang.Location = new Point(140, 355);
+            lblKhachHang.Location = new Point(140, 357);
             lblKhachHang.Name = "lblKhachHang";
             lblKhachHang.Size = new Size(100, 25);
             lblKhachHang.TabIndex = 16;
@@ -239,7 +240,7 @@
             lblTien.BackColor = Color.Transparent;
             lblTien.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTien.ForeColor = Color.Black;
-            lblTien.Location = new Point(130, 408);
+            lblTien.Location = new Point(130, 410);
             lblTien.Name = "lblTien";
             lblTien.Size = new Size(162, 39);
             lblTien.TabIndex = 15;
@@ -249,7 +250,7 @@
             // 
             guna2HtmlLabel14.BackColor = Color.Transparent;
             guna2HtmlLabel14.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel14.Location = new Point(33, 417);
+            guna2HtmlLabel14.Location = new Point(33, 419);
             guna2HtmlLabel14.Name = "guna2HtmlLabel14";
             guna2HtmlLabel14.Size = new Size(85, 25);
             guna2HtmlLabel14.TabIndex = 14;
@@ -260,7 +261,7 @@
             lblGio.BackColor = Color.Transparent;
             lblGio.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblGio.ForeColor = Color.Black;
-            lblGio.Location = new Point(123, 298);
+            lblGio.Location = new Point(123, 297);
             lblGio.Name = "lblGio";
             lblGio.Size = new Size(100, 25);
             lblGio.TabIndex = 11;
@@ -270,7 +271,7 @@
             // 
             guna2HtmlLabel10.BackColor = Color.Transparent;
             guna2HtmlLabel10.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel10.Location = new Point(33, 298);
+            guna2HtmlLabel10.Location = new Point(33, 297);
             guna2HtmlLabel10.Name = "guna2HtmlLabel10";
             guna2HtmlLabel10.Size = new Size(84, 25);
             guna2HtmlLabel10.TabIndex = 10;
@@ -281,7 +282,7 @@
             lblLoaiRap.BackColor = Color.Transparent;
             lblLoaiRap.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblLoaiRap.ForeColor = Color.Black;
-            lblLoaiRap.Location = new Point(123, 242);
+            lblLoaiRap.Location = new Point(123, 238);
             lblLoaiRap.Name = "lblLoaiRap";
             lblLoaiRap.Size = new Size(24, 25);
             lblLoaiRap.TabIndex = 9;
@@ -291,7 +292,7 @@
             // 
             guna2HtmlLabel8.BackColor = Color.Transparent;
             guna2HtmlLabel8.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel8.Location = new Point(33, 242);
+            guna2HtmlLabel8.Location = new Point(33, 238);
             guna2HtmlLabel8.Name = "guna2HtmlLabel8";
             guna2HtmlLabel8.Size = new Size(73, 25);
             guna2HtmlLabel8.TabIndex = 8;
@@ -302,7 +303,7 @@
             lblGhe.BackColor = Color.Transparent;
             lblGhe.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblGhe.ForeColor = Color.Black;
-            lblGhe.Location = new Point(123, 186);
+            lblGhe.Location = new Point(123, 180);
             lblGhe.Name = "lblGhe";
             lblGhe.Size = new Size(43, 25);
             lblGhe.TabIndex = 7;
@@ -312,7 +313,7 @@
             // 
             guna2HtmlLabel6.BackColor = Color.Transparent;
             guna2HtmlLabel6.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel6.Location = new Point(33, 186);
+            guna2HtmlLabel6.Location = new Point(33, 180);
             guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             guna2HtmlLabel6.Size = new Size(39, 25);
             guna2HtmlLabel6.TabIndex = 6;
@@ -323,7 +324,7 @@
             lblNgay.BackColor = Color.Transparent;
             lblNgay.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblNgay.ForeColor = Color.Black;
-            lblNgay.Location = new Point(123, 124);
+            lblNgay.Location = new Point(123, 120);
             lblNgay.Name = "lblNgay";
             lblNgay.Size = new Size(80, 25);
             lblNgay.TabIndex = 5;
@@ -333,7 +334,7 @@
             // 
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel4.Location = new Point(33, 124);
+            guna2HtmlLabel4.Location = new Point(33, 120);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(50, 25);
             guna2HtmlLabel4.TabIndex = 4;

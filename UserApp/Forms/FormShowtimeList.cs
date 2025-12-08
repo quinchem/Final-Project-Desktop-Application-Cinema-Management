@@ -15,15 +15,23 @@ namespace UserApp
 {
     public partial class FormShowtimeList : Form
     {
+        // Repo lấy dữ liệu suất chiếu
         private ShowtimeRepo repo = new ShowtimeRepo();
+        // Repo lấy ảnh poster phim
         private ImageRepo _imageRepo = new ImageRepo();
+        // Danh sách suất chiếu đang được load
         private List<ShowtimeInfo> currentShowtimes;
+        // Tham chiếu đến form cha để mở các form con như chọn ghế
         private UserMainForm parentForm;
 
+        // Ngày bắt đầu của tuần hiển thị
         private DateTime currentStartDate;
+        // Ngày đang được chọn
         private DateTime selectedDate;
+        // Tháng hiển thị trên label
         private int selectedMonth = DateTime.Today.Month;
 
+        // Suất chiếu được chọn và panel tương ứng
         private ShowtimeInfo _selectedShowtime = null;
         private Guna2Panel _selectedPanel = null;
 
@@ -31,14 +39,19 @@ namespace UserApp
         {
             InitializeComponent();
             parentForm = parent;
+
+            // Cấu hình flow layout và giá trị mặc định về ngày
             InitializeFlowLayoutPanel();
             selectedMonth = DateTime.Today.Month;
             currentStartDate = GetMondayOfWeek(DateTime.Today);
             selectedDate = DateTime.Today;
             LoadMonthsLabel();
+
+            // Khi form được hiển thị thì khởi tạo calendar và load dữ liệu
             this.Shown += (s, e) => InitCalendar();
         }
 
+        // Thiết lập ban đầu cho flow layout panel chứa các card suất chiếu
         private void InitializeFlowLayoutPanel()
         {
             if (flpShowtimes == null) return;
@@ -49,18 +62,20 @@ namespace UserApp
             flpShowtimes.WrapContents = true;
             flpShowtimes.BorderStyle = BorderStyle.None;
 
-            // Màu nền trong suốt để thấy màu form
+            // Đặt nền trong suốt để nhìn thấy màu nền form
             flpShowtimes.BackColor = Color.Transparent;
 
-            // 🔥 QUAN TRỌNG: Đẩy xuống dưới cùng để không che cái Lịch
+            // Đẩy panel xuống dưới để không che phần lịch ở trên
             flpShowtimes.SendToBack();
         }
 
+        // Cập nhật label tháng
         private void LoadMonthsLabel()
         {
             lblMonth.Text = $"THÁNG {selectedMonth}";
         }
 
+        // Khởi tạo calendar, cập nhật các nút ngày và load dữ liệu
         private void InitCalendar()
         {
             if (currentStartDate == default || currentStartDate == DateTime.MinValue)
@@ -73,17 +88,19 @@ namespace UserApp
             selectedDate = selectedDate.Date;
 
             UpdateMonthLabelByWeek();
-            UpdateDateButtons();  
-            LoadShowtimes();    
+            UpdateDateButtons();
+            LoadShowtimes();
             SelectDate(selectedDate);
         }
 
+        // Trả về ngày thứ hai (Monday) của tuần chứa ngày truyền vào
         private DateTime GetMondayOfWeek(DateTime date)
         {
             int diff = (7 + (date.DayOfWeek - DayOfWeek.Monday)) % 7;
             return date.AddDays(-1 * diff).Date;
         }
 
+        // Cập nhật label tháng theo tuần hiện tại (dựa trên ngày giữa tuần)
         private void UpdateMonthLabelByWeek()
         {
             DateTime midWeek = currentStartDate.AddDays(3);
@@ -94,6 +111,7 @@ namespace UserApp
             lblMonth.Text = $"THÁNG {month} - {year}";
         }
 
+        // Xử lý nút lùi một tuần
         private void btnPrevWeek_Click(object sender, EventArgs e)
         {
             currentStartDate = currentStartDate.AddDays(-7);
@@ -103,6 +121,8 @@ namespace UserApp
             UpdateMonthLabelByWeek();
             LoadShowtimes();
         }
+
+        // Xử lý nút tiến một tuần
         private void btnNextWeek_Click(object sender, EventArgs e)
         {
             currentStartDate = currentStartDate.AddDays(7);
@@ -113,6 +133,7 @@ namespace UserApp
             LoadShowtimes();
         }
 
+        // Chọn một ngày và cập nhật giao diện
         private void SelectDate(DateTime date)
         {
             selectedDate = date;
@@ -121,13 +142,14 @@ namespace UserApp
             Guna2CircleButton clickedButton = GetDateButton(date);
             if (clickedButton != null)
             {
-                clickedButton.FillColor = Color.FromArgb(255, 140, 50); // Cam
+                clickedButton.FillColor = Color.FromArgb(255, 140, 50); // Màu cam cho ngày chọn
                 clickedButton.ForeColor = Color.White;
             }
 
             DisplayShowtimes();
         }
 
+        // Cập nhật nội dung và tag cho các nút ngày trong tuần
         private void UpdateDateButtons()
         {
             Guna2CircleButton[] dateButtons = { btnMon, btnTue, btnWed, btnThu, btnFri, btnSat, btnSun };
@@ -139,11 +161,11 @@ namespace UserApp
 
                 btn.Text = date.Day.ToString("00");
                 btn.Tag = date;
-                btn.Click -= DateButton_Click; // Xóa cũ
-                btn.Click += DateButton_Click; // Thêm mới
+                btn.Click -= DateButton_Click; // Xóa handler cũ để tránh đăng ký nhiều lần
+                btn.Click += DateButton_Click; // Thêm handler mới
             }
 
-            // Highlight lại nút đang chọn nếu nó nằm trong tuần này
+            // Tô lại nút đang chọn nếu nằm trong tuần hiện tại
             ResetDateButtonStyles();
             Guna2CircleButton selectedBtn = GetDateButton(selectedDate);
             if (selectedBtn != null)
@@ -153,6 +175,7 @@ namespace UserApp
             }
         }
 
+        // Reset style cho các nút ngày về mặc định
         private void ResetDateButtonStyles()
         {
             Guna2CircleButton[] dateButtons = { btnMon, btnTue, btnWed, btnThu, btnFri, btnSat, btnSun };
@@ -164,6 +187,7 @@ namespace UserApp
             }
         }
 
+        // Lấy nút tương ứng với ngày trong tuần hiện tại
         private Guna2CircleButton GetDateButton(DateTime date)
         {
             TimeSpan diff = date.Date - currentStartDate.Date;
@@ -176,6 +200,7 @@ namespace UserApp
             return null;
         }
 
+        // Handler khi click vào nút ngày
         private void DateButton_Click(object sender, EventArgs e)
         {
             if (sender is Control ctrl && ctrl.Tag is DateTime dt)
@@ -184,8 +209,7 @@ namespace UserApp
             }
         }
 
-        // --- TẢI VÀ HIỂN THỊ DỮ LIỆU ---
-
+        // Lấy danh sách suất chiếu cho tuần hiện tại
         private void LoadShowtimes()
         {
             UpdateDateButtons();
@@ -205,6 +229,7 @@ namespace UserApp
             }
         }
 
+        // Hiển thị các suất chiếu lên flow layout theo ngày được chọn
         private void DisplayShowtimes()
         {
             flpShowtimes.SuspendLayout();
@@ -218,6 +243,7 @@ namespace UserApp
                     return;
                 }
 
+                // Lọc danh sách theo ngày đang chọn
                 var filteredList = currentShowtimes
                     .Where(s => s.ParsedDate.Date == selectedDate.Date)
                     .ToList();
@@ -228,6 +254,7 @@ namespace UserApp
                     return;
                 }
 
+                // Gom nhóm theo tiêu đề phim để tạo từng panel riêng cho mỗi phim
                 var grouped = filteredList.GroupBy(s => s.title);
                 foreach (var group in grouped)
                 {
@@ -241,6 +268,7 @@ namespace UserApp
             }
         }
 
+        // Hiển thị label thông báo khi không có suất chiếu
         private void ShowEmptyMessage(string message)
         {
             Label lbl = new Label
@@ -257,7 +285,7 @@ namespace UserApp
             flpShowtimes.Controls.Add(lbl);
         }
 
-        // --- TẠO GIAO DIỆN PHIM ĐẸP (Xanh Hamster) ---
+        // Tạo panel hiển thị thông tin phim và các nút giờ chiếu
         private Guna2Panel CreateMoviePanel(string movieTitle, List<ShowtimeInfo> showtimes)
         {
             if (showtimes == null || showtimes.Count == 0) return null;
@@ -265,17 +293,18 @@ namespace UserApp
             string displayTitle = string.IsNullOrEmpty(movieTitle) ? "Tên phim đang cập nhật" : movieTitle.ToUpper();
             Color mainBgColor = Color.FromArgb(92, 124, 150);
             Color titleColor = Color.White;
-            Color timeBgColor = Color.FromArgb(236, 230, 224); 
-            Color accentColor = Color.FromArgb(45, 87, 154);   
+            Color timeBgColor = Color.FromArgb(236, 230, 224);
+            Color accentColor = Color.FromArgb(45, 87, 154);
             int panelHeight = 280;
 
+            // Panel chính cho từng phim
             Guna2Panel mainPanel = new Guna2Panel
             {
                 Width = flpShowtimes.ClientSize.Width - 25,
                 Height = panelHeight,
                 FillColor = mainBgColor,
                 BackColor = Color.Transparent,
-                UseTransparentBackground = true, 
+                UseTransparentBackground = true,
                 BorderRadius = 15,
                 Margin = new Padding(5, 5, 5, 25)
             };
@@ -284,6 +313,7 @@ namespace UserApp
             mainPanel.ShadowDecoration.Color = Color.Black;
             mainPanel.ShadowDecoration.BorderRadius = 15;
 
+            // Tải poster phim từ repo ảnh nếu có
             Image moviePoster = null;
             try
             {
@@ -299,6 +329,7 @@ namespace UserApp
             }
             catch { }
 
+            // Picture box hiển thị poster
             Guna2PictureBox picPoster = new Guna2PictureBox
             {
                 Size = new Size(175, 250),
@@ -311,6 +342,7 @@ namespace UserApp
             };
             mainPanel.Controls.Add(picPoster);
 
+            // Panel bên phải chứa tên phim và các nút giờ
             Panel rightPanel = new Panel
             {
                 Location = new Point(240, 15),
@@ -319,6 +351,7 @@ namespace UserApp
             };
             mainPanel.Controls.Add(rightPanel);
 
+            // Label tiêu đề phim
             Label lblTitle = new Label
             {
                 Text = displayTitle,
@@ -332,6 +365,7 @@ namespace UserApp
             };
             rightPanel.Controls.Add(lblTitle);
 
+            // FlowLayoutPanel chứa các nút giờ
             FlowLayoutPanel flpTimes = new FlowLayoutPanel
             {
                 Dock = DockStyle.Fill,
@@ -343,10 +377,12 @@ namespace UserApp
             rightPanel.Controls.Add(flpTimes);
             lblTitle.SendToBack();
 
+            // Sắp xếp suất chiếu theo thời gian bắt đầu
             var sortedShowtimes = showtimes.OrderBy(s => s.StartTime).ToList();
 
             foreach (var s in sortedShowtimes)
             {
+                // Tạo panel nhỏ cho từng suất chiếu
                 Guna2Panel timePanel = new Guna2Panel
                 {
                     Size = new Size(170, 100),
@@ -364,6 +400,7 @@ namespace UserApp
                 timePanel.ShadowDecoration.Depth = 3;
                 timePanel.ShadowDecoration.Color = Color.Gray;
 
+                // Label hiển thị giờ bắt đầu và kết thúc
                 Label lblTime = new Label
                 {
                     Text = $"{s.StartTime:hh\\:mm} - {s.EndTime:hh\\:mm}",
@@ -376,6 +413,7 @@ namespace UserApp
                     BackColor = Color.Transparent
                 };
 
+                // Label hiển thị loại phòng hoặc định dạng
                 Label lblType = new Label
                 {
                     Text = s.auditorium_type ?? "2D",
@@ -389,6 +427,7 @@ namespace UserApp
                     BackColor = Color.Transparent
                 };
 
+                // Label hiển thị tên phòng
                 Label lblRoom = new Label
                 {
                     Text = s.name ?? "P.?",
@@ -401,21 +440,25 @@ namespace UserApp
                     BackColor = Color.Transparent
                 };
 
+                // Đăng ký handler click để chọn suất chiếu
                 timePanel.Click += Showtime_Click_Handler;
                 lblTime.Click += (sender, e) => Showtime_Click_Handler(timePanel, e);
                 lblType.Click += (sender, e) => Showtime_Click_Handler(timePanel, e);
                 lblRoom.Click += (sender, e) => Showtime_Click_Handler(timePanel, e);
 
+                // Thêm control vào panel thời gian
                 timePanel.Controls.Add(lblRoom);
                 timePanel.Controls.Add(lblType);
                 timePanel.Controls.Add(lblTime);
 
+                // Thêm panel giờ vào flow layout
                 flpTimes.Controls.Add(timePanel);
             }
 
             return mainPanel;
         }
 
+        // Xử lý khi người dùng click chọn một suất chiếu
         private void Showtime_Click_Handler(object sender, EventArgs e)
         {
             Guna2Panel clickedPanel = null;
@@ -424,21 +467,30 @@ namespace UserApp
 
             if (clickedPanel != null && clickedPanel.Tag is ShowtimeInfo info)
             {
+                // Nếu đã có panel chọn trước đó thì reset style về mặc định
                 if (_selectedPanel != null)
                 {
-                    _selectedPanel.FillColor = Color.FromArgb(236, 230, 224); 
+                    _selectedPanel.FillColor = Color.FromArgb(236, 230, 224);
                     _selectedPanel.BorderThickness = 0;
                 }
-                clickedPanel.FillColor = Color.FromArgb(245, 131, 35); 
+
+                // Đổi style panel vừa click để thể hiện là đang chọn
+                clickedPanel.FillColor = Color.FromArgb(245, 131, 35);
                 clickedPanel.BorderThickness = 2;
 
+                // Cập nhật biến lưu suất chiếu và panel đang chọn
                 _selectedPanel = clickedPanel;
                 _selectedShowtime = info;
             }
-            string showtimeId = _selectedShowtime.showtime_id;
-            string auditoriumId = _selectedShowtime.auditorium_id;
+
+            if (_selectedShowtime != null)
+            {
+                string showtimeId = _selectedShowtime.showtime_id;
+                string auditoriumId = _selectedShowtime.auditorium_id;
+            }
         }
 
+        // Xử lý khi người dùng bấm nút Chọn ghế
         private void btnChonCho_Click(object sender, EventArgs e)
         {
             if (_selectedShowtime == null)
@@ -449,6 +501,8 @@ namespace UserApp
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            // Mở form chọn ghế và truyền thông tin suất chiếu đã chọn
             parentForm.OpenChildForm(new FormSeatSelection(parentForm, _selectedShowtime));
         }
     }

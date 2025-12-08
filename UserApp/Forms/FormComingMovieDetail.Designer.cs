@@ -1,8 +1,6 @@
-﻿using Guna.UI2.WinForms.Suite;
-
-namespace UserApp
+﻿namespace UserApp.Forms
 {
-    partial class FormMovieDetail
+    partial class FormComingMovieDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +28,14 @@ namespace UserApp
         /// </summary>
         private void InitializeComponent()
         {
-            CustomizableEdges customizableEdges1 = new CustomizableEdges();
-            CustomizableEdges customizableEdges2 = new CustomizableEdges();
-            CustomizableEdges customizableEdges3 = new CustomizableEdges();
-            CustomizableEdges customizableEdges4 = new CustomizableEdges();
-            CustomizableEdges customizableEdges5 = new CustomizableEdges();
-            CustomizableEdges customizableEdges6 = new CustomizableEdges();
-            CustomizableEdges customizableEdges7 = new CustomizableEdges();
-            CustomizableEdges customizableEdges8 = new CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panelChiTiet = new Panel();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             lblGenre = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -91,8 +89,8 @@ namespace UserApp
             panelChiTiet.Dock = DockStyle.Fill;
             panelChiTiet.Location = new Point(0, 0);
             panelChiTiet.Name = "panelChiTiet";
-            panelChiTiet.Size = new Size(1902, 808);
-            panelChiTiet.TabIndex = 0;
+            panelChiTiet.Size = new Size(1884, 761);
+            panelChiTiet.TabIndex = 1;
             // 
             // guna2Button1
             // 
@@ -107,7 +105,7 @@ namespace UserApp
             guna2Button1.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button1.ForeColor = Color.White;
             guna2Button1.ImageSize = new Size(30, 30);
-            guna2Button1.Location = new Point(1508, 231);
+            guna2Button1.Location = new Point(1508, 49);
             guna2Button1.Margin = new Padding(2);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.BorderRadius = 28;
@@ -146,20 +144,18 @@ namespace UserApp
             // lblDescription
             // 
             lblDescription.AutoSize = false;
+            lblDescription.AutoSizeHeightOnly = true;
             lblDescription.BackColor = Color.Transparent;
             lblDescription.Font = new Font("Segoe UI", 13.8F);
             lblDescription.ForeColor = Color.White;
             lblDescription.Location = new Point(181, 635);
+            lblDescription.MaximumSize = new Size(1593, 0);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(1593, 0);
-            lblDescription.MaximumSize = new Size(1593, 0);
-           
-            lblDescription.MaximumSize = new Size(1593, 0);
-            lblDescription.AutoSizeHeightOnly = true;
-            lblDescription.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            lblDescription.AutoSizeHeightOnly = true;
+            lblDescription.Size = new Size(1593, 32);
+            lblDescription.TabIndex = 22;
             lblDescription.Text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-
+            lblDescription.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            // 
             // btnMoTa
             // 
             btnMoTa.BorderRadius = 15;
@@ -202,11 +198,10 @@ namespace UserApp
             btnDatVe.ShadowDecoration.Depth = 40;
             btnDatVe.ShadowDecoration.Enabled = true;
             btnDatVe.ShadowDecoration.Shadow = new Padding(0, 0, 3, 5);
-            btnDatVe.Size = new Size(159, 61);
+            btnDatVe.Size = new Size(0, 0);
             btnDatVe.TabIndex = 14;
             btnDatVe.Text = "ĐẶT VÉ  ";
             btnDatVe.TextAlign = HorizontalAlignment.Right;
-            btnDatVe.Click += btnDatVe_Click;
             // 
             // lblAge
             // 
@@ -362,34 +357,29 @@ namespace UserApp
             picPoster.TabIndex = 0;
             picPoster.TabStop = false;
             // 
-            // FormMovieDetail
+            // FormComingMovieDetail
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 808);
+            BackColor = Color.FromArgb(92, 124, 150);
+            ClientSize = new Size(1884, 761);
             Controls.Add(panelChiTiet);
-            Margin = new Padding(2);
-            Name = "FormMovieDetail";
-            StartPosition = FormStartPosition.Manual;
-            Text = "Chi tiết phim";
+            Name = "FormComingMovieDetail";
+            Text = "FormComingMovieDetail";
             panelChiTiet.ResumeLayout(false);
             panelChiTiet.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picPoster).EndInit();
             ResumeLayout(false);
-
         }
 
         #endregion
 
         private Panel panelChiTiet;
-        private Guna.UI2.WinForms.Guna2PictureBox picPoster;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTitle;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblGenre;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblDescription;
+        private Guna.UI2.WinForms.Guna2Button btnMoTa;
         private Guna.UI2.WinForms.Guna2Button btnDatVe;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblAge;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblLanguage;
@@ -397,11 +387,13 @@ namespace UserApp
         private Guna.UI2.WinForms.Guna2HtmlLabel lblReleaseDate;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblActor;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblDirector;
-        private Guna.UI2.WinForms.Guna2Button btnMoTa;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblDescription;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblGenre;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
-        private Guna.UI2.WinForms.Guna2Button btnQuayLai;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTitle;
+        private Guna.UI2.WinForms.Guna2PictureBox picPoster;
     }
 }

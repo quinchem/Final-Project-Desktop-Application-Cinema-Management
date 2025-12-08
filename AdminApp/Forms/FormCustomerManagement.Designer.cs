@@ -225,7 +225,7 @@ namespace AdminApp
             HoTen.Frozen = true;
             HoTen.HeaderText = "Họ và tên";
             HoTen.MinimumWidth = 6;
-            HoTen.Name = "HoTen";
+            HoTen.Name = "full_name";
             HoTen.ReadOnly = true;
             HoTen.Width = 220;
             // 
@@ -237,7 +237,7 @@ namespace AdminApp
             GioiTinh.Frozen = true;
             GioiTinh.HeaderText = "Giới tính";
             GioiTinh.MinimumWidth = 6;
-            GioiTinh.Name = "GioiTinh";
+            GioiTinh.Name = "gender";
             GioiTinh.ReadOnly = true;
             GioiTinh.Width = 175;
             // 
@@ -249,7 +249,7 @@ namespace AdminApp
             NgaySinh.Frozen = true;
             NgaySinh.HeaderText = "Ngày sinh";
             NgaySinh.MinimumWidth = 6;
-            NgaySinh.Name = "NgaySinh";
+            NgaySinh.Name = "date_of_birth";
             NgaySinh.ReadOnly = true;
             NgaySinh.Width = 175;
             // 
@@ -261,7 +261,7 @@ namespace AdminApp
             SĐT.Frozen = true;
             SĐT.HeaderText = "Số điện thoại";
             SĐT.MinimumWidth = 6;
-            SĐT.Name = "SĐT";
+            SĐT.Name = "phone_number";
             SĐT.ReadOnly = true;
             SĐT.Width = 175;
             // 
@@ -273,7 +273,7 @@ namespace AdminApp
             Email.Frozen = true;
             Email.HeaderText = "Email";
             Email.MinimumWidth = 6;
-            Email.Name = "Email";
+            Email.Name = "email";
             Email.ReadOnly = true;
             Email.Width = 200;
             // 
@@ -284,7 +284,7 @@ namespace AdminApp
             DiaChi.FillWeight = 65.33226F;
             DiaChi.HeaderText = "Địa chỉ";
             DiaChi.MinimumWidth = 6;
-            DiaChi.Name = "DiaChi";
+            DiaChi.Name = "address";
             DiaChi.ReadOnly = true;
             DiaChi.Width = 200;
             // 
@@ -295,7 +295,7 @@ namespace AdminApp
             ThoiGianTaoTK.FillWeight = 65.33226F;
             ThoiGianTaoTK.HeaderText = "Thời gian tạo tài khoản";
             ThoiGianTaoTK.MinimumWidth = 6;
-            ThoiGianTaoTK.Name = "ThoiGianTaoTK";
+            ThoiGianTaoTK.Name = "create_date";
             ThoiGianTaoTK.ReadOnly = true;
             ThoiGianTaoTK.Width = 250;
             // 

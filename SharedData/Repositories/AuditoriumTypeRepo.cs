@@ -10,6 +10,7 @@ namespace SharedData.Repositories
 {
     public class AuditoriumTypeRepo
     {
+        // Lấy tất cả định dạng phòng
         public List<AuditoriumType> GetAll()
         {
             var list = new List<AuditoriumType>();
@@ -36,6 +37,7 @@ namespace SharedData.Repositories
             return list;
         }
 
+        // Thêm định dạng phòng
         public void Insert(AuditoriumType t)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -54,6 +56,7 @@ namespace SharedData.Repositories
             }
         }
 
+        // Cập nhật định dạng phòng
         public void Update(AuditoriumType t)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -73,6 +76,7 @@ namespace SharedData.Repositories
             }
         }
 
+        // Xóa
         public void Delete(string typeId)
         {
             using (var conn = DatabaseHelper.GetConnection())

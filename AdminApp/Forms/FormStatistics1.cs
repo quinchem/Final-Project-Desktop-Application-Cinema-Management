@@ -28,6 +28,7 @@ namespace AdminApp
             _parent = parent;
         }
 
+        // Hàm khởi tạo form để đặt ngày về 30 ngày gần nhất cũng như load Year Combo
         private void FormStatistics1_Load(object sender, EventArgs e)
         {
             dtpFrom.Value = DateTime.Today.AddDays(-30);
@@ -40,6 +41,7 @@ namespace AdminApp
             dtpTo.MouseDown += DatePicker_MouseDown;
         }
 
+        // Hàm chặn chọn ngày nếu như đang lọc theo năm
         private void DatePicker_MouseDown(object sender, MouseEventArgs e)
         {
             if (isFilteringByYear)
@@ -51,14 +53,11 @@ namespace AdminApp
             }
         }
 
+        // Hàm load các năm vào Year ComboBox
         private void LoadYearCombo()
         {
             YearCombo.Items.Clear();
-
-            // Thêm mục "Không" để được phép chọn DateTimePicker
             YearCombo.Items.Add("Không");
-
-            // Các năm cố định theo yêu cầu
             YearCombo.Items.Add("2023");
             YearCombo.Items.Add("2024");
             YearCombo.Items.Add("2025");
@@ -66,8 +65,6 @@ namespace AdminApp
 
             YearCombo.SelectedIndex = 0;
         }
-
-
 
         private void ReloadAll()
         {
@@ -83,9 +80,8 @@ namespace AdminApp
             LoadTopMoviesChart();
         }
 
-        // ==============================================
-        // KPI
-        // ==============================================
+        // Hàm truy vấn CSDL để lấy cái KPI bao gồm: tổng doanh thu, số vé bán ra, doanh thu trung bình,
+        //phim nổi trội nhất, số khách hàng mới để đưa vào label tương ứng
         private void LoadRevenueKPI()
         {
             using var conn = DatabaseHelper.GetConnection();
@@ -129,7 +125,6 @@ namespace AdminApp
                     }
                 }
 
-                // Top movie
                 cmd.CommandText = @"
                     SELECT m.title
                     FROM bill b
@@ -150,9 +145,6 @@ namespace AdminApp
                     lblTopMovie.MaximumSize = new Size(250, 0);
                 }
 
-                // New customers
-                // 3️⃣ Khách hàng mới
-                // 3️⃣ Khách hàng mới - fix lỗi định dạng create_date
                 cmd.CommandText = @"
                 SELECT COUNT(*)
                 FROM customer
@@ -163,27 +155,11 @@ namespace AdminApp
                 {
                     lblNewCustomer.Text = reader.Read() ? reader.GetInt32(0).ToString() : "0";
                 }
-                //cmd.CommandText = @"
-                //    SELECT COUNT(*)
-                //    FROM customer
-                //    WHERE create_date IS NOT NULL
-                //        AND substr(create_date, 7, 4) || '-' || 
-                //            substr(create_date, 4, 2) || '-' || 
-                //            substr(create_date, 1, 2) 
-                //            BETWEEN @from AND @to";
-
-                //using (var reader = cmd.ExecuteReader())
-                //{
-                //    lblNewCustomer.Text = reader.Read()
-                //        ? reader.GetInt32(0).ToString()
-                //        : "0";
             }
         }
 
 
-        // ==============================================
-        // Line chart: doanh thu theo ngày
-        // ==============================================
+       //Hàm truy vấn thông tin doanh thu theo ngày và đưa thông tin vào biểu đồ đường 
         private void LoadRevenueByDayChart()
         {
             gunaChartRevenue.Datasets.Clear();
@@ -223,9 +199,7 @@ namespace AdminApp
             gunaChartRevenue.Update();
         }
 
-        // ==============================================
-        // Bar chart: top 5 movie
-        // ==============================================
+        //Hàm truy vấn thông tin 5 phim có doanh thu cao nhất và đưa thông tin vào biểu đồ  
         private void LoadTopMoviesChart()
         {
             gunaChartTopMovies.Datasets.Clear();
@@ -265,9 +239,7 @@ namespace AdminApp
             gunaChartTopMovies.Update();
         }
 
-        // ==============================================
-        // EVENTS
-        // ==============================================
+        // Hàm xử lý sự kiện khi thay đổi ngày bắt đầu, nếu chọn theo năm thì không xử lý chọn ngày
         private void dtpFrom_ValueChanged(object sender, EventArgs e)
         {
             if (isFilteringByYear) return;
@@ -283,6 +255,7 @@ namespace AdminApp
             ReloadAll();
         }
 
+        // Hàm xử lý sự kiện khi thay đổi ngày kết thúc, nếu chọn theo năm thì không xử lý chọn ngày
         private void dtpTo_ValueChanged(object sender, EventArgs e)
         {
             if (isFilteringByYear) return;
@@ -298,21 +271,19 @@ namespace AdminApp
             ReloadAll();
         }
 
-        // ================================
-        // ⭐ EVENT COMBOBOX NĂM — QUAN TRỌNG
-        // ================================
+       // Hàm xử lý sự kiện chọn lọc theo năm
         private void YearCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Nếu chọn "Không" thì cho phép chọn ngày
             if (YearCombo.SelectedItem.ToString() == "Không")
             {
-                // Cho phép chọn ngày
                 isFilteringByYear = false;
                 dtpFrom.Enabled = true;
                 dtpTo.Enabled = true;
             }
             else
             {
-                // Khóa DatePicker và tự set theo năm
+                // Nếu khác thì sẽ khóa DatePicker và tự set theo năm
                 isFilteringByYear = true;
                 dtpFrom.Enabled = false;
                 dtpTo.Enabled = false;
@@ -321,11 +292,10 @@ namespace AdminApp
                 dtpFrom.Value = new DateTime(year, 1, 1);
                 dtpTo.Value = new DateTime(year, 12, 31);
             }
-
             ReloadAll();
         }
 
-
+        // Các hàm xử lý để mở các form thống kê khác
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
             _parent.OpenChildForm(new FormStatistics2(_parent));

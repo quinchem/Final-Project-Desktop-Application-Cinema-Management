@@ -38,10 +38,12 @@ namespace UserApp
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
                 player.Play();
                 MessageBox.Show("Không tìm thấy thông tin tài khoản!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Enabled = false; // disable UC nếu không tìm thấy account
+                this.Enabled = false; 
             }
 
         }
+        
+        // Vẽ border bo góc cho UserControl
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -58,17 +60,20 @@ namespace UserApp
             path.CloseFigure();
             this.Region = new Region(path);
 
-            // Vẽ viền
+            // Vẽ đường viền
             using (Pen pen = new Pen(Color.Gray, 1))
             {
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 e.Graphics.DrawPath(pen, path);
             }
         }
+        // Refresh giao diện khi load
         private void MyUserControl_Load(object sender, EventArgs e)
         {
-            this.Invalidate(); // vẽ lại => tự chạy OnPaint
+            this.Invalidate(); 
         }
+        
+         // Sự kiện nhấn nút "Lưu mật khẩu"
 
         private void btnSavePassword_Click(object sender, EventArgs e)
         {
@@ -76,7 +81,7 @@ namespace UserApp
             string newPass = txtNewPassword.Text.Trim();
             string confirmPass = txtConfirmPassword.Text.Trim();
 
-            // Validate input
+            // Xác thực đầu vào
             if (string.IsNullOrWhiteSpace(oldPass) || string.IsNullOrWhiteSpace(newPass) || string.IsNullOrWhiteSpace(confirmPass))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);

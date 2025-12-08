@@ -15,11 +15,10 @@ using System.Windows.Forms;
 namespace AdminApp
 {
     public partial class FormEditCustomer : Form
-    {
+    {   // Repository thao tác dữ liệu khách hàng
         private readonly CustomerRepo repo = new CustomerRepo();
+        // Đối tượng khách hàng được truyền từ form cha
         private readonly Customer customer;
-
-        // Constructor nhận khách hàng từ form cha
         public FormEditCustomer(Customer c)
         {
             InitializeComponent();
@@ -34,7 +33,7 @@ namespace AdminApp
             LoadCustomerToForm();
         }
 
-        // Load dữ liệu lên form con
+        // Phần này giúp load dữ liệu lên form con
         private void LoadCustomerToForm()
         {
             if (customer == null) return;
@@ -50,7 +49,6 @@ namespace AdminApp
                 CbGioiTinh.SelectedItem = customer.gender;
             }
 
-            // xử lý ngày sinh - chấp nhận nhiều format
             if (!string.IsNullOrWhiteSpace(customer.date_of_birth))
             {
                 string[] formats = new[] { "dd/MM/yyyy", "dd-MM-yyyy", "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" };
@@ -60,14 +58,13 @@ namespace AdminApp
                 }
                 else
                 {
-                    // nếu không parse được thì giữ giá trị mặc định (hoặc log)
+                    
                 }
             }
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            // Validate
             if (string.IsNullOrWhiteSpace(txtTenKH.Text))
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.fail_sound);
@@ -83,8 +80,7 @@ namespace AdminApp
                 MessageBox.Show("Vui lòng chọn giới tính");
                 return;
             }
-
-            // Build Customer object (CHUẨN CustomerRepo)
+            // Tạo đối tượng khách hàng đã cập nhật
             Customer updatedCustomer = new Customer
             {
                 customer_id = customer.customer_id,          
@@ -96,10 +92,8 @@ namespace AdminApp
                 address = txtDiaChi.Text.Trim(),
                 create_date = customer.create_date            
             };
-
-            // Update DB
+            // Gọi repository để cập nhật dữ liệu
             bool ok = repo.Update(updatedCustomer);         
-
             if (ok)
             {
                 SoundPlayer player = new SoundPlayer(Properties.Resources.success_sound);

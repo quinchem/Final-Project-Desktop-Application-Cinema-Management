@@ -37,7 +37,7 @@
             SuatChieu = new DataGridViewTextBoxColumn();
             NgayDatVe = new DataGridViewTextBoxColumn();
             TongTien = new DataGridViewTextBoxColumn();
-            //TicketCode = new DataGridViewTextBoxColumn();
+            TicketCode = new DataGridViewTextBoxColumn();
             XemChiTiet = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dgvHistoryTicket).BeginInit();
             SuspendLayout();
@@ -72,7 +72,7 @@
             dgvHistoryTicket.Size = new Size(1328, 552);
             dgvHistoryTicket.TabIndex = 0;
             dgvHistoryTicket.CellContentClick += dgvHistoryTicket_CellContentClick;
-            //dgvHistoryTicket.CellPainting += dgvHistoryTicket_CellPainting;
+            dgvHistoryTicket.CellPainting += dgvHistoryTicket_CellPainting;
             // 
             // STT
             // 
@@ -85,49 +85,49 @@
             // 
             MaDatVe.DataPropertyName = "MaDatVe";
             MaDatVe.FillWeight = 114.957649F;
-            MaDatVe.HeaderText = "Mã Đặt Vé";
+            MaDatVe.HeaderText = "Mã đơn đặt vé";
             MaDatVe.MinimumWidth = 8;
             MaDatVe.Name = "MaDatVe";
             // 
             // TenPhim
             // 
             TenPhim.FillWeight = 139.6315F;
-            TenPhim.HeaderText = "Tên Phim";
+            TenPhim.HeaderText = "Tên phim";
             TenPhim.MinimumWidth = 8;
             TenPhim.Name = "TenPhim";
             // 
             // SuatChieu
             // 
             SuatChieu.FillWeight = 111.794319F;
-            SuatChieu.HeaderText = "Suất Chiếu";
+            SuatChieu.HeaderText = "Suất chiếu";
             SuatChieu.MinimumWidth = 8;
             SuatChieu.Name = "SuatChieu";
             // 
             // NgayDatVe
             // 
             NgayDatVe.FillWeight = 108.225479F;
-            NgayDatVe.HeaderText = "Ngày Đặt Vé";
+            NgayDatVe.HeaderText = "Ngày đặt vé";
             NgayDatVe.MinimumWidth = 8;
             NgayDatVe.Name = "NgayDatVe";
             // 
             // TongTien
             // 
             TongTien.FillWeight = 104.199074F;
-            TongTien.HeaderText = "Tổng Tiền";
+            TongTien.HeaderText = "Tổng tiền";
             TongTien.MinimumWidth = 8;
             TongTien.Name = "TongTien";
             // 
             // TicketCode
             // 
-            /*TicketCode.FillWeight = 90.9091F;
+            TicketCode.FillWeight = 90.9091F;
             TicketCode.HeaderText = "Ticket Code";
             TicketCode.MinimumWidth = 8;
-            TicketCode.Name = "TicketCode";*/
+            TicketCode.Name = "TicketCode";
             // 
             // XemChiTiet
             // 
             XemChiTiet.FillWeight = 71.4022446F;
-            XemChiTiet.HeaderText = "Xem Chi Tiết";
+            XemChiTiet.HeaderText = "Xem chi tiết";
             XemChiTiet.MinimumWidth = 8;
             XemChiTiet.Name = "XemChiTiet";
             XemChiTiet.Text = "Xem";
@@ -154,7 +154,7 @@
         private DataGridViewTextBoxColumn SuatChieu;
         private DataGridViewTextBoxColumn NgayDatVe;
         private DataGridViewTextBoxColumn TongTien;
-        //private DataGridViewTextBoxColumn TicketCode;
+        private DataGridViewTextBoxColumn TicketCode;
         private DataGridViewButtonColumn XemChiTiet;
     }
 }

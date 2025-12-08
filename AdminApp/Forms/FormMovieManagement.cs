@@ -31,8 +31,22 @@ namespace AdminApp
         private void FormMovieManagement_Load(object sender, EventArgs e)
         {
             LoadFilmData();
+            LoadStatusCombo();
         }
 
+        // Hàm đổ dữ liệu trạng thái phim vào ComboBox
+        private void LoadStatusCombo()
+        {
+            cboStatusFilter.Items.Clear();
+            cboStatusFilter.Items.Add("Tất cả");
+            cboStatusFilter.Items.Add("Đang chiếu");
+            cboStatusFilter.Items.Add("Sắp chiếu");
+            cboStatusFilter.Items.Add("Ngừng chiếu");
+
+            cboStatusFilter.SelectedIndex = 0; 
+        }
+
+        // Hàm lấy toàn bộ phim từ CSDL qua FilmRepo, sau đó sắp xếp theo ngày chiếu
         private void LoadFilmData()
         {
             try
@@ -48,6 +62,8 @@ namespace AdminApp
                 MessageBox.Show("Error loading films: " + ex.Message);
             }
         }
+
+        //Hàm để gán danh sách phim vào DataGridView và sắp xếp thứ tự cột
         private void BindDataToGrid(List<Film> films)
         {
             dgvMovies.DataSource = films;
@@ -59,24 +75,59 @@ namespace AdminApp
             dgvMovies.Columns["colEdit"].DisplayIndex = 4;
             dgvMovies.Columns["colDelete"].DisplayIndex = 5;
         }
+
+        // Hàm xử lý sự kiện lọc trạng thái phim từ ComboBox
+        private void cboStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedStatus = cboStatusFilter.SelectedItem.ToString();
+
+            List<Film> films;
+
+            if (selectedStatus == "Tất cả")
+            {
+                films = _filmRepo.GetAllFilms();
+            }
+            else
+            {
+                films = _filmRepo.GetFilmsByStatus(selectedStatus);
+            }
+
+            BindDataToGrid(films);
+        }
+
+
+        // Hàm xử lý sự kiện tìm tên phim, nếu textbox rỗng thì sẽ lấy toàn bộ phim,
+        // nếu có nhập keyword thì sẽ tìm phim theo keyword, sử dụng Film Repo
+        // Nếu có chọn lọc trạng thái thì sẽ lọc theo trạng thái trước, sau đó mới lọc theo từ khóa
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             string keyword = txtSearch.Text.Trim();
+            string status = cboStatusFilter.SelectedItem.ToString();
+
             List<Film> results;
 
-            if (string.IsNullOrEmpty(keyword))
+            // Trường hợp lọc theo status
+            if (status == "Tất cả")
             {
-                // Nếu textbox rỗng -> load tất cả phim
                 results = _filmRepo.GetAllFilms();
             }
             else
             {
-                results = _filmRepo.SearchFilmByName1(keyword);
+                results = _filmRepo.GetFilmsByStatus(status);
+            }
+
+            // Sau đó lọc theo keyword
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                results = results
+                    .Where(f => f.title.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .ToList();
             }
 
             BindDataToGrid(results);
         }
 
+        // Hàm xử lý sự kiệm mở form Thêm Phim khi nhấn vào nút Thêm
         private void btnThem_Click(object sender, EventArgs e)
         {
 
@@ -85,27 +136,23 @@ namespace AdminApp
             f.Show();
         }
 
-        
-
+        // Hàm xử lý sự kiện khi bấm vào cell trong datagridview:
+        // - Nếu nhấn nút Edit thì mở form Chỉnh sửa Film
+        // - Nếu nhấn nút Delete thì sẽ xác nhận và xóa phim khỏi CSDL
         private void dgvMovies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Bỏ qua header
             if (e.RowIndex < 0) return;
-
-            // Lấy ID của dòng được click
            Film film = (Film)dgvMovies.Rows[e.RowIndex].DataBoundItem;
             string movie_id = film.movie_id;
 
-            // 1) Click icon chỉnh sửa
             if (dgvMovies.Columns[e.ColumnIndex].Name == "colEdit")
             {
                 FormEditMovie f = new FormEditMovie(movie_id);
                 f.ShowDialog();
-                LoadFilmData();   // Reload lại bảng sau khi sửa
+                LoadFilmData();   
                 return;
             }
 
-            // 2) Click icon xóa
             if (dgvMovies.Columns[e.ColumnIndex].Name == "colDelete")
             {
                 DialogResult result = MessageBox.Show(
@@ -123,6 +170,8 @@ namespace AdminApp
                 return;
             }
         }
+
+        // Hàm xóa phim khỏi CSDL dựa vào movie_id
         private void DeleteMovie(string id)
         {
             using (var conn = DatabaseHelper.GetConnection())
@@ -137,6 +186,8 @@ namespace AdminApp
                 }
             }
         }
+
+        // Hàm xử lý sự kiện mở form Chi tiết phim dựa vào movie_id khi double-click vào một dòng
         private void dgvMovie_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -147,14 +198,24 @@ namespace AdminApp
             var f = new FormViewDetailMovie(movieId);
             f.Show();
         }
-           
 
+        // Hàm xử lý sự kiện nhấn Enter trong textbox thì sẽ chuyển qua nút tìm kiếm
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnTimPhim.PerformClick();
+                e.SuppressKeyPress = true; // chặn tiếng "bíp"
+            }
+        }
+
+        // Hàm xử lý sự kiện xuất file Excel
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
             try
             {
                 var repo = new FilmRepo();
-                var movies = repo.GetAllFilms(); // Lấy tất cả phim từ DB
+                var movies = repo.GetAllFilms(); 
 
                 if (movies == null || movies.Count == 0)
                 {
@@ -174,7 +235,6 @@ namespace AdminApp
                         {
                             var worksheet = workbook.Worksheets.Add("Movies");
 
-                            // Header
                             worksheet.Cell(1, 1).Value = "STT";
                             worksheet.Cell(1, 2).Value = "Title";
                             worksheet.Cell(1, 3).Value = "Genre";
@@ -187,9 +247,7 @@ namespace AdminApp
                             worksheet.Cell(1, 10).Value = "Duration";
                             worksheet.Cell(1, 11).Value = "Purchase Price";
                             worksheet.Cell(1, 12).Value = "Release Date";
-                            worksheet.Cell(1, 13).Value = "id";
 
-                            // Dữ liệu
                             int row = 2;
                             int stt = 1;
                             foreach (var film in movies)
@@ -207,7 +265,6 @@ namespace AdminApp
                                 worksheet.Cell(row, 10).Value = film.duration;
                                 worksheet.Cell(row, 11).Value = film.film_purchase_price;
                                 worksheet.Cell(row, 12).Value = film.release_date;
-                                worksheet.Cell(row, 13).Value = film.movie_id;
                                 row++;
                             }
 

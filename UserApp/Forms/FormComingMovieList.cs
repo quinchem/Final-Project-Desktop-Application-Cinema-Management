@@ -1,5 +1,4 @@
-using Microsoft.VisualBasic.ApplicationServices;
-using SharedData.Models;
+﻿using SharedData.Models;
 using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,17 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserApp.Forms;
 
 namespace UserApp
 {
-    public partial class FormMovieList : Form
+    public partial class FormComingMovieList : Form
     {
         private FilmRepo _filmRepo = new FilmRepo();
         private ImageRepo _imageRepo = new ImageRepo();
         private UserMainForm _parentForm;
         string movieId;
 
-        public FormMovieList(UserMainForm parentForm)
+        public FormComingMovieList(UserMainForm parentForm)
         {
             InitializeComponent();
             _parentForm = parentForm;
@@ -33,7 +33,7 @@ namespace UserApp
             FilmRepo repo = new FilmRepo();
             ImageRepo imgRepo = new ImageRepo();
 
-            var films = _filmRepo.GetCurrentlyShowingFilms1();
+            var films = _filmRepo.GetComingSoonFilms();
             flowLayoutPanel1.Controls.Clear();
             foreach (var film in films)
             {
@@ -56,7 +56,7 @@ namespace UserApp
             poster.Size = new Size(180, 230);
             poster.SizeMode = PictureBoxSizeMode.Zoom;
             poster.Location = new Point((panel.Width - poster.Width) / 2, 10);
-            poster.Cursor = Cursors.Hand; 
+            poster.Cursor = Cursors.Hand;
 
             if (posterBytes != null)
             {
@@ -70,7 +70,7 @@ namespace UserApp
             {
                 if (_parentForm != null)
                 {
-                    _parentForm.OpenChildForm(new FormMovieDetail(film.movie_id, _parentForm));
+                    _parentForm.OpenChildForm(new FormComingMovieDetail(film.movie_id, _parentForm));
 
                 }
             };
@@ -162,36 +162,8 @@ namespace UserApp
             lblDate.Text = $"KHỞI CHIẾU: {film.release_date}";
             panel.Controls.Add(lblDate);
 
-            //BUTTON ĐẶT VÉ
-            Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button();
-            btn.Text = "ĐẶT VÉ";
-            btn.FillColor = Color.FromArgb(245, 131, 35);
-            btn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btn.ForeColor = Color.White;
-            btn.BorderRadius = 10;
-            btn.Size = new Size(120, 38);
-            btn.Location = new Point((panel.Width - btn.Width) / 2, panel.Height - 55);
-            btn.Tag = film.movie_id;
-            btn.Click += (s, e) =>
-            {
-                if (_parentForm != null)
-                {
-                    btn.Click += (s, e) =>
-                    {
-                        if (_parentForm != null)
-                        {
-                            _parentForm.OpenChildForm(new FormShowtimeDetail(_parentForm, film.movie_id));
-                        }
-                    };
-
-                }
-            };
-
-            panel.Controls.Add(btn);
-
             return panel;
         }
     }
 }
-
 

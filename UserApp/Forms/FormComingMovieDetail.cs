@@ -1,5 +1,4 @@
-﻿using SharedData.Models;
-using SharedData.Repositories;
+﻿using SharedData.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UserApp
+namespace UserApp.Forms
 {
-    public partial class FormMovieDetail : Form
+    public partial class FormComingMovieDetail : Form
     {
         private string movieId;
         private FilmRepo _filmRepo = new FilmRepo();
@@ -22,7 +21,7 @@ namespace UserApp
 
         //Hàm Khởi tạo form chi tiết phim, lưu lại ID phim được chọn ở danh sách phim,
         // sau đó load thông tin phim và poster
-        public FormMovieDetail(string id, UserMainForm parentForm)
+        public FormComingMovieDetail(string id, UserMainForm parentForm)
         {
             InitializeComponent();
             movieId = id;
@@ -58,7 +57,7 @@ namespace UserApp
                     lblActor.Text = film.actor;
 
                     // --- Giới hạn xuống dòng cho mô tả ---
-                    
+
                     lblDescription.Text = film.description;
                 }
                 else
@@ -88,7 +87,7 @@ namespace UserApp
                     using (MemoryStream ms = new MemoryStream(imgData))
                     {
                         picPoster.Image = Image.FromStream(ms);
-                        picPoster.SizeMode = PictureBoxSizeMode.Zoom; 
+                        picPoster.SizeMode = PictureBoxSizeMode.Zoom;
                     }
                 }
             }
@@ -101,26 +100,13 @@ namespace UserApp
         }
 
 
-        // Hàm xử lý sự kiện khi nhấn nút Đặt vé, sẽ chuyển sang form suất chiếu của phim đó dựa vào movie id
-        private void btnDatVe_Click(object sender, EventArgs e)
-        {
-            UserMainForm parent = this.ParentForm as UserMainForm;
-
-            if (parent != null)
-            {
-                _parentForm.OpenChildForm(new FormShowtimeDetail(_parentForm, movieId));
-            }
-        }
-
         // Hàm xử lý sự kiện nhi nhấn nút quay lại, sẽ quay về danh sách phim
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
             if (_parentForm != null)
             {
-                _parentForm.OpenChildForm(new FormMovieList(_parentForm));
+                _parentForm.OpenChildForm(new FormComingMovieList(_parentForm));
             }
         }
     }
 }
-
-
