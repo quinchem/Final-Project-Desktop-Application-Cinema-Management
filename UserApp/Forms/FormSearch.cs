@@ -19,44 +19,28 @@ namespace UserApp.Forms
         // Repo lấy ảnh poster
         private ImageRepo _imageRepo = new ImageRepo();
 
-        // Lưu từ khóa đang tìm
-        private string _keyword;
-
-
         // Constructor: nhận form cha và từ khóa
         public FormSearch(UserMainForm parentForm, string keyword)
         {
             InitializeComponent();
             _parentForm = parentForm;
-            _keyword = keyword;
+            //Nạp dữ liệu gợi ý
+            txtTimKiem.AutoCompleteMode = AutoCompleteMode.None;
 
             txtTimKiem.Text = keyword;       // Hiển thị keyword lên ô tìm kiếm
-            LoadMovies();                    // Tải danh sách phim tìm được
+            //LoadMovies(keyword);
+            PerformSearch();// Tải danh sách phim tìm được
         }
 
-
-        // Hàm tải danh sách phim theo từ khóa
-        private void LoadMovies()
+        private void TxtTimKiem_TextChanged(object sender, EventArgs e)
         {
-            flowLayoutPanel1.Controls.Clear();      // Xóa kết quả cũ
-
-            var films = _searchRepo.SearchFilms(_keyword);   // Tìm phim theo từ khóa
-
-            foreach (var film in films)
-            {
-                var poster = _imageRepo.GetMoviePoster(film.movie_id);  // Lấy ảnh poster
-                var card = CreateFilmCard(film, poster);               // Tạo card phim
-                flowLayoutPanel1.Controls.Add(card);                   // Thêm vào giao diện
-            }
+            PerformSearch();
         }
-
 
         // Sự kiện nhấn nút tìm kiếm
         private void btnSearch_Click(object sender, EventArgs e)
-        {
-            _keyword = txtTimKiem.Text.Trim();
-            if (!string.IsNullOrEmpty(_keyword))
-                LoadMovies();
+        {       
+            PerformSearch();
         }
 
 
@@ -66,10 +50,38 @@ namespace UserApp.Forms
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
-                btnTimKiem.PerformClick();      // Gọi nút tìm
+                PerformSearch();      // Gọi nút tìm
             }
         }
 
+        // Hàm tìm kiếm và hiển thị phim
+        private void PerformSearch()
+        {
+            // Lấy trực tiếp từ ô nhập liệu
+            string currentKeyword = txtTimKiem.Text.Trim();
+
+            // Gọi Repo tìm kiếm
+            var films = _searchRepo.SearchFilms(currentKeyword);
+
+            // Xóa kết quả cũ
+            flowLayoutPanel1.Controls.Clear();
+
+            if (films == null || films.Count == 0) return;
+
+            // Tạm dừng vẽ để nạp cho mượt
+            flowLayoutPanel1.SuspendLayout();
+
+            foreach (var film in films)
+            {
+                var poster = _imageRepo.GetMoviePoster(film.movie_id);
+                // Sử dụng hàm tạo card đã căn chỉnh giao diện chuẩn
+                var card = CreateFilmCard(film, poster);
+                flowLayoutPanel1.Controls.Add(card);
+            }
+
+            // Vẽ lại giao diện
+            flowLayoutPanel1.ResumeLayout();
+        }
 
         // Hàm tạo 1 card phim hoàn chỉnh
         private Panel CreateFilmCard(Film film, byte[] posterBytes)
@@ -86,7 +98,7 @@ namespace UserApp.Forms
             PictureBox poster = new PictureBox();
             poster.Size = new Size(250, 300);
             poster.SizeMode = PictureBoxSizeMode.Zoom;
-            poster.Location = new Point((card.Width - poster.Width) / 2, 10);
+            poster.Location = new Point((card.Width - poster.Width) / 2, 0);
             poster.Cursor = Cursors.Hand;
 
             // Gán ảnh poster
@@ -106,32 +118,28 @@ namespace UserApp.Forms
 
             card.Controls.Add(poster);
 
-
-
             // Tên phim
             Label lblTitle = new Label();
             lblTitle.AutoSize = false;
             lblTitle.Width = card.Width - 20;
             lblTitle.Height = 45;
-            lblTitle.Location = new Point(10, poster.Bottom + 10);
             lblTitle.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             lblTitle.ForeColor = Color.White;
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             lblTitle.Text = film.title;
             lblTitle.AutoEllipsis = true;
             card.Controls.Add(lblTitle);
+            lblTitle.Location = new Point((card.Width - lblTitle.Width) / 2, poster.Bottom + 10);
 
 
             // Panel chứa độ tuổi và thời lượng
             FlowLayoutPanel infoPanel = new FlowLayoutPanel();
             infoPanel.FlowDirection = FlowDirection.LeftToRight;
-            infoPanel.AutoSize = true;
+            infoPanel.AutoSize = false;
+            infoPanel.Size = new Size(card.Width, 28);
             infoPanel.WrapContents = false;
             infoPanel.BackColor = Color.Transparent;
-
-            // Đặt infoPanel dưới dòng ngày chiếu
-            infoPanel.Location = new Point((card.Width - 200) / 2, lblTitle.Bottom + 6);
-
+            
 
 
             // Thời lượng
@@ -165,20 +173,20 @@ namespace UserApp.Forms
             infoPanel.Controls.Add(lblDuration);
             infoPanel.Controls.Add(lblDot);
             infoPanel.Controls.Add(lblAge);
-
             card.Controls.Add(infoPanel);
+            int realWidth = lblDuration.PreferredWidth + lblDot.PreferredWidth + lblAge.PreferredWidth + 10; // +10 cho margin
+            infoPanel.Location = new Point((card.Width - realWidth) / 2, lblTitle.Bottom + 5);
 
             // Ngày khởi chiếu
             Label lblDate = new Label();
-            lblDate.AutoSize = false;
+            lblDate.AutoSize = true;
             lblDate.Width = card.Width - 20;
-            lblDate.Height = 20;
-            lblDate.Location = new Point(10, infoPanel.Bottom + 6);
             lblDate.Font = new Font("Segoe UI", 10F);
             lblDate.ForeColor = Color.White;
             lblDate.TextAlign = ContentAlignment.MiddleCenter;
             lblDate.Text = "KHỞI CHIẾU: " + film.release_date;
             card.Controls.Add(lblDate);
+            lblDate.Location = new Point((card.Width - lblDate.Width) / 2, infoPanel.Bottom + 5);
 
 
             // Nút đặt vé
@@ -189,10 +197,6 @@ namespace UserApp.Forms
             btn.BorderRadius = 12;
             btn.ForeColor = Color.White;
             btn.Size = new Size(140, 40);
-
-            // Nút nằm dưới ngày chiếu
-            btn.Location = new Point((card.Width - btn.Width) / 2, lblDate.Bottom + 12);
-
 
             // Mở form suất chiếu khi nhấn nút
             btn.Click += (s, e) =>
@@ -208,8 +212,7 @@ namespace UserApp.Forms
             }
 
             card.Controls.Add(btn);
-
-
+            btn.Location = new Point((card.Width - btn.Width) / 2, lblDate.Bottom + 15);
             return card;
         }
     }

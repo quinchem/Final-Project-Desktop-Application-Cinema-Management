@@ -14,22 +14,29 @@ namespace SharedData.Repositories
         {
             List<Film> list = new List<Film>();
 
-            if (string.IsNullOrEmpty(keyword))
-                return list;
-
-            string likeKey = "%" + keyword + "%";
-
             using var conn = new SqliteConnection(ConnStr);
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = @"
-                SELECT movie_id, title, duration, age_restriction, release_date
-                FROM movie
-                WHERE title LIKE $k OR description LIKE $k
-            ";
 
-            cmd.Parameters.AddWithValue("$k", likeKey);
+            // SỬA LOGIC Ở ĐÂY:
+            if (string.IsNullOrEmpty(keyword))
+            {
+                // Nếu từ khóa rỗng thì lấy tất cả phim
+                cmd.CommandText = @"
+                    SELECT movie_id, title, duration, age_restriction, release_date
+                    FROM movie";
+            }
+            else
+            {
+                // Nếu có từ khóa thì tìm kiếm
+                cmd.CommandText = @"
+                    SELECT movie_id, title, duration, age_restriction, release_date
+                    FROM movie
+                    WHERE title LIKE $k OR description LIKE $k";
+
+                cmd.Parameters.AddWithValue("$k", "%" + keyword + "%");
+            }
 
             using var rd = cmd.ExecuteReader();
             while (rd.Read())
@@ -47,4 +54,5 @@ namespace SharedData.Repositories
             return list;
         }
     }
+    
 }

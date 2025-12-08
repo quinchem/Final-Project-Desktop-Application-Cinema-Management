@@ -103,6 +103,25 @@ namespace AdminApp
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
         }
 
+        // Hàm dùng để vô hiệu hóa trạng thái nút menu đang active
+        private void DisableButton()
+        {
+            if (currentButton != null)
+            {
+                // Trả về màu trong suốt
+                currentButton.FillColor = Color.Transparent;
+
+                // Trả về màu chữ trắng
+                currentButton.ForeColor = Color.White;
+
+                // Trả về font thường
+                currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
+
+                // Xóa ghi nhớ nút hiện tại
+                currentButton = null;
+            }
+        }
+
         // Hàm dùng để kiểm tra người dùng đã đăng nhập hay chưa, nếu chưa thì sẽ hiện thông báo
         private bool CheckLogin()
         {
@@ -172,6 +191,7 @@ namespace AdminApp
         {
             if (!CheckLogin()) return;
             OpenChildForm(new FormAccountManagement(_staffId));
+            DisableButton();
         }
 
 
@@ -190,6 +210,7 @@ namespace AdminApp
                 currentButton.BackColor = Color.FromArgb(51, 51, 76);
                 currentButton = null;
             }
+            DisableButton();
         }
 
         private void logo_Click(object sender, EventArgs e)
