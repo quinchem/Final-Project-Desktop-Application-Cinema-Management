@@ -307,7 +307,7 @@ namespace UserApp
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblEmail.Location = new Point(60, 33);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(166, 38);
+            lblEmail.Size = new Size(60, 30);
             lblEmail.TabIndex = 0;
             lblEmail.Text = "Email:";
             // 
