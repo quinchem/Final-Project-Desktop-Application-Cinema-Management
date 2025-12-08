@@ -95,6 +95,7 @@
             txtTimKiem.ShadowDecoration.CustomizableEdges = customizableEdges6;
             txtTimKiem.Size = new Size(835, 46);
             txtTimKiem.TabIndex = 10;
+            txtTimKiem.TextChanged += TxtTimKiem_TextChanged;
             txtTimKiem.KeyDown += txtTimKiem_KeyDown;
             // 
             // flowLayoutPanel1
