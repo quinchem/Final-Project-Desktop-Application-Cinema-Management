@@ -1,6 +1,8 @@
 ﻿using Guna.UI2.WinForms;
+using Microsoft.Data.Sqlite;
 using Microsoft.VisualBasic.Devices;
 using SharedData.Models;
+using SharedData.Repositories;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -22,6 +24,9 @@ namespace UserApp
 
         // Ảnh nhỏ đang được chọn — dùng cho phần xem gallery ảnh phim
         Guna2PictureBox currentSelected = null;
+
+        // Repository để truy xuất dữ liệu tìm kiếm
+        private SearchRepo _searchRepo = new SearchRepo();  
 
         // Constructor chính: nhận Customer từ FormLogin
         public UserMainForm(Customer customer)
@@ -124,7 +129,7 @@ namespace UserApp
             // Bật lại AutoScroll cho giao diện chính
             this.AutoScroll = true;
         }
-        
+
         // Sự kiện click vào logo → quay về Home
         private void logo_Click(object sender, EventArgs e)
         {
@@ -144,6 +149,7 @@ namespace UserApp
             OpenChildForm(new FormShowtimeList(this));
         }
 
+        // Nút mở danh sách phim sắp chiếu
         private void btnPhimSapChieu_Click(object sender, EventArgs e)
         {
             Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
@@ -166,7 +172,7 @@ namespace UserApp
 
             OpenChildForm(new FormMovieList(this));
         }
-        
+
         // Thay đổi hiệu ứng (màu, font) cho nút menu được chọn
         private void ActivateButton(Guna.UI2.WinForms.Guna2Button btn)
         {
@@ -193,7 +199,7 @@ namespace UserApp
             currentButton.ForeColor = Color.FromArgb(255, 128, 0);  // Màu chữ khi chọn
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
         }
-        
+
         // Mở chat bot hỗ trợ khách hàng
         private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
@@ -227,5 +233,83 @@ namespace UserApp
             // Lưu lại ảnh đã chọn
             currentSelected = clickedPic;
         }
+
+
+        //Hàm xử lý sự kiện khi người dùng nhập nội dung vào ô tìm kiếm
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            string keyword = txtTimKiem.Text.Trim();   // Lấy từ khóa đang nhập
+
+            if (string.IsNullOrEmpty(keyword))
+            {
+                listSuggest.Visible = false;           // Nếu rỗng thì ẩn danh sách gợi ý
+                return;
+            }
+
+            var films = _searchRepo.SearchFilms(keyword);   // Lấy danh sách phim gợi ý
+
+            listSuggest.Items.Clear();                // Xóa dữ liệu cũ
+
+            foreach (var f in films)
+                listSuggest.Items.Add(f.title);       // Đổ dữ liệu mới vào listSuggest
+
+            // Sau khi đã Add item vào listSuggest → giờ mới tính được số lượng
+            int itemCount = listSuggest.Items.Count;
+
+            int itemHeight = 28;                      // Chiều cao mỗi dòng
+            int maxItems = 6;                         // Hiển thị tối đa 6 dòng
+
+            if (itemCount > 0)
+            {
+                int displayed = Math.Min(itemCount, maxItems);
+                listSuggest.Height = displayed * itemHeight;
+                listSuggest.Visible = true;           // Hiện listSuggest
+            }
+            else
+            {
+                listSuggest.Visible = false;          // Không có kết quả thì ẩn
+            }
+        }
+
+        // Hàm mở FormSearch với từ khóa đã chọn
+        private void listSuggest_Click(object sender, EventArgs e)
+        {
+            if (listSuggest.SelectedItem != null)                                        // Kiểm tra có chọn dòng nào không
+            {
+                string keyword = listSuggest.SelectedItem.ToString();                      // Lấy nội dung dòng được chọn
+                OpenChildForm(new FormSearch(this, keyword));           // Mở FormSearch cùng từ khóa
+            }
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            string keyword = txtTimKiem.Text.Trim();        // Lấy keyword trong ô tìm kiếm
+            OpenChildForm(new FormSearch(this, keyword));   // Gọi hàm mở FormSearch
+        }
+
+        // Sự kiện nhấn Enter trong ô tìm kiếm
+        private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;            
+                OpenSearchFromTextbox();              // Gọi hàm tìm kiếm
+            }
+        }
+
+        // Hàm mở FormSearch dựa trên từ khóa trong textbox
+        private void OpenSearchFromTextbox()
+        {
+            string keyword = txtTimKiem.Text.Trim();   // Lấy từ khóa
+
+            if (string.IsNullOrEmpty(keyword))
+                return;
+
+            listSuggest.Visible = false;               // Ẩn gợi ý khi chuyển trang
+
+            OpenChildForm(new FormSearch(this, keyword));   // Mở FormSearch
+        }
+
     }
 }
+
