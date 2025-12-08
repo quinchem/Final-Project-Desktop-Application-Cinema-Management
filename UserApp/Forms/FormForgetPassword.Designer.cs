@@ -60,8 +60,9 @@ namespace UserApp
             panelQuenMK.Controls.Add(panelQMK);
             panelQuenMK.Dock = DockStyle.Fill;
             panelQuenMK.Location = new Point(0, 0);
+            panelQuenMK.Margin = new Padding(4, 4, 4, 4);
             panelQuenMK.Name = "panelQuenMK";
-            panelQuenMK.Size = new Size(1902, 973);
+            panelQuenMK.Size = new Size(2564, 1460);
             panelQuenMK.TabIndex = 0;
             // 
             // btnDangNhap
@@ -77,10 +78,11 @@ namespace UserApp
             btnDangNhap.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDangNhap.ForeColor = SystemColors.Window;
             btnDangNhap.Image = Properties.Resources.QuenMK;
-            btnDangNhap.Location = new Point(595, 182);
+            btnDangNhap.Location = new Point(892, 273);
+            btnDangNhap.Margin = new Padding(4, 4, 4, 4);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnDangNhap.Size = new Size(197, 46);
+            btnDangNhap.Size = new Size(296, 69);
             btnDangNhap.TabIndex = 8;
             btnDangNhap.Text = "QUÊN MẬT KHẨU";
             // 
@@ -100,14 +102,15 @@ namespace UserApp
             panelQMK.FillColor2 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor3 = Color.FromArgb(236, 230, 224);
             panelQMK.FillColor4 = Color.FromArgb(236, 230, 224);
-            panelQMK.Location = new Point(576, 249);
+            panelQMK.Location = new Point(864, 374);
+            panelQMK.Margin = new Padding(4, 4, 4, 4);
             panelQMK.Name = "panelQMK";
             panelQMK.ShadowDecoration.Color = Color.FromArgb(64, 64, 64);
             panelQMK.ShadowDecoration.CustomizableEdges = customizableEdges10;
             panelQMK.ShadowDecoration.Depth = 20;
             panelQMK.ShadowDecoration.Enabled = true;
             panelQMK.ShadowDecoration.Shadow = new Padding(1, 1, 5, 5);
-            panelQMK.Size = new Size(713, 332);
+            panelQMK.Size = new Size(1070, 498);
             panelQMK.TabIndex = 7;
             // 
             // btnQuayLai
@@ -124,10 +127,11 @@ namespace UserApp
             btnQuayLai.ForeColor = Color.FromArgb(245, 131, 35);
             btnQuayLai.Image = Properties.Resources.back_arrow;
             btnQuayLai.ImageAlign = HorizontalAlignment.Left;
-            btnQuayLai.Location = new Point(44, 269);
+            btnQuayLai.Location = new Point(66, 404);
+            btnQuayLai.Margin = new Padding(4, 4, 4, 4);
             btnQuayLai.Name = "btnQuayLai";
             btnQuayLai.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnQuayLai.Size = new Size(253, 35);
+            btnQuayLai.Size = new Size(380, 52);
             btnQuayLai.TabIndex = 7;
             btnQuayLai.Text = "Quay về trang đăng nhập";
             btnQuayLai.TextAlign = HorizontalAlignment.Left;
@@ -137,7 +141,8 @@ namespace UserApp
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.Location = new Point(58, 261);
+            guna2HtmlLabel1.Location = new Point(87, 392);
+            guna2HtmlLabel1.Margin = new Padding(4, 4, 4, 4);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(3, 2);
             guna2HtmlLabel1.TabIndex = 6;
@@ -155,10 +160,11 @@ namespace UserApp
             btnGui.FocusedColor = Color.FromArgb(245, 131, 35);
             btnGui.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGui.ForeColor = Color.White;
-            btnGui.Location = new Point(541, 261);
+            btnGui.Location = new Point(812, 392);
+            btnGui.Margin = new Padding(4, 4, 4, 4);
             btnGui.Name = "btnGui";
             btnGui.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnGui.Size = new Size(108, 43);
+            btnGui.Size = new Size(162, 64);
             btnGui.TabIndex = 5;
             btnGui.Text = "GỬI";
             btnGui.Click += btnGui_Click;
@@ -168,9 +174,10 @@ namespace UserApp
             lblyc.AutoSize = false;
             lblyc.BackColor = Color.Transparent;
             lblyc.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblyc.Location = new Point(58, 41);
+            lblyc.Location = new Point(87, 62);
+            lblyc.Margin = new Padding(4, 4, 4, 4);
             lblyc.Name = "lblyc";
-            lblyc.Size = new Size(652, 59);
+            lblyc.Size = new Size(978, 88);
             lblyc.TabIndex = 0;
             lblyc.Text = "Vui lòng nhập địa chỉ email của bạn vào ô bên dưới.";
             // 
@@ -178,9 +185,10 @@ namespace UserApp
             // 
             lblEmail.BackColor = Color.Transparent;
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(58, 109);
+            lblEmail.Location = new Point(87, 164);
+            lblEmail.Margin = new Padding(4, 4, 4, 4);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(60, 30);
+            lblEmail.Size = new Size(83, 40);
             lblEmail.TabIndex = 2;
             lblEmail.Text = "Email:";
             // 
@@ -197,21 +205,22 @@ namespace UserApp
             txtEmail.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtEmail.ForeColor = Color.FromArgb(64, 64, 64);
             txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmail.Location = new Point(58, 159);
-            txtEmail.Margin = new Padding(3, 5, 3, 5);
+            txtEmail.Location = new Point(87, 238);
+            txtEmail.Margin = new Padding(4, 8, 4, 8);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "";
             txtEmail.SelectedText = "";
             txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            txtEmail.Size = new Size(591, 45);
+            txtEmail.Size = new Size(886, 68);
             txtEmail.TabIndex = 1;
             // 
             // FormForgetPassword
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 973);
+            ClientSize = new Size(2564, 1460);
             Controls.Add(panelQuenMK);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "FormForgetPassword";
             StartPosition = FormStartPosition.Manual;
             Text = "Quên mật khẩu";

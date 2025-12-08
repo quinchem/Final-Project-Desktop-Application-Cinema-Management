@@ -339,6 +339,5 @@ namespace UserApp
             return result.Trim();
         }
 
-        
     }
 }
