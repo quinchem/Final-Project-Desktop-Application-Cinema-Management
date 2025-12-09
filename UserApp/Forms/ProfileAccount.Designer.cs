@@ -197,6 +197,7 @@
             btnSave.FillColor = Color.FromArgb(44, 84, 115);
             btnSave.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnSave.ForeColor = Color.White;
+            btnSave.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnSave.Location = new Point(1229, 486);
             btnSave.Margin = new Padding(2);
             btnSave.Name = "btnSave";

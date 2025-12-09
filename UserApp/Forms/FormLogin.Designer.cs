@@ -259,6 +259,7 @@ namespace UserApp
             btnMiniDN.FocusedColor = Color.FromArgb(245, 131, 35);
             btnMiniDN.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnMiniDN.ForeColor = Color.White;
+            btnMiniDN.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnMiniDN.Location = new Point(507, 264);
             btnMiniDN.Name = "btnMiniDN";
             btnMiniDN.ShadowDecoration.CustomizableEdges = customizableEdges12;
@@ -307,7 +308,7 @@ namespace UserApp
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblEmail.Location = new Point(60, 33);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(166, 38);
+            lblEmail.Size = new Size(60, 30);
             lblEmail.TabIndex = 0;
             lblEmail.Text = "Email:";
             // 
@@ -605,6 +606,7 @@ namespace UserApp
             btnminiDK.FocusedColor = Color.FromArgb(245, 131, 35);
             btnminiDK.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnminiDK.ForeColor = Color.White;
+            btnminiDK.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnminiDK.Location = new Point(684, 409);
             btnminiDK.Name = "btnminiDK";
             btnminiDK.ShadowDecoration.CustomizableEdges = customizableEdges30;

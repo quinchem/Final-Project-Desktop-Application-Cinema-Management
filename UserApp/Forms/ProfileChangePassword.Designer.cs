@@ -152,6 +152,7 @@
             btnSavePassword.FillColor = Color.FromArgb(44, 84, 115);
             btnSavePassword.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnSavePassword.ForeColor = Color.White;
+            btnSavePassword.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnSavePassword.Location = new Point(1157, 474);
             btnSavePassword.Name = "btnSavePassword";
             btnSavePassword.ShadowDecoration.CustomizableEdges = customizableEdges8;
