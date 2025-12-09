@@ -7,8 +7,7 @@ Mở Visual Studio, chọn Clone a repository
 
 Sau đó, dán câu lệnh "https://github.com/quinchem/Final-Project-Desktop-Application-Cinema-Management.git"vào Repository location và nhấn chọn Clone
 
-<img width="1917" height="1017" alt="image" src="https://github.com/user-attachments/assets/e85a7cf6-60fd-4931-bbd1-acd489a46923" />
-
+<img width="1915" height="1136" alt="image" src="https://github.com/user-attachments/assets/3792e1ed-38e6-4be6-befb-e48f562c3e94" />
 
 Sau khi chạy lệnh này thành công, thư mục dự án sẽ được tải máy cá nhân.
 
