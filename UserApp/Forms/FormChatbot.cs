@@ -14,7 +14,7 @@ namespace UserApp.Forms
         private readonly ChatbotRepo _repo;
         private readonly List<string> _userHistoryGenres = new();
 
-        private const string API_KEY = "AIzaSyA3o7LHNHl2_xJyBUjrBHaIURDFJ_r0W3A";
+        private const string API_KEY = "Your_key";
 
         public FormChatbot(UserMainForm parentForm)
         {
