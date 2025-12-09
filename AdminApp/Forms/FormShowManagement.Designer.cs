@@ -92,10 +92,11 @@
             btnXoa.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnXoa.ForeColor = Color.White;
             btnXoa.Image = Properties.Resources.trash;
-            btnXoa.Location = new Point(1670, 95);
+            btnXoa.Location = new Point(2505, 142);
+            btnXoa.Margin = new Padding(4, 4, 4, 4);
             btnXoa.Name = "btnXoa";
             btnXoa.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnXoa.Size = new Size(116, 51);
+            btnXoa.Size = new Size(174, 76);
             btnXoa.TabIndex = 38;
             btnXoa.Text = "XÓA";
             btnXoa.Click += btnXoa_Click;
@@ -112,10 +113,11 @@
             btnSua.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSua.ForeColor = Color.White;
             btnSua.Image = Properties.Resources.pen;
-            btnSua.Location = new Point(1450, 95);
+            btnSua.Location = new Point(2175, 142);
+            btnSua.Margin = new Padding(4, 4, 4, 4);
             btnSua.Name = "btnSua";
             btnSua.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnSua.Size = new Size(175, 51);
+            btnSua.Size = new Size(262, 76);
             btnSua.TabIndex = 37;
             btnSua.Text = "CHỈNH SỬA";
             btnSua.Click += btnChinhSua_Click;
@@ -146,12 +148,14 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvShowtime.DefaultCellStyle = dataGridViewCellStyle3;
             dgvShowtime.GridColor = Color.WhiteSmoke;
-            dgvShowtime.Location = new Point(131, 209);
+            dgvShowtime.Location = new Point(196, 314);
+            dgvShowtime.Margin = new Padding(4, 4, 4, 4);
             dgvShowtime.Name = "dgvShowtime";
             dgvShowtime.ReadOnly = true;
             dgvShowtime.RowHeadersVisible = false;
             dgvShowtime.RowHeadersWidth = 51;
-            dgvShowtime.Size = new Size(1655, 594);
+            dgvShowtime.RowTemplate.Height = 29;
+            dgvShowtime.Size = new Size(2482, 891);
             dgvShowtime.TabIndex = 36;
             dgvShowtime.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgvShowtime.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -261,10 +265,11 @@
             btnThem.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnThem.ForeColor = Color.White;
             btnThem.Image = Properties.Resources.add;
-            btnThem.Location = new Point(1289, 95);
+            btnThem.Location = new Point(1934, 142);
+            btnThem.Margin = new Padding(4, 4, 4, 4);
             btnThem.Name = "btnThem";
             btnThem.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnThem.Size = new Size(116, 51);
+            btnThem.Size = new Size(174, 76);
             btnThem.TabIndex = 35;
             btnThem.Text = "THÊM";
             btnThem.Click += btnThem_Click;
@@ -281,10 +286,11 @@
             btnTimPhim.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTimPhim.ForeColor = Color.White;
             btnTimPhim.Image = Properties.Resources.search;
-            btnTimPhim.Location = new Point(602, 31);
+            btnTimPhim.Location = new Point(903, 46);
+            btnTimPhim.Margin = new Padding(4, 4, 4, 4);
             btnTimPhim.Name = "btnTimPhim";
             btnTimPhim.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnTimPhim.Size = new Size(96, 45);
+            btnTimPhim.Size = new Size(144, 68);
             btnTimPhim.TabIndex = 34;
             btnTimPhim.Text = "TÌM";
             btnTimPhim.Click += btnTim_Click;
@@ -309,20 +315,22 @@
             txtTenPhim.HoverState.BorderColor = SystemColors.ActiveBorder;
             txtTenPhim.HoverState.ForeColor = Color.FromArgb(92, 124, 150);
             txtTenPhim.HoverState.PlaceholderForeColor = Color.Transparent;
-            txtTenPhim.Location = new Point(74, 31);
-            txtTenPhim.Margin = new Padding(3, 5, 3, 5);
+            txtTenPhim.Location = new Point(111, 46);
+            txtTenPhim.Margin = new Padding(4, 8, 4, 8);
             txtTenPhim.Name = "txtTenPhim";
             txtTenPhim.PlaceholderForeColor = Color.FromArgb(92, 124, 150);
             txtTenPhim.PlaceholderText = "Nhập tên phim";
             txtTenPhim.SelectedText = "";
             txtTenPhim.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            txtTenPhim.Size = new Size(497, 45);
+            txtTenPhim.Size = new Size(746, 68);
             txtTenPhim.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             txtTenPhim.TabIndex = 33;
             // 
             // btnTatCa
             // 
             btnTatCa.BorderRadius = 5;
+            btnTatCa.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnTatCa.CheckedState.FillColor = Color.FromArgb(255, 128, 0);
             btnTatCa.CustomizableEdges = customizableEdges11;
             btnTatCa.DisabledState.BorderColor = Color.DarkGray;
             btnTatCa.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -331,10 +339,12 @@
             btnTatCa.FillColor = Color.Silver;
             btnTatCa.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTatCa.ForeColor = Color.White;
-            btnTatCa.Location = new Point(72, 105);
+            btnTatCa.HoverState.FillColor = Color.FromArgb(255, 128, 0);
+            btnTatCa.Location = new Point(108, 158);
+            btnTatCa.Margin = new Padding(4, 4, 4, 4);
             btnTatCa.Name = "btnTatCa";
             btnTatCa.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            btnTatCa.Size = new Size(97, 41);
+            btnTatCa.Size = new Size(146, 62);
             btnTatCa.TabIndex = 39;
             btnTatCa.Text = "TẤT CẢ";
             btnTatCa.Click += btnTatCa_Click;
@@ -342,6 +352,8 @@
             // btnPhong1
             // 
             btnPhong1.BorderRadius = 5;
+            btnPhong1.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnPhong1.CheckedState.FillColor = Color.FromArgb(255, 128, 0);
             btnPhong1.CustomizableEdges = customizableEdges13;
             btnPhong1.DisabledState.BorderColor = Color.DarkGray;
             btnPhong1.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -350,10 +362,12 @@
             btnPhong1.FillColor = Color.Silver;
             btnPhong1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPhong1.ForeColor = Color.White;
-            btnPhong1.Location = new Point(192, 105);
+            btnPhong1.HoverState.FillColor = Color.FromArgb(255, 128, 0);
+            btnPhong1.Location = new Point(288, 158);
+            btnPhong1.Margin = new Padding(4, 4, 4, 4);
             btnPhong1.Name = "btnPhong1";
             btnPhong1.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            btnPhong1.Size = new Size(117, 41);
+            btnPhong1.Size = new Size(176, 62);
             btnPhong1.TabIndex = 40;
             btnPhong1.Text = "PHÒNG 1";
             btnPhong1.Click += btnPhong1_Click;
@@ -361,6 +375,8 @@
             // guna2Button6
             // 
             guna2Button6.BorderRadius = 5;
+            guna2Button6.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            guna2Button6.CheckedState.FillColor = Color.FromArgb(255, 128, 0);
             guna2Button6.CustomizableEdges = customizableEdges15;
             guna2Button6.DisabledState.BorderColor = Color.DarkGray;
             guna2Button6.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -369,10 +385,12 @@
             guna2Button6.FillColor = Color.Silver;
             guna2Button6.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button6.ForeColor = Color.White;
-            guna2Button6.Location = new Point(337, 105);
+            guna2Button6.HoverState.FillColor = Color.FromArgb(255, 128, 0);
+            guna2Button6.Location = new Point(506, 158);
+            guna2Button6.Margin = new Padding(4, 4, 4, 4);
             guna2Button6.Name = "guna2Button6";
             guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2Button6.Size = new Size(116, 41);
+            guna2Button6.Size = new Size(174, 62);
             guna2Button6.TabIndex = 41;
             guna2Button6.Text = "PHÒNG 2";
             guna2Button6.Click += btnPhong2_Click;
@@ -380,6 +398,8 @@
             // guna2Button7
             // 
             guna2Button7.BorderRadius = 5;
+            guna2Button7.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            guna2Button7.CheckedState.FillColor = Color.FromArgb(255, 128, 0);
             guna2Button7.CustomizableEdges = customizableEdges17;
             guna2Button7.DisabledState.BorderColor = Color.DarkGray;
             guna2Button7.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -388,10 +408,12 @@
             guna2Button7.FillColor = Color.Silver;
             guna2Button7.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button7.ForeColor = Color.White;
-            guna2Button7.Location = new Point(489, 105);
+            guna2Button7.HoverState.FillColor = Color.FromArgb(255, 128, 0);
+            guna2Button7.Location = new Point(734, 158);
+            guna2Button7.Margin = new Padding(4, 4, 4, 4);
             guna2Button7.Name = "guna2Button7";
             guna2Button7.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            guna2Button7.Size = new Size(114, 41);
+            guna2Button7.Size = new Size(171, 62);
             guna2Button7.TabIndex = 42;
             guna2Button7.Text = "PHÒNG 3";
             guna2Button7.Click += btnPhong3_Click;
@@ -399,6 +421,8 @@
             // guna2Button8
             // 
             guna2Button8.BorderRadius = 5;
+            guna2Button8.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            guna2Button8.CheckedState.FillColor = Color.FromArgb(255, 128, 0);
             guna2Button8.CustomizableEdges = customizableEdges19;
             guna2Button8.DisabledState.BorderColor = Color.DarkGray;
             guna2Button8.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -407,10 +431,12 @@
             guna2Button8.FillColor = Color.Silver;
             guna2Button8.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button8.ForeColor = Color.White;
-            guna2Button8.Location = new Point(630, 105);
+            guna2Button8.HoverState.FillColor = Color.FromArgb(255, 128, 0);
+            guna2Button8.Location = new Point(945, 158);
+            guna2Button8.Margin = new Padding(4, 4, 4, 4);
             guna2Button8.Name = "guna2Button8";
             guna2Button8.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            guna2Button8.Size = new Size(118, 41);
+            guna2Button8.Size = new Size(177, 62);
             guna2Button8.TabIndex = 43;
             guna2Button8.Text = "PHÒNG 4";
             guna2Button8.Click += btnPhong4_Click;
@@ -418,6 +444,8 @@
             // guna2Button9
             // 
             guna2Button9.BorderRadius = 5;
+            guna2Button9.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            guna2Button9.CheckedState.FillColor = Color.FromArgb(255, 128, 0);
             guna2Button9.CustomizableEdges = customizableEdges21;
             guna2Button9.DisabledState.BorderColor = Color.DarkGray;
             guna2Button9.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -426,19 +454,22 @@
             guna2Button9.FillColor = Color.Silver;
             guna2Button9.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button9.ForeColor = Color.White;
-            guna2Button9.Location = new Point(773, 105);
+            guna2Button9.HoverState.FillColor = Color.FromArgb(255, 128, 0);
+            guna2Button9.Location = new Point(1160, 158);
+            guna2Button9.Margin = new Padding(4, 4, 4, 4);
             guna2Button9.Name = "guna2Button9";
             guna2Button9.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            guna2Button9.Size = new Size(117, 41);
+            guna2Button9.Size = new Size(176, 62);
             guna2Button9.TabIndex = 44;
             guna2Button9.Text = "PHÒNG 5";
             guna2Button9.Click += btnPhong5_Click;
             // 
             // guna2Separator1
             // 
-            guna2Separator1.Location = new Point(104, 169);
+            guna2Separator1.Location = new Point(156, 254);
+            guna2Separator1.Margin = new Padding(4, 4, 4, 4);
             guna2Separator1.Name = "guna2Separator1";
-            guna2Separator1.Size = new Size(1682, 12);
+            guna2Separator1.Size = new Size(2523, 18);
             guna2Separator1.TabIndex = 45;
             // 
             // dtpNgayChieu
@@ -450,12 +481,13 @@
             dtpNgayChieu.Font = new Font("Segoe UI", 9F);
             dtpNgayChieu.ForeColor = SystemColors.ButtonHighlight;
             dtpNgayChieu.Format = DateTimePickerFormat.Long;
-            dtpNgayChieu.Location = new Point(1450, 23);
+            dtpNgayChieu.Location = new Point(2175, 34);
+            dtpNgayChieu.Margin = new Padding(4, 4, 4, 4);
             dtpNgayChieu.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dtpNgayChieu.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             dtpNgayChieu.Name = "dtpNgayChieu";
             dtpNgayChieu.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            dtpNgayChieu.Size = new Size(336, 45);
+            dtpNgayChieu.Size = new Size(504, 68);
             dtpNgayChieu.TabIndex = 46;
             dtpNgayChieu.Value = new DateTime(2025, 11, 23, 18, 16, 6, 909);
             dtpNgayChieu.ValueChanged += dtpNgayChieu_ValueChanged;
@@ -465,18 +497,19 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ControlLight;
-            label1.Location = new Point(1291, 32);
+            label1.Location = new Point(1936, 48);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(130, 28);
+            label1.Size = new Size(183, 38);
             label1.TabIndex = 48;
             label1.Text = "CHỌN NGÀY";
             // 
             // FormShowManagement
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(92, 124, 150);
-            ClientSize = new Size(1902, 836);
+            ClientSize = new Size(2564, 1254);
             Controls.Add(label1);
             Controls.Add(dtpNgayChieu);
             Controls.Add(guna2Separator1);
@@ -492,6 +525,7 @@
             Controls.Add(btnThem);
             Controls.Add(btnTimPhim);
             Controls.Add(txtTenPhim);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "FormShowManagement";
             Text = "FormShowManagement";
             Load += FormShowManagement_Load;
