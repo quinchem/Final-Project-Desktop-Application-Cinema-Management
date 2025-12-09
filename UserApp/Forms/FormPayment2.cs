@@ -335,7 +335,7 @@ namespace UserApp
                     }
                 }
 
-                lblTrangThai.Text = "Đang chờ thanh toán (Tự động kiểm tra)...";
+                lblTrangThai.Text = "Đang chờ thanh toán...";
                 
                // Lưu payUrl để mở trình duyệt khi user click QR
                picQR.Tag = payUrl;
