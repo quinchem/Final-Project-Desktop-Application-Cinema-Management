@@ -1,4 +1,4 @@
-**1. Clone dự án từ github về máy tính cá nhân**
+**1. Clone dự án từ Github về máy tính cá nhân**
 
 Mở Visual Studio, chọn Clone a repository và dán câu lệnh " https://github.com/quinchem/Final-Project-Desktop-Application-Cinema-Management.git
 "sau vào Repository location
@@ -7,7 +7,7 @@ Sau khi chạy lệnh này, thư mục dự án sẽ được tải xuống hệ
 
 **2. Cách kết nối Chatbot với Gemini**
 
-Mở Visual Studio và tìm câu lệnh khai báo API key "private const string API_KEY = "Your_key"" trong file FormChatbot.cs
+Mở Visual Studio, sau đó mở Solution Explorer và nhấp chuột phải vào file FormChatbot.cs trong folder Forms của project UserApp chọn View Code. Sau đó, tìm câu lệnh khai báo API key "private const string API_KEY = "Your_key"" 
 
 Thay "Your_key" bằng API key /*AIzaSyA3o7LHNHl2_xJyBUjrBHaIURDFJ_r0W3Atest*/.
 
@@ -33,8 +33,9 @@ Nếu chọn AdminApp, khi đăng nhập điền thông tin như sau:
 
     Password: admin12345
     
+Sau khi đăng nhập thành công vào ứng dụng, chọn các chức năng trên thanh menu để trải nghiệm ứng dụng
 
-**4. Tích hợp thanh toán Momo và ứng dụng**
+**4. Cách trải nghiệm tính năng thanh toán bằng Momo**
 
 Đầu tiên cần xoá ứng dụng MoMo chính thức nếu đang cài trên điện thoại. Sau đó, tải và cài đặt ứng dụng MoMo Test (UAT) theo đường link: https://developers.momo.vn/v3/download
 
