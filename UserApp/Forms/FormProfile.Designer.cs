@@ -46,6 +46,7 @@
             // 
             btnInformation.BorderRadius = 10;
             btnInformation.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnInformation.Checked = true;
             btnInformation.CustomizableEdges = customizableEdges1;
             btnInformation.DisabledState.BorderColor = Color.DarkGray;
             btnInformation.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -81,11 +82,11 @@
             btnChangPassword.ForeColor = Color.White;
             btnChangPassword.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnChangPassword.Image = Properties.Resources.DatlaiMK;
-            btnChangPassword.Location = new Point(500, 75);
+            btnChangPassword.Location = new Point(487, 75);
             btnChangPassword.Margin = new Padding(2);
             btnChangPassword.Name = "btnChangPassword";
             btnChangPassword.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnChangPassword.Size = new Size(166, 46);
+            btnChangPassword.Size = new Size(179, 46);
             btnChangPassword.TabIndex = 2;
             btnChangPassword.Text = "ĐỔI MẬT KHẨU";
             btnChangPassword.Click += btnChangePassword_Click;
@@ -105,11 +106,11 @@
             btnHistory.ForeColor = Color.White;
             btnHistory.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnHistory.Image = Properties.Resources.BookingHistory;
-            btnHistory.Location = new Point(728, 75);
+            btnHistory.Location = new Point(719, 75);
             btnHistory.Margin = new Padding(2);
             btnHistory.Name = "btnHistory";
             btnHistory.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnHistory.Size = new Size(166, 46);
+            btnHistory.Size = new Size(175, 46);
             btnHistory.TabIndex = 3;
             btnHistory.Text = "LỊCH SỬ ĐẶT VÉ";
             btnHistory.Click += btnHistory_Click;
