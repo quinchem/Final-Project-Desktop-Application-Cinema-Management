@@ -103,7 +103,8 @@ Tiếp đến, cần liên kết ngân hàng & và thêm số dư ví theo các 
 
   Dùng ứng dụng trên để thanh toán khi đặt vé xem phim 
   
-  <img width="1919" height="1137" alt="image" src="https://github.com/user-attachments/assets/fd2eb27d-0dfe-4dbc-ba56-dbe26da54e1e" />
+  <img width="1919" height="1108" alt="image" src="https://github.com/user-attachments/assets/61c4120f-7398-4031-9d71-f7cfb043bc9c" />
+
 
 
 
