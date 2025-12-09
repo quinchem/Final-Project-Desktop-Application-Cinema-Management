@@ -164,6 +164,7 @@ namespace UserApp
             btnPhimSapChieu.FillColor = Color.FromArgb(44, 84, 115);
             btnPhimSapChieu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPhimSapChieu.ForeColor = Color.White;
+            btnPhimSapChieu.HoverState.ForeColor = Color.FromArgb(245, 131, 35);
             btnPhimSapChieu.Image = (Image)resources.GetObject("btnPhimSapChieu.Image");
             btnPhimSapChieu.ImageSize = new Size(30, 30);
             btnPhimSapChieu.Location = new Point(811, 65);
@@ -184,6 +185,7 @@ namespace UserApp
             btnPhim.FillColor = Color.FromArgb(44, 84, 115);
             btnPhim.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPhim.ForeColor = Color.White;
+            btnPhim.HoverState.ForeColor = Color.FromArgb(245, 131, 35);
             btnPhim.Image = Properties.Resources.phim;
             btnPhim.ImageSize = new Size(25, 25);
             btnPhim.Location = new Point(517, 65);
@@ -205,6 +207,7 @@ namespace UserApp
             btnLichChieu.FillColor = Color.FromArgb(44, 84, 115);
             btnLichChieu.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLichChieu.ForeColor = Color.White;
+            btnLichChieu.HoverState.ForeColor = Color.FromArgb(245, 131, 35);
             btnLichChieu.Image = Properties.Resources.shooting_schedule;
             btnLichChieu.ImageSize = new Size(25, 25);
             btnLichChieu.Location = new Point(282, 65);
@@ -309,6 +312,7 @@ namespace UserApp
             btnTimKiem.FillColor = Color.FromArgb(245, 131, 35);
             btnTimKiem.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTimKiem.ForeColor = Color.White;
+            btnTimKiem.HoverState.FillColor = Color.FromArgb(32, 46, 94);
             btnTimKiem.Location = new Point(1317, 194);
             btnTimKiem.Name = "btnTimKiem";
             btnTimKiem.ShadowDecoration.CustomizableEdges = customizableEdges14;

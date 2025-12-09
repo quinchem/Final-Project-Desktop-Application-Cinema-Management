@@ -374,6 +374,7 @@
             btnPrint.FillColor = Color.FromArgb(44, 84, 115);
             btnPrint.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPrint.ForeColor = Color.White;
+            btnPrint.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnPrint.Image = Properties.Resources.printing;
             btnPrint.ImageSize = new Size(25, 25);
             btnPrint.Location = new Point(1262, 477);
