@@ -67,6 +67,7 @@
             btnTimKiem.FillColor = Color.FromArgb(245, 131, 35);
             btnTimKiem.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTimKiem.ForeColor = Color.White;
+            btnTimKiem.HoverState.FillColor = Color.FromArgb(64, 104, 168);
             btnTimKiem.Location = new Point(1281, 44);
             btnTimKiem.Name = "btnTimKiem";
             btnTimKiem.ShadowDecoration.CustomizableEdges = customizableEdges4;

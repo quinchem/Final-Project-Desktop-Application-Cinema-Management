@@ -155,6 +155,7 @@ namespace UserApp
             btnGui.FocusedColor = Color.FromArgb(245, 131, 35);
             btnGui.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGui.ForeColor = Color.White;
+            btnGui.HoverState.FillColor = Color.FromArgb(245, 131, 35);
             btnGui.Location = new Point(541, 261);
             btnGui.Name = "btnGui";
             btnGui.ShadowDecoration.CustomizableEdges = customizableEdges6;
