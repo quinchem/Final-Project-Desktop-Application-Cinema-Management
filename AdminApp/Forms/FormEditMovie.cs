@@ -203,6 +203,8 @@ namespace AdminApp
                 }
             }
         }
+
+        // Hàm xóa poster khỏi database và PictureBox
         private void DeletePoster()
         {
             try
@@ -226,6 +228,8 @@ namespace AdminApp
             }
         }
 
+
+        // Hàm xử lý sự kiện nhấn vào nút Delete Poster để xoá poster
         private void btnDeletePoster_Click(object sender, EventArgs e)
         {
             var confirm = MessageBox.Show(

@@ -61,7 +61,7 @@ namespace UserApp
             panelQuenMK.Dock = DockStyle.Fill;
             panelQuenMK.Location = new Point(0, 0);
             panelQuenMK.Name = "panelQuenMK";
-            panelQuenMK.Size = new Size(1902, 973);
+            panelQuenMK.Size = new Size(1368, 837);
             panelQuenMK.TabIndex = 0;
             // 
             // btnDangNhap
@@ -176,11 +176,12 @@ namespace UserApp
             // 
             // lblEmail
             // 
+            lblEmail.AutoSize = false;
             lblEmail.BackColor = Color.Transparent;
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(58, 109);
+            lblEmail.Location = new Point(58, 108);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(60, 30);
+            lblEmail.Size = new Size(76, 39);
             lblEmail.TabIndex = 2;
             lblEmail.Text = "Email:";
             // 
@@ -210,7 +211,7 @@ namespace UserApp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 973);
+            ClientSize = new Size(1368, 837);
             Controls.Add(panelQuenMK);
             Name = "FormForgetPassword";
             StartPosition = FormStartPosition.Manual;

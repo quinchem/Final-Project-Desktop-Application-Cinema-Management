@@ -88,6 +88,7 @@ namespace UserApp
         private void btnUserName_Click(object sender, EventArgs e)
         {
             if (CurrentUser == null) return;
+            DisableButton();
 
             OpenChildForm(new FormProfile(CurrentUser));
         }
@@ -125,6 +126,7 @@ namespace UserApp
                 currentFormChild.Close();
                 currentFormChild = null;
             }
+            DisableButton();
 
             // Bật lại AutoScroll cho giao diện chính
             this.AutoScroll = true;
@@ -181,23 +183,39 @@ namespace UserApp
             // Reset hiệu ứng của nút trước đó
             if (currentButton != null)
             {
-                currentButton.FillColor = currentButton.Tag != null
-                    ? (Color)currentButton.Tag   // Màu gốc lưu trong Tag
-                    : Color.FromArgb(44, 84, 115);
-
-                currentButton.ForeColor = Color.White;
+                currentButton.FillColor = Color.Transparent;
+                currentButton.ForeColor = Color.White; // Trả về màu chữ trắng gốc
                 currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
             }
 
-            // Lưu màu gốc của nút để khi bỏ chọn có thể khôi phục
-            if (btn.Tag == null)
-                btn.Tag = btn.FillColor;
-
             // Kích hoạt hiệu ứng cho nút hiện tại
             currentButton = btn;
+            if (currentButton.Tag == null)
+            {
+                currentButton.Tag = currentButton.FillColor;
+            }
             currentButton.FillColor = Color.FromArgb(44, 84, 115);  // Màu nền khi chọn
             currentButton.ForeColor = Color.FromArgb(255, 128, 0);  // Màu chữ khi chọn
             currentButton.Font = new Font(currentButton.Font, FontStyle.Bold);
+        }
+
+        // Vô hiệu hóa hiệu ứng nút menu
+        private void DisableButton()
+        {
+            if (currentButton != null)
+            {
+                // Trả về màu trong suốt
+                currentButton.FillColor = Color.Transparent;
+
+                // Trả về màu chữ trắng
+                currentButton.ForeColor = Color.White;
+
+                // Trả về font thường
+                currentButton.Font = new Font(currentButton.Font, FontStyle.Regular);
+
+                // Xóa ghi nhớ nút hiện tại
+                currentButton = null;
+            }
         }
 
         // Mở chat bot hỗ trợ khách hàng
