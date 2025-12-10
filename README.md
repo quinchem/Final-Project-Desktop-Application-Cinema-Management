@@ -26,7 +26,7 @@ Sau đó, tìm câu lệnh khai báo API key "private const string API_KEY = "Yo
 <img width="1542" height="756" alt="image" src="https://github.com/user-attachments/assets/43aaf8d1-e500-4fad-980f-e68dfdfab45c" />
 
 
-Thay "Your_key" bằng API key /*AIzaSyDC2fdokjVJycrmgKwO9j6IMpDgJcFUhV0test*/.
+Thay "Your_key" bằng API key /*AIzaSyDijpUre8M///fuP65B73iw///9GYypxl///IqrdQyUtest*/.
 
 Lưu ý: Bỏ dấu "/" và bỏ từ "test" ở cuối API Key khi nhập vào code
 
