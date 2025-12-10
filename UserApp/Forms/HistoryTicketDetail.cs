@@ -9,6 +9,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using SharedData.Models;
+using ZXing;
+using ZXing.Common;
+using ZXing.Windows.Compatibility;
 
 namespace UserApp
 {
@@ -24,7 +27,6 @@ namespace UserApp
             _billId = billId;
             LoadDetail();
         }
-        // Sinh mã Ticket Code
 
         private string GenerateTicketCode(string billId)
         {
@@ -35,7 +37,32 @@ namespace UserApp
                 return $"TK-{billId}-{hash.Substring(0, 4)}";
             }
         }
-        // Tải chi tiết vé từ database
+
+        private Bitmap GenerateBarcode(string data)
+        {
+            try
+            {
+                var barcodeWriter = new BarcodeWriter
+                {
+                    Format = BarcodeFormat.CODE_128,
+                    Options = new EncodingOptions
+                    {
+                        Width = 400,
+                        Height = 100,
+                        Margin = 1,
+                        PureBarcode = false
+                    }
+                };
+
+                return barcodeWriter.Write(data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tạo barcode: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
 
         private void LoadDetail()
         {
@@ -77,9 +104,8 @@ namespace UserApp
                                 string startTime = reader["start_time"].ToString();
                                 string endTime = reader["end_time"].ToString();
                                 string auditoriumName = reader["auditorium_name"].ToString();
-                                
-                                // Lấy danh sách ghế
 
+                                // Lấy danh sách ghế
                                 string seatQuery = @"
                                     SELECT 
                                         se.seat_id,
@@ -111,8 +137,6 @@ namespace UserApp
 
                                 int seatCount = seatLocations.Count;
                                 string seatList = string.Join(", ", seatLocations);
-                                
-                                // Lưu dữ liệu để in
 
                                 _printData = new TicketPrintData
                                 {
@@ -140,7 +164,6 @@ namespace UserApp
                                 txtNgayDatVe.Text = _printData.NgayDatVe;
                                 txtTongTien.Text = $"{_printData.TongTien:N0} VND";
                                 txtTicketCode.Text = _printData.TicketCode;
-
                             }
                             else
                             {
@@ -161,8 +184,6 @@ namespace UserApp
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
-         // Quay về lịch sử vé
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -195,8 +216,6 @@ namespace UserApp
                 printDoc.Print();
             }
         }
-        
-         // Hàm in trang
 
         private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
         {
@@ -210,7 +229,6 @@ namespace UserApp
             Font smallFont = new Font("Segoe UI", 9, FontStyle.Italic);
             Font totalFont = new Font("Segoe UI", 12, FontStyle.Bold);
 
-
             Brush blackBrush = Brushes.Black;
             Brush grayBrush = Brushes.Gray;
             Brush redBrush = Brushes.Red;
@@ -219,16 +237,12 @@ namespace UserApp
             int leftMargin = 50;
             int topMargin = 50;
             int yPos = topMargin;
-
-            // Định dạng nền trang
             g.FillRectangle(Brushes.White, e.PageBounds);
-
-            // Định dạng cho logo ở góc trái
             int logoWidth = 80;
             int logoHeight = 80;
             try
             {
-                byte[] logoBytes = Properties.Resources.Logo_trang; 
+                byte[] logoBytes = Properties.Resources.Logo_trang;
                 using (var ms = new System.IO.MemoryStream(logoBytes))
                 {
                     Image logo = Image.FromStream(ms);
@@ -252,7 +266,7 @@ namespace UserApp
             yPos += 40;
 
             // Định dạng tạo khung chữ nhật bao quát toàn bộ thông tin
-            int boxHeight = 500; // chiều cao có thể điều chỉnh tùy số lượng thông tin
+            int boxHeight = 500;
             Rectangle infoBox = new Rectangle(leftMargin, yPos, e.PageBounds.Width - 2 * leftMargin, boxHeight);
             g.FillRectangle(new SolidBrush(ColorTranslator.FromHtml("#ECE6E0")), infoBox);
             g.DrawRectangle(Pens.Gray, infoBox);
@@ -282,15 +296,41 @@ namespace UserApp
             DrawInfoLine(g, "Tổng tiền:", $"{_printData.TongTien:N0} VND", labelX, infoY, totalFont, redBrush); infoY += 35;
             DrawInfoLine(g, "Tổng tiền (bằng chữ):", NumberToVietnameseWords(_printData.TongTien), labelX, infoY, normalFont); infoY += 35;
             DrawInfoLine(g, "Tình trạng:", "Thành công", labelX, infoY, normalFont, greenBrush);
+
+            yPos = infoBox.Bottom + 30;
+            // Tạo barcode từ TicketCode
+            Bitmap barcodeImage = GenerateBarcode(_printData.TicketCode);
+            if (barcodeImage != null)
+            {
+                int barcodeWidth = 400;
+                int barcodeHeight = 100;
+                int barcodeX = (e.PageBounds.Width - barcodeWidth) / 2;
+
+                Rectangle barcodeBox = new Rectangle(barcodeX - 10, yPos - 10, barcodeWidth + 20, barcodeHeight + 40);
+                g.FillRectangle(Brushes.White, barcodeBox);
+                g.DrawRectangle(new Pen(Color.Gray, 2), barcodeBox);
+
+                g.DrawImage(barcodeImage, barcodeX, yPos, barcodeWidth, barcodeHeight);
+                yPos += barcodeHeight + 10;
+                string barcodeText = "Quét mã vạch để xác thực vé";
+                SizeF textSize = g.MeasureString(barcodeText, smallFont);
+                g.DrawString(barcodeText, smallFont, grayBrush,
+                    (e.PageBounds.Width - textSize.Width) / 2, yPos);
+
+                yPos += 30;
+                string footerText = "Cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi!";
+                SizeF footerSize = g.MeasureString(footerText, headerFont);
+                g.DrawString(footerText, headerFont, blackBrush,
+                    (e.PageBounds.Width - footerSize.Width) / 2, yPos);
+                barcodeImage.Dispose();
+            }
         }
 
-        
         private void DrawInfoLine(Graphics g, string label, string value, int x, int y, Font font, Brush valueBrush = null)
         {
             g.DrawString(label, font, Brushes.Black, x, y);
             g.DrawString(value, font, valueBrush ?? Brushes.Black, x + 200, y);
         }
-
 
         private string NumberToVietnameseWords(decimal number)
         {
@@ -338,6 +378,5 @@ namespace UserApp
 
             return result.Trim();
         }
-
     }
 }
