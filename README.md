@@ -1,3 +1,5 @@
+**Ứng dụng Desktop đặt vé xem phim có tích hợp Chatbot Gemini AI và MoMo API dành cho khách hàng và quản lý rạp phim dành cho quản trị viên trên nền tảng WinForms ngôn ngữ C#**
+
 **1. Clone dự án từ Github về máy tính cá nhân**
 
 Mở Visual Studio, chọn Clone a repository 
